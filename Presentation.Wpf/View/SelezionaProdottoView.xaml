@@ -1,0 +1,33 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ciccio1.Presentation.Wpf.View"
+        xmlns:Domain="clr-namespace:Ciccio1.Domain;assembly=Ciccio1.Domain" 
+        x:Class="Ciccio1.Presentation.Wpf.View.SelezionaProdottoView"
+        mc:Ignorable="d"
+        Title="Seleziona Prodotto" Height="300" Width="300">
+
+    <Window.Resources>
+        <CollectionViewSource x:Key="prodottoViewSource" d:DesignSource="{d:DesignInstance {x:Type Domain:Prodotto}, CreateList=True}"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Mode="Default" Path="SelezionaProdottoViewModel" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+
+    <Grid>
+        <DataGrid x:Name="prodottoDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0" ItemsSource="{Binding Prodotti}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Single" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="nomeColumn" Width="*" Header="Nome" Binding="{Binding Nome}"/>
+                <DataGridTextColumn x:Name="prezzoColumn" Width="SizeToHeader" Header="Prezzo" Binding="{Binding Prezzo}"/>
+                <DataGridTextColumn x:Name="nomeCategoriaColumn" Width="*" IsReadOnly="True" Header="Nome Categoria" Binding="{Binding NomeCategoria}"/>
+            </DataGrid.Columns>
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" 
+                              Command="{Binding SelezionaProdottoCommand}" 
+                              CommandParameter="{Binding ElementName=prodottoDataGrid, Path=SelectedItem}" />
+            </DataGrid.InputBindings>
+        </DataGrid>
+    </Grid>
+</Window>
