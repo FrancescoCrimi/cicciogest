@@ -10,7 +10,8 @@ namespace Ciccio1.Infrastructure.DomainBase
     {
         IList<TEntity> GetAll();
         TEntity Get(Guid id);
-        void Save(TEntity entity);
+        TEntity Get(int id);
+        int Save(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
     }

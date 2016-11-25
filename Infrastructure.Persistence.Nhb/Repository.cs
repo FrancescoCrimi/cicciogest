@@ -35,9 +35,14 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         public abstract T Get(Guid id);
 
-        public void Save(T entity)
+        public T Get(int id)
         {
-            da.ISession.Save(entity);
+            return da.ISession.Get<T>(id);
+        }
+
+        public int Save(T entity)
+        {
+           return (int) da.ISession.Save(entity);
         }
 
         public void Delete(T entity)

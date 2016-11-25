@@ -19,19 +19,21 @@ namespace Ciccio1.WebApi.Controllers
         }
 
         // GET: api/Fattura
-        public IEnumerable<Fattura> Get()
+        public IEnumerable<Fattura> GetFatture()
         {
             return service.GetFatture();
         }
 
         // GET: api/Fattura/5
-        public Fattura Get(Guid id)
+        [HttpGet]
+        public Fattura GetFattura(Guid id)
         {
             return service.GetFattura(id);
         }
 
         // POST: api/Fattura
-        public void Post([FromBody]Fattura value)
+        [HttpPost]
+        public void SaveFattura([FromBody]Fattura value)
         {
             service.SaveFattura(value);
         }
@@ -43,9 +45,10 @@ namespace Ciccio1.WebApi.Controllers
         }
 
         // DELETE: api/Fattura/5
-        public void Delete(Guid id)
+        public void DeleteFattura(Guid id)
         {
             
         }
+
     }
 }

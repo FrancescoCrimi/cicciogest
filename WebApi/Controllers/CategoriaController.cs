@@ -19,31 +19,22 @@ namespace Ciccio1.WebApi.Controllers
         }
 
         // GET: api/Categoria
-        public IEnumerable<Categoria> Get()
+        [HttpGet]
+        public IEnumerable<Categoria> GetCategorie()
         {
             return service.GetCategorie();
         }
 
-        //// GET: api/Categoria/5
-        //public Categoria Get(Guid id)
-        //{
-            
-        //}
-
         // POST: api/Categoria
-        public void Post([FromBody]Categoria value)
+        [HttpPost]
+        public Categoria SaveCategoria([FromBody]Categoria value)
         {
-            service.SaveCategoria(value);
-        }
-
-        // PUT: api/Categoria/5
-        public void Put(int id, [FromBody]Categoria value)
-        {
-            service.SaveCategoria(value);
+           return service.SaveCategoria(value);
         }
 
         // DELETE: api/Categoria/5
-        public void Delete(Guid id)
+        [HttpDelete]
+        public void DeleteCategoria(Guid id)
         {
         }
     }

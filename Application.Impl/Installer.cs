@@ -23,7 +23,7 @@ namespace Ciccio1.Application.Impl
                     container.Install(new Ciccio1.Infrastructure.Persistence.Nhb.Installer());
                     break;
                 case Storage.Db4o:
-                    container.Install(new Ciccio1.Infrastructure.Persistence.Db4o.Installer());
+                    //container.Install(new Ciccio1.Infrastructure.Persistence.Db4o.Installer());
                     break;
             }
 

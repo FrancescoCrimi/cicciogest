@@ -16,7 +16,7 @@ namespace Ciccio1.Application
         [OperationContract]
         Fattura GetFattura(Guid id);
         [OperationContract]
-        void SaveFattura(Fattura fattura);
+        Fattura SaveFattura(Fattura fattura);
         [OperationContract]
         void DeleteFattura(Fattura fattura);
 
@@ -26,7 +26,7 @@ namespace Ciccio1.Application
         [OperationContract]
         Prodotto GetProdotto(Guid id);
         [OperationContract]
-        void SaveProdotto(Prodotto prodotto);
+        Prodotto SaveProdotto(Prodotto prodotto);
         [OperationContract]
         void DeleteProdotto(Prodotto prodotto);
 
@@ -34,7 +34,7 @@ namespace Ciccio1.Application
         [OperationContract]
         IEnumerable<Categoria> GetCategorie();
         [OperationContract]
-        void SaveCategoria(Categoria categoria);
+        Categoria SaveCategoria(Categoria categoria);
         [OperationContract]
         void DeleteCategoria(Categoria categoria);
     }

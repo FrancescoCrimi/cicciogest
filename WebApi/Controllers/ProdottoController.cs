@@ -19,19 +19,22 @@ namespace Ciccio1.WebApi.Controllers
         }
 
         // GET: api/Prodotto
-        public IEnumerable<Prodotto> Get()
+        [HttpGet]
+        public IEnumerable<Prodotto> GetProdotti()
         {
             return service.GetProdotti();
         }
 
         // GET: api/Prodotto/5
-        public Prodotto Get(Guid id)
+        [HttpGet]
+        public Prodotto GetProdotto(Guid id)
         {
             return service.GetProdotto(id);
         }
 
         // POST: api/Prodotto
-        public void Post([FromBody]Prodotto value)
+        [HttpPost]
+        public void SaveProdotto([FromBody]Prodotto value)
         {
             service.SaveProdotto(value);
         }
@@ -42,7 +45,8 @@ namespace Ciccio1.WebApi.Controllers
         }
 
         // DELETE: api/Prodotto/5
-        public void Delete(Guid id)
+        [HttpDelete]
+        public void DeleteProdotto(Guid id)
         {
         }
     }

@@ -56,16 +56,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CiccioService.cs" />
     <Compile Include="Installer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{2EF46392-C000-4E92-8D4D-3DB5202B471F}</Project>
       <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{e64edbe5-b464-433b-bf56-bb880a547be3}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{3D13291C-AC45-41F0-9200-21EBDF6D433B}</Project>

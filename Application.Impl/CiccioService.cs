@@ -55,8 +55,10 @@ namespace Ciccio1.Application.Impl
             }
         }
 
-        public void SaveFattura(Fattura fattura)
+        public Fattura SaveFattura(Fattura fattura)
         {
+            Fattura newFat = null;
+            int id = fattura.Id;
             using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
             {
                 try
@@ -64,9 +66,14 @@ namespace Ciccio1.Application.Impl
                     if (fattura.IsTransient())
                     {
                         fattura = Factory.FatturaToPersist(fattura);
+                        id = fatturaRepository.Save(fattura);
                     }
-                    fatturaRepository.Save(fattura);
+                    else
+                    {
+                        fatturaRepository.Update(fattura);
+                    }
                     uow.Commit();
+                    newFat = fatturaRepository.Get(id);
                 }
                 catch (Exception ex)
                 {
@@ -74,6 +81,7 @@ namespace Ciccio1.Application.Impl
                     throw ex;
                 }
             }
+            return newFat;
         }
 
         public void DeleteFattura(Fattura fattura)
@@ -109,18 +117,25 @@ namespace Ciccio1.Application.Impl
             }
         }
 
-        public void SaveProdotto(Prodotto prodotto)
+        public Prodotto SaveProdotto(Prodotto prodotto)
         {
+            Prodotto newPro = null;
             using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
             {
+                int id = prodotto.Id;
                 try
                 {
                     if (prodotto.IsTransient())
                     {
                         prodotto = Factory.ProdottoToPersist(prodotto);
+                        id = prodottoRepository.Save(prodotto);
                     }
-                    prodottoRepository.Save(prodotto);
+                    else
+                    {
+                        prodottoRepository.Update(prodotto);
+                    }
                     uow.Commit();
+                    newPro = prodottoRepository.Get(id);
                 }
                 catch (Exception)
                 {
@@ -128,6 +143,7 @@ namespace Ciccio1.Application.Impl
                     throw;
                 }
             }
+            return newPro;
         }
 
         public void DeleteProdotto(Prodotto prodotto)
@@ -155,8 +171,10 @@ namespace Ciccio1.Application.Impl
             }
         }
 
-        public void SaveCategoria(Categoria categoria)
+        public Categoria SaveCategoria(Categoria categoria)
         {
+            Categoria newCat = null;
+            int id = categoria.Id;
             using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
             {
                 try
@@ -164,9 +182,14 @@ namespace Ciccio1.Application.Impl
                     if (categoria.IsTransient())
                     {
                         categoria = Factory.CategoriaToPersist(categoria);
+                        id = categoriaRepository.Save(categoria);
                     }
-                    categoriaRepository.Save(categoria);
+                    else
+                    {
+                        categoriaRepository.Update(categoria);
+                    }
                     uow.Commit();
+                    newCat = categoriaRepository.Get(id);
                 }
                 catch (Exception ex)
                 {
@@ -174,6 +197,7 @@ namespace Ciccio1.Application.Impl
                     throw ex;
                 }
             }
+            return newCat;
         }
 
         public void DeleteCategoria(Categoria categoria)
