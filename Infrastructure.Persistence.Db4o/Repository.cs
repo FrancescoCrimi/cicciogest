@@ -46,6 +46,11 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
         {
             da.ObjectContainer.Delete(entity);
         }
+
+        public void Update(T entity)
+        {
+            da.ObjectContainer.Store(entity);
+        }
     }
 
 

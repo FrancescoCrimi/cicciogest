@@ -37,12 +37,17 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         public void Save(T entity)
         {
-            da.ISession.SaveOrUpdate(entity);
+            da.ISession.Save(entity);
         }
 
         public void Delete(T entity)
         {
             da.ISession.Delete(entity);
+        }
+
+        public void Update(T entity)
+        {
+            da.ISession.Update(entity);
         }
     }
 

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Le informazioni generali relative a un assembly sono controllate dal seguente 
 // set di attributi. Modificare i valori di questi attributi per modificare le informazioni
 // associate a un assembly.
-[assembly: AssemblyTitle("Ciccio1.Infrastructure.Persistence.Raven")]
+[assembly: AssemblyTitle("WebApi")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ciccio1.Infrastructure.Persistence.Raven")]
+[assembly: AssemblyProduct("WebApi")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,18 +19,17 @@ using System.Runtime.InteropServices;
 // COM, impostare su true l'attributo ComVisible per tale tipo.
 [assembly: ComVisible(false)]
 
-// Se il progetto viene esposto a COM, il GUID seguente verrà utilizzato come ID della libreria dei tipi
-[assembly: Guid("00511af9-5c19-40a6-b86e-21fa545c5368")]
+// Se il progetto viene esposto a COM, il GUID seguente verrà utilizzato per creare l'ID della libreria dei tipi
+[assembly: Guid("868f4133-0415-4931-9150-f09c7317420b")]
 
-// Le informazioni sulla versione di un assembly sono costituite dai seguenti quattro valori:
+// Le informazioni sulla versione di un assembly sono costituite dai quattro valori seguenti:
 //
 //      Versione principale
 //      Versione secondaria 
-//      Numero di build
+//      Numero build
 //      Revisione
 //
 // È possibile specificare tutti i valori oppure impostare valori predefiniti per i numeri relativi alla revisione e alla build 
-// usando l'asterisco '*' come illustrato di seguito:
-// [assembly: AssemblyVersion("1.0.*")]
+// utilizzando l'asterisco (*) come illustrato di seguito:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Le informazioni generali relative a un assembly sono controllate dal seguente 
 // set di attributi. Modificare i valori di questi attributi per modificare le informazioni
 // associate a un assembly.
-[assembly: AssemblyTitle("Ciccio1.Infrastructure.Persistence.EF")]
+[assembly: AssemblyTitle("RestClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ciccio1.Infrastructure.Persistence.EF")]
+[assembly: AssemblyProduct("RestClient")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Se il progetto viene esposto a COM, il GUID seguente verrà utilizzato come ID della libreria dei tipi
-[assembly: Guid("50c0fd4a-810f-46c3-818e-09e6d41190c0")]
+[assembly: Guid("91d6bfdc-06ad-44d7-94df-6a792b074e9d")]
 
 // Le informazioni sulla versione di un assembly sono costituite dai seguenti quattro valori:
 //
