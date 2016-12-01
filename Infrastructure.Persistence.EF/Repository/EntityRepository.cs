@@ -7,34 +7,34 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Infrastructure.Persistence.EF
 {
-    abstract class EntityRepository<T> : IEntityRepository<T> where T : Entity<T>
+    abstract class EntityRepository<TEntity, TId> : IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
     {
-        public void Delete(T entity)
+        public void Delete(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public T Get(int id)
+        public TEntity Get(TId id)
         {
             throw new NotImplementedException();
         }
 
-        public T Get(Guid id)
+        public TEntity Get(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<T> GetAll()
+        public IList<TEntity> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public int Save(T entity)
+        public int Save(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(T entity)
+        public void Update(TEntity entity)
         {
             throw new NotImplementedException();
         }

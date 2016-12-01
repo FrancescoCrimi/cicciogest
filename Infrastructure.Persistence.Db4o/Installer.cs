@@ -9,6 +9,7 @@ using Ciccio1.Domain;
 using Ciccio1.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
 using Castle.Facilities.WcfIntegration;
+using Ciccio1.Infrastructure.Persistence.Db4o.Repository;
 
 namespace Ciccio1.Infrastructure.Persistence.Db4o
 {

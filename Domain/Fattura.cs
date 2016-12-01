@@ -12,7 +12,7 @@ namespace Ciccio1.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
-    public class Fattura : Entity<Fattura>
+    public class Fattura : Entity<int>
     {
         private Guid idFattura;
         private string nome;

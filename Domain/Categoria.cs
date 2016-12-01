@@ -10,7 +10,7 @@ namespace Ciccio1.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
-    public class Categoria : Entity<Categoria>
+    public class Categoria : Entity<int>
     {
         private string nome;
         private Guid idCategoria;

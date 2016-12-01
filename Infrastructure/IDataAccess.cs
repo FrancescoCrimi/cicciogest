@@ -7,10 +7,8 @@ namespace Ciccio1.Infrastructure
 {
     public interface IDataAccess : IDisposable
     {
-        //IUnitOfWork Sessione();
         void CreateDataAccess();
         void VerifyDataAccess();
         IUnitOfWork CreateUnitOfWork();
-        //IUnitOfWork CreateUnitOfWork();
     }
 }

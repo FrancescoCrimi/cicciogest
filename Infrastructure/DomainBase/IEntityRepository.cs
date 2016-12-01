@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Ciccio1.Infrastructure.DomainBase
 {
-    public interface IEntityRepository<TEntity> where TEntity : Entity<TEntity>
+    public interface IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
     {
         IList<TEntity> GetAll();
         TEntity Get(Guid id);
-        TEntity Get(int id);
+        TEntity Get(TId id);
         int Save(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

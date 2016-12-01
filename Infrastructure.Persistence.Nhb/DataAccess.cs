@@ -202,11 +202,5 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
             ISession.BeginTransaction();
             return new UnitOfWork(ISession);
         }
-
-        //public IUnitOfWork CreateUnitOfWork()
-        //{
-        //    ISession = sessionFactory.OpenSession();
-        //    return new UnitOfWorkNhb(ISession);
-        //}
     }
 }

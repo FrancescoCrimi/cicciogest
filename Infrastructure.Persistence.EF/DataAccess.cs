@@ -13,11 +13,6 @@ namespace Ciccio1.Infrastructure.Persistence.EF
             throw new NotImplementedException();
         }
 
-        //public IUnitOfWork CreateUnitOfWork()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public IUnitOfWork CreateUnitOfWork()
         {
             throw new NotImplementedException();

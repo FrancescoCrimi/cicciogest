@@ -10,8 +10,8 @@ using NHibernate.Criterion;
 
 namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
 {
-    abstract class EntityRepository<T>
-        : IEntityRepository<T> where T : Entity<T>
+    abstract class EntityRepository<TEntity, TId>
+        : IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
     {
         protected DataAccess da;
 
@@ -20,12 +20,12 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
             this.da = da;
         }
 
-        public IList<T> GetAll()
+        public IList<TEntity> GetAll()
         {
             try
             {
-                ICriteria criteria = da.ISession.CreateCriteria<T>();
-                return criteria.List<T>();
+                ICriteria criteria = da.ISession.CreateCriteria<TEntity>();
+                return criteria.List<TEntity>();
             }
             catch (NHibernate.Exceptions.GenericADOException ex)
             {
@@ -33,65 +33,26 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
             }
         }
 
-        public abstract T Get(Guid id);
+        public abstract TEntity Get(Guid id);
 
-        public T Get(int id)
+        public TEntity Get(TId id)
         {
-            return da.ISession.Get<T>(id);
+            return da.ISession.Get<TEntity>(id);
         }
 
-        public int Save(T entity)
+        public int Save(TEntity entity)
         {
            return (int) da.ISession.Save(entity);
         }
 
-        public void Delete(T entity)
+        public void Delete(TEntity entity)
         {
             da.ISession.Delete(entity);
         }
 
-        public void Update(T entity)
+        public void Update(TEntity entity)
         {
             da.ISession.Update(entity);
         }
     }
-
-
-
-    //class FatturaRepository : EntityRepository<Fattura>, IFatturaRepository
-    //{
-    //    public FatturaRepository(IDataAccess da)
-    //        : base((DataAccess)da) { }
-
-    //    public override Fattura Get(Guid id)
-    //    {
-    //        return da.ISession.CreateCriteria<Fattura>().Add(Expression.Eq("IdFattura", id)).UniqueResult<Fattura>();
-    //    }
-    //}
-
-
-
-    //class ProdottoRepository : EntityRepository<Prodotto>, IProdottoRepository
-    //{
-    //    public ProdottoRepository(IDataAccess da)
-    //        : base((DataAccess)da) { }
-
-    //    public override Prodotto Get(Guid id)
-    //    {
-    //        return da.ISession.CreateCriteria<Prodotto>().Add(Expression.Eq("IdProdotto", id)).UniqueResult<Prodotto>();
-    //    }
-    //}
-
-
-
-    //class CategoriaRepository : EntityRepository<Categoria>, ICategoriaRepository
-    //{
-    //    public CategoriaRepository(IDataAccess da)
-    //        : base((DataAccess)da) { }
-
-    //    public override Categoria Get(Guid id)
-    //    {
-    //        return da.ISession.CreateCriteria<Categoria>().Add(Expression.Eq("IdCategoria", id)).UniqueResult<Categoria>();
-    //    }
-    //}
 }

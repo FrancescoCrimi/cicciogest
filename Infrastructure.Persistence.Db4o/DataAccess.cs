@@ -72,21 +72,20 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
         {
             IEventRegistry events = EventRegistryFactory.ForObjectContainer(container);
 
-            //// eventi autoincrement
-            //AutoIncrement increment = new AutoIncrement(container);
-            //events.Creating += (s, e) =>
-            //{
-            //    if (e.Object is Entity<int>)
-            //    {
-            //        Entity<int> entity = (Entity<int>)e.Object;
-            //        Factory.SetId(entity, increment.GetNextID(entity.GetType()));
-            //    }
-            //};
+            // eventi autoincrement
+            AutoIncrement increment = new AutoIncrement(container);
+            events.Creating += (s, e) =>
+            {
+                if (e.Object is Entity<int>)
+                {
+                    e.GetType().GetProperty("Id").SetValue(e, increment.GetNextID(e.GetType()));
+                }
+            };
 
-            //events.Committing += (s, e) =>
-            //{
-            //    increment.StoreState();
-            //};
+            events.Committing += (s, e) =>
+            {
+                increment.StoreState();
+            };
 
             //// eventi Validating
             //events.Creating += ValidateEntity;
@@ -102,13 +101,6 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             IUnitOfWork uow = new UnitOfWork(ObjectContainer);
             return uow;
         }
-
-        //public IUnitOfWork CreateUnitOfWork()
-        //{
-        //    ObjectContainer = embeddedObjectContainer.Ext().OpenSession();
-        //    IUnitOfWork uow = new UnitOfWorkDb4o(ObjectContainer);
-        //    return uow;
-        //}
 
         public void CreateDataAccess()
         {
