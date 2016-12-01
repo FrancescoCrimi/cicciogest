@@ -25,7 +25,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             return da.ObjectContainer.Query<T>();
         }
 
-        public T Get(Guid id)
+        public T Get(int id)
         {
             IQuery query = da.ObjectContainer.Query();
             query.Constrain(typeof(T));
@@ -37,9 +37,15 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
                 return (T)rst.Next();
         }
 
-        public void Save(T entity)
+        public T Get(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Save(T entity)
         {
             da.ObjectContainer.Store(entity);
+            return 0;
         }
 
         public void Delete(T entity)

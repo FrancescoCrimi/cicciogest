@@ -6,11 +6,11 @@ using System.Text;
 namespace Ciccio1.Infrastructure
 {
 
-    public interface IUnitOfWork : IDisposable
-    {
-    }
+    //public interface IUnitOfWork : IDisposable
+    //{
+    //}
 
-    public interface IUnitOfWorkTrans : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         void Commit();
         void Rollback();

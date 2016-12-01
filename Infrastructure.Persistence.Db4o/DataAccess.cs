@@ -96,19 +96,19 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
         #endregion Metodi Privati
 
 
-        public IUnitOfWorkTrans CreateUnitOfWorkTrans()
-        {
-            ObjectContainer = embeddedObjectContainer.Ext().OpenSession();
-            IUnitOfWorkTrans uow = new UnitOfWorkTransDb4o(ObjectContainer);
-            return uow;
-        }
-
         public IUnitOfWork CreateUnitOfWork()
         {
             ObjectContainer = embeddedObjectContainer.Ext().OpenSession();
-            IUnitOfWork uow = new UnitOfWorkDb4o(ObjectContainer);
+            IUnitOfWork uow = new UnitOfWork(ObjectContainer);
             return uow;
         }
+
+        //public IUnitOfWork CreateUnitOfWork()
+        //{
+        //    ObjectContainer = embeddedObjectContainer.Ext().OpenSession();
+        //    IUnitOfWork uow = new UnitOfWorkDb4o(ObjectContainer);
+        //    return uow;
+        //}
 
         public void CreateDataAccess()
         {

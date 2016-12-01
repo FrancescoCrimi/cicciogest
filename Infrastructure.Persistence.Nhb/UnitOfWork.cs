@@ -7,36 +7,36 @@ using Castle.Core.Logging;
 
 namespace Ciccio1.Infrastructure.Persistence.Nhb
 {
-    class UnitOfWorkNhb : IUnitOfWork
-    {
-        ISession session;
-        internal UnitOfWorkNhb(ISession session)
-        {
-            this.session = session;
-        }       
-        public void Dispose()
-        {
-            if (session != null)
-            {
-                try
-                {
-                    session.Close();
-                    session.Dispose();
-                    session = null;
-                }
-                catch (Exception ex)
-                {
-                    throw new HibernateException("Unable to close orphaned session", ex);
-                }
-            }
-        }
-    }
+    //class UnitOfWorkNhb : IUnitOfWork
+    //{
+    //    ISession session;
+    //    internal UnitOfWorkNhb(ISession session)
+    //    {
+    //        this.session = session;
+    //    }       
+    //    public void Dispose()
+    //    {
+    //        if (session != null)
+    //        {
+    //            try
+    //            {
+    //                session.Close();
+    //                session.Dispose();
+    //                session = null;
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                throw new HibernateException("Unable to close orphaned session", ex);
+    //            }
+    //        }
+    //    }
+    //}
 
-    class UnitOfWorkTransNhb : IUnitOfWorkTrans
+    class UnitOfWork : IUnitOfWork
     {
         ILogger logger;
         ISession session;
-        internal UnitOfWorkTransNhb(ISession session)
+        internal UnitOfWork(ISession session)
         {
             //this.logger = logger;
             this.session = session;       

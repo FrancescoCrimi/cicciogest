@@ -9,6 +9,7 @@ using Ciccio1.Domain;
 using Ciccio1.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
 using Castle.Facilities.WcfIntegration;
+using Ciccio1.Infrastructure.Persistence.Nhb.Repository;
 
 namespace Ciccio1.Infrastructure.Persistence.Nhb
 {
@@ -30,6 +31,13 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
                 case UI.WCF:
                     container.Register(
                         Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestylePerWcfSession());
+                    //Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestylePerWcfOperation());
+                    //Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestylePerWebRequest());
+                    break;
+                case UI.REST:
+                    container.Register(
+                        Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifeStyle.PerWebRequest
+                        );
                     break;
             }
             container.Register(
@@ -37,10 +45,10 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
                 //Component.For<IUnitOfWorkFactory, IUnitOfWorkFactoryNhb>().ImplementedBy<UnitOfWorkFactoryNhb>().LifeStyle.Transient,
                 Component.For<IFatturaRepository>().ImplementedBy<FatturaRepository>().LifeStyle.Transient,
                 Component.For<IProdottoRepository>().ImplementedBy<ProdottoRepository>().LifeStyle.Transient,
-                Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient,
-                Component.For<Func<IDataAccess, IFatturaRepository>>().AsFactory(),
-                Component.For<Func<IDataAccess, IProdottoRepository>>().AsFactory(),
-                Component.For<Func<IDataAccess, ICategoriaRepository>>().AsFactory()
+                Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient
+                //Component.For<Func<IDataAccess, IFatturaRepository>>().AsFactory(),
+                //Component.For<Func<IDataAccess, IProdottoRepository>>().AsFactory(),
+                //Component.For<Func<IDataAccess, ICategoriaRepository>>().AsFactory()
                 );
         }
     }

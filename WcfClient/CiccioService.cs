@@ -30,6 +30,11 @@ namespace Ciccio1.WcfClient
             throw new NotImplementedException();
         }
 
+        public Categoria GetCategoria(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Categoria> GetCategorie()
         {
             throw new NotImplementedException();

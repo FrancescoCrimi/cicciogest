@@ -10,7 +10,7 @@ namespace Ciccio1.Infrastructure
         //IUnitOfWork Sessione();
         void CreateDataAccess();
         void VerifyDataAccess();
-        IUnitOfWorkTrans CreateUnitOfWorkTrans();
         IUnitOfWork CreateUnitOfWork();
+        //IUnitOfWork CreateUnitOfWork();
     }
 }

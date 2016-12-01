@@ -24,16 +24,23 @@ namespace Ciccio1.Application.Impl
             IKernel kernel,
             ILogger logger,
             IDataAccess da,
-            Func<IDataAccess, IFatturaRepository> fatturaRepositoryFactory,
-            Func<IDataAccess, IProdottoRepository> prodottoRepositoryFactory,
-            Func<IDataAccess, ICategoriaRepository> categoriaRepositoryFactory)
+            //Func<IDataAccess, IFatturaRepository> fatturaRepositoryFactory,
+            //Func<IDataAccess, IProdottoRepository> prodottoRepositoryFactory,
+            //Func<IDataAccess, ICategoriaRepository> categoriaRepositoryFactory
+            IFatturaRepository fatturaRepository,
+            IProdottoRepository prodottoRepository,
+            ICategoriaRepository categoriaRepository
+            )
         {
             this.kernel = kernel;
             this.logger = logger;
             this.da = da;
-            fatturaRepository = fatturaRepositoryFactory(da);
-            prodottoRepository = prodottoRepositoryFactory(da);
-            categoriaRepository = categoriaRepositoryFactory(da);
+            //fatturaRepository = fatturaRepositoryFactory(da);
+            //prodottoRepository = prodottoRepositoryFactory(da);
+            //categoriaRepository = categoriaRepositoryFactory(da);
+            this.fatturaRepository = fatturaRepository;
+            this.prodottoRepository = prodottoRepository;
+            this.categoriaRepository = categoriaRepository;
             logger.Debug("CiccioService Creata " + this.GetHashCode().ToString());
         }
 
@@ -59,7 +66,7 @@ namespace Ciccio1.Application.Impl
         {
             Fattura newFat = null;
             int id = fattura.Id;
-            using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
+            using (IUnitOfWork uow = da.CreateUnitOfWork())
             {
                 try
                 {
@@ -86,7 +93,7 @@ namespace Ciccio1.Application.Impl
 
         public void DeleteFattura(Fattura fattura)
         {
-            using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
+            using (IUnitOfWork uow = da.CreateUnitOfWork())
             {
                 try
                 {
@@ -100,6 +107,7 @@ namespace Ciccio1.Application.Impl
                 }
             }
         }
+
 
         public IEnumerable<Prodotto> GetProdotti()
         {
@@ -120,7 +128,7 @@ namespace Ciccio1.Application.Impl
         public Prodotto SaveProdotto(Prodotto prodotto)
         {
             Prodotto newPro = null;
-            using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
+            using (IUnitOfWork uow = da.CreateUnitOfWork())
             {
                 int id = prodotto.Id;
                 try
@@ -148,7 +156,7 @@ namespace Ciccio1.Application.Impl
 
         public void DeleteProdotto(Prodotto prodotto)
         {
-            using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
+            using (IUnitOfWork uow = da.CreateUnitOfWork())
             {
                 try
                 {
@@ -163,6 +171,7 @@ namespace Ciccio1.Application.Impl
             }
         }
 
+
         public IEnumerable<Categoria> GetCategorie()
         {
             using (IUnitOfWork uow = da.CreateUnitOfWork())
@@ -171,11 +180,19 @@ namespace Ciccio1.Application.Impl
             }
         }
 
+        public Categoria GetCategoria(Guid id)
+        {
+            using (IUnitOfWork uow = da.CreateUnitOfWork())
+            {
+                return categoriaRepository.Get(id);
+            }
+        }
+
         public Categoria SaveCategoria(Categoria categoria)
         {
             Categoria newCat = null;
             int id = categoria.Id;
-            using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
+            using (IUnitOfWork uow = da.CreateUnitOfWork())
             {
                 try
                 {
@@ -202,7 +219,7 @@ namespace Ciccio1.Application.Impl
 
         public void DeleteCategoria(Categoria categoria)
         {
-            using (IUnitOfWorkTrans uow = da.CreateUnitOfWorkTrans())
+            using (IUnitOfWork uow = da.CreateUnitOfWork())
             {
                 try
                 {
@@ -220,9 +237,9 @@ namespace Ciccio1.Application.Impl
         public void Dispose()
         {
             //kernel.ReleaseComponent(da);
-            //kernel.ReleaseComponent(fatturaRepository);
-            //kernel.ReleaseComponent(prodottoRepository);
-            //kernel.ReleaseComponent(categoriaRepository);
+            kernel.ReleaseComponent(fatturaRepository);
+            kernel.ReleaseComponent(prodottoRepository);
+            kernel.ReleaseComponent(categoriaRepository);
             logger.Debug("CiccioService Dispose " + this.GetHashCode().ToString());
         }
 

@@ -15,9 +15,10 @@ namespace Ciccio1.WebApi
         {
             container.Install(new Ciccio1.Application.Impl.Installer());
             container.Register(
-                Component.For<FatturaController>().LifestyleTransient(),
-                Component.For<ProdottoController>().LifestyleTransient(),
-                Component.For<CategoriaController>().LifestyleTransient()
+                //Component.For<FattureController>().LifestyleTransient(),
+                //Component.For<ProdottiController>().LifestyleTransient(),
+                //Component.For<CategorieController>().LifestyleTransient()
+                Component.For<CiccioServiceController>().LifestyleTransient()
                 );
         }
     }

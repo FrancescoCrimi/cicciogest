@@ -195,18 +195,18 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
             logger.Debug("DataAccess Dispose " + this.GetHashCode().ToString());
         }
 
-        public IUnitOfWorkTrans CreateUnitOfWorkTrans()
+        public IUnitOfWork CreateUnitOfWork()
         {
             ISession = sessionFactory.OpenSession();
             ISession.FlushMode = FlushMode.Commit;
             ISession.BeginTransaction();
-            return new UnitOfWorkTransNhb(ISession);
+            return new UnitOfWork(ISession);
         }
 
-        public IUnitOfWork CreateUnitOfWork()
-        {
-            ISession = sessionFactory.OpenSession();
-            return new UnitOfWorkNhb(ISession);
-        }
+        //public IUnitOfWork CreateUnitOfWork()
+        //{
+        //    ISession = sessionFactory.OpenSession();
+        //    return new UnitOfWorkNhb(ISession);
+        //}
     }
 }

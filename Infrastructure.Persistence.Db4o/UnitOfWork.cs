@@ -7,29 +7,29 @@ using Castle.Core.Logging;
 
 namespace Ciccio1.Infrastructure.Persistence.Db4o
 {
-    class UnitOfWorkDb4o : IUnitOfWork
-    {
-        private IObjectContainer container;
-        //private ILogger logger;
-        internal UnitOfWorkDb4o(IObjectContainer container)
-        {
-            this.container = container;
-        }
-        public void Dispose()
-        {
-            container.Rollback();
-            container.Close();
-            container.Dispose();
-        }
-    }
+    //class UnitOfWorkDb4o : IUnitOfWork
+    //{
+    //    private IObjectContainer container;
+    //    //private ILogger logger;
+    //    internal UnitOfWorkDb4o(IObjectContainer container)
+    //    {
+    //        this.container = container;
+    //    }
+    //    public void Dispose()
+    //    {
+    //        container.Rollback();
+    //        container.Close();
+    //        container.Dispose();
+    //    }
+    //}
 
-    class UnitOfWorkTransDb4o : IUnitOfWorkTrans
+    class UnitOfWork : IUnitOfWork
     {
         private IObjectContainer container;
         //private ILogger logger;
 
         //internal UnitOfWorkTransDb4o(IObjectContainer container, ILogger logger)
-        internal UnitOfWorkTransDb4o(IObjectContainer container)
+        internal UnitOfWork(IObjectContainer container)
         {
             this.container = container;
             //this.logger = logger;

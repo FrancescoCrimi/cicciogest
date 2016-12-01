@@ -39,7 +39,14 @@ namespace Ciccio1.Application.Impl
                     break;
                 case UI.WCF:
                     container.Register(
-                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfSession());
+                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfSession());
+                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfOperation());
+                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient());
+                    break;
+                case UI.REST:
+                    container.Register(
+                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWebRequest()
+                        );
                     break;
             }
         }

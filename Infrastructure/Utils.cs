@@ -17,7 +17,8 @@ namespace Ciccio1.Infrastructure
     {
         Form = 1,
         WPF,
-        WCF
+        WCF,
+        REST
     }
 
     public enum Databases
