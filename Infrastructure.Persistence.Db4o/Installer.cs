@@ -8,7 +8,6 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Ciccio1.Domain;
 using Ciccio1.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
-using Castle.Facilities.WcfIntegration;
 using Ciccio1.Infrastructure.Persistence.Db4o.Repository;
 
 namespace Ciccio1.Infrastructure.Persistence.Db4o
@@ -28,20 +27,17 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
                     container.Register(
                         Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifeStyle.Singleton);
                     break;
-                case UI.WCF:
-                    container.Register(
-                        Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestylePerWcfSession());
-                    break;
+
             }
             container.Register(
                 //Component.For<IObjectContainer>().UsingFactoryMethod(k => k.Resolve<IDb4oDataAccess>().OpenSession()).LifeStyle.Transient,
                 //Component.For<IUnitOfWork, ISessioneDb4o>().UsingFactoryMethod(k => k.Resolve<IDataAccess>().Sessione()).LifeStyle.Transient,
                 Component.For<IFatturaRepository>().ImplementedBy<FatturaRepository>().LifeStyle.Transient,
                 Component.For<IProdottoRepository>().ImplementedBy<ProdottoRepository>().LifeStyle.Transient,
-                Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient,
-                Component.For<Func<IDataAccess, IFatturaRepository>>().AsFactory(),
-                Component.For<Func<IDataAccess, IProdottoRepository>>().AsFactory(),
-                Component.For<Func<IDataAccess, ICategoriaRepository>>().AsFactory()
+                Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient
+                //Component.For<Func<IDataAccess, IFatturaRepository>>().AsFactory(),
+                //Component.For<Func<IDataAccess, IProdottoRepository>>().AsFactory(),
+                //Component.For<Func<IDataAccess, ICategoriaRepository>>().AsFactory()
                 );
         }
     }
