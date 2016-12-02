@@ -10,7 +10,7 @@ namespace Ciccio1.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
-    public class Citta : Entity<Citta>
+    public class Citta : Entity<int>
     {
         public override bool IsTransient()
         {

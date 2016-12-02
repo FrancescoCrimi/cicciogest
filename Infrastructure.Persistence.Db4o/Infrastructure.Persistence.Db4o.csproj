@@ -71,7 +71,6 @@
     <Compile Include="Repository\CategoriaRepository.cs" />
     <Compile Include="Repository\FatturaRepository.cs" />
     <Compile Include="Repository\ProdottoRepository.cs" />
-    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

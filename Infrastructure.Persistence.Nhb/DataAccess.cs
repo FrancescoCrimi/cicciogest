@@ -19,8 +19,8 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
         private IConf conf;
         private ILogger logger;
         private static ISessionFactory sessionFactory;
+        private ISession session;
 
-        internal ISession ISession { get; private set; }
 
         public DataAccess(IConf conf, ILogger logger)
         {
@@ -133,29 +133,6 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
         #endregion
 
 
-        //public ISessionFactory SessionFactory()
-        //{
-        //    if (sessionFactory == null || sessionFactory.IsClosed)
-        //    {
-        //        if (sessionFactory != null)
-        //        {
-        //            sessionFactory.Dispose();
-        //            sessionFactory = null;
-        //        }
-        //        sessionFactory = Configuration().BuildSessionFactory();
-        //    }
-        //    return sessionFactory;
-        //}
-
-        //public IUnitOfWork Sessione()
-        //{
-        //    logger.Debug("richiesta ISessione");
-        //    ISession nhbSession = SessionFactory().OpenSession();
-        //    nhbSession.FlushMode = FlushMode.Commit;
-        //    IUnitOfWork sessione = new UnitOfWorkNhb(nhbSession, logger);
-        //    return sessione;
-        //}
-
         public void CreateDataAccess()
         {
             switch (conf.Database)
@@ -184,23 +161,78 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
             new SchemaValidator(Configuration()).Validate();
         }
 
-
-
         public void Dispose()
         {
-            //if (sessionFactory != null)
-            //{
-            //    sessionFactory.Dispose();
-            //}
             logger.Debug("DataAccess Dispose " + this.GetHashCode().ToString());
+            disposeSession();
         }
 
-        public IUnitOfWork CreateUnitOfWork()
+
+        public void Begin()
         {
-            ISession = sessionFactory.OpenSession();
-            ISession.FlushMode = FlushMode.Commit;
-            ISession.BeginTransaction();
-            return new UnitOfWork(ISession);
+            disposeSession();
+            session = sessionFactory.OpenSession();
+            session.FlushMode = FlushMode.Commit;
+            session.BeginTransaction();
         }
+
+        public void Commit()
+        {
+            session.Transaction.Commit();
+        }
+
+        public void Rollback()
+        {
+            session.Transaction.Rollback();
+        }
+
+        internal ISession ISession
+        {
+            get
+            {
+                if(session != null)
+                return session;
+                else
+                {
+                    Begin();
+                    return session;
+                }
+            }
+        }
+
+
+        private void disposeSession()
+        {
+            //logger.Debug("rollback Transaction");
+            if (session != null)
+            {
+                try
+                {
+                    if (session.Transaction != null)
+                    {
+                        try
+                        {
+                            if (session.Transaction.IsActive)
+                            {
+                                session.Transaction.Rollback();
+                            }
+                            session.Transaction.Dispose();
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new HibernateException("Unable to rollback transaction for orphaned session", ex);
+                        }
+                    }
+                    session.Close();
+                    session.Dispose();
+                    session = null;
+                }
+                catch (Exception ex)
+                {
+                    throw new HibernateException("Unable to close orphaned session", ex);
+                }
+            }
+        }
+
     }
 }

@@ -13,9 +13,9 @@ namespace Ciccio1.Application.Impl
 {
     class CiccioService : ICiccioService
     {
-        private IKernel kernel = null;
-        private ILogger logger = null;
-        private IDataAccess da = null;
+        private IKernel kernel;
+        private ILogger logger;
+        private IDataAccess da;
         private IFatturaRepository fatturaRepository;
         private IProdottoRepository prodottoRepository;
         private ICategoriaRepository categoriaRepository;
@@ -48,189 +48,153 @@ namespace Ciccio1.Application.Impl
 
         public IEnumerable<Fattura> GetFatture()
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
-            {
-                return fatturaRepository.GetAll();
-            }
+            return fatturaRepository.GetAll();
         }
 
         public Fattura GetFattura(Guid id)
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
-            {
-                return fatturaRepository.Get(id);
-            }
+            return fatturaRepository.Get(id);
         }
 
         public Fattura SaveFattura(Fattura fattura)
         {
             Fattura newFat = null;
             int id = fattura.Id;
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
+            try
             {
-                try
+                if (fattura.IsTransient())
                 {
-                    if (fattura.IsTransient())
-                    {
-                        fattura = Factory.FatturaToPersist(fattura);
-                        id = fatturaRepository.Save(fattura);
-                    }
-                    else
-                    {
-                        fatturaRepository.Update(fattura);
-                    }
-                    uow.Commit();
-                    newFat = fatturaRepository.Get(id);
+                    fattura = Factory.FatturaToPersist(fattura);
+                    id = fatturaRepository.Save(fattura);
                 }
-                catch (Exception ex)
+                else
                 {
-                    uow.Rollback();
-                    throw ex;
+                    fatturaRepository.Update(fattura);
                 }
+                da.Commit();
+                newFat = fatturaRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
             }
             return newFat;
         }
 
         public void DeleteFattura(Fattura fattura)
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
+            try
             {
-                try
-                {
-                    fatturaRepository.Delete(fattura);
-                    uow.Commit();
-                }
-                catch (Exception ex)
-                {
-                    uow.Rollback();
-                    throw ex;
-                }
+                fatturaRepository.Delete(fattura);
+                da.Commit();
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
             }
         }
 
 
         public IEnumerable<Prodotto> GetProdotti()
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
-            {
-                return prodottoRepository.GetAll();
-            }
+            return prodottoRepository.GetAll();
         }
 
         public Prodotto GetProdotto(Guid id)
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
-            {
-                return prodottoRepository.Get(id);
-            }
+            return prodottoRepository.Get(id);
         }
 
         public Prodotto SaveProdotto(Prodotto prodotto)
         {
             Prodotto newPro = null;
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
+            int id = prodotto.Id;
+            try
             {
-                int id = prodotto.Id;
-                try
+                if (prodotto.IsTransient())
                 {
-                    if (prodotto.IsTransient())
-                    {
-                        prodotto = Factory.ProdottoToPersist(prodotto);
-                        id = prodottoRepository.Save(prodotto);
-                    }
-                    else
-                    {
-                        prodottoRepository.Update(prodotto);
-                    }
-                    uow.Commit();
-                    newPro = prodottoRepository.Get(id);
+                    prodotto = Factory.ProdottoToPersist(prodotto);
+                    id = prodottoRepository.Save(prodotto);
                 }
-                catch (Exception)
+                else
                 {
-                    uow.Rollback();
-                    throw;
+                    prodottoRepository.Update(prodotto);
                 }
+                da.Commit();
+                newPro = prodottoRepository.Get(id);
+            }
+            catch (Exception)
+            {
+                da.Rollback();
+                throw;
             }
             return newPro;
         }
 
         public void DeleteProdotto(Prodotto prodotto)
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
+            try
             {
-                try
-                {
-                    prodottoRepository.Delete(prodotto);
-                    uow.Commit();
-                }
-                catch (Exception)
-                {
-                    uow.Rollback();
-                    throw;
-                }
+                prodottoRepository.Delete(prodotto);
+                da.Commit();
+            }
+            catch (Exception)
+            {
+                da.Rollback();
+                throw;
             }
         }
 
 
         public IEnumerable<Categoria> GetCategorie()
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
-            {
-                return categoriaRepository.GetAll();
-            }
+            return categoriaRepository.GetAll();
         }
 
         public Categoria GetCategoria(Guid id)
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
-            {
-                return categoriaRepository.Get(id);
-            }
+            return categoriaRepository.Get(id);
         }
 
         public Categoria SaveCategoria(Categoria categoria)
         {
             Categoria newCat = null;
             int id = categoria.Id;
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
+            try
             {
-                try
+                if (categoria.IsTransient())
                 {
-                    if (categoria.IsTransient())
-                    {
-                        categoria = Factory.CategoriaToPersist(categoria);
-                        id = categoriaRepository.Save(categoria);
-                    }
-                    else
-                    {
-                        categoriaRepository.Update(categoria);
-                    }
-                    uow.Commit();
-                    newCat = categoriaRepository.Get(id);
+                    categoria = Factory.CategoriaToPersist(categoria);
+                    id = categoriaRepository.Save(categoria);
                 }
-                catch (Exception ex)
+                else
                 {
-                    uow.Rollback();
-                    throw ex;
+                    categoriaRepository.Update(categoria);
                 }
+                da.Commit();
+                newCat = categoriaRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
             }
             return newCat;
         }
 
         public void DeleteCategoria(Categoria categoria)
         {
-            using (IUnitOfWork uow = da.CreateUnitOfWork())
+            try
             {
-                try
-                {
-                    categoriaRepository.Delete(categoria);
-                    uow.Commit();
-                }
-                catch (Exception)
-                {
-                    uow.Rollback();
-                    throw;
-                }
+                categoriaRepository.Delete(categoria);
+                da.Commit();
+            }
+            catch (Exception)
+            {
+                da.Rollback();
+                throw;
             }
         }
 

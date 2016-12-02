@@ -8,6 +8,7 @@ namespace Ciccio1.Infrastructure
     public enum Storage
     {
         NHibernate = 1,
+        EF,
         Db4o,
         WCF,
         REST

@@ -8,22 +8,32 @@ namespace Ciccio1.Infrastructure.Persistence.EF
 {
     class DataAccess : IDataAccess
     {
+        public void Begin()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Commit()
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateDataAccess()
         {
             throw new NotImplementedException();
         }
 
-        public IUnitOfWork CreateUnitOfWork()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
+        public void Rollback()
         {
             throw new NotImplementedException();
         }
 
         public void VerifyDataAccess()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
         {
             throw new NotImplementedException();
         }

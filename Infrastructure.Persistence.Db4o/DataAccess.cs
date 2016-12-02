@@ -18,7 +18,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
         private static IEmbeddedObjectContainer embeddedObjectContainer;
         private IConf conf;
         private ILogger logger;
-        internal IObjectContainer ObjectContainer { get; private set; }
+        private IObjectContainer objectContainer;
 
         public DataAccess(IConf conf, ILogger logger)
         {
@@ -94,13 +94,20 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
 
         #endregion Metodi Privati
 
-
-        public IUnitOfWork CreateUnitOfWork()
+        internal IObjectContainer ObjectContainer
         {
-            ObjectContainer = embeddedObjectContainer.Ext().OpenSession();
-            IUnitOfWork uow = new UnitOfWork(ObjectContainer);
-            return uow;
+            get
+            {
+                if (objectContainer != null)
+                    return objectContainer;
+                else
+                {
+                    Begin();
+                    return objectContainer;
+                }
+            }
         }
+
 
         public void CreateDataAccess()
         {
@@ -112,9 +119,40 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             throw new NotImplementedException();
         }
 
+        public void Begin()
+        {
+            disposeObjectContainer();
+            objectContainer = embeddedObjectContainer.Ext().OpenSession();
+        }
+
+        public void Commit()
+        {
+            try
+            {
+                objectContainer.Commit();
+            }
+            catch (Exception ex)
+            {
+                objectContainer.Rollback();
+            }
+        }
+
+        public void Rollback()
+        {
+            objectContainer.Rollback();
+        }
+
+        private void disposeObjectContainer()
+        {
+            objectContainer.Rollback();
+            objectContainer.Close();
+            objectContainer.Dispose();
+        }
+
         public void Dispose()
         {
-            //throw new NotImplementedException();
+            disposeObjectContainer();
         }
+
     }
 }

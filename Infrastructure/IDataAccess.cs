@@ -9,6 +9,8 @@ namespace Ciccio1.Infrastructure
     {
         void CreateDataAccess();
         void VerifyDataAccess();
-        IUnitOfWork CreateUnitOfWork();
+        void Begin();
+        void Commit();
+        void Rollback();
     }
 }
