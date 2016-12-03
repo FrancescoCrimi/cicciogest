@@ -14,7 +14,7 @@ namespace Ciccio1.Application
         [OperationContract]
         IEnumerable<Fattura> GetFatture();
         [OperationContract]
-        Fattura GetFattura(Guid id);
+        Fattura GetFattura(int id);
         [OperationContract]
         Fattura SaveFattura(Fattura fattura);
         [OperationContract]

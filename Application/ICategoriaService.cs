@@ -14,7 +14,7 @@ namespace Ciccio1.Application
         [OperationContract]
         IEnumerable<Categoria> GetCategorie();
         [OperationContract]
-        Categoria GetCategoria(Guid id);
+        Categoria GetCategoria(int id);
         [OperationContract]
         Categoria SaveCategoria(Categoria categoria);
         [OperationContract]

@@ -41,7 +41,7 @@ namespace Ciccio1.WebApi.Controllers
         [Route("api/Categorie/{id}")]
         [SwaggerOperation("GetCategoria")]
         [SwaggerResponse(200, type: typeof(Categoria))]
-        public Categoria GetCategoria(Guid id)
+        public Categoria GetCategoria(int id)
         {
             return service.GetCategoria(id);
         }
@@ -97,7 +97,7 @@ namespace Ciccio1.WebApi.Controllers
         [Route("api/Fatture/{id}")]
         [SwaggerOperation("GetFattura")]
         [SwaggerResponse(200, type: typeof(Fattura))]
-        public Fattura GetFattura(Guid id)
+        public Fattura GetFattura(int id)
         {
             return service.GetFattura(id);
         }
@@ -152,7 +152,7 @@ namespace Ciccio1.WebApi.Controllers
         [Route("api/Prodotti/{id}")]
         [SwaggerOperation("GetProdotto")]
         [SwaggerResponse(200, type: typeof(Prodotto))]
-        public Prodotto GetProdotto(Guid id)
+        public Prodotto GetProdotto(int id)
         {
             return service.GetProdotto(id);
         }

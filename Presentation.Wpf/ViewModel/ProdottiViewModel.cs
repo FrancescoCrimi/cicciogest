@@ -63,7 +63,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             {
                 if (value != null && value != Prodotto)
                 {
-                    Prodotto = prodottoService.GetProdotto(value.IdProdotto);
+                    Prodotto = prodottoService.GetProdotto(value.Id);
                     RaisePropertyChanged("Prodotto");
                 }
             }

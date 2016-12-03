@@ -51,7 +51,7 @@ namespace Ciccio1.Application.Impl
             return fatturaRepository.GetAll();
         }
 
-        public Fattura GetFattura(Guid id)
+        public Fattura GetFattura(int id)
         {
             return fatturaRepository.Get(id);
         }
@@ -64,7 +64,7 @@ namespace Ciccio1.Application.Impl
             {
                 if (fattura.IsTransient())
                 {
-                    fattura = Factory.FatturaToPersist(fattura);
+                    //fattura = Factory.FatturaToPersist(fattura);
                     id = fatturaRepository.Save(fattura);
                 }
                 else
@@ -102,7 +102,7 @@ namespace Ciccio1.Application.Impl
             return prodottoRepository.GetAll();
         }
 
-        public Prodotto GetProdotto(Guid id)
+        public Prodotto GetProdotto(int id)
         {
             return prodottoRepository.Get(id);
         }
@@ -115,7 +115,7 @@ namespace Ciccio1.Application.Impl
             {
                 if (prodotto.IsTransient())
                 {
-                    prodotto = Factory.ProdottoToPersist(prodotto);
+                    //prodotto = Factory.ProdottoToPersist(prodotto);
                     id = prodottoRepository.Save(prodotto);
                 }
                 else
@@ -153,7 +153,7 @@ namespace Ciccio1.Application.Impl
             return categoriaRepository.GetAll();
         }
 
-        public Categoria GetCategoria(Guid id)
+        public Categoria GetCategoria(int id)
         {
             return categoriaRepository.Get(id);
         }
@@ -166,7 +166,7 @@ namespace Ciccio1.Application.Impl
             {
                 if (categoria.IsTransient())
                 {
-                    categoria = Factory.CategoriaToPersist(categoria);
+                    //categoria = Factory.CategoriaToPersist(categoria);
                     id = categoriaRepository.Save(categoria);
                 }
                 else

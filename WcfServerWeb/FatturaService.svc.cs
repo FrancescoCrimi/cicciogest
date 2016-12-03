@@ -18,7 +18,7 @@ namespace Ciccio1.WcfServerWeb
             throw new NotImplementedException();
         }
 
-        public Fattura GetFattura(Guid id)
+        public Fattura GetFattura(int id)
         {
             throw new NotImplementedException();
         }

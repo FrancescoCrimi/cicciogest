@@ -41,7 +41,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             {
                 if (value != null && value != Fattura)
                 {
-                    setFattura(service.GetFattura(value.IdFattura));
+                    setFattura(service.GetFattura(value.Id));
                     dettIsNew = false;
                 }
             }
@@ -197,7 +197,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 
         private void registraMessaggi()
         {
-            App.Messenger.Register<Guid>("IdProdottoSelezionato", id =>
+            App.Messenger.Register<int>("IdProdottoSelezionato", id =>
             {
                 Dettaglio = Factory.NuovoDettaglio(service.GetProdotto(id), 1);
                 RaisePropertyChanged("Dettaglio");

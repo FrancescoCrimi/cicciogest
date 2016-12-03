@@ -16,10 +16,10 @@ namespace Ciccio1.Application.Impl
 
         public CategoriaService(
             ILogger logger,
-            IDataAccess da
-            )
+            IDataAccess da)
         {
-
+            this.logger = logger;
+            this.da = da;
         }
 
         public void DeleteCategoria(Categoria categoria)
@@ -27,7 +27,7 @@ namespace Ciccio1.Application.Impl
             throw new NotImplementedException();
         }
 
-        public Categoria GetCategoria(Guid id)
+        public Categoria GetCategoria(int id)
         {
             throw new NotImplementedException();
         }

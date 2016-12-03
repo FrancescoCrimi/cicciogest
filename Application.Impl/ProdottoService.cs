@@ -16,10 +16,10 @@ namespace Ciccio1.Application.Impl
 
         public ProdottoService(
             ILogger logger,
-            IDataAccess da
-            )
+            IDataAccess da)
         {
-
+            this.logger = logger;
+            this.da = da;
         }
 
         public void DeleteProdotto(Prodotto prodotto)
@@ -32,7 +32,7 @@ namespace Ciccio1.Application.Impl
             throw new NotImplementedException();
         }
 
-        public Prodotto GetProdotto(Guid id)
+        public Prodotto GetProdotto(int id)
         {
             throw new NotImplementedException();
         }

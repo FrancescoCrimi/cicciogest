@@ -14,26 +14,30 @@ namespace Ciccio1.Domain
     [DataContract(Namespace = "http://gesttest.it")]
     public class Fattura : Entity<int>
     {
-        private Guid idFattura;
+        //private Guid idFattura;
         private string nome;
 
         [DataMember]
         protected IList<Dettaglio> dettagli;
 
-        protected Fattura() { } // Needed by Nhibernate
-        internal Fattura(Guid idFattura)
+        internal Fattura()
         {
-            IdFattura = idFattura;
             dettagli = new Collection<Dettaglio>();
-        }
+        } // Needed by Nhibernate
+
+        //internal Fattura(Guid idFattura)
+        //{
+        //    IdFattura = idFattura;
+        //    dettagli = new Collection<Dettaglio>();
+        //}
 
 
-        [DataMember]
-        public virtual Guid IdFattura
-        {
-            get { return idFattura; }
-            protected set { idFattura = value; }
-        }
+        //[DataMember]
+        //public virtual Guid IdFattura
+        //{
+        //    get { return idFattura; }
+        //    protected set { idFattura = value; }
+        //}
 
         [DataMember]
         public virtual string Nome
@@ -115,10 +119,10 @@ namespace Ciccio1.Domain
                 AddDettaglio(dettaglio);
         }
 
-        public override bool IsTransient()
-        {
-            return (IdFattura == Guid.Empty);
-        }
+        //public override bool IsTransient()
+        //{
+        //    return (IdFattura == Guid.Empty);
+        //}
 
         //public virtual void AddOrUpdate(Prodotto product)
         //{

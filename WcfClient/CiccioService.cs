@@ -30,7 +30,7 @@ namespace Ciccio1.WcfClient
             throw new NotImplementedException();
         }
 
-        public Categoria GetCategoria(Guid id)
+        public Categoria GetCategoria(int id)
         {
             throw new NotImplementedException();
         }
@@ -40,7 +40,7 @@ namespace Ciccio1.WcfClient
             throw new NotImplementedException();
         }
 
-        public Fattura GetFattura(Guid id)
+        public Fattura GetFattura(int id)
         {
             throw new NotImplementedException();
         }
@@ -55,7 +55,7 @@ namespace Ciccio1.WcfClient
             throw new NotImplementedException();
         }
 
-        public Prodotto GetProdotto(Guid id)
+        public Prodotto GetProdotto(int id)
         {
             throw new NotImplementedException();
         }

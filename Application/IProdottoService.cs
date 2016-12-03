@@ -14,7 +14,7 @@ namespace Ciccio1.Application
         [OperationContract]
         IEnumerable<Prodotto> GetProdotti();
         [OperationContract]
-        Prodotto GetProdotto(Guid id);
+        Prodotto GetProdotto(int id);
         [OperationContract]
         Prodotto SaveProdotto(Prodotto prodotto);
         [OperationContract]

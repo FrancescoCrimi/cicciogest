@@ -13,21 +13,8 @@ namespace Ciccio1.Domain
     public class Categoria : Entity<int>
     {
         private string nome;
-        private Guid idCategoria;
 
-        protected Categoria() { }
-
-        internal Categoria(Guid id)
-        {
-            IdCategoria = id;
-        }
-
-        [DataMember]
-        public virtual Guid IdCategoria
-        {
-            get { return idCategoria; }
-            protected set { idCategoria = value; }
-        }
+        internal Categoria() { }
 
         [DataMember]
         public virtual string Nome
@@ -40,9 +27,9 @@ namespace Ciccio1.Domain
             }
         }
 
-        public override bool IsTransient()
-        {
-            return (IdCategoria == Guid.Empty);
-        }
+        //public override bool IsTransient()
+        //{
+        //    return (Id == 0);
+        //}
     }
 }

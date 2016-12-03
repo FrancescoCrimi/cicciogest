@@ -18,7 +18,7 @@ namespace Ciccio1.WcfServerWeb
             throw new NotImplementedException();
         }
 
-        public Categoria GetCategoria(Guid id)
+        public Categoria GetCategoria(int id)
         {
             throw new NotImplementedException();
         }

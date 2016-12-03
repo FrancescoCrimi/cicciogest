@@ -12,9 +12,5 @@ namespace Ciccio1.Domain
     [DataContract(Namespace = "http://gesttest.it")]
     public class Indirizzo : Entity<int>
     {
-        public override bool IsTransient()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

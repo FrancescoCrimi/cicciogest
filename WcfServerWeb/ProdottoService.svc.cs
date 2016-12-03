@@ -23,7 +23,7 @@ namespace Ciccio1.WcfServerWeb
             throw new NotImplementedException();
         }
 
-        public Prodotto GetProdotto(Guid id)
+        public Prodotto GetProdotto(int id)
         {
             throw new NotImplementedException();
         }

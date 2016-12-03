@@ -14,7 +14,10 @@ namespace Ciccio1.Infrastructure.DomainBase
         [DataMember]
         public virtual int Id { get; protected set; }
 
-        public abstract  bool IsTransient();
+        public bool IsTransient()
+        {
+            return (Id == 0);
+        }
 
         public virtual event PropertyChangedEventHandler PropertyChanged;
 
