@@ -8,6 +8,8 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Ciccio1.Infrastructure.Conf;
 using Castle.Facilities.WcfIntegration;
+using Ciccio1.Domain;
+using Ciccio1.Infrastructure.Persistence.EF.Repository;
 
 namespace Ciccio1.Infrastructure.Persistence.EF
 {
@@ -37,6 +39,11 @@ namespace Ciccio1.Infrastructure.Persistence.EF
                 default:
                     break;
             }
+            container.Register(
+                Component.For<IFatturaRepository>().ImplementedBy<FatturaRepository>().LifeStyle.Transient,
+                Component.For<IProdottoRepository>().ImplementedBy<ProdottoRepository>().LifeStyle.Transient,
+                Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient
+                );
         }
     }
 }

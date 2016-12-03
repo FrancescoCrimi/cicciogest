@@ -15,10 +15,9 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
 {
     class DataAccess : IDataAccess
     {
-        private static IEmbeddedObjectContainer embeddedObjectContainer;
+        private IEmbeddedObjectContainer embeddedObjectContainer;
         private IConf conf;
         private ILogger logger;
-        private IObjectContainer objectContainer;
 
         public DataAccess(IConf conf, ILogger logger)
         {
@@ -78,7 +77,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             {
                 if (e.Object is Entity<int>)
                 {
-                    e.GetType().GetProperty("Id").SetValue(e, increment.GetNextID(e.GetType()));
+                    e.Object.GetType().GetProperty("Id").SetValue(e.Object, increment.GetNextID(e.Object.GetType()));
                 }
             };
 
@@ -98,16 +97,11 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
         {
             get
             {
-                if (objectContainer != null)
-                    return objectContainer;
-                else
-                {
-                    Begin();
-                    return objectContainer;
-                }
+                return embeddedObjectContainer;
             }
         }
 
+        #region Metodi Publici
 
         public void CreateDataAccess()
         {
@@ -121,37 +115,33 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
 
         public void Begin()
         {
-            disposeObjectContainer();
-            objectContainer = embeddedObjectContainer.Ext().OpenSession();
+            throw new NotImplementedException();
         }
 
         public void Commit()
         {
             try
             {
-                objectContainer.Commit();
+                embeddedObjectContainer.Commit();
             }
             catch (Exception ex)
             {
-                objectContainer.Rollback();
+                embeddedObjectContainer.Rollback();
+                throw ex;
             }
         }
 
         public void Rollback()
         {
-            objectContainer.Rollback();
+            embeddedObjectContainer.Rollback();
         }
 
-        private void disposeObjectContainer()
-        {
-            objectContainer.Rollback();
-            objectContainer.Close();
-            objectContainer.Dispose();
-        }
+        #endregion Metodi Publici
 
         public void Dispose()
         {
-            disposeObjectContainer();
+            embeddedObjectContainer.Close();
+            embeddedObjectContainer.Dispose();
         }
 
     }

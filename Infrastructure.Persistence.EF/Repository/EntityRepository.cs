@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Infrastructure.Persistence.EF
+namespace Ciccio1.Infrastructure.Persistence.EF.Repository
 {
     abstract class EntityRepository<TEntity, TId> : IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
     {

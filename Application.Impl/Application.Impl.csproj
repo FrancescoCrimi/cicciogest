@@ -80,6 +80,14 @@
       <Project>{E64EDBE5-B464-433B-BF56-BB880A547BE3}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Persistence.Db4o\Infrastructure.Persistence.Db4o.csproj">
+      <Project>{8031ab93-3042-4c7f-8132-c81d21e39b69}</Project>
+      <Name>Infrastructure.Persistence.Db4o</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Persistence.EF\Infrastructure.Persistence.EF.csproj">
+      <Project>{c101d70b-4ce7-4334-a4a6-0e417874d583}</Project>
+      <Name>Infrastructure.Persistence.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure.Persistence.Nhb\Infrastructure.Persistence.Nhb.csproj">
       <Project>{01fc267b-f1e7-4d91-b8f1-6fc9eeca78d9}</Project>
       <Name>Infrastructure.Persistence.Nhb</Name>
