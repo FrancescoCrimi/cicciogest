@@ -37,11 +37,6 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o.Repository
                 return (TEntity)rst.Next();
         }
 
-        public TEntity Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public int Save(TEntity entity)
         {
             da.ObjectContainer.Store(entity);

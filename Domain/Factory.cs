@@ -7,44 +7,20 @@ namespace Ciccio1.Domain
 {
     public static class Factory
     {
-        public static Fattura NewTransientFattura()
+        public static Fattura NewFattura()
         {
             return new Fattura();
         }
-        //public static Fattura FatturaToPersist(Fattura f)
-        //{
-        //    var newFatt = new Fattura(Guid.NewGuid());
-        //    newFatt.Nome = f.Nome;
-        //    newFatt.ReplaceDettagli(f.Dettagli);
-        //    return newFatt;
-        //}
 
-
-        public static Prodotto NewTransientProdotto()
+        public static Prodotto NewProdotto()
         {
             return new Prodotto();
         }
-        //public static Prodotto ProdottoToPersist(Prodotto p)
-        //{
-        //    Prodotto np = new Prodotto(Guid.NewGuid());
-        //    np.Nome = p.Nome;
-        //    np.Prezzo = p.Prezzo;
-        //    np.Categoria = p.Categoria;
-        //    return np;
-        //}
 
-
-        public static Categoria NewTransientCategoria()
+        public static Categoria NewCategoria()
         {
             return new Categoria();
         }
-        //public static Categoria CategoriaToPersist(Categoria c)
-        //{
-        //    Categoria nc = new Categoria(Guid.NewGuid());
-        //    nc.Nome = c.Nome;
-        //    return nc;
-        //}
-
 
         public static Dettaglio NuovoDettaglio(Prodotto prodotto, int quantità)
         {

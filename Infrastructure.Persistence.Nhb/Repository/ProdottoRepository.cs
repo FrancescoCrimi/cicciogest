@@ -12,10 +12,5 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
     {
         public ProdottoRepository(IDataAccess da)
             : base((DataAccess)da) { }
-
-        public override Prodotto Get(Guid id)
-        {
-            return da.ISession.CreateCriteria<Prodotto>().Add(Expression.Eq("IdProdotto", id)).UniqueResult<Prodotto>();
-        }
     }
 }

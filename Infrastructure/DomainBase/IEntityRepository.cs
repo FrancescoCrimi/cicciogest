@@ -9,7 +9,6 @@ namespace Ciccio1.Infrastructure.DomainBase
     public interface IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
     {
         IList<TEntity> GetAll();
-        TEntity Get(Guid id);
         TEntity Get(TId id);
         int Save(TEntity entity);
         void Update(TEntity entity);

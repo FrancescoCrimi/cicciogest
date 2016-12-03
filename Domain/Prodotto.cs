@@ -13,21 +13,9 @@ namespace Ciccio1.Domain
     {
         private string nome;
         private int prezzo;
-        //private Guid idProdotto;
         private Categoria categoria;
 
         internal Prodotto() { }
-        //internal Prodotto(Guid id)
-        //{
-        //    IdProdotto = id;
-        //}
-
-        //[DataMember]
-        //public virtual Guid IdProdotto
-        //{
-        //    get { return idProdotto; }
-        //    protected set { idProdotto = value; }
-        //}
 
         [DataMember]
         public virtual string Nome
@@ -59,6 +47,7 @@ namespace Ciccio1.Domain
             {
                 categoria = value;
                 NotifyPropertyChanged("Categoria");
+                NotifyPropertyChanged("NomeCategoria");
             }
         }
 
@@ -71,10 +60,5 @@ namespace Ciccio1.Domain
                 else return this.Categoria.Nome;
             }
         }
-
-        //public override bool IsTransient()
-        //{
-        //    return (IdProdotto == Guid.Empty);
-        //}
     }
 }

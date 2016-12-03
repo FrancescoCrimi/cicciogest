@@ -26,10 +26,5 @@ namespace Ciccio1.Domain
                 NotifyPropertyChanged("Nome");
             }
         }
-
-        //public override bool IsTransient()
-        //{
-        //    return (Id == 0);
-        //}
     }
 }

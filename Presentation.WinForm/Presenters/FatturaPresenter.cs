@@ -229,7 +229,7 @@ namespace Ciccio1.Presentation.WinForm.Presenters
         private void nuovaFattura()
         {
             view.FattureDataGridView.ClearSelection();
-            mostraFattura(Factory.NewTransientFattura());
+            mostraFattura(Factory.NewFattura());
         }
 
         private void mostraFattura(Fattura fattura)

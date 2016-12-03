@@ -178,7 +178,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 
         private void nuovaFattura()
         {
-            setFattura(Factory.NewTransientFattura());
+            setFattura(Factory.NewFattura());
             dettIsNew = false;
         }
 

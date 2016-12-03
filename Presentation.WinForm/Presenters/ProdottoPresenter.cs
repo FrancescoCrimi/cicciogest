@@ -50,7 +50,7 @@ namespace Ciccio1.Presentation.WinForm.Presenters
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
         {
-            view.ProdottoBindingSource.DataSource = Factory.NewTransientProdotto();
+            view.ProdottoBindingSource.DataSource = Factory.NewProdotto();
         }
 
         private void SalvaToolStripButton_Click(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace Ciccio1.Presentation.WinForm.Presenters
             view.ProdottiBindingSource.DataSource = service.GetProdotti();
             view.ProdottiDataGridView.ClearSelection();
             prodottiLoading = false;
-            view.ProdottoBindingSource.DataSource = Factory.NewTransientProdotto();
+            view.ProdottoBindingSource.DataSource = Factory.NewProdotto();
             view.CategorieProdottoBindingSource.DataSource = service.GetCategorie();
         }
 

@@ -12,10 +12,5 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
     {
         public FatturaRepository(IDataAccess da)
             : base((DataAccess)da) { }
-
-        public override Fattura Get(Guid id)
-        {
-            return da.ISession.CreateCriteria<Fattura>().Add(Expression.Eq("IdFattura", id)).UniqueResult<Fattura>();
-        }
     }
 }

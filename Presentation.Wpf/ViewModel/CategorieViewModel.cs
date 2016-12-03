@@ -92,7 +92,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 
         private void nuovo()
         {
-            TipoProdotto = Factory.NewTransientCategoria();
+            TipoProdotto = Factory.NewCategoria();
             RaisePropertyChanged("TipoProdotto");
         }
 

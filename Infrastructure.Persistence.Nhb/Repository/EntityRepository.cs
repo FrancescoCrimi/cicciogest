@@ -33,8 +33,6 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
             }
         }
 
-        public abstract TEntity Get(Guid id);
-
         public TEntity Get(TId id)
         {
             return da.ISession.Get<TEntity>(id);

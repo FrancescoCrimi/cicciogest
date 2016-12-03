@@ -19,11 +19,6 @@ namespace Ciccio1.Infrastructure.Persistence.EF.Repository
             throw new NotImplementedException();
         }
 
-        public TEntity Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<TEntity> GetAll()
         {
             throw new NotImplementedException();

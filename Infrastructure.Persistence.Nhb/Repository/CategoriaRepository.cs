@@ -12,10 +12,5 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
     {
         public CategoriaRepository(IDataAccess da)
             : base((DataAccess)da) { }
-
-        public override Categoria Get(Guid id)
-        {
-            return da.ISession.CreateCriteria<Categoria>().Add(Expression.Eq("IdCategoria", id)).UniqueResult<Categoria>();
-        }
     }
 }
