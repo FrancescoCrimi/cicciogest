@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServerWeb", "WcfServerWe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Persistence.EF", "Infrastructure.Persistence.EF\Infrastructure.Persistence.EF.csproj", "{C101D70B-4CE7-4334-A4A6-0E417874D583}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Persistence.EFC", "Infrastructure.Persistence.EFC\Infrastructure.Persistence.EFC.csproj", "{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,14 @@ Global
 		{C101D70B-4CE7-4334-A4A6-0E417874D583}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C101D70B-4CE7-4334-A4A6-0E417874D583}.Release|x86.ActiveCfg = Release|Any CPU
 		{C101D70B-4CE7-4334-A4A6-0E417874D583}.Release|x86.Build.0 = Release|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Debug|x86.Build.0 = Debug|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

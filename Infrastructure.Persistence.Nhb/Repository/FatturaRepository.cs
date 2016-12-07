@@ -10,7 +10,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
 {
     class FatturaRepository : EntityRepository<Fattura, int>, IFatturaRepository
     {
-        public FatturaRepository(IDataAccess da)
-            : base((DataAccess)da) { }
+        public FatturaRepository(DataAccess da)
+            : base(da) { }
     }
 }

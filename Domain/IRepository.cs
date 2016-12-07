@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Domain
 {
-    public interface IFatturaRepository : IEntityRepository<Fattura, int>
-    {
-    }
-    public interface IProdottoRepository : IEntityRepository<Prodotto, int>
-    {
-    }
-    public interface ICategoriaRepository : IEntityRepository<Categoria, int>
-    {
-    }
+    public interface IDomainRepository<TEntity> : IEntityRepository<TEntity, int>
+        where TEntity : DomainEntity<TEntity>
+    { }
+
+    public interface IFatturaRepository : IDomainRepository<Fattura>
+    { }
+
+    public interface IProdottoRepository : IDomainRepository<Prodotto>
+    { }
+
+    public interface ICategoriaRepository : IDomainRepository<Categoria>
+    { }
 }

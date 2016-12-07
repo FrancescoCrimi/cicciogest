@@ -139,6 +139,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Ciccio1.Domain.Dettaglio.datasource" />
+    <None Include="Properties\DataSources\Ciccio1.Domain.Fattura.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

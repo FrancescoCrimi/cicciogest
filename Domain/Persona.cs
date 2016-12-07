@@ -10,7 +10,7 @@ namespace Ciccio1.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
-    public class Persona : Entity<int>
+    public class Persona : DomainEntity<Persona>
     {
     }
 }

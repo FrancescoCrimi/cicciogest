@@ -62,7 +62,7 @@ namespace Ciccio1.Application.Impl
             int id = fattura.Id;
             try
             {
-                if (fattura.IsTransient())
+                if (fattura.Id == 0)
                 {
                     //fattura = Factory.FatturaToPersist(fattura);
                     id = fatturaRepository.Save(fattura);
@@ -113,7 +113,7 @@ namespace Ciccio1.Application.Impl
             int id = prodotto.Id;
             try
             {
-                if (prodotto.IsTransient())
+                if (prodotto.Id == 0)
                 {
                     //prodotto = Factory.ProdottoToPersist(prodotto);
                     id = prodottoRepository.Save(prodotto);
@@ -164,7 +164,7 @@ namespace Ciccio1.Application.Impl
             int id = categoria.Id;
             try
             {
-                if (categoria.IsTransient())
+                if (categoria.Id == 0)
                 {
                     //categoria = Factory.CategoriaToPersist(categoria);
                     id = categoriaRepository.Save(categoria);

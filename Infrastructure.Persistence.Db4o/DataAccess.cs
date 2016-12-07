@@ -29,6 +29,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
                 embeddedObjectContainer = Db4oEmbedded.OpenFile(db4oConf, conf.ConnectionString);
                 registerEventOnContainer(embeddedObjectContainer);
             }
+            logger.Debug("DataAccess Creata " + this.GetHashCode().ToString());
         }
 
 
@@ -41,18 +42,18 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
 
             // indice Id Entity
             ////configuration.Common.ObjectClass(typeof(IEntity<int>)).ObjectField("Id").Indexed(true);
-            //configuration.Common.ObjectClass(typeof(Entity<>)).ObjectField("id").Indexed(true);
+            configuration.Common.ObjectClass(typeof(DomainEntity<>)).ObjectField("Id").Indexed(true);
             //configuration.Common.ObjectClass(typeof(ValueObject<>)).ObjectField("id").Indexed(true);
-            configuration.Common.ObjectClass(typeof(Fattura)).ObjectField("idFattura").Indexed(true);
-            configuration.Common.ObjectClass(typeof(Categoria)).ObjectField("idCategoria").Indexed(true);
-            configuration.Common.ObjectClass(typeof(Prodotto)).ObjectField("idProdotto").Indexed(true);
+            //configuration.Common.ObjectClass(typeof(Fattura)).ObjectField("idFattura").Indexed(true);
+            //configuration.Common.ObjectClass(typeof(Categoria)).ObjectField("idCategoria").Indexed(true);
+            //configuration.Common.ObjectClass(typeof(Prodotto)).ObjectField("idProdotto").Indexed(true);
 
             // Unique Constraints
-            //configuration.Common.Add(new UniqueFieldValueConstraint(typeof(Entity<>), "id"));
+            configuration.Common.Add(new UniqueFieldValueConstraint(typeof(DomainEntity<>), "Id"));
             //configuration.Common.Add(new UniqueFieldValueConstraint(typeof(ValueObject<>), "id"));
-            configuration.Common.Add(new UniqueFieldValueConstraint(typeof(Fattura), "idFattura"));
-            configuration.Common.Add(new UniqueFieldValueConstraint(typeof(Categoria), "idCategoria"));
-            configuration.Common.Add(new UniqueFieldValueConstraint(typeof(Prodotto), "idProdotto"));
+            //configuration.Common.Add(new UniqueFieldValueConstraint(typeof(Fattura), "idFattura"));
+            //configuration.Common.Add(new UniqueFieldValueConstraint(typeof(Categoria), "idCategoria"));
+            //configuration.Common.Add(new UniqueFieldValueConstraint(typeof(Prodotto), "idProdotto"));
 
             // Diagnostica a console visual studio
             configuration.Common.Diagnostic.AddListener(new Db4objects.Db4o.Diagnostic.DiagnosticToConsole());
@@ -75,10 +76,10 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             AutoIncrement increment = new AutoIncrement(container);
             events.Creating += (s, e) =>
             {
-                if (e.Object is Entity<int>)
-                {
-                    e.Object.GetType().GetProperty("Id").SetValue(e.Object, increment.GetNextID(e.Object.GetType()));
-                }
+                //if (e.Object is Entity<int>)
+                //{
+                //    e.Object.GetType().GetProperty("Id").SetValue(e.Object, increment.GetNextID(e.Object.GetType()));
+                //}
             };
 
             events.Committing += (s, e) =>
@@ -142,6 +143,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
         {
             embeddedObjectContainer.Close();
             embeddedObjectContainer.Dispose();
+            logger.Debug("DataAccess Dispose " + this.GetHashCode().ToString());
         }
 
     }

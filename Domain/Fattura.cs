@@ -12,16 +12,16 @@ namespace Ciccio1.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
-    public class Fattura : Entity<int>
+    public class Fattura : DomainEntity<Fattura>
     {
         private string nome;
 
         [DataMember]
-        protected IList<Dettaglio> dettagli;
+        protected ISet<Dettaglio> dettagli;
 
         internal Fattura()
         {
-            dettagli = new Collection<Dettaglio>();
+            dettagli = new HashSet<Dettaglio>();
         } // Needed by Nhibernate
 
 
@@ -37,11 +37,11 @@ namespace Ciccio1.Domain
             }
         }
 
-        public virtual IReadOnlyList<Dettaglio> Dettagli
+        public virtual IEnumerable<Dettaglio> Dettagli
         {
             get
             {
-                return new ReadOnlyCollection<Dettaglio>(dettagli);
+                return new List<Dettaglio>(dettagli).AsReadOnly();
             }
         }
 
@@ -92,7 +92,7 @@ namespace Ciccio1.Domain
 
         public virtual void ReplaceDettagli(IEnumerable<Dettaglio> dettagli)
         {
-            var newdett = new Collection<Dettaglio>();
+            var newdett = new HashSet<Dettaglio>();
             foreach (Dettaglio item in dettagli)
             {
                 newdett.Add(item);

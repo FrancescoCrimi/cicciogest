@@ -163,8 +163,8 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         public void Dispose()
         {
-            logger.Debug("DataAccess Dispose " + this.GetHashCode().ToString());
             disposeSession();
+            logger.Debug("DataAccess Dispose " + this.GetHashCode().ToString());
         }
 
 
@@ -190,8 +190,8 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
         {
             get
             {
-                if(session != null)
-                return session;
+                if (session != null)
+                    return session;
                 else
                 {
                     Begin();

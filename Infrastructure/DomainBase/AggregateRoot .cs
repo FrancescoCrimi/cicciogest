@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Infrastructure.DomainBase
 {
-    public abstract class AggregateRoot<T> : Entity<T> where T : AggregateRoot<T>
-    {
-    }
+    //public abstract class AggregateRoot<T> : Entity<T> where T : AggregateRoot<T>
+    //{
+    //}
 }

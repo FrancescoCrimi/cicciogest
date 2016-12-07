@@ -9,7 +9,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o.Repository
 {
     class CategoriaRepository : EntityRepository<Categoria, int>, ICategoriaRepository
     {
-        public CategoriaRepository(IDataAccess da)
-            : base((DataAccess)da) { }
+        public CategoriaRepository(DataAccess da)
+            : base(da) { }
     }
 }

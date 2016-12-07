@@ -6,21 +6,12 @@
   <class name="Fattura" table="Fattura">
 
     <id name="Id" generator="native" unsaved-value="0"/>
-    <property name="IdFattura" not-null="true" unique="true" />
     <property name="Nome" not-null="true" />
 
-    <bag name="Dettagli" lazy="false" generic="true" access="field.camelcase" cascade="all-delete-orphan" >
+    <set name="Dettagli" lazy="false" generic="true" access="field.camelcase" cascade="all-delete-orphan" >
       <key column="Fattura_Id" not-null="true"/>
       <one-to-many class="Dettaglio"/>
-    </bag>
-    
-    <!--<list name="Dettagli" lazy="false" generic="true" access="field.camelcase" cascade="all-delete-orphan" >
-      <key column="Fattura_Id" not-null="true"/>
-      <index type="Int32">
-        <column name="`Fattura_Index`" not-null="true" />
-      </index>
-      <one-to-many class="Dettaglio"/>
-    </list>-->
+    </set>
 
   </class>
 

@@ -11,7 +11,7 @@ using NHibernate.Criterion;
 namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
 {
     abstract class EntityRepository<TEntity, TId>
-        : IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
+        : IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>
     {
         protected DataAccess da;
 

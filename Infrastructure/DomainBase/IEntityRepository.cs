@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Ciccio1.Infrastructure.DomainBase
 {
-    public interface IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
+    public interface IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>
     {
         IList<TEntity> GetAll();
         TEntity Get(TId id);

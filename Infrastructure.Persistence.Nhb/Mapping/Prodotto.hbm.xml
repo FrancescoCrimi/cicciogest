@@ -6,7 +6,6 @@
   <class name="Prodotto" table="Prodotto">
     
     <id name="Id" generator="native" unsaved-value="0"/>
-    <property name="IdProdotto" not-null="true" unique="true"/>
     <property name="Nome" not-null="true"/>
     <property name="Prezzo" not-null="true"/>
     <many-to-one name="Categoria" lazy="false" column="Categoria_Id" not-null="true"/>

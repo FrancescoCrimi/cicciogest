@@ -6,7 +6,6 @@
   <class name="Categoria" table="Categoria">
     
     <id name="Id" generator="native" unsaved-value="0"/>
-    <property name="IdCategoria" not-null="true" unique="true"/>
     <property name="Nome" not-null="true"/>
   
   </class>

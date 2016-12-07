@@ -8,9 +8,13 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Domain
 {
+    public class DomainEntity<TEntity> : Entity<TEntity, int>
+        where TEntity : DomainEntity<TEntity>
+    { }
+
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
-    public class Categoria : Entity<int>
+    public class Categoria : DomainEntity<Categoria>
     {
         private string nome;
 

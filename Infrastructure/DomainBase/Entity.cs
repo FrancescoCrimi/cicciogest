@@ -9,19 +9,20 @@ namespace Ciccio1.Infrastructure.DomainBase
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
-    public abstract class Entity<T> : IEquatable<Entity<T>>, INotifyPropertyChanged
+    public abstract class Entity<TEntity, TId> : IEquatable<TEntity>, INotifyPropertyChanged
+        where TEntity : Entity<TEntity, TId>
     {
         [DataMember]
-        public virtual int Id { get; protected set; }
+        public virtual TId Id { get; protected set; }
 
-        public bool IsTransient()
-        {
-            return (Id == 0);
-        }
+        //public bool IsTransient()
+        //{
+        //    return (Id == 0);
+        //}
 
         public virtual event PropertyChangedEventHandler PropertyChanged;
 
-        public virtual bool Equals(Entity<T> other)
+        public virtual bool Equals(TEntity other)
         {
             if (object.ReferenceEquals(this, other)) return true;
             if (object.ReferenceEquals(null, other)) return false;
@@ -30,7 +31,7 @@ namespace Ciccio1.Infrastructure.DomainBase
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as Entity<T>);
+            return Equals(obj as TEntity);
         }
 
         public override int GetHashCode()

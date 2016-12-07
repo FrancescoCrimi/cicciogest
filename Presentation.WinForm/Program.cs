@@ -14,10 +14,14 @@ namespace Ciccio1.Presentation.WinForm
         private static Container container = null;
         private ILogger logger = null;
 
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
+
         [STAThread]
         static void Main()
         {
             var aa = new Program();
+            SetProcessDPIAware();
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             System.Windows.Forms.Application.Run(aa.runApp());

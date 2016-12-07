@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Infrastructure.Persistence.EF.Repository
 {
-    abstract class EntityRepository<TEntity, TId> : IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
+    abstract class EntityRepository<TEntity, TId> 
+        : IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>
     {
         public void Delete(TEntity entity)
         {

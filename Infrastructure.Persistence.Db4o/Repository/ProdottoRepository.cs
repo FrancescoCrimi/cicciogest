@@ -9,7 +9,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o.Repository
 {
     class ProdottoRepository : EntityRepository<Prodotto, int>, IProdottoRepository
     {
-        public ProdottoRepository(IDataAccess da)
-            : base((DataAccess)da) { }
+        public ProdottoRepository(DataAccess da)
+            : base(da) { }
     }
 }

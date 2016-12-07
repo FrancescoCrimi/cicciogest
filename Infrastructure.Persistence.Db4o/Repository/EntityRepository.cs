@@ -11,7 +11,7 @@ using Castle.Core.Logging;
 namespace Ciccio1.Infrastructure.Persistence.Db4o.Repository
 {
     abstract class EntityRepository<TEntity, TId>
-        : IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
+        : IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>
     {
         protected DataAccess da;
 

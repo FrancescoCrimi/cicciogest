@@ -17,6 +17,11 @@ namespace Ciccio1.Infrastructure.Persistence.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Properties()
+                .Where(p => p.Name == "Id")
+                .Configure(p => p.IsKey()
+                .HasColumnOrder(1));
+
             base.OnModelCreating(modelBuilder);
         }
 
