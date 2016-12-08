@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Ciccio1.Application
 {
     [ServiceContract(ConfigurationName = "Ciccio1.Application.IFatturaService")]
-    public interface IFatturaService
+    public interface IFatturaService : IDisposable
     {
         [OperationContract]
         IEnumerable<Fattura> GetFatture();

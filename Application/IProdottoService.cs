@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Ciccio1.Application
 {
     [ServiceContract(ConfigurationName = "Ciccio1.Application.IProdottoService")]
-    public interface IProdottoService
+    public interface IProdottoService : IDisposable
     {
         [OperationContract]
         IEnumerable<Prodotto> GetProdotti();

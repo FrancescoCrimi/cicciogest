@@ -76,7 +76,8 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             AutoIncrement increment = new AutoIncrement(container);
             events.Creating += (s, e) =>
             {
-                //if (e.Object is Entity<int>)
+                //if (e.Object is DomainEntity<>)
+                //if (e.Object.GetType().BaseType.GetGenericTypeDefinition() == typeof(DomainEntity<>))
                 //{
                 //    e.Object.GetType().GetProperty("Id").SetValue(e.Object, increment.GetNextID(e.Object.GetType()));
                 //}

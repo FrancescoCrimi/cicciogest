@@ -28,12 +28,21 @@ namespace Ciccio1.Application.Impl
 
         public void DeleteFattura(Fattura fattura)
         {
-            throw new NotImplementedException();
+            try
+            {
+                fatturaRepository.Delete(fattura);
+                da.Commit();
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
+            }
         }
 
         public Fattura GetFattura(int id)
         {
-            throw new NotImplementedException();
+            return fatturaRepository.Get(id);
         }
 
         public IEnumerable<Fattura> GetFatture()
@@ -43,7 +52,29 @@ namespace Ciccio1.Application.Impl
 
         public Fattura SaveFattura(Fattura fattura)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (fattura.Id == 0)
+                {
+                    fatturaRepository.Save(fattura);
+                }
+                else
+                {
+                    fatturaRepository.Update(fattura);
+                }
+                da.Commit();
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
+            }
+            return fattura;
+        }
+
+        public void Dispose()
+        {
+            //throw new NotImplementedException();
         }
     }
 }

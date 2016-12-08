@@ -56,7 +56,7 @@
     <Compile Include="Factory.cs" />
     <Compile Include="Fattura.cs" />
     <Compile Include="Indirizzo.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Prodotto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

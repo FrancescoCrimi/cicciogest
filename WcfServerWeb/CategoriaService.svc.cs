@@ -18,6 +18,11 @@ namespace Ciccio1.WcfServerWeb
             throw new NotImplementedException();
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public Categoria GetCategoria(int id)
         {
             throw new NotImplementedException();

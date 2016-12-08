@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
 {
-    class ProdottoRepository : EntityRepository<Prodotto, int>, IProdottoRepository
+    class ProdottoRepository : DomainRepository<Prodotto>, IProdottoRepository
     {
         public ProdottoRepository(DataAccess da)
             : base(da) { }

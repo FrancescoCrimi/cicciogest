@@ -58,28 +58,24 @@ namespace Ciccio1.Application.Impl
 
         public Fattura SaveFattura(Fattura fattura)
         {
-            Fattura newFat = null;
-            int id = fattura.Id;
             try
             {
                 if (fattura.Id == 0)
                 {
-                    //fattura = Factory.FatturaToPersist(fattura);
-                    id = fatturaRepository.Save(fattura);
+                    fatturaRepository.Save(fattura);
                 }
                 else
                 {
                     fatturaRepository.Update(fattura);
                 }
                 da.Commit();
-                newFat = fatturaRepository.Get(id);
             }
             catch (Exception ex)
             {
                 da.Rollback();
                 throw ex;
             }
-            return newFat;
+            return fattura;
         }
 
         public void DeleteFattura(Fattura fattura)
@@ -109,28 +105,24 @@ namespace Ciccio1.Application.Impl
 
         public Prodotto SaveProdotto(Prodotto prodotto)
         {
-            Prodotto newPro = null;
-            int id = prodotto.Id;
             try
             {
                 if (prodotto.Id == 0)
                 {
-                    //prodotto = Factory.ProdottoToPersist(prodotto);
-                    id = prodottoRepository.Save(prodotto);
+                    prodottoRepository.Save(prodotto);
                 }
                 else
                 {
                     prodottoRepository.Update(prodotto);
                 }
                 da.Commit();
-                newPro = prodottoRepository.Get(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 da.Rollback();
-                throw;
+                throw ex;
             }
-            return newPro;
+            return prodotto;
         }
 
         public void DeleteProdotto(Prodotto prodotto)
@@ -160,28 +152,24 @@ namespace Ciccio1.Application.Impl
 
         public Categoria SaveCategoria(Categoria categoria)
         {
-            Categoria newCat = null;
-            int id = categoria.Id;
             try
             {
                 if (categoria.Id == 0)
                 {
-                    //categoria = Factory.CategoriaToPersist(categoria);
-                    id = categoriaRepository.Save(categoria);
+                    categoriaRepository.Save(categoria);
                 }
                 else
                 {
                     categoriaRepository.Update(categoria);
                 }
                 da.Commit();
-                newCat = categoriaRepository.Get(id);
             }
             catch (Exception ex)
             {
                 da.Rollback();
                 throw ex;
             }
-            return newCat;
+            return categoria;
         }
 
         public void DeleteCategoria(Categoria categoria)

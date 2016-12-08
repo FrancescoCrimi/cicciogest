@@ -13,33 +13,69 @@ namespace Ciccio1.Application.Impl
     {
         private ILogger logger;
         private IDataAccess da;
+        private ICategoriaRepository categoriaRepository;
 
         public CategoriaService(
             ILogger logger,
-            IDataAccess da)
+            IDataAccess da,
+            ICategoriaRepository categoriaRepository
+            )
         {
             this.logger = logger;
             this.da = da;
+            this.categoriaRepository = categoriaRepository;
+            logger.Debug("CategoriaService Creata " + this.GetHashCode().ToString());
         }
 
         public void DeleteCategoria(Categoria categoria)
         {
-            throw new NotImplementedException();
+            try
+            {
+                categoriaRepository.Delete(categoria);
+                da.Commit();
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
+            }
         }
 
         public Categoria GetCategoria(int id)
         {
-            throw new NotImplementedException();
+            return categoriaRepository.Get(id);
         }
 
         public IEnumerable<Categoria> GetCategorie()
         {
-            throw new NotImplementedException();
+            return categoriaRepository.GetAll();
         }
 
         public Categoria SaveCategoria(Categoria categoria)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (categoria.Id == 0)
+                {
+                    categoriaRepository.Save(categoria);
+                }
+                else
+                {
+                    categoriaRepository.Update(categoria);
+                }
+                da.Commit();
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
+            }
+            return categoria;
+        }
+
+        public void Dispose()
+        {
+            //throw new NotImplementedException();
         }
     }
 }

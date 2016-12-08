@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.EFC
 {
-    public class Class1
+    class ModelContext
     {
     }
 }

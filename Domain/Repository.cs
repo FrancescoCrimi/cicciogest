@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Domain
 {
+    public class DomainEntity<TEntity> : Entity<TEntity, int>
+        where TEntity : DomainEntity<TEntity>
+    { }
+
+
     public interface IDomainRepository<TEntity> : IEntityRepository<TEntity, int>
         where TEntity : DomainEntity<TEntity>
     { }

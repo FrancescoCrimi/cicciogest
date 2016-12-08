@@ -10,12 +10,12 @@ using NHibernate.Criterion;
 
 namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
 {
-    abstract class EntityRepository<TEntity, TId>
-        : IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>
+    abstract class DomainRepository<TEntity>
+        : IDomainRepository<TEntity> where TEntity : DomainEntity<TEntity>
     {
         protected DataAccess da;
 
-        protected EntityRepository(DataAccess da)
+        protected DomainRepository(DataAccess da)
         {
             this.da = da;
         }
@@ -33,7 +33,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
             }
         }
 
-        public TEntity Get(TId id)
+        public TEntity Get(int id)
         {
             return da.ISession.Get<TEntity>(id);
         }

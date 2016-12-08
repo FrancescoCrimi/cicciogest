@@ -65,13 +65,14 @@
             this.nomeDataGridViewTextBoxColumn});
             this.CategorieDataGridView.DataSource = this.CategorieBindingSource;
             this.CategorieDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CategorieDataGridView.Location = new System.Drawing.Point(3, 60);
+            this.CategorieDataGridView.Location = new System.Drawing.Point(4, 69);
+            this.CategorieDataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CategorieDataGridView.MultiSelect = false;
             this.CategorieDataGridView.Name = "CategorieDataGridView";
             this.CategorieDataGridView.ReadOnly = true;
             this.CategorieDataGridView.RowHeadersVisible = false;
             this.CategorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.CategorieDataGridView.Size = new System.Drawing.Size(238, 199);
+            this.CategorieDataGridView.Size = new System.Drawing.Size(317, 249);
             this.CategorieDataGridView.TabIndex = 1;
             // 
             // idDataGridViewTextBoxColumn
@@ -81,7 +82,7 @@
             this.idDataGridViewTextBoxColumn.HeaderText = "Id";
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 41;
+            this.idDataGridViewTextBoxColumn.Width = 48;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -98,18 +99,20 @@
             // 
             this.tipoProdottoLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tipoProdottoLabel.AutoSize = true;
-            this.tipoProdottoLabel.Location = new System.Drawing.Point(3, 6);
+            this.tipoProdottoLabel.Location = new System.Drawing.Point(4, 6);
+            this.tipoProdottoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tipoProdottoLabel.Name = "tipoProdottoLabel";
-            this.tipoProdottoLabel.Size = new System.Drawing.Size(98, 13);
+            this.tipoProdottoLabel.Size = new System.Drawing.Size(131, 17);
             this.tipoProdottoLabel.TabIndex = 3;
             this.tipoProdottoLabel.Text = "Categoria Prodotto:";
             // 
             // textBox1
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CategoriaBindingSource, "Nome", true));
-            this.textBox1.Location = new System.Drawing.Point(107, 3);
+            this.textBox1.Location = new System.Drawing.Point(143, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(122, 20);
+            this.textBox1.Size = new System.Drawing.Size(161, 22);
             this.textBox1.TabIndex = 4;
             // 
             // CategoriaBindingSource
@@ -126,16 +129,18 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(244, 262);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 322);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NuovoToolStripButton,
             this.CancellaToolStripButton,
@@ -143,7 +148,7 @@
             this.AboutToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(244, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(325, 27);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -152,7 +157,7 @@
             this.NuovoToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("NuovoToolStripButton.Image")));
             this.NuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.NuovoToolStripButton.Name = "NuovoToolStripButton";
-            this.NuovoToolStripButton.Size = new System.Drawing.Size(63, 22);
+            this.NuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
             this.NuovoToolStripButton.Text = "&Nuovo";
             // 
             // CancellaToolStripButton
@@ -160,7 +165,7 @@
             this.CancellaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("CancellaToolStripButton.Image")));
             this.CancellaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CancellaToolStripButton.Name = "CancellaToolStripButton";
-            this.CancellaToolStripButton.Size = new System.Drawing.Size(72, 22);
+            this.CancellaToolStripButton.Size = new System.Drawing.Size(89, 24);
             this.CancellaToolStripButton.Text = "&Cancella";
             // 
             // SalvaToolStripButton
@@ -168,7 +173,7 @@
             this.SalvaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("SalvaToolStripButton.Image")));
             this.SalvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SalvaToolStripButton.Name = "SalvaToolStripButton";
-            this.SalvaToolStripButton.Size = new System.Drawing.Size(54, 22);
+            this.SalvaToolStripButton.Size = new System.Drawing.Size(68, 24);
             this.SalvaToolStripButton.Text = "&Salva";
             // 
             // AboutToolStripButton
@@ -177,7 +182,7 @@
             this.AboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("AboutToolStripButton.Image")));
             this.AboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AboutToolStripButton.Name = "AboutToolStripButton";
-            this.AboutToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.AboutToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.AboutToolStripButton.Text = "&?";
             // 
             // flowLayoutPanel1
@@ -186,17 +191,19 @@
             this.flowLayoutPanel1.Controls.Add(this.tipoProdottoLabel);
             this.flowLayoutPanel1.Controls.Add(this.textBox1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 28);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 31);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(238, 26);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(317, 30);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // CategoriaView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 262);
+            this.ClientSize = new System.Drawing.Size(325, 322);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CategoriaView";
             this.Text = "Categoria Prodotto";
             ((System.ComponentModel.ISupportInitialize)(this.CategorieDataGridView)).EndInit();

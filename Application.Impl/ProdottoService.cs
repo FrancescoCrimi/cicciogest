@@ -13,33 +13,68 @@ namespace Ciccio1.Application.Impl
     {
         private ILogger logger;
         private IDataAccess da;
+        private IProdottoRepository prodottoRepository;
 
         public ProdottoService(
             ILogger logger,
-            IDataAccess da)
+            IDataAccess da,
+            IProdottoRepository prodottoRepository
+            )
         {
             this.logger = logger;
             this.da = da;
+            this.prodottoRepository = prodottoRepository;
         }
 
         public void DeleteProdotto(Prodotto prodotto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                prodottoRepository.Delete(prodotto);
+                da.Commit();
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
+            }
         }
 
         public IEnumerable<Prodotto> GetProdotti()
         {
-            throw new NotImplementedException();
+            return prodottoRepository.GetAll();
         }
 
         public Prodotto GetProdotto(int id)
         {
-            throw new NotImplementedException();
+            return prodottoRepository.Get(id);
         }
 
         public Prodotto SaveProdotto(Prodotto prodotto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (prodotto.Id == 0)
+                {
+                    prodottoRepository.Save(prodotto);
+                }
+                else
+                {
+                    prodottoRepository.Update(prodotto);
+                }
+                da.Commit();
+            }
+            catch (Exception ex)
+            {
+                da.Rollback();
+                throw ex;
+            }
+            return prodotto;
+        }
+
+        public void Dispose()
+        {
+            //throw new NotImplementedException();
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
 {
-    class FatturaRepository : EntityRepository<Fattura, int>, IFatturaRepository
+    class FatturaRepository : DomainRepository<Fattura>, IFatturaRepository
     {
         public FatturaRepository(DataAccess da)
             : base(da) { }

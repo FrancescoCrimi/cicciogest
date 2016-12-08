@@ -18,6 +18,11 @@ namespace Ciccio1.WcfServerWeb
             throw new NotImplementedException();
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Prodotto> GetProdotti()
         {
             throw new NotImplementedException();
