@@ -9,8 +9,16 @@ using Ciccio1.WebApi.Controllers;
 
 namespace Ciccio1.WebApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Installer : IWindsorInstaller
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="store"></param>
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Install(new Ciccio1.Application.Impl.Installer());

@@ -8,6 +8,7 @@
     <id name="Id" generator="native" unsaved-value="0"/>
     <property name="Nome" not-null="true"/>
     <property name="Prezzo" not-null="true"/>
+    <property name="NomeCategoria" not-null="true"/>
     <many-to-one name="Categoria" lazy="false" column="Categoria_Id" not-null="true"/>
     
   </class>

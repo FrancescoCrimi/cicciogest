@@ -23,8 +23,11 @@ namespace Ciccio1.Domain
             get { return nome; }
             set
             {
-                nome = value;
-                NotifyPropertyChanged("Nome");
+                if (value != nome)
+                {
+                    nome = value;
+                    NotifyPropertyChanged("Nome");
+                }
             }
         }
 
@@ -34,8 +37,11 @@ namespace Ciccio1.Domain
             get { return prezzo; }
             set
             {
-                prezzo = value;
-                NotifyPropertyChanged("Prezzo");
+                if (value != prezzo)
+                {
+                    prezzo = value;
+                    NotifyPropertyChanged("Prezzo");
+                }
             }
         }
 
@@ -45,20 +51,16 @@ namespace Ciccio1.Domain
             get { return categoria; }
             set
             {
-                categoria = value;
-                NotifyPropertyChanged("Categoria");
-                NotifyPropertyChanged("NomeCategoria");
+                if(value != categoria)
+                {
+                    categoria = value;
+                    NomeCategoria = categoria.Nome;
+                    NotifyPropertyChanged("NomeCategoria");
+                }
             }
         }
 
-
-        public virtual string NomeCategoria
-        {
-            get
-            {
-                if (this.Categoria == null) return "";
-                else return this.Categoria.Nome;
-            }
-        }
+        [DataMember]
+        public virtual string NomeCategoria { get; protected set; }
     }
 }

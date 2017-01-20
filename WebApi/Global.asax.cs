@@ -9,8 +9,14 @@ using System.Web.Routing;
 
 namespace Ciccio1.WebApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WebApiApplication : System.Web.HttpApplication
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected void Application_Start()
         {
             Container container = new Container();

@@ -40,6 +40,81 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
         }
 
 
+        #region Metodi Publici
+
+        public void CreateDataAccess()
+        {
+            switch (conf.Database)
+            {
+                case Databases.MySql:
+                    initMySql();
+                    break;
+                case Databases.SQLite:
+                    initSQLite();
+                    break;
+                case Databases.SSCE:
+                    initSSCE();
+                    break;
+                case Databases.SSEE:
+                    break;
+                default:
+                    break;
+            }
+            SchemaExport SE = new SchemaExport(Configuration());
+            SE.Drop(true, true);
+            SE.Create(true, true);
+        }
+
+        public void VerifyDataAccess()
+        {
+            new SchemaValidator(Configuration()).Validate();
+        }
+
+        public void Begin()
+        {
+            disposeSession();
+            session = sessionFactory.OpenSession();
+            session.FlushMode = FlushMode.Commit;
+            session.BeginTransaction();
+        }
+
+        public void Commit()
+        {
+            session.Transaction.Commit();
+            disposeSession();
+        }
+
+        public void Rollback()
+        {
+            session.Transaction.Rollback();
+        }
+
+        public void Dispose()
+        {
+            disposeSession();
+            logger.Debug("DataAccess Dispose " + this.GetHashCode().ToString());
+        }
+
+        #endregion
+
+        #region Metodi Internal
+
+        internal ISession ISession
+        {
+            get
+            {
+                if (session != null)
+                    return session;
+                else
+                {
+                    Begin();
+                    return session;
+                }
+            }
+        }
+
+        #endregion
+
         #region Metodi Privati
 
         private Configuration Configuration()
@@ -130,77 +205,6 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
             return true;
         }
 
-        #endregion
-
-
-        public void CreateDataAccess()
-        {
-            switch (conf.Database)
-            {
-                case Databases.MySql:
-                    initMySql();
-                    break;
-                case Databases.SQLite:
-                    initSQLite();
-                    break;
-                case Databases.SSCE:
-                    initSSCE();
-                    break;
-                case Databases.SSEE:
-                    break;
-                default:
-                    break;
-            }
-            SchemaExport SE = new SchemaExport(Configuration());
-            SE.Drop(true, true);
-            SE.Create(true, true);
-        }
-
-        public void VerifyDataAccess()
-        {
-            new SchemaValidator(Configuration()).Validate();
-        }
-
-        public void Dispose()
-        {
-            disposeSession();
-            logger.Debug("DataAccess Dispose " + this.GetHashCode().ToString());
-        }
-
-
-        public void Begin()
-        {
-            disposeSession();
-            session = sessionFactory.OpenSession();
-            session.FlushMode = FlushMode.Commit;
-            session.BeginTransaction();
-        }
-
-        public void Commit()
-        {
-            session.Transaction.Commit();
-        }
-
-        public void Rollback()
-        {
-            session.Transaction.Rollback();
-        }
-
-        internal ISession ISession
-        {
-            get
-            {
-                if (session != null)
-                    return session;
-                else
-                {
-                    Begin();
-                    return session;
-                }
-            }
-        }
-
-
         private void disposeSession()
         {
             //logger.Debug("rollback Transaction");
@@ -234,5 +238,6 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
             }
         }
 
+        #endregion
     }
 }

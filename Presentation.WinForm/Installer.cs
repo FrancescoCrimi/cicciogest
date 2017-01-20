@@ -11,6 +11,7 @@ using Ciccio1.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
 using Castle.Windsor.Installer;
 using Ciccio1.Application;
+using Ciccio1.Infrastructure;
 
 namespace Ciccio1.Presentation.WinForm
 {
@@ -21,18 +22,22 @@ namespace Ciccio1.Presentation.WinForm
             IConf conf = container.Resolve<IConf>();
             switch (conf.DataAccess)
             {
-                case Infrastructure.Storage.NHibernate:
+                case Storage.NHibernate:
                     container.Install(FromAssembly.Named("Application.Impl"));
                     break;
-                case Infrastructure.Storage.Db4o:
+                case Storage.EFC:
                     container.Install(FromAssembly.Named("Application.Impl"));
                     break;
-                case Infrastructure.Storage.WCF:
+                case Storage.EF:
+                    container.Install(FromAssembly.Named("Application.Impl"));
+                    break;
+                case Storage.Db4o:
+                    container.Install(FromAssembly.Named("Application.Impl"));
+                    break;
+                case Storage.WCF:
                     container.Install(FromAssembly.Named("WcfClient"));
                     break;
-                case Infrastructure.Storage.REST:
-                    break;
-                default:
+                case Storage.REST:
                     break;
             }
             registerComponent(container);
@@ -41,20 +46,16 @@ namespace Ciccio1.Presentation.WinForm
         void registerComponent(IWindsorContainer container)
         {
             container.Register(
-                Component.For<FatturaPresenter>().LifestyleSingleton(),
                 Component.For<FatturaView>().LifestyleSingleton(),
-
-                Component.For<ProdottoPresenter>().LifestyleTransient(),
                 Component.For<ProdottoView>().LifestyleTransient(),
-
-                Component.For<CategoriaPresenter>().LifestyleTransient(),
                 Component.For<CategoriaView>().LifestyleTransient(),
 
                 Component.For<SelectProdottoView>().LifeStyle.Transient,
                 Component.For<SelectProdottoPresenter>().LifeStyle.Transient,
-                Component.For<Func<ICiccioService, SelectProdottoPresenter>>().AsFactory()
+                Component.For<Func<ICiccioService, SelectProdottoPresenter>>().AsFactory(),
 
-                //Component.For<PresenterLocator>().LifestyleSingleton()
+                Component.For<FattureForm>().LifestyleSingleton(),
+                Component.For<DettagliForm>().LifestyleTransient()
                 );
         }
     }

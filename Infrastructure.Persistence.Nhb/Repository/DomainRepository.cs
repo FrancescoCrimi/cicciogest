@@ -20,7 +20,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
             this.da = da;
         }
 
-        public IList<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
             try
             {

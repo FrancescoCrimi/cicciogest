@@ -84,6 +84,10 @@
       <Project>{8031ab93-3042-4c7f-8132-c81d21e39b69}</Project>
       <Name>Infrastructure.Persistence.Db4o</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Persistence.EFC\Infrastructure.Persistence.EFC.csproj">
+      <Project>{eb230f8b-de2e-47e0-a071-1d1d115e6db3}</Project>
+      <Name>Infrastructure.Persistence.EFC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure.Persistence.EF\Infrastructure.Persistence.EF.csproj">
       <Project>{c101d70b-4ce7-4334-a4a6-0e417874d583}</Project>
       <Name>Infrastructure.Persistence.EF</Name>

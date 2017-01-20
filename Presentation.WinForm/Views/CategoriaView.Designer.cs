@@ -30,50 +30,51 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriaView));
-            this.CategorieDataGridView = new System.Windows.Forms.DataGridView();
+            this.categorieDataGridView = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CategorieBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tipoProdottoLabel = new System.Windows.Forms.Label();
+            this.categorieBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nomeLabel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.CategoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.NuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.CancellaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SalvaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.AboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.nuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.cancellaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.CategorieDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CategorieBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CategoriaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categorieDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // CategorieDataGridView
+            // categorieDataGridView
             // 
-            this.CategorieDataGridView.AllowUserToAddRows = false;
-            this.CategorieDataGridView.AllowUserToDeleteRows = false;
-            this.CategorieDataGridView.AllowUserToResizeRows = false;
-            this.CategorieDataGridView.AutoGenerateColumns = false;
-            this.CategorieDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.CategorieDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CategorieDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.categorieDataGridView.AllowUserToAddRows = false;
+            this.categorieDataGridView.AllowUserToDeleteRows = false;
+            this.categorieDataGridView.AllowUserToResizeRows = false;
+            this.categorieDataGridView.AutoGenerateColumns = false;
+            this.categorieDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.categorieDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.categorieDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.nomeDataGridViewTextBoxColumn});
-            this.CategorieDataGridView.DataSource = this.CategorieBindingSource;
-            this.CategorieDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CategorieDataGridView.Location = new System.Drawing.Point(4, 69);
-            this.CategorieDataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.CategorieDataGridView.MultiSelect = false;
-            this.CategorieDataGridView.Name = "CategorieDataGridView";
-            this.CategorieDataGridView.ReadOnly = true;
-            this.CategorieDataGridView.RowHeadersVisible = false;
-            this.CategorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.CategorieDataGridView.Size = new System.Drawing.Size(317, 249);
-            this.CategorieDataGridView.TabIndex = 1;
+            this.categorieDataGridView.DataSource = this.categorieBindingSource;
+            this.categorieDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categorieDataGridView.Location = new System.Drawing.Point(4, 69);
+            this.categorieDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.categorieDataGridView.MultiSelect = false;
+            this.categorieDataGridView.Name = "categorieDataGridView";
+            this.categorieDataGridView.ReadOnly = true;
+            this.categorieDataGridView.RowHeadersVisible = false;
+            this.categorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.categorieDataGridView.Size = new System.Drawing.Size(274, 180);
+            this.categorieDataGridView.TabIndex = 1;
+            this.categorieDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.categorieDataGridView_CellDoubleClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -91,128 +92,133 @@
             this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
             this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // CategorieBindingSource
+            // categorieBindingSource
             // 
-            this.CategorieBindingSource.DataSource = typeof(Ciccio1.Domain.Categoria);
+            this.categorieBindingSource.DataSource = typeof(Ciccio1.Domain.Categoria);
             // 
-            // tipoProdottoLabel
+            // nomeLabel
             // 
-            this.tipoProdottoLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tipoProdottoLabel.AutoSize = true;
-            this.tipoProdottoLabel.Location = new System.Drawing.Point(4, 6);
-            this.tipoProdottoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tipoProdottoLabel.Name = "tipoProdottoLabel";
-            this.tipoProdottoLabel.Size = new System.Drawing.Size(131, 17);
-            this.tipoProdottoLabel.TabIndex = 3;
-            this.tipoProdottoLabel.Text = "Categoria Prodotto:";
+            this.nomeLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nomeLabel.AutoSize = true;
+            this.nomeLabel.Location = new System.Drawing.Point(4, 6);
+            this.nomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.nomeLabel.Name = "nomeLabel";
+            this.nomeLabel.Size = new System.Drawing.Size(49, 17);
+            this.nomeLabel.TabIndex = 3;
+            this.nomeLabel.Text = "Nome:";
             // 
             // textBox1
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CategoriaBindingSource, "Nome", true));
-            this.textBox1.Location = new System.Drawing.Point(143, 4);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "Nome", true));
+            this.textBox1.Location = new System.Drawing.Point(61, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(161, 22);
             this.textBox1.TabIndex = 4;
             // 
-            // CategoriaBindingSource
+            // categoriaBindingSource
             // 
-            this.CategoriaBindingSource.DataSource = typeof(Ciccio1.Domain.Categoria);
+            this.categoriaBindingSource.DataSource = typeof(Ciccio1.Domain.Categoria);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.CategorieDataGridView, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.toolStrip, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.categorieDataGridView, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 322);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(282, 253);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.NuovoToolStripButton,
-            this.CancellaToolStripButton,
-            this.SalvaToolStripButton,
-            this.AboutToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(325, 27);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuovoToolStripButton,
+            this.cancellaToolStripButton,
+            this.salvaToolStripButton,
+            this.aboutToolStripButton});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(282, 27);
+            this.toolStrip.TabIndex = 3;
+            this.toolStrip.Text = "toolStrip1";
             // 
-            // NuovoToolStripButton
+            // nuovoToolStripButton
             // 
-            this.NuovoToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("NuovoToolStripButton.Image")));
-            this.NuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NuovoToolStripButton.Name = "NuovoToolStripButton";
-            this.NuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
-            this.NuovoToolStripButton.Text = "&Nuovo";
+            this.nuovoToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoToolStripButton.Image")));
+            this.nuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuovoToolStripButton.Name = "nuovoToolStripButton";
+            this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
+            this.nuovoToolStripButton.Text = "Nuovo";
+            this.nuovoToolStripButton.Click += new System.EventHandler(this.nuovoToolStripButton_Click);
             // 
-            // CancellaToolStripButton
+            // cancellaToolStripButton
             // 
-            this.CancellaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("CancellaToolStripButton.Image")));
-            this.CancellaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CancellaToolStripButton.Name = "CancellaToolStripButton";
-            this.CancellaToolStripButton.Size = new System.Drawing.Size(89, 24);
-            this.CancellaToolStripButton.Text = "&Cancella";
+            this.cancellaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cancellaToolStripButton.Image")));
+            this.cancellaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cancellaToolStripButton.Name = "cancellaToolStripButton";
+            this.cancellaToolStripButton.Size = new System.Drawing.Size(89, 24);
+            this.cancellaToolStripButton.Text = "Cancella";
+            this.cancellaToolStripButton.Click += new System.EventHandler(this.cancellaToolStripButton_Click);
             // 
-            // SalvaToolStripButton
+            // salvaToolStripButton
             // 
-            this.SalvaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("SalvaToolStripButton.Image")));
-            this.SalvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SalvaToolStripButton.Name = "SalvaToolStripButton";
-            this.SalvaToolStripButton.Size = new System.Drawing.Size(68, 24);
-            this.SalvaToolStripButton.Text = "&Salva";
+            this.salvaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripButton.Image")));
+            this.salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.salvaToolStripButton.Name = "salvaToolStripButton";
+            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
+            this.salvaToolStripButton.Text = "Salva";
+            this.salvaToolStripButton.Click += new System.EventHandler(this.salvaToolStripButton_Click);
             // 
-            // AboutToolStripButton
+            // aboutToolStripButton
             // 
-            this.AboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("AboutToolStripButton.Image")));
-            this.AboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AboutToolStripButton.Name = "AboutToolStripButton";
-            this.AboutToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.AboutToolStripButton.Text = "&?";
+            this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.aboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripButton.Image")));
+            this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aboutToolStripButton.Name = "aboutToolStripButton";
+            this.aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.aboutToolStripButton.Text = "&?";
+            this.aboutToolStripButton.Click += new System.EventHandler(this.aboutToolStripButton_Click);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.tipoProdottoLabel);
+            this.flowLayoutPanel1.Controls.Add(this.nomeLabel);
             this.flowLayoutPanel1.Controls.Add(this.textBox1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 31);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(317, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(274, 30);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // CategoriaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 322);
+            this.ClientSize = new System.Drawing.Size(282, 253);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CategoriaView";
-            this.Text = "Categoria Prodotto";
-            ((System.ComponentModel.ISupportInitialize)(this.CategorieDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CategorieBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CategoriaBindingSource)).EndInit();
+            this.Text = "Categorie";
+            this.Load += new System.EventHandler(this.CategoriaView_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.categorieDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -221,19 +227,19 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label tipoProdottoLabel;
+        private System.Windows.Forms.Label nomeLabel;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        internal System.Windows.Forms.DataGridView CategorieDataGridView;
-        internal System.Windows.Forms.BindingSource CategorieBindingSource;
-        internal System.Windows.Forms.BindingSource CategoriaBindingSource;
-        internal System.Windows.Forms.ToolStripButton NuovoToolStripButton;
-        internal System.Windows.Forms.ToolStripButton CancellaToolStripButton;
-        internal System.Windows.Forms.ToolStripButton SalvaToolStripButton;
-        internal System.Windows.Forms.ToolStripButton AboutToolStripButton;
+        private System.Windows.Forms.DataGridView categorieDataGridView;
+        private System.Windows.Forms.BindingSource categorieBindingSource;
+        private System.Windows.Forms.BindingSource categoriaBindingSource;
+        private System.Windows.Forms.ToolStripButton nuovoToolStripButton;
+        private System.Windows.Forms.ToolStripButton cancellaToolStripButton;
+        private System.Windows.Forms.ToolStripButton salvaToolStripButton;
+        private System.Windows.Forms.ToolStripButton aboutToolStripButton;
     }
 }

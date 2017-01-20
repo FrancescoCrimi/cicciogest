@@ -10,9 +10,17 @@ using Swashbuckle.Swagger.Annotations;
 
 namespace Ciccio1.WebApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CiccioServiceController : ApiController
     {
         private ICiccioService service;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="service"></param>
         public CiccioServiceController(ICiccioService service)
         {
             this.service = service;

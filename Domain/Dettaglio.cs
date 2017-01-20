@@ -13,72 +13,74 @@ namespace Ciccio1.Domain
     [DataContract(Namespace = "http://gesttest.it")]
     public class Dettaglio : ValueObject<Dettaglio>
     {
-        private int quantità = 0;
-        private Prodotto prodotto = null;
+        private int quantità;
+        private Prodotto prodotto;
+        public virtual event EventHandler TotaleChanged;
 
-        protected Dettaglio() { } // Needed by Hibernate
 
-        internal Dettaglio(Prodotto prodotto, int quantità)
+        public Dettaglio() { }
+
+        public Dettaglio(Prodotto prodotto, int quantità)
         {
-            Quantità = quantità;
-            Prodotto = prodotto;
+            modificaQuantita(quantità);
+            modificaProdotto(prodotto);
         }
 
         [DataMember]
         public virtual int Quantità
         {
             get { return quantità; }
-            set { modificaQuantita(value); }
+            set
+            {
+                if (value != quantità)
+                    modificaQuantita(value);
+            }
         }
 
         [DataMember]
         public virtual Prodotto Prodotto
         {
             get { return prodotto; }
-            set { modificaProdotto(value); }
-        }
-
-        public virtual int Totale
-        {
-            get
+            set
             {
-                if (Prodotto != null)
-                    return Prodotto.Prezzo * Quantità;
-                else
-                    return 0;
+                if (value != prodotto)
+                    modificaProdotto(value);
             }
         }
 
-        public virtual string Nome
+        [DataMember]
+        public virtual int Totale { get; protected set; }
+
+        [DataMember]
+        public virtual string NomeProdotto { get; protected set; }
+
+        [DataMember]
+        public virtual int PrezzoProdotto { get; protected set; }
+
+
+        private void modificaQuantita(int quantità)
         {
-            get
-            {
-                if (this.Prodotto == null) return "";
-                else return this.Prodotto.Nome;
-            }
+            this.quantità = quantità;
+            NotifyPropertyChanged("Quantità");
+            calcolaTotale();
         }
 
-        public virtual int Prezzo
+        private void modificaProdotto(Prodotto prodotto)
         {
-            get
-            {
-                if (this.Prodotto == null) return 0;
-                else return this.Prodotto.Prezzo;
-            }
+            this.prodotto = prodotto;
+            NomeProdotto = prodotto.Nome;
+            PrezzoProdotto = prodotto.Prezzo;
+            NotifyPropertyChanged("NomeProdotto");
+            NotifyPropertyChanged("PrezzoProdotto");
+            calcolaTotale();
         }
 
-
-        private void modificaQuantita(int quantita)
+        private void calcolaTotale()
         {
-            quantità = quantita;
+            Totale = PrezzoProdotto * Quantità;
             NotifyPropertyChanged("Totale");
-        }
-
-        private void modificaProdotto(Prodotto prod)
-        {
-            prodotto = prod;
-            NotifyPropertyChanged("Prezzo");
-            NotifyPropertyChanged("Totale");
+            if (TotaleChanged != null)
+                TotaleChanged(this, new EventArgs());
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

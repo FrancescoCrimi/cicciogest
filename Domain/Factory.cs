@@ -21,10 +21,5 @@ namespace Ciccio1.Domain
         {
             return new Categoria();
         }
-
-        public static Dettaglio NuovoDettaglio(Prodotto prodotto, int quantità)
-        {
-            return new Dettaglio(prodotto, quantità);
-        }
     }
 }

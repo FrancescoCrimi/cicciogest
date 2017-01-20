@@ -16,6 +16,8 @@ namespace Ciccio1.Infrastructure.Persistence.EF
 
         public DataAccess(IConf conf, ILogger logger)
         {
+            this.conf = conf;
+            this.logger = logger;
         }
 
         internal ModelContext Model

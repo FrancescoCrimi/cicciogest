@@ -15,16 +15,12 @@ namespace Ciccio1.Domain
     public class Fattura : DomainEntity<Fattura>
     {
         private string nome;
-
-        [DataMember]
-        protected ISet<Dettaglio> dettagli;
+        private ISet<Dettaglio> dettagli;
 
         internal Fattura()
         {
-            dettagli = new HashSet<Dettaglio>();
-        } // Needed by Nhibernate
-
-
+            Dettagli = new HashSet<Dettaglio>();
+        }
 
         [DataMember]
         public virtual string Nome
@@ -32,38 +28,30 @@ namespace Ciccio1.Domain
             get { return nome; }
             set
             {
-                this.nome = value;
-                NotifyPropertyChanged("Nome");
+                if (value != nome)
+                {
+                    this.nome = value;
+                    NotifyPropertyChanged("Nome");
+                }
             }
         }
 
+        [DataMember]
         public virtual IEnumerable<Dettaglio> Dettagli
         {
-            get
+            get { return dettagli; }
+            protected set
             {
-                return new List<Dettaglio>(dettagli).AsReadOnly();
-            }
-        }
-
-        public virtual int Totale
-        {
-            get
-            {
-                int totale = 0;
-                if (Dettagli != null)
+                foreach (Dettaglio dett in value)
                 {
-                    if (dettagli.Count > 0)
-                    {
-                        foreach (Dettaglio prodItem in Dettagli)
-                        {
-                            totale += prodItem.Totale;
-                        }
-                    }
+                    dett.TotaleChanged += dettaglioTotaleChanged;
                 }
-                return totale;
+                dettagli = (ISet<Dettaglio>)value;
             }
         }
 
+        [DataMember]
+        public virtual int Totale { get; protected set; }
 
         public virtual void AddDettaglio(Dettaglio dettaglio)
         {
@@ -71,6 +59,8 @@ namespace Ciccio1.Domain
             if (!dettagli.Contains(dettaglio))
             {
                 dettagli.Add(dettaglio);
+                dettaglio.TotaleChanged += dettaglioTotaleChanged;
+                calcolaTotale();
             }
             else
             {
@@ -78,7 +68,6 @@ namespace Ciccio1.Domain
                 //DettaglioFattura d = Dettagli.foreac
                 //d.Quantità = (dettaglio.Quantità + d.Quantità);
             }
-            NotifyPropertyChanged("Totale");
         }
 
         public virtual void RemoveDettaglio(Dettaglio dettaglio)
@@ -86,19 +75,20 @@ namespace Ciccio1.Domain
             if (dettagli.Contains(dettaglio))
             {
                 dettagli.Remove(dettaglio);
+                dettaglio.TotaleChanged -= dettaglioTotaleChanged;
+                calcolaTotale();
             }
-            NotifyPropertyChanged("Totale");
         }
 
-        public virtual void ReplaceDettagli(IEnumerable<Dettaglio> dettagli)
-        {
-            var newdett = new HashSet<Dettaglio>();
-            foreach (Dettaglio item in dettagli)
-            {
-                newdett.Add(item);
-            }
-            this.dettagli = newdett;
-        }
+        //public virtual void ReplaceDettagli(IEnumerable<Dettaglio> dettagli)
+        //{
+        //    var newdett = new HashSet<Dettaglio>();
+        //    foreach (Dettaglio item in dettagli)
+        //    {
+        //        newdett.Add(item);
+        //    }
+        //    this.dettagli = newdett;
+        //}
 
         public virtual void AddDettagli(ISet<Dettaglio> dettagli)
         {
@@ -113,5 +103,26 @@ namespace Ciccio1.Domain
         //    else
         //        products[products.IndexOf(product)] = product;
         //}
+
+        private void calcolaTotale()
+        {
+            Totale = 0;
+            if (Dettagli != null)
+            {
+                if (dettagli.Count > 0)
+                {
+                    foreach (Dettaglio prodItem in Dettagli)
+                    {
+                        Totale += prodItem.Totale;
+                    }
+                }
+            }
+            NotifyPropertyChanged("Totale");
+        }
+
+        private void dettaglioTotaleChanged(object sender, EventArgs e)
+        {
+            calcolaTotale();
+        }
     }
 }

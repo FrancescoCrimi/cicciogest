@@ -199,7 +199,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
         {
             App.Messenger.Register<int>("IdProdottoSelezionato", id =>
             {
-                Dettaglio = Factory.NuovoDettaglio(service.GetProdotto(id), 1);
+                Dettaglio = new Dettaglio(service.GetProdotto(id), 1);
                 RaisePropertyChanged("Dettaglio");
                 App.Messenger.NotifyColleagues("ChiudiSelezionaProdotto");
                 dettIsNew = true;

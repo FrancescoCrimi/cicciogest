@@ -9,6 +9,7 @@ namespace Ciccio1.Infrastructure
     {
         NHibernate = 1,
         EF,
+        EFC,
         Db4o,
         WCF,
         REST

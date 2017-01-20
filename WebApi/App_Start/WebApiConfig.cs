@@ -5,8 +5,15 @@ using System.Web.Http;
 
 namespace Ciccio1.WebApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class WebApiConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="config"></param>
         public static void Register(HttpConfiguration config)
         {
             // Servizi e configurazione dell'API Web

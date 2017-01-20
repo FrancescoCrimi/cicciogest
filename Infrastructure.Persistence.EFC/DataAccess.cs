@@ -1,14 +1,28 @@
-﻿using Ciccio1.Infrastructure;
+﻿using Castle.Core.Logging;
+using Ciccio1.Infrastructure;
+using Ciccio1.Infrastructure.Conf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Persistence.EFC
+namespace Ciccio1.Infrastructure.Persistence.EFC
 {
     class DataAccess : IDataAccess
     {
+        private IConf conf;
+        private ILogger logger;
+        private ModelContext dbCtx;
+
+        public DataAccess(IConf conf, ILogger logger)
+        {
+            this.conf = conf;
+            this.logger = logger;
+        }
+
+        #region Metodi Pubblici
+
         public void Begin()
         {
             throw new NotImplementedException();
@@ -16,27 +30,65 @@ namespace Infrastructure.Persistence.EFC
 
         public void Commit()
         {
-            throw new NotImplementedException();
-        }
-
-        public void CreateDataAccess()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
+            dbCtx.SaveChanges();
+            disposeCtx();
         }
 
         public void Rollback()
         {
-            throw new NotImplementedException();
+            disposeCtx();
+        }
+
+        public void CreateDataAccess()
+        {
+            ModelContext.Database.EnsureCreated();
         }
 
         public void VerifyDataAccess()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
+
+        public void Dispose()
+        {
+            disposeCtx();
+        }
+
+        #endregion
+
+
+
+        #region Metodi Internal
+
+        internal ModelContext ModelContext
+        {
+            get
+            {
+                if(dbCtx == null)
+                {
+                    createCtx();
+                }
+                return dbCtx;
+            }
+        }
+
+        #endregion
+
+
+
+        #region Metodi Privati
+
+        private void createCtx()
+        {
+            dbCtx = new ModelContext();
+        }
+
+        private void disposeCtx()
+        {
+            dbCtx.Dispose();
+            dbCtx = null;
+        }
+
+        #endregion
     }
 }

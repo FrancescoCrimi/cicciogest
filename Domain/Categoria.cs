@@ -22,8 +22,11 @@ namespace Ciccio1.Domain
             get { return nome; }
             set
             {
-                nome = value;
-                NotifyPropertyChanged("Nome");
+                if (value != nome)
+                {
+                    nome = value;
+                    NotifyPropertyChanged("Nome");
+                }
             }
         }
     }

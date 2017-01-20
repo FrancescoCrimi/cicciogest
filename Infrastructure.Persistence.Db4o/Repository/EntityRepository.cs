@@ -20,7 +20,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o.Repository
             this.da = da;
         }
 
-        public IList<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
             return da.ObjectContainer.Query<TEntity>();
         }

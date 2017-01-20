@@ -4,11 +4,16 @@
                    xmlns="urn:nhibernate-mapping-2.2">
 
   <class name="Dettaglio" table="Dettaglio">
-    
+
     <id name="Id" generator="native" unsaved-value="0"/>
+
     <property name="Quantità" not-null="true" />
+    <property name="Totale" not-null="true" />
+    <property name="NomeProdotto" not-null="true" />
+    <property name="PrezzoProdotto" not-null="true" />
+
     <many-to-one name="Prodotto" lazy="false" column="Prodotto_Id" not-null="true" />
-    
+
   </class>
 
 </hibernate-mapping>

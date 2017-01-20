@@ -6,39 +6,51 @@ using Ciccio1.Infrastructure;
 using Ciccio1.Presentation.WinForm.Views;
 using Castle.Core.Logging;
 using Ciccio1.Presentation.WinForm.Presenters;
+using Ciccio1.Application;
 
 namespace Ciccio1.Presentation.WinForm
 {
     class Program
     {
-        private static Container container = null;
-        private ILogger logger = null;
-
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
+
+        internal static Container Container { get; private set; }
 
         [STAThread]
         static void Main()
         {
-            var aa = new Program();
             SetProcessDPIAware();
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            System.Windows.Forms.Application.Run(aa.runApp());
-            //System.Windows.Forms.Application.Run(aa.runConfig());
+            var aa = new Program();
         }
 
-        Form runApp()
+        private Program()
         {
-            container = new Container();
-            logger = container.Resolve<ILoggerFactory>().Create(this.GetType());
-            container.Install(new Installer());
-            FatturaPresenter presenter = container.Resolve<FatturaPresenter>();
-            return presenter.View;
+            startup();
+            //dummyload();
+            //System.Windows.Forms.Application.Run(new ConfigDataAccessView());
         }
-        Form runConfig()
+
+        private void startup()
         {
-            return new ConfigDataAccessView();
+            Container = new Container();
+            Container.Install(new Installer());
+            //FatturaPresenter presenter = Container.Resolve<FatturaPresenter>();
+            //System.Windows.Forms.Application.Run(presenter.View);
+            FatturaView fv = Container.Resolve<FatturaView>();
+            System.Windows.Forms.Application.Run(fv);
+            //FattureForm fatt = container.Resolve<FattureForm>();
+            //System.Windows.Forms.Application.Run(fatt);
+        }
+
+        private void dummyload()
+        {
+            Container container = new Container();
+            container.Install(new Installer());
+            ICiccioService service = container.Resolve<ICiccioService>();
+            new LoadData(service);
         }
 
         //public Program()
@@ -66,6 +78,20 @@ namespace Ciccio1.Presentation.WinForm
         //    {
         //        MessageBox.Show("Errore: " + ex.Message);
         //    }
+        //}
+
+        //Form runApp()
+        //{
+        //    container = new Container();
+        //    logger = container.Resolve<ILoggerFactory>().Create(this.GetType());
+        //    container.Install(new Installer());
+        //    FatturaPresenter presenter = container.Resolve<FatturaPresenter>();
+        //    return presenter.View;
+        //}
+
+        //Form runConfig()
+        //{
+        //    return new ConfigDataAccessView();
         //}
     }
 }

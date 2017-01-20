@@ -35,57 +35,57 @@
             System.Windows.Forms.Label prezzoDettaglioLabel;
             System.Windows.Forms.Label totaleDettaglioLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FatturaView));
-            this.DettagliDataGridView = new System.Windows.Forms.DataGridView();
+            this.dettagliDataGridView = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomeProdotto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrezzoProdotto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totaleDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DettagliBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.FatturaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.FattureBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dettagliBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.nomeDettaglioTextBox = new System.Windows.Forms.TextBox();
-            this.DettaglioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dettaglioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.quantitàDettaglioTextBox = new System.Windows.Forms.TextBox();
             this.prezzoDettaglioTextBox = new System.Windows.Forms.TextBox();
             this.totaleDettaglioTextBox = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.nomeFatturaTextBox = new System.Windows.Forms.TextBox();
+            this.fatturaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.totaleFatturaLabel = new System.Windows.Forms.Label();
             this.totaleFatturaTextBox = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.NuovoDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.AggiungiDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.RimuoviDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.ProdottiToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.CategorieToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.AboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.nuovoDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aggiungiDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.rimuoviDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.prodottiToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.categorieToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.NuovaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SalvaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.CancellaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.FattureDataGridView = new System.Windows.Forms.DataGridView();
+            this.nuovaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.salvaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.cancellaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.fattureDataGridView = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fattureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             nomeFatturaLabel = new System.Windows.Forms.Label();
             nomeDettaglioLabel = new System.Windows.Forms.Label();
             quantitàDettaglioLabel = new System.Windows.Forms.Label();
             prezzoDettaglioLabel = new System.Windows.Forms.Label();
             totaleDettaglioLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.DettagliDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DettagliBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FatturaBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FattureBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dettagliBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DettaglioBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dettaglioBindingSource)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fatturaBindingSource)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FattureDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // nomeFatturaLabel
@@ -143,32 +143,31 @@
             totaleDettaglioLabel.TabIndex = 11;
             totaleDettaglioLabel.Text = "Tot.:";
             // 
-            // DettagliDataGridView
+            // dettagliDataGridView
             // 
-            this.DettagliDataGridView.AllowUserToAddRows = false;
-            this.DettagliDataGridView.AllowUserToDeleteRows = false;
-            this.DettagliDataGridView.AllowUserToResizeRows = false;
-            this.DettagliDataGridView.AutoGenerateColumns = false;
-            this.DettagliDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DettagliDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DettagliDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dettagliDataGridView.AllowUserToAddRows = false;
+            this.dettagliDataGridView.AllowUserToDeleteRows = false;
+            this.dettagliDataGridView.AllowUserToResizeRows = false;
+            this.dettagliDataGridView.AutoGenerateColumns = false;
+            this.dettagliDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dettagliDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn2,
-            this.nomeDataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn2,
+            this.NomeProdotto,
+            this.PrezzoProdotto,
             this.dataGridViewTextBoxColumn1,
             this.totaleDataGridViewTextBoxColumn2});
-            this.DettagliDataGridView.DataSource = this.DettagliBindingSource;
-            this.DettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DettagliDataGridView.Location = new System.Drawing.Point(296, 67);
-            this.DettagliDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DettagliDataGridView.MultiSelect = false;
-            this.DettagliDataGridView.Name = "DettagliDataGridView";
-            this.DettagliDataGridView.ReadOnly = true;
-            this.DettagliDataGridView.RowHeadersVisible = false;
-            this.DettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DettagliDataGridView.Size = new System.Drawing.Size(493, 237);
-            this.DettagliDataGridView.TabIndex = 0;
-            this.DettagliDataGridView.TabStop = false;
+            this.dettagliDataGridView.DataSource = this.dettagliBindingSource;
+            this.dettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dettagliDataGridView.Location = new System.Drawing.Point(292, 69);
+            this.dettagliDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.dettagliDataGridView.MultiSelect = false;
+            this.dettagliDataGridView.Name = "dettagliDataGridView";
+            this.dettagliDataGridView.ReadOnly = true;
+            this.dettagliDataGridView.RowHeadersVisible = false;
+            this.dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dettagliDataGridView.Size = new System.Drawing.Size(485, 238);
+            this.dettagliDataGridView.TabIndex = 0;
+            this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dettagliDataGridView_CellClick);
             // 
             // idDataGridViewTextBoxColumn2
             // 
@@ -179,45 +178,44 @@
             this.idDataGridViewTextBoxColumn2.ReadOnly = true;
             this.idDataGridViewTextBoxColumn2.Width = 48;
             // 
-            // nomeDataGridViewTextBoxColumn2
+            // NomeProdotto
             // 
-            this.nomeDataGridViewTextBoxColumn2.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn2.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn2.Name = "nomeDataGridViewTextBoxColumn2";
-            this.nomeDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.NomeProdotto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NomeProdotto.DataPropertyName = "NomeProdotto";
+            this.NomeProdotto.HeaderText = "Nome";
+            this.NomeProdotto.Name = "NomeProdotto";
+            this.NomeProdotto.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn2
+            // PrezzoProdotto
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Prezzo";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Prezzo";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.PrezzoProdotto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.PrezzoProdotto.DataPropertyName = "PrezzoProdotto";
+            this.PrezzoProdotto.HeaderText = "Prezzo";
+            this.PrezzoProdotto.Name = "PrezzoProdotto";
+            this.PrezzoProdotto.ReadOnly = true;
+            this.PrezzoProdotto.Width = 81;
             // 
             // dataGridViewTextBoxColumn1
             // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Quantità";
             this.dataGridViewTextBoxColumn1.HeaderText = "Quantità";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 91;
             // 
             // totaleDataGridViewTextBoxColumn2
             // 
+            this.totaleDataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.totaleDataGridViewTextBoxColumn2.DataPropertyName = "Totale";
             this.totaleDataGridViewTextBoxColumn2.HeaderText = "Totale";
             this.totaleDataGridViewTextBoxColumn2.Name = "totaleDataGridViewTextBoxColumn2";
             this.totaleDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.totaleDataGridViewTextBoxColumn2.Width = 77;
             // 
-            // DettagliBindingSource
+            // dettagliBindingSource
             // 
-            this.DettagliBindingSource.DataSource = typeof(Ciccio1.Domain.Dettaglio);
-            // 
-            // FatturaBindingSource
-            // 
-            this.FatturaBindingSource.DataSource = typeof(Ciccio1.Domain.Fattura);
-            // 
-            // FattureBindingSource
-            // 
-            this.FattureBindingSource.DataSource = typeof(Ciccio1.Domain.Fattura);
+            this.dettagliBindingSource.DataSource = typeof(Ciccio1.Domain.Dettaglio);
             // 
             // tableLayoutPanel1
             // 
@@ -228,8 +226,8 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.toolStrip2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.DettagliDataGridView, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.FattureDataGridView, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dettagliDataGridView, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.fattureDataGridView, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
@@ -238,7 +236,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(792, 304);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(781, 311);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // flowLayoutPanel2
@@ -254,16 +252,15 @@
             this.flowLayoutPanel2.Controls.Add(totaleDettaglioLabel);
             this.flowLayoutPanel2.Controls.Add(this.totaleDettaglioTextBox);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(297, 31);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(292, 31);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(491, 30);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(485, 30);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
             // nomeDettaglioTextBox
             // 
-            this.nomeDettaglioTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.nomeDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.DettaglioBindingSource, "Nome", true));
+            this.nomeDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "NomeProdotto", true));
             this.nomeDettaglioTextBox.Location = new System.Drawing.Point(61, 4);
             this.nomeDettaglioTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.nomeDettaglioTextBox.Name = "nomeDettaglioTextBox";
@@ -272,13 +269,13 @@
             this.nomeDettaglioTextBox.TabIndex = 0;
             this.nomeDettaglioTextBox.TabStop = false;
             // 
-            // DettaglioBindingSource
+            // dettaglioBindingSource
             // 
-            this.DettaglioBindingSource.DataSource = typeof(Ciccio1.Domain.Dettaglio);
+            this.dettaglioBindingSource.DataSource = typeof(Ciccio1.Domain.Dettaglio);
             // 
             // quantitàDettaglioTextBox
             // 
-            this.quantitàDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.DettaglioBindingSource, "Quantità", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.quantitàDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "Quantità", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.quantitàDettaglioTextBox.Location = new System.Drawing.Point(235, 4);
             this.quantitàDettaglioTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.quantitàDettaglioTextBox.Name = "quantitàDettaglioTextBox";
@@ -287,8 +284,7 @@
             // 
             // prezzoDettaglioTextBox
             // 
-            this.prezzoDettaglioTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.prezzoDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.DettaglioBindingSource, "Prezzo", true));
+            this.prezzoDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "PrezzoProdotto", true));
             this.prezzoDettaglioTextBox.Location = new System.Drawing.Point(346, 4);
             this.prezzoDettaglioTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.prezzoDettaglioTextBox.Name = "prezzoDettaglioTextBox";
@@ -299,8 +295,7 @@
             // 
             // totaleDettaglioTextBox
             // 
-            this.totaleDettaglioTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.totaleDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.DettaglioBindingSource, "Totale", true));
+            this.totaleDettaglioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "Totale", true));
             this.totaleDettaglioTextBox.Location = new System.Drawing.Point(438, 4);
             this.totaleDettaglioTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.totaleDettaglioTextBox.Name = "totaleDettaglioTextBox";
@@ -320,19 +315,23 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 31);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(285, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(280, 30);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // nomeFatturaTextBox
             // 
             this.nomeFatturaTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.nomeFatturaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.FatturaBindingSource, "Nome", true));
+            this.nomeFatturaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fatturaBindingSource, "Nome", true));
             this.nomeFatturaTextBox.Location = new System.Drawing.Point(61, 4);
             this.nomeFatturaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.nomeFatturaTextBox.Name = "nomeFatturaTextBox";
             this.nomeFatturaTextBox.Size = new System.Drawing.Size(119, 22);
             this.nomeFatturaTextBox.TabIndex = 99;
             this.nomeFatturaTextBox.TabStop = false;
+            // 
+            // fatturaBindingSource
+            // 
+            this.fatturaBindingSource.DataSource = typeof(Ciccio1.Domain.Fattura);
             // 
             // totaleFatturaLabel
             // 
@@ -348,8 +347,7 @@
             // totaleFatturaTextBox
             // 
             this.totaleFatturaTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.totaleFatturaTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.totaleFatturaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.FatturaBindingSource, "Totale", true));
+            this.totaleFatturaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fatturaBindingSource, "Totale", true));
             this.totaleFatturaTextBox.Location = new System.Drawing.Point(229, 4);
             this.totaleFatturaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.totaleFatturaTextBox.Name = "totaleFatturaTextBox";
@@ -362,129 +360,138 @@
             // 
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.NuovoDettaglioToolStripButton,
-            this.AggiungiDettaglioToolStripButton,
-            this.RimuoviDettaglioToolStripButton,
-            this.ProdottiToolStripButton,
-            this.CategorieToolStripButton,
-            this.AboutToolStripButton});
-            this.toolStrip2.Location = new System.Drawing.Point(293, 0);
+            this.nuovoDettaglioToolStripButton,
+            this.aggiungiDettaglioToolStripButton,
+            this.rimuoviDettaglioToolStripButton,
+            this.prodottiToolStripButton,
+            this.categorieToolStripButton,
+            this.aboutToolStripButton});
+            this.toolStrip2.Location = new System.Drawing.Point(288, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(499, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(493, 27);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // NuovoDettaglioToolStripButton
+            // nuovoDettaglioToolStripButton
             // 
-            this.NuovoDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("NuovoDettaglioToolStripButton.Image")));
-            this.NuovoDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NuovoDettaglioToolStripButton.Name = "NuovoDettaglioToolStripButton";
-            this.NuovoDettaglioToolStripButton.Size = new System.Drawing.Size(77, 24);
-            this.NuovoDettaglioToolStripButton.Text = "&Nuovo";
+            this.nuovoDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoDettaglioToolStripButton.Image")));
+            this.nuovoDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuovoDettaglioToolStripButton.Name = "nuovoDettaglioToolStripButton";
+            this.nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(77, 24);
+            this.nuovoDettaglioToolStripButton.Text = "Nuovo";
+            this.nuovoDettaglioToolStripButton.Click += new System.EventHandler(this.NuovoDettaglioToolStripButton_Click);
             // 
-            // AggiungiDettaglioToolStripButton
+            // aggiungiDettaglioToolStripButton
             // 
-            this.AggiungiDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("AggiungiDettaglioToolStripButton.Image")));
-            this.AggiungiDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AggiungiDettaglioToolStripButton.Name = "AggiungiDettaglioToolStripButton";
-            this.AggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(94, 24);
-            this.AggiungiDettaglioToolStripButton.Text = "&Aggiungi";
+            this.aggiungiDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiungiDettaglioToolStripButton.Image")));
+            this.aggiungiDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aggiungiDettaglioToolStripButton.Name = "aggiungiDettaglioToolStripButton";
+            this.aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(94, 24);
+            this.aggiungiDettaglioToolStripButton.Text = "&Aggiungi";
+            this.aggiungiDettaglioToolStripButton.Click += new System.EventHandler(this.AggiungiDettaglioToolStripButton_Click);
             // 
-            // RimuoviDettaglioToolStripButton
+            // rimuoviDettaglioToolStripButton
             // 
-            this.RimuoviDettaglioToolStripButton.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.Delete;
-            this.RimuoviDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.RimuoviDettaglioToolStripButton.Name = "RimuoviDettaglioToolStripButton";
-            this.RimuoviDettaglioToolStripButton.Size = new System.Drawing.Size(87, 24);
-            this.RimuoviDettaglioToolStripButton.Text = "&Rimuovi";
+            this.rimuoviDettaglioToolStripButton.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.Delete;
+            this.rimuoviDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rimuoviDettaglioToolStripButton.Name = "rimuoviDettaglioToolStripButton";
+            this.rimuoviDettaglioToolStripButton.Size = new System.Drawing.Size(87, 24);
+            this.rimuoviDettaglioToolStripButton.Text = "&Rimuovi";
+            this.rimuoviDettaglioToolStripButton.Click += new System.EventHandler(this.RimuoviDettaglioToolStripButton_Click);
             // 
-            // ProdottiToolStripButton
+            // prodottiToolStripButton
             // 
-            this.ProdottiToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ProdottiToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ProdottiToolStripButton.Image")));
-            this.ProdottiToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProdottiToolStripButton.Name = "ProdottiToolStripButton";
-            this.ProdottiToolStripButton.Size = new System.Drawing.Size(67, 24);
-            this.ProdottiToolStripButton.Text = "&Prodotti";
+            this.prodottiToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.prodottiToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("prodottiToolStripButton.Image")));
+            this.prodottiToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.prodottiToolStripButton.Name = "prodottiToolStripButton";
+            this.prodottiToolStripButton.Size = new System.Drawing.Size(67, 24);
+            this.prodottiToolStripButton.Text = "&Prodotti";
+            this.prodottiToolStripButton.Click += new System.EventHandler(this.ProdottiToolStripButton_Click);
             // 
-            // CategorieToolStripButton
+            // categorieToolStripButton
             // 
-            this.CategorieToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.CategorieToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("CategorieToolStripButton.Image")));
-            this.CategorieToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CategorieToolStripButton.Name = "CategorieToolStripButton";
-            this.CategorieToolStripButton.Size = new System.Drawing.Size(78, 24);
-            this.CategorieToolStripButton.Text = "&Categorie";
+            this.categorieToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.categorieToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("categorieToolStripButton.Image")));
+            this.categorieToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.categorieToolStripButton.Name = "categorieToolStripButton";
+            this.categorieToolStripButton.Size = new System.Drawing.Size(78, 24);
+            this.categorieToolStripButton.Text = "&Categorie";
+            this.categorieToolStripButton.Click += new System.EventHandler(this.CategorieToolStripButton_Click);
             // 
-            // AboutToolStripButton
+            // aboutToolStripButton
             // 
-            this.AboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("AboutToolStripButton.Image")));
-            this.AboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AboutToolStripButton.Name = "AboutToolStripButton";
-            this.AboutToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.AboutToolStripButton.Text = "&?";
+            this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.aboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripButton.Image")));
+            this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aboutToolStripButton.Name = "aboutToolStripButton";
+            this.aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.aboutToolStripButton.Text = "&?";
+            this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
             // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.NuovaFatturaToolStripButton,
-            this.SalvaFatturaToolStripButton,
-            this.CancellaFatturaToolStripButton});
+            this.nuovaFatturaToolStripButton,
+            this.salvaFatturaToolStripButton,
+            this.cancellaFatturaToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(293, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(288, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // NuovaFatturaToolStripButton
+            // nuovaFatturaToolStripButton
             // 
-            this.NuovaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("NuovaFatturaToolStripButton.Image")));
-            this.NuovaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NuovaFatturaToolStripButton.Name = "NuovaFatturaToolStripButton";
-            this.NuovaFatturaToolStripButton.Size = new System.Drawing.Size(76, 24);
-            this.NuovaFatturaToolStripButton.Text = "&Nuova";
+            this.nuovaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovaFatturaToolStripButton.Image")));
+            this.nuovaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuovaFatturaToolStripButton.Name = "nuovaFatturaToolStripButton";
+            this.nuovaFatturaToolStripButton.Size = new System.Drawing.Size(76, 24);
+            this.nuovaFatturaToolStripButton.Text = "&Nuova";
+            this.nuovaFatturaToolStripButton.Click += new System.EventHandler(this.NuovaFatturaToolStripButton_Click);
             // 
-            // SalvaFatturaToolStripButton
+            // salvaFatturaToolStripButton
             // 
-            this.SalvaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("SalvaFatturaToolStripButton.Image")));
-            this.SalvaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SalvaFatturaToolStripButton.Name = "SalvaFatturaToolStripButton";
-            this.SalvaFatturaToolStripButton.Size = new System.Drawing.Size(68, 24);
-            this.SalvaFatturaToolStripButton.Text = "&Salva";
+            this.salvaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("salvaFatturaToolStripButton.Image")));
+            this.salvaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.salvaFatturaToolStripButton.Name = "salvaFatturaToolStripButton";
+            this.salvaFatturaToolStripButton.Size = new System.Drawing.Size(68, 24);
+            this.salvaFatturaToolStripButton.Text = "&Salva";
+            this.salvaFatturaToolStripButton.Click += new System.EventHandler(this.SalvaFatturaToolStripButton_Click);
             // 
-            // CancellaFatturaToolStripButton
+            // cancellaFatturaToolStripButton
             // 
-            this.CancellaFatturaToolStripButton.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.Delete;
-            this.CancellaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CancellaFatturaToolStripButton.Name = "CancellaFatturaToolStripButton";
-            this.CancellaFatturaToolStripButton.Size = new System.Drawing.Size(89, 24);
-            this.CancellaFatturaToolStripButton.Text = "&Cancella";
+            this.cancellaFatturaToolStripButton.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.Delete;
+            this.cancellaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cancellaFatturaToolStripButton.Name = "cancellaFatturaToolStripButton";
+            this.cancellaFatturaToolStripButton.Size = new System.Drawing.Size(89, 24);
+            this.cancellaFatturaToolStripButton.Text = "&Cancella";
+            this.cancellaFatturaToolStripButton.Click += new System.EventHandler(this.CancellaFatturaToolStripButton_Click);
             // 
-            // FattureDataGridView
+            // fattureDataGridView
             // 
-            this.FattureDataGridView.AllowUserToAddRows = false;
-            this.FattureDataGridView.AllowUserToDeleteRows = false;
-            this.FattureDataGridView.AllowUserToResizeRows = false;
-            this.FattureDataGridView.AutoGenerateColumns = false;
-            this.FattureDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.FattureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.FattureDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fattureDataGridView.AllowUserToAddRows = false;
+            this.fattureDataGridView.AllowUserToDeleteRows = false;
+            this.fattureDataGridView.AllowUserToResizeRows = false;
+            this.fattureDataGridView.AutoGenerateColumns = false;
+            this.fattureDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.fattureDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.nomeDataGridViewTextBoxColumn,
             this.totaleDataGridViewTextBoxColumn});
-            this.FattureDataGridView.DataSource = this.FattureBindingSource;
-            this.FattureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FattureDataGridView.Location = new System.Drawing.Point(4, 69);
-            this.FattureDataGridView.Margin = new System.Windows.Forms.Padding(4);
-            this.FattureDataGridView.MultiSelect = false;
-            this.FattureDataGridView.Name = "FattureDataGridView";
-            this.FattureDataGridView.ReadOnly = true;
-            this.FattureDataGridView.RowHeadersVisible = false;
-            this.FattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.FattureDataGridView.Size = new System.Drawing.Size(285, 233);
-            this.FattureDataGridView.TabIndex = 5;
+            this.fattureDataGridView.DataSource = this.fattureBindingSource;
+            this.fattureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fattureDataGridView.Location = new System.Drawing.Point(4, 69);
+            this.fattureDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.fattureDataGridView.MultiSelect = false;
+            this.fattureDataGridView.Name = "fattureDataGridView";
+            this.fattureDataGridView.ReadOnly = true;
+            this.fattureDataGridView.RowHeadersVisible = false;
+            this.fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.fattureDataGridView.Size = new System.Drawing.Size(280, 238);
+            this.fattureDataGridView.TabIndex = 5;
+            this.fattureDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.fattureDataGridView_CellClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -511,31 +518,36 @@
             this.totaleDataGridViewTextBoxColumn.ReadOnly = true;
             this.totaleDataGridViewTextBoxColumn.Width = 77;
             // 
+            // fattureBindingSource
+            // 
+            this.fattureBindingSource.DataSource = typeof(Ciccio1.Domain.Fattura);
+            // 
             // FatturaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 304);
+            this.ClientSize = new System.Drawing.Size(781, 311);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FatturaView";
             this.Text = "Fattura";
-            ((System.ComponentModel.ISupportInitialize)(this.DettagliDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DettagliBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FatturaBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FattureBindingSource)).EndInit();
+            this.Load += new System.EventHandler(this.View_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dettagliBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DettaglioBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dettaglioBindingSource)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fatturaBindingSource)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FattureDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -553,28 +565,28 @@
         private System.Windows.Forms.TextBox quantitàDettaglioTextBox;
         private System.Windows.Forms.TextBox prezzoDettaglioTextBox;
         private System.Windows.Forms.TextBox totaleDettaglioTextBox;
-        internal System.Windows.Forms.DataGridView DettagliDataGridView;
-        internal System.Windows.Forms.ToolStripButton NuovoDettaglioToolStripButton;
-        internal System.Windows.Forms.ToolStripButton AggiungiDettaglioToolStripButton;
-        internal System.Windows.Forms.ToolStripButton RimuoviDettaglioToolStripButton;
-        internal System.Windows.Forms.ToolStripButton ProdottiToolStripButton;
-        internal System.Windows.Forms.ToolStripButton NuovaFatturaToolStripButton;
-        internal System.Windows.Forms.ToolStripButton SalvaFatturaToolStripButton;
-        internal System.Windows.Forms.ToolStripButton CancellaFatturaToolStripButton;
-        internal System.Windows.Forms.DataGridView FattureDataGridView;
-        internal System.Windows.Forms.ToolStripButton AboutToolStripButton;
-        internal System.Windows.Forms.ToolStripButton CategorieToolStripButton;
-        internal System.Windows.Forms.BindingSource FattureBindingSource;
-        internal System.Windows.Forms.BindingSource FatturaBindingSource;
-        internal System.Windows.Forms.BindingSource DettagliBindingSource;
-        internal System.Windows.Forms.BindingSource DettaglioBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totaleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NomeProdotto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrezzoProdotto;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn totaleDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.ToolStripButton nuovoDettaglioToolStripButton;
+        private System.Windows.Forms.ToolStripButton aggiungiDettaglioToolStripButton;
+        private System.Windows.Forms.ToolStripButton rimuoviDettaglioToolStripButton;
+        private System.Windows.Forms.ToolStripButton prodottiToolStripButton;
+        private System.Windows.Forms.ToolStripButton categorieToolStripButton;
+        private System.Windows.Forms.ToolStripButton aboutToolStripButton;
+        private System.Windows.Forms.ToolStripButton nuovaFatturaToolStripButton;
+        private System.Windows.Forms.ToolStripButton salvaFatturaToolStripButton;
+        private System.Windows.Forms.ToolStripButton cancellaFatturaToolStripButton;
+        private System.Windows.Forms.DataGridView fattureDataGridView;
+        private System.Windows.Forms.DataGridView dettagliDataGridView;
+        private System.Windows.Forms.BindingSource fattureBindingSource;
+        private System.Windows.Forms.BindingSource fatturaBindingSource;
+        private System.Windows.Forms.BindingSource dettagliBindingSource;
+        private System.Windows.Forms.BindingSource dettaglioBindingSource;
     }
 }

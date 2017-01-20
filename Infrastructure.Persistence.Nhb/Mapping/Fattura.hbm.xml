@@ -6,9 +6,12 @@
   <class name="Fattura" table="Fattura">
 
     <id name="Id" generator="native" unsaved-value="0"/>
-    <property name="Nome" not-null="true" />
 
-    <set name="Dettagli" lazy="false" generic="true" access="field.camelcase" cascade="all-delete-orphan" >
+    <property name="Nome" not-null="true" />
+    <property name="Totale" not-null="true" />
+
+    <!--<set name="Dettagli" lazy="false" generic="true" access="field.camelcase" cascade="all-delete-orphan" >-->
+    <set name="Dettagli" lazy="false" generic="true" cascade="all-delete-orphan" >
       <key column="Fattura_Id" not-null="true"/>
       <one-to-many class="Dettaglio"/>
     </set>

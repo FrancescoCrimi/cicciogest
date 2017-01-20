@@ -20,7 +20,7 @@ namespace Ciccio1.Infrastructure.Persistence.EF.Repository
             throw new NotImplementedException();
         }
 
-        public IList<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
             throw new NotImplementedException();
         }
