@@ -77,10 +77,16 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             events.Creating += (s, e) =>
             {
                 //if (e.Object is DomainEntity<>)
-                //if (e.Object.GetType().BaseType.GetGenericTypeDefinition() == typeof(DomainEntity<>))
-                //{
-                //    e.Object.GetType().GetProperty("Id").SetValue(e.Object, increment.GetNextID(e.Object.GetType()));
-                //}
+                if (
+                e.Object.GetType().BaseType.IsGenericType &&
+                (
+                e.Object.GetType().BaseType.GetGenericTypeDefinition() == typeof(DomainEntity<>) ||
+                e.Object.GetType().BaseType.GetGenericTypeDefinition() == typeof(ValueObject<>)
+                )
+                )
+                {
+                    e.Object.GetType().GetProperty("Id").SetValue(e.Object, increment.GetNextID(e.Object.GetType()));
+                }
             };
 
             events.Committing += (s, e) =>

@@ -5,8 +5,9 @@ using System.Windows.Forms;
 using Ciccio1.Infrastructure;
 using Ciccio1.Presentation.WinForm.Views;
 using Castle.Core.Logging;
-using Ciccio1.Presentation.WinForm.Presenters;
 using Ciccio1.Application;
+using Castle.Windsor;
+using Castle.MicroKernel.Lifestyle;
 
 namespace Ciccio1.Presentation.WinForm
 {
@@ -14,8 +15,6 @@ namespace Ciccio1.Presentation.WinForm
     {
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
-
-        internal static Container Container { get; private set; }
 
         [STAThread]
         static void Main()
@@ -28,21 +27,9 @@ namespace Ciccio1.Presentation.WinForm
 
         private Program()
         {
-            startup();
+            System.Windows.Forms.Application.Run(ViewResolver.Resolve<FattureForm>());
             //dummyload();
             //System.Windows.Forms.Application.Run(new ConfigDataAccessView());
-        }
-
-        private void startup()
-        {
-            Container = new Container();
-            Container.Install(new Installer());
-            //FatturaPresenter presenter = Container.Resolve<FatturaPresenter>();
-            //System.Windows.Forms.Application.Run(presenter.View);
-            FatturaView fv = Container.Resolve<FatturaView>();
-            System.Windows.Forms.Application.Run(fv);
-            //FattureForm fatt = container.Resolve<FattureForm>();
-            //System.Windows.Forms.Application.Run(fatt);
         }
 
         private void dummyload()
@@ -94,4 +81,6 @@ namespace Ciccio1.Presentation.WinForm
         //    return new ConfigDataAccessView();
         //}
     }
+
+    public interface DummyForm { }
 }

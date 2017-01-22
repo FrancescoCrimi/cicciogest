@@ -12,8 +12,9 @@ namespace Ciccio1.Infrastructure.DomainBase
     public abstract class Entity<TEntity, TId> : IEquatable<TEntity>, INotifyPropertyChanged
         where TEntity : Entity<TEntity, TId>
     {
+        private TId id;
         [DataMember]
-        public virtual TId Id { get; protected set; }
+        public virtual TId Id { get { return id; } protected set { id = value; } }
 
         //public bool IsTransient()
         //{

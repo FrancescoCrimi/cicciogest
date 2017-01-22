@@ -22,7 +22,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
             {
                 case UI.Form:
                     container.Register(
-                        Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestyleSingleton());
+                        Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestyleScoped());
                     break;
                 case UI.WPF:
                     container.Register(

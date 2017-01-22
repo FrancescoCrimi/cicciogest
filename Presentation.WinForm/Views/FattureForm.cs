@@ -12,9 +12,8 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class FattureForm : Form
+    public partial class FattureForm : Form, DummyForm
     {
-        //private IFatturaService service;
         private ICiccioService service;
 
         public FattureForm(ICiccioService service)
@@ -23,80 +22,47 @@ namespace Ciccio1.Presentation.WinForm.Views
             this.service = service;
         }
 
-        private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fattureDataGridView.ClearSelection();
-            fatturaBindingSource.DataSource = Factory.NewFattura();
-        }
-
-        private void modificaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            modificaFattura();
-        }
-
-        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fatturaBindingSource.EndEdit();
-            Fattura f = fatturaBindingSource.Current as Fattura;
-            if (f != null)
-            {
-                service.SaveFattura(f);
-                visualizzaFatture();
-            }
-        }
-
-        private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fatturaBindingSource.EndEdit();
-            Fattura f = fatturaBindingSource.Current as Fattura;
-            if (f != null)
-            {
-                service.DeleteFattura(f);
-                visualizzaFatture();
-            }
-        }
-
-        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dettagliToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DettagliForm dettFrm = Program.Container.Resolve<DettagliForm>();
-            dettFrm.ShowDialog();
-            Program.Container.Release(dettFrm);
-            visualizzaFatture();
-        }
-
-        private void prodottiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FattureDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            modificaFattura();
-        }
-
         private void Fatture_Load(object sender, EventArgs e)
         {
             visualizzaFatture();
         }
 
-        private void Fatture_FormClosed(object sender, FormClosedEventArgs e)
+        private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            apriFatturaForm(Factory.NewFattura());
+        }
 
+        private void modificaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            modificaFatturaSelezionata();
+        }
+
+        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void prodottiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProdottoView pv = ViewResolver.Resolve<ProdottoView>();
+            pv.ShowDialog();
+            ViewResolver.Release(pv);
+        }
+
+        private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CategoriaView cv = ViewResolver.Resolve<CategoriaView>();
+            cv.ShowDialog();
+            ViewResolver.Release(cv);
+        }
+
+        private void fattureDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            modificaFatturaSelezionata();
         }
 
         private void visualizzaFatture()
         {
-            //fattureLoading = true;
             IEnumerable<Fattura> fatt = service.GetFatture();
             fattureBindingSource.Clear();
 
@@ -105,15 +71,28 @@ namespace Ciccio1.Presentation.WinForm.Views
                 fattureBindingSource.Add(item);
             }
             fattureDataGridView.ClearSelection();
-            //fattureLoading = false;
-            //nuovaFattura();
-            fatturaBindingSource.DataSource = Factory.NewFattura();
         }
 
-        private void modificaFattura()
+        private void modificaFatturaSelezionata()
         {
             if (fattureBindingSource.Current != null)
-                fatturaBindingSource.DataSource = fattureBindingSource.Current;
+            {
+                Fattura fat = fattureBindingSource.Current as Fattura;
+                apriFatturaForm(fat);
+            }
+        }
+
+        private void apriFatturaForm(Fattura fatt)
+        {
+            FatturaForm dettFrm = ViewResolver.Resolve<FatturaForm>(new { idFattura = fatt.Id });
+            dettFrm.ShowDialog();
+            ViewResolver.Release(dettFrm);
+            visualizzaFatture();
+        }
+
+        private void FattureForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ViewResolver.Release(this);
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class FatturaView : Form
+    public partial class FatturaView : Form, DummyForm
     {
         private ILogger logger;
         private ICiccioService service = null;
@@ -27,12 +27,12 @@ namespace Ciccio1.Presentation.WinForm.Views
             this.logger = logger;
         }
 
-        private void View_Load(object sender, EventArgs e)
+        private void FatturaView_Load(object sender, EventArgs e)
         {
             visualizzaFatture();
         }
 
-        private void SalvaFatturaToolStripButton_Click(object sender, EventArgs e)
+        private void salvaFatturaToolStripButton_Click(object sender, EventArgs e)
         {
             fatturaBindingSource.EndEdit();
             Fattura f = fatturaBindingSource.Current as Fattura;
@@ -50,7 +50,7 @@ namespace Ciccio1.Presentation.WinForm.Views
             }
         }
 
-        private void RimuoviDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void rimuoviDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
             fatturaBindingSource.EndEdit();
             Fattura f = fatturaBindingSource.Current as Fattura;
@@ -67,25 +67,25 @@ namespace Ciccio1.Presentation.WinForm.Views
             }
         }
 
-        private void NuovoDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void nuovoDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
             dettagliDataGridView.ClearSelection();
-            SelectProdottoView spp = Program.Container.Resolve<SelectProdottoView>();
+            SelectProdottoView spp = ViewResolver.Resolve<SelectProdottoView>();
             spp.ShowDialog();
             if (spp.ProdottoSelezionato != null)
             {
                 Dettaglio newdett = new Dettaglio(spp.ProdottoSelezionato, 1);
                 dettaglioBindingSource.DataSource = newdett;
             }
-            Program.Container.Release(spp);
+            ViewResolver.Release(spp);
         }
 
-        private void NuovaFatturaToolStripButton_Click(object sender, EventArgs e)
+        private void nuovaFatturaToolStripButton_Click(object sender, EventArgs e)
         {
             nuovaFattura();
         }
 
-        private void CancellaFatturaToolStripButton_Click(object sender, EventArgs e)
+        private void cancellaFatturaToolStripButton_Click(object sender, EventArgs e)
         {
             fatturaBindingSource.EndEdit();
             Fattura f = fatturaBindingSource.Current as Fattura;
@@ -103,25 +103,21 @@ namespace Ciccio1.Presentation.WinForm.Views
             }
         }
 
-        private void CategorieToolStripButton_Click(object sender, EventArgs e)
+        private void categorieToolStripButton_Click(object sender, EventArgs e)
         {
-            //var asdf = kernel.Resolve<CategoriaPresenter>();
-            //asdf.Show();
-            CategoriaView cv = Program.Container.Resolve<CategoriaView>();
+            CategoriaView cv = ViewResolver.Resolve<CategoriaView>();
             cv.ShowDialog();
-            Program.Container.Release(cv);
+            ViewResolver.Release(cv);
         }
 
-        private void ProdottiToolStripButton_Click(object sender, EventArgs e)
+        private void prodottiToolStripButton_Click(object sender, EventArgs e)
         {
-            //ProdottoPresenter pp = kernel.Resolve<ProdottoPresenter>();
-            //pp.Show();
-            ProdottoView pv = Program.Container.Resolve<ProdottoView>();
+            ProdottoView pv = ViewResolver.Resolve<ProdottoView>();
             pv.ShowDialog();
-            Program.Container.Release(pv);
+            ViewResolver.Release(pv);
         }
 
-        private void AggiungiDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void aggiungiDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
             fatturaBindingSource.EndEdit();
             Fattura f = fatturaBindingSource.Current as Fattura;
@@ -141,13 +137,25 @@ namespace Ciccio1.Presentation.WinForm.Views
             }
         }
 
-        private void AboutToolStripButton_Click(object sender, EventArgs e)
+        private void aboutToolStripButton_Click(object sender, EventArgs e)
         {
             var about = new AboutBox();
             about.ShowDialog();
         }
 
+        private void fattureDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (fattureBindingSource.Current != null)
+                mostraFattura(fattureBindingSource.Current as Fattura);
+        }
 
+        private void dettagliDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dettagliBindingSource.Current != null)
+            {
+                dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
+            }
+        }
 
 
         private void visualizzaFatture()
@@ -188,20 +196,6 @@ namespace Ciccio1.Presentation.WinForm.Views
         private void clearDettaglio()
         {
             dettaglioBindingSource.DataSource = new Dettaglio();
-        }
-
-        private void fattureDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (fattureBindingSource.Current != null)
-                mostraFattura(fattureBindingSource.Current as Fattura);
-        }
-
-        private void dettagliDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dettagliBindingSource.Current != null)
-            {
-                dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
-            }
         }
     }
 }

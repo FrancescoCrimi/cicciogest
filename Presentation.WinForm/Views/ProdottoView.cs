@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class ProdottoView : Form
+    public partial class ProdottoView : Form, DummyForm
     {
         private ILogger logger;
         private ICiccioService service;

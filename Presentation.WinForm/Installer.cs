@@ -5,7 +5,6 @@ using System.Text;
 using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
-using Ciccio1.Presentation.WinForm.Presenters;
 using Ciccio1.Presentation.WinForm.Views;
 using Ciccio1.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
@@ -51,11 +50,11 @@ namespace Ciccio1.Presentation.WinForm
                 Component.For<CategoriaView>().LifestyleTransient(),
 
                 Component.For<SelectProdottoView>().LifeStyle.Transient,
-                Component.For<SelectProdottoPresenter>().LifeStyle.Transient,
-                Component.For<Func<ICiccioService, SelectProdottoPresenter>>().AsFactory(),
+                //Component.For<SelectProdottoPresenter>().LifeStyle.Transient,
+                //Component.For<Func<ICiccioService, SelectProdottoPresenter>>().AsFactory(),
 
                 Component.For<FattureForm>().LifestyleSingleton(),
-                Component.For<DettagliForm>().LifestyleTransient()
+                Component.For<FatturaForm>().LifestyleTransient()
                 );
         }
     }

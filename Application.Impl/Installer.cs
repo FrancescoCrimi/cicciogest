@@ -37,7 +37,7 @@ namespace Ciccio1.Application.Impl
             {
                 case UI.Form:
                     container.Register(
-                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleSingleton());
+                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient());
                     break;
                 case UI.WPF:
                     container.Register(

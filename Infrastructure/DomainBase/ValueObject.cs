@@ -12,8 +12,9 @@ namespace Ciccio1.Infrastructure.DomainBase
     [DataContract(Namespace = "http://gesttest.it")]
     public abstract class ValueObject<T> : IEquatable<T>, INotifyPropertyChanged where T : ValueObject<T>
     {
+        private int id;
         [DataMember]
-        public virtual int Id { get; protected set; }
+        public virtual int Id { get { return id; } protected set { id = value; } }
 
         public override int GetHashCode()
         {

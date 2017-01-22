@@ -379,7 +379,7 @@
             this.nuovoDettaglioToolStripButton.Name = "nuovoDettaglioToolStripButton";
             this.nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(77, 24);
             this.nuovoDettaglioToolStripButton.Text = "Nuovo";
-            this.nuovoDettaglioToolStripButton.Click += new System.EventHandler(this.NuovoDettaglioToolStripButton_Click);
+            this.nuovoDettaglioToolStripButton.Click += new System.EventHandler(this.nuovoDettaglioToolStripButton_Click);
             // 
             // aggiungiDettaglioToolStripButton
             // 
@@ -388,7 +388,7 @@
             this.aggiungiDettaglioToolStripButton.Name = "aggiungiDettaglioToolStripButton";
             this.aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(94, 24);
             this.aggiungiDettaglioToolStripButton.Text = "&Aggiungi";
-            this.aggiungiDettaglioToolStripButton.Click += new System.EventHandler(this.AggiungiDettaglioToolStripButton_Click);
+            this.aggiungiDettaglioToolStripButton.Click += new System.EventHandler(this.aggiungiDettaglioToolStripButton_Click);
             // 
             // rimuoviDettaglioToolStripButton
             // 
@@ -397,7 +397,7 @@
             this.rimuoviDettaglioToolStripButton.Name = "rimuoviDettaglioToolStripButton";
             this.rimuoviDettaglioToolStripButton.Size = new System.Drawing.Size(87, 24);
             this.rimuoviDettaglioToolStripButton.Text = "&Rimuovi";
-            this.rimuoviDettaglioToolStripButton.Click += new System.EventHandler(this.RimuoviDettaglioToolStripButton_Click);
+            this.rimuoviDettaglioToolStripButton.Click += new System.EventHandler(this.rimuoviDettaglioToolStripButton_Click);
             // 
             // prodottiToolStripButton
             // 
@@ -407,7 +407,7 @@
             this.prodottiToolStripButton.Name = "prodottiToolStripButton";
             this.prodottiToolStripButton.Size = new System.Drawing.Size(67, 24);
             this.prodottiToolStripButton.Text = "&Prodotti";
-            this.prodottiToolStripButton.Click += new System.EventHandler(this.ProdottiToolStripButton_Click);
+            this.prodottiToolStripButton.Click += new System.EventHandler(this.prodottiToolStripButton_Click);
             // 
             // categorieToolStripButton
             // 
@@ -417,7 +417,7 @@
             this.categorieToolStripButton.Name = "categorieToolStripButton";
             this.categorieToolStripButton.Size = new System.Drawing.Size(78, 24);
             this.categorieToolStripButton.Text = "&Categorie";
-            this.categorieToolStripButton.Click += new System.EventHandler(this.CategorieToolStripButton_Click);
+            this.categorieToolStripButton.Click += new System.EventHandler(this.categorieToolStripButton_Click);
             // 
             // aboutToolStripButton
             // 
@@ -427,7 +427,7 @@
             this.aboutToolStripButton.Name = "aboutToolStripButton";
             this.aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.aboutToolStripButton.Text = "&?";
-            this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
+            this.aboutToolStripButton.Click += new System.EventHandler(this.aboutToolStripButton_Click);
             // 
             // toolStrip1
             // 
@@ -449,7 +449,7 @@
             this.nuovaFatturaToolStripButton.Name = "nuovaFatturaToolStripButton";
             this.nuovaFatturaToolStripButton.Size = new System.Drawing.Size(76, 24);
             this.nuovaFatturaToolStripButton.Text = "&Nuova";
-            this.nuovaFatturaToolStripButton.Click += new System.EventHandler(this.NuovaFatturaToolStripButton_Click);
+            this.nuovaFatturaToolStripButton.Click += new System.EventHandler(this.nuovaFatturaToolStripButton_Click);
             // 
             // salvaFatturaToolStripButton
             // 
@@ -458,7 +458,7 @@
             this.salvaFatturaToolStripButton.Name = "salvaFatturaToolStripButton";
             this.salvaFatturaToolStripButton.Size = new System.Drawing.Size(68, 24);
             this.salvaFatturaToolStripButton.Text = "&Salva";
-            this.salvaFatturaToolStripButton.Click += new System.EventHandler(this.SalvaFatturaToolStripButton_Click);
+            this.salvaFatturaToolStripButton.Click += new System.EventHandler(this.salvaFatturaToolStripButton_Click);
             // 
             // cancellaFatturaToolStripButton
             // 
@@ -467,7 +467,7 @@
             this.cancellaFatturaToolStripButton.Name = "cancellaFatturaToolStripButton";
             this.cancellaFatturaToolStripButton.Size = new System.Drawing.Size(89, 24);
             this.cancellaFatturaToolStripButton.Text = "&Cancella";
-            this.cancellaFatturaToolStripButton.Click += new System.EventHandler(this.CancellaFatturaToolStripButton_Click);
+            this.cancellaFatturaToolStripButton.Click += new System.EventHandler(this.cancellaFatturaToolStripButton_Click);
             // 
             // fattureDataGridView
             // 
@@ -531,7 +531,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FatturaView";
             this.Text = "Fattura";
-            this.Load += new System.EventHandler(this.View_Load);
+            this.Load += new System.EventHandler(this.FatturaView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dettagliBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
