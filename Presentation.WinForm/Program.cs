@@ -27,7 +27,8 @@ namespace Ciccio1.Presentation.WinForm
 
         private Program()
         {
-            System.Windows.Forms.Application.Run(ViewResolver.Resolve<FattureForm>());
+            System.Windows.Forms.Application.Run(new HomeView());
+            //System.Windows.Forms.Application.Run(ViewResolver.Resolve<FattureForm>());
             //dummyload();
             //System.Windows.Forms.Application.Run(new ConfigDataAccessView());
         }

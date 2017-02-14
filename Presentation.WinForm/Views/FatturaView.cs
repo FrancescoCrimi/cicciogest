@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
@@ -15,187 +16,109 @@ namespace Ciccio1.Presentation.WinForm.Views
     public partial class FatturaView : Form, DummyForm
     {
         private ILogger logger;
-        private ICiccioService service = null;
+        private ICiccioService service;
 
-        public FatturaView(
-            ILogger logger,
-            ICiccioService service
-            )
+        public FatturaView(ICiccioService service, ILogger logger, int idFattura)
         {
             InitializeComponent();
             this.service = service;
             this.logger = logger;
+            if (idFattura == 0)
+                fatturaBindingSource.DataSource = Factory.NewFattura();
+            else
+                fatturaBindingSource.DataSource = service.GetFattura(idFattura);
+            dettaglioBindingSource.DataSource = new Dettaglio();
         }
 
-        private void FatturaView_Load(object sender, EventArgs e)
+        #region metodi eventi
+
+        private void nuovaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            visualizzaFatture();
+            fatturaBindingSource.DataSource = Factory.NewFattura();
         }
 
-        private void salvaFatturaToolStripButton_Click(object sender, EventArgs e)
+        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fatturaBindingSource.EndEdit();
-            Fattura f = fatturaBindingSource.Current as Fattura;
-            if (f != null)
-            {
-                try
-                {
-                    service.SaveFattura(f);
-                    visualizzaFatture();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
+            service.SaveFattura((Fattura)fatturaBindingSource.DataSource);
+            Close();
         }
 
-        private void rimuoviDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fatturaBindingSource.EndEdit();
-            Fattura f = fatturaBindingSource.Current as Fattura;
-            if (f != null)
-            {
-                dettaglioBindingSource.EndEdit();
-                Dettaglio d = dettaglioBindingSource.Current as Dettaglio;
-                if (d != null)
-                {
-                    f.RemoveDettaglio(d);
-                    showDettagli(f.Dettagli);
-                    clearDettaglio();
-                }
-            }
+            service.DeleteFattura((Fattura)fatturaBindingSource.DataSource);
+            Close();
         }
 
-        private void nuovoDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dettagliDataGridView.ClearSelection();
-            SelectProdottoView spp = ViewResolver.Resolve<SelectProdottoView>();
-            spp.ShowDialog();
-            if (spp.ProdottoSelezionato != null)
-            {
-                Dettaglio newdett = new Dettaglio(spp.ProdottoSelezionato, 1);
-                dettaglioBindingSource.DataSource = newdett;
-            }
-            ViewResolver.Release(spp);
+            Close();
         }
 
-        private void nuovaFatturaToolStripButton_Click(object sender, EventArgs e)
-        {
-            nuovaFattura();
-        }
-
-        private void cancellaFatturaToolStripButton_Click(object sender, EventArgs e)
-        {
-            fatturaBindingSource.EndEdit();
-            Fattura f = fatturaBindingSource.Current as Fattura;
-            if (f != null)
-            {
-                try
-                {
-                    service.DeleteFattura(f);
-                    visualizzaFatture();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
-        }
-
-        private void categorieToolStripButton_Click(object sender, EventArgs e)
-        {
-            CategoriaView cv = ViewResolver.Resolve<CategoriaView>();
-            cv.ShowDialog();
-            ViewResolver.Release(cv);
-        }
-
-        private void prodottiToolStripButton_Click(object sender, EventArgs e)
+        private void prodottiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProdottoView pv = ViewResolver.Resolve<ProdottoView>();
             pv.ShowDialog();
             ViewResolver.Release(pv);
         }
 
-        private void aggiungiDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fatturaBindingSource.EndEdit();
-            Fattura f = fatturaBindingSource.Current as Fattura;
-            if (f != null)
+            CategoriaView cv = ViewResolver.Resolve<CategoriaView>();
+            cv.ShowDialog();
+            ViewResolver.Release(cv);
+        }
+
+        private void nuovoDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dettaglioBindingSource.DataSource = new Dettaglio(service.GetProdotto(selectProd()), 1);
+        }
+
+        private void aggiungiDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
+            Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
+            if (dettaglio.Id == 0)
             {
-                dettaglioBindingSource.EndEdit();
-                Dettaglio d = dettaglioBindingSource.Current as Dettaglio;
-                if (d != null)
-                {
-                    if (d.Id == 0)
-                    {
-                        f.AddDettaglio(d);
-                        showDettagli(f.Dettagli);
-                    }
-                    clearDettaglio();
-                }
+                fattura.AddDettaglio(dettaglio);
             }
+            dettaglioBindingSource.DataSource = new Dettaglio(null, 1);
         }
 
-        private void aboutToolStripButton_Click(object sender, EventArgs e)
+        private void rimuoviDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var about = new AboutBox();
-            about.ShowDialog();
+            Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
+            Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
+            if (dettaglio.Id != 0)
+                fattura.RemoveDettaglio(dettaglio);
+            dettaglioBindingSource.DataSource = new Dettaglio(null, 1);
         }
 
-        private void fattureDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void selProdottoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (fattureBindingSource.Current != null)
-                mostraFattura(fattureBindingSource.Current as Fattura);
+            ((Dettaglio)dettaglioBindingSource.Current).Prodotto = service.GetProdotto(selectProd());
         }
 
         private void dettagliDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dettagliBindingSource.Current != null)
-            {
                 dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
-            }
         }
 
-
-        private void visualizzaFatture()
+        private void nomeProdottoTextBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var fatt = service.GetFatture();
-            fattureBindingSource.Clear();
-            foreach (Fattura item in fatt)
-            {
-                fattureBindingSource.Add(item);
-            }
-            fattureDataGridView.ClearSelection();
-            nuovaFattura();
+            ((Dettaglio)dettaglioBindingSource.Current).Prodotto = service.GetProdotto(selectProd());
         }
+        #endregion
 
-        private void nuovaFattura()
+        #region metodi privati
+        private int selectProd()
         {
-            fattureDataGridView.ClearSelection();
-            mostraFattura(Factory.NewFattura());
+            SelectProdottoView spv = ViewResolver.Resolve<SelectProdottoView>();
+            spv.ShowDialog();
+            int idProd = spv.IdProdotto;
+            ViewResolver.Release(spv);
+            return idProd;
         }
-
-        private void mostraFattura(Fattura fattura)
-        {
-            fatturaBindingSource.DataSource = fattura;
-            showDettagli(fattura.Dettagli);
-            clearDettaglio();
-        }
-
-        private void showDettagli(IEnumerable<Dettaglio> dettagli)
-        {
-            dettagliBindingSource.Clear();
-            foreach (Dettaglio item in dettagli)
-            {
-                dettagliBindingSource.Add(item);
-            }
-            dettagliDataGridView.ClearSelection();
-        }
-
-        private void clearDettaglio()
-        {
-            dettaglioBindingSource.DataSource = new Dettaglio();
-        }
+        #endregion
     }
 }

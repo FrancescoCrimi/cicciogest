@@ -47,5 +47,10 @@ namespace Ciccio1.Presentation.Wpf.View
             //    tv.ShowDialog();
             //});
         }
+
+        private void fatturaDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

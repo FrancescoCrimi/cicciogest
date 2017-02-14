@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 //using System.Linq;
 using System.Text;
 using System.Runtime.CompilerServices;
+using CiccioListe;
 
 namespace Ciccio1.Domain
 {
@@ -15,11 +16,11 @@ namespace Ciccio1.Domain
     public class Fattura : DomainEntity<Fattura>
     {
         private string nome;
-        private ISet<Dettaglio> dettagli;
+        private IDomainList<Dettaglio> dettagli;
 
         internal Fattura()
         {
-            Dettagli = new HashSet<Dettaglio>();
+            Dettagli = new DomainList<Dettaglio>();
         }
 
         [DataMember]
@@ -30,24 +31,17 @@ namespace Ciccio1.Domain
             {
                 if (value != nome)
                 {
-                    this.nome = value;
+                    nome = value;
                     NotifyPropertyChanged("Nome");
                 }
             }
         }
 
         [DataMember]
-        public virtual IEnumerable<Dettaglio> Dettagli
+        public virtual IDomainList<Dettaglio> Dettagli
         {
             get { return dettagli; }
-            protected set
-            {
-                foreach (Dettaglio dett in value)
-                {
-                    dett.TotaleChanged += dettaglioTotaleChanged;
-                }
-                dettagli = (ISet<Dettaglio>)value;
-            }
+            protected set { dettagli = value; }
         }
 
         [DataMember]
@@ -55,12 +49,11 @@ namespace Ciccio1.Domain
 
         public virtual void AddDettaglio(Dettaglio dettaglio)
         {
-            //dettaglio.ImpostaFattura(this);
             if (!dettagli.Contains(dettaglio))
             {
+                dettaglio.Fattura = this;
                 dettagli.Add(dettaglio);
-                dettaglio.TotaleChanged += dettaglioTotaleChanged;
-                calcolaTotale();
+                CalcolaTotale();
             }
             else
             {
@@ -75,8 +68,7 @@ namespace Ciccio1.Domain
             if (dettagli.Contains(dettaglio))
             {
                 dettagli.Remove(dettaglio);
-                dettaglio.TotaleChanged -= dettaglioTotaleChanged;
-                calcolaTotale();
+                CalcolaTotale();
             }
         }
 
@@ -104,7 +96,7 @@ namespace Ciccio1.Domain
         //        products[products.IndexOf(product)] = product;
         //}
 
-        private void calcolaTotale()
+        protected internal virtual void CalcolaTotale()
         {
             Totale = 0;
             if (Dettagli != null)
@@ -118,11 +110,6 @@ namespace Ciccio1.Domain
                 }
             }
             NotifyPropertyChanged("Totale");
-        }
-
-        private void dettaglioTotaleChanged(object sender, EventArgs e)
-        {
-            calcolaTotale();
         }
     }
 }

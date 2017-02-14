@@ -15,8 +15,6 @@ namespace Ciccio1.Domain
     {
         private int quantità;
         private Prodotto prodotto;
-        public virtual event EventHandler TotaleChanged;
-
 
         public Dettaglio() { }
 
@@ -57,6 +55,8 @@ namespace Ciccio1.Domain
         [DataMember]
         public virtual int PrezzoProdotto { get; protected set; }
 
+        internal protected virtual Fattura Fattura { get; set; }
+
 
         private void modificaQuantita(int quantità)
         {
@@ -67,25 +67,29 @@ namespace Ciccio1.Domain
 
         private void modificaProdotto(Prodotto prodotto)
         {
-            this.prodotto = prodotto;
-            NomeProdotto = prodotto.Nome;
-            PrezzoProdotto = prodotto.Prezzo;
-            NotifyPropertyChanged("NomeProdotto");
-            NotifyPropertyChanged("PrezzoProdotto");
-            calcolaTotale();
+            if (prodotto != null)
+            {
+                this.prodotto = prodotto;
+                NomeProdotto = prodotto.Nome;
+                PrezzoProdotto = prodotto.Prezzo;
+                NotifyPropertyChanged("NomeProdotto");
+                NotifyPropertyChanged("PrezzoProdotto");
+                calcolaTotale();
+            }
         }
 
         private void calcolaTotale()
         {
             Totale = PrezzoProdotto * Quantità;
             NotifyPropertyChanged("Totale");
-            if (TotaleChanged != null)
-                TotaleChanged(this, new EventArgs());
+            if (Fattura != null)
+                Fattura.CalcolaTotale();
         }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return Prodotto.Id;
+            if(Prodotto != null)
+                yield return Prodotto.Id;
             //yield return Quantità;
             yield break;
         }

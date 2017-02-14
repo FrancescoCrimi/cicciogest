@@ -39,6 +39,7 @@ namespace Ciccio1.Presentation.Wpf
         {
             container.Register(
                 Component.For<FattureViewModel>().LifestyleTransient(),
+                Component.For<FatturaViewModel>().LifestyleTransient(),
                 Component.For<ProdottiViewModel>().LifestyleTransient(),
                 Component.For<CategorieViewModel>().LifestyleTransient(),
                 Component.For<SelezionaProdottoViewModel>().LifestyleTransient()

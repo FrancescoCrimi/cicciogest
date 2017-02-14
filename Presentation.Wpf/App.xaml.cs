@@ -10,13 +10,12 @@ using System.Windows;
 
 namespace Ciccio1.Presentation.Wpf
 {
-    /// <summary>
-    /// Logica di interazione per App.xaml
-    /// </summary>
     public partial class App : System.Windows.Application
     {
         private static ProdottiView pv = null;
         private static SelezionaProdottoView sp = null;
+        private static FatturaView fatturaView = null;
+        private static CategorieView categoriaView = null;
 
         internal static Messenger Messenger
         {
@@ -27,6 +26,23 @@ namespace Ciccio1.Presentation.Wpf
 
         static App()
         {
+
+            messenger.Register<int>("ApriFatturaView", id =>
+            {
+                fatturaView = new FatturaView();
+                messenger.NotifyColleagues("SettaIdFatturaView", id);
+                fatturaView.ShowDialog();
+            });
+
+            messenger.Register("ChiudiFatturaView", () =>
+            {
+                if(fatturaView != null)
+                {
+                    fatturaView.Close();
+                    fatturaView = null;
+                }
+            });
+
             messenger.Register("ApriSelezionaProdotto", () =>
             {
                 sp = new SelezionaProdottoView();
@@ -57,10 +73,19 @@ namespace Ciccio1.Presentation.Wpf
                 }
             });
 
-            messenger.Register("ApriTipiProdottiView", () =>
+            messenger.Register("ApriCategorieView", () =>
             {
-                CategorieView tv = new CategorieView();
-                tv.ShowDialog();
+                CategorieView categoriaView = new CategorieView();
+                categoriaView.ShowDialog();
+            });
+
+            messenger.Register("ChiudiCategoriaView", () => 
+            {
+                if(categoriaView != null)
+                {
+                    categoriaView.Close();
+                    categoriaView = null;
+                }
             });
         }
     }

@@ -44,7 +44,8 @@ namespace Ciccio1.Presentation.WinForm
             {
                 disp.Dispose();
             }
-            windsor.Release(form);
+            dict.Remove(form.GetHashCode());
+            windsor.Release(form);            
         }
     }
 }

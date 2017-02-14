@@ -1,6 +1,6 @@
 ﻿namespace Ciccio1.Presentation.WinForm.Views
 {
-    partial class FattureForm
+    partial class FattureView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FattureForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FattureView));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuovoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -200,7 +200,6 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FattureForm";
             this.Text = "Fatture";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FattureForm_FormClosed);
             this.Load += new System.EventHandler(this.Fatture_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

@@ -22,15 +22,15 @@ namespace Ciccio1.Application.Impl
                 case Storage.NHibernate:
                     container.Install(new Ciccio1.Infrastructure.Persistence.Nhb.Installer());
                     break;
-                case Storage.EF:
-                    container.Install(new Ciccio1.Infrastructure.Persistence.EF.Installer());
-                    break;
-                case Storage.EFC:
-                    container.Install(new Ciccio1.Infrastructure.Persistence.EFC.Installer());
-                    break;
-                case Storage.Db4o:
-                    container.Install(new Ciccio1.Infrastructure.Persistence.Db4o.Installer());
-                    break;
+                //case Storage.EF:
+                //    container.Install(new Ciccio1.Infrastructure.Persistence.EF.Installer());
+                //    break;
+                //case Storage.EFC:
+                //    container.Install(new Ciccio1.Infrastructure.Persistence.EFC.Installer());
+                //    break;
+                //case Storage.Db4o:
+                //    container.Install(new Ciccio1.Infrastructure.Persistence.Db4o.Installer());
+                //    break;
             }
 
             switch (conf.UserInterface)

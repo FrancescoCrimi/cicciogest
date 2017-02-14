@@ -22,6 +22,11 @@ namespace Ciccio1.Presentation.Wpf
             get { return ioc.Resolve<FattureViewModel>(); }
         }
 
+        public FatturaViewModel FatturaViewModel
+        {
+            get { return ioc.Resolve<FatturaViewModel>(); }
+        }
+
         public ProdottiViewModel ProdottiViewModel
         {
             get 

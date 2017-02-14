@@ -117,7 +117,7 @@
             this.prodottiDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.prodottiDataGridView.Size = new System.Drawing.Size(324, 211);
             this.prodottiDataGridView.TabIndex = 1;
-            this.prodottiDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.prodottiDataGridView_CellDoubleClick_1);
+            this.prodottiDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.prodottiDataGridView_CellClick);
             // 
             // Id
             // 
@@ -153,12 +153,11 @@
             // 
             // prodottiBindingSource
             // 
-            this.prodottiBindingSource.AllowNew = false;
             this.prodottiBindingSource.DataSource = typeof(Ciccio1.Domain.Prodotto);
             // 
             // nomeTextBox
             // 
-            this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.prodottoBindingSource, "Nome", true));
+            this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.prodottoBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nomeTextBox.Location = new System.Drawing.Point(4, 21);
             this.nomeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.nomeTextBox.Name = "nomeTextBox";
@@ -171,14 +170,14 @@
             // 
             // categoriaComboBox
             // 
-            this.categoriaComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.prodottoBindingSource, "Categoria", true));
+            this.categoriaComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.prodottoBindingSource, "Categoria", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.categoriaComboBox.DataSource = this.categorieBindingSource;
             this.categoriaComboBox.DisplayMember = "Nome";
             this.categoriaComboBox.FormattingEnabled = true;
             this.categoriaComboBox.Location = new System.Drawing.Point(196, 21);
             this.categoriaComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.categoriaComboBox.Name = "categoriaComboBox";
-            this.categoriaComboBox.Size = new System.Drawing.Size(120, 24);
+            this.categoriaComboBox.Size = new System.Drawing.Size(119, 24);
             this.categoriaComboBox.TabIndex = 10;
             // 
             // categorieBindingSource
@@ -187,7 +186,7 @@
             // 
             // prezzoTextBox1
             // 
-            this.prezzoTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.prodottoBindingSource, "Prezzo", true));
+            this.prezzoTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.prodottoBindingSource, "Prezzo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.prezzoTextBox1.Location = new System.Drawing.Point(132, 21);
             this.prezzoTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.prezzoTextBox1.Name = "prezzoTextBox1";

@@ -29,10 +29,10 @@ namespace Ciccio1.Presentation.WinForm.Views
 
         private void ProdottiDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            ProdottoSelezionato = prodottiBindingSource.Current as Prodotto;
+            IdProdotto = ((Prodotto)prodottiBindingSource.Current).Id;
             Close();
         }
 
-        public Prodotto ProdottoSelezionato { get; private set; }
+        public int IdProdotto { get; private set; }
     }
 }

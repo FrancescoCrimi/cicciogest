@@ -2,20 +2,14 @@
 <hibernate-mapping assembly="Domain"
                    namespace="Ciccio1.Domain"
                    xmlns="urn:nhibernate-mapping-2.2">
-
-  <class name="Fattura" table="Fattura">
-
+  <class name="Fattura" table="Fatture">
     <id name="Id" generator="native" unsaved-value="0"/>
-
     <property name="Nome" not-null="true" />
     <property name="Totale" not-null="true" />
-
     <!--<set name="Dettagli" lazy="false" generic="true" access="field.camelcase" cascade="all-delete-orphan" >-->
-    <set name="Dettagli" lazy="false" generic="true" cascade="all-delete-orphan" >
-      <key column="Fattura_Id" not-null="true"/>
+    <bag name="Dettagli" generic="true" access="field.camelcase" cascade="all-delete-orphan" inverse="true" >
+      <key column="IdFattura" on-delete="cascade" foreign-key="FkDettagliFattureId" not-null="true"/>
       <one-to-many class="Dettaglio"/>
-    </set>
-
+    </bag>
   </class>
-
 </hibernate-mapping>

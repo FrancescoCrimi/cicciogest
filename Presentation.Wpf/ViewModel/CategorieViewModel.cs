@@ -15,21 +15,19 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
     {
         private ICiccioService service = null;
 
-        public CategorieViewModel(ICiccioService categoriaProdottoService)
+        public CategorieViewModel(ICiccioService service)
         {
-            service = categoriaProdottoService;
-            TipiProdotto = new ObservableCollection<Categoria>();
+            this.service = service;
+            Categorie = new ObservableCollection<Categoria>();
             aggiorna();
         }
 
 
         #region Proprietà Pubbliche
 
-        public ObservableCollection<Categoria> TipiProdotto { get; private set; }
-        public Categoria TipoProdotto { get; private set; }
-        public Categoria TipoProdottoSelezionato { set { selezionaTipoProdotto(value); } }
-
-
+        public ObservableCollection<Categoria> Categorie { get; private set; }
+        public Categoria Categoria { get; private set; }
+        public Categoria CategoriaSelezionata { set { settaCategoria(value); } }
         public ICommand SalvaCommand
         {
             get
@@ -38,7 +36,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
                 {
                     try
                     {
-                        service.SaveCategoria(TipoProdotto);
+                        service.SaveCategoria(Categoria);
                         aggiorna();
                     }
                     catch (Exception e)
@@ -48,7 +46,6 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
                 });
             }
         }
-
         public ICommand RimuoviCommand
         {
             get
@@ -57,7 +54,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
                 {
                     try
                     {
-                        service.DeleteCategoria(TipoProdotto);
+                        service.DeleteCategoria(Categoria);
                         aggiorna();
                     }
                     catch (Exception e)
@@ -67,7 +64,6 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
                 });
             }
         }
-
         public ICommand NuovoCommand
         {
             get
@@ -81,29 +77,29 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 
         #region Metodi Privati
 
-        private void selezionaTipoProdotto(Categoria tipoProdotto)
+        private void settaCategoria(Categoria categoria)
         {
-            if (tipoProdotto != null && tipoProdotto != this.TipoProdotto)
+            if (categoria != null && categoria != Categoria)
             {
-                this.TipoProdotto = tipoProdotto;
-                RaisePropertyChanged("TipoProdotto");
+                Categoria = categoria;
+                RaisePropertyChanged("Categoria");
             }
         }
 
         private void nuovo()
         {
-            TipoProdotto = Factory.NewCategoria();
-            RaisePropertyChanged("TipoProdotto");
+            Categoria = Factory.NewCategoria();
+            RaisePropertyChanged("Categoria");
         }
 
         private void aggiorna()
         {
             nuovo();
-            var tipiProdotto = service.GetCategorie();
-            TipiProdotto.Clear();
-            foreach (Categoria tp in tipiProdotto)
+            var lp = service.GetCategorie();
+            Categorie.Clear();
+            foreach (Categoria ca in lp)
             {
-                TipiProdotto.Add(tp);
+                Categorie.Add(ca);
             }
         }
 

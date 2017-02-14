@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class FattureForm : Form, DummyForm
+    public partial class FattureView : Form, DummyForm
     {
         private ICiccioService service;
 
-        public FattureForm(ICiccioService service)
+        public FattureView(ICiccioService service)
         {
             InitializeComponent();
             this.service = service;
@@ -29,7 +29,7 @@ namespace Ciccio1.Presentation.WinForm.Views
 
         private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            apriFatturaForm(Factory.NewFattura());
+            apriFatturaForm(0);
         }
 
         private void modificaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,35 +64,24 @@ namespace Ciccio1.Presentation.WinForm.Views
         private void visualizzaFatture()
         {
             IEnumerable<Fattura> fatt = service.GetFatture();
-            fattureBindingSource.Clear();
-
-            foreach (Fattura item in fatt)
-            {
-                fattureBindingSource.Add(item);
-            }
+            fattureBindingSource.DataSource = fatt;
             fattureDataGridView.ClearSelection();
         }
 
         private void modificaFatturaSelezionata()
         {
             if (fattureBindingSource.Current != null)
-            {
-                Fattura fat = fattureBindingSource.Current as Fattura;
-                apriFatturaForm(fat);
+            {                
+                apriFatturaForm(((Fattura)fattureBindingSource.Current).Id);
             }
         }
 
-        private void apriFatturaForm(Fattura fatt)
+        private void apriFatturaForm(int id)
         {
-            FatturaForm dettFrm = ViewResolver.Resolve<FatturaForm>(new { idFattura = fatt.Id });
+            FatturaView dettFrm = ViewResolver.Resolve<FatturaView>(new { idFattura = id });
             dettFrm.ShowDialog();
             ViewResolver.Release(dettFrm);
             visualizzaFatture();
-        }
-
-        private void FattureForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            ViewResolver.Release(this);
         }
     }
 }

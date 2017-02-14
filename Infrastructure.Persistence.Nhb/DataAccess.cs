@@ -33,7 +33,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
                     sessionFactory.Dispose();
                     sessionFactory = null;
                 }
-                sessionFactory = Configuration().BuildSessionFactory();
+                sessionFactory = getConfiguration().BuildSessionFactory();
                 logger.Debug("SessionFactory Creata " + sessionFactory.GetHashCode().ToString());
             }
             logger.Debug("DataAccess Creata " + this.GetHashCode().ToString());
@@ -60,14 +60,14 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
                 default:
                     break;
             }
-            SchemaExport SE = new SchemaExport(Configuration());
+            SchemaExport SE = new SchemaExport(getConfiguration());
             SE.Drop(true, true);
             SE.Create(true, true);
         }
 
         public void VerifyDataAccess()
         {
-            new SchemaValidator(Configuration()).Validate();
+            new SchemaValidator(getConfiguration()).Validate();
         }
 
         public void Begin()
@@ -117,39 +117,40 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         #region Metodi Privati
 
-        private Configuration Configuration()
+        private Configuration getConfiguration()
         {
-            NHibernate.Cfg.Configuration _configuration = new NHibernate.Cfg.Configuration();
-            _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionProvider, "NHibernate.Connection.DriverConnectionProvider");
+            NHibernate.Cfg.Configuration configuration = new NHibernate.Cfg.Configuration();
+            configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionProvider, "NHibernate.Connection.DriverConnectionProvider");
 
             switch (conf.Database)
             {
                 case Databases.MySql:
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL55Dialect");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL55Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
                     break;
                 case Databases.SQLite:
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SQLite20Driver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SQLite20Driver");
                     //_configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "DddTest.Infrastructure.Persistence.Nhb.ModifySQLiteDialect, Infrastructure.Persistence.Nhb");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.SQLiteDialect");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.SQLiteDialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
                     break;
                 case Databases.SSCE:
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SqlServerCeDriver");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSqlCe40Dialect");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SqlServerCeDriver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSqlCe40Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
                     break;
                 case Databases.SSEE:
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
-                    _configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
                     break;
             }
-            _configuration.SetProperty(NHibernate.Cfg.Environment.FormatSql, "true");
-            _configuration.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");
-            _configuration.AddAssembly("Infrastructure.Persistence.Nhb");
-            return _configuration;
+            configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "NhbCiccioListe.DomainCollectionTypeFactory, NhbCiccioListe");
+            configuration.SetProperty(NHibernate.Cfg.Environment.FormatSql, "true");
+            configuration.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");
+            configuration.AddAssembly("Infrastructure.Persistence.Nhb");
+            return configuration;
         }
 
         private bool initMySql()

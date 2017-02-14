@@ -45,16 +45,11 @@ namespace Ciccio1.Presentation.WinForm
         void registerComponent(IWindsorContainer container)
         {
             container.Register(
-                Component.For<FatturaView>().LifestyleSingleton(),
                 Component.For<ProdottoView>().LifestyleTransient(),
                 Component.For<CategoriaView>().LifestyleTransient(),
-
                 Component.For<SelectProdottoView>().LifeStyle.Transient,
-                //Component.For<SelectProdottoPresenter>().LifeStyle.Transient,
-                //Component.For<Func<ICiccioService, SelectProdottoPresenter>>().AsFactory(),
-
-                Component.For<FattureForm>().LifestyleSingleton(),
-                Component.For<FatturaForm>().LifestyleTransient()
+                Component.For<FattureView>().LifestyleTransient(),
+                Component.For<FatturaView>().LifestyleTransient()
                 );
         }
     }

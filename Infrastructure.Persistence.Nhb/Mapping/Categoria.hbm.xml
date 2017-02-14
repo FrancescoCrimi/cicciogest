@@ -3,7 +3,7 @@
                    namespace="Ciccio1.Domain"
                    xmlns="urn:nhibernate-mapping-2.2">
 
-  <class name="Categoria" table="Categoria">
+  <class name="Categoria" table="Categorie">
     
     <id name="Id" generator="native" unsaved-value="0"/>
     <property name="Nome" not-null="true"/>

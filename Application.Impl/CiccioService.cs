@@ -24,9 +24,6 @@ namespace Ciccio1.Application.Impl
             IKernel kernel,
             ILogger logger,
             IDataAccess da,
-            //Func<IDataAccess, IFatturaRepository> fatturaRepositoryFactory,
-            //Func<IDataAccess, IProdottoRepository> prodottoRepositoryFactory,
-            //Func<IDataAccess, ICategoriaRepository> categoriaRepositoryFactory
             IFatturaRepository fatturaRepository,
             IProdottoRepository prodottoRepository,
             ICategoriaRepository categoriaRepository
@@ -35,9 +32,6 @@ namespace Ciccio1.Application.Impl
             this.kernel = kernel;
             this.logger = logger;
             this.da = da;
-            //fatturaRepository = fatturaRepositoryFactory(da);
-            //prodottoRepository = prodottoRepositoryFactory(da);
-            //categoriaRepository = categoriaRepositoryFactory(da);
             this.fatturaRepository = fatturaRepository;
             this.prodottoRepository = prodottoRepository;
             this.categoriaRepository = categoriaRepository;

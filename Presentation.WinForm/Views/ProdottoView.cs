@@ -78,7 +78,7 @@ namespace Ciccio1.Presentation.WinForm.Views
             about.ShowDialog();
         }
 
-        private void prodottiDataGridView_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        private void prodottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (prodottiBindingSource.Current != null)
                 prodottoBindingSource.DataSource = prodottiBindingSource.Current;
@@ -86,10 +86,9 @@ namespace Ciccio1.Presentation.WinForm.Views
 
         private void visualizzaProdotti()
         {
-            prodottiBindingSource.DataSource = service.GetProdotti();
-            prodottiDataGridView.ClearSelection();
-            prodottoBindingSource.DataSource = Factory.NewProdotto();
             categorieBindingSource.DataSource = service.GetCategorie();
+            prodottiBindingSource.DataSource = service.GetProdotti();
+            prodottoBindingSource.DataSource = Factory.NewProdotto();
         }
     }
 }
