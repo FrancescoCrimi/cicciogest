@@ -14,16 +14,18 @@ namespace Ciccio1.Application.Impl
         private ILogger logger;
         private IDataAccess da;
         private IFatturaRepository fatturaRepository;
+        private IProdottoRepository prodottoRepository;
 
         public FatturaService(
             ILogger logger,
             IDataAccess da,
-            IFatturaRepository fatturaRepository
-            )
+            IFatturaRepository fatturaRepository,
+            IProdottoRepository prodottoRepository)
         {
             this.logger = logger;
             this.da = da;
             this.fatturaRepository = fatturaRepository;
+            this.prodottoRepository = prodottoRepository;
         }
 
         public void DeleteFattura(Fattura fattura)
@@ -47,6 +49,7 @@ namespace Ciccio1.Application.Impl
 
         public IEnumerable<Fattura> GetFatture()
         {
+            da.Begin();
             return fatturaRepository.GetAll();
         }
 
@@ -70,6 +73,11 @@ namespace Ciccio1.Application.Impl
                 throw ex;
             }
             return fattura;
+        }
+
+        public Prodotto GetProdotto(int id)
+        {
+            return prodottoRepository.Get(id);
         }
 
         public void Dispose()

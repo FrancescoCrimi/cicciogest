@@ -20,15 +20,13 @@ namespace Ciccio1.Presentation.WinForm.Views
         private void nuovaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FatturaView fatturaView = ViewResolver.Resolve<FatturaView>(new { idFattura = 0 });
-            fatturaView.ShowDialog();
-            ViewResolver.Release(fatturaView);
+            fatturaView.Show();
         }
-
+ 
         private void cercaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FattureView fattureView = ViewResolver.Resolve<FattureView>();
-            fattureView.ShowDialog();
-            ViewResolver.Release(fattureView);
+            fattureView.Show();
         }
 
         private void gestioneClientiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -38,16 +36,14 @@ namespace Ciccio1.Presentation.WinForm.Views
 
         private void gestioneProdottiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProdottoView prodview = ViewResolver.Resolve<ProdottoView>();
-            prodview.ShowDialog();
-            ViewResolver.Release(prodview);
+            ProdottoView prodottoView = ViewResolver.Resolve<ProdottoView>();
+            prodottoView.Show();
         }
 
         private void gestioneCategorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CategoriaView catview = ViewResolver.Resolve<CategoriaView>();
-            catview.ShowDialog();
-            ViewResolver.Release(catview);
+            CategoriaView categoriaView = ViewResolver.Resolve<CategoriaView>();
+            categoriaView.Show();
         }
 
         private void esciToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,7 +53,7 @@ namespace Ciccio1.Presentation.WinForm.Views
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new AboutBox().ShowDialog();
         }
     }
 }

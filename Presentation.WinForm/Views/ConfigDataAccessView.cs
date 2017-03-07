@@ -25,7 +25,7 @@ namespace Ciccio1.Presentation.WinForm.Views
             databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
             uIComboBox.DataSource = Enum.GetValues(typeof(UI));
 
-            container = new Container();
+            container = new Container(UI.Form);
             setImpostazioni(container.Resolve<IConf>());
             container.Install(new Installer());
         }
@@ -35,7 +35,7 @@ namespace Ciccio1.Presentation.WinForm.Views
             uIComboBox.SelectedItem = impoConf.UserInterface;
             databaseComboBox.SelectedItem = impoConf.Database;
             dataAccessComboBox.SelectedItem = impoConf.DataAccess;
-            connectionStringTextBox.Text = impoConf.ConnectionString;
+            connectionStringTextBox.Text = impoConf.CS;
         }
 
         private IConf getImpostazioni()
@@ -44,7 +44,7 @@ namespace Ciccio1.Presentation.WinForm.Views
             newConf.UserInterface = (UI)uIComboBox.SelectedValue;
             newConf.Database = (Databases)databaseComboBox.SelectedValue;
             newConf.DataAccess = (Storage)dataAccessComboBox.SelectedValue;
-            newConf.ConnectionString = connectionStringTextBox.Text;
+            newConf.CS = connectionStringTextBox.Text;
             return newConf;
         }
 

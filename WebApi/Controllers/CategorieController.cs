@@ -15,13 +15,13 @@ namespace Ciccio1.WebApi.Controllers
     /// </summary>
     public class CategorieController : ApiController
     {
-        private ICiccioService service;
+        private ICategoriaService service;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="service"></param>
-        public CategorieController(ICiccioService service)
+        public CategorieController(ICategoriaService service)
         {
             this.service = service;
         }

@@ -15,13 +15,13 @@ namespace Ciccio1.WebApi.Controllers
     /// </summary>
     public class FattureController : ApiController
     {
-        private ICiccioService service;
+        private IFatturaService service;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="service"></param>
-        public FattureController(ICiccioService service)
+        public FattureController(IFatturaService service)
         {
             this.service = service;
         }

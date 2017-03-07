@@ -8,20 +8,23 @@ using Ciccio1.Domain;
 using Ciccio1.Application;
 using System.Collections.ObjectModel;
 using Ciccio1.Presentation.Wpf.Utils;
+using Castle.Core.Logging;
 
 namespace Ciccio1.Presentation.Wpf.ViewModel
 {
     public class ProdottiViewModel : ObservableObject
     {
-        private ICiccioService prodottoService = null;
+        private IProdottoService service;
+        private ILogger logger;
 
-        public ProdottiViewModel(ICiccioService prodottoService)
+        public ProdottiViewModel(IProdottoService service, ILogger logger)
         {
-            this.prodottoService = prodottoService;
+            this.service = service;
+            this.logger = logger;
             Prodotti = new ObservableCollection<Prodotto>();
             Categorie = new ObservableCollection<Categoria>();
 
-            var categorie = this.prodottoService.GetCategorie();
+            var categorie = this.service.GetCategorie();
             foreach (Categoria cat in categorie)
             {
                 Categorie.Add(cat);
@@ -35,7 +38,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
         private void aggiorna()
         {
             Prodotti.Clear();
-            var prodotti = prodottoService.GetProdotti();
+            var prodotti = service.GetProdotti();
             foreach (Prodotto pr in prodotti)
             {
                 Prodotti.Add(pr);
@@ -63,7 +66,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             {
                 if (value != null && value != Prodotto)
                 {
-                    Prodotto = prodottoService.GetProdotto(value.Id);
+                    Prodotto = service.GetProdotto(value.Id);
                     RaisePropertyChanged("Prodotto");
                 }
             }
@@ -77,7 +80,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
                 {
                     try
                     {
-                        prodottoService.DeleteProdotto(Prodotto);
+                        service.DeleteProdotto(Prodotto);
                         aggiorna();
                     }
                     catch (Exception e)
@@ -95,7 +98,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
                 {
                     try
                     {
-                        prodottoService.SaveProdotto(Prodotto);
+                        service.SaveProdotto(Prodotto);
                         aggiorna();
                     }
                     catch (Exception e)

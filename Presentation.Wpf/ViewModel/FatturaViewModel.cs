@@ -16,10 +16,10 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 {
     public class FatturaViewModel : ObservableObject
     {
-        private ICiccioService service;
+        private IFatturaService service;
         private ILogger logger;
 
-        public FatturaViewModel(ICiccioService service, ILogger logger)
+        public FatturaViewModel(IFatturaService service, ILogger logger)
         {
             this.service = service;
             this.logger = logger;
@@ -44,37 +44,39 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             }
         }
 
-        public ICommand SalvaFatturaCommand
+        public RelayCommand<Window> SalvaFatturaCommand
         {
             get
             {
-                return new RelayCommand(() =>
-                {
-                    try
-                    {
-                        service.SaveFattura(Fattura);
-                        App.Messenger.NotifyColleagues("AggiornaFattureView");
-                        App.Messenger.NotifyColleagues("ChiudiFatturaView");
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("Errore: " + e.Message);
-                    }
-                });
+                return new RelayCommand<Window>(window =>
+               {
+                   try
+                   {
+                       service.SaveFattura(Fattura);
+                       ViewModelLocator.Messenger.NotifyColleagues("AggiornaFattureView");
+                        //App.Messenger.NotifyColleagues("ChiudiFatturaView");
+                        window.Close();
+                   }
+                   catch (Exception e)
+                   {
+                       MessageBox.Show("Errore: " + e.Message);
+                   }
+               });
             }
         }
 
-        public ICommand RimuoviFatturaCommand
+        public RelayCommand<Window> RimuoviFatturaCommand
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand<Window>(window =>
                 {
                     try
                     {
                         service.DeleteFattura(Fattura);
-                        App.Messenger.NotifyColleagues("AggiornaFattureView");
-                        App.Messenger.NotifyColleagues("ChiudiFatturaView");
+                        ViewModelLocator.Messenger.NotifyColleagues("AggiornaFattureView");
+                        //App.Messenger.NotifyColleagues("ChiudiFatturaView");
+                        window.Close();
                     }
                     catch (Exception e)
                     {
@@ -88,7 +90,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
         {
             get
             {
-                return new RelayCommand(() => App.Messenger.NotifyColleagues("ApriSelezionaProdotto"));
+                return new RelayCommand(() => ViewModelLocator.Messenger.NotifyColleagues("ApriSelezionaProdotto"));
             }
         }
 
@@ -125,7 +127,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
         {
             get
             {
-                return new RelayCommand(() => App.Messenger.NotifyColleagues("ApriCategorieView"));
+                return new RelayCommand(() => ViewModelLocator.Messenger.NotifyColleagues("ApriCategorieView"));
             }
         }
 
@@ -133,7 +135,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
         {
             get
             {
-                return new RelayCommand(() => App.Messenger.NotifyColleagues("ApriProdottiView"));
+                return new RelayCommand(() => ViewModelLocator.Messenger.NotifyColleagues("ApriProdottiView"));
             }
         }
 
@@ -154,7 +156,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
         {
             get
             {
-                return new RelayCommand(() => App.Messenger.NotifyColleagues("ApriSelezionaProdotto"));
+                return new RelayCommand(() => ViewModelLocator.Messenger.NotifyColleagues("ApriSelezionaProdotto"));
             }
         }
 
@@ -181,14 +183,14 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 
         private void registraMessaggi()
         {
-            App.Messenger.Register<int>("IdProdottoSelezionato", id =>
+            ViewModelLocator.Messenger.Register<int>("IdProdottoSelezionato", id =>
             {
                 Dettaglio = new Dettaglio(service.GetProdotto(id), 1);
                 RaisePropertyChanged("Dettaglio");
-                App.Messenger.NotifyColleagues("ChiudiSelezionaProdotto");
+                //ViewModelLocator.Messenger.NotifyColleagues("ChiudiSelezionaProdotto");
             });
 
-            App.Messenger.Register<int>("SettaIdFatturaView", id => nuovaFattura(id));
+            ViewModelLocator.Messenger.Register<int>("SettaIdFatturaView", id => nuovaFattura(id));
         }
 
         #endregion

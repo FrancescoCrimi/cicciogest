@@ -11,6 +11,7 @@ namespace Ciccio1.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
+    [KnownType(typeof(Categoria))]
     public class Dettaglio : ValueObject<Dettaglio>
     {
         private int quantità;

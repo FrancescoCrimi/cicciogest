@@ -10,7 +10,7 @@ namespace Ciccio1.Infrastructure.Conf
         UI UserInterface { get; }
         Storage DataAccess { get; }
         Databases Database { get; }
-        String ConnectionString { get; }
+        string CS { get; }
         string Name { get; }
     }
 }

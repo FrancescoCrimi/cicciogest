@@ -14,10 +14,10 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 {
     public class FattureViewModel : ObservableObject
     {
-        private ICiccioService service;
+        private IFatturaService service;
         private ILogger logger;
 
-        public FattureViewModel(ICiccioService service, ILogger logger)
+        public FattureViewModel(IFatturaService service, ILogger logger)
         {
             this.service = service;
             this.logger = logger;
@@ -38,7 +38,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                App.Messenger.NotifyColleagues("ApriFatturaView", 0));
+                ViewModelLocator.Messenger.NotifyColleagues("ApriFatturaView", 0));
             }
         }
 
@@ -47,7 +47,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                App.Messenger.NotifyColleagues("ApriFatturaView", FatturaSelezionata.Id));
+                ViewModelLocator.Messenger.NotifyColleagues("ApriFatturaView", FatturaSelezionata.Id));
             }
         }
 
@@ -56,7 +56,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                App.Messenger.NotifyColleagues("ApriCategorieView"));
+                ViewModelLocator.Messenger.NotifyColleagues("ApriCategorieView"));
             }
         }
 
@@ -65,7 +65,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                App.Messenger.NotifyColleagues("ApriProdottiView"));
+                ViewModelLocator.Messenger.NotifyColleagues("ApriProdottiView"));
             }
         }
 
@@ -86,7 +86,7 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
 
         private void registraMessaggi()
         {
-            App.Messenger.Register("AggiornaFattureView", () => aggiorna());
+            ViewModelLocator.Messenger.Register("AggiornaFattureView", () => aggiorna());
         }
 
         #endregion

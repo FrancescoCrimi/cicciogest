@@ -14,16 +14,18 @@ namespace Ciccio1.Application.Impl
         private ILogger logger;
         private IDataAccess da;
         private IProdottoRepository prodottoRepository;
+        private ICategoriaRepository categoriaRepository;
 
         public ProdottoService(
             ILogger logger,
             IDataAccess da,
-            IProdottoRepository prodottoRepository
-            )
+            IProdottoRepository prodottoRepository,                     
+            ICategoriaRepository categoriaRepository)
         {
             this.logger = logger;
             this.da = da;
             this.prodottoRepository = prodottoRepository;
+            this.categoriaRepository = categoriaRepository;
         }
 
         public void DeleteProdotto(Prodotto prodotto)
@@ -75,6 +77,11 @@ namespace Ciccio1.Application.Impl
         public void Dispose()
         {
             //throw new NotImplementedException();
+        }
+
+        public IEnumerable<Categoria> GetCategorie()
+        {
+            return categoriaRepository.GetAll();
         }
     }
 }

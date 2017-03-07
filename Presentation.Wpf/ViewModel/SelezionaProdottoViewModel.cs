@@ -1,4 +1,5 @@
-﻿using Ciccio1.Application;
+﻿using Castle.Core.Logging;
+using Ciccio1.Application;
 using Ciccio1.Domain;
 using Ciccio1.Presentation.Wpf.Utils;
 using System;
@@ -7,13 +8,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Ciccio1.Presentation.Wpf.ViewModel
 {
     public class SelezionaProdottoViewModel : ObservableObject
     {
-        public SelezionaProdottoViewModel(ICiccioService prodottoService)
+        public SelezionaProdottoViewModel(IProdottoService prodottoService, ILogger logger)
         {
             Prodotti = new ObservableCollection<Prodotto>();
             var prodotti = prodottoService.GetProdotti();
@@ -24,14 +26,16 @@ namespace Ciccio1.Presentation.Wpf.ViewModel
         }
 
         public ObservableCollection<Prodotto> Prodotti { get; private set; }
+        public Prodotto ProdottoSelezionato { private get; set; }
 
         public ICommand SelezionaProdottoCommand
         {
             get
             {
-                return new RelayCommand<Prodotto>(p => 
+                return new RelayCommand<Window>(window =>
                 {
-                    App.Messenger.NotifyColleagues("IdProdottoSelezionato", p.Id);
+                    ViewModelLocator.Messenger.NotifyColleagues("IdProdottoSelezionato", ProdottoSelezionato.Id);
+                    window.Close();
                 });
             }
         }

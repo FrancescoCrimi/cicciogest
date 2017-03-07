@@ -10,7 +10,8 @@ namespace Ciccio1.Utils
     {
         static void Main(string[] args)
         {
-            Backup backup = new Backup();
+            new SerializeDC();
+            //new LoadData();
         }
     }
 }

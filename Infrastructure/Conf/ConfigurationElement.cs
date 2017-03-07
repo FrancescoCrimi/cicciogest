@@ -6,14 +6,9 @@ using System.Configuration;
 
 namespace Ciccio1.Infrastructure.Conf
 {
-    sealed class DddTestConfigurationElement : ConfigurationElement, IConf
+    sealed class ConfigurationElement : System.Configuration.ConfigurationElement, IConf
     {
-        [ConfigurationProperty("user_interface", DefaultValue = UI.Form)]
-        public UI UserInterface
-        {
-            get { return (UI)this["user_interface"]; }
-            set { this["user_interface"] = value; }
-        }
+        public UI UserInterface { get; set; }
 
         [ConfigurationProperty("data_access", DefaultValue = Storage.NHibernate)]
         public Storage DataAccess
@@ -22,11 +17,18 @@ namespace Ciccio1.Infrastructure.Conf
             set { this["data_access"] = value; }
         }
 
-        [ConfigurationProperty("data_access_config")]
-        public DataAccessConfigurationElement DataAccessConfig
+        [ConfigurationProperty("database", DefaultValue = Databases.SSCE)]
+        public Databases Database
         {
-            get { return (DataAccessConfigurationElement)this["data_access_config"]; }
-            set { this["data_access_config"] = value; }
+            get { return (Databases)this["database"]; }
+            set { this["database"] = value; }
+        }
+
+        [ConfigurationProperty("cs", DefaultValue = "Data Source=DddTest.sdf")]
+        public String CS
+        {
+            get { return (String)this["cs"]; }
+            set { this["cs"] = value; }
         }
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true, DefaultValue = "ssce")]
@@ -35,13 +37,5 @@ namespace Ciccio1.Infrastructure.Conf
             get { return (string)base["name"]; }
             set { base["name"] = value; }
         }
-
-
-
-        UI IConf.UserInterface { get { return UserInterface; } }
-        Storage IConf.DataAccess { get { return DataAccess; } }
-        Databases IConf.Database { get { return DataAccessConfig.Database; } }
-        string IConf.ConnectionString { get { return DataAccessConfig.CS; } }
-        string IConf.Name { get { return Name; } }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Ciccio1.Application;
+﻿using Castle.Core.Logging;
+using Ciccio1.Application;
 using Ciccio1.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,15 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class FattureView : Form, DummyForm
+    public partial class FattureView : Form
     {
-        private ICiccioService service;
+        private ILogger logger;
+        private IFatturaService service;
 
-        public FattureView(ICiccioService service)
+        public FattureView(ILogger logger, IFatturaService service)
         {
             InitializeComponent();
+            this.logger = logger;
             this.service = service;
         }
 
@@ -45,15 +48,13 @@ namespace Ciccio1.Presentation.WinForm.Views
         private void prodottiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProdottoView pv = ViewResolver.Resolve<ProdottoView>();
-            pv.ShowDialog();
-            ViewResolver.Release(pv);
+            pv.Show();
         }
 
         private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CategoriaView cv = ViewResolver.Resolve<CategoriaView>();
-            cv.ShowDialog();
-            ViewResolver.Release(cv);
+            CategoriaView categoriaView = ViewResolver.Resolve<CategoriaView>();
+            categoriaView.Show();
         }
 
         private void fattureDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -78,10 +79,14 @@ namespace Ciccio1.Presentation.WinForm.Views
 
         private void apriFatturaForm(int id)
         {
-            FatturaView dettFrm = ViewResolver.Resolve<FatturaView>(new { idFattura = id });
-            dettFrm.ShowDialog();
-            ViewResolver.Release(dettFrm);
-            visualizzaFatture();
+            FatturaView fatturaView = ViewResolver.Resolve<FatturaView>(new { idFattura = id });
+            fatturaView.FormClosed += (object sender, FormClosedEventArgs e) => visualizzaFatture();
+            fatturaView.Show();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
         }
     }
 }

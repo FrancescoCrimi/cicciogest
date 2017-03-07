@@ -26,7 +26,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
                     break;
                 case UI.WPF:
                     container.Register(
-                        Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestyleSingleton());
+                        Component.For<DataAccess, IDataAccess>().ImplementedBy<DataAccess>().LifestyleScoped());
                     break;
                 case UI.WCF:
                     container.Register(

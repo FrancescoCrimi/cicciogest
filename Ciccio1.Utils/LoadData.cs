@@ -1,4 +1,5 @@
-﻿using Ciccio1.Application;
+﻿using Castle.MicroKernel.Lifestyle;
+using Ciccio1.Application;
 using Ciccio1.Domain;
 using Ciccio1.Infrastructure;
 using System;
@@ -13,34 +14,50 @@ namespace Ciccio1.Utils
     {
         public LoadData()
         {
-            Container container = new Container();
+            Container container = new Container(UI.Form);
             container.Install(new Ciccio1.Application.Impl.Installer());
-            ICiccioService service = container.Resolve<ICiccioService>();
-            for (int c = 1; c < 4; c++)
+
+            IDisposable disposable = container.Windsor.BeginScope();
+            IDataAccess da = container.Resolve<IDataAccess>();
+            IFatturaService fatturaService = container.Resolve<IFatturaService>();
+            ICategoriaService categoriaService = container.Resolve<ICategoriaService>();
+            IProdottoService prodottoService = container.Resolve<IProdottoService>();
+
+            da.CreateDataAccess();
+
+            for (int c = 1; c < 6; c++)
             {
                 Categoria cat = Factory.NewCategoria();
                 cat.Nome = "Categoria " + c.ToString();
-                service.SaveCategoria(cat);
+                categoriaService.SaveCategoria(cat);
             }
-            for (int p = 1; p < 4; p++)
+
+            for (int p = 1; p < 6; p++)
             {
                 Prodotto prod = Factory.NewProdotto();
                 prod.Nome = "Prodotto " + p.ToString();
                 prod.Prezzo = 10 + p;
-                prod.Categoria = service.GetCategoria(p);
-                service.SaveProdotto(prod);
+                prod.Categoria = categoriaService.GetCategoria(p);
+                prodottoService.SaveProdotto(prod);
             }
-            for (int i = 1; i < 4; i++)
+
+            for (int i = 1; i < 6; i++)
             {
                 Fattura fatt = Factory.NewFattura();
                 fatt.Nome = "Fattura " + i.ToString();
-                for (int o = 1; o < 4; o++)
+                for (int o = 1; o < (i + 1); o++)
                 {
-                    Dettaglio dett = new Dettaglio(service.GetProdotto(o), o + i);
+                    Dettaglio dett = new Dettaglio(fatturaService.GetProdotto(o), o);
                     fatt.AddDettaglio(dett);
                 }
-                service.SaveFattura(fatt);
+                fatturaService.SaveFattura(fatt);
             }
+
+            container.Release(da);
+            container.Release(fatturaService);
+            container.Release(prodottoService);
+            container.Release(categoriaService);
+            disposable.Dispose();
         }
     }
 }

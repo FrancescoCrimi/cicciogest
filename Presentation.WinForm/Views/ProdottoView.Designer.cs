@@ -232,7 +232,7 @@
             this.nuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuovoToolStripButton.Name = "nuovoToolStripButton";
             this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
-            this.nuovoToolStripButton.Text = "&Nuovo";
+            this.nuovoToolStripButton.Text = "Nuovo";
             this.nuovoToolStripButton.Click += new System.EventHandler(this.NuovoToolStripButton_Click);
             // 
             // cancellaToolStripButton
@@ -241,7 +241,7 @@
             this.cancellaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cancellaToolStripButton.Name = "cancellaToolStripButton";
             this.cancellaToolStripButton.Size = new System.Drawing.Size(89, 24);
-            this.cancellaToolStripButton.Text = "&Cancella";
+            this.cancellaToolStripButton.Text = "Cancella";
             this.cancellaToolStripButton.Click += new System.EventHandler(this.CancellaToolStripButton_Click);
             // 
             // salvaToolStripButton
@@ -250,7 +250,7 @@
             this.salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.salvaToolStripButton.Name = "salvaToolStripButton";
             this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
-            this.salvaToolStripButton.Text = "&Salva";
+            this.salvaToolStripButton.Text = "Salva";
             this.salvaToolStripButton.Click += new System.EventHandler(this.SalvaToolStripButton_Click);
             // 
             // aboutToolStripButton

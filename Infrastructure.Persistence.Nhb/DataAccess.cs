@@ -44,22 +44,22 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         public void CreateDataAccess()
         {
-            switch (conf.Database)
-            {
-                case Databases.MySql:
-                    initMySql();
-                    break;
-                case Databases.SQLite:
-                    initSQLite();
-                    break;
-                case Databases.SSCE:
-                    initSSCE();
-                    break;
-                case Databases.SSEE:
-                    break;
-                default:
-                    break;
-            }
+            //switch (conf.Database)
+            //{
+            //    case Databases.MySql:
+            //        initMySql();
+            //        break;
+            //    case Databases.SQLite:
+            //        initSQLite();
+            //        break;
+            //    case Databases.SSCE:
+            //        initSSCE();
+            //        break;
+            //    case Databases.SSEE:
+            //        break;
+            //    default:
+            //        break;
+            //}
             SchemaExport SE = new SchemaExport(getConfiguration());
             SE.Drop(true, true);
             SE.Create(true, true);
@@ -127,26 +127,40 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
                 case Databases.MySql:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL55Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
                 case Databases.SQLite:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SQLite20Driver");
                     //_configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "DddTest.Infrastructure.Persistence.Nhb.ModifySQLiteDialect, Infrastructure.Persistence.Nhb");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.SQLiteDialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
                 case Databases.SSCE:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SqlServerCeDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSqlCe40Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
                 case Databases.SSEE:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.ConnectionString);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
             }
-            configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "NhbCiccioListe.DomainCollectionTypeFactory, NhbCiccioListe");
+            switch (conf.UserInterface)
+            {
+                case UI.Form:
+                    configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.CazzoListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
+                    //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.MinchiaListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
+                    break;
+                case UI.WPF:
+                    configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.CazzoListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
+                    //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.MinchiaListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
+                    break;
+                case UI.WCF:
+                    break;
+                case UI.REST:
+                    break;
+            }
             configuration.SetProperty(NHibernate.Cfg.Environment.FormatSql, "true");
             configuration.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");
             configuration.AddAssembly("Infrastructure.Persistence.Nhb");
@@ -155,7 +169,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         private bool initMySql()
         {
-            MySqlConnection conn = new MySqlConnection(conf.ConnectionString);
+            MySqlConnection conn = new MySqlConnection(conf.CS);
             try
             {
                 conn.Open();
@@ -183,10 +197,10 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         private bool initSSCE()
         {
-            string sdfFile = conf.ConnectionString.Split(new char[] { '=' })[1].Trim();
+            string sdfFile = conf.CS.Split(new char[] { '=' })[1].Trim();
             if (!File.Exists(sdfFile))
             {
-                SqlCeEngine en = new SqlCeEngine(conf.ConnectionString);
+                SqlCeEngine en = new SqlCeEngine(conf.CS);
                 en.CreateDatabase();
                 en.Dispose();
             }
@@ -195,10 +209,10 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
 
         private bool initSQLite()
         {
-            string dbFile = conf.ConnectionString.Split(new char[] { '=' })[1].Trim();
+            string dbFile = conf.CS.Split(new char[] { '=' })[1].Trim();
             if (!File.Exists(dbFile))
             {
-                SQLiteConnection conn = new SQLiteConnection(conf.ConnectionString);
+                SQLiteConnection conn = new SQLiteConnection(conf.CS);
                 conn.Open();
                 conn.Close();
                 conn.Dispose();

@@ -19,5 +19,8 @@ namespace Ciccio1.Application
         Fattura SaveFattura(Fattura fattura);
         [OperationContract]
         void DeleteFattura(Fattura fattura);
+
+        [OperationContract]
+        Prodotto GetProdotto(int id);
     }
 }

@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class FatturaView : Form, DummyForm
+    public partial class FatturaView : Form
     {
         private ILogger logger;
-        private ICiccioService service;
+        private IFatturaService service;
 
-        public FatturaView(ICiccioService service, ILogger logger, int idFattura)
+        public FatturaView(IFatturaService service, ILogger logger, int idFattura)
         {
             InitializeComponent();
             this.service = service;
@@ -57,15 +57,13 @@ namespace Ciccio1.Presentation.WinForm.Views
         private void prodottiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProdottoView pv = ViewResolver.Resolve<ProdottoView>();
-            pv.ShowDialog();
-            ViewResolver.Release(pv);
+            pv.Show();
         }
 
         private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CategoriaView cv = ViewResolver.Resolve<CategoriaView>();
-            cv.ShowDialog();
-            ViewResolver.Release(cv);
+            cv.Show();
         }
 
         private void nuovoDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -116,9 +114,19 @@ namespace Ciccio1.Presentation.WinForm.Views
             SelectProdottoView spv = ViewResolver.Resolve<SelectProdottoView>();
             spv.ShowDialog();
             int idProd = spv.IdProdotto;
-            ViewResolver.Release(spv);
             return idProd;
         }
         #endregion
+
+
+        private void FatturaView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
+        }
     }
 }

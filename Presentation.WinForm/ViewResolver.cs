@@ -6,46 +6,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm
 {
     static class ViewResolver
     {
         private static IWindsorContainer windsor;
-        private static Dictionary<int, IDisposable> dict = new Dictionary<int, IDisposable>();
+        private static Dictionary<Form, IDisposable> dict;
 
         static ViewResolver()
         {
-            Container container = new Container();
+            Container container = new Container(UI.Form);
             container.Install(new Installer());
             windsor = container.Windsor;
+            dict = new Dictionary<Form, IDisposable>();
         }
 
-        internal static TForm Resolve<TForm>() where TForm : DummyForm
+        internal static TForm Resolve<TForm>() where TForm : Form
         {
             IDisposable disp = windsor.BeginScope();
             TForm form = windsor.Resolve<TForm>();
-            dict.Add(form.GetHashCode(), disp);
+            form.FormClosed += view_FormClosed;
+            dict.Add(form, disp);
             return form;
         }
 
-        internal static TForm Resolve<TForm>(object argumentsAsAnonymousType) where TForm : DummyForm
+        internal static TForm Resolve<TForm>(object argumentsAsAnonymousType) where TForm : Form
         {
             IDisposable disp = windsor.BeginScope();
             TForm form = windsor.Resolve<TForm>(argumentsAsAnonymousType);
-            dict.Add(form.GetHashCode(), disp);
+            form.FormClosed += view_FormClosed;
+            dict.Add(form, disp);
             return form;
         }
 
-        internal static void Release(DummyForm form)
+        private static void view_FormClosed(object sender, FormClosedEventArgs e)
         {
-            IDisposable disp = null;
-            if (dict.TryGetValue(form.GetHashCode(), out disp))
+            Form view = sender as Form;
+            if (view != null)
             {
-                disp.Dispose();
+                IDisposable disp = null;
+                if (dict.TryGetValue(view, out disp))
+                {
+                    dict.Remove(view);
+                    windsor.Release(view);
+                    disp.Dispose();
+                }
             }
-            dict.Remove(form.GetHashCode());
-            windsor.Release(form);            
         }
     }
 }

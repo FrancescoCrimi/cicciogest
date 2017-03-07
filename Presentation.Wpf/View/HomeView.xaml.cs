@@ -26,7 +26,7 @@ namespace Ciccio1.Presentation.Wpf.View
 
         private void mostraFattureMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            ViewModelLocator.Messenger.NotifyColleagues("ApriFatture");
         }
 
         private void nuovaFatturaMenuItem_Click(object sender, RoutedEventArgs e)

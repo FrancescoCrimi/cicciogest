@@ -19,7 +19,7 @@ namespace Ciccio1.WebApi
         /// </summary>
         protected void Application_Start()
         {
-            Container container = new Container();
+            Container container = new Container(UI.REST);
             container.Install(new Installer());
 
             GlobalConfiguration.Configuration.Services.Replace(

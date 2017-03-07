@@ -9,25 +9,15 @@ using Ciccio1.WebApi.Controllers;
 
 namespace Ciccio1.WebApi
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class Installer : IWindsorInstaller
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="store"></param>
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Install(new Ciccio1.Application.Impl.Installer());
             container.Register(
-                //Component.For<FattureController>().LifestyleTransient(),
-                //Component.For<ProdottiController>().LifestyleTransient(),
-                //Component.For<CategorieController>().LifestyleTransient()
-                Component.For<CiccioServiceController>().LifestyleTransient()
-                );
+                Component.For<FattureController>().LifestyleTransient(),
+                Component.For<ProdottiController>().LifestyleTransient(),
+                Component.For<CategorieController>().LifestyleTransient());
         }
     }
 }

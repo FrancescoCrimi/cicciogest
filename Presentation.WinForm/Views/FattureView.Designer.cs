@@ -133,8 +133,9 @@
             // 
             this.aboutToolStripMenuItem.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.About;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // fattureDataGridView
             // 
@@ -190,7 +191,7 @@
             // 
             this.fattureBindingSource.DataSource = typeof(Ciccio1.Domain.Fattura);
             // 
-            // FattureForm
+            // FattureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -198,7 +199,7 @@
             this.Controls.Add(this.fattureDataGridView);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "FattureForm";
+            this.Name = "FattureView";
             this.Text = "Fatture";
             this.Load += new System.EventHandler(this.Fatture_Load);
             this.menuStrip.ResumeLayout(false);

@@ -1,4 +1,5 @@
-﻿using Ciccio1.Application;
+﻿using Castle.Core.Logging;
+using Ciccio1.Application;
 using Ciccio1.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class SelectProdottoView : Form, DummyForm
+    public partial class SelectProdottoView : Form
     {
-        private ICiccioService service;
+        private IProdottoService service;
 
-        public SelectProdottoView(ICiccioService service)
+        public SelectProdottoView(ILogger logger, IProdottoService service)
         {
             InitializeComponent();
             this.service = service;

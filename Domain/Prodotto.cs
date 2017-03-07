@@ -45,7 +45,7 @@ namespace Ciccio1.Domain
             }
         }
 
-        [DataMember]
+        //[DataMember]
         public virtual Categoria Categoria
         {
             get { return categoria; }

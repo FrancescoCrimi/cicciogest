@@ -8,80 +8,85 @@ using Castle.Facilities.WcfIntegration;
 using Ciccio1.Infrastructure;
 using Ciccio1.Application;
 using Ciccio1.Infrastructure.Wcf;
+using Castle.MicroKernel.Registration;
 
 namespace Ciccio1.WcfServer
 {
     class Program
     {
+        DefaultServiceHostFactory shf;
+        string baseAddresses;
+
         static void Main(string[] args)
         {
-            new Server();
+            new Program();
         }
-    }
 
-    class Server
-    {
-        internal Server()
+        Program()
         {
-            ServiceHostBase CiccioServiceHost = start();
+            Container container = new Container(UI.WCF);
+            container.Install(new Ciccio1.Application.Impl.Installer());
+
+
+            //ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+            //smb.HttpGetEnabled = true;
+            //container.Windsor.Register(
+            //    Component.For<IServiceBehavior>().Instance(smb));
+
+
+            shf = new DefaultServiceHostFactory();
+            baseAddresses = "http://localhost:8000/";
+
+            //ServiceHostBase fatturaServiceHost = creaFatturaServiceHost();
+            ServiceHostBase fatturaSH = creaServiceHost(typeof(IFatturaService), "FatturaService.svc");
+            ServiceHostBase prodottoSH = creaServiceHost(typeof(IProdottoService), "ProdottoService.svc");
+            ServiceHostBase categoriaSH = creaServiceHost(typeof(ICategoriaService), "CategoriaService.svc");
             try
             {
-                CiccioServiceHost.Open();
-                PrintServiceInfo(CiccioServiceHost);
+                fatturaSH.Open();
+                PrintServiceInfo(fatturaSH);
+                prodottoSH.Open();
+                PrintServiceInfo(prodottoSH);
+                categoriaSH.Open();
+                PrintServiceInfo(categoriaSH);
                 Console.WriteLine("Press <ENTER> to terminate service.");
                 Console.ReadLine();
-                CiccioServiceHost.Close();
+                fatturaSH.Close();
+                prodottoSH.Close();
+                categoriaSH.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("An exception occurred: {0}", ex.Message);
-                CiccioServiceHost.Abort();
+                fatturaSH.Abort();
+                prodottoSH.Abort();
+                categoriaSH.Abort();
                 Console.ReadLine();
             }
         }
 
-        ServiceHostBase start()
+        ServiceHostBase creaServiceHost(Type serviceType, string address)
         {
-            try
+            // Crea ServiceHost
+            ServiceHostBase shb = shf.CreateServiceHost(serviceType.AssemblyQualifiedName,
+                new Uri[] { new Uri(baseAddresses + address) });
+
+            // Aggiungi un Endpoint al ServiceHost
+            ServiceEndpoint se = shb.AddServiceEndpoint(serviceType.FullName, new WSHttpBinding(), "");
+
+            //Imposta DataContractSurrogate
+            foreach (OperationDescription od in se.Contract.Operations)
             {
-                Container container = new Container();
-                container.Install(new Ciccio1.Application.Impl.Installer());
-
-                Uri baseAddress = new Uri("http://localhost:8000/");
-                DefaultServiceHostFactory shf = new DefaultServiceHostFactory();
-                ServiceHostBase sh =
-                    shf.CreateServiceHost(typeof(ICiccioService).AssemblyQualifiedName, new Uri[1] { baseAddress });
-
-                sh.AddServiceEndpoint(typeof(ICiccioService).FullName, new WSHttpBinding(), "CiccioService.svc");
-                ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-                smb.HttpGetEnabled = true;
-                sh.Description.Behaviors.Add(smb);
-
-                //foreach (ServiceEndpoint ep in sh.Description.Endpoints)
-                //{
-                //    foreach (OperationDescription op in ep.Contract.Operations)
-                //    {
-                //        DataContractSerializerOperationBehavior dataContractBehavior =
-                //            op.Behaviors.Find<DataContractSerializerOperationBehavior>()
-                //            as DataContractSerializerOperationBehavior;
-                //        if (dataContractBehavior != null)
-                //        {
-                //            dataContractBehavior.DataContractSurrogate = new MyDataContractSurrogate();
-                //        }
-                //        else
-                //        {
-                //            dataContractBehavior = new DataContractSerializerOperationBehavior(op);
-                //            dataContractBehavior.DataContractSurrogate = new MyDataContractSurrogate();
-                //            op.Behaviors.Add(dataContractBehavior);
-                //        }
-                //    }
-                //}
-                return sh;
+                var dcsob = od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+                dcsob.DataContractSurrogate = new MyDataContractSurrogate();
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            // Crea e aggiungi un Behavior per la gestione dei Metadati
+            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+            smb.HttpGetEnabled = true;
+            shb.Description.Behaviors.Add(smb);
+
+            return shb;
         }
 
         void PrintServiceInfo(ServiceHostBase host)
@@ -92,3 +97,37 @@ namespace Ciccio1.WcfServer
         }
     }
 }
+
+
+
+//ServiceHostBase creaFatturaServiceHost()
+//{
+//    ServiceHostBase sh = shf.CreateServiceHost(
+//        typeof(IFatturaService).AssemblyQualifiedName, baseAddresses);
+//    ServiceEndpoint fatturaServiceEndpoint = sh.AddServiceEndpoint(typeof(IFatturaService).FullName, new WSHttpBinding(), "FatturaService.svc");
+//    defineSurrogate(fatturaServiceEndpoint);
+//    ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+//    smb.HttpGetEnabled = true;
+//    sh.Description.Behaviors.Add(smb);
+//    return sh;
+//}
+
+//foreach (ServiceEndpoint ep in sh.Description.Endpoints)
+//{
+//    foreach (OperationDescription op in ep.Contract.Operations)
+//    {
+//        DataContractSerializerOperationBehavior dataContractBehavior =
+//            op.Behaviors.Find<DataContractSerializerOperationBehavior>()
+//            as DataContractSerializerOperationBehavior;
+//        if (dataContractBehavior != null)
+//        {
+//            dataContractBehavior.DataContractSurrogate = new MyDataContractSurrogate();
+//        }
+//        else
+//        {
+//            dataContractBehavior = new DataContractSerializerOperationBehavior(op);
+//            dataContractBehavior.DataContractSurrogate = new MyDataContractSurrogate();
+//            op.Behaviors.Add(dataContractBehavior);
+//        }
+//    }
+//}

@@ -278,8 +278,9 @@
             // 
             this.aboutToolStripMenuItem.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.About;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -529,6 +530,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FatturaView";
             this.Text = "Fattura";
+            this.Load += new System.EventHandler(this.FatturaView_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

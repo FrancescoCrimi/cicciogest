@@ -8,16 +8,19 @@ using Ciccio1.Domain;
 using Ciccio1.Application;
 using System.Collections.ObjectModel;
 using Ciccio1.Presentation.Wpf.Utils;
+using Castle.Core.Logging;
 
 namespace Ciccio1.Presentation.Wpf.ViewModel
 {
     public class CategorieViewModel : ObservableObject
     {
-        private ICiccioService service = null;
+        private ICategoriaService service;
+        private ILogger logger;
 
-        public CategorieViewModel(ICiccioService service)
+        public CategorieViewModel(ICategoriaService service, ILogger logger)
         {
             this.service = service;
+            this.logger = logger;
             Categorie = new ObservableCollection<Categoria>();
             aggiorna();
         }

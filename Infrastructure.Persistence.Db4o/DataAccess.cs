@@ -26,7 +26,7 @@ namespace Ciccio1.Infrastructure.Persistence.Db4o
             if (embeddedObjectContainer == null || embeddedObjectContainer.Ext().IsClosed())
             {
                 IEmbeddedConfiguration db4oConf = getDb4oConf();
-                embeddedObjectContainer = Db4oEmbedded.OpenFile(db4oConf, conf.ConnectionString);
+                embeddedObjectContainer = Db4oEmbedded.OpenFile(db4oConf, conf.CS);
                 registerEventOnContainer(embeddedObjectContainer);
             }
             logger.Debug("DataAccess Creata " + this.GetHashCode().ToString());

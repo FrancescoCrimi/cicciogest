@@ -12,15 +12,14 @@ using System.Windows.Forms;
 
 namespace Ciccio1.Presentation.WinForm.Views
 {
-    public partial class ProdottoView : Form, DummyForm
+    public partial class ProdottoView : Form
     {
         private ILogger logger;
-        private ICiccioService service;
+        private IProdottoService service;
 
         public ProdottoView(
             ILogger logger,
-            ICiccioService service
-            )
+            IProdottoService service)
         {
             InitializeComponent();
             this.logger = logger;

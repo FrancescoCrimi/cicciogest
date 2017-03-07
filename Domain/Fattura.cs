@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 //using System.Linq;
 using System.Text;
 using System.Runtime.CompilerServices;
-using CiccioListe;
+using CiccioUtil.Liste.CazzoListe;
 
 namespace Ciccio1.Domain
 {
@@ -16,11 +16,11 @@ namespace Ciccio1.Domain
     public class Fattura : DomainEntity<Fattura>
     {
         private string nome;
-        private IDomainList<Dettaglio> dettagli;
+        private IList<Dettaglio> dettagli;
 
         internal Fattura()
         {
-            Dettagli = new DomainList<Dettaglio>();
+            dettagli = new DomainList<Dettaglio>();
         }
 
         [DataMember]
@@ -38,7 +38,7 @@ namespace Ciccio1.Domain
         }
 
         [DataMember]
-        public virtual IDomainList<Dettaglio> Dettagli
+        public virtual IList<Dettaglio> Dettagli
         {
             get { return dettagli; }
             protected set { dettagli = value; }

@@ -22,37 +22,48 @@ namespace Ciccio1.Application.Impl
                 case Storage.NHibernate:
                     container.Install(new Ciccio1.Infrastructure.Persistence.Nhb.Installer());
                     break;
-                //case Storage.EF:
-                //    container.Install(new Ciccio1.Infrastructure.Persistence.EF.Installer());
-                //    break;
-                //case Storage.EFC:
-                //    container.Install(new Ciccio1.Infrastructure.Persistence.EFC.Installer());
-                //    break;
-                //case Storage.Db4o:
-                //    container.Install(new Ciccio1.Infrastructure.Persistence.Db4o.Installer());
-                //    break;
+                    //case Storage.EF:
+                    //    container.Install(new Ciccio1.Infrastructure.Persistence.EF.Installer());
+                    //    break;
+                    //case Storage.EFC:
+                    //    container.Install(new Ciccio1.Infrastructure.Persistence.EFC.Installer());
+                    //    break;
+                    //case Storage.Db4o:
+                    //    container.Install(new Ciccio1.Infrastructure.Persistence.Db4o.Installer());
+                    //    break;
             }
 
             switch (conf.UserInterface)
             {
                 case UI.Form:
                     container.Register(
-                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient());
+                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient(),
+                        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
+                        Component.For<IProdottoService>().ImplementedBy<ProdottoService>().LifestyleTransient(),
+                        Component.For<ICategoriaService>().ImplementedBy<CategoriaService>().LifestyleTransient());
                     break;
                 case UI.WPF:
                     container.Register(
-                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleSingleton());
+                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient(),
+                        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
+                        Component.For<IProdottoService>().ImplementedBy<ProdottoService>().LifestyleTransient(),
+                        Component.For<ICategoriaService>().ImplementedBy<CategoriaService>().LifestyleTransient());
                     break;
                 case UI.WCF:
                     container.Register(
                         //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfSession());
                         //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfOperation());
-                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient());
+                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient());
+                        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
+                        Component.For<IProdottoService>().ImplementedBy<ProdottoService>().LifestyleTransient(),
+                        Component.For<ICategoriaService>().ImplementedBy<CategoriaService>().LifestyleTransient());
                     break;
                 case UI.REST:
                     container.Register(
-                        Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWebRequest()
-                        );
+                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWebRequest()
+                        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestylePerWebRequest(),
+                        Component.For<IProdottoService>().ImplementedBy<ProdottoService>().LifestylePerWebRequest(),
+                        Component.For<ICategoriaService>().ImplementedBy<CategoriaService>().LifestylePerWebRequest());
                     break;
             }
         }

@@ -48,20 +48,28 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Castle.Facilities.Logging, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.LoggingFacility.3.3.0\lib\net45\Castle.Facilities.Logging.dll</HintPath>
+    <Reference Include="Castle.Facilities.Logging, Version=3.4.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.LoggingFacility.3.4.0\lib\net45\Castle.Facilities.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Castle.Facilities.WcfIntegration, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.WcfIntegrationFacility.3.3.0\lib\net45\Castle.Facilities.WcfIntegration.dll</HintPath>
+    <Reference Include="Castle.Facilities.WcfIntegration, Version=3.4.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.WcfIntegrationFacility.3.4.0\lib\net45\Castle.Facilities.WcfIntegration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.Log4netIntegration, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core-log4net.3.3.3\lib\net45\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Services.Logging.NLogIntegration, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core-NLog.3.3.3\lib\net45\Castle.Services.Logging.NLogIntegration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor, Version=3.4.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.4.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -69,8 +77,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.2\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.Services" />
@@ -108,24 +116,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CategoriaService.svc" />
-    <Content Include="CiccioService.svc" />
     <Content Include="FatturaService.svc" />
     <Content Include="ProdottoService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoriaService.svc.cs">
-      <DependentUpon>CategoriaService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="CiccioService.svc.cs">
-      <DependentUpon>CiccioService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="FatturaService.svc.cs">
-      <DependentUpon>FatturaService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="ProdottoService.svc.cs">
-      <DependentUpon>ProdottoService.svc</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

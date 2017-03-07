@@ -1,5 +1,6 @@
 ﻿<Window
         x:Class="Ciccio1.Presentation.Wpf.View.FatturaView"
+        x:Name="FatturaSuca"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,8 +20,8 @@
         <Menu x:Name="menu">
             <MenuItem x:Name="fatturaMenuItem" Header="Fattura">
                 <MenuItem x:Name="nuovaFatturaMenuItem" Header="Nuova" Command="{Binding NuovaFatturaCommand}"/>
-                <MenuItem x:Name="salvaFatturaMenuItem" Header="Salva" Command="{Binding SalvaFatturaCommand}"/>
-                <MenuItem x:Name="eliminaFatturaMenuItem" Header="Elimina" Command="{Binding RimuoviFatturaCommand}"/>
+                <MenuItem x:Name="salvaFatturaMenuItem" Header="Salva" Command="{Binding SalvaFatturaCommand}" CommandParameter="{Binding ElementName=FatturaSuca}"/>
+                <MenuItem x:Name="eliminaFatturaMenuItem" Header="Elimina" Command="{Binding RimuoviFatturaCommand}" CommandParameter="{Binding ElementName=FatturaSuca}"/>
                 <MenuItem x:Name="esciMenuItem" Header="Esci"/>
             </MenuItem>
             <MenuItem x:Name="dettagliMenuItem" Header="Dettagli">

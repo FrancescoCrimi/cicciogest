@@ -6,14 +6,14 @@ using System.Configuration;
 
 namespace Ciccio1.Infrastructure.Conf
 {
-    sealed class DddTestConfigurationSection : System.Configuration.ConfigurationSection
+    sealed class ConfigurationSection : System.Configuration.ConfigurationSection
     {
         [ConfigurationProperty("Confs")]
-        public DddTestConfigurationElementCollection Configurazioni
+        public ConfigurationElementCollection Configurazioni
         {
             get
             {
-                return (DddTestConfigurationElementCollection)this["Confs"];
+                return (ConfigurationElementCollection)this["Confs"];
             }
         }
     }

@@ -20,9 +20,9 @@ namespace Ciccio1.Infrastructure
 
         #region Costruttori
 
-        public Container()
+        public Container(UI ui)
         {
-            conf = readConfiguration();
+            conf = readConfiguration(ui);
             startWindsor();
         }
 
@@ -40,31 +40,42 @@ namespace Ciccio1.Infrastructure
         private void startWindsor()
         {
             windsor = new WindsorContainer();
-            windsor.AddFacility<TypedFactoryFacility>();
+
+            // Aggiungi Facility TypeFactory
+            //windsor.AddFacility<TypedFactoryFacility>();
+
+            // Aggiungi Facility logging con Log4Net
             //windsor.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithAppConfig());
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithAppConfig());
+
+            // Aggiungi Facility logging con NLog
             //windsor.AddFacility<LoggingFacility>(f => f.UseNLog().WithConfig("NLog.config"));
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.NLog).WithConfig("NLog.config"));
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.NLog).WithAppConfig());
+
+            // Aggiungi WcfFacility
             windsor.AddFacility<WcfFacility>();
+
             windsor.Register(Component.For<IConf>().Instance(conf));
             logger = windsor.Resolve<ILogger>();
             logger.Debug("Container Avviato");
         }
 
-        private IConf readConfiguration()
+        private IConf readConfiguration(UI ui)
         {
-            IConf conf = null;
+            //IConf conf = null;
             try
             {
-                DddTestConfigurationSection cs = (DddTestConfigurationSection)System.Configuration.ConfigurationManager.GetSection("DddTest");
-                conf = (IConf)cs.Configurazioni[cs.Configurazioni.Default];
+                ConfigurationSection cs = (ConfigurationSection)System.Configuration.ConfigurationManager.GetSection("CiccioGest");
+                ConfigurationElement confa = cs.Configurazioni[cs.Configurazioni.Default];
+                confa.UserInterface = ui;
+                return confa;
             }
             catch (Exception ex)
             {
                 throw new Exception("Orrore Configurazione", ex);
             }
-            return conf;
+            //return conf;
         }
 
         private void writeConfiguration(IConf iConf)
@@ -73,14 +84,14 @@ namespace Ciccio1.Infrastructure
             System.Configuration.Configuration configuration =
                 System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.None);
 
-            DddTestConfigurationSection cs = (DddTestConfigurationSection)configuration.Sections["DddTest"];
+            ConfigurationSection cs = (ConfigurationSection)configuration.Sections["DddTest"];
 
-            DddTestConfigurationElement conf = (DddTestConfigurationElement)cs.Configurazioni[cs.Configurazioni.Default];
+            ConfigurationElement conf = (ConfigurationElement)cs.Configurazioni[cs.Configurazioni.Default];
 
             conf.DataAccess = iConf.DataAccess;
             conf.UserInterface = iConf.UserInterface;
-            conf.DataAccessConfig.CS = iConf.ConnectionString;
-            conf.DataAccessConfig.Database = iConf.Database;
+            conf.CS = iConf.CS;
+            conf.Database = iConf.Database;
             configuration.Save(System.Configuration.ConfigurationSaveMode.Minimal, false);
         }
 

@@ -35,9 +35,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Persistence.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Persistence.EFC", "Infrastructure.Persistence.EFC\Infrastructure.Persistence.EFC.csproj", "{EB230F8B-DE2E-47E0-A071-1D1D115E6DB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiccioListe", "..\Liste\CiccioListe\CiccioListe.csproj", "{169F7149-C729-408A-A5D1-C0109340D2CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liste", "..\CiccioUtil\Liste\Liste.csproj", "{169F7149-C729-408A-A5D1-C0109340D2CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhbCiccioListe", "..\Liste\NhbCiccioListe\NhbCiccioListe.csproj", "{D3F577AC-B8C7-4E20-8E10-41A515CA3B54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhbListe", "..\CiccioUtil\NhbListe\NhbListe.csproj", "{D3F577AC-B8C7-4E20-8E10-41A515CA3B54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

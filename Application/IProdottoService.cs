@@ -19,5 +19,8 @@ namespace Ciccio1.Application
         Prodotto SaveProdotto(Prodotto prodotto);
         [OperationContract]
         void DeleteProdotto(Prodotto prodotto);
+
+        [OperationContract]
+        IEnumerable<Categoria> GetCategorie();
     }
 }
