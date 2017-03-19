@@ -7,7 +7,7 @@ using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Infrastructure.Wcf
+namespace CiccioGest.Infrastructure.Wcf
 {
     public class DataContractSurrogateBehavior : IContractBehavior
     {

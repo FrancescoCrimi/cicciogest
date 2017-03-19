@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Ciccio1.Presentation.Wpf"
-        xmlns:Domain="clr-namespace:Ciccio1.Domain;assembly=Domain" x:Class="Ciccio1.Presentation.Wpf.Window1"
+        xmlns:local="clr-namespace:CiccioGest.Presentation.Wpf"
+        xmlns:Domain="clr-namespace:CiccioGest.Domain;assembly=Domain" x:Class="CiccioGest.Presentation.Wpf.Window1"
         mc:Ignorable="d"
         Title="Window1" Height="282.759" Width="560.345" Loaded="Window_Loaded">
     <Window.Resources>

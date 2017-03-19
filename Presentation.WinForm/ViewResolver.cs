@@ -1,6 +1,6 @@
 ﻿using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor;
-using Ciccio1.Infrastructure;
+using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ciccio1.Presentation.WinForm
+namespace CiccioGest.Presentation.WinForm
 {
     static class ViewResolver
     {

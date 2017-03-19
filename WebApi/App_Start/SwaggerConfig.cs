@@ -1,12 +1,12 @@
 using System.Web.Http;
 using WebActivatorEx;
-using Ciccio1.WebApi;
+using CiccioGest.WebApi;
 using Swashbuckle.Application;
 using System;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
-namespace Ciccio1.WebApi
+namespace CiccioGest.WebApi
 {
     /// <summary>
     /// 

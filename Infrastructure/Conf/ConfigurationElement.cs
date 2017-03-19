@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-namespace Ciccio1.Infrastructure.Conf
+namespace CiccioGest.Infrastructure.Conf
 {
     sealed class ConfigurationElement : System.Configuration.ConfigurationElement, IConf
     {

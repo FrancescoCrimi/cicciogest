@@ -7,10 +7,10 @@ using Castle.MicroKernel.Registration;
 using Castle.Core.Logging;
 using Castle.Facilities.Logging;
 using Castle.Facilities.WcfIntegration;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
 
-namespace Ciccio1.Infrastructure
+namespace CiccioGest.Infrastructure
 {
     public class Container : IDisposable
     {

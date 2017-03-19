@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Ciccio1.Infrastructure;
+using CiccioGest.Infrastructure;
 using Castle.Core.Logging;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Infrastructure.Conf;
 
-namespace Ciccio1.Presentation.WinForm.Views
+namespace CiccioGest.Presentation.WinForm.Views
 {
     public partial class ConfigDataAccessView : Form
     {

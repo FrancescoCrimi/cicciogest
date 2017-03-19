@@ -1,6 +1,6 @@
 ﻿using Castle.Core.Logging;
-using Ciccio1.Application;
-using Ciccio1.Domain;
+using CiccioGest.Application;
+using CiccioGest.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Ciccio1.Presentation.WinForm.Views
+namespace CiccioGest.Presentation.WinForm.Views
 {
     public partial class CategoriaView : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace Ciccio1.Presentation.WinForm.Views
+﻿namespace CiccioGest.Presentation.WinForm.Views
 {
     partial class CategoriaView
     {
@@ -94,7 +94,7 @@
             // 
             // categorieBindingSource
             // 
-            this.categorieBindingSource.DataSource = typeof(Ciccio1.Domain.Categoria);
+            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Categoria);
             // 
             // nomeLabel
             // 
@@ -118,7 +118,7 @@
             // 
             // categoriaBindingSource
             // 
-            this.categoriaBindingSource.DataSource = typeof(Ciccio1.Domain.Categoria);
+            this.categoriaBindingSource.DataSource = typeof(CiccioGest.Domain.Categoria);
             // 
             // tableLayoutPanel1
             // 

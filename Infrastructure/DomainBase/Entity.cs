@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Ciccio1.Infrastructure.DomainBase
+namespace CiccioGest.Infrastructure.DomainBase
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]

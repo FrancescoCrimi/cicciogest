@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ciccio1.Infrastructure;
-using Ciccio1.Presentation.Wpf.ViewModel;
-using Ciccio1.Presentation.Wpf.Utils;
-using Ciccio1.Presentation.Wpf.View;
+using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Wpf.ViewModel;
+using CiccioGest.Presentation.Wpf.Utils;
+using CiccioGest.Presentation.Wpf.View;
 using Castle.MicroKernel.Lifestyle;
 using System.Windows;
 
-namespace Ciccio1.Presentation.Wpf
+namespace CiccioGest.Presentation.Wpf
 {
     public class ViewModelLocator
     {

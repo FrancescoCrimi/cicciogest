@@ -5,12 +5,12 @@ using System.Text;
 using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
-using Ciccio1.Domain;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Domain;
+using CiccioGest.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
-using Ciccio1.Infrastructure.Persistence.Db4o.Repository;
+using CiccioGest.Infrastructure.Persistence.Db4o.Repository;
 
-namespace Ciccio1.Infrastructure.Persistence.Db4o
+namespace CiccioGest.Infrastructure.Persistence.Db4o
 {
     public class Installer : IWindsorInstaller
     {

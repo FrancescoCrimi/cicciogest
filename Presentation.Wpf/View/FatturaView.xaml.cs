@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Ciccio1.Presentation.Wpf.View
+namespace CiccioGest.Presentation.Wpf.View
 {
     public partial class FatturaView : Window
     {

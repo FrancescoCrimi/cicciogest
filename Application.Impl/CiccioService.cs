@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ciccio1.Infrastructure;
-using Ciccio1.Domain;
+using CiccioGest.Infrastructure;
+using CiccioGest.Domain;
 using Castle.Core.Logging;
-using Ciccio1.Infrastructure.DomainBase;
-using Ciccio1.Application;
+using CiccioGest.Infrastructure.DomainBase;
+using CiccioGest.Application;
 using Castle.MicroKernel;
 
-namespace Ciccio1.Application.Impl
+namespace CiccioGest.Application.Impl
 {
     //    class CiccioService : ICiccioService
     //    {

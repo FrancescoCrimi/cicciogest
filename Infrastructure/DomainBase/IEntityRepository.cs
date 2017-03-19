@@ -1,10 +1,10 @@
-﻿using Ciccio1.Infrastructure.DomainBase;
+﻿using CiccioGest.Infrastructure.DomainBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ciccio1.Infrastructure.DomainBase
+namespace CiccioGest.Infrastructure.DomainBase
 {
     public interface IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>
     {

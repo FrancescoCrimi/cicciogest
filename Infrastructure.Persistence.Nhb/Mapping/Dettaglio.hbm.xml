@@ -7,13 +7,13 @@
 
     <id name="Id" generator="native" unsaved-value="0"/>
 
-    <property name="Quantità" not-null="true" />
-    <property name="Totale" not-null="true" />
-    <property name="NomeProdotto" not-null="true" />
-    <property name="PrezzoProdotto" not-null="true" />
+    <property name="Quantità" not-null="true"/>
+    <property name="Totale" not-null="true"/>
+    <property name="NomeProdotto" not-null="true"/>
+    <property name="PrezzoProdotto" not-null="true"/>
 
-    <many-to-one name="Prodotto" column="IdProdotto" foreign-key="FkDettagliProdottiId" not-null="true" />
-    <many-to-one name="Fattura" column="IdFattura" not-null="true" />
+    <many-to-one name="Prodotto" column="IdProdotto" not-null="true" foreign-key="FkDettagliProdottiId"/>
+    <many-to-one name="Fattura" column="IdFattura" not-null="true"/>
 
   </class>
 

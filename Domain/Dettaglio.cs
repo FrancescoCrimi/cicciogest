@@ -5,9 +5,9 @@ using System.Text;
 using DddTest.Infrastructure.Builders;
 using System.Runtime.Serialization;
 using System.ComponentModel;
-using Ciccio1.Infrastructure.DomainBase;
+using CiccioGest.Infrastructure.DomainBase;
 
-namespace Ciccio1.Domain
+namespace CiccioGest.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
@@ -36,7 +36,7 @@ namespace Ciccio1.Domain
             }
         }
 
-        [DataMember]
+        //[DataMember]
         public virtual Prodotto Prodotto
         {
             get { return prodotto; }

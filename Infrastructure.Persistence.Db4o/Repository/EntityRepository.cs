@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Query;
-using Ciccio1.Domain;
-using Ciccio1.Infrastructure.DomainBase;
+using CiccioGest.Domain;
+using CiccioGest.Infrastructure.DomainBase;
 using Castle.Core.Logging;
 
-namespace Ciccio1.Infrastructure.Persistence.Db4o.Repository
+namespace CiccioGest.Infrastructure.Persistence.Db4o.Repository
 {
     abstract class EntityRepository<TEntity, TId>
         : IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>

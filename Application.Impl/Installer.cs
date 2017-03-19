@@ -6,10 +6,10 @@ using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Facilities.WcfIntegration;
-using Ciccio1.Infrastructure;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
 
-namespace Ciccio1.Application.Impl
+namespace CiccioGest.Application.Impl
 {
     public class Installer : IWindsorInstaller
     {
@@ -20,7 +20,7 @@ namespace Ciccio1.Application.Impl
             switch (conf.DataAccess)
             {
                 case Storage.NHibernate:
-                    container.Install(new Ciccio1.Infrastructure.Persistence.Nhb.Installer());
+                    container.Install(new CiccioGest.Infrastructure.Persistence.Nhb.Installer());
                     break;
                     //case Storage.EF:
                     //    container.Install(new Ciccio1.Infrastructure.Persistence.EF.Installer());

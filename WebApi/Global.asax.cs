@@ -1,4 +1,4 @@
-﻿using Ciccio1.Infrastructure;
+﻿using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Routing;
 
-namespace Ciccio1.WebApi
+namespace CiccioGest.WebApi
 {
     /// <summary>
     /// 

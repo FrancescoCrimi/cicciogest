@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ciccio1.Domain;
+using CiccioGest.Domain;
 using Castle.Core.Logging;
-using Ciccio1.Infrastructure;
+using CiccioGest.Infrastructure;
 
-namespace Ciccio1.Application.Impl
+namespace CiccioGest.Application.Impl
 {
     class ProdottoService : IProdottoService
     {

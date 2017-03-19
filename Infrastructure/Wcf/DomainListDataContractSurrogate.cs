@@ -1,4 +1,5 @@
-﻿using CiccioUtil.Liste.CazzoListe;
+﻿//using CiccioUtil.Liste.CazzoListe;
+using CiccioUtils.CiccioListe;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Infrastructure.Wcf
+namespace CiccioGest.Infrastructure.Wcf
 {
     public class DomainListDataContractSurrogate : IDataContractSurrogate
     {

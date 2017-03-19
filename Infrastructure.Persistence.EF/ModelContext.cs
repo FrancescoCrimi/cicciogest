@@ -1,4 +1,4 @@
-﻿using Ciccio1.Domain;
+﻿using CiccioGest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Infrastructure.Persistence.EF
+namespace CiccioGest.Infrastructure.Persistence.EF
 {
     class ModelContext : DbContext
     {

@@ -1,5 +1,5 @@
-﻿using Ciccio1.Application;
-using Ciccio1.Domain;
+﻿using CiccioGest.Application;
+using CiccioGest.Domain;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Ciccio1.WebApi.Controllers
+namespace CiccioGest.WebApi.Controllers
 {
     /// <summary>
     /// 

@@ -1,4 +1,4 @@
-﻿namespace Ciccio1.Presentation.WinForm.Views
+﻿namespace CiccioGest.Presentation.WinForm.Views
 {
     partial class FattureView
     {
@@ -84,7 +84,7 @@
             // 
             // modificaToolStripMenuItem
             // 
-            this.modificaToolStripMenuItem.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.Copia;
+            this.modificaToolStripMenuItem.Image = global::CiccioGest.Presentation.WinForm.Properties.Resources.Copia;
             this.modificaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
             this.modificaToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
@@ -131,7 +131,7 @@
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.About;
+            this.aboutToolStripMenuItem.Image = global::CiccioGest.Presentation.WinForm.Properties.Resources.About;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About";
@@ -189,7 +189,7 @@
             // 
             // fattureBindingSource
             // 
-            this.fattureBindingSource.DataSource = typeof(Ciccio1.Domain.Fattura);
+            this.fattureBindingSource.DataSource = typeof(CiccioGest.Domain.Fattura);
             // 
             // FattureView
             // 

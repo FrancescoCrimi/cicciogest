@@ -6,12 +6,12 @@ using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Db4objects.Db4o.Constraints;
 using Db4objects.Db4o.Events;
-using Ciccio1.Domain;
-using Ciccio1.Infrastructure.Conf;
-using Ciccio1.Infrastructure.DomainBase;
+using CiccioGest.Domain;
+using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Infrastructure.DomainBase;
 using Castle.Core.Logging;
 
-namespace Ciccio1.Infrastructure.Persistence.Db4o
+namespace CiccioGest.Infrastructure.Persistence.Db4o
 {
     class DataAccess : IDataAccess
     {

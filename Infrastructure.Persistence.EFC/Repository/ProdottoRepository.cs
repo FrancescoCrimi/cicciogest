@@ -1,5 +1,5 @@
-﻿using Ciccio1.Domain;
-using Ciccio1.Infrastructure.Persistence.EFC;
+﻿using CiccioGest.Domain;
+using CiccioGest.Infrastructure.Persistence.EFC;
 using System;
 using System.Collections.Generic;
 using System.Linq;

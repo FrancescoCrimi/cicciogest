@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
 
-namespace Ciccio1.WebApi
+namespace CiccioGest.WebApi
 {
     /// <summary>
     /// 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Db4objects.Db4o;
 
-namespace Ciccio1.Infrastructure.Persistence.Db4o
+namespace CiccioGest.Infrastructure.Persistence.Db4o
 {
     public class AutoIncrement
     {

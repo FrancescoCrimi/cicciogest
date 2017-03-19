@@ -1,11 +1,11 @@
-using Ciccio1.Infrastructure.DomainBase;
+using CiccioGest.Infrastructure.DomainBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Ciccio1.Domain
+namespace CiccioGest.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]
@@ -45,13 +45,12 @@ namespace Ciccio1.Domain
             }
         }
 
-        //[DataMember]
         public virtual Categoria Categoria
         {
             get { return categoria; }
             set
             {
-                if(value != categoria)
+                if (value != categoria)
                 {
                     categoria = value;
                     NomeCategoria = categoria.Nome;

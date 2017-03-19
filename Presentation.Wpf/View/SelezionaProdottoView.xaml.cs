@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Ciccio1.Presentation.Wpf.View
+namespace CiccioGest.Presentation.Wpf.View
 {
     public partial class SelezionaProdottoView : Window
     {

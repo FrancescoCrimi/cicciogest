@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NHibernate;
-using Ciccio1.Infrastructure;
-using Ciccio1.Domain;
-using Ciccio1.Infrastructure.DomainBase;
+using CiccioGest.Infrastructure;
+using CiccioGest.Domain;
+using CiccioGest.Infrastructure.DomainBase;
 using NHibernate.Criterion;
 
-namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
+namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
     abstract class DomainRepository<TEntity>
         : IDomainRepository<TEntity> where TEntity : DomainEntity<TEntity>
@@ -20,7 +20,7 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb.Repository
             this.da = da;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             try
             {

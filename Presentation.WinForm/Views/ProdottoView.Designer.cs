@@ -1,4 +1,4 @@
-﻿namespace Ciccio1.Presentation.WinForm.Views
+﻿namespace CiccioGest.Presentation.WinForm.Views
 {
     partial class ProdottoView
     {
@@ -153,7 +153,7 @@
             // 
             // prodottiBindingSource
             // 
-            this.prodottiBindingSource.DataSource = typeof(Ciccio1.Domain.Prodotto);
+            this.prodottiBindingSource.DataSource = typeof(CiccioGest.Domain.Prodotto);
             // 
             // nomeTextBox
             // 
@@ -166,7 +166,7 @@
             // 
             // prodottoBindingSource
             // 
-            this.prodottoBindingSource.DataSource = typeof(Ciccio1.Domain.Prodotto);
+            this.prodottoBindingSource.DataSource = typeof(CiccioGest.Domain.Prodotto);
             // 
             // categoriaComboBox
             // 
@@ -182,7 +182,7 @@
             // 
             // categorieBindingSource
             // 
-            this.categorieBindingSource.DataSource = typeof(Ciccio1.Domain.Categoria);
+            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Categoria);
             // 
             // prezzoTextBox1
             // 

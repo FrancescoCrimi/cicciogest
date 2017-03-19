@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ciccio1.Presentation.WinForm.Views
+namespace CiccioGest.Presentation.WinForm.Views
 {
     public partial class HomeView : Form
     {

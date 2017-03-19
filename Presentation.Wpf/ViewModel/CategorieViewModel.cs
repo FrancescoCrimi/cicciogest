@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using Ciccio1.Domain;
-using Ciccio1.Application;
+using CiccioGest.Domain;
+using CiccioGest.Application;
 using System.Collections.ObjectModel;
-using Ciccio1.Presentation.Wpf.Utils;
+using CiccioGest.Presentation.Wpf.Utils;
 using Castle.Core.Logging;
 
-namespace Ciccio1.Presentation.Wpf.ViewModel
+namespace CiccioGest.Presentation.Wpf.ViewModel
 {
     public class CategorieViewModel : ObservableObject
     {

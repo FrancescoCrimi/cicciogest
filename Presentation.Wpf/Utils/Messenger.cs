@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace Ciccio1.Presentation.Wpf.Utils
+namespace CiccioGest.Presentation.Wpf.Utils
 {
     /// <summary>
     /// Provides loosely-coupled messaging between

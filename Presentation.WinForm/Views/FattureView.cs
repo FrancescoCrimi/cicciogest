@@ -1,6 +1,6 @@
 ﻿using Castle.Core.Logging;
-using Ciccio1.Application;
-using Ciccio1.Domain;
+using CiccioGest.Application;
+using CiccioGest.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ciccio1.Presentation.WinForm.Views
+namespace CiccioGest.Presentation.WinForm.Views
 {
     public partial class FattureView : Form
     {

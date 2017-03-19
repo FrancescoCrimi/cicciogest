@@ -1,4 +1,4 @@
-﻿namespace Ciccio1.Presentation.WinForm.Views
+﻿namespace CiccioGest.Presentation.WinForm.Views
 {
     partial class ConfigDataAccessView
     {

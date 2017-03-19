@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace Ciccio1.Presentation.Wpf.Utils
+namespace CiccioGest.Presentation.Wpf.Utils
 {
     /// <summary>
     /// This is the abstract base class for any object that provides property change notifications.  

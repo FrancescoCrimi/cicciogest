@@ -1,11 +1,11 @@
-﻿using Ciccio1.Domain;
+﻿using CiccioGest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Infrastructure.Persistence.Db4o.Repository
+namespace CiccioGest.Infrastructure.Persistence.Db4o.Repository
 {
     class CategoriaRepository : EntityRepository<Categoria, int>, ICategoriaRepository
     {

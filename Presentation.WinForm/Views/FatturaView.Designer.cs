@@ -1,4 +1,4 @@
-﻿namespace Ciccio1.Presentation.WinForm.Views
+﻿namespace CiccioGest.Presentation.WinForm.Views
 {
     partial class FatturaView
     {
@@ -191,7 +191,7 @@
             // 
             // eliminaToolStripMenuItem
             // 
-            this.eliminaToolStripMenuItem.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.Delete;
+            this.eliminaToolStripMenuItem.Image = global::CiccioGest.Presentation.WinForm.Properties.Resources.Delete;
             this.eliminaToolStripMenuItem.Name = "eliminaToolStripMenuItem";
             this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.eliminaToolStripMenuItem.Text = "Elimina";
@@ -276,7 +276,7 @@
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Image = global::Ciccio1.Presentation.WinForm.Properties.Resources.About;
+            this.aboutToolStripMenuItem.Image = global::CiccioGest.Presentation.WinForm.Properties.Resources.About;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About";
@@ -377,7 +377,7 @@
             // 
             // fatturaBindingSource
             // 
-            this.fatturaBindingSource.DataSource = typeof(Ciccio1.Domain.Fattura);
+            this.fatturaBindingSource.DataSource = typeof(CiccioGest.Domain.Fattura);
             // 
             // tableLayoutPanel2
             // 
@@ -491,7 +491,7 @@
             // 
             // dettaglioBindingSource
             // 
-            this.dettaglioBindingSource.DataSource = typeof(Ciccio1.Domain.Dettaglio);
+            this.dettaglioBindingSource.DataSource = typeof(CiccioGest.Domain.Dettaglio);
             // 
             // quantitàTextBox
             // 

@@ -1,4 +1,4 @@
-﻿using Ciccio1.Domain;
+﻿using CiccioGest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Application
+namespace CiccioGest.Application
 {
     [ServiceContract(ConfigurationName = "Ciccio1.Application.ICategoriaService")]
     public interface ICategoriaService : IDisposable

@@ -2,9 +2,9 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Ciccio1.Application;
-using Ciccio1.Infrastructure.Conf;
-using Ciccio1.Infrastructure.Wcf;
+using CiccioGest.Application;
+using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Infrastructure.Wcf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.WcfClient
+namespace CiccioGest.WcfClient
 {
     public class Installer : IWindsorInstaller
     {

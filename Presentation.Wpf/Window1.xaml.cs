@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Ciccio1.Presentation.Wpf
+namespace CiccioGest.Presentation.Wpf
 {
     /// <summary>
     /// Logica di interazione per Window1.xaml

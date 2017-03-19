@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Infrastructure.Wcf
+namespace CiccioGest.Infrastructure.Wcf
 {
     public class MyDataContractSurrogate : IDataContractSurrogate
     {

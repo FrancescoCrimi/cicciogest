@@ -1,14 +1,14 @@
-﻿using Ciccio1.Application;
+﻿using CiccioGest.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Ciccio1.Domain;
+using CiccioGest.Domain;
 using Swashbuckle.Swagger.Annotations;
 
-namespace Ciccio1.WebApi.Controllers
+namespace CiccioGest.WebApi.Controllers
 {
     ///// <summary>
     ///// 

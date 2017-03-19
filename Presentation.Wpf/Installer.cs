@@ -5,11 +5,11 @@ using System.Text;
 using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
-using Ciccio1.Presentation.Wpf.ViewModel;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Presentation.Wpf.ViewModel;
+using CiccioGest.Infrastructure.Conf;
 using Castle.Windsor.Installer;
 
-namespace Ciccio1.Presentation.Wpf
+namespace CiccioGest.Presentation.Wpf
 {
     class Installer : IWindsorInstaller
     {

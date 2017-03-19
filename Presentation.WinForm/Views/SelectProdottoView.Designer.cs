@@ -1,4 +1,4 @@
-﻿namespace Ciccio1.Presentation.WinForm.Views
+﻿namespace CiccioGest.Presentation.WinForm.Views
 {
     partial class SelectProdottoView
     {
@@ -41,7 +41,7 @@
             // 
             // prodottiBindingSource
             // 
-            this.prodottiBindingSource.DataSource = typeof(Ciccio1.Domain.Prodotto);
+            this.prodottiBindingSource.DataSource = typeof(CiccioGest.Domain.Prodotto);
             // 
             // prodottiDataGridView
             // 

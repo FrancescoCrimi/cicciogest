@@ -1,13 +1,13 @@
 ﻿using Castle.Core.Logging;
-using Ciccio1.Infrastructure;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Infrastructure.Persistence.EFC
+namespace CiccioGest.Infrastructure.Persistence.EFC
 {
     class DataAccess : IDataAccess
     {

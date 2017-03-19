@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace Ciccio1.Presentation.Wpf.Utils
+namespace CiccioGest.Presentation.Wpf.Utils
 {
     /// <summary>
     /// A command whose sole purpose is to 

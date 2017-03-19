@@ -1,5 +1,5 @@
-﻿using Ciccio1.Presentation.Wpf.Utils;
-using Ciccio1.Presentation.Wpf.View;
+﻿using CiccioGest.Presentation.Wpf.Utils;
+using CiccioGest.Presentation.Wpf.View;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Ciccio1.Presentation.Wpf
+namespace CiccioGest.Presentation.Wpf
 {
     public partial class App : System.Windows.Application
     {

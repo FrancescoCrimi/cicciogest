@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Ciccio1.Infrastructure;
-using Ciccio1.Presentation.WinForm.Views;
+using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.WinForm.Views;
 using Castle.Core.Logging;
-using Ciccio1.Application;
+using CiccioGest.Application;
 using Castle.Windsor;
 using Castle.MicroKernel.Lifestyle;
 
-namespace Ciccio1.Presentation.WinForm
+namespace CiccioGest.Presentation.WinForm
 {
     class Program
     {

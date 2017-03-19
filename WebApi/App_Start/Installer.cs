@@ -5,15 +5,15 @@ using System.Linq;
 using System.Web;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Ciccio1.WebApi.Controllers;
+using CiccioGest.WebApi.Controllers;
 
-namespace Ciccio1.WebApi
+namespace CiccioGest.WebApi
 {
     public class Installer : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Install(new Ciccio1.Application.Impl.Installer());
+            container.Install(new CiccioGest.Application.Impl.Installer());
             container.Register(
                 Component.For<FattureController>().LifestyleTransient(),
                 Component.For<ProdottiController>().LifestyleTransient(),

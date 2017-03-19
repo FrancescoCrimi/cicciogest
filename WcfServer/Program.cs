@@ -5,12 +5,12 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using Castle.Facilities.WcfIntegration;
-using Ciccio1.Infrastructure;
-using Ciccio1.Application;
-using Ciccio1.Infrastructure.Wcf;
+using CiccioGest.Infrastructure;
+using CiccioGest.Application;
+using CiccioGest.Infrastructure.Wcf;
 using Castle.MicroKernel.Registration;
 
-namespace Ciccio1.WcfServer
+namespace CiccioGest.WcfServer
 {
     class Program
     {
@@ -25,7 +25,7 @@ namespace Ciccio1.WcfServer
         Program()
         {
             Container container = new Container(UI.WCF);
-            container.Install(new Ciccio1.Application.Impl.Installer());
+            container.Install(new CiccioGest.Application.Impl.Installer());
 
 
             //ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
@@ -74,11 +74,13 @@ namespace Ciccio1.WcfServer
             // Aggiungi un Endpoint al ServiceHost
             ServiceEndpoint se = shb.AddServiceEndpoint(serviceType.FullName, new WSHttpBinding(), "");
 
-            //Imposta DataContractSurrogate
             foreach (OperationDescription od in se.Contract.Operations)
             {
-                var dcsob = od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+                DataContractSerializerOperationBehavior dcsob = od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+                //Imposta DataContractSurrogate
                 dcsob.DataContractSurrogate = new MyDataContractSurrogate();
+                //Imposta DataContractResolver
+                dcsob.DataContractResolver = new MyDataContractResolver();
             }
 
             // Crea e aggiungi un Behavior per la gestione dei Metadati

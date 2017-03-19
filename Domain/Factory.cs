@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ciccio1.Domain
+namespace CiccioGest.Domain
 {
     public static class Factory
     {

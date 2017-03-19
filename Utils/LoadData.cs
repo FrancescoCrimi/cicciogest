@@ -1,21 +1,21 @@
 ﻿using Castle.MicroKernel.Lifestyle;
-using Ciccio1.Application;
-using Ciccio1.Domain;
-using Ciccio1.Infrastructure;
+using CiccioGest.Application;
+using CiccioGest.Domain;
+using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ciccio1.Utils
+namespace CiccioGest.Utils
 {
     class LoadData
     {
         public LoadData()
         {
             Container container = new Container(UI.Form);
-            container.Install(new Ciccio1.Application.Impl.Installer());
+            container.Install(new CiccioGest.Application.Impl.Installer());
 
             IDisposable disposable = container.Windsor.BeginScope();
             IDataAccess da = container.Resolve<IDataAccess>();

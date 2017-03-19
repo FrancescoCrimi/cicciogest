@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Infrastructure.Conf;
 using Castle.Facilities.WcfIntegration;
-using Ciccio1.Domain;
-using Ciccio1.Infrastructure.Persistence.EF.Repository;
+using CiccioGest.Domain;
+using CiccioGest.Infrastructure.Persistence.EF.Repository;
 
-namespace Ciccio1.Infrastructure.Persistence.EF
+namespace CiccioGest.Infrastructure.Persistence.EF
 {
     public class Installer : IWindsorInstaller
     {

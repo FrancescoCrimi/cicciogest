@@ -1,4 +1,4 @@
-using Ciccio1.Infrastructure.DomainBase;
+using CiccioGest.Infrastructure.DomainBase;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,9 +7,9 @@ using System.Runtime.Serialization;
 //using System.Linq;
 using System.Text;
 using System.Runtime.CompilerServices;
-using CiccioUtil.Liste.CazzoListe;
+using CiccioUtils.CiccioListe;
 
-namespace Ciccio1.Domain
+namespace CiccioGest.Domain
 {
     [Serializable]
     [DataContract(Namespace = "http://gesttest.it")]

@@ -9,10 +9,10 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data.SqlServerCe;
 using System.Data.SQLite;
-using Ciccio1.Infrastructure.Conf;
+using CiccioGest.Infrastructure.Conf;
 using Castle.Core.Logging;
 
-namespace Ciccio1.Infrastructure.Persistence.Nhb
+namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
     class DataAccess : IDataAccess
     {
@@ -149,12 +149,12 @@ namespace Ciccio1.Infrastructure.Persistence.Nhb
             switch (conf.UserInterface)
             {
                 case UI.Form:
-                    configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.CazzoListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
-                    //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.MinchiaListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListe.DomainCollectionTypeFactory, CiccioUtils.NhbListe");
+                    //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListePlus.DomainCollectionTypeFactory, CiccioUtils.NhbListePlus");
                     break;
                 case UI.WPF:
-                    configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.CazzoListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
-                    //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtil.NhbListe.MinchiaListe.DomainCollectionTypeFactory, CiccioUtil.NhbListe");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListe.DomainCollectionTypeFactory, CiccioUtils.NhbListe");
+                    //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListePlus.DomainCollectionTypeFactory, CiccioUtils.NhbListePlus");
                     break;
                 case UI.WCF:
                     break;

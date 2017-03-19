@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ciccio1.Infrastructure.Conf
+namespace CiccioGest.Infrastructure.Conf
 {
     [System.Configuration.ConfigurationCollection(typeof(ConfigurationElement), AddItemName = "Conf", CollectionType = System.Configuration.ConfigurationElementCollectionType.BasicMap)]
     sealed class ConfigurationElementCollection : System.Configuration.ConfigurationElementCollection
