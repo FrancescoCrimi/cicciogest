@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping assembly="Domain"
-                   namespace="Ciccio1.Domain"
+                   namespace="CiccioGest.Domain.Model"
                    xmlns="urn:nhibernate-mapping-2.2">
 
   <class name="Dettaglio" table="Dettagli">

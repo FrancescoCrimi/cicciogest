@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using CiccioGest.Domain;
 using Castle.Core.Logging;
 using CiccioGest.Infrastructure;
+using CiccioGest.Domain.Repository;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 
 namespace CiccioGest.Application.Impl
 {
@@ -47,7 +50,7 @@ namespace CiccioGest.Application.Impl
             return fatturaRepository.Get(id);
         }
 
-        public IEnumerable<Fattura> GetFatture()
+        public IEnumerable<FatturaReadOnly> GetFatture()
         {
             da.Begin();
             return fatturaRepository.GetAll();

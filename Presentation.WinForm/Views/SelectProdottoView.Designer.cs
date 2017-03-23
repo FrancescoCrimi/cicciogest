@@ -41,7 +41,7 @@
             // 
             // prodottiBindingSource
             // 
-            this.prodottiBindingSource.DataSource = typeof(CiccioGest.Domain.Prodotto);
+            this.prodottiBindingSource.DataSource = typeof(CiccioGest.Domain.Model.Prodotto);
             // 
             // prodottiDataGridView
             // 

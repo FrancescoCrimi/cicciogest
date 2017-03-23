@@ -9,6 +9,7 @@ using CiccioGest.Domain;
 using CiccioGest.Infrastructure.Conf;
 using Castle.Facilities.TypedFactory;
 using CiccioGest.Infrastructure.Persistence.Db4o.Repository;
+using CiccioGest.Domain.Repository;
 
 namespace CiccioGest.Infrastructure.Persistence.Db4o
 {

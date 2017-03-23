@@ -44,6 +44,10 @@ namespace CiccioGest.Infrastructure.Wcf
 
         public object GetObjectToSerialize(object obj, Type targetType)
         {
+            if(obj.GetType().Name == targetType.Name + "Proxy")
+            {
+
+            }
             return obj;
         }
 

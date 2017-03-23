@@ -10,6 +10,7 @@ using CiccioGest.Infrastructure.Conf;
 using Castle.Facilities.WcfIntegration;
 using CiccioGest.Domain;
 using CiccioGest.Infrastructure.Persistence.EF.Repository;
+using CiccioGest.Domain.Repository;
 
 namespace CiccioGest.Infrastructure.Persistence.EF
 {

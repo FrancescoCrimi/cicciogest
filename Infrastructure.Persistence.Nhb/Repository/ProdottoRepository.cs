@@ -1,4 +1,7 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
+using CiccioGest.Domain.Repository;
 using NHibernate;
 using NHibernate.Criterion;
 using System;
@@ -14,10 +17,15 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
         public ProdottoRepository(DataAccess da)
             : base(da) { }
 
-        public override IEnumerable<Prodotto> GetAll()
+        public IEnumerable<ProdottoReadOnly> GetAll()
         {
-            var qr = da.ISession.CreateQuery("select prod.Id, prod.Nome from Prodotto prod");
-            return qr.Enumerable<Prodotto>();
+            List<ProdottoReadOnly> list = new List<ProdottoReadOnly>();
+            IList<Prodotto> prodotti = da.ISession.CreateCriteria<Prodotto>().List<Prodotto>();
+            foreach (Prodotto item in prodotti)
+            {
+                list.Add(new ProdottoReadOnly(item.Id, item.Nome, item.Prezzo, item.NomeCategoria));
+            }
+            return list;
         }
     }
 }

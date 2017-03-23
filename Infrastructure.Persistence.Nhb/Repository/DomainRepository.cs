@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NHibernate;
-using CiccioGest.Infrastructure;
-using CiccioGest.Domain;
-using CiccioGest.Infrastructure.DomainBase;
-using NHibernate.Criterion;
+using CiccioGest.Domain.Repository;
+using CiccioGest.Domain.Model;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
@@ -20,19 +17,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             this.da = da;
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
-        {
-            try
-            {
-                ICriteria criteria = da.ISession.CreateCriteria<TEntity>();
-                return criteria.List<TEntity>();
-            }
-            catch (NHibernate.Exceptions.GenericADOException ex)
-            {
-                throw new DataAccessException("Suca Sql", ex);
-            }
-        }
-
         public TEntity Get(int id)
         {
             return da.ISession.Get<TEntity>(id);
@@ -40,7 +24,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 
         public int Save(TEntity entity)
         {
-           return (int) da.ISession.Save(entity);
+            return (int)da.ISession.Save(entity);
         }
 
         public void Delete(TEntity entity)

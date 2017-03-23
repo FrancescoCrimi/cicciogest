@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CiccioGest.Domain;
 using Castle.Core.Logging;
 using CiccioGest.Infrastructure;
+using CiccioGest.Domain.Repository;
+using CiccioGest.Domain.Model;
 
 namespace CiccioGest.Application.Impl
 {

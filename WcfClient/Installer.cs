@@ -36,7 +36,7 @@ namespace CiccioGest.WcfClient
             WSHttpBinding myBinding = new WSHttpBinding();
             EndpointAddress myEndpointAddress = new EndpointAddress(address);
             ChannelFactory<Service> myChannelFactory = new ChannelFactory<Service>(myBinding, myEndpointAddress);
-            defineSurrogate(myChannelFactory.Endpoint);
+            //defineSurrogate(myChannelFactory.Endpoint);
             return myChannelFactory;
         }
 

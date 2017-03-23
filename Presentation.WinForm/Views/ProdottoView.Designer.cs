@@ -153,7 +153,7 @@
             // 
             // prodottiBindingSource
             // 
-            this.prodottiBindingSource.DataSource = typeof(CiccioGest.Domain.Prodotto);
+            this.prodottiBindingSource.DataSource = typeof(CiccioGest.Domain.ReadOnlyModel.ProdottoReadOnly);
             // 
             // nomeTextBox
             // 
@@ -166,7 +166,7 @@
             // 
             // prodottoBindingSource
             // 
-            this.prodottoBindingSource.DataSource = typeof(CiccioGest.Domain.Prodotto);
+            this.prodottoBindingSource.DataSource = typeof(CiccioGest.Domain.Model.Prodotto);
             // 
             // categoriaComboBox
             // 
@@ -182,7 +182,7 @@
             // 
             // categorieBindingSource
             // 
-            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Categoria);
+            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Model.Categoria);
             // 
             // prezzoTextBox1
             // 

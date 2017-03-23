@@ -1,5 +1,5 @@
-﻿using CiccioGest.Domain;
-using NHibernate.Criterion;
+﻿using CiccioGest.Domain.Model;
+using CiccioGest.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,13 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
     class CategoriaRepository : DomainRepository<Categoria>, ICategoriaRepository
     {
         public CategoriaRepository(DataAccess da)
-            : base(da) { }
+            : base(da)
+        {
+        }
+
+        public IEnumerable<Categoria> GetAll()
+        {
+            return da.ISession.CreateCriteria<Categoria>().List<Categoria>();
+        }
     }
 }

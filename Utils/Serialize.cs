@@ -1,5 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
 using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,8 @@ namespace CiccioGest.Utils
 
         void BackupXml()
         {
-            Fattura fatt = service.GetFatture().FirstOrDefault();
+            //Fattura fatt = service.GetFatture().FirstOrDefault();
+            Fattura fatt = service.GetFattura(1);
             FileStream fsXs = new FileStream("FatturaXS.xml", FileMode.Create);
             XmlSerializer xs = new XmlSerializer(typeof(Fattura), "http://gesttest.it");
             xs.Serialize(fsXs, fatt);

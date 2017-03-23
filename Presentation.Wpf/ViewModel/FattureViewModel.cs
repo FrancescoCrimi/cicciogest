@@ -1,6 +1,8 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using CiccioGest.Presentation.Wpf.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace CiccioGest.Presentation.Wpf.ViewModel
         {
             this.service = service;
             this.logger = logger;
-            Fatture = new ObservableCollection<Fattura>();
+            Fatture = new ObservableCollection<FatturaReadOnly>();
             registraMessaggi();
             aggiorna();
         }
@@ -29,7 +31,7 @@ namespace CiccioGest.Presentation.Wpf.ViewModel
 
         #region Proprietà Pubbliche
 
-        public ObservableCollection<Fattura> Fatture { get; private set; }
+        public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
 
         public Fattura FatturaSelezionata { private get; set; }
 
@@ -76,9 +78,9 @@ namespace CiccioGest.Presentation.Wpf.ViewModel
 
         private void aggiorna()
         {
-            IEnumerable<Fattura> fatture = service.GetFatture();
+            IEnumerable<FatturaReadOnly> fatture = service.GetFatture();
             Fatture.Clear();
-            foreach (Fattura fatt in fatture)
+            foreach (FatturaReadOnly fatt in fatture)
             {
                 Fatture.Add(fatt);
             }

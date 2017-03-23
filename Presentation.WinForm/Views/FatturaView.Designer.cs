@@ -377,7 +377,7 @@
             // 
             // fatturaBindingSource
             // 
-            this.fatturaBindingSource.DataSource = typeof(CiccioGest.Domain.Fattura);
+            this.fatturaBindingSource.DataSource = typeof(CiccioGest.Domain.Model.Fattura);
             // 
             // tableLayoutPanel2
             // 
@@ -491,7 +491,7 @@
             // 
             // dettaglioBindingSource
             // 
-            this.dettaglioBindingSource.DataSource = typeof(CiccioGest.Domain.Dettaglio);
+            this.dettaglioBindingSource.DataSource = typeof(CiccioGest.Domain.Model.Dettaglio);
             // 
             // quantitàTextBox
             // 

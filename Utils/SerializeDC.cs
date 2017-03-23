@@ -1,8 +1,9 @@
 ﻿using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
 using CiccioGest.Infrastructure;
-using CiccioGest.Infrastructure.Wcf;
+//using CiccioGest.Infrastructure.Wcf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,9 +33,9 @@ namespace CiccioGest.Utils
             Prodotto prod = service.GetProdotto(1);
             var suca = service.GetFatture();
             FileStream fs = new FileStream("ProdottoDCS.xml", FileMode.Create);
-            DataContractSerializer dcs = new DataContractSerializer(typeof(Prodotto));
+            //DataContractSerializer dcs = new DataContractSerializer(typeof(Prodotto));
             //DataContractSerializer dcs = new DataContractSerializer(typeof(Fattura), new Type[] { typeof(DomainPersistentBag<Dettaglio>) });
-            //DataContractSerializer dcs = new DataContractSerializer(typeof(Prodotto), new Type[0], Int16.MaxValue, false, false, null, new MyDataContractResolver());
+            DataContractSerializer dcs = new DataContractSerializer(typeof(Prodotto), new Type[0], Int16.MaxValue, false, false, new MyDataContractSurrogate());
             dcs.WriteObject(fs, prod);
             fs.Close();
         }
@@ -42,9 +43,9 @@ namespace CiccioGest.Utils
         void deserialize()
         {
             FileStream fs = new FileStream("ProdottoDCS.xml", FileMode.Open);
-            //DataContractSerializer dcs = new DataContractSerializer(typeof(Fattura));
+            DataContractSerializer dcs = new DataContractSerializer(typeof(Fattura));
             //DataContractSerializer dcs = new DataContractSerializer(typeof(Fattura), new Type[] { typeof(DomainList<Dettaglio>) });
-            DataContractSerializer dcs = new DataContractSerializer(typeof(Prodotto), new Type[0], Int16.MaxValue, true, false, new DomainListDataContractSurrogate(), new MyDataContractResolver());
+            //DataContractSerializer dcs = new DataContractSerializer(typeof(Prodotto), new Type[0], Int16.MaxValue, true, false, new DomainListDataContractSurrogate(), new MyDataContractResolver());
             var aaaa = dcs.ReadObject(fs);
             Prodotto impFatt = (Prodotto)aaaa;
             fs.Close();

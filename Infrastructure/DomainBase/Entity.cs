@@ -8,7 +8,7 @@ using System.Text;
 namespace CiccioGest.Infrastructure.DomainBase
 {
     [Serializable]
-    [DataContract(Namespace = "http://gesttest.it")]
+    [DataContract(Namespace = "http://cicciogest.it")]
     public abstract class Entity<TEntity, TId> : IEquatable<TEntity>, INotifyPropertyChanged
         where TEntity : Entity<TEntity, TId>
     {

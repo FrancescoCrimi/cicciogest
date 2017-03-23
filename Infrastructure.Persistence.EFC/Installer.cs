@@ -10,6 +10,7 @@ using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Infrastructure;
 using CiccioGest.Domain;
 using Infrastructure.Persistence.EFC.Repository;
+using CiccioGest.Domain.Repository;
 
 namespace CiccioGest.Infrastructure.Persistence.EFC
 {

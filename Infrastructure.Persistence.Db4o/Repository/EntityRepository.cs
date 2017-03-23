@@ -20,10 +20,10 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o.Repository
             this.da = da;
         }
 
-        public IEnumerable<TEntity> GetAll()
-        {
-            return da.ObjectContainer.Query<TEntity>();
-        }
+        //public IEnumerable<TEntity> GetAll()
+        //{
+        //    return da.ObjectContainer.Query<TEntity>();
+        //}
 
         public TEntity Get(TId id)
         {

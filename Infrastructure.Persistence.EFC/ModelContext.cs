@@ -1,4 +1,5 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

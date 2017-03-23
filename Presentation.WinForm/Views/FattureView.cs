@@ -1,6 +1,8 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,7 +66,7 @@ namespace CiccioGest.Presentation.WinForm.Views
 
         private void visualizzaFatture()
         {
-            IEnumerable<Fattura> fatt = service.GetFatture();
+            IEnumerable<FatturaReadOnly> fatt = service.GetFatture();
             fattureBindingSource.DataSource = fatt;
             fattureDataGridView.ClearSelection();
         }
@@ -73,7 +75,7 @@ namespace CiccioGest.Presentation.WinForm.Views
         {
             if (fattureBindingSource.Current != null)
             {                
-                apriFatturaForm(((Fattura)fattureBindingSource.Current).Id);
+                apriFatturaForm(((FatturaReadOnly)fattureBindingSource.Current).Id);
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
@@ -34,7 +36,7 @@ namespace CiccioGest.WebApi.Controllers
         [Route("api/Prodotti")]
         [SwaggerOperation("GetProdotti")]
         [SwaggerResponse(200, type: typeof(List<Prodotto>))]
-        public IEnumerable<Prodotto> GetAll()
+        public IEnumerable<ProdottoReadOnly> GetAll()
         {
             return service.GetProdotti();
         }

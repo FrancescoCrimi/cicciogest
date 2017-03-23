@@ -1,6 +1,8 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,7 +82,7 @@ namespace CiccioGest.Presentation.WinForm.Views
         private void prodottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (prodottiBindingSource.Current != null)
-                prodottoBindingSource.DataSource = prodottiBindingSource.Current;
+                prodottoBindingSource.DataSource = service.GetProdotto(((ProdottoReadOnly)prodottiBindingSource.Current).Id);
         }
 
         private void visualizzaProdotti()

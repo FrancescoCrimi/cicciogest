@@ -1,10 +1,13 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.Repository;
 using CiccioGest.Infrastructure.Persistence.EFC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CiccioGest.Domain.ReadOnlyModel;
 
 namespace Infrastructure.Persistence.EFC.Repository
 {
@@ -27,10 +30,15 @@ namespace Infrastructure.Persistence.EFC.Repository
             return da.ModelContext.FatturaSet.Find(id);
         }
 
-        public IEnumerable<Fattura> GetAll()
+        public IEnumerable<FatturaReadOnly> GetAll()
         {
-            return da.ModelContext.FatturaSet.ToList();
+            throw new NotImplementedException();
         }
+
+        //public IEnumerable<Fattura> GetAll()
+        //{
+        //    return da.ModelContext.FatturaSet.ToList();
+        //}
 
         public int Save(Fattura entity)
         {

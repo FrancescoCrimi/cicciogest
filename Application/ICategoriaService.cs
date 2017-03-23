@@ -1,4 +1,5 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    [ServiceContract(ConfigurationName = "Ciccio1.Application.ICategoriaService")]
+    [ServiceContract(ConfigurationName = "CiccioGest.Application.ICategoriaService")]
     public interface ICategoriaService : IDisposable
     {
         [OperationContract]

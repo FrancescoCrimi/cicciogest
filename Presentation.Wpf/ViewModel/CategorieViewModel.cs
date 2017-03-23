@@ -9,6 +9,7 @@ using CiccioGest.Application;
 using System.Collections.ObjectModel;
 using CiccioGest.Presentation.Wpf.Utils;
 using Castle.Core.Logging;
+using CiccioGest.Domain.Model;
 
 namespace CiccioGest.Presentation.Wpf.ViewModel
 {

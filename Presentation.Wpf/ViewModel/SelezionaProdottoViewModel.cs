@@ -1,6 +1,8 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using CiccioGest.Presentation.Wpf.Utils;
 using System;
 using System.Collections.Generic;
@@ -17,15 +19,15 @@ namespace CiccioGest.Presentation.Wpf.ViewModel
     {
         public SelezionaProdottoViewModel(IProdottoService prodottoService, ILogger logger)
         {
-            Prodotti = new ObservableCollection<Prodotto>();
+            Prodotti = new ObservableCollection<ProdottoReadOnly>();
             var prodotti = prodottoService.GetProdotti();
-            foreach (Prodotto pr in prodotti)
+            foreach (ProdottoReadOnly pr in prodotti)
             {
                 Prodotti.Add(pr);
             }
         }
 
-        public ObservableCollection<Prodotto> Prodotti { get; private set; }
+        public ObservableCollection<ProdottoReadOnly> Prodotti { get; private set; }
         public Prodotto ProdottoSelezionato { private get; set; }
 
         public ICommand SelezionaProdottoCommand

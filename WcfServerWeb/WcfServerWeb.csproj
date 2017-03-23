@@ -86,6 +86,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -98,9 +99,14 @@
     <Content Include="CategoriaService.svc" />
     <Content Include="FatturaService.svc" />
     <Content Include="ProdottoService.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +125,10 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{3d13291c-ac45-41f0-9200-21ebdf6d433b}</Project>
       <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interface.Wcf\Interface.Wcf.csproj">
+      <Project>{2fcafee6-b62c-4947-8fe9-f1d984f94f00}</Project>
+      <Name>Interface.Wcf</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

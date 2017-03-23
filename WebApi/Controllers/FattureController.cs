@@ -1,5 +1,7 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
@@ -36,7 +38,7 @@ namespace CiccioGest.WebApi.Controllers
         [Route("api/Fatture")]
         [SwaggerOperation("GetFatture")]
         [SwaggerResponse(200, type: typeof(List<Fattura>))]
-        public IEnumerable<Fattura> GetFatture()
+        public IEnumerable<FatturaReadOnly> GetFatture()
         {
             return service.GetFatture();
         }

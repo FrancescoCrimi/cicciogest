@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using CiccioGest.Domain;
 using Castle.Core.Logging;
 using CiccioGest.Infrastructure;
+using CiccioGest.Domain.Repository;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 
 namespace CiccioGest.Application.Impl
 {
@@ -42,7 +45,7 @@ namespace CiccioGest.Application.Impl
             }
         }
 
-        public IEnumerable<Prodotto> GetProdotti()
+        public IEnumerable<ProdottoReadOnly> GetProdotti()
         {
             return prodottoRepository.GetAll();
         }

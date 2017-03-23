@@ -1,10 +1,13 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.Repository;
 using CiccioGest.Infrastructure.Persistence.EFC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CiccioGest.Domain.ReadOnlyModel;
 
 namespace Infrastructure.Persistence.EFC.Repository
 {
@@ -27,10 +30,15 @@ namespace Infrastructure.Persistence.EFC.Repository
             return da.ModelContext.ProdottoSet.Find(id);
         }
 
-        public IEnumerable<Prodotto> GetAll()
+        public IEnumerable<ProdottoReadOnly> GetAll()
         {
-            return da.ModelContext.ProdottoSet.ToList();
+            throw new NotImplementedException();
         }
+
+        //public IEnumerable<Prodotto> GetAll()
+        //{
+        //    return da.ModelContext.ProdottoSet.ToList();
+        //}
 
         public int Save(Prodotto entity)
         {

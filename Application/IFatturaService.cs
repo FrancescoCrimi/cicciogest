@@ -1,4 +1,6 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    [ServiceContract(ConfigurationName = "Ciccio1.Application.IFatturaService")]
+    [ServiceContract(ConfigurationName = "CiccioGest.Application.IFatturaService")]
     public interface IFatturaService : IDisposable
     {
         [OperationContract]
-        IEnumerable<Fattura> GetFatture();
+        IEnumerable<FatturaReadOnly> GetFatture();
         [OperationContract]
         Fattura GetFattura(int id);
         [OperationContract]

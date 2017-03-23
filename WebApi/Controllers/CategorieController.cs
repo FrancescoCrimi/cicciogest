@@ -1,5 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
 using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;

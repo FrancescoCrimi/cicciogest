@@ -59,17 +59,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Categoria.cs" />
-    <Compile Include="Citta.cs" />
-    <Compile Include="Cliente.cs" />
-    <Compile Include="Dettaglio.cs" />
-    <Compile Include="Factory.cs" />
-    <Compile Include="Fattura.cs" />
-    <Compile Include="Indirizzo.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="Persona.cs" />
-    <Compile Include="Prodotto.cs" />
+    <Compile Include="Model\Categoria.cs" />
+    <Compile Include="Model\Citta.cs" />
+    <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\Dettaglio.cs" />
+    <Compile Include="Factory\Factory.cs" />
+    <Compile Include="Model\Fattura.cs" />
+    <Compile Include="Model\Indirizzo.cs" />
+    <Compile Include="ReadOnlyModel\Class1.cs" />
+    <Compile Include="ReadOnlyModel\FatturaReadOnly.cs" />
+    <Compile Include="Model\DomainEntity.cs" />
+    <Compile Include="Model\Persona.cs" />
+    <Compile Include="Model\Prodotto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyModel\ProdottoReadOnly.cs" />
+    <Compile Include="Repository\ICategoriaRepository.cs" />
+    <Compile Include="Repository\IDomainRepository.cs" />
+    <Compile Include="Repository\IFatturaRepository.cs" />
+    <Compile Include="Repository\IProdottoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -84,6 +91,7 @@
       <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

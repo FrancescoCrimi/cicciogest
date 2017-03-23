@@ -1,4 +1,6 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    [ServiceContract(ConfigurationName = "Ciccio1.Application.IProdottoService")]
+    [ServiceContract(ConfigurationName = "CiccioGest.Application.IProdottoService")]
     public interface IProdottoService : IDisposable
     {
         [OperationContract]
-        IEnumerable<Prodotto> GetProdotti();
+        IEnumerable<ProdottoReadOnly> GetProdotti();
         [OperationContract]
         Prodotto GetProdotto(int id);
         [OperationContract]

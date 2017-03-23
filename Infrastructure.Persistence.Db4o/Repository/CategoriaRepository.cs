@@ -1,4 +1,6 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +13,10 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o.Repository
     {
         public CategoriaRepository(DataAccess da)
             : base(da) { }
+
+        public IEnumerable<Categoria> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using CiccioGest.Domain;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.Repository;
 using CiccioGest.Infrastructure.Persistence.EFC;
 using System;
 using System.Collections.Generic;

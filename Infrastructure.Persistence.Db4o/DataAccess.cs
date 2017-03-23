@@ -10,6 +10,7 @@ using CiccioGest.Domain;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Infrastructure.DomainBase;
 using Castle.Core.Logging;
+using CiccioGest.Domain.Model;
 
 namespace CiccioGest.Infrastructure.Persistence.Db4o
 {

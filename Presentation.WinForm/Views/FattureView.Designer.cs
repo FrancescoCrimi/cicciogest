@@ -133,7 +133,7 @@
             // 
             this.aboutToolStripMenuItem.Image = global::CiccioGest.Presentation.WinForm.Properties.Resources.About;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -189,7 +189,7 @@
             // 
             // fattureBindingSource
             // 
-            this.fattureBindingSource.DataSource = typeof(CiccioGest.Domain.Fattura);
+            this.fattureBindingSource.DataSource = typeof(CiccioGest.Domain.ReadOnlyModel.FatturaReadOnly);
             // 
             // FattureView
             // 

@@ -154,9 +154,16 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Ciccio1.Domain.Dettaglio.datasource" />
-    <None Include="Properties\DataSources\Ciccio1.Domain.Fattura.datasource" />
-    <None Include="Properties\DataSources\Ciccio1.Domain.Prodotto.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Categoria.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Citta.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Cliente.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Dettaglio.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Fattura.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Indirizzo.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Persona.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Model.Prodotto.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.ReadOnlyModel.FatturaReadOnly.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.ReadOnlyModel.ProdottoReadOnly.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
