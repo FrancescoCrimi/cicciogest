@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.Wpf
                     container.Install(FromAssembly.Named("Application.Impl"));
                     break;
                 case Infrastructure.Storage.WCF:
-                    container.Install(FromAssembly.Named("WcfClient"));
+                    container.Install(FromAssembly.Named("Presentation.ClientWcf"));
                     break;
                 case Infrastructure.Storage.REST:
                     break;

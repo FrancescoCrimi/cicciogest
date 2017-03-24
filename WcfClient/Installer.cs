@@ -4,7 +4,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Infrastructure.Wcf;
+//using CiccioGest.Infrastructure.Wcf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +22,22 @@ namespace CiccioGest.WcfClient
             IConf conf = container.Resolve<IConf>();
             //ChannelFactory<IFatturaService> cf = creaFatturaChannelFactory(conf.ConnectionString + "/FatturaService.svc");
 
+            //DefaultClientModel cazzo = new DefaultClientModel();
+            //cazzo.Endpoint = WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/FatturaService.svc");
+
             container.Register(
-                //Component.For<IFatturaService>().AsWcfClient(                
-                //    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.ConnectionString + "/FatturaService.svc")),
-                //Component.For<IFatturaService>().UsingFactoryMethod(cf.CreateChannel).LifestyleTransient());            
-                Component.For<IFatturaService>().UsingFactoryMethod(suca<IFatturaService>(conf.CS + "/FatturaService.svc").CreateChannel).LifestyleTransient(),
-                Component.For<IProdottoService>().UsingFactoryMethod(suca<IProdottoService>(conf.CS + "/ProdottoService.svc").CreateChannel).LifestyleTransient(),
-                Component.For<ICategoriaService>().UsingFactoryMethod(suca<ICategoriaService>(conf.CS + "/CategoriaService.svc").CreateChannel).LifestyleTransient());
+                Component.For<IFatturaService>().AsWcfClient(
+                    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/FatturaService.svc")),
+                Component.For<IProdottoService>().AsWcfClient(
+                    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/ProdottoService.svc")),
+                Component.For<ICategoriaService>().AsWcfClient(
+                    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/CategoriaService.svc")));
+
+            container.Register(Component.For<IEndpointBehavior>().ImplementedBy<DomainListEndpointBehavior>());
+
+            //Component.For<IFatturaService>().UsingFactoryMethod(suca<IFatturaService>(conf.CS + "/FatturaService.svc").CreateChannel).LifestyleTransient(),
+            //Component.For<IProdottoService>().UsingFactoryMethod(suca<IProdottoService>(conf.CS + "/ProdottoService.svc").CreateChannel).LifestyleTransient(),
+            //Component.For<ICategoriaService>().UsingFactoryMethod(suca<ICategoriaService>(conf.CS + "/CategoriaService.svc").CreateChannel).LifestyleTransient());
         }
 
         ChannelFactory<Service> suca<Service>(string address)
@@ -36,7 +45,7 @@ namespace CiccioGest.WcfClient
             WSHttpBinding myBinding = new WSHttpBinding();
             EndpointAddress myEndpointAddress = new EndpointAddress(address);
             ChannelFactory<Service> myChannelFactory = new ChannelFactory<Service>(myBinding, myEndpointAddress);
-            //defineSurrogate(myChannelFactory.Endpoint);
+            defineSurrogate(myChannelFactory.Endpoint);
             return myChannelFactory;
         }
 
