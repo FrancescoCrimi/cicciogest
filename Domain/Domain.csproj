@@ -79,7 +79,6 @@
     <Compile Include="Repository\IProdottoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Categoria.datasource" />
     <None Include="Properties\DataSources\Dettaglio.datasource" />

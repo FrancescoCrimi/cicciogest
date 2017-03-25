@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICategoriaService.cs" />
-    <Compile Include="ICiccioService.cs" />
     <Compile Include="IFatturaService.cs" />
     <Compile Include="IProdottoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +68,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Castle.Facilities.WcfIntegration;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Windsor;
+using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Castle.Windsor;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Facilities.WcfIntegration;
-using CiccioGest.Infrastructure;
-using CiccioGest.Infrastructure.Conf;
 
 namespace CiccioGest.Application.Impl
 {

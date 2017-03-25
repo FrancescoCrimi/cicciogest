@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Castle.Core.Logging;
+using CiccioGest.Domain.Model;
+using CiccioGest.Domain.ReadOnlyModel;
+using CiccioGest.Domain.Repository;
+using CiccioGest.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CiccioGest.Domain;
-using Castle.Core.Logging;
-using CiccioGest.Infrastructure;
-using CiccioGest.Domain.Repository;
-using CiccioGest.Domain.Model;
-using CiccioGest.Domain.ReadOnlyModel;
 
 namespace CiccioGest.Application.Impl
 {
