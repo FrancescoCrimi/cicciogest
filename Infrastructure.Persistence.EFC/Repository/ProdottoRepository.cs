@@ -20,9 +20,10 @@ namespace Infrastructure.Persistence.EFC.Repository
             this.da = da;
         }
 
-        public void Delete(Prodotto entity)
+        public void Delete(int id)
         {
-            da.ModelContext.ProdottoSet.Remove(entity);
+            //da.ModelContext.ProdottoSet.Remove(entity);
+            throw new NotImplementedException();
         }
 
         public Prodotto Get(int id)

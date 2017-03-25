@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Domain.Repository
 {
-    public interface IDomainRepository<TEntity> : IEntityRepository<TEntity, int>
-    where TEntity : DomainEntity<TEntity>
+    public interface IDomainRepository<TEntity> : IEntityRepository<TEntity, int>    
+        where TEntity : DomainEntity<TEntity>
     {
     }
 }

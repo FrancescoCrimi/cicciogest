@@ -58,7 +58,7 @@ namespace CiccioGest.Presentation.Wpf.ViewModel
                 {
                     try
                     {
-                        service.DeleteCategoria(Categoria);
+                        service.DeleteCategoria(Categoria.Id);
                         aggiorna();
                     }
                     catch (Exception e)

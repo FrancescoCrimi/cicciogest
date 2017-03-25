@@ -64,7 +64,7 @@ namespace CiccioGest.Presentation.WinForm.Views
             {
                 try
                 {
-                    service.DeleteCategoria(tp);
+                    service.DeleteCategoria(tp.Id);
                     visualizzaCategorie();
                 }
                 catch (Exception ex)

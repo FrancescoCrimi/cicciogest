@@ -10,7 +10,7 @@ namespace CiccioGest.Infrastructure.Persistence.EF.Repository
     abstract class EntityRepository<TEntity, TId> 
         : IEntityRepository<TEntity, TId> where TEntity : Entity<TEntity, TId>
     {
-        public void Delete(TEntity entity)
+        public void Delete(TId id)
         {
             throw new NotImplementedException();
         }

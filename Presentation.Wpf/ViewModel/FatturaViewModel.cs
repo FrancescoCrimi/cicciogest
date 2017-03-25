@@ -74,7 +74,7 @@ namespace CiccioGest.Presentation.Wpf.ViewModel
                 {
                     try
                     {
-                        service.DeleteFattura(Fattura);
+                        service.DeleteFattura(Fattura.Id);
                         ViewModelLocator.Messenger.NotifyColleagues("AggiornaFattureView");
                         //App.Messenger.NotifyColleagues("ChiudiFatturaView");
                         window.Close();

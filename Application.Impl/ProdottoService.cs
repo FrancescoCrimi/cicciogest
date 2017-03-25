@@ -31,11 +31,11 @@ namespace CiccioGest.Application.Impl
             this.categoriaRepository = categoriaRepository;
         }
 
-        public void DeleteProdotto(Prodotto prodotto)
+        public void DeleteProdotto(int id)
         {
             try
             {
-                prodottoRepository.Delete(prodotto);
+                prodottoRepository.Delete(id);
                 da.Commit();
             }
             catch (Exception ex)

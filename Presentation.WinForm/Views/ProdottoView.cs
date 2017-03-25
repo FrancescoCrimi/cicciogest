@@ -63,7 +63,7 @@ namespace CiccioGest.Presentation.WinForm.Views
             {
                 try
                 {
-                    service.DeleteProdotto(p);
+                    service.DeleteProdotto(p.Id);
                 }
                 catch (Exception ex)
                 {

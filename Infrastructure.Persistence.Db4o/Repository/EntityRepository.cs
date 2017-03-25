@@ -43,14 +43,21 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o.Repository
             return 0;
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(TId id)
         {
-            da.ObjectContainer.Delete(entity);
+            var entity = Get(id);
+            if (entity != null)
+                da.ObjectContainer.Delete(entity);
         }
 
         public void Update(TEntity entity)
         {
             da.ObjectContainer.Store(entity);
         }
+
+        //public void Delete(TId id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

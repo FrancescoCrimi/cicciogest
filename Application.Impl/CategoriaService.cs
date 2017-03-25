@@ -33,7 +33,7 @@ namespace CiccioGest.Application.Impl
         {
             try
             {
-                categoriaRepository.Delete(categoria);
+                //categoriaRepository.Delete(categoria);
                 da.Commit();
             }
             catch (Exception ex)
@@ -78,6 +78,11 @@ namespace CiccioGest.Application.Impl
         public void Dispose()
         {
             //throw new NotImplementedException();
+        }
+
+        public void DeleteCategoria(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

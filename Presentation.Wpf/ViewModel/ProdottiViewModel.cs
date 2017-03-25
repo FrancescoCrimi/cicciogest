@@ -82,7 +82,7 @@ namespace CiccioGest.Presentation.Wpf.ViewModel
                 {
                     try
                     {
-                        service.DeleteProdotto(Prodotto);
+                        service.DeleteProdotto(Prodotto.Id);
                         aggiorna();
                     }
                     catch (Exception e)

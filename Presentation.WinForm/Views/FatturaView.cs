@@ -46,7 +46,7 @@ namespace CiccioGest.Presentation.WinForm.Views
 
         private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            service.DeleteFattura((Fattura)fatturaBindingSource.DataSource);
+            service.DeleteFattura(((Fattura)fatturaBindingSource.DataSource).Id);
             Close();
         }
 

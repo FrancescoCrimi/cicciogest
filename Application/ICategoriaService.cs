@@ -19,6 +19,6 @@ namespace CiccioGest.Application
         [OperationContract]
         Categoria SaveCategoria(Categoria categoria);
         [OperationContract]
-        void DeleteCategoria(Categoria categoria);
+        void DeleteCategoria(int id);
     }
 }

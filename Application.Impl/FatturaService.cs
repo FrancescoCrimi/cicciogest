@@ -31,11 +31,11 @@ namespace CiccioGest.Application.Impl
             this.prodottoRepository = prodottoRepository;
         }
 
-        public void DeleteFattura(Fattura fattura)
+        public void DeleteFattura(int id)
         {
             try
             {
-                fatturaRepository.Delete(fattura);
+                fatturaRepository.Delete(id);
                 da.Commit();
             }
             catch (Exception ex)
@@ -87,5 +87,7 @@ namespace CiccioGest.Application.Impl
         {
             //throw new NotImplementedException();
         }
+
+     
     }
 }

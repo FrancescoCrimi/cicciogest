@@ -20,7 +20,7 @@ namespace CiccioGest.Application
         [OperationContract]
         Fattura SaveFattura(Fattura fattura);
         [OperationContract]
-        void DeleteFattura(Fattura fattura);
+        void DeleteFattura(int id);
 
         [OperationContract]
         Prodotto GetProdotto(int id);

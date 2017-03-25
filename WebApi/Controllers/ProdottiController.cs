@@ -1,5 +1,4 @@
 ﻿using CiccioGest.Application;
-using CiccioGest.Domain;
 using CiccioGest.Domain.Model;
 using CiccioGest.Domain.ReadOnlyModel;
 using Swashbuckle.Swagger.Annotations;
@@ -29,21 +28,21 @@ namespace CiccioGest.WebApi.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Ritorna lista prodotti
         /// </summary>
         /// <response code="200">OK</response>
         [HttpGet]
         [Route("api/Prodotti")]
         [SwaggerOperation("GetProdotti")]
-        [SwaggerResponse(200, type: typeof(List<Prodotto>))]
-        public IEnumerable<ProdottoReadOnly> GetAll()
+        [SwaggerResponse(200, type: typeof(List<ProdottoReadOnly>))]
+        public IEnumerable<ProdottoReadOnly> GetProdotti()
         {
             return service.GetProdotti();
         }
 
 
         /// <summary>
-        /// 
+        /// Ritorna prodotto per id
         /// </summary>
         /// <param name="id"></param>
         /// <response code="200">OK</response>
@@ -51,37 +50,39 @@ namespace CiccioGest.WebApi.Controllers
         [Route("api/Prodotti/{id}")]
         [SwaggerOperation("GetProdotto")]
         [SwaggerResponse(200, type: typeof(Prodotto))]
-        public Prodotto GetById(int id)
+        public Prodotto GetProdotto(int id)
         {
             return service.GetProdotto(id);
         }
 
 
+
         /// <summary>
-        /// 
+        /// Salva prodotto
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="prodotto"></param>
         /// <response code="200">OK</response>
         [HttpPost]
         [Route("api/Prodotti")]
         [SwaggerOperation("SaveProdotto")]
         [SwaggerResponse(200, type: typeof(Prodotto))]
-        public Prodotto Save([FromBody]Prodotto value)
+        public Prodotto SaveProdotto([FromBody]Prodotto prodotto)
         {
-            return service.SaveProdotto(value);
+            return service.SaveProdotto(prodotto);
         }
 
 
         /// <summary>
-        /// 
+        /// Cancella prodotto per id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">IdProdotto</param>
         /// <response code="204">No Content</response>
         [HttpDelete]
         [Route("api/Prodotti/{id}")]
         [SwaggerOperation("DeleteProdotto")]
-        public void Delete(Guid id)
+        public void DeleteProdotto(int id)
         {
+            service.DeleteProdotto(id);
         }
     }
 }

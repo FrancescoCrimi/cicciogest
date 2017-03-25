@@ -20,9 +20,10 @@ namespace Infrastructure.Persistence.EFC.Repository
             this.da = da;
         }
 
-        public void Delete(Fattura entity)
+        public void Delete(int id)
         {
-            da.ModelContext.FatturaSet.Remove(entity);
+            //da.ModelContext.FatturaSet.Remove(entity);
+            throw new NotImplementedException();
         }
 
         public Fattura Get(int id)

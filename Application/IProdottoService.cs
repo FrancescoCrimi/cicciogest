@@ -20,7 +20,7 @@ namespace CiccioGest.Application
         [OperationContract]
         Prodotto SaveProdotto(Prodotto prodotto);
         [OperationContract]
-        void DeleteProdotto(Prodotto prodotto);
+        void DeleteProdotto(int id);
 
         [OperationContract]
         IEnumerable<Categoria> GetCategorie();

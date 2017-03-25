@@ -31,7 +31,7 @@ namespace CiccioGest.WebApi.Controllers
 
 
         /// <summary>
-        /// 
+        /// Ritorna lista fatture
         /// </summary>
         /// <response code="200">OK</response>
         [HttpGet]
@@ -45,7 +45,7 @@ namespace CiccioGest.WebApi.Controllers
 
 
         /// <summary>
-        /// Ritorna Fattura per Guid
+        /// Ritorna Fattura per id
         /// </summary>
         /// <param name="id"></param>
         /// <response code="200">OK</response>
@@ -61,7 +61,7 @@ namespace CiccioGest.WebApi.Controllers
 
 
         /// <summary>
-        /// Salva nuova o aggiorna Fattura
+        /// Salva nuova o aggiorna fattura
         /// </summary>
         /// <param name="fattura"></param>
         /// <response code="200">OK</response>

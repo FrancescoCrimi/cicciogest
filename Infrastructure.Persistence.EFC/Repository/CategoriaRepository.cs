@@ -19,9 +19,11 @@ namespace Infrastructure.Persistence.EFC.Repository
             this.da = da;
         }
 
-        public void Delete(Categoria entity)
+        public void Delete(int id)
         {
-            da.ModelContext.CategoriaSet.Remove(entity);
+            var entity = Get(id);
+            if (entity != null)
+                da.ModelContext.CategoriaSet.Remove(entity);
         }
 
         public Categoria Get(int id)

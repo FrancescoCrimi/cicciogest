@@ -14,7 +14,7 @@ namespace CiccioGest.WebApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    public class CategorieController : ApiController
+    public class CategorieController : ApiController, ICategoriaService
     {
         private ICategoriaService service;
 
@@ -36,7 +36,7 @@ namespace CiccioGest.WebApi.Controllers
         [Route("api/Categorie")]
         [SwaggerOperation("GetCategorie")]
         [SwaggerResponse(200, type: typeof(List<Categoria>))]
-        public IEnumerable<Categoria> GetAll()
+        public IEnumerable<Categoria> GetCategorie()
         {
             return service.GetCategorie();
         }
@@ -52,7 +52,7 @@ namespace CiccioGest.WebApi.Controllers
         [Route("api/Categorie")]
         [SwaggerOperation("SaveCategoria")]
         [SwaggerResponse(200, type: typeof(Categoria))]
-        public Categoria Save([FromBody]Categoria value)
+        public Categoria SaveCategoria([FromBody]Categoria value)
         {
             return service.SaveCategoria(value);
         }
@@ -66,8 +66,25 @@ namespace CiccioGest.WebApi.Controllers
         [HttpDelete]
         [Route("api/Categorie/{id}")]
         [SwaggerOperation("DeleteCategoria")]
-        public void Delete(Guid id)
+        public void DeleteCategoria(int id)
         {
+            service.DeleteCategoria(id);
         }
+
+
+        /// <summary>
+        /// Ritorna categoria per id
+        /// </summary>
+        /// <param name="id">IdCategoria</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/Categorie/{id}")]
+        [SwaggerOperation("GetCategoria")]
+        public Categoria GetCategoria(int id)
+        {
+            return service.GetCategoria(id);
+        }
+
+   
     }
 }

@@ -27,9 +27,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             return (int)da.ISession.Save(entity);
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(int id)
         {
-            da.ISession.Delete(entity);
+            var entity = da.ISession.Get<TEntity>(id);
+            if (entity != null)
+                da.ISession.Delete(entity);
         }
 
         public void Update(TEntity entity)
