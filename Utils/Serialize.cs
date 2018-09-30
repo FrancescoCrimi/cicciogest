@@ -1,6 +1,6 @@
-﻿using CiccioGest.Application;
-using CiccioGest.Domain;
-using CiccioGest.Domain.Model;
+﻿using Castle.Windsor;
+using CiccioGest.Application;
+using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace CiccioGest.Utils
 
         public Serialize()
         {
-            Container container = new Container(UI.Form);
+            IWindsorContainer container = Bootstrap.Windsor;
             container.Install(new CiccioGest.Application.Impl.Installer());
             service = container.Resolve<IFatturaService>();
             BackupXml();

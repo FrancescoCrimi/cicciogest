@@ -1,7 +1,9 @@
 ﻿using Castle.MicroKernel.Lifestyle;
+using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Domain;
-using CiccioGest.Domain.Model;
+using CiccioGest.Domain.Documenti;
+using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -15,36 +17,36 @@ namespace CiccioGest.Utils
     {
         public LoadData()
         {
-            Container container = new Container(UI.Form);
+            IWindsorContainer container =  Bootstrap.Windsor;
             container.Install(new CiccioGest.Application.Impl.Installer());
 
-            IDisposable disposable = container.Windsor.BeginScope();
-            IDataAccess da = container.Resolve<IDataAccess>();
+            IDisposable disposable = container.BeginScope();
+            IUnitOfWorkFactory da = container.Resolve<IUnitOfWorkFactory>();
             IFatturaService fatturaService = container.Resolve<IFatturaService>();
-            ICategoriaService categoriaService = container.Resolve<ICategoriaService>();
-            IProdottoService prodottoService = container.Resolve<IProdottoService>();
+            IMagazinoService magazinoService = container.Resolve<IMagazinoService>();
+            //IProdottoService prodottoService = container.Resolve<IProdottoService>();
 
             da.CreateDataAccess();
 
             for (int c = 1; c < 6; c++)
             {
-                Categoria cat = Factory.NewCategoria();
+                Categoria cat = new Categoria();
                 cat.Nome = "Categoria " + c.ToString();
-                categoriaService.SaveCategoria(cat);
+                magazinoService.SaveCategoria(cat);
             }
 
             for (int p = 1; p < 6; p++)
             {
-                Prodotto prod = Factory.NewProdotto();
+                Prodotto prod = new Prodotto();
                 prod.Nome = "Prodotto " + p.ToString();
                 prod.Prezzo = 10 + p;
-                prod.Categoria = categoriaService.GetCategoria(p);
-                prodottoService.SaveProdotto(prod);
+                prod.Categoria = magazinoService.GetCategoria(p);
+                magazinoService.SaveProdotto(prod);
             }
 
             for (int i = 1; i < 6; i++)
             {
-                Fattura fatt = Factory.NewFattura();
+                Fattura fatt = new Fattura();
                 fatt.Nome = "Fattura " + i.ToString();
                 for (int o = 1; o < (i + 1); o++)
                 {
@@ -56,8 +58,8 @@ namespace CiccioGest.Utils
 
             container.Release(da);
             container.Release(fatturaService);
-            container.Release(prodottoService);
-            container.Release(categoriaService);
+            //container.Release(prodottoService);
+            container.Release(magazinoService);
             disposable.Dispose();
         }
     }

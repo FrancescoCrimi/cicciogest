@@ -1,4 +1,4 @@
-﻿using CiccioGest.Domain.Model;
+﻿using CiccioGest.Domain.Magazino;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;

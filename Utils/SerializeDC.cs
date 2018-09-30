@@ -1,9 +1,9 @@
 ﻿using Castle.MicroKernel.Lifestyle;
+using Castle.Windsor;
 using CiccioGest.Application;
-using CiccioGest.Domain;
-using CiccioGest.Domain.Model;
+using CiccioGest.Domain.Documenti;
+using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
-//using CiccioGest.Infrastructure.Wcf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,9 +19,9 @@ namespace CiccioGest.Utils
         IFatturaService service;
         public SerializeDC()
         {
-            Container container = new Container(UI.Form);
+            IWindsorContainer container =  Bootstrap.Windsor;
             container.Install(new CiccioGest.Application.Impl.Installer());
-            container.Windsor.BeginScope();
+            container.BeginScope();
             service = container.Resolve<IFatturaService>();
             serialize();
             //deserialize();

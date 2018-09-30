@@ -10,8 +10,8 @@ namespace CiccioGest.Utils
     {
         static void Main(string[] args)
         {
-            new SerializeDC();
-            //new LoadData();
+            //new SerializeDC();
+            new LoadData();
         }
     }
 }
