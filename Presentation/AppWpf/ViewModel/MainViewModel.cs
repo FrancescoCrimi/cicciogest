@@ -19,6 +19,8 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private ILogger logger;
+        private IKernel kernel;
         private readonly IDataService _dataService;
 
         /// <summary>
@@ -49,6 +51,8 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         /// </summary>
         public MainViewModel(ILogger logger, IKernel kernel, IDataService dataService)
         {
+            this.logger = logger;
+            this.kernel = kernel;
             _dataService = dataService;
             _dataService.GetData(
                 (item, error) =>
@@ -62,52 +66,57 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
                     WelcomeTitle = item.Title;
                 });
 
-            ApriFattureCommand = new RelayCommand(() =>
-            {
-                IDisposable disp = kernel.BeginScope();
-                var fv = new FatturaView();
-                Messenger.Default.Send(new CaricaFattura() { What = LoadType.Cerca });
-                fv.ShowDialog();
-                kernel.ReleaseComponent(fv);
-                disp.Dispose();
-            });
-            NuovaFatturaCommand = new RelayCommand(() =>
-            {
-                IDisposable disp = kernel.BeginScope();
-                var fv = new FatturaView();
-                Messenger.Default.Send(new CaricaFattura() { What = LoadType.Nuova });
-                fv.ShowDialog();
-                kernel.ReleaseComponent(fv);
-                disp.Dispose();
-            });
-            ApriProdottiCommand = new RelayCommand(() =>
-            {
-                IDisposable disp = kernel.BeginScope();
-                var pv = new ProdottoView();
-                Messenger.Default.Send(new CaricaProdotto() { What = LoadType.Cerca });
-                pv.ShowDialog();
-                kernel.ReleaseComponent(pv);
-                disp.Dispose();
-            });
-            NuovoProdottoCommand = new RelayCommand(() =>
-            {
-                IDisposable disp = kernel.BeginScope();
-                var pv = new ProdottoView();
-                Messenger.Default.Send(new CaricaProdotto() { What = LoadType.Nuova });
-                pv.ShowDialog();
-                kernel.ReleaseComponent(pv);
-                disp.Dispose();
-            });
-            ApriCategorieCommand = new RelayCommand(() =>
-            {
-                IDisposable disp = kernel.BeginScope();
-                var pv = new CategoriaView();
-                pv.ShowDialog();
-                kernel.ReleaseComponent(pv);
-                disp.Dispose();
-            });
+            ApriFattureCommand = new RelayCommand(apriFatture);
+            NuovaFatturaCommand = new RelayCommand(nuovaFattura);
+            ApriProdottiCommand = new RelayCommand(apriProdotti);
+            NuovoProdottoCommand = new RelayCommand(nuovoProdotto);
+            ApriCategorieCommand = new RelayCommand(apriCategorie);
         }
 
+        private void apriCategorie()
+        {
+            IDisposable disp = kernel.BeginScope();
+            var pv = new CategoriaView();
+            pv.ShowDialog();
+            kernel.ReleaseComponent(pv);
+            disp.Dispose();
+        }
+        private void nuovoProdotto()
+        {
+            IDisposable disp = kernel.BeginScope();
+            var pv = new ProdottoView();
+            Messenger.Default.Send(new CaricaProdotto() { What = LoadType.Nuova });
+            pv.ShowDialog();
+            kernel.ReleaseComponent(pv);
+            disp.Dispose();
+        }
+        private void apriProdotti()
+        {
+            IDisposable disp = kernel.BeginScope();
+            var pv = new ProdottoView();
+            Messenger.Default.Send(new CaricaProdotto() { What = LoadType.Cerca });
+            pv.ShowDialog();
+            kernel.ReleaseComponent(pv);
+            disp.Dispose();
+        }
+        private void nuovaFattura()
+        {
+            IDisposable disp = kernel.BeginScope();
+            var fv = new FatturaView();
+            Messenger.Default.Send(new CaricaFattura() { What = LoadType.Nuova });
+            fv.ShowDialog();
+            kernel.ReleaseComponent(fv);
+            disp.Dispose();
+        }
+        private void apriFatture()
+        {
+            IDisposable disp = kernel.BeginScope();
+            var fv = new FatturaView();
+            Messenger.Default.Send(new CaricaFattura() { What = LoadType.Cerca });
+            fv.ShowDialog();
+            kernel.ReleaseComponent(fv);
+            disp.Dispose();
+        }
 
         public ICommand ApriFattureCommand { get; private set; }
         public ICommand NuovaFatturaCommand { get; private set; }
