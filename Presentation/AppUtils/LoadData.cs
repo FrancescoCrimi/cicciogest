@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Utils
+namespace CiccioGest.Presentation.AppUtils
 {
     class LoadData
     {

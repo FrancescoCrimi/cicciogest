@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Utils
+namespace CiccioGest.Presentation.AppUtils
 {
     public class MyDataContractSurrogate : IDataContractSurrogate
     {
