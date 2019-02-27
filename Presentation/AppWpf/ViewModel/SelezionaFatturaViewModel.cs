@@ -2,9 +2,11 @@
 using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -17,11 +19,12 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class SelezionaFatturaViewModel : ViewModelBase
+    public sealed class SelezionaFatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
+        public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
+        public FatturaReadOnly FatturaSelezionata { private get; set; }
+        public ICommand ApriFattura { get; private set; }
         private ILogger logger;
-        private IKernel kernel;
-        private IFatturaService service;
 
         /// <summary>
         /// Initializes a new instance of the SelezionaFatturaViewModel class.
@@ -30,49 +33,28 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public SelezionaFatturaViewModel(ILogger logger, IKernel kernel, IFatturaService service)
         {
             this.logger = logger;
-            this.kernel = kernel;
-            this.service = service;
-            Fatture = new ObservableCollection<FatturaReadOnly>();
             ApriFattura = new RelayCommand<Window>(apriFattura);
-            Messenger.Default.Register<AggiornaSelezionaFattureView>(this, aggiorna);
-            aggiorna();
-        }
-
-        #region Proprietà pubbliche
-
-        public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
-        public FatturaReadOnly FatturaSelezionata { private get; set; }
-        public ICommand ApriFattura { get; private set; }
-
-        #endregion
-
-
-        #region Metodi Privati
-
-        private void aggiorna(object aa = null)
-        {
-            Fatture.Clear();
+            Fatture = new ObservableCollection<FatturaReadOnly>();
             foreach (FatturaReadOnly fatt in service.GetFatture())
             {
                 Fatture.Add(fatt);
             }
-            RaisePropertyChanged("Fatture");
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Created");
         }
 
         private void apriFattura(Window wnd)
         {
             if (FatturaSelezionata != null)
             {
-                Messenger.Default.Send(new CaricaFattura
-                {
-                    IdFattura = FatturaSelezionata.Id,
-                    What = LoadType.Carica
-                });
+                MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
                 wnd.Close();
             }
         }
 
-        #endregion
-
+        public void Dispose()
+        {
+            Cleanup();
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+        }
     }
 }

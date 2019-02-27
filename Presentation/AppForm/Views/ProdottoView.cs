@@ -2,6 +2,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class ProdottoView : Form
+    public partial class ProdottoView : Form, ICazzo
     {
         private ILogger logger;
         private IMagazinoService service;

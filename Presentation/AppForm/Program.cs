@@ -1,4 +1,6 @@
-﻿using CiccioGest.Presentation.AppForm.Views;
+﻿using Castle.MicroKernel.Registration;
+using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.AppForm.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +19,21 @@ namespace CiccioGest.Presentation.AppForm
             SetProcessDPIAware();
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            System.Windows.Forms.Application.Run(new HomeView());
+            new Program();
+            System.Windows.Forms.Application.Run(new MainView());
             //System.Windows.Forms.Application.Run(new ConfigDataAccessView());
+        }
+
+        public Program()
+        {
+            Bootstrap.Windsor.Install(new CiccioGest.Presentation.Client.Installer());
+            Bootstrap.Windsor.Register(
+                Component.For<ProdottoView>().LifestyleTransient(),
+                Component.For<CategoriaView>().LifestyleTransient(),
+                Component.For<SelectProdottoView>().LifeStyle.Transient,
+                Component.For<SelectFattureView>().LifestyleTransient(),
+                Component.For<FatturaView>().LifestyleTransient(),
+                Component.For<MainView>().LifestyleTransient());
         }
     }
 }

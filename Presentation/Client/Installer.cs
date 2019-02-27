@@ -27,9 +27,9 @@ namespace CiccioGest.Presentation.Client
                           Component.For<IFatturaService>().AsWcfClient(
                               WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/FatturaService.svc")),
                           Component.For<IMagazinoService>().AsWcfClient(
-                              WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/ProdottoService.svc")),
-                          Component.For<IClientiFornitoriService>().AsWcfClient(
-                              WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/CategoriaService.svc")),
+                              WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/MagazinoService.svc")),
+                          //Component.For<IClientiFornitoriService>().AsWcfClient(
+                          //    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/CategoriaService.svc")),
                           Component.For<IEndpointBehavior>().ImplementedBy<DomainListEndpointBehavior>());
                     break;
                 case Storage.REST:

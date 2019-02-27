@@ -1,4 +1,5 @@
-﻿using CiccioGest.Domain.Magazino;
+﻿using Castle.Core.Logging;
+using CiccioGest.Domain.Magazino;
 using NHibernate;
 using NHibernate.Criterion;
 using System;
@@ -11,8 +12,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
     class ProdottoRepository : DomainRepository<Prodotto>, IProdottoRepository
     {
-        public ProdottoRepository(UnitOfWorkNhb unitOfWork)
-            : base(unitOfWork) { }
+        public ProdottoRepository(ILogger logger, UnitOfWorkNhb unitOfWork)
+            : base(unitOfWork)
+        {
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " (uow:" + unitOfWork.GetHashCode().ToString() + " ) Created");
+        }
 
         public IEnumerable<ProdottoReadOnly> GetAll()
         {

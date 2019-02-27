@@ -32,7 +32,7 @@
             </MenuItem>
             <MenuItem Header="Magazino">
                 <MenuItem Header="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>
-                <MenuItem Header="Nuovo Prodotto" Command="{Binding NuovoProdottoCommand, Mode=OneWay}"/>
+                <!--<MenuItem Header="Nuovo Prodotto" Command="{Binding NuovoProdottoCommand, Mode=OneWay}"/>-->
                 <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Anagrafica">

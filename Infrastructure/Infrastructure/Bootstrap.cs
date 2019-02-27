@@ -62,10 +62,9 @@ namespace CiccioGest.Infrastructure
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithAppConfig());
             windsor.AddFacility<WcfFacility>();
-
             windsor.Register(Component.For<IConf>().Instance(conf));
-            logger = windsor.Resolve<ILogger>();
-            logger.Debug(windsor.GetType().Name + ":" + windsor.GetHashCode().ToString() + " Created");
+            logger = windsor.Resolve<ILoggerFactory>().Create(this.GetType());
+            //logger.Debug(windsor.GetType().Name + ":" + windsor.GetHashCode().ToString() + " Created");
         }
 
         private IConf readConfiguration()

@@ -32,7 +32,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     sessionFactory = null;
                 }
                 sessionFactory = getNhbConfiguration().BuildSessionFactory();
-                logger.Debug(sessionFactory.GetType().Name + ":" + sessionFactory.GetHashCode().ToString() + " Created");
+                //logger.Debug(sessionFactory.GetType().Name + ":" + sessionFactory.GetHashCode().ToString() + " Created");
             }
             logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
         }

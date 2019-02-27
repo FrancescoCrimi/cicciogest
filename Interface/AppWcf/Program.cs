@@ -29,9 +29,9 @@ namespace CiccioGest.Interface.AppWcf
                 typeof(IFatturaService).AssemblyQualifiedName,
                 new Uri[] { new Uri(baseAddresses + "FatturaService.svc") });
 
-            ServiceHostBase prodottoServiceHost = factory.CreateServiceHost(
+            ServiceHostBase magazinoServiceHost = factory.CreateServiceHost(
                 typeof(IMagazinoService).AssemblyQualifiedName,
-                new Uri[] { new Uri(baseAddresses + "ProdottoService.svc") });
+                new Uri[] { new Uri(baseAddresses + "MagazinoService.svc") });
 
             //ServiceHostBase categoriaServiceHost = factory.CreateServiceHost(
             //    typeof(IClientiFornitoriService).AssemblyQualifiedName,
@@ -41,21 +41,21 @@ namespace CiccioGest.Interface.AppWcf
             {
                 fatturaServiceHost.Open();
                 PrintServiceInfo(fatturaServiceHost);
-                prodottoServiceHost.Open();
-                PrintServiceInfo(prodottoServiceHost);
+                magazinoServiceHost.Open();
+                PrintServiceInfo(magazinoServiceHost);
                 //categoriaServiceHost.Open();
                 //PrintServiceInfo(categoriaServiceHost);
                 Console.WriteLine("Press <ENTER> to terminate service.");
                 Console.ReadLine();
                 fatturaServiceHost.Close();
-                prodottoServiceHost.Close();
+                magazinoServiceHost.Close();
                 //categoriaServiceHost.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("An exception occurred: {0}", ex.Message);
                 fatturaServiceHost.Abort();
-                prodottoServiceHost.Abort();
+                magazinoServiceHost.Abort();
                 //categoriaServiceHost.Abort();
                 Console.ReadLine();
             }

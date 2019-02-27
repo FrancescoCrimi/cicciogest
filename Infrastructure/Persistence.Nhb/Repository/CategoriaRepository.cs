@@ -1,4 +1,5 @@
-﻿using CiccioGest.Domain.Magazino;
+﻿using Castle.Core.Logging;
+using CiccioGest.Domain.Magazino;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
     class CategoriaRepository : DomainRepository<Categoria>, ICategoriaRepository
     {
-        public CategoriaRepository(UnitOfWorkNhb unitOfWork)
+        public CategoriaRepository(ILogger logger, UnitOfWorkNhb unitOfWork)
             : base(unitOfWork)
         {
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " (uow:" + unitOfWork.GetHashCode().ToString() + " ) Created");
         }
 
         public IEnumerable<Categoria> GetAll()

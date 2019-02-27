@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using CiccioGest.Infrastructure;
+using GalaSoft.MvvmLight.Messaging;
+using System.Windows;
 
 namespace CiccioGest.Presentation.AppWpf.View
 {
@@ -13,6 +15,13 @@ namespace CiccioGest.Presentation.AppWpf.View
         public SelezionaFatturaView()
         {
             InitializeComponent();
+            Closing += SelezionaFatturaView_Closing;
+        }
+
+        private void SelezionaFatturaView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
+            Bootstrap.Windsor.Release(DataContext);
         }
     }
 }

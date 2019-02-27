@@ -20,7 +20,8 @@ namespace CiccioGest.Infrastructure
         Form = 1,
         WPF,
         WCF,
-        REST
+        REST,
+        SCRIPT
     }
 
     public enum Databases
@@ -41,5 +42,10 @@ namespace CiccioGest.Infrastructure
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }
+    }
+
+    public interface ICazzo
+    {
+
     }
 }

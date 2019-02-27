@@ -25,11 +25,12 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             {
                 case UI.Form:
                     container.Register(
-                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifestyleScoped());
+                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifestyleBoundTo<ICazzo>());
                     break;
                 case UI.WPF:
                     container.Register(
-                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifestyleScoped());
+                    //Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifestyleScoped());
+                    Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifestyleBoundTo<ICazzo>());
                     break;
                 case UI.WCF:
                     container.Register(
@@ -39,8 +40,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     break;
                 case UI.REST:
                     container.Register(
-                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifeStyle.PerWebRequest
-                        );
+                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifeStyle.PerWebRequest);
+                    break;
+                case UI.SCRIPT:
+                    container.Register(
+                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifestyleSingleton());
                     break;
             }
             container.Register(

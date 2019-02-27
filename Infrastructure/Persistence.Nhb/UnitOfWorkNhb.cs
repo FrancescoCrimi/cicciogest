@@ -12,58 +12,26 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
     {
         ISessionFactory sessionFactory;
         ISession session;
-        ITransaction transaction;
-        IStatelessSession statelessSession;
         ILogger logger;
-
 
         public UnitOfWorkNhb(UnitOfWorkFactoryNhb unitOfWorkFactory, ILogger logger)
         {
             this.sessionFactory = unitOfWorkFactory.SessionFactory();
-            statelessSession = sessionFactory.OpenStatelessSession();
             this.logger = logger;
             logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
-        }
-
-
-        #region Proprietà Internal
-
-        //internal ISession ISession
-        //{
-        //    get
-        //    {
-        //        if (session == null)
-        //            startSession();
-        //        return session;
-        //    }
-        //}
-
-        internal IStatelessSession IStatelessSession
-        {
-            get
-            {
-                return statelessSession;
-            }
         }
 
         internal ISession ISession
         {
             get
             {
-                if (session != null)
-                    return session;
-                else
-                {
-                    Begin();
-                    return session;
-                }
+                if (session == null)
+                    startSession();
+                return session;
             }
         }
 
-        #endregion
-
-
-        public void Begin()
+        private void startSession()
         {
             disposeSession();
             session = sessionFactory.OpenSession();
@@ -84,7 +52,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         private void disposeSession()
         {
-            //logger.Debug("rollback Transaction");
             if (session != null)
             {
                 try
@@ -117,7 +84,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         public void Dispose()
         {
-            logger.Debug(this.GetHashCode().ToString() + ":" + this.GetType().Name + " Disposed");
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Disposed");
         }
     }
 }

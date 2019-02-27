@@ -2,6 +2,7 @@
 using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -17,7 +18,8 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class CategoriaViewModel : ViewModelBase
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly")]
+    public sealed class CategoriaViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private ILogger logger;
         private IKernel kernel;
@@ -49,6 +51,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             {
                 aggiorna();
             }
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Created");
         }
 
         #region Proprietà Pubbliche
@@ -113,6 +116,12 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             {
                 Categorie.Add(ca);
             }
+        }
+
+        public void Dispose()
+        {
+            Cleanup();
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
         }
 
         #endregion

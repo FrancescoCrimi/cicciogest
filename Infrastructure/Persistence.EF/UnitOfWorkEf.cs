@@ -16,11 +16,6 @@ namespace CiccioGest.Infrastructure.Persistence.EF
             this.logger = logger;
         }
 
-        public void Begin()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Commit()
         {
             throw new NotImplementedException();

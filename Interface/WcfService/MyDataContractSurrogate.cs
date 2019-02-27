@@ -15,11 +15,11 @@ namespace CiccioGest.Interface.WcfService
     {
         public MyDataContractSurrogate()
         {
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Prodotto, Prodotto>();
-                cfg.CreateMap<Categoria, Categoria>();
-            });
+            //AutoMapper.Mapper.Initialize(cfg =>
+            //{
+            //    cfg.CreateMap<Prodotto, Prodotto>();
+            //    cfg.CreateMap<Categoria, Categoria>();
+            //});
         }
 
         public object GetCustomDataToExport(Type clrType, Type dataContractType)

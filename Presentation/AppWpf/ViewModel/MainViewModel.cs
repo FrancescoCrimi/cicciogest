@@ -2,12 +2,10 @@
 using CiccioGest.Presentation.AppWpf.Model;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using CiccioGest.Presentation.AppWpf.View;
 using System;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
 using Castle.Core.Logging;
 using GalaSoft.MvvmLight.Messaging;
+using CiccioGest.Infrastructure;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
@@ -17,10 +15,14 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
     /// See http://www.mvvmlight.net
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public sealed class MainViewModel : ViewModelBase, IDisposable, ICazzo
     {
+        public ICommand ApriFattureCommand { get; private set; }
+        public ICommand NuovaFatturaCommand { get; private set; }
+        public ICommand ApriProdottiCommand { get; private set; }
+        //public ICommand NuovoProdottoCommand { get; private set; }
+        public ICommand ApriCategorieCommand { get; private set; }
         private ILogger logger;
-        private IKernel kernel;
         private readonly IDataService _dataService;
 
         /// <summary>
@@ -49,10 +51,10 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(ILogger logger, IKernel kernel, IDataService dataService)
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MainViewModel(ILogger logger, IDataService dataService)
         {
             this.logger = logger;
-            this.kernel = kernel;
             _dataService = dataService;
             _dataService.GetData(
                 (item, error) =>
@@ -69,61 +71,36 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             ApriFattureCommand = new RelayCommand(apriFatture);
             NuovaFatturaCommand = new RelayCommand(nuovaFattura);
             ApriProdottiCommand = new RelayCommand(apriProdotti);
-            NuovoProdottoCommand = new RelayCommand(nuovoProdotto);
+            //NuovoProdottoCommand = new RelayCommand(nuovoProdotto);
             ApriCategorieCommand = new RelayCommand(apriCategorie);
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
         }
 
         private void apriCategorie()
         {
-            IDisposable disp = kernel.BeginScope();
-            var pv = new CategoriaView();
-            pv.ShowDialog();
-            kernel.ReleaseComponent(pv);
-            disp.Dispose();
+            MessengerInstance.Send(new NotificationMessage("ApriCategorie"));
         }
-        private void nuovoProdotto()
-        {
-            IDisposable disp = kernel.BeginScope();
-            var pv = new ProdottoView();
-            Messenger.Default.Send(new CaricaProdotto() { What = LoadType.Nuova });
-            pv.ShowDialog();
-            kernel.ReleaseComponent(pv);
-            disp.Dispose();
-        }
+
+        //private void nuovoProdotto()
+        //{
+        //}
+
         private void apriProdotti()
         {
-            IDisposable disp = kernel.BeginScope();
-            var pv = new ProdottoView();
-            Messenger.Default.Send(new CaricaProdotto() { What = LoadType.Cerca });
-            pv.ShowDialog();
-            kernel.ReleaseComponent(pv);
-            disp.Dispose();
+            MessengerInstance.Send(new NotificationMessage("ApriProdotti"));
         }
+
         private void nuovaFattura()
         {
-            IDisposable disp = kernel.BeginScope();
-            var fv = new FatturaView();
-            Messenger.Default.Send(new CaricaFattura() { What = LoadType.Nuova });
-            fv.ShowDialog();
-            kernel.ReleaseComponent(fv);
-            disp.Dispose();
+            MessengerInstance.Send(new NotificationMessage("ApriFattura"));
+            //MessengerInstance.Send(new NotificationMessage<int>(0, "IdCliente"));
         }
+
         private void apriFatture()
         {
-            IDisposable disp = kernel.BeginScope();
-            var fv = new FatturaView();
-            Messenger.Default.Send(new CaricaFattura() { What = LoadType.Cerca });
-            fv.ShowDialog();
-            kernel.ReleaseComponent(fv);
-            disp.Dispose();
+            MessengerInstance.Send(new NotificationMessage("ApriFattura"));
+            MessengerInstance.Send(new NotificationMessage<int>(0, "IdFattura"));
         }
-
-        public ICommand ApriFattureCommand { get; private set; }
-        public ICommand NuovaFatturaCommand { get; private set; }
-        public ICommand ApriProdottiCommand { get; private set; }
-        public ICommand NuovoProdottoCommand { get; private set; }
-        public ICommand ApriCategorieCommand { get; private set; }
-
 
         ////public override void Cleanup()
         ////{
@@ -131,5 +108,11 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
 
         ////    base.Cleanup();
         ////}
+
+        public void Dispose()
+        {
+            Cleanup();
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+        }
     }
 }

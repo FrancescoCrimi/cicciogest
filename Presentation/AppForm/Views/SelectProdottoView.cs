@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +14,9 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class SelectProdottoView : Form
+    public partial class SelectProdottoView : Form, ICazzo
     {
+        public int IdProdotto { get; private set; }
         private IMagazinoService service;
 
         public SelectProdottoView(ILogger logger, IMagazinoService service)
@@ -33,7 +35,5 @@ namespace CiccioGest.Presentation.AppForm.Views
             IdProdotto = ((ProdottoReadOnly)prodottiBindingSource.Current).Id;
             Close();
         }
-
-        public int IdProdotto { get; private set; }
     }
 }

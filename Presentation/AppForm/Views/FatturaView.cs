@@ -1,7 +1,9 @@
 ﻿using Castle.Core.Logging;
+using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,40 +16,62 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class FatturaView : Form
+    public partial class FatturaView : Form, ICazzo
     {
         private ILogger logger;
+        private IKernel kernel;
         private IFatturaService service;
+        private int? idFattura;
 
-        public FatturaView(IFatturaService service, ILogger logger, int idFattura)
+        public FatturaView(ILogger logger, IKernel kernel, IFatturaService service)
+            : this(logger, kernel, service, null)
         {
-            InitializeComponent();
-            this.service = service;
-            this.logger = logger;
-            if (idFattura == 0)
-                fatturaBindingSource.DataSource = new Fattura();
-            else
-                fatturaBindingSource.DataSource = service.GetFattura(idFattura);
-            dettaglioBindingSource.DataSource = new Dettaglio();
         }
 
-        #region metodi eventi
+        public FatturaView(ILogger logger, IKernel kernel, IFatturaService service, int? idFattura)
+        {
+            this.logger = logger;
+            this.kernel = kernel;
+            this.service = service;
+            this.idFattura = idFattura;
+            InitializeComponent();
+            nuova();
+        }
+
+        private void FatturaView_Load(object sender, EventArgs e)
+        {
+            if (idFattura != null)
+            {
+                if (idFattura == 0)
+                    selectFattura();
+                else
+                    apriFattura((int)idFattura);
+            }
+        }
 
         private void nuovaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fatturaBindingSource.DataSource = new Fattura();
+            nuova();
+        }
+
+        private void apriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            selectFattura();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
         }
 
         private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             service.SaveFattura((Fattura)fatturaBindingSource.DataSource);
-            Close();
         }
 
         private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             service.DeleteFattura(((Fattura)fatturaBindingSource.DataSource).Id);
-            Close();
         }
 
         private void esciToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,21 +79,10 @@ namespace CiccioGest.Presentation.AppForm.Views
             Close();
         }
 
-        private void prodottiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ProdottoView pv = ViewResolver.Resolve<ProdottoView>();
-            pv.Show();
-        }
-
-        private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CategoriaView cv = ViewResolver.Resolve<CategoriaView>();
-            cv.Show();
-        }
-
         private void nuovoDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dettaglioBindingSource.DataSource = new Dettaglio(service.GetProdotto(selectProd()), 1);
+            dettaglioBindingSource.DataSource = new Dettaglio();
+            selectProduct();
         }
 
         private void aggiungiDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,7 +107,7 @@ namespace CiccioGest.Presentation.AppForm.Views
 
         private void selProdottoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ((Dettaglio)dettaglioBindingSource.Current).Prodotto = service.GetProdotto(selectProd());
+            selectProduct();
         }
 
         private void dettagliDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -105,29 +118,48 @@ namespace CiccioGest.Presentation.AppForm.Views
 
         private void nomeProdottoTextBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ((Dettaglio)dettaglioBindingSource.Current).Prodotto = service.GetProdotto(selectProd());
+            selectProduct();
         }
-        #endregion
 
-        #region metodi privati
-        private int selectProd()
+
+
+
+        private void nuova()
         {
-            SelectProdottoView spv = ViewResolver.Resolve<SelectProdottoView>();
+            fatturaBindingSource.DataSource = new Fattura();
+            dettaglioBindingSource.DataSource = new Dettaglio();
+        }
+
+        private void apriFattura(int idFattura)
+        {
+            fatturaBindingSource.DataSource = service.GetFattura(idFattura);
+        }
+
+        private void selectFattura()
+        {
+            var sfv = kernel.Resolve<SelectFattureView>();
+            sfv.ShowDialog();
+            if (sfv.IdFattura == 0)
+            {
+                MessageBox.Show("Fattura non selezionata");
+            }
+            else
+            {
+                apriFattura(sfv.IdFattura);
+            }
+            kernel.ReleaseComponent(sfv);
+        }
+
+        private void selectProduct()
+        {
+            SelectProdottoView spv = kernel.Resolve<SelectProdottoView>();
             spv.ShowDialog();
-            int idProd = spv.IdProdotto;
-            return idProd;
-        }
-        #endregion
-
-
-        private void FatturaView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new AboutBox().ShowDialog();
+            int idProdotto = spv.IdProdotto;
+            if (idProdotto == 0)
+                MessageBox.Show("Prodotto non selezionato");
+            else
+                ((Dettaglio)dettaglioBindingSource.Current).Prodotto = service.GetProdotto(idProdotto);
+            kernel.ReleaseComponent(spv);
         }
     }
 }

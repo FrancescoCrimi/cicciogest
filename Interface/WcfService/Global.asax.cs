@@ -1,4 +1,5 @@
 ﻿using Castle.Windsor;
+using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,11 @@ namespace CiccioGest.Interface.WcfService
         {
             IWindsorContainer container = Bootstrap.Windsor;
             container.Install(new CiccioGest.Application.Impl.Installer());
-
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Prodotto, Prodotto>();
+                cfg.CreateMap<Categoria, Categoria>();
+            });
         }
 
         protected void Session_Start(object sender, EventArgs e)

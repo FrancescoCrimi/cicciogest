@@ -1,4 +1,5 @@
-﻿using CiccioGest.Domain.Documenti;
+﻿using Castle.Core.Logging;
+using CiccioGest.Domain.Documenti;
 using NHibernate.Criterion;
 using System;
 using System.Collections;
@@ -11,9 +12,10 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
     class FatturaRepository : DomainRepository<Fattura>, IFatturaRepository
     {
-        public FatturaRepository(UnitOfWorkNhb unitOfWork)
+        public FatturaRepository(ILogger logger, UnitOfWorkNhb unitOfWork)
             : base(unitOfWork)
         {
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " (uow:" + unitOfWork.GetHashCode().ToString() + " ) Created");
         }
 
         public IEnumerable<FatturaReadOnly> GetAll()

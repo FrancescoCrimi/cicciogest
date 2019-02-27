@@ -18,8 +18,9 @@
         <Menu x:Name="menu">
             <MenuItem x:Name="fatturaMenuItem" Header="Fattura">
                 <MenuItem x:Name="nuovaFatturaMenuItem" Header="Nuova" Command="{Binding NuovaFatturaCommand}"/>
-                <MenuItem x:Name="salvaFatturaMenuItem" Header="Salva" Command="{Binding SalvaFatturaCommand}" CommandParameter="{Binding ElementName=FatturaSuca}"/>
-                <MenuItem x:Name="eliminaFatturaMenuItem" Header="Elimina" Command="{Binding RimuoviFatturaCommand}" CommandParameter="{Binding ElementName=FatturaSuca}"/>
+                <MenuItem x:Name="salvaFatturaMenuItem" Header="Salva" Command="{Binding SalvaFatturaCommand}"/>
+                <MenuItem x:Name="eliminaFatturaMenuItem" Header="Elimina" Command="{Binding RimuoviFatturaCommand}"/>
+                <MenuItem x:Name="apriFatturaMenuItem" Header="Apri" Command="{Binding ApriFatturaCommand}"/>
                 <MenuItem x:Name="esciMenuItem" Header="Esci"/>
             </MenuItem>
             <MenuItem x:Name="dettagliMenuItem" Header="Dettagli">

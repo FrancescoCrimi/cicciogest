@@ -20,7 +20,7 @@ namespace CiccioGest.Presentation.AppUtils
             IWindsorContainer container =  Bootstrap.Windsor;
             container.Install(new CiccioGest.Application.Impl.Installer());
 
-            IDisposable disposable = container.BeginScope();
+            //IDisposable disposable = container.BeginScope();
             IUnitOfWorkFactory da = container.Resolve<IUnitOfWorkFactory>();
             IFatturaService fatturaService = container.Resolve<IFatturaService>();
             IMagazinoService magazinoService = container.Resolve<IMagazinoService>();
@@ -60,7 +60,7 @@ namespace CiccioGest.Presentation.AppUtils
             container.Release(fatturaService);
             //container.Release(prodottoService);
             container.Release(magazinoService);
-            disposable.Dispose();
+            //disposable.Dispose();
         }
     }
 }

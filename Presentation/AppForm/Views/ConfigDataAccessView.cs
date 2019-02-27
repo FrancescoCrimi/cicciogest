@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.AppForm.Views
             windsor = Bootstrap.Windsor;
             container = windsor.Resolve<IUnitOfWorkFactory>();
             setImpostazioni(windsor.Resolve<IConf>());
-            windsor.Install(new Installer());
+            //windsor.Install(new Installer());
         }
 
         private void setImpostazioni(IConf impoConf)

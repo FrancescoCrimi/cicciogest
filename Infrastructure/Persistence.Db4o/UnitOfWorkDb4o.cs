@@ -26,14 +26,10 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o
         {
             get
             {
+                if(objectContainer == null)
+                    objectContainer = extObjectContainer.OpenSession();
                 return objectContainer;
             }
-        }
-
-
-        public void Begin()
-        {
-            objectContainer = extObjectContainer.OpenSession();
         }
 
         public void Commit()

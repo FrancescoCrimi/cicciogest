@@ -35,7 +35,8 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 
         public void Update(TEntity entity)
         {
-            unitOfWork.ISession.Update(entity);
+            unitOfWork.ISession.Merge<TEntity>(entity);
+            //unitOfWork.ISession.Update(entity);
         }
     }
 }

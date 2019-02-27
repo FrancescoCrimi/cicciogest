@@ -15,21 +15,21 @@ namespace CiccioGest.Application.Impl
     class FatturaService : IFatturaService
     {
         private ILogger logger;
-        private IUnitOfWork da;
+        private IUnitOfWork uow;
         private IFatturaRepository fatturaRepository;
         private IProdottoRepository prodottoRepository;
 
         public FatturaService(
             ILogger logger,
-            IUnitOfWork da,
+            IUnitOfWork uow,
             IFatturaRepository fatturaRepository,
             IProdottoRepository prodottoRepository)
         {
             this.logger = logger;
-            this.da = da;
+            this.uow = uow;
             this.fatturaRepository = fatturaRepository;
             this.prodottoRepository = prodottoRepository;
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString()+ " (uow:" + uow.GetHashCode().ToString() + " ) Created");
         }
 
         public void DeleteFattura(int id)
@@ -37,11 +37,11 @@ namespace CiccioGest.Application.Impl
             try
             {
                 fatturaRepository.Delete(id);
-                da.Commit();
+                uow.Commit();
             }
             catch (Exception ex)
             {
-                da.Rollback();
+                uow.Rollback();
                 throw ex;
             }
         }
@@ -53,7 +53,6 @@ namespace CiccioGest.Application.Impl
 
         public IEnumerable<FatturaReadOnly> GetFatture()
         {
-            da.Begin();
             return fatturaRepository.GetAll();
         }
 
@@ -69,11 +68,11 @@ namespace CiccioGest.Application.Impl
                 {
                     fatturaRepository.Update(fattura);
                 }
-                da.Commit();
+                uow.Commit();
             }
             catch (Exception ex)
             {
-                da.Rollback();
+                uow.Rollback();
                 throw ex;
             }
             return fattura;
@@ -86,7 +85,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Disposed");
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " (uow:" + uow.GetHashCode().ToString() + " ) Disposed");
         }
 
         public Cliente GetCliente(int idCliente)

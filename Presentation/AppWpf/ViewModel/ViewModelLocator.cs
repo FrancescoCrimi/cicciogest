@@ -54,11 +54,11 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
             windsor.Register(
                 Component.For<MainViewModel>(),
-                Component.For<SelezionaFatturaViewModel>(),
-                Component.For<SelezionaProdottoViewModel>(),
-                Component.For<CategoriaViewModel>(),
-                Component.For<FatturaViewModel>(),
-                Component.For<ProdottoViewModel>());
+                Component.For<SelezionaFatturaViewModel>().LifestyleTransient(),
+                Component.For<SelezionaProdottoViewModel>().LifestyleTransient(),
+                Component.For<CategoriaViewModel>().LifestyleTransient(),
+                Component.For<FatturaViewModel>().LifestyleTransient(),
+                Component.For<ProdottoViewModel>().LifestyleTransient());
         }
 
         /// <summary>
@@ -144,7 +144,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
                 return windsor.Resolve<ProdottoViewModel>();
             }
         }
-
 
         /// <summary>
         /// Cleans up all the resources.

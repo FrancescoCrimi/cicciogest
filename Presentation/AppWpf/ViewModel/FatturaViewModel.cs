@@ -2,7 +2,7 @@
 using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppWpf.View;
+using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -18,8 +18,19 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class FatturaViewModel : ViewModelBase
+    public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
+        public Fattura Fattura { get; private set; }
+        public Dettaglio Dettaglio { get; private set; }
+        public Dettaglio DettaglioSelezionato { private get; set; }
+        public ICommand NuovaFatturaCommand { get; private set; }
+        public ICommand SalvaFatturaCommand { get; private set; }
+        public ICommand RimuoviFatturaCommand { get; private set; }
+        public ICommand ApriFatturaCommand { get; private set; }
+        public ICommand NuovoDettaglioCommand { get; private set; }
+        public ICommand AggiungiDettaglioCommand { get; private set; }
+        public ICommand RimuoviDettaglioCommand { get; private set; }
+        public ICommand SelezionaDettaglioCommand { get; private set; }
         private ILogger logger;
         private IKernel kernel;
         private IFatturaService service;
@@ -27,16 +38,24 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         /// <summary>
         /// Initializes a new instance of the FatturaViewModel class.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FatturaViewModel(ILogger logger, IKernel kernel, IFatturaService service)
         {
             this.logger = logger;
             this.kernel = kernel;
             this.service = service;
-            NuovaFatturaCommand = new RelayCommand(nuova);
-            SalvaFatturaCommand = new RelayCommand<Window>(salva);
-            RimuoviFatturaCommand = new RelayCommand<Window>(elimina);
-            NuovoDettaglioCommand = new RelayCommand(apriSelezionaProdotto);
+            NuovaFatturaCommand = new RelayCommand(() => mostra(new Fattura()) );
+            SalvaFatturaCommand = new RelayCommand(salva);
+            RimuoviFatturaCommand = new RelayCommand(elimina);
+            ApriFatturaCommand = new RelayCommand(() =>
+            {
+                MessengerInstance.Send(new NotificationMessage("SelezionaFattura"));
+            });
+            NuovoDettaglioCommand = new RelayCommand(() =>
+            {
+                MessengerInstance.Send(new NotificationMessage("SelezionaProdotto"));
+            });
+
             AggiungiDettaglioCommand = new RelayCommand(aggiungiDettagglio);
             RimuoviDettaglioCommand = new RelayCommand(rimuoviDettaglio);
             SelezionaDettaglioCommand = new RelayCommand(selezionaDettaglio);
@@ -47,59 +66,28 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
             else
             {
-                registraMessaggi();                
+                registraMessaggi();
+                mostra(new Fattura());
             }
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
         }
-
-        #region Proprietà Pubbliche
-
-        public Fattura Fattura { get; private set; }
-        public Dettaglio Dettaglio { get; private set; }
-        public Dettaglio DettaglioSelezionato { private get; set; }
-        public ICommand NuovaFatturaCommand { get; private set; }
-        public ICommand SalvaFatturaCommand { get; private set; }
-        public ICommand RimuoviFatturaCommand { get; private set; }
-        public ICommand NuovoDettaglioCommand { get; private set; }
-        public ICommand AggiungiDettaglioCommand { get; private set; }
-        public ICommand RimuoviDettaglioCommand { get; private set; }
-        public ICommand SelezionaDettaglioCommand { get; private set; }
-
-        #endregion
-
-
-        #region Metodi Privati
 
         private void registraMessaggi()
         {
-            Messenger.Default.Register<CaricaProdotto>(this, cp =>
-            {
-                Dettaglio = new Dettaglio(service.GetProdotto(cp.IdProdotto), 1);
-                RaisePropertyChanged("Dettaglio");
-            });
-
-            Messenger.Default.Register<CaricaFattura>(this, cf =>
-            {
-                switch (cf.What)
+            MessengerInstance.Register<NotificationMessage<int>>(this, ns => {
+                if (ns.Notification == "IdFattura")
                 {
-                    case LoadType.Nuova:
-                        nuova();
-                        break;
-                    case LoadType.Cerca:
-                        var sfv = new SelezionaFatturaView();
-                        sfv.ShowDialog();
-                        break;
-                    case LoadType.Carica:
-                        mostra(service.GetFattura(cf.IdFattura));
-                        break;
-                    default:
-                        break;
+                    if (ns.Content == 0)
+                        MessengerInstance.Send(new NotificationMessage("SelezionaFattura"));
+                    else
+                        mostra(service.GetFattura(ns.Content));
+                }
+                else if (ns.Notification == "IdProdotto")
+                {
+                    Dettaglio = new Dettaglio(service.GetProdotto(ns.Content), 1);
+                    RaisePropertyChanged("Dettaglio");
                 }
             });
-        }
-
-        private void nuova()
-        {
-            mostra(new Fattura());
         }
 
         private void mostra(Fattura fattura)
@@ -115,13 +103,12 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             RaisePropertyChanged("Dettaglio");
         }
 
-        private void salva(Window window)
+        private void salva()
         {
             try
             {
                 service.SaveFattura(Fattura);
-                //Messenger.Default.Send(new AggiornaSelezionaFattureView());
-                window.Close();
+                //window.Close();
             }
             catch (Exception e)
             {
@@ -129,13 +116,12 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        private void elimina(Window window)
+        private void elimina()
         {
             try
             {
                 service.DeleteFattura(Fattura.Id);
-                //Messenger.Default.Send(new AggiornaSelezionaFattureView());
-                window.Close();
+                //window.Close();
             }
             catch (Exception e)
             {
@@ -167,13 +153,15 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             RaisePropertyChanged("Dettaglio");
         }
 
-        void apriSelezionaProdotto()
-        {
-            var spv = new SelezionaProdottoView();
-            spv.ShowDialog();
-            spv.Close();
-        }
+        //void apriSelezionaProdotto()
+        //{
+            
+        //}
 
-        #endregion
+        public void Dispose()
+        {
+            Cleanup();
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace CiccioGest.Domain.Documenti
             }
         }
 
-        //[DataMember]
+        [DataMember]
         public virtual Prodotto Prodotto
         {
             get { return prodotto; }

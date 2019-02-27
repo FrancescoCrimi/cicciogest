@@ -33,39 +33,39 @@ namespace CiccioGest.Application.Impl
                     break;
             }
 
-            switch (conf.UserInterface)
-            {
-                case UI.Form:
+            //switch (conf.UserInterface)
+            //{
+                //case UI.Form:
                     container.Register(
                         //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient(),
                         Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
                         Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestyleTransient(),
                         Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestyleTransient());
-                    break;
-                case UI.WPF:
-                    container.Register(
-                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient(),
-                        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
-                        Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestyleTransient(),
-                        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestyleTransient());
-                    break;
-                case UI.WCF:
-                    container.Register(
-                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfSession());
-                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfOperation());
-                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient());
-                        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
-                        Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestyleTransient(),
-                        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestyleTransient());
-                    break;
-                case UI.REST:
-                    container.Register(
-                        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWebRequest()
-                        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestylePerWebRequest(),
-                        Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestylePerWebRequest(),
-                        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestylePerWebRequest());
-                    break;
-            }
+                //    break;
+                //case UI.WPF:
+                //    container.Register(
+                //        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient(),
+                //        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
+                //        Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestyleTransient(),
+                //        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestyleTransient());
+                //    break;
+                //case UI.WCF:
+                //    container.Register(
+                //        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfSession());
+                //        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWcfOperation());
+                //        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient());
+                //        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
+                //        Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestyleTransient(),
+                //        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestyleTransient());
+                //    break;
+                //case UI.REST:
+                //    container.Register(
+                //        //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestylePerWebRequest()
+                //        Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestylePerWebRequest(),
+                //        Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestylePerWebRequest(),
+                //        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestylePerWebRequest());
+                //    break;
+            //}
         }
     }
 }

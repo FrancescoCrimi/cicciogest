@@ -2,10 +2,11 @@
 using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.AppWpf.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+//using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -19,7 +20,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class ProdottoViewModel : ViewModelBase
+    public sealed class ProdottoViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private ILogger logger;
         private IKernel kernel;
@@ -28,6 +29,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         /// <summary>
         /// Initializes a new instance of the ProdottoViewModel class.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProdottoViewModel(ILogger logger, IKernel kernel, IMagazinoService service)
         {
             this.logger = logger;
@@ -59,6 +61,8 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
                     Categorie.Add(cat);
                 }
             }
+            aggiorna();
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Created");
         }
 
 
@@ -70,11 +74,11 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public ICommand NuovoCommand { get; private set; }
         public ICommand EliminaCommand { get; private set; }
         public ICommand SalvaCommand { get; private set; }
-        public Prodotto ProdottoSelezionato
+        public ProdottoReadOnly ProdottoSelezionato
         {
             set
             {
-                if (value != null && value != Prodotto)
+                if (value != null)
                 {
                     Prodotto = service.GetProdotto(value.Id);
                     RaisePropertyChanged("Prodotto");
@@ -89,25 +93,28 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
 
         private void registraMessaggi()
         {
-            Messenger.Default.Register<CaricaProdotto>(this, cp =>
-            {
-                switch (cp.What)
-                {
-                    case LoadType.Nuova:
-                        aggiorna();
-                        break;
-                    case LoadType.Cerca:
-                        var spv = new SelezionaProdottoView();
-                        spv.ShowDialog();
-                        break;
-                    case LoadType.Carica:
-                        Prodotto = service.GetProdotto(cp.IdProdotto);
-                        RaisePropertyChanged("Prodotto");
-                        break;
-                    default:
-                        break;
-                }
-            });
+            //MessengerInstance.Register<CaricaProdotto>(this, cp =>
+            //{
+            //    switch (cp.What)
+            //    {
+
+            //        case LoadType.Nuova:
+            //            aggiorna();
+            //            break;
+
+            //        case LoadType.Cerca:
+            //            var spv = new SelezionaProdottoView();
+            //            spv.ShowDialog();
+            //            break;
+
+            //        case LoadType.Carica:
+            //            Prodotto = service.GetProdotto(cp.IdProdotto);
+            //            RaisePropertyChanged("Prodotto");
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //});
         }
 
         private void aggiorna()
@@ -151,6 +158,12 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             {
                 MessageBox.Show("Errore: " + e.Message);
             }
+        }
+
+        public void Dispose()
+        {
+            Cleanup();
+            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
         }
 
         #endregion
