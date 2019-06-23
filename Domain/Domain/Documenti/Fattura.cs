@@ -3,6 +3,8 @@ using CiccioUtils.CiccioListe;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -21,7 +23,18 @@ namespace CiccioGest.Domain.Documenti
         public Fattura()
         {
             dettagli = new DomainList<Dettaglio>();
+            ((IBindingList)dettagli).ListChanged += Fattura_ListChanged;
+            ((INotifyCollectionChanged)dettagli).CollectionChanged += Fattura_CollectionChanged;
         }
+
+        private void Fattura_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+        }
+
+        private void Fattura_ListChanged(object sender, ListChangedEventArgs e)
+        {            
+        }
+
         public Fattura(string nome)
             :this()
         {

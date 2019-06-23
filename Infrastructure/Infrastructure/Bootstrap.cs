@@ -19,8 +19,6 @@ namespace CiccioGest.Infrastructure
         private ILogger logger = null;
         private IConf conf = null;
 
-        #region Costruttori
-
         static Bootstrap()
         {
             windsor = new WindsorContainer();
@@ -30,34 +28,6 @@ namespace CiccioGest.Infrastructure
         Bootstrap()
         {
             conf = readConfiguration();
-            startWindsor();
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
-        }
-
-        #endregion
-
-
-        #region Proprietà pubbliche
-
-        public static IWindsorContainer Windsor { get { return windsor; } }
-
-        //public  static IWindsorContainer DesignWindsor
-        //{
-        //    get
-        //    {
-        //        var swsw = new WindsorContainer();
-        //        swsw.AddFacility<LoggingFacility>();
-        //        return swsw;
-        //    }
-        //}
-
-        #endregion
-
-
-        #region Metodi Privati
-
-        private void startWindsor()
-        {
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<Log4netFactory>().WithAppConfig());
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithAppConfig());
@@ -65,7 +35,10 @@ namespace CiccioGest.Infrastructure
             windsor.Register(Component.For<IConf>().Instance(conf));
             logger = windsor.Resolve<ILoggerFactory>().Create(this.GetType());
             //logger.Debug(windsor.GetType().Name + ":" + windsor.GetHashCode().ToString() + " Created");
+            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
         }
+
+        public static IWindsorContainer Windsor { get { return windsor; } }
 
         private IConf readConfiguration()
         {
@@ -98,29 +71,10 @@ namespace CiccioGest.Infrastructure
             configuration.Save(System.Configuration.ConfigurationSaveMode.Minimal, false);
         }
 
-        #endregion
-
-
-        #region Metodi Pubblici
-
-        //public void CreateDataAccess()
-        //{
-        //    windsor.Resolve<IDataAccess>().CreateDataAccess();
-        //    writeConfiguration(conf);
-        //}
-
-        //public void VerifyDataAccess()
-        //{
-        //    windsor.Resolve<IDataAccess>().VerifyDataAccess();
-        //    writeConfiguration(conf);
-        //}
-
         public void Dispose()
         {
             windsor.Dispose();
             logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Disposed");
         }
-
-        #endregion
     }
 }
