@@ -15,24 +15,24 @@ namespace CiccioGest.Domain.Documenti
     [KnownType(typeof(Categoria))]
     public class Dettaglio : ValueObject<Dettaglio>
     {
-        private int quantità;
+        private int quantita;
         private Prodotto prodotto;
 
         public Dettaglio() { }
 
-        public Dettaglio(Prodotto prodotto, int quantità)
+        public Dettaglio(Prodotto prodotto, int quantita)
         {
-            modificaQuantita(quantità);
+            modificaQuantita(quantita);
             modificaProdotto(prodotto);
         }
 
         [DataMember]
-        public virtual int Quantità
+        public virtual int Quantita
         {
-            get { return quantità; }
+            get { return quantita; }
             set
             {
-                if (value != quantità)
+                if (value != quantita)
                     modificaQuantita(value);
             }
         }
@@ -60,10 +60,10 @@ namespace CiccioGest.Domain.Documenti
         internal protected virtual Fattura Fattura { get; set; }
 
 
-        private void modificaQuantita(int quantità)
+        private void modificaQuantita(int quantita)
         {
-            this.quantità = quantità;
-            NotifyPropertyChanged("Quantità");
+            this.quantita = quantita;
+            NotifyPropertyChanged("Quantita");
             calcolaTotale();
         }
 
@@ -82,7 +82,7 @@ namespace CiccioGest.Domain.Documenti
 
         private void calcolaTotale()
         {
-            Totale = PrezzoProdotto * Quantità;
+            Totale = PrezzoProdotto * Quantita;
             NotifyPropertyChanged("Totale");
             if (Fattura != null)
                 Fattura.CalcolaTotale();

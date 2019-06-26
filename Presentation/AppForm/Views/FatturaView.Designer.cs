@@ -39,6 +39,7 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fatturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuovaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.apriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salvaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.esciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,11 +52,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dettagliDataGridView = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prezzoProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantitàDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dettagliBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fatturaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -70,7 +66,11 @@
             this.quantitàTextBox = new System.Windows.Forms.TextBox();
             this.prezzoProdottoTextBox = new System.Windows.Forms.TextBox();
             this.nomeProdottoTextBox = new System.Windows.Forms.TextBox();
-            this.apriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prezzoProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             nomeProdottoLabel = new System.Windows.Forms.Label();
             prezzoProdottoLabel = new System.Windows.Forms.Label();
             quantitàLabel = new System.Windows.Forms.Label();
@@ -166,7 +166,7 @@
             this.eliminaToolStripMenuItem,
             this.esciToolStripMenuItem});
             this.fatturaToolStripMenuItem.Name = "fatturaToolStripMenuItem";
-            this.fatturaToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.fatturaToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.fatturaToolStripMenuItem.Text = "Fattura";
             // 
             // nuovaToolStripMenuItem
@@ -174,16 +174,23 @@
             this.nuovaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuovaToolStripMenuItem.Image")));
             this.nuovaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuovaToolStripMenuItem.Name = "nuovaToolStripMenuItem";
-            this.nuovaToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.nuovaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.nuovaToolStripMenuItem.Text = "Nuova";
             this.nuovaToolStripMenuItem.Click += new System.EventHandler(this.nuovaToolStripMenuItem_Click);
+            // 
+            // apriToolStripMenuItem
+            // 
+            this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
+            this.apriToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
+            this.apriToolStripMenuItem.Text = "Apri";
+            this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
             // 
             // salvaToolStripMenuItem
             // 
             this.salvaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripMenuItem.Image")));
             this.salvaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.salvaToolStripMenuItem.Name = "salvaToolStripMenuItem";
-            this.salvaToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.salvaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.salvaToolStripMenuItem.Text = "Salva";
             this.salvaToolStripMenuItem.Click += new System.EventHandler(this.salvaToolStripMenuItem_Click);
             // 
@@ -191,14 +198,14 @@
             // 
             this.eliminaToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Delete;
             this.eliminaToolStripMenuItem.Name = "eliminaToolStripMenuItem";
-            this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.eliminaToolStripMenuItem.Text = "Elimina";
             this.eliminaToolStripMenuItem.Click += new System.EventHandler(this.eliminaToolStripMenuItem_Click);
             // 
             // esciToolStripMenuItem
             // 
             this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
-            this.esciToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.esciToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.esciToolStripMenuItem.Text = "Esci";
             this.esciToolStripMenuItem.Click += new System.EventHandler(this.esciToolStripMenuItem_Click);
             // 
@@ -210,34 +217,34 @@
             this.rimuoviDettaglioToolStripMenuItem,
             this.selProdottoToolStripMenuItem});
             this.dettagliToolStripMenuItem.Name = "dettagliToolStripMenuItem";
-            this.dettagliToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.dettagliToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
             this.dettagliToolStripMenuItem.Text = "Dettagli";
             // 
             // nuovoDettaglioToolStripMenuItem
             // 
             this.nuovoDettaglioToolStripMenuItem.Name = "nuovoDettaglioToolStripMenuItem";
-            this.nuovoDettaglioToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.nuovoDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.nuovoDettaglioToolStripMenuItem.Text = "Nuovo";
             this.nuovoDettaglioToolStripMenuItem.Click += new System.EventHandler(this.nuovoDettaglioToolStripMenuItem_Click);
             // 
             // aggiungiDettaglioToolStripMenuItem
             // 
             this.aggiungiDettaglioToolStripMenuItem.Name = "aggiungiDettaglioToolStripMenuItem";
-            this.aggiungiDettaglioToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.aggiungiDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.aggiungiDettaglioToolStripMenuItem.Text = "Aggiungi";
             this.aggiungiDettaglioToolStripMenuItem.Click += new System.EventHandler(this.aggiungiDettaglioToolStripMenuItem_Click);
             // 
             // rimuoviDettaglioToolStripMenuItem
             // 
             this.rimuoviDettaglioToolStripMenuItem.Name = "rimuoviDettaglioToolStripMenuItem";
-            this.rimuoviDettaglioToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.rimuoviDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.rimuoviDettaglioToolStripMenuItem.Text = "Rimuovi";
             this.rimuoviDettaglioToolStripMenuItem.Click += new System.EventHandler(this.rimuoviDettaglioToolStripMenuItem_Click);
             // 
             // selProdottoToolStripMenuItem
             // 
             this.selProdottoToolStripMenuItem.Name = "selProdottoToolStripMenuItem";
-            this.selProdottoToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.selProdottoToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.selProdottoToolStripMenuItem.Text = "Prodotto";
             this.selProdottoToolStripMenuItem.Click += new System.EventHandler(this.selProdottoToolStripMenuItem_Click);
             // 
@@ -246,14 +253,14 @@
             this.toolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.toolStripMenuItem.Name = "toolStripMenuItem";
-            this.toolStripMenuItem.Size = new System.Drawing.Size(28, 24);
+            this.toolStripMenuItem.Size = new System.Drawing.Size(30, 24);
             this.toolStripMenuItem.Text = "?";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.About;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -283,8 +290,8 @@
             this.dettagliDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.nomeProdottoDataGridViewTextBoxColumn,
+            this.Quantita,
             this.prezzoProdottoDataGridViewTextBoxColumn,
-            this.quantitàDataGridViewTextBoxColumn,
             this.totaleDataGridViewTextBoxColumn});
             this.dettagliDataGridView.DataSource = this.dettagliBindingSource;
             this.dettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -294,55 +301,12 @@
             this.dettagliDataGridView.Name = "dettagliDataGridView";
             this.dettagliDataGridView.ReadOnly = true;
             this.dettagliDataGridView.RowHeadersVisible = false;
+            this.dettagliDataGridView.RowHeadersWidth = 51;
             this.dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dettagliDataGridView.Size = new System.Drawing.Size(496, 232);
             this.dettagliDataGridView.TabIndex = 6;
             this.dettagliDataGridView.TabStop = false;
             this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dettagliDataGridView_CellClick);
-            // 
-            // Id
-            // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 48;
-            // 
-            // nomeProdottoDataGridViewTextBoxColumn
-            // 
-            this.nomeProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nomeProdottoDataGridViewTextBoxColumn.DataPropertyName = "NomeProdotto";
-            this.nomeProdottoDataGridViewTextBoxColumn.HeaderText = "Prodotto";
-            this.nomeProdottoDataGridViewTextBoxColumn.Name = "nomeProdottoDataGridViewTextBoxColumn";
-            this.nomeProdottoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // prezzoProdottoDataGridViewTextBoxColumn
-            // 
-            this.prezzoProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.prezzoProdottoDataGridViewTextBoxColumn.DataPropertyName = "PrezzoProdotto";
-            this.prezzoProdottoDataGridViewTextBoxColumn.HeaderText = "Prezzo";
-            this.prezzoProdottoDataGridViewTextBoxColumn.Name = "prezzoProdottoDataGridViewTextBoxColumn";
-            this.prezzoProdottoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.prezzoProdottoDataGridViewTextBoxColumn.Width = 81;
-            // 
-            // quantitàDataGridViewTextBoxColumn
-            // 
-            this.quantitàDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.quantitàDataGridViewTextBoxColumn.DataPropertyName = "Quantità";
-            this.quantitàDataGridViewTextBoxColumn.HeaderText = "Quantità";
-            this.quantitàDataGridViewTextBoxColumn.Name = "quantitàDataGridViewTextBoxColumn";
-            this.quantitàDataGridViewTextBoxColumn.ReadOnly = true;
-            this.quantitàDataGridViewTextBoxColumn.Width = 91;
-            // 
-            // totaleDataGridViewTextBoxColumn
-            // 
-            this.totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
-            this.totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
-            this.totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
-            this.totaleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totaleDataGridViewTextBoxColumn.Width = 77;
             // 
             // dettagliBindingSource
             // 
@@ -470,7 +434,7 @@
             // 
             // quantitàTextBox
             // 
-            this.quantitàTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "Quantità", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.quantitàTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "Quantita", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.quantitàTextBox.Location = new System.Drawing.Point(75, 31);
             this.quantitàTextBox.Name = "quantitàTextBox";
             this.quantitàTextBox.Size = new System.Drawing.Size(100, 22);
@@ -495,12 +459,54 @@
             this.nomeProdottoTextBox.TabIndex = 1;
             this.nomeProdottoTextBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nomeProdottoTextBox_MouseDoubleClick);
             // 
-            // apriToolStripMenuItem
+            // Id
             // 
-            this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
-            this.apriToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.apriToolStripMenuItem.Text = "Apri";
-            this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.MinimumWidth = 6;
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 48;
+            // 
+            // nomeProdottoDataGridViewTextBoxColumn
+            // 
+            this.nomeProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nomeProdottoDataGridViewTextBoxColumn.DataPropertyName = "NomeProdotto";
+            this.nomeProdottoDataGridViewTextBoxColumn.HeaderText = "Prodotto";
+            this.nomeProdottoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nomeProdottoDataGridViewTextBoxColumn.Name = "nomeProdottoDataGridViewTextBoxColumn";
+            this.nomeProdottoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Quantita
+            // 
+            this.Quantita.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Quantita.DataPropertyName = "Quantita";
+            this.Quantita.HeaderText = "Quantita";
+            this.Quantita.MinimumWidth = 6;
+            this.Quantita.Name = "Quantita";
+            this.Quantita.ReadOnly = true;
+            this.Quantita.Width = 91;
+            // 
+            // prezzoProdottoDataGridViewTextBoxColumn
+            // 
+            this.prezzoProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.prezzoProdottoDataGridViewTextBoxColumn.DataPropertyName = "PrezzoProdotto";
+            this.prezzoProdottoDataGridViewTextBoxColumn.HeaderText = "Prezzo";
+            this.prezzoProdottoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.prezzoProdottoDataGridViewTextBoxColumn.Name = "prezzoProdottoDataGridViewTextBoxColumn";
+            this.prezzoProdottoDataGridViewTextBoxColumn.ReadOnly = true;
+            this.prezzoProdottoDataGridViewTextBoxColumn.Width = 81;
+            // 
+            // totaleDataGridViewTextBoxColumn
+            // 
+            this.totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
+            this.totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
+            this.totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
+            this.totaleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totaleDataGridViewTextBoxColumn.Width = 77;
             // 
             // FatturaView
             // 
@@ -567,11 +573,11 @@
         private System.Windows.Forms.ToolStripMenuItem aggiungiDettaglioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rimuoviDettaglioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selProdottoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem apriToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeProdottoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
         private System.Windows.Forms.DataGridViewTextBoxColumn prezzoProdottoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantitàDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totaleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStripMenuItem apriToolStripMenuItem;
     }
 }

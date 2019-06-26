@@ -99,7 +99,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Quantita:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="60"/>
-                        <TextBox x:Name="quantitaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Quantità, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="120"/>
+                        <TextBox x:Name="quantitaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Quantita, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="120"/>
                     </Grid>
                     <Grid x:Name="grid6" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
@@ -123,7 +123,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="nomeProdottoColumn" Binding="{Binding NomeProdotto}" Header="Prodotto" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn x:Name="prezzoProdottoColumn" Binding="{Binding PrezzoProdotto}" Header="Prezzo" IsReadOnly="True" Width="SizeToHeader"/>
-                    <DataGridTextColumn x:Name="quantitàColumn" Binding="{Binding Quantità}" Header="Quantità" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="quantitàColumn" Binding="{Binding Quantita}" Header="Quantità" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="totaleColumn" Binding="{Binding Totale}" Header="Totale" IsReadOnly="True" Width="SizeToHeader"/>
                 </DataGrid.Columns>
             </DataGrid>

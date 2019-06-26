@@ -7,7 +7,7 @@
 
     <id name="Id" generator="native" unsaved-value="0"/>
 
-    <property name="Quantità" not-null="true"/>
+    <property name="Quantita" not-null="true"/>
     <property name="Totale" not-null="true"/>
     <property name="NomeProdotto" not-null="true"/>
     <property name="PrezzoProdotto" not-null="true"/>

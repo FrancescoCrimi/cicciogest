@@ -131,7 +131,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
 
         private void aggiungiDettagglio()
         {
-            if (Dettaglio.Quantità != 0)
+            if (Dettaglio.Quantita != 0)
             {
                 Fattura.AddDettaglio(Dettaglio);
                 RaisePropertyChanged("Fattura");
