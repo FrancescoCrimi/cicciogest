@@ -51,22 +51,19 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MainViewModel(ILogger logger, IDataService dataService)
         {
             this.logger = logger;
             _dataService = dataService;
-            _dataService.GetData(
-                (item, error) =>
+            _dataService.GetData((item, error) =>
+            {
+                if (error != null)
                 {
-                    if (error != null)
-                    {
-                        // Report error here
-                        return;
-                    }
-
-                    WelcomeTitle = item.Title;
-                });
+                    // Report error here
+                    return;
+                }
+                WelcomeTitle = item.Title;
+            });
 
             ApriFattureCommand = new RelayCommand(apriFatture);
             NuovaFatturaCommand = new RelayCommand(nuovaFattura);
@@ -101,13 +98,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             MessengerInstance.Send(new NotificationMessage("ApriFattura"));
             MessengerInstance.Send(new NotificationMessage<int>(0, "IdFattura"));
         }
-
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean up if needed
-
-        ////    base.Cleanup();
-        ////}
 
         public void Dispose()
         {

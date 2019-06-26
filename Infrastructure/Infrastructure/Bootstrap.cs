@@ -34,7 +34,6 @@ namespace CiccioGest.Infrastructure
             windsor.AddFacility<WcfFacility>();
             windsor.Register(Component.For<IConf>().Instance(conf));
             logger = windsor.Resolve<ILoggerFactory>().Create(this.GetType());
-            //logger.Debug(windsor.GetType().Name + ":" + windsor.GetHashCode().ToString() + " Created");
             logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
         }
 
