@@ -1,4 +1,5 @@
-﻿using Castle.Windsor;
+﻿using Castle.MicroKernel;
+using Castle.Windsor;
 using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,9 @@ namespace CiccioGest.Presentation.AppForm.Views
 
         private void cercaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FatturaView fv = Bootstrap.Windsor.Resolve<FatturaView>(new { idFattura = 0 });
+            // FatturaView fv = Bootstrap.Windsor.Resolve<FatturaView>(new { idFattura = 0 });
+            // fix windsor 5.0
+            FatturaView fv = Bootstrap.Windsor.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", 0));
             fv.FormClosing += FormClose;
             fv.Show();
         }

@@ -40,7 +40,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     break;
                 case UI.REST:
                     container.Register(
-                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifeStyle.PerWebRequest);
+                        Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>().LifestylePerWebRequest());
                     break;
                 case UI.SCRIPT:
                     container.Register(
