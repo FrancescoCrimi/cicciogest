@@ -13,31 +13,31 @@ using System.Text;
 
 namespace CiccioGest.Infrastructure
 {
-    public class Bootstrap : IDisposable
+    public sealed class Bootstrap : IDisposable
     {
-        private static IWindsorContainer windsor = null;
-        private ILogger logger = null;
-        private IConf conf = null;
+        private readonly ILogger logger;
 
         static Bootstrap()
         {
-            windsor = new WindsorContainer();
+            Windsor = new WindsorContainer();
             new Bootstrap();
         }
 
         Bootstrap()
         {
-            conf = readConfiguration();
-            windsor.AddFacility<LoggingFacility>(f => f.LogUsing<Log4netFactory>().WithAppConfig());
+            Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<Log4netFactory>().WithAppConfig());
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithAppConfig());
-            windsor.AddFacility<WcfFacility>();
-            windsor.Register(Component.For<IConf>().Instance(conf));
-            logger = windsor.Resolve<ILoggerFactory>().Create(this.GetType());
+            Windsor.AddFacility<WcfFacility>();
+
+            IConf conf = readConfiguration();
+            Windsor.Register(Component.For<IConf>().Instance(conf));
+
+            logger = Windsor.Resolve<ILoggerFactory>().Create(this.GetType());
             logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
         }
 
-        public static IWindsorContainer Windsor { get { return windsor; } }
+        public static IWindsorContainer Windsor { get; private set; }
 
         private IConf readConfiguration()
         {
@@ -72,7 +72,7 @@ namespace CiccioGest.Infrastructure
 
         public void Dispose()
         {
-            windsor.Dispose();
+            Windsor.Dispose();
             logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Disposed");
         }
     }
