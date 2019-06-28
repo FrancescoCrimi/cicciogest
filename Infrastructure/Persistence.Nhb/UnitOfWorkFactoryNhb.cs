@@ -16,8 +16,8 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
     class UnitOfWorkFactoryNhb : IUnitOfWorkFactory
     {
-        private IConf conf;
-        private ILogger logger;
+        private readonly IConf conf;
+        private readonly ILogger logger;
         private static ISessionFactory sessionFactory;
 
         public UnitOfWorkFactoryNhb(IConf conf, ILogger logger)
@@ -32,7 +32,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     sessionFactory = null;
                 }
                 sessionFactory = getNhbConfiguration().BuildSessionFactory();
-                //logger.Debug(sessionFactory.GetType().Name + ":" + sessionFactory.GetHashCode().ToString() + " Created");
             }
             logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
         }
@@ -54,15 +53,9 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     break;
                 case Databases.SQLite:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SQLite20Driver");
-                    //_configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "DddTest.Infrastructure.Persistence.Nhb.ModifySQLiteDialect, Infrastructure.Persistence.Nhb");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.SQLiteDialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
-                //case Databases.SSCE:
-                //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SqlServerCeDriver");
-                //    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSqlCe40Dialect");
-                //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
-                //    break;
                 case Databases.SSEE:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
@@ -80,8 +73,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListePlus.DomainCollectionTypeFactory, CiccioUtils.NhbListePlus");
                     break;
                 case UI.WCF:
-                    break;
-                case UI.REST:
                     break;
             }
             configuration.SetProperty(NHibernate.Cfg.Environment.FormatSql, "true");
@@ -151,9 +142,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 case Databases.SQLite:
                     initSQLite();
                     break;
-                //case Databases.SSCE:
-                //    initSSCE();
-                //    break;
                 case Databases.SSEE:
                     break;
                 default:

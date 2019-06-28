@@ -35,10 +35,6 @@ namespace CiccioGest.Infrastructure.Persistence.EF
                     container.Register(
                         Component.For<IUnitOfWork, UnitOfWorkEf>().ImplementedBy<UnitOfWorkEf>().LifestylePerWcfSession());
                     break;
-                case UI.REST:
-                    container.Register(
-                        Component.For<IUnitOfWork, UnitOfWorkEf>().ImplementedBy<UnitOfWorkEf>().LifestylePerWebRequest());
-                    break;
                 default:
                     break;
             }

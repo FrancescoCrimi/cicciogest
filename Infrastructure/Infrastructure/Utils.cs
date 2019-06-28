@@ -9,10 +9,8 @@ namespace CiccioGest.Infrastructure
     {
         NHibernate = 1,
         EF,
-    //    EFC,
         Db4o,
         WCF,
-        REST
     }
 
     public enum UI
@@ -20,7 +18,6 @@ namespace CiccioGest.Infrastructure
         Form = 1,
         WPF,
         WCF,
-        REST,
         SCRIPT
     }
 
@@ -28,7 +25,6 @@ namespace CiccioGest.Infrastructure
     {
         MySql = 1,
         SQLite,
-        //SSCE,
         SSEE
     }
 

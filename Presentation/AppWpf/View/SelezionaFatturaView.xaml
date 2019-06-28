@@ -5,9 +5,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        mc:Ignorable="d ignore"
-        DataContext="{Binding SelezionaFattura, Source={StaticResource Locator}}" Width="300" Height="300" Title="Seleziona Fattura">
+        mc:Ignorable="d"
+        Width="300"
+        Height="300"
+        Title="Seleziona Fattura"
+        DataContext="{Binding SelezionaFattura, Source={StaticResource Locator}}">
 
     <Grid>
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding Fatture}" SelectedItem="{Binding FatturaSelezionata}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">

@@ -11,15 +11,6 @@ namespace CiccioGest.Presentation.AppWpf.Design
 {
     class DesignMagazinoService : IMagazinoService
     {
-        private List<Categoria> categorie = new List<Categoria>();
-        private List<Prodotto> prodott = new List<Prodotto>();
-        private List<ProdottoReadOnly> prodotti = new List<ProdottoReadOnly>();
-
-        public DesignMagazinoService()
-        {
-            loadData();
-        }
-
         public void DeleteCategoria(int id)
         {
             throw new NotImplementedException();
@@ -32,12 +23,12 @@ namespace CiccioGest.Presentation.AppWpf.Design
 
         public Categoria GetCategoria(int id)
         {
-            return categorie.First(c => c.Id == id);
+            return DesignData.Categorie.First(c => c.Id == id);
         }
 
         public IEnumerable<Categoria> GetCategorie()
         {
-            return categorie;
+            return DesignData.Categorie;
         }
 
         public Fornitore GetFornitore(int id)
@@ -47,12 +38,12 @@ namespace CiccioGest.Presentation.AppWpf.Design
 
         public IEnumerable<ProdottoReadOnly> GetProdotti()
         {
-            return prodotti;
+            return DesignData.ProdottiRO;
         }
 
         public Prodotto GetProdotto(int id)
         {
-            return prodott.First(p => p.Id == id);
+            return DesignData.Prodotti.First(p => p.Id == id);
         }
 
         public Categoria SaveCategoria(Categoria categoria)
@@ -65,27 +56,9 @@ namespace CiccioGest.Presentation.AppWpf.Design
             throw new NotImplementedException();
         }
 
-        private void loadData()
-        {
-            for (int c = 1; c < 6; c++)
-            {
-                Categoria cat = new Categoria(c, "Categoria " + c.ToString());
-                categorie.Add(cat);
-            }
-
-            for (int p = 1; p < 6; p++)
-            {
-                Prodotto prod = new Prodotto(p, "Prodotto " + p.ToString(), 10 + p);
-                prod.Categoria = categorie[p - 1];
-                prodott.Add(prod);
-                ProdottoReadOnly pro = new ProdottoReadOnly(prod.Id, prod.Nome, prod.Prezzo, prod.NomeCategoria);
-                prodotti.Add(pro);
-            }
-        }
-
         public void Dispose()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

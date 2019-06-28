@@ -26,8 +26,8 @@ namespace CiccioGest.Infrastructure
         Bootstrap()
         {
             Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<Log4netFactory>().WithAppConfig());
-            //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-            //windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithAppConfig());
+            //Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
+            //Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithAppConfig());
             Windsor.AddFacility<WcfFacility>();
 
             IConf conf = readConfiguration();

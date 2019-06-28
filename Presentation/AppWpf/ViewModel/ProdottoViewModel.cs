@@ -14,22 +14,12 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public sealed class ProdottoViewModel : ViewModelBase, IDisposable, ICazzo
     {
-        private ILogger logger;
-        private IKernel kernel;
-        private IMagazinoService service;
+        private readonly ILogger logger;
+        private readonly IKernel kernel;
+        private readonly IMagazinoService service;
 
-        /// <summary>
-        /// Initializes a new instance of the ProdottoViewModel class.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProdottoViewModel(ILogger logger, IKernel kernel, IMagazinoService service)
         {
             this.logger = logger;

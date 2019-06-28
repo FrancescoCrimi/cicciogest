@@ -12,12 +12,6 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
         public Fattura Fattura { get; private set; }
@@ -31,14 +25,10 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public ICommand AggiungiDettaglioCommand { get; private set; }
         public ICommand RimuoviDettaglioCommand { get; private set; }
         public ICommand SelezionaDettaglioCommand { get; private set; }
-        private ILogger logger;
-        private IKernel kernel;
-        private IFatturaService service;
+        private readonly ILogger logger;
+        private readonly IKernel kernel;
+        private readonly IFatturaService service;
 
-        /// <summary>
-        /// Initializes a new instance of the FatturaViewModel class.
-        /// </summary>
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FatturaViewModel(ILogger logger, IKernel kernel, IFatturaService service)
         {
             this.logger = logger;

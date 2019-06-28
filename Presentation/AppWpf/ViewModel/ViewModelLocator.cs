@@ -1,37 +1,18 @@
-﻿/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocatorTemplate xmlns:vm="clr-namespace:AppMvvmLight.ViewModel"
-                                   x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-*/
-
-using Castle.Facilities.Logging;
+﻿using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.AppWpf.Design;
-using CiccioGest.Presentation.AppWpf.Model;
 using GalaSoft.MvvmLight;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
-    /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
-    /// <para>
-    /// See http://www.mvvmlight.net
-    /// </para>
-    /// </summary>
     public class ViewModelLocator
     {
-        static IWindsorContainer windsor;
+        static readonly IWindsorContainer windsor;
 
         static ViewModelLocator()
         {
@@ -39,9 +20,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             {
                 windsor = new WindsorContainer();
                 windsor.AddFacility<LoggingFacility>();
-                //windsor = Bootstrap.DesignWindsor;
                 windsor.Register(
-                    Component.For<IDataService>().ImplementedBy<DesignDataService>(),
                     Component.For<IFatturaService>().ImplementedBy<DesignFatturaService>(),
                     Component.For<IMagazinoService>().ImplementedBy<DesignMagazinoService>(),
                     Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>());
@@ -49,7 +28,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             else
             {
                 windsor = Bootstrap.Windsor;
-                windsor.Register(Component.For<IDataService>().ImplementedBy<DataService>());
                 windsor.Install(new CiccioGest.Presentation.Client.Installer());
             }
             windsor.Register(
@@ -61,9 +39,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
                 Component.For<ProdottoViewModel>().LifestyleTransient());
         }
 
-        /// <summary>
-        /// Gets the Main property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -75,9 +50,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the SelezionaFattura property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -89,9 +61,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the SelezionaProdotto property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -103,9 +72,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the SelezionaProdotto property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -117,9 +83,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the SelezionaProdotto property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -131,9 +94,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the SelezionaProdotto property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -145,9 +105,6 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        /// <summary>
-        /// Cleans up all the resources.
-        /// </summary>
         public static void Cleanup()
         {
         }

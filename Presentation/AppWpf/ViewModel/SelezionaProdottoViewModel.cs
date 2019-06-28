@@ -13,23 +13,10 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public sealed class SelezionaProdottoViewModel : ViewModelBase, IDisposable, ICazzo
     {
-        public ObservableCollection<ProdottoReadOnly> Prodotti { get; private set; }
-        public ProdottoReadOnly ProdottoSelezionato { private get; set; }
-        public ICommand SelezionaProdottoCommand { get; private set; }
-        private ILogger logger;
+        private readonly ILogger logger;
 
-        /// <summary>
-        /// Initializes a new instance of the SelezionaProdottoViewModel class.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SelezionaProdottoViewModel(ILogger logger, IKernel kernel, IMagazinoService service)
         {
             this.logger = logger;
@@ -41,6 +28,10 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
             logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Created");
         }
+
+        public ObservableCollection<ProdottoReadOnly> Prodotti { get; private set; }
+        public ProdottoReadOnly ProdottoSelezionato { private get; set; }
+        public ICommand SelezionaProdottoCommand { get; private set; }
 
         private void apriProdotto(Window wnd)
         {

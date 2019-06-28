@@ -13,22 +13,13 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public sealed class SelezionaFatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
         public FatturaReadOnly FatturaSelezionata { private get; set; }
         public ICommand ApriFattura { get; private set; }
-        private ILogger logger;
+        private readonly ILogger logger;
 
-        /// <summary>
-        /// Initializes a new instance of the SelezionaFatturaViewModel class.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SelezionaFatturaViewModel(ILogger logger, IKernel kernel, IFatturaService service)
         {

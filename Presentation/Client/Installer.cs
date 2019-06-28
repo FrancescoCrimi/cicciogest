@@ -32,8 +32,6 @@ namespace CiccioGest.Presentation.Client
                           //    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/CategoriaService.svc")),
                           Component.For<IEndpointBehavior>().ImplementedBy<DomainListEndpointBehavior>());
                     break;
-                case Storage.REST:
-                    break;
                 default:
                     //container.Install(FromAssembly.Named("Application.Impl"));
                     container.Install(new CiccioGest.Application.Impl.Installer());
