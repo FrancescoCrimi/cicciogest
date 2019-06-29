@@ -59,7 +59,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
                 registraMessaggi();
                 mostra(new Fattura());
             }
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         private void registraMessaggi()
@@ -151,7 +151,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

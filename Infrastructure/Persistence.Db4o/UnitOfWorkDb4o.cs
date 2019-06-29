@@ -19,7 +19,7 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o
         {
             this.logger = logger;
             extObjectContainer = unitOfWorkFactory.ObjectContainer;
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         internal IObjectContainer ObjectContainer
@@ -52,7 +52,7 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o
 
         public void Dispose()
         {
-            logger.Debug(this.GetHashCode().ToString() + ":" + this.GetType().Name + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

@@ -26,7 +26,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             {
                 Prodotti.Add(pr);
             }
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ObservableCollection<ProdottoReadOnly> Prodotti { get; private set; }
@@ -45,7 +45,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

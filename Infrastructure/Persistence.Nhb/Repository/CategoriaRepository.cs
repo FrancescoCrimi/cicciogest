@@ -13,7 +13,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
         public CategoriaRepository(ILogger logger, UnitOfWorkNhb unitOfWork)
             : base(unitOfWork)
         {
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " (uow:" + unitOfWork.GetHashCode().ToString() + " ) Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " (uow:" + unitOfWork.GetHashCode().ToString() + " ) Created");
         }
 
         public IEnumerable<Categoria> GetAll()

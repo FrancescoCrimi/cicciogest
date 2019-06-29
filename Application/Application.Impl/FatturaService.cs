@@ -29,7 +29,7 @@ namespace CiccioGest.Application.Impl
             this.uow = uow;
             this.fatturaRepository = fatturaRepository;
             this.prodottoRepository = prodottoRepository;
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString()+ " (uow:" + uow.GetHashCode().ToString() + " ) Created");
+            logger.Debug("HashCode: " + this.GetHashCode().ToString()+ " (uow:" + uow.GetHashCode().ToString() + " ) Created");
         }
 
         public void DeleteFattura(int id)
@@ -85,7 +85,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " (uow:" + uow.GetHashCode().ToString() + " ) Disposed");
+            logger.Debug("HashCode: " + this.GetHashCode().ToString() + " (uow:" + uow.GetHashCode().ToString() + " ) Disposed");
         }
 
         public Cliente GetCliente(int idCliente)

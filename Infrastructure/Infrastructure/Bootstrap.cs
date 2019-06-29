@@ -25,16 +25,16 @@ namespace CiccioGest.Infrastructure
 
         Bootstrap()
         {
-            Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<Log4netFactory>().WithAppConfig());
+            //Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<Log4netFactory>().WithAppConfig());
             //Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-            //Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithAppConfig());
+            Windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithAppConfig());
             Windsor.AddFacility<WcfFacility>();
 
             IConf conf = readConfiguration();
             Windsor.Register(Component.For<IConf>().Instance(conf));
 
             logger = Windsor.Resolve<ILoggerFactory>().Create(this.GetType());
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public static IWindsorContainer Windsor { get; private set; }
@@ -73,7 +73,7 @@ namespace CiccioGest.Infrastructure
         public void Dispose()
         {
             Windsor.Dispose();
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

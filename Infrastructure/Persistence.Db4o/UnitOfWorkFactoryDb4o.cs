@@ -29,7 +29,7 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o
             this.conf = conf;
             this.logger = logger;
             startDb4o();
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
 
@@ -144,7 +144,7 @@ namespace CiccioGest.Infrastructure.Persistence.Db4o
         public void Dispose()
         {
             stopDb4o();
-            logger.Debug(this.GetHashCode().ToString() + ":" + this.GetType().Name + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

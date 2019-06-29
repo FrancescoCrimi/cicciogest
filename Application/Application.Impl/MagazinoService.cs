@@ -27,7 +27,7 @@ namespace CiccioGest.Application.Impl
             this.da = da;
             this.prodottoRepository = prodottoRepository;
             this.categoriaRepository = categoriaRepository;
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void DeleteProdotto(int id)
@@ -120,7 +120,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.Debug(this.GetHashCode().ToString() + ":" + this.GetType().Name + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

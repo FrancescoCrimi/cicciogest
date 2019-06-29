@@ -18,7 +18,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
         {
             this.sessionFactory = unitOfWorkFactory.SessionFactory();
             this.logger = logger;
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         internal ISession ISession
@@ -84,7 +84,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         public void Dispose()
         {
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

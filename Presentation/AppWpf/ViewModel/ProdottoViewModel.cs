@@ -52,7 +52,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
                 }
             }
             aggiorna();
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
 
@@ -153,7 +153,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
 
         #endregion

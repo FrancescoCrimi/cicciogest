@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             {
                 Fatture.Add(fatt);
             }
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         private void apriFattura(Window wnd)
@@ -45,7 +45,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

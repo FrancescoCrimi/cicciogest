@@ -27,7 +27,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             ApriProdottiCommand = new RelayCommand(apriProdotti);
             //NuovoProdottoCommand = new RelayCommand(nuovoProdotto);
             ApriCategorieCommand = new RelayCommand(apriCategorie);
-            logger.Debug(this.GetType().Name + ":" + this.GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         private void apriCategorie()
@@ -59,7 +59,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug(GetType().Name + ":" + GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }
