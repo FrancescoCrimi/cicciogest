@@ -37,7 +37,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         {
             if (FatturaSelezionata != null)
             {
-                MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
+                MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "ApriFatturaSelezionata"));
                 wnd.Close();
             }
         }

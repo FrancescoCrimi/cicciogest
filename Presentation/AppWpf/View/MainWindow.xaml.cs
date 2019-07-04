@@ -21,9 +21,13 @@ namespace CiccioGest.Presentation.AppWpf.View
         {
             Messenger.Default.Register<NotificationMessage>(this, ns =>
             {
-                if (ns.Notification == "ApriFattura")
+                if (ns.Notification == "ApriFatturaView")
                 {
                      new FatturaView().Show();
+                }
+                else if (ns.Notification == "ApriSelezionaFatturaView")
+                {
+                    new SelezionaFatturaView().ShowDialog();
                 }
                 else if (ns.Notification == "ApriProdotti")
                 {

@@ -18,8 +18,8 @@
 
         <Menu x:Name="menu">
             <MenuItem Header="Documenti">
+                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
                 <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
-                <MenuItem Header="Nuova Fattura" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Magazino">
                 <MenuItem Header="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>

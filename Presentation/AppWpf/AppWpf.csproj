@@ -106,6 +106,8 @@
     <Compile Include="Design\DesignData.cs" />
     <Compile Include="Design\DesignFatturaService.cs" />
     <Compile Include="Design\DesignMagazinoService.cs" />
+    <Compile Include="Messages\ChangePage.cs" />
+    <Compile Include="Messages\OpenSelectWindow.cs" />
     <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\FatturaViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
