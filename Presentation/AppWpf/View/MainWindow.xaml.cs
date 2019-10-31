@@ -1,48 +1,23 @@
-﻿using System;
-using System.Windows;
-using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Infrastructure;
+﻿using Castle.MicroKernel.Registration;
 using CiccioGest.Presentation.AppWpf.ViewModel;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.AppWpf.View
 {
     public partial class MainWindow : Window
-    {
+    {        
         public MainWindow()
         {
             InitializeComponent();
-            registraMessaggi();
+            App.Windsor.Register(Component.For<Frame>().Instance(pippo));
             Closing += MainWindow_Closing;
-        }
-
-        private void registraMessaggi()
-        {
-            Messenger.Default.Register<NotificationMessage>(this, ns =>
-            {
-                if (ns.Notification == "ApriFatturaView")
-                {
-                     new FatturaView().Show();
-                }
-                else if (ns.Notification == "ApriSelezionaFatturaView")
-                {
-                    new SelezionaFatturaView().ShowDialog();
-                }
-                else if (ns.Notification == "ApriProdotti")
-                {
-                     new ProdottoView().Show();
-                }
-                else if (ns.Notification == "ApriCategorie")
-                {
-                     new CategoriaView().Show();
-                }
-            });
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Bootstrap.Windsor.Release(DataContext);
+            App.Windsor.Release(DataContext);
             Messenger.Default.Unregister(this);
             ViewModelLocator.Cleanup();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -13,9 +14,9 @@ namespace CiccioGest.Presentation.AppForm.Views
         public AboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("Informazioni su {0} {0}", AssemblyTitle);
+            this.Text = string.Format(CultureInfo.InvariantCulture, "Informazioni su {0} {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Versione {0} {0}", AssemblyVersion);
+            this.labelVersion.Text = string.Format(CultureInfo.InvariantCulture, "Versione {0} {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;

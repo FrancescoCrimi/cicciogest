@@ -1,9 +1,4 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Application;
-using CiccioGest.Domain;
-using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using Castle.Core.Logging;
+
+using CiccioGest.Application;
+using CiccioGest.Domain;
+using CiccioGest.Domain.Magazino;
+using CiccioGest.Infrastructure;
+
 namespace CiccioGest.Presentation.AppForm.Views
 {
     public partial class CategoriaView : Form, ICazzo
     {
-        private ILogger logger;
-        private IMagazinoService service;
+        private readonly ILogger logger;
+        private readonly IMagazinoService service;
 
         public CategoriaView(
             ILogger logger,
@@ -30,25 +32,24 @@ namespace CiccioGest.Presentation.AppForm.Views
 
         private void CategoriaView_Load(object sender, EventArgs e)
         {
-            visualizzaCategorie();
+            VisualizzaCategorie();
         }
 
-        private void nuovoToolStripButton_Click(object sender, EventArgs e)
+        private void NuovoToolStripButton_Click(object sender, EventArgs e)
         {
             categorieDataGridView.ClearSelection();
-            categoriaBindingSource.DataSource = new Categoria();
+            CategoriaBindingSource.DataSource = new Categoria();
         }
 
-        private void salvaToolStripButton_Click(object sender, EventArgs e)
+        private void SalvaToolStripButton_Click(object sender, EventArgs e)
         {
-            categoriaBindingSource.EndEdit();
-            Categoria tp = categoriaBindingSource.Current as Categoria;
-            if (tp != null)
+            CategoriaBindingSource.EndEdit();
+            if (CategoriaBindingSource.Current is Categoria tp)
             {
                 try
                 {
                     service.SaveCategoria(tp);
-                    visualizzaCategorie();
+                    VisualizzaCategorie();
                 }
                 catch (Exception ex)
                 {
@@ -57,16 +58,15 @@ namespace CiccioGest.Presentation.AppForm.Views
             }
         }
 
-        private void cancellaToolStripButton_Click(object sender, EventArgs e)
+        private void CancellaToolStripButton_Click(object sender, EventArgs e)
         {
-            categoriaBindingSource.EndEdit();
-            Categoria tp = categoriaBindingSource.Current as Categoria;
-            if (tp != null)
+            CategoriaBindingSource.EndEdit();
+            if (CategoriaBindingSource.Current is Categoria tp)
             {
                 try
                 {
                     service.DeleteCategoria(tp.Id);
-                    visualizzaCategorie();
+                    VisualizzaCategorie();
                 }
                 catch (Exception ex)
                 {
@@ -75,23 +75,23 @@ namespace CiccioGest.Presentation.AppForm.Views
             }
         }
 
-        private void aboutToolStripButton_Click(object sender, EventArgs e)
+        private void AboutToolStripButton_Click(object sender, EventArgs e)
         {
             var about = new AboutBox();
             about.ShowDialog();
         }
 
-        private void categorieDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void CategorieDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (categorieBindingSource.Current != null)
-                categoriaBindingSource.DataSource = categorieBindingSource.Current;
+                CategoriaBindingSource.DataSource = categorieBindingSource.Current;
         }
 
-        private void visualizzaCategorie()
+        private void VisualizzaCategorie()
         {
             categorieBindingSource.DataSource = service.GetCategorie();
             categorieDataGridView.ClearSelection();
-            categoriaBindingSource.DataSource = new Categoria();
+            CategoriaBindingSource.DataSource = new Categoria();
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿using Castle.Windsor;
+﻿using Castle.Facilities.Logging;
+using Castle.Facilities.WcfIntegration;
+using Castle.MicroKernel.Registration;
+using Castle.Services.Logging.NLogIntegration;
+using Castle.Windsor;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace CiccioGest.Interface.WcfService
 {
@@ -15,13 +15,20 @@ namespace CiccioGest.Interface.WcfService
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            IWindsorContainer container = Bootstrap.Windsor;
-            container.Install(new CiccioGest.Application.Impl.Installer());
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Prodotto, Prodotto>();
-                cfg.CreateMap<Categoria, Categoria>();
-            });
+            IWindsorContainer container = new WindsorContainer();
+            container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
+            container.AddFacility<WcfFacility>();
+            IConf conf = ConfMgr.ReadConfiguration();
+            container.Register(
+                Component.For<IConf>().Instance(conf),
+                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+            container.Install(new CiccioGest.Application.Installer());
+
+            //AutoMapper.Mapper.Initialize(cfg =>
+            //{
+            //    cfg.CreateMap<Articolo, Articolo>();
+            //    cfg.CreateMap<Categoria, Categoria>();
+            //});
         }
 
         protected void Session_Start(object sender, EventArgs e)

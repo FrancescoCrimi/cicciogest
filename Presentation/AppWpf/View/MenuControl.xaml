@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="CiccioGest.Presentation.AppWpf.View.MenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CiccioGest.Presentation.AppWpf.View"
+             DataContext="{Binding MenuControl, Mode=OneWay, Source={StaticResource Locator}}"
+             mc:Ignorable="d" d:DesignWidth="800">
+    <Grid>
+
+        <Menu x:Name="menu">
+            <MenuItem Header="Documenti">
+                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
+                <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
+            </MenuItem>
+            <MenuItem Header="Magazino">
+                <MenuItem Header="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>
+                <!--<MenuItem Header="Nuovo Prodotto" Command="{Binding NuovoProdottoCommand, Mode=OneWay}"/>-->
+                <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
+            </MenuItem>
+            <MenuItem Header="Anagrafica">
+                <MenuItem Header="Clienti"/>
+                <MenuItem Header="Fornitori"/>
+            </MenuItem>
+            <MenuItem x:Name="aboutMenuItem" Header="?"/>
+        </Menu>
+
+    </Grid>
+</UserControl>

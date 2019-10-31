@@ -4,12 +4,6 @@ using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
@@ -27,9 +21,9 @@ namespace CiccioGest.Presentation.AppForm.Views
             this.service = service;
         }
 
-        private void Fatture_Load(object sender, EventArgs e)
+        private async void Fatture_Load(object sender, EventArgs e)
         {
-            IEnumerable<FatturaReadOnly> fatt = service.GetFatture();
+            IEnumerable<FatturaReadOnly> fatt = await service.GetFatture();
             fattureBindingSource.DataSource = fatt;
             fattureDataGridView.ClearSelection();
         }

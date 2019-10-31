@@ -2,16 +2,11 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using System.Text;
 
 namespace CiccioGest.Presentation.Client
 {
@@ -34,7 +29,7 @@ namespace CiccioGest.Presentation.Client
                     break;
                 default:
                     //container.Install(FromAssembly.Named("Application.Impl"));
-                    container.Install(new CiccioGest.Application.Impl.Installer());
+                    container.Install(new CiccioGest.Application.Installer());
                     break;
             }
         }

@@ -1,5 +1,4 @@
-﻿using CiccioUtils.CiccioListe;
-using System;
+﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +7,8 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+
+using CiccioUtils.CiccioListe;
 
 namespace CiccioGest.Presentation.WinForm
 {

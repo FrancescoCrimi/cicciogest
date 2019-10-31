@@ -3,109 +3,65 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.AppWpf.Design;
 using GalaSoft.MvvmLight;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
-    public class ViewModelLocator
+    public class ViewModelLocator : ViewModelBase, IDisposable
     {
-        static readonly IWindsorContainer windsor;
+        private readonly IWindsorContainer windsor;
 
-        static ViewModelLocator()
+        public ViewModelLocator()
         {
-            if (ViewModelBase.IsInDesignModeStatic)
+            if (App.InDesignMode())
+            //if (IsInDesignMode)
             {
                 windsor = new WindsorContainer();
                 windsor.AddFacility<LoggingFacility>();
                 windsor.Register(
                     Component.For<IFatturaService>().ImplementedBy<DesignFatturaService>(),
                     Component.For<IMagazinoService>().ImplementedBy<DesignMagazinoService>(),
-                    Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>());
+                    Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>(),
+                    Component.For<INavigationService>().ImplementedBy<DesignNavigationService>());
             }
             else
             {
-                windsor = Bootstrap.Windsor;
+                windsor = App.Windsor;
+                IConf conf = ConfMgr.ReadConfiguration();
+                windsor.Register(
+                    Component.For<IConf>().Instance(conf),
+                    Component.For<INavigationService>().ImplementedBy<NavigationService>(),
+                    Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
                 windsor.Install(new CiccioGest.Presentation.Client.Installer());
             }
             windsor.Register(
-                Component.For<MainViewModel>(),
+                Component.For<MainViewModel>().ImplementedBy<MainViewModel>(),
+                Component.For<HomeViewModel>(),
                 Component.For<SelezionaFatturaViewModel>().LifestyleTransient(),
                 Component.For<SelezionaProdottoViewModel>().LifestyleTransient(),
                 Component.For<CategoriaViewModel>().LifestyleTransient(),
                 Component.For<FatturaViewModel>().LifestyleTransient(),
+                Component.For<MenuControlViewModel>().LifestyleTransient(),
                 Component.For<ProdottoViewModel>().LifestyleTransient());
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public MainViewModel Main
-        {
-            get
-            {
-                return windsor.Resolve<MainViewModel>();
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public SelezionaFatturaViewModel SelezionaFattura
-        {
-            get
-            {
-                return windsor.Resolve<SelezionaFatturaViewModel>();
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public SelezionaProdottoViewModel SelezionaProdotto
-        {
-            get
-            {
-                return windsor.Resolve<SelezionaProdottoViewModel>();
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public CategoriaViewModel Categoria
-        {
-            get
-            {
-                return windsor.Resolve<CategoriaViewModel>();
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public FatturaViewModel Fattura
-        {
-            get
-            {
-                return windsor.Resolve<FatturaViewModel>();
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public ProdottoViewModel Prodotto
-        {
-            get
-            {
-                return windsor.Resolve<ProdottoViewModel>();
-            }
-        }
+        public MainViewModel Main => windsor.Resolve<MainViewModel>();
+        public SelezionaFatturaViewModel SelezionaFattura => windsor.Resolve<SelezionaFatturaViewModel>();
+        public SelezionaProdottoViewModel SelezionaProdotto => windsor.Resolve<SelezionaProdottoViewModel>();
+        public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
+        public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
+        public ProdottoViewModel Prodotto => windsor.Resolve<ProdottoViewModel>();
+        public HomeViewModel Home => windsor.Resolve<HomeViewModel>();
+        public MenuControlViewModel MenuControl => windsor.Resolve<MenuControlViewModel>();
 
         public static void Cleanup()
+        {
+        }
+
+        public void Dispose()
         {
         }
     }

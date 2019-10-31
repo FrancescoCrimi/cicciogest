@@ -176,14 +176,14 @@
             this.nuovaToolStripMenuItem.Name = "nuovaToolStripMenuItem";
             this.nuovaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.nuovaToolStripMenuItem.Text = "Nuova";
-            this.nuovaToolStripMenuItem.Click += new System.EventHandler(this.nuovaToolStripMenuItem_Click);
+            this.nuovaToolStripMenuItem.Click += new System.EventHandler(this.NuovaToolStripMenuItem_Click);
             // 
             // apriToolStripMenuItem
             // 
             this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
             this.apriToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.apriToolStripMenuItem.Text = "Apri";
-            this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
+            this.apriToolStripMenuItem.Click += new System.EventHandler(this.ApriToolStripMenuItem_Click);
             // 
             // salvaToolStripMenuItem
             // 
@@ -192,7 +192,7 @@
             this.salvaToolStripMenuItem.Name = "salvaToolStripMenuItem";
             this.salvaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.salvaToolStripMenuItem.Text = "Salva";
-            this.salvaToolStripMenuItem.Click += new System.EventHandler(this.salvaToolStripMenuItem_Click);
+            this.salvaToolStripMenuItem.Click += new System.EventHandler(this.SalvaToolStripMenuItem_Click);
             // 
             // eliminaToolStripMenuItem
             // 
@@ -200,14 +200,14 @@
             this.eliminaToolStripMenuItem.Name = "eliminaToolStripMenuItem";
             this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.eliminaToolStripMenuItem.Text = "Elimina";
-            this.eliminaToolStripMenuItem.Click += new System.EventHandler(this.eliminaToolStripMenuItem_Click);
+            this.eliminaToolStripMenuItem.Click += new System.EventHandler(this.EliminaToolStripMenuItem_Click);
             // 
             // esciToolStripMenuItem
             // 
             this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
             this.esciToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.esciToolStripMenuItem.Text = "Esci";
-            this.esciToolStripMenuItem.Click += new System.EventHandler(this.esciToolStripMenuItem_Click);
+            this.esciToolStripMenuItem.Click += new System.EventHandler(this.EsciToolStripMenuItem_Click);
             // 
             // dettagliToolStripMenuItem
             // 
@@ -225,28 +225,28 @@
             this.nuovoDettaglioToolStripMenuItem.Name = "nuovoDettaglioToolStripMenuItem";
             this.nuovoDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.nuovoDettaglioToolStripMenuItem.Text = "Nuovo";
-            this.nuovoDettaglioToolStripMenuItem.Click += new System.EventHandler(this.nuovoDettaglioToolStripMenuItem_Click);
+            this.nuovoDettaglioToolStripMenuItem.Click += new System.EventHandler(this.NuovoDettaglioToolStripMenuItem_Click);
             // 
             // aggiungiDettaglioToolStripMenuItem
             // 
             this.aggiungiDettaglioToolStripMenuItem.Name = "aggiungiDettaglioToolStripMenuItem";
             this.aggiungiDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.aggiungiDettaglioToolStripMenuItem.Text = "Aggiungi";
-            this.aggiungiDettaglioToolStripMenuItem.Click += new System.EventHandler(this.aggiungiDettaglioToolStripMenuItem_Click);
+            this.aggiungiDettaglioToolStripMenuItem.Click += new System.EventHandler(this.AggiungiDettaglioToolStripMenuItem_Click);
             // 
             // rimuoviDettaglioToolStripMenuItem
             // 
             this.rimuoviDettaglioToolStripMenuItem.Name = "rimuoviDettaglioToolStripMenuItem";
             this.rimuoviDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.rimuoviDettaglioToolStripMenuItem.Text = "Rimuovi";
-            this.rimuoviDettaglioToolStripMenuItem.Click += new System.EventHandler(this.rimuoviDettaglioToolStripMenuItem_Click);
+            this.rimuoviDettaglioToolStripMenuItem.Click += new System.EventHandler(this.RimuoviDettaglioToolStripMenuItem_Click);
             // 
             // selProdottoToolStripMenuItem
             // 
             this.selProdottoToolStripMenuItem.Name = "selProdottoToolStripMenuItem";
             this.selProdottoToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.selProdottoToolStripMenuItem.Text = "Prodotto";
-            this.selProdottoToolStripMenuItem.Click += new System.EventHandler(this.selProdottoToolStripMenuItem_Click);
+            this.selProdottoToolStripMenuItem.Click += new System.EventHandler(this.SelProdottoToolStripMenuItem_Click);
             // 
             // toolStripMenuItem
             // 
@@ -262,7 +262,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -306,7 +306,7 @@
             this.dettagliDataGridView.Size = new System.Drawing.Size(496, 232);
             this.dettagliDataGridView.TabIndex = 6;
             this.dettagliDataGridView.TabStop = false;
-            this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dettagliDataGridView_CellClick);
+            this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DettagliDataGridView_CellClick);
             // 
             // dettagliBindingSource
             // 
@@ -457,7 +457,7 @@
             this.nomeProdottoTextBox.ReadOnly = true;
             this.nomeProdottoTextBox.Size = new System.Drawing.Size(100, 22);
             this.nomeProdottoTextBox.TabIndex = 1;
-            this.nomeProdottoTextBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nomeProdottoTextBox_MouseDoubleClick);
+            this.nomeProdottoTextBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NomeProdottoTextBox_MouseDoubleClick);
             // 
             // Id
             // 

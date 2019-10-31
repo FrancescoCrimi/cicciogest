@@ -1,112 +1,110 @@
 ﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.AppWpf.View;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace CiccioGest.Presentation.AppWpf.ViewModel
 {
     public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
-        public Fattura Fattura { get; private set; }
-        public Dettaglio Dettaglio { get; private set; }
-        public Dettaglio DettaglioSelezionato { private get; set; }
-        public ICommand NuovaFatturaCommand { get; private set; }
-        public ICommand SalvaFatturaCommand { get; private set; }
-        public ICommand RimuoviFatturaCommand { get; private set; }
-        public ICommand ApriFatturaCommand { get; private set; }
-        public ICommand NuovoDettaglioCommand { get; private set; }
-        public ICommand AggiungiDettaglioCommand { get; private set; }
-        public ICommand RimuoviDettaglioCommand { get; private set; }
-        public ICommand SelezionaDettaglioCommand { get; private set; }
         private readonly ILogger logger;
-        private readonly IKernel kernel;
         private readonly IFatturaService service;
+        private readonly INavigationService ns;
+        private ICommand nuovaFatturaCommand;
+        private ICommand salvaFatturaCommand;
+        private ICommand rimuoviFatturaCommand;
+        private ICommand apriFatturaCommand;
+        private ICommand nuovoDettaglioCommand;
+        private ICommand aggiungiDettaglioCommand;
+        private ICommand rimuoviDettaglioCommand;
+        private ICommand selezionaDettaglioCommand;
+        private ICommand loadedCommand;
 
-        public FatturaViewModel(ILogger logger, IKernel kernel, IFatturaService service)
+        public FatturaViewModel(ILogger logger, IFatturaService service, INavigationService ns)
         {
-            this.logger = logger;
-            this.kernel = kernel;
-            this.service = service;
-            NuovaFatturaCommand = new RelayCommand(() => mostra(new Fattura()) );
-            SalvaFatturaCommand = new RelayCommand(salva);
-            RimuoviFatturaCommand = new RelayCommand(elimina);
-            ApriFatturaCommand = new RelayCommand(() =>
-            {
-                MessengerInstance.Send(new NotificationMessage("SelezionaFattura"));
-            });
-            NuovoDettaglioCommand = new RelayCommand(() =>
-            {
-                MessengerInstance.Send(new NotificationMessage("SelezionaProdotto"));
-            });
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
 
-            AggiungiDettaglioCommand = new RelayCommand(aggiungiDettagglio);
-            RimuoviDettaglioCommand = new RelayCommand(rimuoviDettaglio);
-            SelezionaDettaglioCommand = new RelayCommand(selezionaDettaglio);
-            if (IsInDesignModeStatic)
+            if (App.InDesignMode())
             {
-                mostra(service.GetFattura(4));
+                MostraFattura(service.GetFattura(4).Result);
                 Dettaglio = Fattura.Dettagli[3];
             }
             else
             {
-                registraMessaggi();
-                mostra(new Fattura());
+                RegistraMessaggi();
+                MostraFattura(new Fattura());
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        private void registraMessaggi()
+        public Fattura Fattura { get; private set; }
+        public Dettaglio Dettaglio { get; private set; }
+        public Dettaglio DettaglioSelezionato { private get; set; }
+
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??
+            (nuovaFatturaCommand = new RelayCommand(() => MostraFattura(new Fattura())));
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??
+            (salvaFatturaCommand = new RelayCommand(SalvaFattura));
+        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??
+            (rimuoviFatturaCommand = new RelayCommand(RimuoviFattura));
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??
+            (apriFatturaCommand = new RelayCommand(() => ns.Navigate(new SelezionaFatturaView())));
+        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??
+            (nuovoDettaglioCommand = new RelayCommand(() => ns.Navigate(new SelezionaProdottoView())));
+        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??
+            (aggiungiDettaglioCommand = new RelayCommand(AggiungiDettagglio));
+        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??
+            (rimuoviDettaglioCommand = new RelayCommand(RimuoviDettaglio));
+        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??
+            (selezionaDettaglioCommand = new RelayCommand(SelezionaDettaglio));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+
+        private void RegistraMessaggi()
         {
-            MessengerInstance.Register<NotificationMessage<int>>(this, ns => {
+            MessengerInstance.Register<NotificationMessage<int>>(this, async ns =>
+            {
                 if (ns.Notification == "IdFattura")
                 {
-                    if (ns.Content == 0)
-                        MessengerInstance.Send(new NotificationMessage("SelezionaFattura"));
-                    else
-                        mostra(service.GetFattura(ns.Content));
-                }
-
-
-
-                else if (ns.Notification == "ApriFatturaSelezionata")
-                {
-                    mostra(service.GetFattura(ns.Content));
+                    MostraFattura(await service.GetFattura(ns.Content));
                 }
 
                 else if (ns.Notification == "IdProdotto")
                 {
-                    Dettaglio = new Dettaglio(service.GetProdotto(ns.Content), 1);
-                    RaisePropertyChanged("Dettaglio");
+                    Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
+                    RaisePropertyChanged(nameof(Dettaglio));
                 }
             });
         }
 
-        private void mostra(Fattura fattura)
+        private void MostraFattura(Fattura fattura)
         {
             Fattura = fattura;
-            RaisePropertyChanged("Fattura");
-            nuovoDettaglio();
+            RaisePropertyChanged(nameof(Fattura));
+            NuovoDettaglio();
         }
 
-        private void nuovoDettaglio()
+        private void NuovoDettaglio()
         {
             Dettaglio = new Dettaglio(null, 1);
-            RaisePropertyChanged("Dettaglio");
+            RaisePropertyChanged(nameof(Dettaglio));
         }
 
-        private void salva()
+        private void SalvaFattura()
         {
             try
             {
                 service.SaveFattura(Fattura);
-                //window.Close();
             }
             catch (Exception e)
             {
@@ -114,12 +112,11 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        private void elimina()
+        private void RimuoviFattura()
         {
             try
             {
                 service.DeleteFattura(Fattura.Id);
-                //window.Close();
             }
             catch (Exception e)
             {
@@ -127,39 +124,34 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        private void aggiungiDettagglio()
+        private void AggiungiDettagglio()
         {
             if (Dettaglio.Quantita != 0)
             {
                 Fattura.AddDettaglio(Dettaglio);
-                RaisePropertyChanged("Fattura");
-                nuovoDettaglio();
+                RaisePropertyChanged(nameof(Fattura));
+                NuovoDettaglio();
             }
         }
 
-        private void rimuoviDettaglio()
+        private void RimuoviDettaglio()
         {
             Fattura.RemoveDettaglio(Dettaglio);
-            RaisePropertyChanged("Fattura");
-            nuovoDettaglio();
+            RaisePropertyChanged(nameof(Fattura));
+            NuovoDettaglio();
         }
 
-        private void selezionaDettaglio()
+        private void SelezionaDettaglio()
         {
             if (DettaglioSelezionato != null)
                 Dettaglio = DettaglioSelezionato;
-            RaisePropertyChanged("Dettaglio");
+            RaisePropertyChanged(nameof(Dettaglio));
         }
-
-        //void apriSelezionaProdotto()
-        //{
-            
-        //}
 
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CiccioGest.Interface.AppWcf
 {
     public class CiccioServiceHostFactory : DefaultServiceHostFactory
     {
-        MyDataContractSurrogate dcs;
+        private readonly MyDataContractSurrogate dcs;
 
         public CiccioServiceHostFactory()
         {
@@ -22,21 +22,22 @@ namespace CiccioGest.Interface.AppWcf
         {
             ServiceHostBase shb = base.CreateServiceHost(constructorString, baseAddresses);
             string aaa = constructorString.Split(',')[0];
-            suca(shb, aaa);
+            Suca(shb, aaa);
             return shb;
         }
 
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
             ServiceHost sh = base.CreateServiceHost(serviceType, baseAddresses);
-            suca(sh, serviceType.FullName);
+            Suca(sh, serviceType.FullName);
             return sh;
         }
 
-        void suca(ServiceHostBase shb, string implementedContract)
+        void Suca(ServiceHostBase shb, string implementedContract)
         {
             // Aggiungi un Endpoint al ServiceHost
-            ServiceEndpoint se = shb.AddServiceEndpoint(implementedContract, new WSHttpBinding(), "");
+            //ServiceEndpoint se = shb.AddServiceEndpoint(implementedContract, new WSHttpBinding(), "");
+            ServiceEndpoint se = shb.AddServiceEndpoint(implementedContract, new BasicHttpBinding(), "");
 
             // Personalizza ServiceEndpoint
             foreach (OperationDescription od in se.Contract.Operations)

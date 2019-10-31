@@ -36,7 +36,7 @@
             this.categorieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nomeLabel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.CategoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.nuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -46,7 +46,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.categorieDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CategoriaBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -74,7 +74,7 @@
             this.categorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.categorieDataGridView.Size = new System.Drawing.Size(274, 180);
             this.categorieDataGridView.TabIndex = 1;
-            this.categorieDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.categorieDataGridView_CellDoubleClick);
+            this.categorieDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CategorieDataGridView_CellDoubleClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -109,7 +109,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CategoriaBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox1.Location = new System.Drawing.Point(61, 4);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
@@ -118,7 +118,7 @@
             // 
             // categoriaBindingSource
             // 
-            this.categoriaBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Categoria);
+            this.CategoriaBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Categoria);
             // 
             // tableLayoutPanel1
             // 
@@ -160,7 +160,7 @@
             this.nuovoToolStripButton.Name = "nuovoToolStripButton";
             this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
             this.nuovoToolStripButton.Text = "Nuovo";
-            this.nuovoToolStripButton.Click += new System.EventHandler(this.nuovoToolStripButton_Click);
+            this.nuovoToolStripButton.Click += new System.EventHandler(this.NuovoToolStripButton_Click);
             // 
             // cancellaToolStripButton
             // 
@@ -169,7 +169,7 @@
             this.cancellaToolStripButton.Name = "cancellaToolStripButton";
             this.cancellaToolStripButton.Size = new System.Drawing.Size(89, 24);
             this.cancellaToolStripButton.Text = "Cancella";
-            this.cancellaToolStripButton.Click += new System.EventHandler(this.cancellaToolStripButton_Click);
+            this.cancellaToolStripButton.Click += new System.EventHandler(this.CancellaToolStripButton_Click);
             // 
             // salvaToolStripButton
             // 
@@ -178,7 +178,7 @@
             this.salvaToolStripButton.Name = "salvaToolStripButton";
             this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
             this.salvaToolStripButton.Text = "Salva";
-            this.salvaToolStripButton.Click += new System.EventHandler(this.salvaToolStripButton_Click);
+            this.salvaToolStripButton.Click += new System.EventHandler(this.SalvaToolStripButton_Click);
             // 
             // aboutToolStripButton
             // 
@@ -188,7 +188,7 @@
             this.aboutToolStripButton.Name = "aboutToolStripButton";
             this.aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.aboutToolStripButton.Text = "&?";
-            this.aboutToolStripButton.Click += new System.EventHandler(this.aboutToolStripButton_Click);
+            this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -214,7 +214,7 @@
             this.Load += new System.EventHandler(this.CategoriaView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.categorieDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CategoriaBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -236,7 +236,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridView categorieDataGridView;
         private System.Windows.Forms.BindingSource categorieBindingSource;
-        private System.Windows.Forms.BindingSource categoriaBindingSource;
+        private System.Windows.Forms.BindingSource CategoriaBindingSource;
         private System.Windows.Forms.ToolStripButton nuovoToolStripButton;
         private System.Windows.Forms.ToolStripButton cancellaToolStripButton;
         private System.Windows.Forms.ToolStripButton salvaToolStripButton;

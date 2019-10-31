@@ -11,7 +11,7 @@ namespace CiccioGest.Interface.WcfService
 {
     public class CiccioServiceHostFactory : DefaultServiceHostFactory
     {
-        MyDataContractSurrogate dcs;
+        private readonly MyDataContractSurrogate dcs;
 
         public CiccioServiceHostFactory()
         {

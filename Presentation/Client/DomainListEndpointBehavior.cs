@@ -11,7 +11,7 @@ namespace CiccioGest.Presentation.Client
 {
     public class DomainListEndpointBehavior : IEndpointBehavior
     {
-        DomainListDataContractSurrogate dcs;
+        private readonly DomainListDataContractSurrogate dcs;
 
         public DomainListEndpointBehavior()
         {

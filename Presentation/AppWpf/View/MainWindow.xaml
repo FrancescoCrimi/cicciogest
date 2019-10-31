@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CiccioGest.Presentation.AppWpf.View"
         mc:Ignorable="d"
-        Width="300"
-        Height="300"
+        Width="640"
+        Height="400"
         Title="CiccioGest"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
 
@@ -16,22 +17,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Menu x:Name="menu">
-            <MenuItem Header="Documenti">
-                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
-                <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
-            </MenuItem>
-            <MenuItem Header="Magazino">
-                <MenuItem Header="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>
-                <!--<MenuItem Header="Nuovo Prodotto" Command="{Binding NuovoProdottoCommand, Mode=OneWay}"/>-->
-                <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
-            </MenuItem>
-            <MenuItem Header="Anagrafica">
-                <MenuItem Header="Clienti"/>
-                <MenuItem Header="Fornitori"/>
-            </MenuItem>
-            <MenuItem x:Name="aboutMenuItem" Header="?"/>
-        </Menu>
+        <!--<local:MenuControl Grid.Row="0" Height="Auto"/>-->
+        <Frame Grid.Row="0" x:Name="ciccio" Source="MenuControl.xaml" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="1" x:Name="pippo" Source="HomeView.xaml" NavigationUIVisibility="Hidden" />
 
     </Grid>
 </Window>

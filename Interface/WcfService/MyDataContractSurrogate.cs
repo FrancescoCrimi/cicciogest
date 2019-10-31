@@ -1,18 +1,19 @@
-﻿using CiccioGest.Domain.Magazino;
+﻿using AutoMapper;
+using CiccioGest.Domain.Magazino;
+using CiccioSoft.Collections.Generic;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CiccioGest.Interface.WcfService
 {
     public class MyDataContractSurrogate : IDataContractSurrogate
     {
+        private Mapper mapper;
+
         public MyDataContractSurrogate()
         {
             //AutoMapper.Mapper.Initialize(cfg =>
@@ -20,6 +21,13 @@ namespace CiccioGest.Interface.WcfService
             //    cfg.CreateMap<Prodotto, Prodotto>();
             //    cfg.CreateMap<Categoria, Categoria>();
             //});
+            MapperConfiguration config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Articolo, Articolo>();
+                cfg.CreateMap<Categoria, Categoria>();
+            });
+            config.AssertConfigurationIsValid();
+            mapper = new Mapper(config);
         }
 
         public object GetCustomDataToExport(Type clrType, Type dataContractType)
@@ -38,7 +46,8 @@ namespace CiccioGest.Interface.WcfService
             if (type.IsGenericType && !type.IsGenericTypeDefinition
                 && type.GetGenericTypeDefinition() == typeof(IList<>))
             {
-                return typeof(List<>).MakeGenericType(type.GetGenericArguments()[0]);
+                //return typeof(List<>).MakeGenericType(type.GetGenericArguments()[0]);
+                return typeof(CiccioList<>).MakeGenericType(type.GetGenericArguments()[0]);
             }
             return type;
         }
@@ -56,7 +65,8 @@ namespace CiccioGest.Interface.WcfService
         {
             if(obj.GetType().Name == targetType.Name + "Proxy")
             {
-                var aswq = AutoMapper.Mapper.Map(obj, typeof(object), targetType);
+                //var aswq = AutoMapper.Mapper.Map(obj, typeof(object), targetType);
+                var aswq = mapper.Map(obj, typeof(object), targetType);
                 return aswq;
             }
             return obj;

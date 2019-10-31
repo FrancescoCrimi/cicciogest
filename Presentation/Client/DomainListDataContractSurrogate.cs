@@ -1,13 +1,10 @@
-﻿using CiccioUtils.CiccioListe;
+﻿using CiccioSoft.Collections.Generic;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Client
 {
@@ -29,11 +26,11 @@ namespace CiccioGest.Presentation.Client
 
         public Type GetDataContractType(Type type)
         {
-            // Changes the IList<T> to DomainList<T>
+            // Changes the IList<T> to CiccioList<T>
             if (type.IsGenericType && !type.IsGenericTypeDefinition
                 && type.GetGenericTypeDefinition() == typeof(IList<>))
             {
-                return typeof(DomainList<>).MakeGenericType(type.GetGenericArguments()[0]);
+                return typeof(CiccioList<>).MakeGenericType(type.GetGenericArguments()[0]);
             }
             return type;
         }

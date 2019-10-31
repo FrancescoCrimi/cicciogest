@@ -1,11 +1,9 @@
 ﻿using CiccioGest.Application;
+using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Domain.Magazino;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CiccioGest.Domain.Magazino;
-using CiccioGest.Domain.ClientiFornitori;
 
 namespace CiccioGest.Presentation.AppWpf.Design
 {
@@ -16,7 +14,7 @@ namespace CiccioGest.Presentation.AppWpf.Design
             throw new NotImplementedException();
         }
 
-        public void DeleteProdotto(int id)
+        public void DeleteArticolo(int id)
         {
             throw new NotImplementedException();
         }
@@ -36,12 +34,12 @@ namespace CiccioGest.Presentation.AppWpf.Design
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ProdottoReadOnly> GetProdotti()
+        public IEnumerable<ArticoloReadOnly> GetArticoli()
         {
             return DesignData.ProdottiRO;
         }
 
-        public Prodotto GetProdotto(int id)
+        public Articolo GetArticolo(int id)
         {
             return DesignData.Prodotti.First(p => p.Id == id);
         }
@@ -51,7 +49,7 @@ namespace CiccioGest.Presentation.AppWpf.Design
             throw new NotImplementedException();
         }
 
-        public Prodotto SaveProdotto(Prodotto prodotto)
+        public Articolo SaveArticolo(Articolo prodotto)
         {
             throw new NotImplementedException();
         }

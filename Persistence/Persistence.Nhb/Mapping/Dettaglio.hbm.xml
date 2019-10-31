@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping assembly="Domain"
+                   namespace="CiccioGest.Domain.Documenti"
+                   xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="Dettaglio" table="Dettagli">
+
+    <id name="Id" generator="native" unsaved-value="0"/>
+
+    <property name="Quantita" not-null="true"/>
+    <property name="Totale" not-null="true"/>
+    <property name="NomeProdotto" not-null="true"/>
+    <property name="PrezzoProdotto" not-null="true"/>
+
+    <many-to-one name="Articolo" column="IdArticolo" not-null="true" foreign-key="FkDettaglioArticoloId"/>
+    <!--<many-to-one name="Fattura" column="IdFattura" not-null="true"/>-->
+
+  </class>
+
+</hibernate-mapping>

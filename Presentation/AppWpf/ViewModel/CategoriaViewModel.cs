@@ -1,5 +1,4 @@
 ﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
@@ -7,6 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,20 +15,18 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
     public sealed class CategoriaViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
         private readonly IMagazinoService service;
 
-        public CategoriaViewModel(ILogger logger, IKernel kernel, IMagazinoService service)
+        public CategoriaViewModel(ILogger logger, IMagazinoService service)
         {
-            this.logger = logger;
-            this.kernel = kernel;
-            this.service = service;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.service = service ?? throw new ArgumentNullException(nameof(service));
             Categorie = new ObservableCollection<Categoria>();
-            SalvaCommand = new RelayCommand(salva);
-            RimuoviCommand = new RelayCommand(rimuovi);
-            NuovoCommand = new RelayCommand(nuova);
+            SalvaCommand = new RelayCommand(Salva);
+            RimuoviCommand = new RelayCommand(Rimuovi);
+            NuovoCommand = new RelayCommand(Nuova);
 
-            if (IsInDesignMode)
+            if (App.InDesignMode())
             {
                 foreach (Categoria ca in service.GetCategorie())
                 {
@@ -38,25 +36,25 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
             else
             {
-                aggiorna();
+                Aggiorna();
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ObservableCollection<Categoria> Categorie { get; private set; }
         public Categoria Categoria { get; private set; }
-        public Categoria CategoriaSelezionata { set { mostra(value); } }
+        public Categoria CategoriaSelezionata { set { Mostra(value); } }
         public ICommand SalvaCommand { get; private set; }
         public ICommand RimuoviCommand { get; private set; }
         public ICommand NuovoCommand { get; private set; }
 
 
-        private void salva()
+        private void Salva()
         {
             try
             {
                 service.SaveCategoria(Categoria);
-                aggiorna();
+                Aggiorna();
             }
             catch (Exception e)
             {
@@ -64,12 +62,12 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        private void rimuovi()
+        private void Rimuovi()
         {
             try
             {
                 service.DeleteCategoria(Categoria.Id);
-                aggiorna();
+                Aggiorna();
             }
             catch (Exception e)
             {
@@ -77,23 +75,23 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
             }
         }
 
-        private void mostra(Categoria categoria)
+        private void Mostra(Categoria categoria)
         {
             if (categoria != null && categoria != Categoria)
             {
                 Categoria = categoria;
-                RaisePropertyChanged("Categoria");
+                RaisePropertyChanged(nameof(Categoria));
             }
         }
 
-        private void nuova()
+        private void Nuova()
         {
-            mostra(new Categoria());
+            Mostra(new Categoria());
         }
 
-        private void aggiorna()
+        private void Aggiorna()
         {
-            nuova();
+            Nuova();
             Categorie.Clear();
             foreach (Categoria ca in service.GetCategorie())
             {
@@ -105,7 +103,7 @@ namespace CiccioGest.Presentation.AppWpf.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

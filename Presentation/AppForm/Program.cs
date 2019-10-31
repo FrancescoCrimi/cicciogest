@@ -1,10 +1,11 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Castle.Facilities.Logging;
+using Castle.MicroKernel.Registration;
+using Castle.Services.Logging.NLogIntegration;
+using Castle.Windsor;
 using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.AppForm.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm
 {
@@ -12,6 +13,8 @@ namespace CiccioGest.Presentation.AppForm
     {
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
+        private readonly IWindsorContainer windsor;
+
 
         [STAThread]
         static void Main()
@@ -20,20 +23,31 @@ namespace CiccioGest.Presentation.AppForm
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             new Program();
-            System.Windows.Forms.Application.Run(new MainView());
-            //System.Windows.Forms.Application.Run(new ConfigDataAccessView());
         }
 
         public Program()
         {
-            Bootstrap.Windsor.Install(new CiccioGest.Presentation.Client.Installer());
-            Bootstrap.Windsor.Register(
-                Component.For<ProdottoView>().LifestyleTransient(),
+            windsor = new WindsorContainer();
+            windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
+            IConf conf = ConfMgr.ReadConfiguration();
+            windsor.Register(
+                Component.For<IConf>().Instance(conf),
+                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+            windsor.Install(new CiccioGest.Application.Installer());
+            RegisterComponent();
+            System.Windows.Forms.Application.Run(windsor.Resolve<MainView>());
+        }
+
+        private void RegisterComponent()
+        {
+            windsor.Register(
+                Component.For<ArticoloView>().LifestyleTransient(),
                 Component.For<CategoriaView>().LifestyleTransient(),
-                Component.For<SelectProdottoView>().LifeStyle.Transient,
+                Component.For<SelectArticoloView>().LifeStyle.Transient,
                 Component.For<SelectFattureView>().LifestyleTransient(),
                 Component.For<FatturaView>().LifestyleTransient(),
-                Component.For<MainView>().LifestyleTransient());
+                Component.For<MainView>().LifestyleTransient(),
+                Component.For<SettingView>().LifestyleTransient());
         }
     }
 }

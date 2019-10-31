@@ -1,71 +1,74 @@
-﻿using Castle.MicroKernel;
-using Castle.Windsor;
+﻿using Castle.Core.Logging;
+using Castle.MicroKernel;
 using CiccioGest.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
     public partial class MainView : Form, ICazzo
     {
-        public MainView()
+        private readonly ILogger logger;
+        private readonly IKernel kernel;
+
+        public MainView(ILogger logger, IKernel kernel)
         {
+            this.logger = logger;
+            this.kernel = kernel;
             InitializeComponent();
         }
 
-        private void nuovaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NuovaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FatturaView fv = Bootstrap.Windsor.Resolve<FatturaView>();
+            FatturaView fv = kernel.Resolve<FatturaView>();
             fv.FormClosing += FormClose;
             fv.Show();
         }
 
-        private void cercaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CercaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // FatturaView fv = Bootstrap.Windsor.Resolve<FatturaView>(new { idFattura = 0 });
             // fix windsor 5.0
-            FatturaView fv = Bootstrap.Windsor.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", 0));
+            FatturaView fv = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", 0));
             fv.FormClosing += FormClose;
             fv.Show();
         }
 
-        private void gestioneClientiToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClientiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Non implementato");
         }
 
-        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FornitoriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Non implementato");
+        }
+
+        private void EsciToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
         }
 
         private void FormClose(object sender, FormClosingEventArgs e)
         {
-            Bootstrap.Windsor.Release(sender);
+            kernel.ReleaseComponent(sender);
         }
 
-        private void prodottiToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ArticoliToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProdottoView pv = Bootstrap.Windsor.Resolve<ProdottoView>();
+            ArticoloView pv = kernel.Resolve<ArticoloView>();
             pv.FormClosing += FormClose;
             pv.Show();
         }
 
-        private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CategorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CategoriaView cv = Bootstrap.Windsor.Resolve<CategoriaView>();
+            CategoriaView cv = kernel.Resolve<CategoriaView>();
             cv.FormClosing += FormClose;
             cv.Show();
         }

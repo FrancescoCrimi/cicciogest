@@ -1,14 +1,14 @@
-﻿using Castle.Facilities.WcfIntegration;
+﻿using Castle.Facilities.Logging;
+using Castle.Facilities.WcfIntegration;
+using Castle.MicroKernel.Registration;
+using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CiccioGest.Interface.AppWcf
 {
@@ -20,8 +20,17 @@ namespace CiccioGest.Interface.AppWcf
         }
         Program()
         {
-            IWindsorContainer container = Bootstrap.Windsor;
-            container.Install(new CiccioGest.Application.Impl.Installer());
+            IWindsorContainer container = new WindsorContainer();
+            container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
+            container.AddFacility<WcfFacility>();
+            IConf conf = ConfMgr.ReadConfiguration();            
+            container.Register(
+                Component.For<IConf>().Instance(conf),
+                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+            container.Install(new CiccioGest.Application.Installer());
+
+            var dummy = container.Resolve<IUnitOfWorkFactory>();
+
             DefaultServiceHostFactory factory = new CiccioServiceHostFactory();
             string baseAddresses = "http://localhost:8000/";
 
@@ -33,30 +42,34 @@ namespace CiccioGest.Interface.AppWcf
                 typeof(IMagazinoService).AssemblyQualifiedName,
                 new Uri[] { new Uri(baseAddresses + "MagazinoService.svc") });
 
-            //ServiceHostBase categoriaServiceHost = factory.CreateServiceHost(
+            //ServiceHostBase clientiFornitoriServiceHost = factory.CreateServiceHost(
             //    typeof(IClientiFornitoriService).AssemblyQualifiedName,
-            //    new Uri[] { new Uri(baseAddresses + "CategoriaService.svc") });
+            //    new Uri[] { new Uri(baseAddresses + "ClientiFornitoriService.svc") });
 
             try
             {
                 fatturaServiceHost.Open();
                 PrintServiceInfo(fatturaServiceHost);
+
                 magazinoServiceHost.Open();
                 PrintServiceInfo(magazinoServiceHost);
-                //categoriaServiceHost.Open();
-                //PrintServiceInfo(categoriaServiceHost);
+
+                //clientiFornitoriServiceHost.Open();
+                //PrintServiceInfo(clientiFornitoriServiceHost);
+
                 Console.WriteLine("Press <ENTER> to terminate service.");
                 Console.ReadLine();
+
                 fatturaServiceHost.Close();
                 magazinoServiceHost.Close();
-                //categoriaServiceHost.Close();
+                //clientiFornitoriServiceHost.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("An exception occurred: {0}", ex.Message);
                 fatturaServiceHost.Abort();
                 magazinoServiceHost.Abort();
-                //categoriaServiceHost.Abort();
+                //clientiFornitoriServiceHost.Abort();
                 Console.ReadLine();
             }
         }
