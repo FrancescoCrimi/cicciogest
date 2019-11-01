@@ -2,7 +2,6 @@ using CiccioGest.Domain.Common;
 using CiccioSoft.Collections.Generic;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.Documenti
@@ -20,34 +19,6 @@ namespace CiccioGest.Domain.Documenti
             Initialize();
         }
 
-        private void Initialize()
-        {
-            dettagli = new CiccioList<Dettaglio>();
-            //dettagli = new List<Dettaglio>();
-            ((IBindingList)dettagli).ListChanged += Fattura_ListChanged;
-            //((INotifyCollectionChanged)dettagli).CollectionChanged += Fattura_CollectionChanged;
-        }
-
-        //private void Fattura_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //}
-
-        private void Fattura_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            CalcolaTotale();
-        }
-
-        //[OnDeserialized]
-        //void OnDeserialized(StreamingContext c)
-        //{
-        //}
-
-        [OnDeserializing]
-        void OnDeserializing(StreamingContext c)
-        {
-            Initialize();
-        }
-
         public Fattura(string nome)
             : this()
         {
@@ -57,6 +28,17 @@ namespace CiccioGest.Domain.Documenti
             : this(nome)
         {
             this.Id = id;
+        }
+
+        private void Initialize()
+        {
+            dettagli = new CiccioList<Dettaglio>();
+        }
+
+        [OnDeserializing]
+        void OnDeserializing(StreamingContext c)
+        {
+            Initialize();
         }
 
 
@@ -77,12 +59,14 @@ namespace CiccioGest.Domain.Documenti
         [DataMember]
         public virtual IList<Dettaglio> Dettagli
         {
-            get { return dettagli; }
+            get => dettagli;
             protected set
             {
-                //((IBindingList)dettagli).ListChanged -= Fattura_ListChanged;
-                dettagli = value ?? throw new ArgumentNullException(nameof(Dettagli));
-                //((IBindingList)dettagli).ListChanged += Fattura_ListChanged;
+                if (value != dettagli)
+                {
+                    dettagli = value;
+                    NotifyPropertyChanged(nameof(Dettagli));
+                }
             }
         }
 
@@ -93,15 +77,14 @@ namespace CiccioGest.Domain.Documenti
         {
             if (!dettagli.Contains(dettaglio))
             {
-                //dettaglio.Fattura = this;
                 dettagli.Add(dettaglio);
                 CalcolaTotale();
             }
             else
             {
-                //DettaglioFattura d = Dettagli[Dettagli.IndexOf(dettaglio)];
-                //DettaglioFattura d = Dettagli.foreac
-                //d.Quantità = (dettaglio.Quantità + d.Quantità);
+                Dettaglio d = dettagli[dettagli.IndexOf(dettaglio)];
+                d.Quantita = (d.Quantita + dettaglio.Quantita);
+                CalcolaTotale();
             }
         }
 
@@ -114,29 +97,11 @@ namespace CiccioGest.Domain.Documenti
             }
         }
 
-        //public virtual void ReplaceDettagli(IEnumerable<Dettaglio> dettagli)
-        //{
-        //    var newdett = new HashSet<Dettaglio>();
-        //    foreach (Dettaglio item in dettagli)
-        //    {
-        //        newdett.Add(item);
-        //    }
-        //    this.dettagli = newdett;
-        //}
-
         public virtual void AddDettagli(ISet<Dettaglio> dettagli)
         {
             foreach (Dettaglio dettaglio in dettagli)
                 AddDettaglio(dettaglio);
         }
-
-        //public virtual void AddOrUpdate(Prodotto product)
-        //{
-        //    if (!products.Contains(product))
-        //        products.Add(product);
-        //    else
-        //        products[products.IndexOf(product)] = product;
-        //}
 
         private void CalcolaTotale()
         {
