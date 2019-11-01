@@ -2,6 +2,7 @@
 using CiccioGest.Domain.Magazino;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
@@ -9,24 +10,24 @@ namespace CiccioGest.Application
     public interface IMagazinoService
     {
         [OperationContract]
-        IEnumerable<ArticoloReadOnly> GetArticoli();
+        Task<IEnumerable<ArticoloReadOnly>> GetArticoli();
         [OperationContract]
-        Articolo GetArticolo(int id);
+        Task<Articolo> GetArticolo(int id);
         [OperationContract]
-        Articolo SaveArticolo(Articolo prodotto);
+        Task<Articolo> SaveArticolo(Articolo prodotto);
         [OperationContract]
-        void DeleteArticolo(int id);
+        Task DeleteArticolo(int id);
 
         [OperationContract]
-        IEnumerable<Categoria> GetCategorie();
+        Task<IEnumerable<Categoria>> GetCategorie();
         [OperationContract]
-        Categoria GetCategoria(int id);
+        Task<Categoria> GetCategoria(int id);
         [OperationContract]
-        Categoria SaveCategoria(Categoria categoria);
+        Task<Categoria> SaveCategoria(Categoria categoria);
         [OperationContract]
-        void DeleteCategoria(int id);
+        Task DeleteCategoria(int id);
 
         [OperationContract]
-        Fornitore GetFornitore(int id);
+        Task<Fornitore> GetFornitore(int id);
     }
 }

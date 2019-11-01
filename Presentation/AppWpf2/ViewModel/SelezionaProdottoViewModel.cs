@@ -16,22 +16,30 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
     public sealed class SelezionaProdottoViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
+        private readonly IMagazinoService service;
+        private ICommand selezionaProdottoCommand;
+        private ICommand loadedCommand;
 
         public SelezionaProdottoViewModel(ILogger logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            SelezionaProdottoCommand = new RelayCommand<Window>(ApriProdotto);
+            this.service = service;
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
-            foreach (ArticoloReadOnly pr in service.GetArticoli())
-            {
-                Prodotti.Add(pr);
-            }
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
         public ArticoloReadOnly ProdottoSelezionato { private get; set; }
-        public ICommand SelezionaProdottoCommand { get; private set; }
+
+        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ?? (selezionaProdottoCommand = new RelayCommand<Window>(ApriProdotto));
+
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        {
+            foreach (ArticoloReadOnly pr in await service.GetArticoli())
+            {
+                Prodotti.Add(pr);
+            }
+        }));
 
         private void ApriProdotto(Window wnd)
         {

@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,45 +17,49 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
+        private ICommand loadedCommand;
+        private ICommand nuovoCommand;
+        private ICommand rimuoviCommand;
+        private ICommand salvaCommand;
 
         public CategoriaViewModel(ILogger logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             Categorie = new ObservableCollection<Categoria>();
-            SalvaCommand = new RelayCommand(Salva);
-            RimuoviCommand = new RelayCommand(Rimuovi);
-            NuovoCommand = new RelayCommand(Nuova);
 
             if (IsInDesignMode)
             {
-                foreach (Categoria ca in service.GetCategorie())
+                foreach (Categoria ca in service.GetCategorie().Result)
                 {
                     Categorie.Add(ca);
                 }
-                Categoria = service.GetCategoria(4);
+                Categoria = service.GetCategoria(4).Result;
             }
-            else
-            {
-                Aggiorna();
-            }
+            //else
+            //{
+            //    Aggiorna();
+            //}
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ObservableCollection<Categoria> Categorie { get; private set; }
         public Categoria Categoria { get; private set; }
         public Categoria CategoriaSelezionata { set { Mostra(value); } }
-        public ICommand SalvaCommand { get; private set; }
-        public ICommand RimuoviCommand { get; private set; }
-        public ICommand NuovoCommand { get; private set; }
+
+        public ICommand SalvaCommand => salvaCommand ?? (salvaCommand = new RelayCommand(async () => await Salva()));
+        public ICommand RimuoviCommand => rimuoviCommand ?? (rimuoviCommand = new RelayCommand(async () => await Rimuovi()));
+        public ICommand NuovoCommand => nuovoCommand ?? (nuovoCommand = new RelayCommand(Nuova));
+        public ICommand LoadedCommand => loadedCommand ??
+            (loadedCommand = new RelayCommand( async () => await Aggiorna()));
 
 
-        private void Salva()
+        private async Task Salva()
         {
             try
             {
-                service.SaveCategoria(Categoria);
-                Aggiorna();
+                await service.SaveCategoria(Categoria);
+                await Aggiorna();
             }
             catch (Exception e)
             {
@@ -62,12 +67,12 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             }
         }
 
-        private void Rimuovi()
+        private async Task Rimuovi()
         {
             try
             {
-                service.DeleteCategoria(Categoria.Id);
-                Aggiorna();
+                await service.DeleteCategoria(Categoria.Id);
+                await Aggiorna();
             }
             catch (Exception e)
             {
@@ -89,11 +94,11 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             Mostra(new Categoria());
         }
 
-        private void Aggiorna()
+        private async Task Aggiorna()
         {
             Nuova();
             Categorie.Clear();
-            foreach (Categoria ca in service.GetCategorie())
+            foreach (Categoria ca in await service.GetCategorie())
             {
                 Categorie.Add(ca);
             }

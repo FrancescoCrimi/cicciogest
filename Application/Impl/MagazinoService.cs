@@ -1,13 +1,11 @@
 ﻿using Castle.Core.Logging;
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CiccioGest.Domain.ClientiFornitori;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
 {
@@ -31,7 +29,8 @@ namespace CiccioGest.Application.Impl
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public void DeleteArticolo(int id)
+
+        public async Task DeleteArticolo(int id)
         {
             try
             {
@@ -45,17 +44,17 @@ namespace CiccioGest.Application.Impl
             }
         }
 
-        public IEnumerable<ArticoloReadOnly> GetArticoli()
+        public async Task<IEnumerable<ArticoloReadOnly>> GetArticoli()
         {
-            return prodottoRepository.GetAll();
+            return await prodottoRepository.GetAll();
         }
 
-        public Articolo GetArticolo(int id)
+        public async Task<Articolo> GetArticolo(int id)
         {
-            return prodottoRepository.GetById(id);
+            return await prodottoRepository.GetById(id);
         }
 
-        public Articolo SaveArticolo(Articolo prodotto)
+        public async Task<Articolo> SaveArticolo(Articolo prodotto)
         {
             try
             {
@@ -77,17 +76,17 @@ namespace CiccioGest.Application.Impl
             return prodotto;
         }
 
-        public Categoria GetCategoria(int id)
+        public async Task<Categoria> GetCategoria(int id)
         {
-            return categoriaRepository.GetById(id);
+            return await categoriaRepository.GetById(id);
         }
 
-        public IEnumerable<Categoria> GetCategorie()
+        public async Task<IEnumerable<Categoria>> GetCategorie()
         {
-            return categoriaRepository.GetAll();
+            return await categoriaRepository.GetAll();
         }
 
-        public Categoria SaveCategoria(Categoria categoria)
+        public async Task<Categoria> SaveCategoria(Categoria categoria)
         {
             try
             {
@@ -109,12 +108,12 @@ namespace CiccioGest.Application.Impl
             return categoria;
         }
 
-        public void DeleteCategoria(int id)
+        public async Task DeleteCategoria(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Fornitore GetFornitore(int id)
+        public async Task<Fornitore> GetFornitore(int id)
         {
             throw new NotImplementedException();
         }

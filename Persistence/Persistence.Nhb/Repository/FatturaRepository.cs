@@ -2,6 +2,7 @@
 using CiccioGest.Domain.Documenti;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
@@ -13,12 +14,12 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
-        public IEnumerable<FatturaReadOnly> GetAll()
+        public async Task<IEnumerable<FatturaReadOnly>> GetAll()
         //public IList<FatturaReadOnly> GetAll()
         {
             List<FatturaReadOnly> list = new List<FatturaReadOnly>();
             //IList qr = da.ISession.CreateQuery("select fat.Id, fat.Nome, fat.Totale from Fattura fat").List();
-            IList<Fattura> fatture = unitOfWork.ISession.CreateCriteria<Fattura>().List<Fattura>();
+            IEnumerable<Fattura> fatture = await unitOfWork.ISession.CreateCriteria<Fattura>().ListAsync<Fattura>();
             foreach (Fattura item in fatture)
             {
                 list.Add(new FatturaReadOnly(item.Id, item.Nome, item.Totale));

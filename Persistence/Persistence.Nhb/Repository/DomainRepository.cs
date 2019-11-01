@@ -1,8 +1,5 @@
 ﻿using CiccioGest.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
@@ -16,27 +13,29 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             this.unitOfWork = unitOfWork;
         }
 
-        public TEntity GetById(int id)
+
+        public async Task<TEntity> GetById(int id)
         {
-            return unitOfWork.ISession.Get<TEntity>(id);
+            return await unitOfWork.ISession.GetAsync<TEntity>(id);
         }
 
-        public int Save(TEntity entity)
+        public async Task<int> Save(TEntity entity)
         {
-            return (int)unitOfWork.ISession.Save(entity);
+            object asdf = await unitOfWork.ISession.SaveAsync(entity);
+            return (int)asdf;
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var entity = unitOfWork.ISession.Get<TEntity>(id);
+            var entity = await unitOfWork.ISession.GetAsync<TEntity>(id);
             if (entity != null)
-                unitOfWork.ISession.Delete(entity);
+                await unitOfWork.ISession.DeleteAsync(entity);
         }
 
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             //unitOfWork.ISession.Merge(entity);
-            unitOfWork.ISession.Update(entity);
+            await unitOfWork.ISession.UpdateAsync(entity);
         }
     }
 }

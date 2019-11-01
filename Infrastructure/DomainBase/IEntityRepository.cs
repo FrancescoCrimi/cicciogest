@@ -1,10 +1,12 @@
-﻿namespace CiccioGest.Infrastructure.DomainBase
+﻿using System.Threading.Tasks;
+
+namespace CiccioGest.Infrastructure.DomainBase
 {
     public interface IEntityRepository<TEntity, TId> where TEntity : Entity<TId>
     {
-        TEntity GetById(TId id);
-        TId Save(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(TId id);
+        Task<TEntity> GetById(TId id);
+        Task<TId> Save(TEntity entity);
+        Task Update(TEntity entity);
+        Task Delete(TId id);
     }
 }

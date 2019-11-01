@@ -1,10 +1,11 @@
 ﻿using CiccioGest.Domain.Common;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Domain.Magazino
 {
     public interface IArticoloRepository : IDomainRepository<Articolo>
     {
-        IEnumerable<ArticoloReadOnly> GetAll();
+        Task<IEnumerable<ArticoloReadOnly>> GetAll();
     }
 }

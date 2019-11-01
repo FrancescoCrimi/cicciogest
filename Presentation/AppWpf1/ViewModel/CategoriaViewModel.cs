@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,6 +17,7 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
+        private ICommand loadedCommand;
 
         public CategoriaViewModel(ILogger logger, IMagazinoService service)
         {
@@ -29,25 +31,30 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
             //if (App.InDesignMode())
             if (IsInDesignModeStatic)
             {
-                foreach (Categoria ca in service.GetCategorie())
+                foreach (Categoria ca in service.GetCategorie().Result)
                 {
                     Categorie.Add(ca);
                 }
-                Categoria = service.GetCategoria(4);
+                Categoria = service.GetCategoria(4).Result;
             }
-            else
-            {
-                Aggiorna();
-            }
+            //else
+            //{
+            //    Aggiorna();
+            //}
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ObservableCollection<Categoria> Categorie { get; private set; }
         public Categoria Categoria { get; private set; }
         public Categoria CategoriaSelezionata { set { Mostra(value); } }
+
         public ICommand SalvaCommand { get; private set; }
         public ICommand RimuoviCommand { get; private set; }
         public ICommand NuovoCommand { get; private set; }
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand( async () => 
+        {
+            await Aggiorna();
+        }));
 
 
         private void Salva()
@@ -90,11 +97,11 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
             Mostra(new Categoria());
         }
 
-        private void Aggiorna()
+        private async Task Aggiorna()
         {
             Nuova();
             Categorie.Clear();
-            foreach (Categoria ca in service.GetCategorie())
+            foreach (Categoria ca in await service.GetCategorie())
             {
                 Categorie.Add(ca);
             }
