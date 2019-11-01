@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,6 +18,11 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
+        private ICommand loadedCommand;
+        private ICommand nuovoCommand;
+        private ICommand salvaCommand;
+        private ICommand eliminaCommand;
+        private ArticoloReadOnly prodottoSelezionato;
 
         public ProdottoViewModel(ILogger logger, IMagazinoService service)
         {
@@ -27,53 +33,54 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
 
             if (IsInDesignMode)
             {
-                Prodotto = service.GetArticolo(4);
-                foreach (Categoria cat in service.GetCategorie())
+                Prodotto = service.GetArticolo(4).Result;
+                foreach (Categoria cat in service.GetCategorie().Result)
                 {
                     Categorie.Add(cat);
                 }
-                foreach (ArticoloReadOnly pr in service.GetArticoli())
+                foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
                 {
                     Prodotti.Add(pr);
                 }
             }
             else
             {
-                NuovoCommand = new RelayCommand(Nuovo);
-                SalvaCommand = new RelayCommand(Salva);
-                EliminaCommand = new RelayCommand(Elimina);
                 RegistraMessaggi();
-                foreach (Categoria cat in service.GetCategorie())
-                {
-                    Categorie.Add(cat);
-                }
             }
-            Aggiorna();
+            //Aggiorna();
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
+        public ICommand NuovoCommand => nuovoCommand ?? (nuovoCommand = new RelayCommand(Nuovo));
+        public ICommand EliminaCommand => eliminaCommand ?? (eliminaCommand = new RelayCommand(async () => await Elimina()));
+        public ICommand SalvaCommand => salvaCommand ?? (salvaCommand = new RelayCommand(async () => await Salva()));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        {
+            foreach (Categoria cat in await service.GetCategorie())
+            {
+                Categorie.Add(cat);
+            }
+            await Aggiorna();
+        }));
 
-        #region Proprietà Pubbliche
-
+        public Articolo Prodotto { get; private set; }
         public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
         public ObservableCollection<Categoria> Categorie { get; private set; }
-        public Articolo Prodotto { get; private set; }
-        public ICommand NuovoCommand { get; private set; }
-        public ICommand EliminaCommand { get; private set; }
-        public ICommand SalvaCommand { get; private set; }
         public ArticoloReadOnly ProdottoSelezionato
         {
+            private get => prodottoSelezionato;
             set
             {
-                if (value != null)
+                if (value != prodottoSelezionato)
                 {
-                    Prodotto = service.GetArticolo(value.Id);
-                    RaisePropertyChanged(nameof(Prodotto));
+                    Task.Run(async () =>
+                    {
+                        Prodotto = await service.GetArticolo(value.Id);
+                        RaisePropertyChanged(nameof(Prodotto));
+                    });
                 }
             }
         }
-
-        #endregion
 
 
         #region Metodi Privati
@@ -104,10 +111,10 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             //});
         }
 
-        private void Aggiorna()
+        private async Task Aggiorna()
         {
             Prodotti.Clear();
-            foreach (ArticoloReadOnly pr in service.GetArticoli())
+            foreach (ArticoloReadOnly pr in await service.GetArticoli())
             {
                 Prodotti.Add(pr);
             }
@@ -121,12 +128,12 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             RaisePropertyChanged(nameof(Prodotto));
         }
 
-        private void Elimina()
+        private async Task Elimina()
         {
             try
             {
-                service.DeleteArticolo(Prodotto.Id);
-                Aggiorna();
+                await service.DeleteArticolo(Prodotto.Id);
+                await Aggiorna();
             }
             catch (Exception e)
             {
@@ -134,12 +141,12 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             }
         }
 
-        private void Salva()
+        private async Task Salva()
         {
             try
             {
-                service.SaveArticolo(Prodotto);
-                Aggiorna();
+                await service.SaveArticolo(Prodotto);
+                await Aggiorna();
             }
             catch (Exception e)
             {

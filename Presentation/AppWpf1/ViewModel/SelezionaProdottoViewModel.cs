@@ -15,25 +15,32 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
 {
     public sealed class SelezionaProdottoViewModel : ViewModelBase, IDisposable, ICazzo
     {
-        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
-        public ArticoloReadOnly ProdottoSelezionato { private get; set; }
-        public ICommand SelezionaProdottoCommand => new RelayCommand(ApriProdotto);
         private readonly ILogger logger;
+        private readonly IMagazinoService service;
         private readonly INavigationService ns;
+        private ICommand loadedCommand;
+        private ICommand selezionaProdottoCommand;
 
         public SelezionaProdottoViewModel(ILogger logger, IMagazinoService service, INavigationService ns)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.service = service;
             this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
-            if (service == null) throw new ArgumentNullException(nameof(service));
 
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
-            foreach (ArticoloReadOnly pr in service.GetArticoli())
+            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+        }
+
+        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
+        public ArticoloReadOnly ProdottoSelezionato { private get; set; }
+        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ??(selezionaProdottoCommand = new RelayCommand(ApriProdotto));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        {
+            foreach (ArticoloReadOnly pr in await service.GetArticoli())
             {
                 Prodotti.Add(pr);
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
-        }
+        }));
 
         private void ApriProdotto()
         {

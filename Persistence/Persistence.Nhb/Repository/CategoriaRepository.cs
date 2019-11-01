@@ -2,6 +2,7 @@
 using CiccioGest.Domain.Magazino;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
@@ -13,9 +14,9 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
-        public IEnumerable<Categoria> GetAll()
+        public async Task<IEnumerable<Categoria>> GetAll()
         {
-            return unitOfWork.ISession.CreateCriteria<Categoria>().List<Categoria>();
+            return await unitOfWork.ISession.CreateCriteria<Categoria>().ListAsync<Categoria>();
         }
     }
 }
