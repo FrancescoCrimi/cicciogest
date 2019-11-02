@@ -63,7 +63,7 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
             {
                 Categorie.Add(cat);
             }
-            Aggiorna();
+            await Aggiorna();
         }));
 
         public ArticoloReadOnly ProdottoSelezionato
@@ -123,12 +123,12 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
             RaisePropertyChanged(nameof(Prodotto));
         }
 
-        private void Elimina()
+        private async void Elimina()
         {
             try
             {
-                service.DeleteArticolo(Prodotto.Id);
-                Aggiorna();
+                await service.DeleteArticolo(Prodotto.Id);
+                await Aggiorna();
             }
             catch (Exception e)
             {
@@ -136,12 +136,12 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
             }
         }
 
-        private void Salva()
+        private async void Salva()
         {
             try
             {
-                service.SaveArticolo(Prodotto);
-                Aggiorna();
+                await service.SaveArticolo(Prodotto);
+                await Aggiorna();
             }
             catch (Exception e)
             {

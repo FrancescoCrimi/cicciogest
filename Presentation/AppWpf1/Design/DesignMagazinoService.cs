@@ -22,7 +22,7 @@ namespace CiccioGest.Presentation.AppWpf1.Design
 
         public async Task<Categoria> GetCategoria(int id)
         {
-            return DesignData.Categorie.First(c => c.Id == id);
+            return  DesignData.Categorie.First(c => c.Id == id);
         }
 
         public async Task<IEnumerable<Categoria>> GetCategorie()

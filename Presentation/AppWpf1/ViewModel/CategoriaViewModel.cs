@@ -57,12 +57,12 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
         }));
 
 
-        private void Salva()
+        private async void Salva()
         {
             try
             {
-                service.SaveCategoria(Categoria);
-                Aggiorna();
+                await service.SaveCategoria(Categoria);
+                await Aggiorna();
             }
             catch (Exception e)
             {
@@ -70,12 +70,12 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
             }
         }
 
-        private void Rimuovi()
+        private async void Rimuovi()
         {
             try
             {
-                service.DeleteCategoria(Categoria.Id);
-                Aggiorna();
+                await service.DeleteCategoria(Categoria.Id);
+                await Aggiorna();
             }
             catch (Exception e)
             {

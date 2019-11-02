@@ -68,13 +68,13 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
         public ObservableCollection<Categoria> Categorie { get; private set; }
         public ArticoloReadOnly ProdottoSelezionato
         {
-            private get => prodottoSelezionato;
             set
             {
                 if (value != prodottoSelezionato)
                 {
                     Task.Run(async () =>
                     {
+                        prodottoSelezionato = value;
                         Prodotto = await service.GetArticolo(value.Id);
                         RaisePropertyChanged(nameof(Prodotto));
                     });
