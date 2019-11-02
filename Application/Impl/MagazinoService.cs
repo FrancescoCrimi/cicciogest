@@ -19,7 +19,7 @@ namespace CiccioGest.Application.Impl
         public MagazinoService(
             ILogger logger,
             IUnitOfWork da,
-            IArticoloRepository prodottoRepository,                     
+            IArticoloRepository prodottoRepository,
             ICategoriaRepository categoriaRepository)
         {
             this.logger = logger;
@@ -34,7 +34,7 @@ namespace CiccioGest.Application.Impl
         {
             try
             {
-                prodottoRepository.Delete(id);
+                await prodottoRepository.Delete(id);
                 da.Commit();
             }
             catch (Exception)
@@ -60,11 +60,11 @@ namespace CiccioGest.Application.Impl
             {
                 if (prodotto.Id == 0)
                 {
-                    prodottoRepository.Save(prodotto);
+                    await prodottoRepository.Save(prodotto);
                 }
                 else
                 {
-                    prodottoRepository.Update(prodotto);
+                    await prodottoRepository.Update(prodotto);
                 }
                 da.Commit();
             }
@@ -92,11 +92,11 @@ namespace CiccioGest.Application.Impl
             {
                 if (categoria.Id == 0)
                 {
-                    categoriaRepository.Save(categoria);
+                    await categoriaRepository.Save(categoria);
                 }
                 else
                 {
-                    categoriaRepository.Update(categoria);
+                    await categoriaRepository.Update(categoria);
                 }
                 da.Commit();
             }

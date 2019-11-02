@@ -64,6 +64,7 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
 
         public void Dispose()
         {
+            GC.SuppressFinalize(this);
         }
     }
 }
