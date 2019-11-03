@@ -8,7 +8,7 @@ namespace CiccioGest.Presentation.AppUwp2.View
         public ShellPage()
         {
             this.InitializeComponent();
-            ((MainViewModel)DataContext).Initialize(ContentFrame);
+            ((ShellViewModel)DataContext).Initialize(ContentFrame);
         }
     }
 }

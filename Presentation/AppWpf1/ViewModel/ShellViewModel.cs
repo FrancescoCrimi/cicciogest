@@ -6,11 +6,11 @@ using System.Globalization;
 
 namespace CiccioGest.Presentation.AppWpf1.ViewModel
 {
-    public sealed class MainViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ShellViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
 
-        public MainViewModel(ILogger logger)
+        public ShellViewModel(ILogger logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");

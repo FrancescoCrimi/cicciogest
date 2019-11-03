@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListaFattureView"
-      DataContext="{Binding SelezionaFattura, Source={StaticResource Locator}}">
+      DataContext="{Binding ListaFatture, Source={StaticResource Locator}}">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -18,7 +18,12 @@
 
     <Grid>
 
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Fatture}" SelectedItem="{Binding FatturaSelezionata}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid
+            ItemsSource="{Binding Fatture}"
+            SelectedItem="{Binding FatturaSelezionata}"
+            SelectionMode="Single"
+            AutoGenerateColumns="False"
+            IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Nome}" Header="Nome" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Totale}" Header="Totale" Width="0.4*"/>

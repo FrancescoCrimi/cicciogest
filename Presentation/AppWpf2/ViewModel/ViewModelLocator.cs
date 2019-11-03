@@ -9,13 +9,13 @@ using GalaSoft.MvvmLight;
 
 namespace CiccioGest.Presentation.AppWpf2.ViewModel
 {
-    public class ViewModelLocator
+    public sealed class ViewModelLocator
     {
         private readonly IWindsorContainer windsor;
 
         public ViewModelLocator()
         {
-            if (ViewModelBase.IsInDesignModeStatic)
+            if (App.InDesignMode)
             {
                 windsor = new WindsorContainer();
                 windsor.AddFacility<LoggingFacility>();
@@ -36,19 +36,19 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             }
             windsor.Register(
                 Component.For<MainViewModel>(),
-                Component.For<SelezionaFatturaViewModel>().LifestyleTransient(),
-                Component.For<SelezionaProdottoViewModel>().LifestyleTransient(),
+                Component.For<ListaFattureViewModel>().LifestyleTransient(),
+                Component.For<ListaArticoliViewModel>().LifestyleTransient(),
                 Component.For<CategoriaViewModel>().LifestyleTransient(),
                 Component.For<FatturaViewModel>().LifestyleTransient(),
-                Component.For<ProdottoViewModel>().LifestyleTransient());
+                Component.For<ArticoloViewModel>().LifestyleTransient());
         }
 
         public MainViewModel Main => windsor.Resolve<MainViewModel>();
-        public SelezionaFatturaViewModel SelezionaFattura => windsor.Resolve<SelezionaFatturaViewModel>();
-        public SelezionaProdottoViewModel SelezionaProdotto => windsor.Resolve<SelezionaProdottoViewModel>();
+        public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
+        public ListaArticoliViewModel ListaArticoli => windsor.Resolve<ListaArticoliViewModel>();
         public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
         public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
-        public ProdottoViewModel Prodotto => windsor.Resolve<ProdottoViewModel>();
+        public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
 
         public static void Cleanup()
         {

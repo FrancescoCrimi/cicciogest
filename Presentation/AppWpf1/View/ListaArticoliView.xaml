@@ -7,8 +7,8 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ListaArticoliView"
-      DataContext="{Binding SelezionaProdotto, Source={StaticResource Locator}}">
+      Title="Lista Articoli"
+      DataContext="{Binding ListaArticoli, Source={StaticResource Locator}}">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -18,17 +18,22 @@
 
     <Grid>
 
-        <DataGrid x:Name="prodottoDataGrid" ItemsSource="{Binding Prodotti}" SelectedItem="{Binding ProdottoSelezionato}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Single" HeadersVisibility="Column">
+        <DataGrid
+            ItemsSource="{Binding Prodotti}" 
+            SelectedItem="{Binding ProdottoSelezionato}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="nomeColumn" Width="*" Header="Nome" Binding="{Binding Nome}"/>
-                <DataGridTextColumn x:Name="prezzoColumn" Width="SizeToHeader" Header="Prezzo" Binding="{Binding Prezzo}"/>
-                <DataGridTextColumn x:Name="nomeCategoriaColumn" Width="*" IsReadOnly="True" Header="Categoria" Binding="{Binding NomeCategoria}"/>
+                <DataGridTextColumn Width="*" Header="Nome" Binding="{Binding Nome}"/>
+                <DataGridTextColumn Width="SizeToHeader" Header="Prezzo" Binding="{Binding Prezzo}"/>
+                <DataGridTextColumn Width="*" Header="Categoria" Binding="{Binding NomeCategoria}"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding
                     MouseAction="LeftDoubleClick" 
-                    Command="{Binding SelezionaProdottoCommand}" 
-                    CommandParameter="{Binding ElementName=SelezionaProdotto}" />
+                    Command="{Binding SelezionaProdottoCommand}" />
+                    <!--CommandParameter="{Binding ElementName=SelezionaProdotto}"-->                    
             </DataGrid.InputBindings>
         </DataGrid>
 

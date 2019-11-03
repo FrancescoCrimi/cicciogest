@@ -21,5 +21,9 @@ namespace CiccioGest.Presentation.AppWpf1.View
             Messenger.Default.Unregister(this);
             ViewModelLocator.Cleanup();
         }
+        public bool Suca()
+        {
+            return System.ComponentModel.DesignerProperties.GetIsInDesignMode(this);
+        }
     }
 }

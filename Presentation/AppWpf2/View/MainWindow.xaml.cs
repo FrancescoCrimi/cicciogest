@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.AppWpf2.View
                 }
                 else if (ns.Notification == "ApriSelezionaFatturaView")
                 {
-                    new SelezionaFatturaView().ShowDialog();
+                    new ListaFattureView().ShowDialog();
                 }
                 else if (ns.Notification == "ApriProdotti")
                 {
-                     new ProdottoView().Show();
+                     new ArticoloView().Show();
                 }
                 else if (ns.Notification == "ApriCategorie")
                 {

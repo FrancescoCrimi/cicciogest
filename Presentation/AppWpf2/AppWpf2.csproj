@@ -12,9 +12,6 @@
     <None Remove="View\CategoriaView.xaml" />
     <None Remove="View\FatturaView.xaml" />
     <None Remove="View\MainWindow.xaml" />
-    <None Remove="View\ProdottoView.xaml" />
-    <None Remove="View\SelezionaFatturaView.xaml" />
-    <None Remove="View\SelezionaProdottoView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,14 +46,14 @@
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\ProdottoView.xaml.cs">
-      <DependentUpon>ProdottoView.xaml</DependentUpon>
+    <Compile Update="View\ArticoloView.xaml.cs">
+      <DependentUpon>ArticoloView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\SelezionaFatturaView.xaml.cs">
-      <DependentUpon>SelezionaFatturaView.xaml</DependentUpon>
+    <Compile Update="View\ListaFattureView.xaml.cs">
+      <DependentUpon>ListaFattureView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\SelezionaProdottoView.xaml.cs">
-      <DependentUpon>SelezionaProdottoView.xaml</DependentUpon>
+    <Compile Update="View\ListaArticoliView.xaml.cs">
+      <DependentUpon>ListaArticoliView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -80,13 +77,13 @@
     <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ProdottoView.xaml">
+    <Page Update="View\ArticoloView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\SelezionaFatturaView.xaml">
+    <Page Update="View\ListaFattureView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\SelezionaProdottoView.xaml">
+    <Page Update="View\ListaArticoliView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

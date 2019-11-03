@@ -13,6 +13,11 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
     {
         private readonly ILogger logger;
         private bool avviaFatturaView = false;
+        private ICommand nuovaFatturaCommand;
+        private ICommand apriFattureCommand;
+        private ICommand apriProdottiCommand;
+        private ICommand apriCategorieCommand;
+        private ICommand loadedCommand;
 
         public MainViewModel(ILogger logger)
         {
@@ -33,10 +38,12 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand NuovaFatturaCommand => new RelayCommand(NuovaFattura);
-        public ICommand ApriFattureCommand => new RelayCommand(ApriFatture);
-        public ICommand ApriProdottiCommand => new RelayCommand(ApriProdotti);
-        public ICommand ApriCategorieCommand => new RelayCommand(ApriCategorie);
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(NuovaFattura));
+        public ICommand ApriFattureCommand => apriFattureCommand ?? (apriFattureCommand = new RelayCommand(ApriFatture));
+        public ICommand ApriProdottiCommand => apriProdottiCommand ?? (apriProdottiCommand = new RelayCommand(ApriProdotti));
+        public ICommand ApriCategorieCommand => apriCategorieCommand ?? (apriCategorieCommand = new RelayCommand(ApriCategorie));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+
 
         private void NuovaFattura()
         {

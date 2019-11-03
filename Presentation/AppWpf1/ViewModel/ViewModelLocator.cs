@@ -11,14 +11,14 @@ using System;
 
 namespace CiccioGest.Presentation.AppWpf1.ViewModel
 {
-    public class ViewModelLocator : ViewModelBase, IDisposable
+    public sealed class ViewModelLocator : ViewModelBase, IDisposable
     {
         private readonly IWindsorContainer windsor;
 
         public ViewModelLocator()
         {
-            //if (App.InDesignMode())
-            if (IsInDesignModeStatic)
+            if (App.InDesignMode)
+            //if (IsInDesignModeStatic)
             {
                 windsor = new WindsorContainer();
                 windsor.AddFacility<LoggingFacility>();
@@ -39,22 +39,22 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
                 windsor.Install(new CiccioGest.Presentation.ClientCore.Installer());
             }
             windsor.Register(
-                Component.For<MainViewModel>().ImplementedBy<MainViewModel>(),
+                Component.For<ShellViewModel>().ImplementedBy<ShellViewModel>(),
                 Component.For<HomeViewModel>(),
-                Component.For<SelezionaFatturaViewModel>().LifestyleTransient(),
-                Component.For<SelezionaProdottoViewModel>().LifestyleTransient(),
+                Component.For<ListaFattureViewModel>().LifestyleTransient(),
+                Component.For<ListaArticoliViewModel>().LifestyleTransient(),
                 Component.For<CategoriaViewModel>().LifestyleTransient(),
                 Component.For<FatturaViewModel>().LifestyleTransient(),
                 Component.For<MenuControlViewModel>().LifestyleTransient(),
-                Component.For<ProdottoViewModel>().LifestyleTransient());
+                Component.For<ArticoloViewModel>().LifestyleTransient());
         }
 
-        public MainViewModel Main => windsor.Resolve<MainViewModel>();
-        public SelezionaFatturaViewModel SelezionaFattura => windsor.Resolve<SelezionaFatturaViewModel>();
-        public SelezionaProdottoViewModel SelezionaProdotto => windsor.Resolve<SelezionaProdottoViewModel>();
+        public ShellViewModel Shell => windsor.Resolve<ShellViewModel>();
+        public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
+        public ListaArticoliViewModel ListaArticoli => windsor.Resolve<ListaArticoliViewModel>();
         public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
         public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
-        public ProdottoViewModel Prodotto => windsor.Resolve<ProdottoViewModel>();
+        public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
         public HomeViewModel Home => windsor.Resolve<HomeViewModel>();
         public MenuControlViewModel MenuControl => windsor.Resolve<MenuControlViewModel>();
 

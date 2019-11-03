@@ -13,18 +13,25 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppWpf2.ViewModel
 {
-    public sealed class SelezionaProdottoViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ListaArticoliViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
         private ICommand selezionaProdottoCommand;
         private ICommand loadedCommand;
 
-        public SelezionaProdottoViewModel(ILogger logger, IMagazinoService service)
+        public ListaArticoliViewModel(ILogger logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service;
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
+            if (App.InDesignMode)
+            {
+                foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
+                {
+                    Prodotti.Add(pr);
+                }
+            }
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 

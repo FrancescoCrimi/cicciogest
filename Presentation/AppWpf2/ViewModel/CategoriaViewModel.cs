@@ -28,7 +28,7 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             Categorie = new ObservableCollection<Categoria>();
 
-            if (IsInDesignMode)
+            if (App.InDesignMode)
             {
                 foreach (Categoria ca in service.GetCategorie().Result)
                 {
@@ -36,10 +36,6 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
                 }
                 Categoria = service.GetCategoria(4).Result;
             }
-            //else
-            //{
-            //    Aggiorna();
-            //}
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 

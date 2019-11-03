@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppWpf1.ViewModel
 {
-    public sealed class SelezionaProdottoViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ListaArticoliViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -21,19 +21,27 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
         private ICommand loadedCommand;
         private ICommand selezionaProdottoCommand;
 
-        public SelezionaProdottoViewModel(ILogger logger, IMagazinoService service, INavigationService ns)
+        public ListaArticoliViewModel(ILogger logger, IMagazinoService service, INavigationService ns)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service;
             this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
 
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
+            if (App.InDesignMode)
+            {
+                foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
+                {
+                    Prodotti.Add(pr);
+                }
+            }
+
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
         public ArticoloReadOnly ProdottoSelezionato { private get; set; }
-        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ??(selezionaProdottoCommand = new RelayCommand(ApriProdotto));
+        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ?? (selezionaProdottoCommand = new RelayCommand(ApriProdotto));
         public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
         {
             foreach (ArticoloReadOnly pr in await service.GetArticoli())
@@ -41,6 +49,8 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
                 Prodotti.Add(pr);
             }
         }));
+
+
 
         private void ApriProdotto()
         {
