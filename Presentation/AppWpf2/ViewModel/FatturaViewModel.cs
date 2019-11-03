@@ -17,15 +17,22 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
     public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
-        //private readonly IKernel kernel;
         private readonly IFatturaService service;
+        private ICommand nuovaFatturaCommand;
+        private ICommand salvaFatturaCommand;
+        private ICommand rimuoviFatturaCommand;
+        private ICommand apriFatturaCommand;
+        private ICommand nuovoDettaglioCommand;
+        private ICommand aggiungiDettaglioCommand;
+        private ICommand rimuoviDettaglioCommand;
+        private ICommand selezionaDettaglioCommand;
+        private ICommand loadedCommand;
 
         public FatturaViewModel(ILogger logger, IFatturaService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            //this.kernel = kernel;
             this.service = service ?? throw new ArgumentNullException(nameof(service));
-            if (IsInDesignModeStatic)
+            if (App.InDesignMode)
             {
                 MostraFattura(service.GetFattura(4).Result);
                 Dettaglio = Fattura.Dettagli[3];
@@ -42,16 +49,17 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand NuovaFatturaCommand => new RelayCommand(() => MostraFattura(new Fattura()));
-        public ICommand SalvaFatturaCommand => new RelayCommand(SalvaFattura);
-        public ICommand RimuoviFatturaCommand => new RelayCommand(RimuoviFattura);
-        public ICommand ApriFatturaCommand => new RelayCommand(() =>
-                MessengerInstance.Send(new NotificationMessage("SelezionaFattura")));
-        public ICommand NuovoDettaglioCommand => new RelayCommand(() =>
-                MessengerInstance.Send(new NotificationMessage("SelezionaProdotto")));
-        public ICommand AggiungiDettaglioCommand => new RelayCommand(AggiungiDettagglio);
-        public ICommand RimuoviDettaglioCommand => new RelayCommand(RimuoviDettaglio);
-        public ICommand SelezionaDettaglioCommand => new RelayCommand(SelezionaDettaglio);
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??(nuovaFatturaCommand = new RelayCommand(() => MostraFattura(new Fattura())));
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new RelayCommand(SalvaFattura));
+        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ?? (rimuoviFatturaCommand = new RelayCommand(RimuoviFattura));
+        public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
+                MessengerInstance.Send(new NotificationMessage("SelezionaFattura"))));
+        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
+                MessengerInstance.Send(new NotificationMessage("SelezionaProdotto"))));
+        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(AggiungiDettagglio));
+        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ?? (rimuoviDettaglioCommand = new RelayCommand(RimuoviDettaglio));
+        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ?? (selezionaDettaglioCommand = new RelayCommand(SelezionaDettaglio));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
 
         private void RegistraMessaggi()
         {

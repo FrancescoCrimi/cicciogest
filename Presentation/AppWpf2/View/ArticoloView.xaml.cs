@@ -4,15 +4,15 @@ using System.Windows;
 
 namespace CiccioGest.Presentation.AppWpf2.View
 {
-    public partial class SelezionaProdottoView : Window
+    public partial class ArticoloView : Window
     {
-        public SelezionaProdottoView()
+        public ArticoloView()
         {
             InitializeComponent();
-            Closing += SelezionaProdottoView_Closing;
+            Closing += ProdottoView_Closing;
         }
 
-        private void SelezionaProdottoView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ProdottoView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Messenger.Default.Unregister(this);
             App.Windsor.Release(DataContext);

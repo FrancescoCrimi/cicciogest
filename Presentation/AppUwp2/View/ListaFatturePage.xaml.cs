@@ -2,9 +2,9 @@
 
 namespace CiccioGest.Presentation.AppUwp2.View
 {
-    public sealed partial class SelectFatturaPage : Page
+    public sealed partial class ListaFatturePage : Page
     {
-        public SelectFatturaPage()
+        public ListaFatturePage()
         {
             this.InitializeComponent();
         }

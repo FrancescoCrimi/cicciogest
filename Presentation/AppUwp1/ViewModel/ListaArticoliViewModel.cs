@@ -16,6 +16,7 @@ namespace CiccioGest.Presentation.AppUwp1.ViewModel
     public sealed class ListaArticoliViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
+        private readonly IMagazinoService service;
         private readonly NavigationService ns;
         private ICommand loadedCommand;
         private ICommand selezionaArticoloCommand;
@@ -23,13 +24,15 @@ namespace CiccioGest.Presentation.AppUwp1.ViewModel
         public ListaArticoliViewModel(ILogger logger, IMagazinoService service, NavigationService ns)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.service = service ?? throw new ArgumentNullException(nameof(service));
             this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
-            if (service == null) throw new ArgumentNullException(nameof(service));
-
             Articoli = new ObservableCollection<ArticoloReadOnly>();
-            foreach (ArticoloReadOnly pr in service.GetArticoli())
+            if (IsInDesignModeStatic)
             {
-                Articoli.Add(pr);
+                foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
+                {
+                    Articoli.Add(pr);
+                }
             }
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
@@ -37,7 +40,15 @@ namespace CiccioGest.Presentation.AppUwp1.ViewModel
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
         public ArticoloReadOnly ArticoloSelezionato { private get; set; }
         public ICommand SelezionaArticoloCommand => selezionaArticoloCommand ?? (selezionaArticoloCommand = new RelayCommand(ApriArticolo));
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => logger.Debug("Ciao Ciao")));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        {
+            Articoli.Clear();
+            foreach (ArticoloReadOnly pr in await service.GetArticoli())
+            {
+                Articoli.Add(pr);
+            }
+            logger.Debug("Ciao Ciao");
+        }));
 
         private void ApriArticolo()
         {

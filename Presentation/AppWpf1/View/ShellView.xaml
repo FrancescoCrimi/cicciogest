@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CiccioGest.Presentation.AppWpf1.View"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        Title="CiccioGest" Height="450" Width="800"
+        DataContext="{Binding Shell, Source={StaticResource Locator}}">
 
     <Grid x:Name="LayoutRoot">
 

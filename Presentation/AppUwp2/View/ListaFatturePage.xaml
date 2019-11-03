@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="CiccioGest.Presentation.AppUwp2.View.SelectFatturaPage"
+    x:Class="CiccioGest.Presentation.AppUwp2.View.ListaFatturePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -10,7 +10,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"      
-    DataContext="{Binding SelectFattura, Source={StaticResource Locator}}"    
+    DataContext="{Binding ListaFatture, Source={StaticResource Locator}}"    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <interactivity:Interaction.Behaviors>

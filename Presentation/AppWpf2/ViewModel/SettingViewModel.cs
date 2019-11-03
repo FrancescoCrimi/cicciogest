@@ -4,7 +4,7 @@ using System;
 
 namespace CiccioGest.Presentation.AppWpf2.ViewModel
 {
-    class SettingViewModel : ViewModelBase, IDisposable, ICazzo
+    sealed class SettingViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private void LoadSampleData()
         {

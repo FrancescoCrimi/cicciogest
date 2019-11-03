@@ -7,13 +7,13 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.AppUwp2.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class ShellViewModel : ViewModelBase
     {
         private readonly ILogger logger;
         private readonly NavigationService navigationService;
         private ICommand itemInvokedCommand;
 
-        public MainViewModel(ILogger logger, NavigationService navigationService)
+        public ShellViewModel(ILogger logger, NavigationService navigationService)
         {
             this.logger = logger;
             this.navigationService = navigationService;

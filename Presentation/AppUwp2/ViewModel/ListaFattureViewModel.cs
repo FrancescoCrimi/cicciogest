@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -9,18 +10,25 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppUwp2.ViewModel
 {
-    public class SelectFatturaViewModel : ViewModelBase
+    public class ListaFattureViewModel : ViewModelBase, ICazzo
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         private ICommand apriFatturaCommand;
         private ICommand loadedCommand;
 
-        public SelectFatturaViewModel(ILogger logger, IFatturaService fatturaService)
+        public ListaFattureViewModel(ILogger logger, IFatturaService fatturaService)
         {
             this.logger = logger;
             this.fatturaService = fatturaService;
             Fatture = new ObservableCollection<FatturaReadOnly>();
+            if (IsInDesignModeStatic)
+            {
+                foreach (FatturaReadOnly fatt in fatturaService.GetFatture().Result)
+                {
+                    Fatture.Add(fatt);
+                }
+            }
         }
 
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }

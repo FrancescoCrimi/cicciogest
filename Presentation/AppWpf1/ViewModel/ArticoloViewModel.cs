@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.AppWpf2.ViewModel
+namespace CiccioGest.Presentation.AppWpf1.ViewModel
 {
-    public sealed class ProdottoViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ArticoloViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -24,14 +24,14 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
         private ICommand eliminaCommand;
         private ArticoloReadOnly prodottoSelezionato;
 
-        public ProdottoViewModel(ILogger logger, IMagazinoService service)
+        public ArticoloViewModel(ILogger logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
             Categorie = new ObservableCollection<Categoria>();
 
-            if (IsInDesignMode)
+            if (IsInDesignModeStatic)
             {
                 Prodotto = service.GetArticolo(4).Result;
                 foreach (Categoria cat in service.GetCategorie().Result)
@@ -47,13 +47,16 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             {
                 RegistraMessaggi();
             }
-            //Aggiorna();
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
+        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
+        public ObservableCollection<Categoria> Categorie { get; private set; }
+        public Articolo Prodotto { get; private set; }
+
         public ICommand NuovoCommand => nuovoCommand ?? (nuovoCommand = new RelayCommand(Nuovo));
-        public ICommand EliminaCommand => eliminaCommand ?? (eliminaCommand = new RelayCommand(async () => await Elimina()));
-        public ICommand SalvaCommand => salvaCommand ?? (salvaCommand = new RelayCommand(async () => await Salva()));
+        public ICommand EliminaCommand => eliminaCommand ?? (eliminaCommand = new RelayCommand(Elimina));
+        public ICommand SalvaCommand => salvaCommand ?? (salvaCommand = new RelayCommand(Salva));
         public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
         {
             foreach (Categoria cat in await service.GetCategorie())
@@ -63,27 +66,19 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             await Aggiorna();
         }));
 
-        public Articolo Prodotto { get; private set; }
-        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
-        public ObservableCollection<Categoria> Categorie { get; private set; }
         public ArticoloReadOnly ProdottoSelezionato
         {
+            private get => prodottoSelezionato;
             set
             {
                 if (value != prodottoSelezionato)
                 {
-                    Task.Run(async () =>
-                    {
-                        prodottoSelezionato = value;
-                        Prodotto = await service.GetArticolo(value.Id);
-                        RaisePropertyChanged(nameof(Prodotto));
-                    });
+                    Task.Run(async () => Prodotto = await service.GetArticolo(value.Id));
+                    RaisePropertyChanged(nameof(Prodotto));
                 }
             }
         }
 
-
-        #region Metodi Privati
 
         private void RegistraMessaggi()
         {
@@ -128,7 +123,7 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             RaisePropertyChanged(nameof(Prodotto));
         }
 
-        private async Task Elimina()
+        private async void Elimina()
         {
             try
             {
@@ -141,7 +136,7 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             }
         }
 
-        private async Task Salva()
+        private async void Salva()
         {
             try
             {
@@ -159,8 +154,6 @@ namespace CiccioGest.Presentation.AppWpf2.ViewModel
             Cleanup();
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
-
-        #endregion
 
     }
 }

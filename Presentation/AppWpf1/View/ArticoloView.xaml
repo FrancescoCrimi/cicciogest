@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ArticoloView"
-      DataContext="{Binding Prodotto, Source={StaticResource Locator}}">
+      DataContext="{Binding Articolo, Source={StaticResource Locator}}">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -67,11 +67,17 @@
 
         </StackPanel>
 
-        <DataGrid x:Name="prodottoDataGrid" EnableRowVirtualization="True" ItemsSource="{Binding Prodotti}" Grid.Row="2" IsReadOnly="True" SelectedItem="{Binding ProdottoSelezionato, Mode=OneWayToSource}" AutoGenerateColumns="False" SelectionMode="Single">
+        <DataGrid
+            ItemsSource="{Binding Prodotti}"
+            SelectedItem="{Binding ProdottoSelezionato, Mode=OneWayToSource}"
+            SelectionMode="Single"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            Grid.Row="2">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="nomeColumn" Binding="{Binding Nome}" Header="Nome" Width="*"/>
-                <DataGridTextColumn x:Name="prezzoColumn" Binding="{Binding Prezzo}" Header="Prezzo" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nomeTipoProdottoColumn" Binding="{Binding NomeCategoria}" Header="Categoria" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Nome}" Header="Nome" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Prezzo}" Header="Prezzo" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding NomeCategoria}" Header="Categoria" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 

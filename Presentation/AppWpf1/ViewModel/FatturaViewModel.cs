@@ -35,10 +35,11 @@ namespace CiccioGest.Presentation.AppWpf1.ViewModel
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
 
-            if (IsInDesignModeStatic)
+            if (App.InDesignMode)
             {
-                MostraFattura(service.GetFattura(4).Result);
-                Dettaglio = Fattura.Dettagli[3];
+                Fattura fatt = service.GetFattura(4).Result;
+                MostraFattura(fatt);
+                Dettaglio = fatt.Dettagli[3];
             }
             else
             {

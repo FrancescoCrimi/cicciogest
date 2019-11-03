@@ -4,9 +4,9 @@ using System.Windows;
 
 namespace CiccioGest.Presentation.AppWpf2.View
 {
-    public partial class SelezionaFatturaView : Window
+    public partial class ListaFattureView : Window
     {
-        public SelezionaFatturaView()
+        public ListaFattureView()
         {
             InitializeComponent();
             Closing += SelezionaFatturaView_Closing;

@@ -19,7 +19,7 @@ namespace CiccioGest.Presentation.AppUwp2.ViewModel
         {
             var nav = new NavigationService();
             nav.Configure("FatturaPage", typeof(FatturaPage));
-            nav.Configure("SelectFatturaPage", typeof(SelectFatturaPage));
+            nav.Configure("ListaFatturePage", typeof(ListaFatturePage));
 
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
@@ -55,13 +55,13 @@ namespace CiccioGest.Presentation.AppUwp2.ViewModel
                 }
             }
             windsor.Register(
-                Component.For<MainViewModel>(),
+                Component.For<ShellViewModel>(),
                 Component.For<FatturaViewModel>(),
-                Component.For<SelectFatturaViewModel>());
+                Component.For<ListaFattureViewModel>());
         }
 
-        public MainViewModel Main => windsor.Resolve<MainViewModel>();
+        public ShellViewModel Shell => windsor.Resolve<ShellViewModel>();
         public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
-        public SelectFatturaViewModel SelectFattura => windsor.Resolve<SelectFatturaViewModel>();
+        public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
     }
 }

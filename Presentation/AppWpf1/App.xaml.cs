@@ -8,6 +8,18 @@ namespace CiccioGest.Presentation.AppWpf1
     {
         private static IWindsorContainer windsor;
 
+        public static bool InDesignMode
+        {
+            get
+            {
+                if (App.Current.MainWindow != null)
+                    return System.ComponentModel.DesignerProperties.GetIsInDesignMode(App.Current.MainWindow);
+                //return System.ComponentModel.DesignerProperties.IsInDesignModeProperty;
+                //return (System.Windows.Application.Current is App);
+                return true;
+            }
+        }
+
         public static IWindsorContainer Windsor => windsor ?? (CreateContainer());
 
         private static IWindsorContainer CreateContainer()

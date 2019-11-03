@@ -4,52 +4,53 @@ using CiccioGest.Domain.Magazino;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.AppUwp1.Design
 {
     class DesignMagazinoService : IMagazinoService
     {
-        public void DeleteCategoria(int id)
+        public Task DeleteCategoria(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteArticolo(int id)
+        public Task DeleteArticolo(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Categoria GetCategoria(int id)
+        public Task<Categoria> GetCategoria(int id)
         {
-            return DesignData.Categorie.First(c => c.Id == id);
+            return Task.Run(() => DesignData.Categorie.First(c => c.Id == id));
         }
 
-        public IEnumerable<Categoria> GetCategorie()
+        public Task<IEnumerable<Categoria>> GetCategorie()
         {
-            return DesignData.Categorie;
+            return Task.Run(() => (IEnumerable<Categoria>)DesignData.Categorie);
         }
 
-        public Fornitore GetFornitore(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ArticoloReadOnly> GetArticoli()
-        {
-            return DesignData.ProdottiRO;
-        }
-
-        public Articolo GetArticolo(int id)
-        {
-            return DesignData.Prodotti.First(p => p.Id == id);
-        }
-
-        public Categoria SaveCategoria(Categoria categoria)
+        public Task<Fornitore> GetFornitore(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Articolo SaveArticolo(Articolo prodotto)
+        public Task<IEnumerable<ArticoloReadOnly>> GetArticoli()
+        {
+            return Task.Run(() => (IEnumerable<ArticoloReadOnly>)DesignData.ProdottiRO);
+        }
+
+        public Task<Articolo> GetArticolo(int id)
+        {
+            return Task.Run(() => DesignData.Prodotti.First(p => p.Id == id));
+        }
+
+        public Task<Categoria> SaveCategoria(Categoria categoria)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Articolo> SaveArticolo(Articolo prodotto)
         {
             throw new NotImplementedException();
         }

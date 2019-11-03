@@ -1,13 +1,14 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.AppUwp2.ViewModel
 {
-    public class FatturaViewModel : ViewModelBase
+    public class FatturaViewModel : ViewModelBase, ICazzo
     {
         private readonly ILogger logger;
         private readonly IFatturaService service;
