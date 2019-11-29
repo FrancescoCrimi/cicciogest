@@ -271,6 +271,20 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\Wcf\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Application\Application.csproj">
+      <Project>{02223ad0-1e4e-4815-8ce4-f9b2176b30b9}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Domain\Domain\Domain.csproj">
+      <Project>{5638149c-0825-4cc3-bcc3-c69143426b2b}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
+      <Project>{ede3cb02-6d67-4ace-9928-0869dcf97810}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

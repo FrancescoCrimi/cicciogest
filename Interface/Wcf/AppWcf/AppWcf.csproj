@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2ED66C79-5524-4D0D-9245-D4D837CC8CA1}</ProjectGuid>
+    <ProjectGuid>{FF544710-8B00-46A0-953D-6BE52A305483}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CiccioGest.Interface.AppWcf</RootNamespace>

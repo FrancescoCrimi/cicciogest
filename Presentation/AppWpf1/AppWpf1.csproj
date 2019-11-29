@@ -22,9 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\Application.csproj" />
-    <ProjectReference Include="..\..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Application\Application\Application.csproj" />
+    <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\ClientCore\ClientCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
