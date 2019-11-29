@@ -197,6 +197,10 @@
       <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{f2ece62f-dae0-4e63-8fa0-2a3eac655b86}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle">

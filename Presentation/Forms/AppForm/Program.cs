@@ -33,7 +33,8 @@ namespace CiccioGest.Presentation.AppForm
             windsor.Register(
                 Component.For<IConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-            windsor.Install(new CiccioGest.Application.Installer());
+            //windsor.Install(new CiccioGest.Application.Installer());
+            windsor.Install(new CiccioGest.Presentation.Client.Installer());
             RegisterComponent();
             System.Windows.Forms.Application.Run(windsor.Resolve<MainView>());
         }
