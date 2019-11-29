@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{C07EB562-7A97-4E62-BD48-DAE218432E7B}</ProjectGuid>
+    <ProjectGuid>{E926D760-A087-41E6-8F62-A873E0B6ED93}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CiccioGest.Presentation.AppUwp1</RootNamespace>

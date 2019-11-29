@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{5774CF92-F51B-431E-803D-811AEA621BBF}</ProjectGuid>
+    <ProjectGuid>{382FC147-E240-417E-8979-0A81F1508B6C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CiccioGest.Presentation.AppUwp2</RootNamespace>
@@ -254,15 +254,15 @@
     <WCFMetadataStorage Include="Connected Services\Wcf\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\Application\Application.csproj">
+    <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
       <Project>{02223ad0-1e4e-4815-8ce4-f9b2176b30b9}</Project>
       <Name>Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Domain\Domain\Domain.csproj">
+    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj">
       <Project>{5638149c-0825-4cc3-bcc3-c69143426b2b}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
       <Project>{ede3cb02-6d67-4ace-9928-0869dcf97810}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
