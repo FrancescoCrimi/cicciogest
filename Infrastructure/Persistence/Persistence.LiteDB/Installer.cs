@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using System;
 
-namespace Persistence.LiteDB
+namespace CiccioGest.Infrastructure.Persistence.LiteDB
 {
     public class Installer : IWindsorInstaller
     {
