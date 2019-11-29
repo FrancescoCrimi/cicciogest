@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClientCore\ClientCore.csproj" />
+    <ProjectReference Include="..\..\ClientCore\ClientCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

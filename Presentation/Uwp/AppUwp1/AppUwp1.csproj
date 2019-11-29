@@ -232,6 +232,9 @@
     <PackageReference Include="Castle.Windsor">
       <Version>5.0.1</Version>
     </PackageReference>
+    <PackageReference Include="CiccioSoft.Collections">
+      <Version>1.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>
     </PackageReference>
@@ -270,6 +273,20 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\Wcf\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
+      <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj">
+      <Project>{87e08e73-2c4f-4f31-beab-55e08711144a}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
+      <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
