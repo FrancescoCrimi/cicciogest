@@ -27,7 +27,7 @@ namespace CiccioGest.Interface.AppWcf
             container.Register(
                 Component.For<IConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-            container.Install(new CiccioGest.Application.Installer());
+            container.Install(new CiccioGest.Application.Impl.Installer());
 
             var dummy = container.Resolve<IUnitOfWorkFactory>();
 

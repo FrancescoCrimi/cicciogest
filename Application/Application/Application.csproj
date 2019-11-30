@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.Nhb\Persistence.Nhb.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Impl\" />
+  </ItemGroup>
+
 </Project>
