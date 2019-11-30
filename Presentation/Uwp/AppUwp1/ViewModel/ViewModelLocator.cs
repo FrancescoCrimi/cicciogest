@@ -48,7 +48,7 @@ namespace CiccioGest.Presentation.AppUwp1.ViewModel
                         windsor.Register(
                             Component.For<IConf>().Instance(conf),
                             Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-                        windsor.Install(new CiccioGest.Application.Installer());
+                        windsor.Install(new CiccioGest.Application.Impl.Installer());
                         break;
                     case Storage.EF:
                         break;
