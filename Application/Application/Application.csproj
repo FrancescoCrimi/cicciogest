@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Impl\**" />
+    <EmbeddedResource Remove="Impl\**" />
+    <None Remove="Impl\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
     <PackageReference Include="CiccioSoft.Collections" Version="1.0.1" />
@@ -24,10 +30,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.Nhb\Persistence.Nhb.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Impl\" />
   </ItemGroup>
 
 </Project>
