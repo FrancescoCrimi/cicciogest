@@ -11,15 +11,26 @@ namespace CiccioGest.Test.Domain
         [Fact]
         public void DettaglioTest()
         {
-            var moq1 = new Mock<Articolo>();
-            moq1.Setup(a => a.Id).Returns(1);
-            Dettaglio det1 = new Dettaglio(moq1.Object, 1);
-            Dettaglio det11 = new Dettaglio(moq1.Object, 2);
+            /* 
+             * Gli oggetti Moqqati ritornano GetHashcode 0.
+             * Per verificare un valueObject che si referenzia attraverso un 
+             * entità serve una vera entità
+             */
+            //var moq1 = new Mock<Articolo>();
+            //moq1.Setup(a => a.Id).Returns(1);
+            //Dettaglio det1 = new Dettaglio(moq1.Object, 1);
+            //Dettaglio det11 = new Dettaglio(moq1.Object, 2);
+
+            Articolo art1 = new Articolo(1, "asdfg", 10);
+            Dettaglio det1 = new Dettaglio(art1, 1);
+            Dettaglio det11 = new Dettaglio(art1, 2);
             Assert.Equal(det1, det11);
 
-            var moq2 = new Mock<Articolo>();
-            moq2.Setup(a => a.Id).Returns(2);
-            Dettaglio det2 = new Dettaglio(moq2.Object, 1);
+            //var moq2 = new Mock<Articolo>();
+            //moq2.Setup(a => a.Id).Returns(2);
+
+            Articolo art2 = new Articolo(2, "asdfg", 10);
+            Dettaglio det2 = new Dettaglio(art2, 1);
             Assert.NotEqual(det1, det2);
         }
 
