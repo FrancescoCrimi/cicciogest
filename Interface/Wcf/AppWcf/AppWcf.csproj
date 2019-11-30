@@ -131,6 +131,11 @@
     <PackageReference Include="Google.Protobuf">
       <Version>3.10.1</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
+      <Version>2.9.8</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="MySql.Data">
       <Version>8.0.18</Version>
     </PackageReference>
