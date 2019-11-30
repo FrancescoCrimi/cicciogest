@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2ED66C79-5524-4D0D-9245-D4D837CC8CA1}</ProjectGuid>
+    <ProjectGuid>{FF544710-8B00-46A0-953D-6BE52A305483}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CiccioGest.Interface.AppWcf</RootNamespace>
@@ -84,6 +84,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj">
+      <Project>{e5891a3c-deae-4d01-a834-46f710047e20}</Project>
+      <Name>Application.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
       <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
       <Name>Application</Name>

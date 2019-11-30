@@ -1,11 +1,10 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using CiccioGest.Application.Impl;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 
-namespace CiccioGest.Application
+namespace CiccioGest.Application.Impl
 {
     public class Installer : IWindsorInstaller
     {

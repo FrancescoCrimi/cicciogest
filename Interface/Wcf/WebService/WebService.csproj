@@ -168,6 +168,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj">
+      <Project>{e5891a3c-deae-4d01-a834-46f710047e20}</Project>
+      <Name>Application.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
       <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
       <Name>Application</Name>
