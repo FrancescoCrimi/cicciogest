@@ -61,6 +61,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj">
+      <Project>{c8febefa-4f77-4001-b5b8-dbe758685eb3}</Project>
+      <Name>Application.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
       <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
       <Name>Application</Name>

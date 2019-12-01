@@ -28,7 +28,7 @@ namespace CiccioGest.Presentation.ClientCore
                     break;
                 default:
                     //container.Install(FromAssembly.Named("Application.Impl"));
-                    container.Install(new CiccioGest.Application.Installer());
+                    container.Install(new CiccioGest.Application.Impl.Installer());
                     break;
             }
         }
