@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>CiccioGest.Presentation.Wpf.App2</RootNamespace>
     <AssemblyName>App2</AssemblyName>
@@ -29,7 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ClientCore\ClientCore.csproj" />
+    <ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
+    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Client\Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

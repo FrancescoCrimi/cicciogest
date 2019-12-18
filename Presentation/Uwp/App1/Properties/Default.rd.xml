@@ -8,7 +8,7 @@
     Per abilitare completamente la reflection per App1.MyClass e tutti i relativi membri pubblici/privati
     <Type Name="App1.MyClass" Dynamic="Required All"/>
 
-    Per abilitare la creazione dinamica della creazione di istanze specifica di AppClass<T> tramite System.Int32
+    Per abilitare la creazione dinamica della creazione di un'istanza specifica di AppClass<T> tramite System.Int32
     <TypeInstantiation Name="App1.AppClass" Arguments="System.Int32" Activate="Required Public" />
 
     Uso della direttiva Namespace per applicare i criteri di reflection a tutti i tipi in uno spazio dei nomi specifico

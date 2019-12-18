@@ -18,21 +18,29 @@ namespace CiccioGest.Interface.Wcf.WebService
         {
             ServiceHostBase shb = base.CreateServiceHost(constructorString, baseAddresses);
             string aaa = constructorString.Split(',')[0];
-            suca(shb, aaa);
+            AddEndpoint(shb, aaa);
+            //AddMetadataAndDebug(shb);
             return shb;
         }
 
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
             ServiceHost sh = base.CreateServiceHost(serviceType, baseAddresses);
-            suca(sh, serviceType.FullName);
+            AddEndpoint(sh, serviceType.FullName);
+            //AddMetadataAndDebug(sh);
             return sh;
         }
 
-        void suca(ServiceHostBase shb, string implementedContract)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shb"></param>
+        /// <param name="implementedContract"></param>
+        private void AddEndpoint(ServiceHostBase shb, string implementedContract)
         {
             // Aggiungi un Endpoint al ServiceHost
-            ServiceEndpoint se = shb.AddServiceEndpoint(implementedContract, new WSHttpBinding(), "");
+            ServiceEndpoint se = shb.AddServiceEndpoint(implementedContract, new BasicHttpBinding(), "");
 
             // Personalizza ServiceEndpoint
             foreach (OperationDescription od in se.Contract.Operations)
@@ -44,11 +52,27 @@ namespace CiccioGest.Interface.Wcf.WebService
                 //dcsob.DataContractResolver = new MyDataContractResolver();
             }
 
-            // Crea e aggiungi un Behavior per la gestione dei Metadati
+            //// Crea e aggiungi un Behavior per la gestione dei Metadati
+            //ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+            //smb.HttpGetEnabled = true;
+            //smb.HttpsGetEnabled = true;
+            //shb.Description.Behaviors.Add(smb);
+        }
+
+        /// <summary>
+        /// Crea e aggiunge un Behavior per la gestione dei Metadati
+        /// e un Behavior per debug
+        /// </summary>
+        /// <param name="shb"></param>
+        private void AddMetadataAndDebug(ServiceHostBase shb)
+        {
             ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
             smb.HttpGetEnabled = true;
-            smb.HttpsGetEnabled = true;
+            smb.HttpsGetEnabled = true;            
             shb.Description.Behaviors.Add(smb);
+            //ServiceDebugBehavior sdb = new ServiceDebugBehavior();
+            //sdb.IncludeExceptionDetailInFaults = true;
+            //shb.Description.Behaviors.Add(sdb);
         }
     }
 }

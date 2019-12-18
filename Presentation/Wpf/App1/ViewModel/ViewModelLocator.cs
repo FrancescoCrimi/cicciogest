@@ -36,7 +36,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
                     Component.For<IConf>().Instance(conf),
                     Component.For<INavigationService>().ImplementedBy<NavigationService>(),
                     Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-                windsor.Install(new CiccioGest.Presentation.ClientCore.Installer());
+                windsor.Install(new CiccioGest.Presentation.Client.Installer());
             }
             windsor.Register(
                 Component.For<ShellViewModel>().ImplementedBy<ShellViewModel>(),

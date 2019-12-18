@@ -34,25 +34,10 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
             else
             {
                 IConf conf = ConfMgr.ReadConfiguration();
-                switch (conf.DataAccess)
-                {
-                    case Storage.NHibernate:
-                        windsor.Register(
-                            Component.For<IConf>().Instance(conf),
-                            Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-                        windsor.Install(new CiccioGest.Application.Impl.Installer());
-                        break;
-                    case Storage.EF:
-                        break;
-                    case Storage.Db4o:
-                        break;
-                    case Storage.WCF:
-                        windsor.Register(
-                            Component.For<IFatturaService>().ImplementedBy<Wcf.FatturaService>());
-                        break;
-                    default:
-                        break;
-                }
+                windsor.Register(
+                    Component.For<IConf>().Instance(conf),
+                    Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+                windsor.Install(new CiccioGest.Presentation.Uwp.Client.MyInstaller()); 
             }
             windsor.Register(
                 Component.For<ShellViewModel>(),

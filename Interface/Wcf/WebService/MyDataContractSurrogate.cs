@@ -12,15 +12,10 @@ namespace CiccioGest.Interface.Wcf.WebService
 {
     public class MyDataContractSurrogate : IDataContractSurrogate
     {
-        private Mapper mapper;
+        private readonly Mapper mapper;
 
         public MyDataContractSurrogate()
         {
-            //AutoMapper.Mapper.Initialize(cfg =>
-            //{
-            //    cfg.CreateMap<Prodotto, Prodotto>();
-            //    cfg.CreateMap<Categoria, Categoria>();
-            //});
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Articolo, Articolo>();

@@ -1,5 +1,0 @@
-﻿<%@ ServiceHost
-    Language="C#"
-    Debug="true"
-    Factory="CiccioGest.Interface.WcfService.CiccioServiceHostFactory, WcfService"
-    Service="CiccioGest.Application.IFatturaService, Application" %>

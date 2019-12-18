@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="5af5d0b6-7ed6-40c6-9a5d-b221f6e19f26"
+    Name="6a08a686-6fb0-4487-8cf6-2468dc92c80c"
     Publisher="CN=franc"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="5af5d0b6-7ed6-40c6-9a5d-b221f6e19f26" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="6a08a686-6fb0-4487-8cf6-2468dc92c80c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CiccioGest.Presentation.AppUwp2</DisplayName>
+    <DisplayName>CiccioGest.Presentation.Uwp.App2</DisplayName>
     <PublisherDisplayName>franc</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="CiccioGest.Presentation.AppUwp2.App">
+      EntryPoint="CiccioGest.Presentation.Uwp.App2.App">
       <uap:VisualElements
-        DisplayName="CiccioGest.Presentation.AppUwp2"
+        DisplayName="CiccioGest.Presentation.Uwp.App2"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="CiccioGest.Presentation.AppUwp2"
+        Description="CiccioGest.Presentation.Uwp.App2"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
