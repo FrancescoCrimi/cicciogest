@@ -1,14 +1,13 @@
-﻿using CiccioGest.Application;
-using CiccioGest.Domain.ClientiFornitori;
+﻿using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Magazino;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.Wpf.App2.Design
+namespace CiccioGest.Application.FakeImpl
 {
-    class DesignMagazinoService : IMagazinoService
+    public class DesignMagazinoService : IMagazinoService
     {
         public async Task DeleteCategoria(int id)
         {
@@ -22,12 +21,12 @@ namespace CiccioGest.Presentation.Wpf.App2.Design
 
         public async Task<Categoria> GetCategoria(int id)
         {
-            return DesignData.Categorie.First(c => c.Id == id);
+            return FakeSampleData.Categorie.First(c => c.Id == id);
         }
 
         public async Task<IEnumerable<Categoria>> GetCategorie()
         {
-            return DesignData.Categorie;
+            return FakeSampleData.Categorie;
         }
 
         public async Task<Fornitore> GetFornitore(int id)
@@ -37,12 +36,12 @@ namespace CiccioGest.Presentation.Wpf.App2.Design
 
         public async Task<IEnumerable<ArticoloReadOnly>> GetArticoli()
         {
-            return DesignData.ProdottiRO;
+            return FakeSampleData.ArticoliRO;
         }
 
         public async Task<Articolo> GetArticolo(int id)
         {
-            return DesignData.Prodotti.First(p => p.Id == id);
+            return FakeSampleData.Articoli.First(p => p.Id == id);
         }
 
         public async Task<Categoria> SaveCategoria(Categoria categoria)
@@ -57,7 +56,6 @@ namespace CiccioGest.Presentation.Wpf.App2.Design
 
         public void Dispose()
         {
-            //throw new NotImplementedException();
         }
     }
 }

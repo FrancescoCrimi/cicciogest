@@ -2,10 +2,9 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CiccioGest.Application;
+using CiccioGest.Application.FakeImpl;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.Wpf.App2.Design;
-using GalaSoft.MvvmLight;
 
 namespace CiccioGest.Presentation.Wpf.App2.ViewModel
 {

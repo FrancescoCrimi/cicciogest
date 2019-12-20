@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
+using System;
+using System.Collections.Generic;
 
-namespace CiccioGest.Presentation.Wpf.App2.Design
+namespace CiccioGest.Application.FakeImpl
 {
-    class DesignClientiFornitoriService : IClientiFornitoriService
+    public class DesignClientiFornitoriService : IClientiFornitoriService
     {
         public void DeleteCittà(int id)
         {

@@ -9,7 +9,7 @@ namespace CiccioGest.Application.FakeImpl
     {
         public static readonly List<Categoria> Categorie = new List<Categoria>();
         public static readonly List<Articolo> Articoli = new List<Articolo>();
-        public static readonly List<ArticoloReadOnly> ProdottiRO = new List<ArticoloReadOnly>();
+        public static readonly List<ArticoloReadOnly> ArticoliRO = new List<ArticoloReadOnly>();
         public static readonly List<Fattura> Fatture = new List<Fattura>();
         public static readonly List<FatturaReadOnly> FattureRO = new List<FatturaReadOnly>();
 
@@ -22,7 +22,7 @@ namespace CiccioGest.Application.FakeImpl
 
         private static void CreaCategorie()
         {
-            for (int c = 1; c < 8; c++)
+            for (int c = 1; c < 11; c++)
             {
                 Categoria cat = new Categoria(c, "Categoria " + c.ToString(CultureInfo.InvariantCulture));
                 Categorie.Add(cat);
@@ -31,13 +31,13 @@ namespace CiccioGest.Application.FakeImpl
 
         private static void CreaArticoli()
         {
-            for (int p = 1; p < 6; p++)
+            for (int p = 1; p < 11; p++)
             {
-                Articolo prod = new Articolo(p, "Prodotto " + p.ToString(CultureInfo.InvariantCulture), 10 + p);
+                Articolo prod = new Articolo(p, "Articolo " + p.ToString(CultureInfo.InvariantCulture), 10 + p);
                 prod.Categoria = Categorie[p - 1];
                 Articoli.Add(prod);
                 ArticoloReadOnly pro = new ArticoloReadOnly(prod.Id, prod.Nome, prod.Prezzo, prod.NomeCategoria);
-                ProdottiRO.Add(pro);
+                ArticoliRO.Add(pro);
             }
         }
 

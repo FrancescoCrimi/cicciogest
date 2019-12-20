@@ -3,6 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
 using CiccioGest.Application;
+using CiccioGest.Application.FakeImpl;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Uwp.App2.View;
@@ -29,7 +30,7 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
 
             if (ViewModelBase.IsInDesignModeStatic || UseDesignTimeData)
             {
-                windsor.Register(Component.For<IFatturaService>().ImplementedBy<Design.DesignFatturaService>());
+                windsor.Register(Component.For<IFatturaService>().ImplementedBy<DesignFatturaService>());
             }
             else
             {

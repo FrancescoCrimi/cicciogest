@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListaFattureView"
-      DataContext="{Binding ListaFatture, Source={StaticResource Locator}}">
+      DataContext="{Binding ListaFatture, Source={StaticResource Locator}}" Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

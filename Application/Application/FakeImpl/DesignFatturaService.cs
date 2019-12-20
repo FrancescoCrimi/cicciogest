@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.Wpf.App2.Design
+namespace CiccioGest.Application.FakeImpl
 {
-    class DesignFatturaService : IFatturaService
+    public class DesignFatturaService : IFatturaService
     {
         public Task<Fattura> GetFattura(int id) =>
-            Task.Run(() => DesignData.Fatture.First(fa => fa.Id == id));
+            Task.Run(() => FakeSampleData.Fatture.First(fa => fa.Id == id));
         public Task<IEnumerable<FatturaReadOnly>> GetFatture() =>
-            Task.Run(() => (IEnumerable<FatturaReadOnly>)DesignData.FattureRO);
+            Task.Run(() => (IEnumerable<FatturaReadOnly>)FakeSampleData.FattureRO);
         public Task DeleteFattura(int id) => throw new NotImplementedException();
         public Task<Fattura> SaveFattura(Fattura fattura) => throw new NotImplementedException();
         public Task<Articolo> GetArticolo(int id) => throw new NotImplementedException();

@@ -68,7 +68,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             try
             {
                 GetImpostazioni();
-                Bootstrap.Restart(conf);
+                //Bootstrap.Restart(conf);
                 //Bootstrap.Windsor.Install(new CiccioGest.Application.Installer());
                 //uowf = Bootstrap.Windsor.Resolve<IUnitOfWorkFactory>();
                 uowf.VerifyDataAccess();
@@ -107,7 +107,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             try
             {
-                Bootstrap.Start();
+                //Bootstrap.Start();
                 //SetImpostazioni(Bootstrap.Windsor.Resolve<IConf>());
             }
             catch (Exception)
