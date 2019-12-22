@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CiccioGest.Infrastructure.Persistence.LiteDB
+namespace CiccioGest.Infrastructure.Persistence.Memory
 {
     internal class UnitOfWork : IUnitOfWork
     {
@@ -10,12 +10,10 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 
         public void Commit()
         {
-            throw new NotImplementedException();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public void Rollback()

@@ -65,7 +65,7 @@
             this.articoliDataGridView.RowHeadersVisible = false;
             this.articoliDataGridView.RowHeadersWidth = 51;
             this.articoliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.articoliDataGridView.Size = new System.Drawing.Size(332, 303);
+            this.articoliDataGridView.Size = new System.Drawing.Size(342, 313);
             this.articoliDataGridView.TabIndex = 1;
             this.articoliDataGridView.DoubleClick += new System.EventHandler(this.ArticoliDataGridView_DoubleClick);
             // 
@@ -111,7 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 303);
+            this.ClientSize = new System.Drawing.Size(342, 313);
             this.Controls.Add(this.articoliDataGridView);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ListaArticoliView";

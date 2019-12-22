@@ -5,13 +5,13 @@ using System.Globalization;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
-    class UnitOfWorkNhb : IUnitOfWork
+    internal class UnitOfWork : IUnitOfWork
     {
         private readonly ILogger logger;
         private readonly ISessionFactory sessionFactory;
         private ISession session;
 
-        public UnitOfWorkNhb(ILogger logger, UnitOfWorkFactoryNhb unitOfWorkFactory)
+        public UnitOfWork(ILogger logger, UnitOfWorkFactory unitOfWorkFactory)
         {
             this.logger = logger;
             this.sessionFactory = unitOfWorkFactory.SessionFactory();

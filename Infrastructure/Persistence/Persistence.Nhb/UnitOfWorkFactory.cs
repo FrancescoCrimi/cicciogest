@@ -10,13 +10,13 @@ using System.IO;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
-    class UnitOfWorkFactoryNhb : IUnitOfWorkFactory
+    internal class UnitOfWorkFactory : IUnitOfWorkFactory
     {
         private readonly IConf conf;
         private readonly ILogger logger;
         private static ISessionFactory sessionFactory;
 
-        public UnitOfWorkFactoryNhb(IConf conf, ILogger logger)
+        public UnitOfWorkFactory(IConf conf, ILogger logger)
         {
             this.conf = conf;
             this.logger = logger;

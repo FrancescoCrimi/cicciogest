@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
-    class FatturaRepository : DomainRepository<Fattura>, IFatturaRepository
+    internal class FatturaRepository : DomainRepository<Fattura>, IFatturaRepository
     {
-        public FatturaRepository(ILogger logger, UnitOfWorkNhb unitOfWork)
+        public FatturaRepository(ILogger logger, UnitOfWork unitOfWork)
             : base(unitOfWork)
         {
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");

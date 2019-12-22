@@ -1,20 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CiccioGest.Infrastructure.Persistence.LiteDB</RootNamespace>
+    <AssemblyName>Persistence.Memory</AssemblyName>
+    <RootNamespace>CiccioGest.Infrastructure.Persistence.Memory</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="Castle.Core-log4net" Version="4.4.0" />
     <PackageReference Include="Castle.Core-NLog" Version="4.4.0" />
+    <PackageReference Include="Castle.LoggingFacility" Version="5.0.1" />
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
-    <PackageReference Include="LiteDB" Version="4.1.4" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

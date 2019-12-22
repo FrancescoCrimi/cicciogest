@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
-    abstract class DomainRepository<TEntity>
+    internal abstract class DomainRepository<TEntity>
         : IDomainRepository<TEntity> where TEntity : DomainEntity
     {
-        protected UnitOfWorkNhb unitOfWork;
+        protected UnitOfWork unitOfWork;
 
-        protected DomainRepository(UnitOfWorkNhb unitOfWork)
+        protected DomainRepository(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }

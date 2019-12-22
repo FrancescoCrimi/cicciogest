@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.Nhb\Persistence.Nhb.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

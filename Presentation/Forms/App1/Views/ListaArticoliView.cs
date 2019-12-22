@@ -20,9 +20,9 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             this.service = service;
         }
 
-        private void View_Load(object sender, EventArgs e)
+        private async void View_Load(object sender, EventArgs e)
         {
-            articoliBindingSource.DataSource = service.GetArticoli();
+            articoliBindingSource.DataSource = await service.GetArticoli();
         }
 
         private void ArticoliDataGridView_DoubleClick(object sender, EventArgs e)

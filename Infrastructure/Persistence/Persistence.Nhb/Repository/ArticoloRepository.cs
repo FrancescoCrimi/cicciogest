@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
-    class ArticoloRepository : DomainRepository<Articolo>, IArticoloRepository
+    internal class ArticoloRepository : DomainRepository<Articolo>, IArticoloRepository
     {
-        public ArticoloRepository(ILogger logger, UnitOfWorkNhb unitOfWork)
+        public ArticoloRepository(ILogger logger, UnitOfWork unitOfWork)
             : base(unitOfWork)
         {
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");

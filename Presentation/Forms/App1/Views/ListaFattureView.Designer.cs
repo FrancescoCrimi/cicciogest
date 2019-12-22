@@ -58,8 +58,9 @@
             this.fattureDataGridView.Name = "fattureDataGridView";
             this.fattureDataGridView.ReadOnly = true;
             this.fattureDataGridView.RowHeadersVisible = false;
+            this.fattureDataGridView.RowHeadersWidth = 51;
             this.fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.fattureDataGridView.Size = new System.Drawing.Size(282, 303);
+            this.fattureDataGridView.Size = new System.Drawing.Size(342, 313);
             this.fattureDataGridView.TabIndex = 6;
             this.fattureDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.fattureDataGridView_CellDoubleClick);
             // 
@@ -68,6 +69,7 @@
             this.idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
             this.idDataGridViewTextBoxColumn.Width = 48;
@@ -76,6 +78,7 @@
             // 
             this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
             this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
             this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -84,6 +87,7 @@
             this.totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
             this.totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
+            this.totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
             this.totaleDataGridViewTextBoxColumn.ReadOnly = true;
             this.totaleDataGridViewTextBoxColumn.Width = 77;
@@ -92,13 +96,13 @@
             // 
             this.fattureBindingSource.DataSource = typeof(CiccioGest.Domain.Documenti.FatturaReadOnly);
             // 
-            // SelectFattureView
+            // ListaFattureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 303);
+            this.ClientSize = new System.Drawing.Size(342, 313);
             this.Controls.Add(this.fattureDataGridView);
-            this.Name = "SelectFattureView";
+            this.Name = "ListaFattureView";
             this.Text = "Fatture";
             this.Load += new System.EventHandler(this.Fatture_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).EndInit();

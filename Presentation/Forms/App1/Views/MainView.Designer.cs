@@ -54,7 +54,7 @@
             this.altroToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(502, 28);
+            this.menuStrip.Size = new System.Drawing.Size(342, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -93,14 +93,14 @@
             // clientiToolStripMenuItem
             // 
             this.clientiToolStripMenuItem.Name = "clientiToolStripMenuItem";
-            this.clientiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.clientiToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.clientiToolStripMenuItem.Text = "Clienti";
             this.clientiToolStripMenuItem.Click += new System.EventHandler(this.ClientiToolStripMenuItem_Click);
             // 
             // fornitoriToolStripMenuItem
             // 
             this.fornitoriToolStripMenuItem.Name = "fornitoriToolStripMenuItem";
-            this.fornitoriToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fornitoriToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.fornitoriToolStripMenuItem.Text = "Fornitori";
             this.fornitoriToolStripMenuItem.Click += new System.EventHandler(this.FornitoriToolStripMenuItem_Click);
             // 
@@ -116,14 +116,14 @@
             // articoliToolStripMenuItem
             // 
             this.articoliToolStripMenuItem.Name = "articoliToolStripMenuItem";
-            this.articoliToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.articoliToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
             this.articoliToolStripMenuItem.Text = "Articoli";
             this.articoliToolStripMenuItem.Click += new System.EventHandler(this.ArticoliToolStripMenuItem_Click);
             // 
             // categorieToolStripMenuItem
             // 
             this.categorieToolStripMenuItem.Name = "categorieToolStripMenuItem";
-            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
             this.categorieToolStripMenuItem.Text = "Categorie";
             this.categorieToolStripMenuItem.Click += new System.EventHandler(this.CategorieToolStripMenuItem_Click);
             // 
@@ -154,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 313);
+            this.ClientSize = new System.Drawing.Size(342, 313);
             this.Controls.Add(this.menuStrip);
             this.Name = "MainView";
             this.Text = "CiccioGest";

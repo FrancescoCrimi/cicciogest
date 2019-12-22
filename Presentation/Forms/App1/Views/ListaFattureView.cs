@@ -23,8 +23,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private async void Fatture_Load(object sender, EventArgs e)
         {
-            IEnumerable<FatturaReadOnly> fatt = await service.GetFatture();
-            fattureBindingSource.DataSource = fatt;
+            fattureBindingSource.DataSource = await service.GetFatture();
             fattureDataGridView.ClearSelection();
         }
 

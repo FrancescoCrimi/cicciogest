@@ -72,16 +72,17 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             about.ShowDialog();
         }
 
-        private void ProdottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void ProdottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (articoliBindingSource.Current != null)
-                articoloBindingSource.DataSource = service.GetArticolo(((ArticoloReadOnly)articoliBindingSource.Current).Id);
+
+                articoloBindingSource.DataSource = await service.GetArticolo(((ArticoloReadOnly)articoliBindingSource.Current).Id);
         }
 
-        private void VisualizzaProdotti()
+        private async void VisualizzaProdotti()
         {
-            categorieBindingSource.DataSource = service.GetCategorie();
-            articoliBindingSource.DataSource = service.GetArticoli();
+            categorieBindingSource.DataSource = await service.GetCategorie();
+            articoliBindingSource.DataSource = await service.GetArticoli();
             articoloBindingSource.DataSource = new Articolo();
         }
     }

@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-using Castle.Core.Logging;
-
+﻿using Castle.Core.Logging;
 using CiccioGest.Application;
-using CiccioGest.Domain;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
+using System;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
 {
@@ -87,9 +78,9 @@ namespace CiccioGest.Presentation.Forms.App1.Views
                 CategoriaBindingSource.DataSource = categorieBindingSource.Current;
         }
 
-        private void VisualizzaCategorie()
+        private async void VisualizzaCategorie()
         {
-            categorieBindingSource.DataSource = service.GetCategorie();
+            categorieBindingSource.DataSource = await service.GetCategorie();
             categorieDataGridView.ClearSelection();
             CategoriaBindingSource.DataSource = new Categoria();
         }

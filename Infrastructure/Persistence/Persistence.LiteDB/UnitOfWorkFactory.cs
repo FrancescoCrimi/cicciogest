@@ -2,8 +2,12 @@
 
 namespace CiccioGest.Infrastructure.Persistence.LiteDB
 {
-    class UnitOfWorkFactory : IUnitOfWorkFactory
+    internal class UnitOfWorkFactory : IUnitOfWorkFactory
     {
+        public UnitOfWorkFactory()
+        {
+        }
+
         public void CreateDataAccess()
         {
             throw new NotImplementedException();

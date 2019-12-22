@@ -8,11 +8,11 @@ using CiccioGest.Infrastructure.Persistence.Nhb.Repository;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
-    public class Installer : IWindsorInstaller
+    public class MyInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IUnitOfWorkFactory, UnitOfWorkFactoryNhb>().ImplementedBy<UnitOfWorkFactoryNhb>().LifeStyle.Singleton);
+            container.Register(Component.For<IUnitOfWorkFactory, UnitOfWorkFactory>().ImplementedBy<UnitOfWorkFactory>().LifeStyle.Singleton);
 
             //IConf conf = container.Resolve<IConf>();
             //switch (conf.UserInterface)
@@ -42,7 +42,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient
                 );
 
-            ComponentRegistration<IUnitOfWork> cr = Component.For<IUnitOfWork, UnitOfWorkNhb>().ImplementedBy<UnitOfWorkNhb>();
+            ComponentRegistration<IUnitOfWork> cr = Component.For<IUnitOfWork, UnitOfWork>().ImplementedBy<UnitOfWork>();
             ISetLifeStyle slf = container.Resolve<ISetLifeStyle>();
             ComponentRegistration<IUnitOfWork> cr2 = slf.Suca(cr);
             container.Register(cr2);

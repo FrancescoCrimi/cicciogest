@@ -17,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.Memory\Persistence.Memory.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.Nhb\Persistence.Nhb.csproj" />
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 

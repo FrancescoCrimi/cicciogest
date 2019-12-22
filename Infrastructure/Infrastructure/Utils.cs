@@ -8,6 +8,7 @@ namespace CiccioGest.Infrastructure
         EF,
         Db4o,
         WCF,
+        Memory,
     }
 
     public enum UI

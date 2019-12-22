@@ -15,7 +15,7 @@ namespace CiccioGest.Application.Impl
             switch (conf.DataAccess)
             {
                 case Storage.NHibernate:
-                    container.Install(new CiccioGest.Infrastructure.Persistence.Nhb.Installer());
+                    container.Install(new CiccioGest.Infrastructure.Persistence.Nhb.MyInstaller());
                     break;
                 //case Storage.EF:
                 //    container.Install(new Ciccio1.Infrastructure.Persistence.EF.Installer());
@@ -26,6 +26,9 @@ namespace CiccioGest.Application.Impl
                 //case Storage.Db4o:
                 //    container.Install(new CiccioGest.Infrastructure.Persistence.Db4o.Installer());
                 //    break;
+                case Storage.Memory:
+                    container.Install(new CiccioGest.Infrastructure.Persistence.Memory.MyInstaller());
+                    break;
             }
 
             //switch (conf.UserInterface)

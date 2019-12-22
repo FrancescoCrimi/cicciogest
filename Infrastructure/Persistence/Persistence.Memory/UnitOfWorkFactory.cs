@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace CiccioGest.Infrastructure.Persistence.LiteDB
+namespace CiccioGest.Infrastructure.Persistence.Memory
 {
-    internal class UnitOfWork : IUnitOfWork
+    internal class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        public UnitOfWork()
+        public UnitOfWorkFactory()
         {
         }
 
-        public void Commit()
+        public void CreateDataAccess()
         {
             throw new NotImplementedException();
         }
@@ -18,7 +20,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
             throw new NotImplementedException();
         }
 
-        public void Rollback()
+        public void VerifyDataAccess()
         {
             throw new NotImplementedException();
         }
