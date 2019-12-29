@@ -1,14 +1,20 @@
 ﻿using CiccioGest.Domain.Common;
 using System;
 using System.Threading.Tasks;
+using LiteDB;
 
 namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 {
     internal abstract class DomainRepository<TEntity>
         : IDomainRepository<TEntity> where TEntity : DomainEntity
     {
-        public DomainRepository()
+        private readonly UnitOfWork unitOfWork;
+        protected readonly LiteCollection<TEntity> coll;
+
+        public DomainRepository(UnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
+            coll = unitOfWork.LiteDB.GetCollection<TEntity>();
         }
 
         public Task Delete(int id)
@@ -16,19 +22,19 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
             throw new NotImplementedException();
         }
 
-        public Task<TEntity> GetById(int id)
+        public Task<TEntity> GetById(int id) => Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
+            return coll.FindOne(ent => ent.Id == id);
+        });
 
-        public Task<int> Save(TEntity entity)
+        public Task<int> Save(TEntity entity) => Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
+            var id = coll.Insert(entity);
+            
+            return (int)id;
+        });
 
-        public Task Update(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+
+        public Task Update(TEntity entity) => Task.Run(() => coll.Update(entity));
     }
 }

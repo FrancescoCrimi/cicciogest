@@ -14,28 +14,34 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
         }
 
 
-        public async Task<TEntity> GetById(int id)
+        public Task<TEntity> GetById(int id)
         {
-            return await unitOfWork.ISession.GetAsync<TEntity>(id);
+            return unitOfWork.ISession.GetAsync<TEntity>(id);
         }
 
-        public async Task<int> Save(TEntity entity)
+        public Task<int> Save(TEntity entity)
         {
-            object asdf = await unitOfWork.ISession.SaveAsync(entity);
-            return (int)asdf;
+            return Task.Run(() =>
+            {
+                var id = unitOfWork.ISession.Save(entity);
+                return (int)id;
+            });
         }
 
-        public async Task Delete(int id)
+        public Task Delete(int id)
         {
-            var entity = await unitOfWork.ISession.GetAsync<TEntity>(id);
-            if (entity != null)
-                await unitOfWork.ISession.DeleteAsync(entity);
+            return Task.Run(() =>
+            {
+                var entity = unitOfWork.ISession.Get<TEntity>(id);
+                if (entity != null)
+                    unitOfWork.ISession.Delete(entity);
+            });
         }
 
-        public async Task Update(TEntity entity)
+        public Task Update(TEntity entity)
         {
             //unitOfWork.ISession.Merge(entity);
-            await unitOfWork.ISession.UpdateAsync(entity);
+            return unitOfWork.ISession.UpdateAsync(entity);
         }
     }
 }

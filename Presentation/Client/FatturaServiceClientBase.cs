@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.Client
             base(binding, remoteAddress)
         { }
 
-        public Task<IEnumerable<FatturaReadOnly>> GetFatture()
+        public Task<IList<FatturaReadOnly>> GetFatture()
         {
             return Channel.GetFatture();
         }

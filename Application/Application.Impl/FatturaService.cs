@@ -52,20 +52,20 @@ namespace CiccioGest.Application.Impl
             return Task.Run(() => fatturaRepository.GetById(id));
         }
 
-        public Task<IEnumerable<FatturaReadOnly>> GetFatture()
+        public Task<IList<FatturaReadOnly>> GetFatture()
         {
-            return Task.Run(() => fatturaRepository.GetAll());
+            return fatturaRepository.GetAll();
         }
 
         public Task<Fattura> SaveFattura(Fattura fattura)
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
                 try
                 {
                     if (fattura.Id == 0)
                     {
-                        fatturaRepository.Save(fattura);
+                        await fatturaRepository.Save(fattura);
                     }
                     else
                     {
@@ -73,7 +73,7 @@ namespace CiccioGest.Application.Impl
                     }
                     uow.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     uow.Rollback();
                     throw;

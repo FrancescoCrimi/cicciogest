@@ -12,7 +12,7 @@ namespace CiccioGest.Application
     public interface IFatturaService : IDisposable
     {
         [OperationContract(Action = "http://gest.cicciosoft.tk/IFatturaService/GetFatture", ReplyAction = "http://gest.cicciosoft.tk/IFatturaService/GetFattureResponse")]
-        Task<IEnumerable<FatturaReadOnly>> GetFatture();
+        Task<IList<FatturaReadOnly>> GetFatture();
 
         [OperationContract(Action = "http://gest.cicciosoft.tk/IFatturaService/GetFattura", ReplyAction = "http://gest.cicciosoft.tk/IFatturaService/GetFatturaResponse")]
         Task<Fattura> GetFattura(int id);

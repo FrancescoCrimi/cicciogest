@@ -14,9 +14,9 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
-        public async Task<IEnumerable<Categoria>> GetAll()
+        public Task<IList<Categoria>> GetAll()
         {
-            return await unitOfWork.ISession.CreateCriteria<Categoria>().ListAsync<Categoria>();
+            return unitOfWork.ISession.CreateCriteria<Categoria>().ListAsync<Categoria>();
         }
     }
 }

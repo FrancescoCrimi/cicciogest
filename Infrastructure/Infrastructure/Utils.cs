@@ -7,6 +7,7 @@ namespace CiccioGest.Infrastructure
         NHibernate = 1,
         EF,
         Db4o,
+        LiteDb,
         WCF,
         Memory,
     }

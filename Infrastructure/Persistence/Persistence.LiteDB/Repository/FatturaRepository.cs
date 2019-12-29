@@ -1,20 +1,32 @@
-﻿using CiccioGest.Domain.Documenti;
+﻿using Castle.Core.Logging;
+using CiccioGest.Domain.Documenti;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 {
     internal class FatturaRepository : DomainRepository<Fattura>, IFatturaRepository
     {
-        public FatturaRepository()
+        private readonly ILogger logger;
+        private readonly UnitOfWork unitOfWork;
+
+        public FatturaRepository(ILogger logger, UnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
+            this.logger = logger;
+            this.unitOfWork = unitOfWork;
         }
 
-        public Task<IEnumerable<FatturaReadOnly>> GetAll()
+        public Task<IList<FatturaReadOnly>> GetAll() => Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
+            var lstArt = coll.FindAll();
+            IList<FatturaReadOnly> lst = new List<FatturaReadOnly>();
+            foreach (var item in lstArt)
+            {
+                lst.Add(new FatturaReadOnly(item.Id, item.Nome, item.Totale));
+            }
+            return lst;
+        });
     }
 }

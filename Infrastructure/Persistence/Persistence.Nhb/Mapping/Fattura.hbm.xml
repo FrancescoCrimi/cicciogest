@@ -12,9 +12,9 @@
 
     <!--<set name="Dettagli" generic="true" access="field.camelcase" cascade="all-delete-orphan">-->
     <!--<bag name="Dettagli" generic="true" access="field.camelcase" cascade="all-delete-orphan" inverse="true">-->
-    <bag name="Dettagli" generic="true" cascade="all-delete-orphan" inverse="true">
+    <bag name="Dettagli" generic="true" cascade="all-delete-orphan" >
       <!--<key column="IdFattura" on-delete="cascade" foreign-key="FkDettagliFattureId" not-null="true"/>-->
-      <key column="IdFattura" on-delete="cascade" foreign-key="FkDettagliFattureId" not-null="true"/>
+      <key column="IdFattura" not-null="true" foreign-key="FkDettagliFattureId" />
       <one-to-many class="Dettaglio"/>
     </bag>
 

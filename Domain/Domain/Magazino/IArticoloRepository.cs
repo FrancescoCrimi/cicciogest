@@ -6,6 +6,6 @@ namespace CiccioGest.Domain.Magazino
 {
     public interface IArticoloRepository : IDomainRepository<Articolo>
     {
-        Task<IEnumerable<ArticoloReadOnly>> GetAll();
+        Task<IList<ArticoloReadOnly>> GetAll();
     }
 }

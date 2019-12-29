@@ -10,11 +10,11 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
         {
         }
 
-        public Task<IEnumerable<Categoria>> GetAll()
+        public Task<IList<Categoria>> GetAll()
         {
             return Task.Run(() =>
             {
-                return (IEnumerable<Categoria>)entities;
+                return entities;
             });
         }
     }

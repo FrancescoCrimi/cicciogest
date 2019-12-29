@@ -1,31 +1,50 @@
 ﻿using CiccioGest.Application;
-using CiccioGest.Application.FakeImpl;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
+using System;
+using System.Collections.Generic;
 
 namespace CiccioGest.Presentation.LoadSampleData
 {
-    class LoadSampleData
+    class LoadSampleData : IDisposable
     {
         public LoadSampleData(IUnitOfWorkFactory da, IFatturaService fatturaService, IMagazinoService magazinoService)
         {
             da.CreateDataAccess();
 
-            foreach (Categoria cat in FakeSampleData.Categorie)
+            for (int c = 1; c < 11; c++)
             {
-                magazinoService.SaveCategoria(cat);
+                Categoria cat = new Categoria("Categoria " + c.ToString());
+                var asdf = magazinoService.SaveCategoria(cat).Result;
+                Console.WriteLine(asdf.Id.ToString());
             }
 
-            foreach (Articolo arti in FakeSampleData.Articoli)
+            for (int p = 1; p < 11; p++)
             {
-                magazinoService.SaveArticolo(arti);
+                var listcate = new List<Categoria>(magazinoService.GetCategorie().Result);
+                Articolo prod = new Articolo("Articolo " + p.ToString(), 10 + p);
+                prod.Categoria = listcate[p - 1];
+                magazinoService.SaveArticolo(prod).Wait();
+                Console.WriteLine(prod.Id.ToString());
             }
 
-            foreach (Fattura fatt in FakeSampleData.Fatture)
+            for (int i = 1; i < 6; i++)
             {
-                fatturaService.SaveFattura(fatt);
+                Fattura fatt = new Fattura("Fattura " + i.ToString());
+                for (int o = 1; o < (i + 1); o++)
+                {
+                    var art = magazinoService.GetArticolo(o).Result;
+                    Dettaglio dett = new Dettaglio(art, o);
+                    fatt.AddDettaglio(dett);
+                }
+                var asdsa = fatturaService.SaveFattura(fatt).Result;
+                Console.WriteLine(asdsa.Id.ToString());
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

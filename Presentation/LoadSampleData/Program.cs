@@ -24,7 +24,8 @@ namespace CiccioGest.Presentation.LoadSampleData
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
             windsor.Install(new CiccioGest.Application.Impl.Installer());
             windsor.Register(Component.For<LoadSampleData>());
-            windsor.Resolve<LoadSampleData>();
+            var aaa = windsor.Resolve<LoadSampleData>();
+            windsor.Release(aaa);
             windsor.Dispose();
         }
     }

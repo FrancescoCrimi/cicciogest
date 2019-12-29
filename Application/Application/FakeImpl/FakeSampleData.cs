@@ -7,11 +7,11 @@ namespace CiccioGest.Application.FakeImpl
 {
     public static class FakeSampleData
     {
-        public static readonly List<Categoria> Categorie = new List<Categoria>();
-        public static readonly List<Articolo> Articoli = new List<Articolo>();
-        public static readonly List<ArticoloReadOnly> ArticoliRO = new List<ArticoloReadOnly>();
-        public static readonly List<Fattura> Fatture = new List<Fattura>();
-        public static readonly List<FatturaReadOnly> FattureRO = new List<FatturaReadOnly>();
+        public static readonly IList<Categoria> Categorie = new List<Categoria>();
+        public static readonly IList<Articolo> Articoli = new List<Articolo>();
+        public static readonly IList<ArticoloReadOnly> ArticoliRO = new List<ArticoloReadOnly>();
+        public static readonly IList<Fattura> Fatture = new List<Fattura>();
+        public static readonly IList<FatturaReadOnly> FattureRO = new List<FatturaReadOnly>();
 
         static FakeSampleData()
         {
@@ -46,10 +46,10 @@ namespace CiccioGest.Application.FakeImpl
             for (int i = 1; i < 6; i++)
             {
                 Fattura fatt = new Fattura(i, "Fattura " + i.ToString(CultureInfo.InvariantCulture));
-                //fatt.Nome = "Fattura " + i.ToString();
                 for (int o = 1; o < (i + 1); o++)
                 {
                     Dettaglio dett = new Dettaglio(Articoli[o - 1], o);
+                    //Dettaglio dett = new Dettaglio(0, Articoli[o - 1], o);
                     fatt.AddDettaglio(dett);
                 }
                 Fatture.Add(fatt);

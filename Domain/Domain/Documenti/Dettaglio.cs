@@ -22,6 +22,12 @@ namespace CiccioGest.Domain.Documenti
             ModificaProdotto(prodotto);
         }
 
+        public Dettaglio(int id, Articolo prodotto, int quantita)
+            : this(prodotto, quantita)
+        {
+            this.Id = id;
+        }
+
         [DataMember]
         public virtual int Quantita
         {

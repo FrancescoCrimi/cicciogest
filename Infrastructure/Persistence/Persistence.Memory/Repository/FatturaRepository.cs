@@ -10,16 +10,16 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
         {
         }
 
-        public Task<IEnumerable<FatturaReadOnly>> GetAll()
+        public Task<IList<FatturaReadOnly>> GetAll()
         {
             return Task.Run(() =>
             {
-                List<FatturaReadOnly> list = new List<FatturaReadOnly>();
+                IList<FatturaReadOnly> list = new List<FatturaReadOnly>();
                 foreach (Fattura item in entities)
                 {
                     list.Add(new FatturaReadOnly(item.Id, item.Nome, item.Totale));
                 }
-                return (IEnumerable<FatturaReadOnly>)list;
+                return list;
             });
         }
     }

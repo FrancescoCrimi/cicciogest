@@ -29,6 +29,9 @@ namespace CiccioGest.Application.Impl
                 case Storage.Memory:
                     container.Install(new CiccioGest.Infrastructure.Persistence.Memory.MyInstaller());
                     break;
+                case Storage.LiteDb:
+                    container.Install(new CiccioGest.Infrastructure.Persistence.LiteDB.MyInstaller());
+                    break;
             }
 
             //switch (conf.UserInterface)

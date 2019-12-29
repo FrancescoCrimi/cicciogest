@@ -8,7 +8,7 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
     internal abstract class DomainRepository<TEntity>
         : IDomainRepository<TEntity> where TEntity : DomainEntity
     {
-        protected static List<TEntity> entities = new List<TEntity>();
+        protected static IList<TEntity> entities = new List<TEntity>();
 
         public DomainRepository()
         {

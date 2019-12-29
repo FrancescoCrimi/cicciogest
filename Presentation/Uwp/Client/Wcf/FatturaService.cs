@@ -25,12 +25,12 @@ namespace CiccioGest.Presentation.Uwp.Client.Wcf
             return GetFatturaAsync(id);
         }
 
-        public Task<IEnumerable<Domain.Documenti.FatturaReadOnly>> GetFatture()
+        public Task<IList<Domain.Documenti.FatturaReadOnly>> GetFatture()
         {
             return Task.Run(async () =>
             {
                 var lst = await GetFattureAsync();
-                return (IEnumerable<Domain.Documenti.FatturaReadOnly>)lst;
+                return (IList<Domain.Documenti.FatturaReadOnly>)lst;
             });
         }
 

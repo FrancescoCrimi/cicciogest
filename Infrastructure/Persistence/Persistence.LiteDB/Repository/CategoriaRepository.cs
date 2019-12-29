@@ -1,20 +1,27 @@
-﻿using CiccioGest.Domain.Magazino;
-using System;
+﻿using Castle.Core.Logging;
+using CiccioGest.Domain.Magazino;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 {
     internal class CategoriaRepository : DomainRepository<Categoria>, ICategoriaRepository
     {
-        public CategoriaRepository()
+        private readonly ILogger logger;
+        private readonly UnitOfWork unitOfWork;
+
+        public CategoriaRepository(ILogger logger, UnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
+            this.logger = logger;
+            this.unitOfWork = unitOfWork;
         }
 
-        public Task<IEnumerable<Categoria>> GetAll()
+        public Task<IList<Categoria>> GetAll() => Task.Run(() =>
         {
-            throw new NotImplementedException();
-        }
+            IEnumerable<Categoria> asd = coll.FindAll();
+            IList<Categoria> suca = new List<Categoria>(asd);
+            return suca;
+        });
     }
 }
