@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                     Component.For<IConf>().Instance(conf),
                     Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
                 //windsor.Install(new CiccioGest.Application.Installer());
-                windsor.Install(new CiccioGest.Presentation.Client.Installer());
+                windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             }
             windsor.Register(
                 Component.For<MainViewModel>(),

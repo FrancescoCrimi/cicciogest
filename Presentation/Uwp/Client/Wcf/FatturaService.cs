@@ -12,12 +12,12 @@ namespace CiccioGest.Presentation.Uwp.Client.Wcf
 
         public Task<Domain.Magazino.Articolo> GetArticolo(int id)
         {
-            return GetArticolo(id);
+            return GetArticoloAsync(id);
         }
 
         public Task<Domain.ClientiFornitori.Cliente> GetCliente(int idCliente)
         {
-            return GetCliente(idCliente);
+            return GetClienteAsync(idCliente);
         }
 
         public Task<Domain.Documenti.Fattura> GetFattura(int id)

@@ -21,7 +21,7 @@ namespace CiccioGest.Presentation.Uwp.Client
                     break;
                 default:
                     //container.Install(FromAssembly.Named("Application.Impl"));
-                    container.Install(new CiccioGest.Application.Impl.Installer());
+                    container.Install(new CiccioGest.Application.Impl.MyInstaller());
                     break;
             }
         }

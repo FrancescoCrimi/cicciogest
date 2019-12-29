@@ -22,7 +22,7 @@ namespace CiccioGest.Presentation.LoadSampleData
             windsor.Register(
                 Component.For<IConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-            windsor.Install(new CiccioGest.Application.Impl.Installer());
+            windsor.Install(new CiccioGest.Application.Impl.MyInstaller());
             windsor.Register(Component.For<LoadSampleData>());
             var aaa = windsor.Resolve<LoadSampleData>();
             windsor.Release(aaa);

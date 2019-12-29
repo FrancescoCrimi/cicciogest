@@ -6,7 +6,7 @@ using CiccioGest.Infrastructure.Conf;
 
 namespace CiccioGest.Application.Impl
 {
-    public class Installer : IWindsorInstaller
+    public class MyInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

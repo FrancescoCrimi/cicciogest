@@ -57,7 +57,7 @@
   <ItemGroup>
     <Compile Include="DomainListDataContractSurrogate.cs" />
     <Compile Include="DomainListEndpointBehavior.cs" />
-    <Compile Include="Installer.cs" />
+    <Compile Include="MyInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

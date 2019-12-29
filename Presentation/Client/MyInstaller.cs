@@ -7,7 +7,7 @@ using CiccioGest.Infrastructure.Conf;
 
 namespace CiccioGest.Presentation.Client
 {
-    public class Installer : IWindsorInstaller
+    public class MyInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.Client
                     break;
                 default:
                     //container.Install(FromAssembly.Named("Application.Impl"));
-                    container.Install(new CiccioGest.Application.Impl.Installer());
+                    container.Install(new CiccioGest.Application.Impl.MyInstaller());
                     break;
             }
         }

@@ -9,47 +9,47 @@ namespace CiccioGest.Application.FakeImpl
 {
     public class DesignMagazinoService : IMagazinoService
     {
-        public async Task DeleteCategoria(int id)
+        public Task DeleteCategoria(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task DeleteArticolo(int id)
+        public Task DeleteArticolo(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Categoria> GetCategoria(int id)
+        public Task<Categoria> GetCategoria(int id) => Task.Run(() =>
         {
             return FakeSampleData.Categorie.First(c => c.Id == id);
-        }
+        });
 
-        public async Task<IEnumerable<Categoria>> GetCategorie()
+        public Task<IList<Categoria>> GetCategorie() => Task.Run(() =>
         {
             return FakeSampleData.Categorie;
-        }
+        });
 
-        public async Task<Fornitore> GetFornitore(int id)
+        public Task<Fornitore> GetFornitore(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ArticoloReadOnly>> GetArticoli()
+        public Task<IList<ArticoloReadOnly>> GetArticoli() => Task.Run(() =>
         {
             return FakeSampleData.ArticoliRO;
-        }
+        });
 
-        public async Task<Articolo> GetArticolo(int id)
+        public Task<Articolo> GetArticolo(int id) => Task.Run(() =>
         {
             return FakeSampleData.Articoli.First(p => p.Id == id);
-        }
+        });
 
-        public async Task<Categoria> SaveCategoria(Categoria categoria)
+        public Task<Categoria> SaveCategoria(Categoria categoria)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Articolo> SaveArticolo(Articolo prodotto)
+        public Task<Articolo> SaveArticolo(Articolo prodotto)
         {
             throw new NotImplementedException();
         }

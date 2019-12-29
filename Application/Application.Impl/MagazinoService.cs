@@ -44,14 +44,14 @@ namespace CiccioGest.Application.Impl
             }
         }
 
-        public async Task<IEnumerable<ArticoloReadOnly>> GetArticoli()
+        public Task<IList<ArticoloReadOnly>> GetArticoli()
         {
-            return await prodottoRepository.GetAll();
+            return prodottoRepository.GetAll();
         }
 
-        public async Task<Articolo> GetArticolo(int id)
+        public Task<Articolo> GetArticolo(int id)
         {
-            return await prodottoRepository.GetById(id);
+            return prodottoRepository.GetById(id);
         }
 
         public async Task<Articolo> SaveArticolo(Articolo prodotto)
@@ -76,14 +76,14 @@ namespace CiccioGest.Application.Impl
             return prodotto;
         }
 
-        public async Task<Categoria> GetCategoria(int id)
+        public Task<Categoria> GetCategoria(int id)
         {
-            return await categoriaRepository.GetById(id);
+            return categoriaRepository.GetById(id);
         }
 
-        public async Task<IEnumerable<Categoria>> GetCategorie()
+        public Task<IList<Categoria>> GetCategorie()
         {
-            return await categoriaRepository.GetAll();
+            return categoriaRepository.GetAll();
         }
 
         public async Task<Categoria> SaveCategoria(Categoria categoria)
@@ -108,12 +108,12 @@ namespace CiccioGest.Application.Impl
             return categoria;
         }
 
-        public async Task DeleteCategoria(int id)
+        public Task DeleteCategoria(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Fornitore> GetFornitore(int id)
+        public Task<Fornitore> GetFornitore(int id)
         {
             throw new NotImplementedException();
         }

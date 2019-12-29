@@ -12,7 +12,7 @@ namespace CiccioGest.Application
     public interface IClientiFornitoriService
     {
         [OperationContract]
-        IEnumerable<Cliente> GetClienti();
+        IList<Cliente> GetClienti();
         [OperationContract]
         Cliente GetCliente(int id);
         [OperationContract]
@@ -22,7 +22,7 @@ namespace CiccioGest.Application
 
 
         [OperationContract]
-        IEnumerable<Fornitore> GetFornitori();
+        IList<Fornitore> GetFornitori();
         [OperationContract]
         Fornitore GetFornitore(int id);
         [OperationContract]
@@ -32,7 +32,7 @@ namespace CiccioGest.Application
 
 
         [OperationContract]
-        IEnumerable<Citta> GetCittà();
+        IList<Citta> GetCittà();
         [OperationContract]
         Citta GetCittà(int id);
         [OperationContract]

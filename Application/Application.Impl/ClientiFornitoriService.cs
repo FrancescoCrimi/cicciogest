@@ -41,7 +41,7 @@ namespace CiccioGest.Application.Impl
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Citta> GetCittà()
+        public IList<Citta> GetCittà()
         {
             throw new NotImplementedException();
         }
@@ -56,7 +56,7 @@ namespace CiccioGest.Application.Impl
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Cliente> GetClienti()
+        public IList<Cliente> GetClienti()
         {
             throw new NotImplementedException();
         }
@@ -66,7 +66,7 @@ namespace CiccioGest.Application.Impl
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Fornitore> GetFornitori()
+        public IList<Fornitore> GetFornitori()
         {
             throw new NotImplementedException();
         }

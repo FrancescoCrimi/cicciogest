@@ -20,7 +20,7 @@ namespace CiccioGest.Interface.Wcf.WebService
             container.Register(
                 Component.For<IConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-            container.Install(new CiccioGest.Application.Impl.Installer());
+            container.Install(new CiccioGest.Application.Impl.MyInstaller());
         }       
     }
 }

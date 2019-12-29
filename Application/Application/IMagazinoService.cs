@@ -10,7 +10,7 @@ namespace CiccioGest.Application
     public interface IMagazinoService
     {
         [OperationContract]
-        Task<IEnumerable<ArticoloReadOnly>> GetArticoli();
+        Task<IList<ArticoloReadOnly>> GetArticoli();
         [OperationContract]
         Task<Articolo> GetArticolo(int id);
         [OperationContract]
@@ -19,7 +19,7 @@ namespace CiccioGest.Application
         Task DeleteArticolo(int id);
 
         [OperationContract]
-        Task<IEnumerable<Categoria>> GetCategorie();
+        Task<IList<Categoria>> GetCategorie();
         [OperationContract]
         Task<Categoria> GetCategoria(int id);
         [OperationContract]
