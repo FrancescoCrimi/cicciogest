@@ -20,9 +20,6 @@ namespace CiccioGest.Application.Impl
                 //case Storage.EF:
                 //    container.Install(new Ciccio1.Infrastructure.Persistence.EF.Installer());
                 //    break;
-                //case Storage.EFC:
-                //    container.Install(new Ciccio1.Infrastructure.Persistence.EFC.Installer());
-                //    break;
                 //case Storage.Db4o:
                 //    container.Install(new CiccioGest.Infrastructure.Persistence.Db4o.Installer());
                 //    break;

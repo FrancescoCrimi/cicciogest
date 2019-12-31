@@ -15,18 +15,18 @@ namespace CiccioGest.Application.Impl
         private readonly ILogger logger;
         private readonly IUnitOfWork uow;
         private readonly IFatturaRepository fatturaRepository;
-        private readonly IArticoloRepository prodottoRepository;
+        private readonly IArticoloRepository articoloRepository;
 
         public FatturaService(
             ILogger logger,
             IUnitOfWork uow,
             IFatturaRepository fatturaRepository,
-            IArticoloRepository prodottoRepository)
+            IArticoloRepository articoloRepository)
         {
             this.logger = logger;
             this.uow = uow;
             this.fatturaRepository = fatturaRepository;
-            this.prodottoRepository = prodottoRepository;
+            this.articoloRepository = articoloRepository;
             logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + uow.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
@@ -49,7 +49,7 @@ namespace CiccioGest.Application.Impl
 
         public Task<Fattura> GetFattura(int id)
         {
-            return Task.Run(() => fatturaRepository.GetById(id));
+            return fatturaRepository.GetById(id);
         }
 
         public Task<IList<FatturaReadOnly>> GetFatture()
@@ -69,7 +69,7 @@ namespace CiccioGest.Application.Impl
                     }
                     else
                     {
-                        fatturaRepository.Update(fattura);
+                        await fatturaRepository.Update(fattura);
                     }
                     uow.Commit();
                 }
@@ -84,7 +84,7 @@ namespace CiccioGest.Application.Impl
 
         public Task<Articolo> GetArticolo(int id)
         {
-            return Task.Run(() => prodottoRepository.GetById(id));
+            return articoloRepository.GetById(id);
         }
 
         public Task<Cliente> GetCliente(int idCliente)

@@ -5,6 +5,7 @@ using CiccioGest.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
 {
@@ -26,62 +27,62 @@ namespace CiccioGest.Application.Impl
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public void DeleteCittà(int id)
+        public Task DeleteCittà(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteCliente(int id)
+        public Task DeleteCliente(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteFornitore(int id)
+        public Task DeleteFornitore(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Citta> GetCittà()
+        public Task<IList<Citta>> GetCittà()
         {
             throw new NotImplementedException();
         }
 
-        public Citta GetCittà(int id)
+        public Task<Citta> GetCittà(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Cliente GetCliente(int id)
+        public Task<Cliente> GetCliente(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Cliente> GetClienti()
+        public Task<IList<Cliente>> GetClienti()
         {
             throw new NotImplementedException();
         }
 
-        public Fornitore GetFornitore(int id)
+        public Task<Fornitore> GetFornitore(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Fornitore> GetFornitori()
+        public Task<IList<Fornitore>> GetFornitori()
         {
             throw new NotImplementedException();
         }
 
-        public Citta SaveCittà(Citta città)
+        public Task<Citta> SaveCittà(Citta città)
         {
             throw new NotImplementedException();
         }
 
-        public Cliente SaveCliente(Cliente cliente)
+        public Task<Cliente> SaveCliente(Cliente cliente)
         {
             throw new NotImplementedException();
         }
 
-        public Fornitore SaveFornitore(Fornitore fornitore)
+        public Task<Fornitore> SaveFornitore(Fornitore fornitore)
         {
             throw new NotImplementedException();
         }

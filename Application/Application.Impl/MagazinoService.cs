@@ -30,18 +30,21 @@ namespace CiccioGest.Application.Impl
         }
 
 
-        public async Task DeleteArticolo(int id)
+        public Task DeleteArticolo(int id)
         {
-            try
+            return Task.Run(async () =>
             {
-                await prodottoRepository.Delete(id);
-                da.Commit();
-            }
-            catch (Exception)
-            {
-                da.Rollback();
-                throw;
-            }
+                 try
+                 {
+                     await prodottoRepository.Delete(id);
+                     da.Commit();
+                 }
+                 catch (Exception)
+                 {
+                     da.Rollback();
+                     throw;
+                 }
+            });
         }
 
         public Task<IList<ArticoloReadOnly>> GetArticoli()
