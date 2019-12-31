@@ -23,10 +23,10 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
             });
         }
 
-        public Task<TEntity> GetById(int id)
+        public Task<TEntity> GetById(int id) => Task.Run(() =>
         {
-            return Task.Run(() => entities.First(fa => fa.Id == id));
-        }
+           return entities.First(fa => fa.Id == id);
+        });
 
         public Task<int> Save(TEntity entity)
         {

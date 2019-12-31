@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.Uwp.Client.Wcf {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CiccioGest.Presentation.Uwp.Client.Wcf.IFatturaService")]
-    public interface IFatturaService {
+    internal interface IFatturaService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://gest.cicciosoft.tk/IFatturaService/GetFatture", ReplyAction="http://gest.cicciosoft.tk/IFatturaService/GetFattureResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<CiccioGest.Domain.Documenti.FatturaReadOnly>> GetFattureAsync();
@@ -38,12 +38,12 @@ namespace CiccioGest.Presentation.Uwp.Client.Wcf {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IFatturaServiceChannel : CiccioGest.Presentation.Uwp.Client.Wcf.IFatturaService, System.ServiceModel.IClientChannel {
+    internal interface IFatturaServiceChannel : CiccioGest.Presentation.Uwp.Client.Wcf.IFatturaService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class FatturaServiceClient : System.ServiceModel.ClientBase<CiccioGest.Presentation.Uwp.Client.Wcf.IFatturaService>, CiccioGest.Presentation.Uwp.Client.Wcf.IFatturaService {
+    internal partial class FatturaServiceClient : System.ServiceModel.ClientBase<CiccioGest.Presentation.Uwp.Client.Wcf.IFatturaService>, CiccioGest.Presentation.Uwp.Client.Wcf.IFatturaService {
         
         /// <summary>
         /// Implement this partial method to configure the service endpoint.

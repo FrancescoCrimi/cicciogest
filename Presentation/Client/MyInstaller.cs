@@ -4,6 +4,7 @@ using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.Client.Wcf;
 
 namespace CiccioGest.Presentation.Client
 {
@@ -16,17 +17,7 @@ namespace CiccioGest.Presentation.Client
             {
                 case Storage.WCF:
                     container.Register(
-                          //Component.For<IFatturaService>().AsWcfClient(
-                          //    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/FatturaService.svc")),
-
-                          Component.For<IFatturaService>().ImplementedBy<FatturaServiceClient>().LifestyleTransient()
-                          //Component.For<IFatturaService>().ImplementedBy<ServiceReference1.FatturaServiceClient>().LifestyleTransient()
-
-                          //Component.For<IMagazinoService>().AsWcfClient(
-                          //    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/MagazinoService.svc")),
-                          //Component.For<IClientiFornitoriService>().AsWcfClient(
-                          //    WcfEndpoint.BoundTo(new WSHttpBinding()).At(conf.CS + "/CategoriaService.svc")),
-                          //Component.For<IEndpointBehavior>().ImplementedBy<DomainListEndpointBehavior>()
+                          Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient()
                           );
                     break;
                 default:

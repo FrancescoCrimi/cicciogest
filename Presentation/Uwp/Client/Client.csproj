@@ -126,10 +126,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Old\DCSWithSurrogatesOperationBehavior.cs" />
-    <Compile Include="Old\FatturaService.cs" />
-    <Compile Include="Old\FatturaServiceTest.cs" />
-    <Compile Include="Old\MySerializationSurrogateProvider.cs" />
+    <Compile Include="Wcf\DCSWithSurrogatesOperationBehavior.cs" />
+    <Compile Include="Wcf\MySerializationSurrogateProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wcf\FatturaService.cs" />
     <EmbeddedResource Include="Properties\CiccioGest.Presentation.Uwp.Client.rd.xml" />

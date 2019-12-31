@@ -2,18 +2,21 @@
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
-using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.Client
+namespace CiccioGest.Presentation.Client.Wcf
 {
-    public class FatturaServiceClientBase : ClientBase<IFatturaService>, IFatturaService
+    internal abstract class FatturaServiceClient : ClientBase<IFatturaService>, IFatturaService
     {
-        public FatturaServiceClientBase(System.ServiceModel.Channels.Binding binding, EndpointAddress remoteAddress) :
-            base(binding, remoteAddress)
-        { }
+        protected abstract void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
+
+        public FatturaServiceClient(System.ServiceModel.Channels.Binding binding, EndpointAddress remoteAddress) :
+                base(binding, remoteAddress)
+        {
+            ConfigureEndpoint(Endpoint, ClientCredentials);
+        }
 
         public Task<IList<FatturaReadOnly>> GetFatture()
         {
@@ -47,12 +50,12 @@ namespace CiccioGest.Presentation.Client
 
         public virtual Task OpenAsync()
         {
-            return Task.Factory.FromAsync(((ICommunicationObject)this).BeginOpen(null, null), new Action<IAsyncResult>(((ICommunicationObject)this).EndOpen));
+            return Task.Factory.FromAsync(((ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((ICommunicationObject)(this)).EndOpen));
         }
 
         public virtual Task CloseAsync()
         {
-            return Task.Factory.FromAsync(((ICommunicationObject)this).BeginClose(null, null), new Action<IAsyncResult>(((ICommunicationObject)this).EndClose));
+            return Task.Factory.FromAsync(((ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((ICommunicationObject)(this)).EndClose));
         }
     }
 }

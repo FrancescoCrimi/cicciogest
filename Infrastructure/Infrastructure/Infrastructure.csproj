@@ -16,10 +16,6 @@
     <PackageReference Include="Castle.LoggingFacility" Version="5.0.1" />
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
     <PackageReference Include="CiccioSoft.Collections" Version="1.0.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 

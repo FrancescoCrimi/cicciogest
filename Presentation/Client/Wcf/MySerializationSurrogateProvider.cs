@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace CiccioGest.Presentation.Client
+namespace CiccioGest.Presentation.Client.Wcf
 {
     public class MySerializationSurrogateProvider : ISerializationSurrogateProvider
     {
