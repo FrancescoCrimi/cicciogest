@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Memory
 {
@@ -10,6 +11,11 @@ namespace CiccioGest.Infrastructure.Persistence.Memory
 
         public void Commit()
         {
+        }
+
+        public Task CommitAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public void Dispose()

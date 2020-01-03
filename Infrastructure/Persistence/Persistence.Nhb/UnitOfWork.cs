@@ -2,6 +2,7 @@
 using NHibernate;
 using System;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
@@ -41,6 +42,16 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             session.Transaction.Commit();
             DisposeSession();
             session.BeginTransaction();
+        }
+
+        public Task CommitAsync()
+        {
+            return Task.Run(() =>
+            {
+                session.Transaction.Rollback();
+                DisposeSession();
+                session.BeginTransaction();
+            });
         }
 
         public void Rollback()

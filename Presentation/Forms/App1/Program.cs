@@ -11,21 +11,18 @@ namespace CiccioGest.Presentation.Forms.App1
 {
     class Program
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool SetProcessDPIAware();
-        private readonly IWindsorContainer windsor;
-
+        private static IWindsorContainer windsor;
 
         [STAThread]
         static void Main()
         {
-            SetProcessDPIAware();
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            new Program();
+            Init();
+            System.Windows.Forms.Application.Run(windsor.Resolve<MainView>());
         }
 
-        public Program()
+        private static void Init()
         {
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
@@ -33,14 +30,7 @@ namespace CiccioGest.Presentation.Forms.App1
             windsor.Register(
                 Component.For<IConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-            //windsor.Install(new CiccioGest.Application.Installer());
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
-            RegisterComponent();
-            System.Windows.Forms.Application.Run(windsor.Resolve<MainView>());
-        }
-
-        private void RegisterComponent()
-        {
             windsor.Register(
                 Component.For<ArticoloView>().LifestyleTransient(),
                 Component.For<CategoriaView>().LifestyleTransient(),

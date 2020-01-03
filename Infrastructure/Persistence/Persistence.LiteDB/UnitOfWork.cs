@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Logging;
 using LiteDB;
 using System;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.LiteDB
 {
@@ -22,6 +23,11 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
         public void Commit()
         {
             logger.Debug("HashCode: " + GetHashCode().ToString() + " Commit");
+        }
+
+        public Task CommitAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public void Dispose()

@@ -4,6 +4,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Infrastructure.Persistence.Nhb.Repository;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
@@ -12,9 +13,12 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IUnitOfWorkFactory, UnitOfWorkFactory>().ImplementedBy<UnitOfWorkFactory>().LifeStyle.Singleton);
+            ISetLifeStyle slf = container.Resolve<ISetLifeStyle>();
+            IConf conf = container.Resolve<IConf>();
 
-            //IConf conf = container.Resolve<IConf>();
+            container.Register(
+                Component.For<IUnitOfWorkFactory, UnitOfWorkFactory>().ImplementedBy<UnitOfWorkFactory>().LifeStyle.Singleton);
+
             //switch (conf.UserInterface)
             //{
             //    case UI.Form:
@@ -39,11 +43,9 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 //Component.For<ISessionFactory>().UsingFactoryMethod(k => k.Resolve<DataAccess>().SessionFactory()),
                 Component.For<IFatturaRepository>().ImplementedBy<FatturaRepository>().LifeStyle.Transient,
                 Component.For<IArticoloRepository>().ImplementedBy<ArticoloRepository>().LifeStyle.Transient,
-                Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient
-                );
+                Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient);
 
-            ComponentRegistration<IUnitOfWork> cr = Component.For<IUnitOfWork, UnitOfWork>().ImplementedBy<UnitOfWork>();
-            ISetLifeStyle slf = container.Resolve<ISetLifeStyle>();
+            ComponentRegistration<IUnitOfWork> cr = Component.For<IUnitOfWork, UnitOfWork>().ImplementedBy<UnitOfWork>();           
             ComponentRegistration<IUnitOfWork> cr2 = slf.Suca(cr);
             container.Register(cr2);
         }

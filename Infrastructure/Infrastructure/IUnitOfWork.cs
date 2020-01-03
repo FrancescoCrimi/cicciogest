@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure
 {
@@ -6,6 +7,7 @@ namespace CiccioGest.Infrastructure
     {
         // void Begin();
         void Commit();
+        Task CommitAsync();
         void Rollback();
     }
 }

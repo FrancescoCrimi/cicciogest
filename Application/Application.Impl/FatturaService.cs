@@ -32,11 +32,11 @@ namespace CiccioGest.Application.Impl
 
         public Task DeleteFattura(int id)
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
                 try
                 {
-                    fatturaRepository.Delete(id);
+                    await fatturaRepository.Delete(id);
                     uow.Commit();
                 }
                 catch (Exception)

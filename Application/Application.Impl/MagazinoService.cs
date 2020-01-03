@@ -32,18 +32,18 @@ namespace CiccioGest.Application.Impl
 
         public Task DeleteArticolo(int id)
         {
-            return Task.Run(async () =>
+            return Task.Run(() =>
             {
-                 try
-                 {
-                     await prodottoRepository.Delete(id);
-                     da.Commit();
-                 }
-                 catch (Exception)
-                 {
-                     da.Rollback();
-                     throw;
-                 }
+                try
+                {
+                    prodottoRepository.Delete(id);
+                    da.Commit();
+                }
+                catch (Exception)
+                {
+                    da.Rollback();
+                    throw;
+                }
             });
         }
 

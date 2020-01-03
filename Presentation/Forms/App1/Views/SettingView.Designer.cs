@@ -116,7 +116,7 @@
             this.connectionStringTextBox.Location = new System.Drawing.Point(16, 126);
             this.connectionStringTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.connectionStringTextBox.Name = "connectionStringTextBox";
-            this.connectionStringTextBox.Size = new System.Drawing.Size(464, 22);
+            this.connectionStringTextBox.Size = new System.Drawing.Size(553, 22);
             this.connectionStringTextBox.TabIndex = 7;
             this.connectionStringTextBox.Text = "server=localhost;User Id=root;password=marco;database=prova";
             // 
@@ -184,7 +184,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 238);
+            this.ClientSize = new System.Drawing.Size(582, 238);
             this.Controls.Add(this.loadConfButton);
             this.Controls.Add(this.writeConfButton);
             this.Controls.Add(this.loadSampleButton);

@@ -4,6 +4,7 @@ using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
@@ -13,42 +14,42 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         private readonly ILogger logger;
         private readonly IKernel kernel;
         private readonly IFatturaService service;
-        private readonly int? idFattura;
+        private readonly int idFattura;
 
         public FatturaView(ILogger logger, IKernel kernel, IFatturaService service)
-            : this(logger, kernel, service, null)
-        {
-        }
+            : this(logger, kernel, service, 0)
+        { }
 
-        public FatturaView(ILogger logger, IKernel kernel, IFatturaService service, int? idFattura)
+        public FatturaView(ILogger logger, IKernel kernel, IFatturaService service, int idFattura)
         {
             this.logger = logger;
             this.kernel = kernel;
             this.service = service;
             this.idFattura = idFattura;
             InitializeComponent();
-            NuovaFattura();
+            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         private void FatturaView_Load(object sender, EventArgs e)
         {
-            if (idFattura != null)
-            {
-                if (idFattura == 0)
-                    SelectFattura();
-                else
-                    ApriFattura((int)idFattura);
-            }
+            ApriFattura(idFattura);
         }
 
         private void NuovaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NuovaFattura();
+            ApriFattura(0);
         }
 
         private void ApriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectFattura();
+            var sfv = kernel.Resolve<ListaFattureView>();
+            sfv.ShowDialog();
+            int IdFattura = sfv.IdFattura;
+            kernel.ReleaseComponent(sfv);
+            if (IdFattura != 0)
+            {
+                ApriFattura(IdFattura);
+            }
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,9 +62,9 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             service.SaveFattura((Fattura)fatturaBindingSource.DataSource);
         }
 
-        private void EliminaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void EliminaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            service.DeleteFattura(((Fattura)fatturaBindingSource.DataSource).Id);
+            await service.DeleteFattura(((Fattura)fatturaBindingSource.DataSource).Id);
         }
 
         private void EsciToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,32 +115,13 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         }
 
 
-
-
-        private void NuovaFattura()
-        {
-            fatturaBindingSource.DataSource = new Fattura();
-            dettaglioBindingSource.DataSource = new Dettaglio();
-        }
-
         private async void ApriFattura(int idFattura)
         {
-            fatturaBindingSource.DataSource = await service.GetFattura(idFattura);
-        }
-
-        private void SelectFattura()
-        {
-            var sfv = kernel.Resolve<ListaFattureView>();
-            sfv.ShowDialog();
-            if (sfv.IdFattura == 0)
-            {
-                MessageBox.Show("Fattura non selezionata");
-            }
+            if (idFattura == 0)
+                fatturaBindingSource.DataSource = new Fattura();
             else
-            {
-                ApriFattura(sfv.IdFattura);
-            }
-            kernel.ReleaseComponent(sfv);
+                fatturaBindingSource.DataSource = await service.GetFattura(idFattura);
+            dettaglioBindingSource.DataSource = new Dettaglio();
         }
 
         private async void SelectProduct()
@@ -147,11 +129,9 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             ListaArticoliView spv = kernel.Resolve<ListaArticoliView>();
             spv.ShowDialog();
             int idProdotto = spv.IdProdotto;
-            if (idProdotto == 0)
-                MessageBox.Show("Prodotto non selezionato");
-            else
-                ((Dettaglio)dettaglioBindingSource.Current).Articolo = await service.GetArticolo(idProdotto);
             kernel.ReleaseComponent(spv);
+            if (idProdotto != 0)
+                ((Dettaglio)dettaglioBindingSource.Current).Articolo = await service.GetArticolo(idProdotto);
         }
     }
 }

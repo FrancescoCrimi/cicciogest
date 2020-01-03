@@ -19,22 +19,35 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 
         public Task Delete(int id)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {
+                coll.Delete(te => te.Id == id);
+            });
         }
 
-        public Task<TEntity> GetById(int id) => Task.Run(() =>
+        public Task<TEntity> GetById(int id)
         {
-            return coll.FindOne(ent => ent.Id == id);
-        });
+            return Task.Run(() =>
+            {
+                return coll.FindOne(ent => ent.Id == id);
+            });
+        }
 
-        public Task<int> Save(TEntity entity) => Task.Run(() =>
+        public Task<int> Save(TEntity entity)
         {
-            var id = coll.Insert(entity);
-            
-            return (int)id;
-        });
+            return Task.Run(() =>
+            {
+                var id = coll.Insert(entity);
+                return (int)id;
+            });
+        }
 
-
-        public Task Update(TEntity entity) => Task.Run(() => coll.Update(entity));
+        public Task Update(TEntity entity)
+        {
+            return Task.Run(() =>
+            {
+                coll.Update(entity);
+            });
+        }
     }
 }
