@@ -27,12 +27,11 @@ namespace CiccioGest.Presentation.Forms.App1
         {
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-            IAppConf conf = ConfigurationManager.ReadConfiguration();
-            //var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
-            ////confmgr.SampleConf();
-            ////confmgr.WriteConfiguration();
-            //confmgr.ReadConfiguration();
-            //IAppConf conf = confmgr.GetCurrent();
+            var confmgr = new ConfigurationManager();
+            //confmgr.SampleConf();
+            //confmgr.WriteConfiguration();
+            confmgr.ReadConfiguration();
+            IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
                 Component.For<IAppConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());

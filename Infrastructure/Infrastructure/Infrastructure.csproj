@@ -25,7 +25,6 @@
     <PackageReference Include="Castle.LoggingFacility" Version="5.0.1" />
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
     <PackageReference Include="CiccioSoft.Collections" Version="1.0.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

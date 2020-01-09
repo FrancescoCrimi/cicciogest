@@ -16,8 +16,7 @@ namespace CiccioGest.Interface.Wcf.WebService
             IWindsorContainer container = new WindsorContainer();
             container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             container.AddFacility<WcfFacility>();
-            //IAppConf conf = ConfigurationManager.ReadConfiguration();
-            var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
+            var confmgr = new ConfigurationManager();
             confmgr.ReadConfiguration();
             IAppConf conf = confmgr.GetCurrent();
             container.Register(

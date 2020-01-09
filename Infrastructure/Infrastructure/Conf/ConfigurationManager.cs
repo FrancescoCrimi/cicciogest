@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace CiccioGest.Infrastructure.Conf.Json
+namespace CiccioGest.Infrastructure.Conf
 {
     public class ConfigurationManager : IConfigurationManager
     {

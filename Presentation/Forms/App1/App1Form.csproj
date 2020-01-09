@@ -291,9 +291,6 @@
     <PackageReference Include="NLog">
       <Version>4.6.8</Version>
     </PackageReference>
-    <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>4.7.0</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Delete.png" />

@@ -18,8 +18,7 @@ namespace CiccioGest.Presentation.LoadSampleData
         {
             IWindsorContainer windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-            //IAppConf conf = ConfigurationManager.ReadConfiguration();
-            var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
+            var confmgr = new ConfigurationManager();
             confmgr.ReadConfiguration();
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(

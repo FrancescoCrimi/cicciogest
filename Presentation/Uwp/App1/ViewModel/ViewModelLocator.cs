@@ -41,8 +41,7 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             }
             else
             {
-                //IAppConf conf = ConfigurationManager.ReadConfiguration();
-                var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
+                var confmgr = new ConfigurationManager();
                 confmgr.SampleConf();
                 //confmgr.WriteConfiguration();
                 //confmgr.ReadConfiguration();
