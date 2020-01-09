@@ -32,9 +32,12 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             else
             {
                 windsor = App.Windsor;
-                IConf conf = ConfMgr.ReadConfiguration();
+                //IAppConf conf = ConfigurationManager.ReadConfiguration();
+                var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
+                confmgr.ReadConfiguration();
+                IAppConf conf = confmgr.GetCurrent();
                 windsor.Register(
-                    Component.For<IConf>().Instance(conf),
+                    Component.For<IAppConf>().Instance(conf),
                     Component.For<INavigationService>().ImplementedBy<NavigationService>(),
                     Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
                 windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());

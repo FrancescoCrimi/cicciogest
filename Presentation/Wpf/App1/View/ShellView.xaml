@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <Frame Grid.Row="0" x:Name="ciccio" Source="MenuControl.xaml" NavigationUIVisibility="Hidden" />
-        <Frame Grid.Row="1" x:Name="pippo" Source="HomeView.xaml" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="1" x:Name="shellFrame" Source="HomeView.xaml" NavigationUIVisibility="Hidden" />
 
     </Grid>
 

@@ -11,7 +11,7 @@ namespace CiccioGest.Presentation.Wpf.App1.View
         public ShellView()
         {
             InitializeComponent();
-            App.Windsor.Register(Component.For<Frame>().Instance(pippo));
+            App.Windsor.Register(Component.For<Frame>().Instance(shellFrame));
             Closing += MainWindow_Closing;
         }
 
@@ -21,6 +21,12 @@ namespace CiccioGest.Presentation.Wpf.App1.View
             Messenger.Default.Unregister(this);
             ViewModelLocator.Cleanup();
         }
+
+        public Frame GetNavigationFrame()
+        {
+            return shellFrame;
+        }
+
         public bool Suca()
         {
             return System.ComponentModel.DesignerProperties.GetIsInDesignMode(this);

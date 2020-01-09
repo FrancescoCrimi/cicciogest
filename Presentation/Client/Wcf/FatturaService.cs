@@ -7,7 +7,7 @@ namespace CiccioGest.Presentation.Client.Wcf
 {
     internal class FatturaService : FatturaServiceClient
     {
-        public FatturaService(IConf conf)
+        public FatturaService(IAppConf conf)
             : base(GetBinding(), GetEndpointAddress(conf))
         {
         }
@@ -42,7 +42,7 @@ namespace CiccioGest.Presentation.Client.Wcf
             return result;
         }
 
-        private static EndpointAddress GetEndpointAddress(IConf conf)
+        private static EndpointAddress GetEndpointAddress(IAppConf conf)
         {
             //return new EndpointAddress("http://localhost:8000/fatturaservice.svc");
             return new EndpointAddress(conf.CS + "/fatturaservice.svc");

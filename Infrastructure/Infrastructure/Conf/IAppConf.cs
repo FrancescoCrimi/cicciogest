@@ -1,6 +1,6 @@
 ﻿namespace CiccioGest.Infrastructure.Conf
 {
-    public interface IConf
+    public interface IAppConf
     {
         UI UserInterface { get; }
         Storage DataAccess { get; }

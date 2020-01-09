@@ -24,9 +24,12 @@ namespace CiccioGest.Interface.Wcf.AppService
             IWindsorContainer container = new WindsorContainer();
             container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             container.AddFacility<WcfFacility>();
-            IConf conf = ConfMgr.ReadConfiguration();
+            //IAppConf conf = ConfigurationManager.ReadConfiguration();
+            var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
+            confmgr.ReadConfiguration();
+            IAppConf conf = confmgr.GetCurrent();
             container.Register(
-                Component.For<IConf>().Instance(conf),
+                Component.For<IAppConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
             container.Install(new CiccioGest.Application.Impl.MyInstaller());
 

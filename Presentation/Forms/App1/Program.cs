@@ -6,6 +6,7 @@ using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Forms.App1.Views;
 using System;
+using System.Reflection;
 
 namespace CiccioGest.Presentation.Forms.App1
 {
@@ -26,9 +27,14 @@ namespace CiccioGest.Presentation.Forms.App1
         {
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-            IConf conf = ConfMgr.ReadConfiguration();
+            IAppConf conf = ConfigurationManager.ReadConfiguration();
+            //var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
+            ////confmgr.SampleConf();
+            ////confmgr.WriteConfiguration();
+            //confmgr.ReadConfiguration();
+            //IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
-                Component.For<IConf>().Instance(conf),
+                Component.For<IAppConf>().Instance(conf),
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             windsor.Register(

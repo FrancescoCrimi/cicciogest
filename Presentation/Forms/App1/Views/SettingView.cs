@@ -10,10 +10,10 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     {
         private readonly ILogger logger;
         private IUnitOfWorkFactory uowf;
-        private IConf conf;
+        private IAppConf conf;
         //private IWindsorContainer windsor;
 
-        public SettingView(ILogger logger, IConf conf, IUnitOfWorkFactory uowf)
+        public SettingView(ILogger logger, IAppConf conf, IUnitOfWorkFactory uowf)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.conf = conf ?? throw new ArgumentNullException(nameof(conf));
@@ -40,7 +40,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             //windsor.Install(new Installer());
         }
 
-        private void SetImpostazioni(IConf impoConf)
+        private void SetImpostazioni(IAppConf impoConf)
         {
             uIComboBox.SelectedItem = impoConf.UserInterface;
             databaseComboBox.SelectedItem = impoConf.Database;
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private void GetImpostazioni()
         {
-            DummyConf newConf = new DummyConf();
+            AppConf newConf = new AppConf();
             newConf.UserInterface = (UI)uIComboBox.SelectedValue;
             newConf.Database = (Databases)databaseComboBox.SelectedValue;
             newConf.DataAccess = (Storage)dataAccessComboBox.SelectedValue;

@@ -12,7 +12,7 @@ namespace CiccioGest.Presentation.Client
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            IConf conf = container.Resolve<IConf>();
+            IAppConf conf = container.Resolve<IAppConf>();
             switch (conf.DataAccess)
             {
                 case Storage.WCF:

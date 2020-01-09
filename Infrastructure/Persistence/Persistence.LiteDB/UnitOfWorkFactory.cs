@@ -9,11 +9,11 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 {
     internal class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly IConf conf;
+        private readonly IAppConf conf;
         private readonly ILogger logger;
         private LiteDatabase db;
 
-        public UnitOfWorkFactory(IConf conf, ILogger logger)
+        public UnitOfWorkFactory(IAppConf conf, ILogger logger)
         {
             this.conf = conf;
             this.logger = logger;

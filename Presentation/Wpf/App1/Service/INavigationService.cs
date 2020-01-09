@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.Wpf.App1.Service
 {
@@ -12,5 +13,6 @@ namespace CiccioGest.Presentation.Wpf.App1.Service
         void GoForward();
         bool Navigate(object root);
         bool StartNavigate(object root);
+        void Initialize(Frame shellFrame);
     }
 }

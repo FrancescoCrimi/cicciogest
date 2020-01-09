@@ -14,7 +14,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             ISetLifeStyle slf = container.Resolve<ISetLifeStyle>();
-            IConf conf = container.Resolve<IConf>();
+            IAppConf conf = container.Resolve<IAppConf>();
 
             container.Register(
                 Component.For<IUnitOfWorkFactory, UnitOfWorkFactory>().ImplementedBy<UnitOfWorkFactory>().LifeStyle.Singleton);

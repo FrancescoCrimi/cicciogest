@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls;
 using CiccioGest.Presentation.Wpf.App1.Service;
 
 namespace CiccioGest.Presentation.Wpf.App1.Design
@@ -11,6 +12,7 @@ namespace CiccioGest.Presentation.Wpf.App1.Design
         public void Clear() => throw new NotImplementedException();
         public void GoBack() => throw new NotImplementedException();
         public void GoForward() => throw new NotImplementedException();
+        public void Initialize(Frame shellFrame) => throw new NotImplementedException();
         public bool Navigate(object root) => throw new NotImplementedException();
         public bool StartNavigate(object root) => throw new NotImplementedException();
     }

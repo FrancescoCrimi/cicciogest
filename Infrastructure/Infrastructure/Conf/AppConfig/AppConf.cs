@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
 
-namespace CiccioGest.Infrastructure.Conf
+namespace CiccioGest.Infrastructure.Conf.AppConfig
 {
-    sealed class ConfigurationElement : System.Configuration.ConfigurationElement, IConf
+    sealed class AppConf : System.Configuration.ConfigurationElement, IAppConf
     {
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true, DefaultValue = "ssee")]

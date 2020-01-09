@@ -101,6 +101,9 @@
     <PackageReference Include="Castle.WcfIntegrationFacility">
       <Version>5.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Castle.Windsor">
+      <Version>5.0.1</Version>
+    </PackageReference>
     <PackageReference Include="CiccioSoft.NhbCollections">
       <Version>1.0.1</Version>
     </PackageReference>

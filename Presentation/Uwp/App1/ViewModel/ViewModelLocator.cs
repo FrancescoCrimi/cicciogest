@@ -41,10 +41,14 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             }
             else
             {
-                //logger = Windsor.Resolve<ILoggerFactory>().Create("AppUwp.ViewModel.ViewModelLocator");
-                IConf conf = ConfMgr.ReadConfiguration();
+                //IAppConf conf = ConfigurationManager.ReadConfiguration();
+                var confmgr = new CiccioGest.Infrastructure.Conf.Json.ConfigurationManager();
+                confmgr.SampleConf();
+                //confmgr.WriteConfiguration();
+                //confmgr.ReadConfiguration();
+                IAppConf conf = confmgr.GetCurrent();
                 windsor.Register(
-                    Component.For<IConf>().Instance(conf),
+                    Component.For<IAppConf>().Instance(conf),
                     Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
                 windsor.Install(new CiccioGest.Presentation.Uwp.Client.MyInstaller());
             }

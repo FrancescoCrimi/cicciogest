@@ -1,15 +1,15 @@
 ﻿using System.Configuration;
 
-namespace CiccioGest.Infrastructure.Conf
+namespace CiccioGest.Infrastructure.Conf.AppConfig
 {
     sealed class ConfigurationSection : System.Configuration.ConfigurationSection
     {
         [ConfigurationProperty("Confs")]
-        public ConfigurationElementCollection Configurazioni
+        public AppConfs Configurazioni
         {
             get
             {
-                return (ConfigurationElementCollection)this["Confs"];
+                return (AppConfs)this["Confs"];
             }
         }
     }

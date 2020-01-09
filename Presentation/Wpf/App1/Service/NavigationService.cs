@@ -9,8 +9,8 @@ namespace CiccioGest.Presentation.Wpf.App1.Service
     public class NavigationService : INavigationService
     {
         private readonly ILogger logger;
-        private readonly System.Windows.Navigation.NavigationService ns;
-        private readonly Frame frame;
+        private Frame frame;
+        private System.Windows.Navigation.NavigationService ns;
 
         public NavigationService(ILogger logger, Frame frame)
         {
@@ -45,6 +45,17 @@ namespace CiccioGest.Presentation.Wpf.App1.Service
             while (ns.CanGoBack)
             {
                 frame.NavigationService.RemoveBackEntry();
+            }
+        }
+
+
+
+        public void Initialize(Frame shellFrame)
+        {
+            if (frame == null)
+            {
+                frame = shellFrame;
+                ns = shellFrame.NavigationService;
             }
         }
     }

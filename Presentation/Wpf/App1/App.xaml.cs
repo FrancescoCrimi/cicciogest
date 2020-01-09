@@ -1,6 +1,7 @@
 ﻿using Castle.Facilities.Logging;
 using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
+using System.Windows.Threading;
 
 namespace CiccioGest.Presentation.Wpf.App1
 {
@@ -27,6 +28,21 @@ namespace CiccioGest.Presentation.Wpf.App1
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             return windsor;
+        }
+
+        private void Application_Startup(object sender, System.Windows.StartupEventArgs e)
+        {
+
+        }
+
+        private void Application_Exit(object sender, System.Windows.ExitEventArgs e)
+        {
+
+        }
+
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+
         }
     }
 }
