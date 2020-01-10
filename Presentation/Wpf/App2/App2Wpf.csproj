@@ -63,9 +63,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Update="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

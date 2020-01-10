@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CiccioGest.Interface.Wcf.WebService</RootNamespace>
     <AssemblyName>WebService</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <UseIISExpress>true</UseIISExpress>
@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -108,6 +109,7 @@
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Drawing.Design" />
@@ -151,7 +153,6 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
@@ -173,13 +174,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CiccioServiceHostFactory.cs" />
+    <Compile Include="Utils\CiccioServiceHostFactory.cs" />
+    <Compile Include="Conf\CiccioGestConfigurationElement.cs" />
+    <Compile Include="Conf\CiccioGestConfigurationElementCollection.cs" />
+    <Compile Include="Conf\CiccioGestConfigurationSection.cs" />
+    <Compile Include="Conf\ConfMgr.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MyDataContractSurrogate.cs" />
+    <Compile Include="Utils\MyDataContractSurrogate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetLifeStyle.cs" />
+    <Compile Include="Utils\SetLifeStyle.cs" />
+    <Compile Include="Utils\Class1.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

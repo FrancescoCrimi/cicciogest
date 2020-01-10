@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CiccioGest.Interface.Wcf.AppService</RootNamespace>
     <AssemblyName>AppService</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -93,6 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CiccioServiceHostFactory.cs" />
+    <Compile Include="Conf\CiccioGestConfigurationElement.cs" />
+    <Compile Include="Conf\CiccioGestConfigurationElementCollection.cs" />
+    <Compile Include="Conf\CiccioGestConfigurationSection.cs" />
+    <Compile Include="Conf\ConfMgr.cs" />
     <Compile Include="MyDataContractSurrogate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
