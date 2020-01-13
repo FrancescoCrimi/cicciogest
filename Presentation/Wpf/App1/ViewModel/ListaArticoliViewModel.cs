@@ -2,6 +2,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Wpf.App1.Contracts;
 using CiccioGest.Presentation.Wpf.App1.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -16,21 +17,23 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
     public sealed class ListaArticoliViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService service;
-        private readonly INavigationService ns;
+        private readonly IMagazinoService magazinoService;
+        private readonly INavigationService navigationService;
         private ICommand loadedCommand;
         private ICommand selezionaProdottoCommand;
 
-        public ListaArticoliViewModel(ILogger logger, IMagazinoService service, INavigationService ns)
+        public ListaArticoliViewModel(ILogger logger,
+                                      IMagazinoService magazinoService,
+                                      INavigationService navigationService)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.service = service;
-            this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
+            this.logger = logger;
+            this.magazinoService = magazinoService;
+            this.navigationService = navigationService;
 
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
             if (App.InDesignMode)
             {
-                foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
+                foreach (ArticoloReadOnly pr in magazinoService.GetArticoli().Result)
                 {
                     Prodotti.Add(pr);
                 }
@@ -44,7 +47,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ?? (selezionaProdottoCommand = new RelayCommand(ApriProdotto));
         public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
         {
-            foreach (ArticoloReadOnly pr in await service.GetArticoli())
+            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
             {
                 Prodotti.Add(pr);
             }
@@ -57,7 +60,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             if (ProdottoSelezionato != null)
             {
                 MessengerInstance.Send(new NotificationMessage<int>(ProdottoSelezionato.Id, "IdProdotto"));
-                ns.GoBack();
+                navigationService.GoBack();
             }
         }
 

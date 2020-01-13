@@ -14,7 +14,7 @@ namespace CiccioGest.Presentation.Wpf.App1.View
         private void ProdottoView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Messenger.Default.Unregister(this);
-            App.Windsor.Release(DataContext);
+            //App.Windsor.Release(DataContext);
         }
     }
 }

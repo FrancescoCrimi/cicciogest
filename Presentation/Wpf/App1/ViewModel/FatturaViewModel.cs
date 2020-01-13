@@ -2,6 +2,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Wpf.App1.Contracts;
 using CiccioGest.Presentation.Wpf.App1.Service;
 using CiccioGest.Presentation.Wpf.App1.View;
 using GalaSoft.MvvmLight;
@@ -17,8 +18,8 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
     public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
-        private readonly IFatturaService service;
-        private readonly INavigationService ns;
+        private readonly IFatturaService fatturaService;
+        private readonly INavigationService navigationService;
         private ICommand nuovaFatturaCommand;
         private ICommand salvaFatturaCommand;
         private ICommand rimuoviFatturaCommand;
@@ -29,15 +30,16 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         private ICommand selezionaDettaglioCommand;
         private ICommand loadedCommand;
 
-        public FatturaViewModel(ILogger logger, IFatturaService service, INavigationService ns)
+        public FatturaViewModel(ILogger logger,
+                                IFatturaService fatturaService,
+                                INavigationService navigationService)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.service = service ?? throw new ArgumentNullException(nameof(service));
-            this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
-
+            this.logger = logger;
+            this.fatturaService = fatturaService;
+            this.navigationService = navigationService;
             if (App.InDesignMode)
             {
-                Fattura fatt = service.GetFattura(4).Result;
+                Fattura fatt = this.fatturaService.GetFattura(4).Result;
                 MostraFattura(fatt);
                 Dettaglio = fatt.Dettagli[3];
             }
@@ -60,9 +62,9 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??
             (rimuoviFatturaCommand = new RelayCommand(RimuoviFattura));
         public ICommand ApriFatturaCommand => apriFatturaCommand ??
-            (apriFatturaCommand = new RelayCommand(() => ns.Navigate(new ListaFattureView())));
+            (apriFatturaCommand = new RelayCommand(() => navigationService.NavigateTo("ListaFatture")));
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??
-            (nuovoDettaglioCommand = new RelayCommand(() => ns.Navigate(new ListaArticoliView())));
+            (nuovoDettaglioCommand = new RelayCommand(() => navigationService.NavigateTo("ListaArticoli")));
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??
             (aggiungiDettaglioCommand = new RelayCommand(AggiungiDettagglio));
         public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??
@@ -77,12 +79,12 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             {
                 if (ns.Notification == "IdFattura")
                 {
-                    MostraFattura(await service.GetFattura(ns.Content));
+                    MostraFattura(await fatturaService.GetFattura(ns.Content));
                 }
 
                 else if (ns.Notification == "IdProdotto")
                 {
-                    Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
+                    Dettaglio = new Dettaglio(await fatturaService.GetArticolo(ns.Content), 1);
                     RaisePropertyChanged(nameof(Dettaglio));
                 }
             });
@@ -105,7 +107,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         {
             try
             {
-                service.SaveFattura(Fattura);
+                fatturaService.SaveFattura(Fattura);
             }
             catch (Exception e)
             {
@@ -117,7 +119,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         {
             try
             {
-                service.DeleteFattura(Fattura.Id);
+                fatturaService.DeleteFattura(Fattura.Id);
             }
             catch (Exception e)
             {

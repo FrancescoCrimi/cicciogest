@@ -15,7 +15,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Frame Grid.Row="0" x:Name="ciccio" Source="MenuControl.xaml" NavigationUIVisibility="Hidden" />
+        <Menu>
+            <MenuItem Header="Documenti">
+                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
+                <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
+            </MenuItem>
+            <MenuItem Header="Magazino">
+                <MenuItem Header="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>
+                <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
+            </MenuItem>
+            <MenuItem Header="Anagrafica">
+                <MenuItem Header="Clienti"/>
+                <MenuItem Header="Fornitori"/>
+            </MenuItem>
+            <MenuItem x:Name="aboutMenuItem" Header="?"/>
+        </Menu>
+
         <Frame Grid.Row="1" x:Name="shellFrame" Source="HomeView.xaml" NavigationUIVisibility="Hidden" />
 
     </Grid>

@@ -9,15 +9,15 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     public partial class SettingView : Form
     {
         private readonly ILogger logger;
-        private IUnitOfWorkFactory uowf;
+        //private IUnitOfWorkFactory uowf;
         private IAppConf conf;
         //private IWindsorContainer windsor;
         private ConfigurationManager confmgr;
 
-        public SettingView(ILogger logger, IUnitOfWorkFactory uowf)
+        public SettingView(ILogger logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.uowf = uowf ?? throw new ArgumentNullException(nameof(uowf));
+            //this.uowf = uowf ?? throw new ArgumentNullException(nameof(uowf));
             InitializeComponent();
             dataAccessComboBox1.DataSource = Enum.GetValues(typeof(Storage));
             databaseComboBox1.DataSource = Enum.GetValues(typeof(Databases));
@@ -66,7 +66,8 @@ namespace CiccioGest.Presentation.Forms.App1.Views
                 //Bootstrap.Restart(conf);
                 //Bootstrap.Windsor.Install(new CiccioGest.Application.Installer());
                 //uowf = Bootstrap.Windsor.Resolve<IUnitOfWorkFactory>();
-                uowf.VerifyDataAccess();
+
+                //uowf.VerifyDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)
@@ -79,7 +80,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {            
             try
             {
-                uowf.CreateDataAccess();
+                //uowf.CreateDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)

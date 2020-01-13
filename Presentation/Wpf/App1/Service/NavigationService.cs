@@ -1,6 +1,11 @@
 ﻿using Castle.Core.Logging;
+using Castle.MicroKernel;
+using CiccioGest.Presentation.Wpf.App1.Contracts;
+using GalaSoft.MvvmLight;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -9,14 +14,14 @@ namespace CiccioGest.Presentation.Wpf.App1.Service
     public class NavigationService : INavigationService
     {
         private readonly ILogger logger;
+        private readonly IKernel kernel;
         private Frame frame;
         private System.Windows.Navigation.NavigationService ns;
 
-        public NavigationService(ILogger logger, Frame frame)
+        public NavigationService(ILogger logger, IKernel kernel)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.frame = frame ?? throw new ArgumentNullException(nameof(frame));
-            ns = this.frame.NavigationService;
+            this.logger = logger;
+            this.kernel = kernel;
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -25,14 +30,30 @@ namespace CiccioGest.Presentation.Wpf.App1.Service
         public Uri CurrentSource => ns.CurrentSource;
         public void GoBack() => ns.GoBack();
         public void GoForward() => ns.GoForward();
-        public bool Navigate(object root) => ns.Navigate(root);
 
-        public bool StartNavigate(object root)
+
+
+
+        public void NavigateTo(string pageKey)
+            => NavigateTo(pageKey, false);
+
+
+        public void NavigateTo(string pageKey, bool clearNavigation)
         {
-            bool b = ns.Navigate(root);
-            frame.LoadCompleted += Frame_LoadCompleted;
-            return b;
+            var pageType = GetPageType(pageKey);
+            if (frame.Content?.GetType() != pageType)
+            {
+                frame.Tag = clearNavigation;
+                var page = GetPage(pageKey);
+                var navigated = frame.Navigate(page);
+                if (navigated & clearNavigation)
+                {
+                    frame.LoadCompleted += Frame_LoadCompleted;
+                }
+            }
         }
+
+
 
         private void Frame_LoadCompleted(object sender, NavigationEventArgs e)
         {
@@ -49,6 +70,48 @@ namespace CiccioGest.Presentation.Wpf.App1.Service
         }
 
 
+
+        public Type GetPageType(string key)
+        {
+            Type pageType;
+            lock (_pages)
+            {
+                if (!_pages.TryGetValue(key, out pageType))
+                {
+                    throw new ArgumentException($"Page not found: {key}. Did you forget to call PageService.Configure?");
+                }
+            }
+
+            return pageType;
+        }
+
+        public Page GetPage(string key)
+        {
+            var pageType = GetPageType(key);
+            return kernel.Resolve(pageType) as Page;
+        }
+
+        private readonly Dictionary<string, Type> _pages = new Dictionary<string, Type>();
+
+        public void Configure<V>()
+            where V : Page
+        {
+            lock (_pages)
+            {
+                //var key = typeof(VM).FullName;
+                var key = typeof(V).Name.Split(new string[] { "View" }, StringSplitOptions.None).First();
+                if (_pages.ContainsKey(key))
+                {
+                    throw new ArgumentException($"The key {key} is already configured in PageService");
+                }
+                var type = typeof(V);
+                if (_pages.Any(p => p.Value == type))
+                {
+                    throw new ArgumentException($"This type is already configured with key {_pages.First(p => p.Value == type).Key}");
+                }
+                _pages.Add(key, type);
+            }
+        }
 
         public void Initialize(Frame shellFrame)
         {

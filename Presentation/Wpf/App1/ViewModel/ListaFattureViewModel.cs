@@ -2,6 +2,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Wpf.App1.Contracts;
 using CiccioGest.Presentation.Wpf.App1.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
