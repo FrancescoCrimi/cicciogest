@@ -20,7 +20,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         private readonly IMagazinoService magazinoService;
         private readonly INavigationService navigationService;
         private ICommand loadedCommand;
-        private ICommand selezionaProdottoCommand;
+        private ICommand selezionaArticoloCommand;
 
         public ListaArticoliViewModel(ILogger logger,
                                       IMagazinoService magazinoService,
@@ -29,37 +29,38 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             this.logger = logger;
             this.magazinoService = magazinoService;
             this.navigationService = navigationService;
-
-            Prodotti = new ObservableCollection<ArticoloReadOnly>();
+            Articoli = new ObservableCollection<ArticoloReadOnly>();
             if (App.InDesignMode)
             {
                 foreach (ArticoloReadOnly pr in magazinoService.GetArticoli().Result)
                 {
-                    Prodotti.Add(pr);
+                    Articoli.Add(pr);
                 }
             }
-
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
-        public ArticoloReadOnly ProdottoSelezionato { private get; set; }
-        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ?? (selezionaProdottoCommand = new RelayCommand(ApriProdotto));
+        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
+
+        public ArticoloReadOnly ArticoloSelezionato { private get; set; }
+
+        public ICommand SelezionaArticoloCommand => selezionaArticoloCommand 
+            ?? (selezionaArticoloCommand = new RelayCommand(ApriArticolo));
+
         public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
         {
             foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
             {
-                Prodotti.Add(pr);
+                Articoli.Add(pr);
             }
         }));
 
 
-
-        private void ApriProdotto()
+        private void ApriArticolo()
         {
-            if (ProdottoSelezionato != null)
+            if (ArticoloSelezionato != null)
             {
-                MessengerInstance.Send(new NotificationMessage<int>(ProdottoSelezionato.Id, "IdProdotto"));
+                MessengerInstance.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
                 navigationService.GoBack();
             }
         }

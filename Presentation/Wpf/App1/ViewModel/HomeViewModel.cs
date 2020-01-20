@@ -13,13 +13,13 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public HomeViewModel(ILogger logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

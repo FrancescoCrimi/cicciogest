@@ -48,7 +48,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
                 RegistraMessaggi();
                 MostraFattura(new Fattura());
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public Fattura Fattura { get; private set; }
@@ -92,6 +92,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 
         private void MostraFattura(Fattura fattura)
         {
+            logger.Debug("MostraFattura " + fattura.Id + " HashCode: " + GetHashCode().ToString());
             Fattura = fattura;
             RaisePropertyChanged(nameof(Fattura));
             NuovoDettaglio();

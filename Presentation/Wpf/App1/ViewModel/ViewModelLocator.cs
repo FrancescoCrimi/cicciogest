@@ -15,10 +15,9 @@ using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 {
-    public sealed class ViewModelLocator : ViewModelBase, IDisposable
+    public sealed class ViewModelLocator : ViewModelBase
     {
         private IWindsorContainer windsor;
-        private INavigationService navigationService;
 
         public ViewModelLocator()
         {
@@ -28,10 +27,12 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
                 windsor = new WindsorContainer();
                 windsor.AddFacility<LoggingFacility>();
                 windsor.Register(
+                    Component.For<IPageService>().ImplementedBy<DesignPageService>(),
+                    Component.For<INavigationService>().ImplementedBy<DesignNavigationService>(),
                     Component.For<IFatturaService>().ImplementedBy<DesignFatturaService>(),
                     Component.For<IMagazinoService>().ImplementedBy<DesignMagazinoService>(),
-                    Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>(),
-                    Component.For<INavigationService>().ImplementedBy<DesignNavigationService>());
+                    Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>()
+                    );
                 registerVM();
             }
         }
@@ -44,8 +45,9 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
                 Component.For<IAppConf>().Instance(conf),
+                Component.For<IPageService>().ImplementedBy<PageService>(),
                 Component.For<INavigationService>().ImplementedBy<NavigationService>(),
-                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>()); ;
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             registerVM();
         }
@@ -54,14 +56,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         {
             windsor.Register(
                 Component.For<ShellView>(),
-                Component.For<ShellViewModel>()
-                //Component.For<HomeViewModel>().LifestyleTransient(),
-                //Component.For<ListaFattureViewModel>().LifestyleTransient(),
-                //Component.For<ListaArticoliViewModel>().LifestyleTransient(),
-                //Component.For<CategoriaViewModel>().LifestyleTransient(),
-                //Component.For<FatturaViewModel>().LifestyleTransient(),
-                //Component.For<ArticoloViewModel>().LifestyleTransient()
-                );
+                Component.For<ShellViewModel>());
             Register<HomeViewModel, HomeView>();
             Register<ListaFattureViewModel, ListaFattureView>();
             Register<ListaArticoliViewModel, ListaArticoliView>();
@@ -77,10 +72,8 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             windsor.Register(
                 Component.For<VM>().LifestyleTransient(),
                 Component.For<V>().LifestyleTransient());
-            windsor.Resolve<INavigationService>().Configure<V>();
-            //windsor.ResolveAll()
+            windsor.Resolve<IPageService>().Configure<V>();
         }
-
 
         public ShellViewModel Shell => windsor.Resolve<ShellViewModel>();
         public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
@@ -89,14 +82,5 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
         public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
         public HomeViewModel Home => windsor.Resolve<HomeViewModel>();
-
-        public static void Cleanup()
-        {
-        }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
     }
 }

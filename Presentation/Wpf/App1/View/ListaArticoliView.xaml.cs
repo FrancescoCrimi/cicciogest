@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.Wpf.App1.View
 {
@@ -8,13 +7,6 @@ namespace CiccioGest.Presentation.Wpf.App1.View
         public ListaArticoliView()
         {
             InitializeComponent();
-            //Closing += SelezionaProdottoView_Closing;
-        }
-
-        private void SelezionaProdottoView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
-            //App.Windsor.Release(DataContext);
         }
     }
 }

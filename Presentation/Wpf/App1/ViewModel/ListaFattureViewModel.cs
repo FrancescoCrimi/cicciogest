@@ -3,13 +3,11 @@ using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Wpf.App1.Contracts;
-using CiccioGest.Presentation.Wpf.App1.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
@@ -18,15 +16,17 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
-        private readonly INavigationService ns;
+        private readonly INavigationService navigationService;
         private ICommand loadedCommand;
         private ICommand apriFatturaCommand;
 
-        public ListaFattureViewModel(ILogger logger, IFatturaService fatturaService, INavigationService ns)
+        public ListaFattureViewModel(ILogger logger,
+                                     IFatturaService fatturaService,
+                                     INavigationService navigationService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.fatturaService = fatturaService;
-            this.ns = ns ?? throw new ArgumentNullException(nameof(ns));
+            this.navigationService = navigationService;
             if (fatturaService == null) throw new ArgumentNullException(nameof(fatturaService));
             Fatture = new ObservableCollection<FatturaReadOnly>();
             if (App.InDesignMode)
@@ -36,7 +36,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
                     Fatture.Add(fatt);
                 }
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public string Title { get => "Suca Forte"; }
@@ -51,13 +51,15 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             }
         }));
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(ApriFattura));
+        public ICommand ApriFatturaCommand => apriFatturaCommand
+            ?? (apriFatturaCommand = new RelayCommand(ApriFattura));
 
         private void ApriFattura()
         {
             if (FatturaSelezionata != null)
             {
-                ns.GoBack();
+                if (navigationService.CanGoBack)
+                    navigationService.GoBack();
                 MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
             }
         }
@@ -65,7 +67,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

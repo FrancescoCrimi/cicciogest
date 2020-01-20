@@ -11,12 +11,7 @@ namespace CiccioGest.Presentation.Wpf.App1.Contracts
         void Clear();
         void GoBack();
         void GoForward();
-
-        void NavigateTo(string pageKey, bool clearNavigation);
-        void NavigateTo(string pageKey);
-
+        void NavigateTo(string pageKey, bool clearNavigation = false);
         void Initialize(Frame shellFrame);
-        void Configure<V>()
-            where V : Page;
     }
 }
