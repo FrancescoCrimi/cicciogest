@@ -18,9 +18,9 @@
             IsBackButtonVisible="Visible"
             IsSettingsVisible="True">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Nuova Fattura" Icon="Document" Tag="FatturaPage"/>
-                <NavigationViewItem Content="Fatture" Icon="Document"  Tag="ListaFatturePage"/>
-                <NavigationViewItem Content="Clienti" Icon="Document" Tag="Clienti" />
+                <NavigationViewItem Content="Fatture" Icon="Document" Tag="Fattura"/>
+                <NavigationViewItem Content="Articoli" Icon="Document"  Tag="Articolo"/>
+                <NavigationViewItem Content="Categorie" Icon="Document" Tag="Categoria" />
             </NavigationView.MenuItems>
             <i:Interaction.Behaviors>
                 <ic:EventTriggerBehavior EventName="ItemInvoked">

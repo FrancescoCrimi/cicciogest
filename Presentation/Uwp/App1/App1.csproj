@@ -133,12 +133,20 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetLifeStyle.cs" />
+    <Compile Include="ViewModel\ArticoloViewModel.cs" />
+    <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\FatturaViewModel.cs" />
     <Compile Include="ViewModel\ListaArticoliViewModel.cs" />
     <Compile Include="ViewModel\ListaFattureViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ShellViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ArticoloPage.xaml.cs">
+      <DependentUpon>ArticoloPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CategoriaPage.xaml.cs">
+      <DependentUpon>CategoriaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FatturaPage.xaml.cs">
       <DependentUpon>FatturaPage.xaml</DependentUpon>
     </Compile>
@@ -178,6 +186,14 @@
     <Page Include="Styles\NavStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ArticoloPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CategoriaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FatturaPage.xaml">
       <Generator>MSBuild:Compile</Generator>

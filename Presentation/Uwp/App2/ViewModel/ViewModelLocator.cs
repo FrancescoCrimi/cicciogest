@@ -9,6 +9,7 @@ using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Uwp.App2.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Views;
+using System.Linq;
 
 namespace CiccioGest.Presentation.Uwp.App2.ViewModel
 {
@@ -19,8 +20,11 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
         public ViewModelLocator()
         {
             var nav = new NavigationService();
-            nav.Configure("FatturaPage", typeof(FatturaPage));
-            nav.Configure("ListaFatturePage", typeof(ListaFatturePage));
+            nav.Configure("Fattura", typeof(FatturaPage));
+            nav.Configure("Articolo", typeof(ArticoloPage));
+            nav.Configure("Categoria", typeof(CategoriaPage));
+            nav.Configure("ListaFatture", typeof(ListaFatturePage));
+            nav.Configure("ListaArticoli", typeof(ListaArticoliPage));
 
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
@@ -35,14 +39,15 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
             else
             {
                 var confmgr = new ConfigurationManager();
-                //confmgr.SampleConf();
-                //confmgr.WriteConfiguration();
-                confmgr.ReadConfiguration();
+                //var colconf = confmgr.GetAll();
+                //var mysql = colconf.First(c => c.Name == "mysql");
+                //confmgr.SetCurrent(mysql);
+                //confmgr.Save();
                 IAppConf conf = confmgr.GetCurrent();
                 windsor.Register(
                     Component.For<IAppConf>().Instance(conf),
                     Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
-                windsor.Install(new CiccioGest.Presentation.Uwp.Client.MyInstaller()); 
+                windsor.Install(new CiccioGest.Presentation.Uwp.Client.MyInstaller());
             }
             windsor.Register(
                 Component.For<ShellViewModel>(),
@@ -52,6 +57,9 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
 
         public ShellViewModel Shell => windsor.Resolve<ShellViewModel>();
         public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
+        public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
+        public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
         public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
+        public ListaArticoliViewModel ListaArticoli => windsor.Resolve<ListaArticoliViewModel>();
     }
 }

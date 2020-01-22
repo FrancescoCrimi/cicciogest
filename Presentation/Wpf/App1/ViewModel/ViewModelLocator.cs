@@ -41,7 +41,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         {
             windsor = windsorContainer;
             var confmgr = new ConfigurationManager();
-            confmgr.ReadConfiguration();
+            //confmgr.ReadConfiguration();
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
                 Component.For<IAppConf>().Instance(conf),

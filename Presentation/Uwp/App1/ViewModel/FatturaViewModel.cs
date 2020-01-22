@@ -6,6 +6,7 @@ using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -15,7 +16,8 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
     public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
-        private readonly IFatturaService service;
+        private readonly NavigationService navigationService;
+        private readonly IFatturaService fatturaService;
         private ICommand nuovaFatturaCommand;
         private ICommand salvaFatturaCommand;
         private ICommand rimuoviFatturaCommand;
@@ -26,14 +28,17 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         private ICommand nuovoDettaglioCommand;
         private ICommand loadedCommand;
 
-        public FatturaViewModel(ILogger logger, IFatturaService service)
+        public FatturaViewModel(ILogger logger,
+                                NavigationService navigationService,
+                                IFatturaService fatturaService)
         {
             this.logger = logger;
-            this.service = service;
+            this.navigationService = navigationService;
+            this.fatturaService = fatturaService;
 
             if (IsInDesignModeStatic)
             {
-                Mostra(service.GetFattura(4).Result);
+                Mostra(this.fatturaService.GetFattura(4).Result);
                 Dettaglio = Fattura.Dettagli[3];
             }
             else
@@ -48,7 +53,16 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         public Dettaglio DettaglioSelezionato { private get; set; }
 
         public ICommand LoadedCommand => loadedCommand ??
-            (loadedCommand = new RelayCommand(async () => Mostra(await service.GetFattura(5))));
+            (loadedCommand = new RelayCommand(LoadedAsync));
+
+        private void LoadedAsync()
+        {
+            Task.Run(async () =>
+            {
+                Fattura fatt = await fatturaService.GetFattura(4);
+                Mostra(fatt);
+            });
+        }
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??
             (nuovaFatturaCommand = new RelayCommand(() => logger.Debug("Nuova Fattura Button fire")));
@@ -59,13 +73,13 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??
             (rimuoviFatturaCommand = new RelayCommand(Elimina));
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??
+        public ICommand ApriCommand => apriFatturaCommand ??
             (apriFatturaCommand = new RelayCommand(() =>
-            MessengerInstance.Send(new NotificationMessage("SelezionaFattura"))));
+            navigationService.NavigateTo("ListaFatture")));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??
             (nuovoDettaglioCommand = new RelayCommand(() =>
-            MessengerInstance.Send(new NotificationMessage("SelezionaProdotto"))));
+            navigationService.NavigateTo("ListaArticoli")));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??
             (aggiungiDettaglioCommand = new RelayCommand(AggiungiDettagglio));
@@ -82,20 +96,12 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             {
                 if (ns.Notification == "IdFattura")
                 {
-                    if (ns.Content == 0)
-                        MessengerInstance.Send(new NotificationMessage("SelezionaFattura"));
-                    else
-                        Mostra(await service.GetFattura(ns.Content));
+                    if (ns.Content != 0)
+                        Mostra(await fatturaService.GetFattura(ns.Content));
                 }
-
-                else if (ns.Notification == "ApriFatturaSelezionata")
-                {
-                    Mostra(await service.GetFattura(ns.Content));
-                }
-
                 else if (ns.Notification == "IdProdotto")
                 {
-                    Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
+                    Dettaglio = new Dettaglio(await fatturaService.GetArticolo(ns.Content), 1);
                     RaisePropertyChanged(nameof(Dettaglio));
                 }
             });
@@ -118,7 +124,7 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         {
             try
             {
-                service.SaveFattura(Fattura);
+                fatturaService.SaveFattura(Fattura);
                 //window.Close();
             }
             catch (Exception e)
@@ -131,7 +137,7 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         {
             try
             {
-                service.DeleteFattura(Fattura.Id);
+                fatturaService.DeleteFattura(Fattura.Id);
                 //window.Close();
             }
             catch (Exception e)

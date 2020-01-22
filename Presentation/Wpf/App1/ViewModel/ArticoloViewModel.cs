@@ -4,7 +4,6 @@ using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-//using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;

@@ -12,7 +12,7 @@ using GalaSoft.MvvmLight.Views;
 
 namespace CiccioGest.Presentation.Uwp.App1.ViewModel
 {
-    public class ViewModelLocator
+    public sealed class ViewModelLocator
     {
         private readonly IWindsorContainer windsor;
         public static bool UseDesignTimeData => true;
@@ -20,10 +20,12 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         public ViewModelLocator()
         {
             var nav = new NavigationService();
-            nav.Configure("MainPage", typeof(View.MainPage));
-            nav.Configure("FatturaPage", typeof(FatturaPage));
-            nav.Configure("ListaFatturePage", typeof(ListaFatturePage));
-            nav.Configure("ListaArticoliPage", typeof(ListaArticoliPage));
+            nav.Configure("Main", typeof(MainPage));
+            nav.Configure("Fattura", typeof(FatturaPage));
+            nav.Configure("Articolo", typeof(ArticoloPage));
+            nav.Configure("Categoria", typeof(CategoriaPage));
+            nav.Configure("ListaFatture", typeof(ListaFatturePage));
+            nav.Configure("ListaArticoli", typeof(ListaArticoliPage));
 
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
@@ -42,7 +44,7 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             else
             {
                 var confmgr = new ConfigurationManager();
-                confmgr.SampleConf();
+                //confmgr.LoadSample();
                 //confmgr.WriteConfiguration();
                 //confmgr.ReadConfiguration();
                 IAppConf conf = confmgr.GetCurrent();
@@ -56,13 +58,17 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
                 Component.For<ShellViewModel>(),
                 Component.For<MainViewModel>(),
                 Component.For<FatturaViewModel>(),
+                Component.For<ArticoloViewModel>(),
+                Component.For<CategoriaViewModel>(),
                 Component.For<ListaFattureViewModel>(),
                 Component.For<ListaArticoliViewModel>());
         }
 
         public ShellViewModel Shell => windsor.Resolve<ShellViewModel>();
         public MainViewModel Main => windsor.Resolve<MainViewModel>();
-        public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
+        public FatturaViewModel Fatture => windsor.Resolve<FatturaViewModel>();
+        public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
+        public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
         public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
         public ListaArticoliViewModel ListaArticoli => windsor.Resolve<ListaArticoliViewModel>();
     }

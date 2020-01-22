@@ -25,25 +25,12 @@
         </Grid.RowDefinitions>
 
         <MenuBar>
-            <!--<MenuBarItem Title="File">
-                <MenuFlyoutItem Text="New"/>
-                <MenuFlyoutItem Text="Open..."/>
-                <MenuFlyoutItem Text="Save"/>
-                <MenuFlyoutItem Text="Exit"/>
-            </MenuBarItem>
-            <MenuBarItem Title="Edit">
-                <MenuFlyoutItem Text="Undo"/>
-                <MenuFlyoutItem Text="Cut"/>
-                <MenuFlyoutItem Text="Copy"/>
-                <MenuFlyoutItem Text="Paste"/>
-            </MenuBarItem>-->
             <MenuBarItem Title="Documenti">
-                <MenuFlyoutItem Text="Nuova" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
-                <MenuFlyoutItem Text="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Fatture" Command="{Binding FattureCommand, Mode=OneWay}"/>
             </MenuBarItem>
             <MenuBarItem Title="Magazino">
-                <MenuFlyoutItem Text="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>
-                <MenuFlyoutItem Text="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Articoli" Command="{Binding ArticoliCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Categorie" Command="{Binding CategorieCommand, Mode=OneWay}"/>
             </MenuBarItem>
             <MenuBarItem Title="Anagrafica">
                 <MenuFlyoutItem Text="Clienti"/>

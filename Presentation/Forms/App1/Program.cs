@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.Forms.App1
             var confmgr = new ConfigurationManager();
             //confmgr.SampleConf();
             //confmgr.WriteConfiguration();
-            confmgr.ReadConfiguration();
+            //confmgr.ReadConfiguration();
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
                 Component.For<IAppConf>().Instance(conf),

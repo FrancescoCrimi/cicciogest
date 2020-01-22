@@ -16,81 +16,72 @@ namespace CiccioGest.Infrastructure.Conf
         private static readonly string filePath = Path.Combine(folderPath, fileName);
         //string asswq = Assembly.GetCallingAssembly().GetName().Name;
         //string aqwsa = Assembly.GetEntryAssembly().GetName().Name;
-        private AppConfs appConfs = null;
+        private AppConfs privateAppConfs = null;
 
-        public void ReadConfiguration()
+
+        private AppConfs AppConfs
+        {
+            get
+            {
+                if (privateAppConfs == null) ReadConfiguration();
+                return privateAppConfs;
+            }
+        }
+
+        private void ReadConfiguration()
         {
             if (File.Exists(filePath))
             {
                 var json = File.ReadAllText(filePath);
-                appConfs = JsonConvert.DeserializeObject<AppConfs>(json);
+                privateAppConfs = JsonConvert.DeserializeObject<AppConfs>(json);
             }
         }
 
-        public void WriteConfiguration()
+        public void Save()
         {
-            if (appConfs != null)
+            if (privateAppConfs != null)
             {
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
                 }
-                var fileContent = JsonConvert.SerializeObject(appConfs, Formatting.Indented);
+                var fileContent = JsonConvert.SerializeObject(privateAppConfs, Formatting.Indented);
                 File.WriteAllText(filePath, fileContent, Encoding.UTF8);
             }
         }
 
         public void Add(AppConf conf)
         {
-            if (appConfs != null)
-            {
-                appConfs.Available.Add(conf.Name, conf);
-            }
+            AppConfs.Available.Add(conf.Name, conf);
         }
 
         public void Remove(AppConf conf)
         {
-            if (appConfs != null)
-            {
-                appConfs.Available.Remove(conf.Name);
-            }
+            AppConfs.Available.Remove(conf.Name);
         }
 
         public void SetCurrent(AppConf conf)
         {
-            if (appConfs != null)
+            if (AppConfs.Available.ContainsValue(conf))
             {
-                if (appConfs.Available.ContainsValue(conf))
-                {
-                    appConfs.Current = conf.Name;
-                }
+                AppConfs.Current = conf.Name;
             }
         }
 
         public AppConf GetCurrent()
         {
-            if (appConfs != null)
-            {
-                appConfs.Available.TryGetValue(appConfs.Current, out AppConf value);
-                return value;
-            }
-            else
-                return default;
+            AppConfs.Available.TryGetValue(AppConfs.Current, out AppConf value);
+            return value;
         }
 
-        public ICollection<AppConf> GetAllConfs()
+        public ICollection<AppConf> GetAll()
         {
-            if (appConfs != null)
-            {
-                return appConfs.Available.Values;
-            }
-            else
-                return default;
+            return AppConfs.Available.Values;
         }
 
-        public void SampleConf()
+        public void LoadSample()
         {
-            appConfs = new AppConfs();
+            privateAppConfs = new AppConfs();
             var mysql = new AppConf()
             {
                 CS = "server=localhost;User Id=CiccioGestNhb;password=CiccioGestNhb;database=CiccioGestNhb",
@@ -99,7 +90,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "mysql"
             };
-            appConfs.Available.Add(mysql.Name, mysql);
+            AppConfs.Available.Add(mysql.Name, mysql);
             var ssee1 = new AppConf()
             {
                 CS = @"Data Source=CICCIOBOOK\SQLEXPRESS;Initial Catalog=CiccioGestNhb;Integrated Security=True",
@@ -108,7 +99,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "ssee1"
             };
-            appConfs.Available.Add(ssee1.Name, ssee1);
+            AppConfs.Available.Add(ssee1.Name, ssee1);
             var ssee2 = new AppConf()
             {
                 CS = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\CiccioGestNhb.mdf;Integrated Security=True",
@@ -117,7 +108,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "ssee2"
             };
-            appConfs.Available.Add(ssee2.Name, ssee2);
+            AppConfs.Available.Add(ssee2.Name, ssee2);
             var sqlite1 = new AppConf()
             {
                 CS = "Data Source=CiccioGestNhb.db;Version=3;BinaryGuid=False",
@@ -126,7 +117,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "sqlite1"
             };
-            appConfs.Available.Add(sqlite1.Name, sqlite1);
+            AppConfs.Available.Add(sqlite1.Name, sqlite1);
             var sqlite2 = new AppConf()
             {
                 CS = "Data Source=CiccioGestNhb.db;Version=3;Default IsolationLevel=ReadCommitted;BinaryGuid=False",
@@ -135,7 +126,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "sqlite2"
             };
-            appConfs.Available.Add(sqlite2.Name, sqlite2);
+            AppConfs.Available.Add(sqlite2.Name, sqlite2);
             var wcf1 = new AppConf()
             {
                 CS = "http://localhost:8000",
@@ -144,7 +135,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "wcf1"
             };
-            appConfs.Available.Add(wcf1.Name, wcf1);
+            AppConfs.Available.Add(wcf1.Name, wcf1);
             var wcf2 = new AppConf()
             {
                 CS = "http://localhost:8100",
@@ -153,7 +144,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "wcf2"
             };
-            appConfs.Available.Add(wcf2.Name, wcf2);
+            AppConfs.Available.Add(wcf2.Name, wcf2);
             var db4o = new AppConf()
             {
                 CS = "CiccioGest.db4o",
@@ -162,7 +153,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "db4o"
             };
-            appConfs.Available.Add(db4o.Name, db4o);
+            AppConfs.Available.Add(db4o.Name, db4o);
             var memory = new AppConf()
             {
                 CS = "",
@@ -171,7 +162,7 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "memory"
             };
-            appConfs.Available.Add(memory.Name, memory);
+            AppConfs.Available.Add(memory.Name, memory);
             var litedb = new AppConf()
             {
                 CS = "CiccioGest.db",
@@ -180,8 +171,9 @@ namespace CiccioGest.Infrastructure.Conf
                 UserInterface = UI.WPF,
                 Name = "litedb"
             };
-            appConfs.Available.Add(litedb.Name, litedb);
+            AppConfs.Available.Add(litedb.Name, litedb);
             SetCurrent(mysql);
+            Save();
         }
     }
 }

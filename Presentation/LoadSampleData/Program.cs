@@ -19,7 +19,7 @@ namespace CiccioGest.Presentation.LoadSampleData
             IWindsorContainer windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             var confmgr = new ConfigurationManager();
-            confmgr.ReadConfiguration();
+            //confmgr.ReadConfiguration();
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
                 Component.For<IAppConf>().Instance(conf),

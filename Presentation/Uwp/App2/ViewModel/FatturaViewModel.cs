@@ -39,7 +39,7 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
         public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
         {
             //mostra(new Fattura());
-            MostraFattura(await service.GetFattura(5));
+            MostraFattura(await service.GetFattura(4));
         }));
 
         private void MostraFattura(Fattura fattura)

@@ -2,7 +2,6 @@
 using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Globalization;
@@ -11,68 +10,43 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.Uwp.App1.ViewModel
 {
-    public class ShellViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ShellViewModel : ViewModelBase, IDisposable, ICazzo
     {
         private readonly ILogger logger;
         private readonly NavigationService navigationService;
-        private bool avviaFatturaView = false;
         private RelayCommand loadedCommand;
 
         public ShellViewModel(ILogger logger, NavigationService navigationService)
         {
             this.logger = logger;
             this.navigationService = navigationService;
-            MessengerInstance.Register<NotificationMessage<int>>(this, ns =>
-            {
-                if (avviaFatturaView)
-                {
-                    if (ns.Notification == "ApriFatturaSelezionata")
-                    {
-                        avviaFatturaView = false;
-                        MessengerInstance.Send(new NotificationMessage("ApriFatturaView"));
-                        MessengerInstance.Send(new NotificationMessage<int>(ns.Content, "ApriFatturaSelezionata"));
-                    }
-                }
-            });
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand NuovaFatturaCommand => new RelayCommand(NuovaFattura);
-        public ICommand ApriFattureCommand => new RelayCommand(ApriFatture);
-        public ICommand ApriProdottiCommand => new RelayCommand(ApriProdotti);
-        public ICommand ApriCategorieCommand => new RelayCommand(ApriCategorie);
+        public ICommand FattureCommand => new RelayCommand(ApriFattura);
+        public ICommand ArticoliCommand => new RelayCommand(ApriArticolo);
+        public ICommand CategorieCommand => new RelayCommand(ApriCategoria);
         public ICommand LoadedCommand => loadedCommand ??
-            (loadedCommand = new RelayCommand(() => navigationService.NavigateTo("MainPage")));
+            (loadedCommand = new RelayCommand(() => navigationService.NavigateTo("Main")));
 
         public void Initialization(Frame frame)
         {
             navigationService.CurrentFrame = frame;
         }
 
-        private void NuovaFattura()
+        private void ApriFattura()
         {
-            MessengerInstance.Send(new NotificationMessage("ApriFatturaView"));
-            //MessengerInstance.Send(new NotificationMessage<int>(0, "IdCliente"));
-            navigationService.NavigateTo("FatturaPage");
+            navigationService.NavigateTo("Fattura");
         }
 
-        private void ApriFatture()
+        private void ApriCategoria()
         {
-            //MessengerInstance.Send(new NotificationMessage("ApriFatturaView"));
-            //MessengerInstance.Send(new NotificationMessage<int>(0, "IdFattura"));
-            avviaFatturaView = true;
-            //MessengerInstance.Send(new NotificationMessage("ApriSelezionaFatturaView"));
-            navigationService.NavigateTo("ListaFatturePage");
+            navigationService.NavigateTo("Categoria");
         }
 
-        private void ApriCategorie()
+        private void ApriArticolo()
         {
-            MessengerInstance.Send(new NotificationMessage("ApriCategorie"));
-        }
-
-        private void ApriProdotti()
-        {
-            MessengerInstance.Send(new NotificationMessage("ApriProdotti"));
+            navigationService.NavigateTo("Articolo");
         }
 
         public void Dispose()

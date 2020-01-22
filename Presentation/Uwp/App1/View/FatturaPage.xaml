@@ -9,7 +9,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
-    DataContext="{Binding Fattura, Source={StaticResource Locator}}"
+    DataContext="{Binding Fatture, Source={StaticResource Locator}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <interactivity:Interaction.Behaviors>
@@ -47,7 +47,7 @@
             <AppBarButton
                 Icon="OpenFile"
                 Label="Apri"
-                Command="{Binding ApriFatturaCommand}"/>
+                Command="{Binding ApriCommand}"/>
             <AppBarSeparator/>
             <AppBarButton
                 Icon="Find"

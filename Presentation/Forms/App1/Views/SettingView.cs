@@ -9,64 +9,39 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     public partial class SettingView : Form
     {
         private readonly ILogger logger;
-        //private IUnitOfWorkFactory uowf;
-        private IAppConf conf;
-        //private IWindsorContainer windsor;
         private ConfigurationManager confmgr;
 
         public SettingView(ILogger logger)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            //this.uowf = uowf ?? throw new ArgumentNullException(nameof(uowf));
             InitializeComponent();
-            dataAccessComboBox1.DataSource = Enum.GetValues(typeof(Storage));
-            databaseComboBox1.DataSource = Enum.GetValues(typeof(Databases));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
+            databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
+            confmgr = new ConfigurationManager();
             CaricaConf();
-            //SetImpostazioni(conf);
         }
 
         private void CaricaConf()
         {
-            confmgr = new ConfigurationManager();
-            //confmgr.SampleConf();
-            //confmgr.WriteConfiguration();
-            confmgr.ReadConfiguration();
-            conf = confmgr.GetCurrent();
-            appConfBindingSource.DataSource = confmgr.GetCurrent();
-            appConfsBindingSource.DataSource = confmgr.GetAllConfs();            
-        }
-
-
-        //private void SetImpostazioni(IAppConf impoConf)
-        //{
-        //    databaseComboBox1.SelectedItem = impoConf.Database;
-        //    dataAccessComboBox1.SelectedItem = impoConf.DataAccess;
-        //    cSTextBox.Text = impoConf.CS;
-        //}
-
-        private void GetImpostazioni()
-        {
-            AppConf newConf = new AppConf();
-            newConf.Database = (Databases)databaseComboBox1.SelectedValue;
-            newConf.DataAccess = (Storage)dataAccessComboBox1.SelectedValue;
-            newConf.CS = cSTextBox.Text;
-            conf = newConf;
+            var asdf = confmgr.GetAll();
+            appConfsBindingSource.DataSource = asdf;
+            var assa = confmgr.GetCurrent();
+            appConfBindingSource.DataSource = assa;
         }
 
         private void LoadSampleButton_Click(object sender, EventArgs e)
         {
-
+            confmgr.LoadSample();
+            CaricaConf();
         }
 
         private void VerifyDbButton_Click(object sender, EventArgs e)
         {
             try
             {
-                GetImpostazioni();
                 //Bootstrap.Restart(conf);
                 //Bootstrap.Windsor.Install(new CiccioGest.Application.Installer());
                 //uowf = Bootstrap.Windsor.Resolve<IUnitOfWorkFactory>();
-
                 //uowf.VerifyDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
@@ -77,7 +52,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         }
 
         private void CreateDbButton_Click(object sender, EventArgs e)
-        {            
+        {
             try
             {
                 //uowf.CreateDataAccess();
@@ -89,67 +64,46 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             }
         }
 
-        private void WriteConfButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                confmgr.WriteConfiguration();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                throw;
-            }
-        }
-
-        private void StartButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LoadConfButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                CaricaConf();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void rimuoviButton_Click(object sender, EventArgs e)
+        private void RimuoviButton_Click(object sender, EventArgs e)
         {
             if (appConfsBindingSource.Current != null)
             {
                 AppConf cnf = (AppConf)appConfsBindingSource.Current;
                 confmgr.Remove(cnf);
                 appConfsBindingSource.DataSource = null;
-                appConfsBindingSource.DataSource = confmgr.GetAllConfs();
+                appConfsBindingSource.DataSource = confmgr.GetAll();
             }
         }
 
-        private void nuovaButton_Click(object sender, EventArgs e)
-        {
-            appConfBindingSource.DataSource = null;
-            appConfBindingSource.DataSource = new AppConf();
-        }
 
-        private void aggiungiButton_Click(object sender, EventArgs e)
+        private void AggiungiButton_Click(object sender, EventArgs e)
         {
-            if(appConfBindingSource.DataSource != null)
+            if (appConfBindingSource.DataSource != null)
             {
                 AppConf cnf = (AppConf)appConfsBindingSource.Current;
                 confmgr.Add(cnf);
                 appConfBindingSource.DataSource = null;
                 appConfBindingSource.DataSource = new AppConf();
                 appConfsBindingSource.DataSource = null;
-                appConfsBindingSource.DataSource = confmgr.GetAllConfs();
+                appConfsBindingSource.DataSource = confmgr.GetAll();
             }
         }
 
-        private void modificaButton_Click(object sender, EventArgs e)
+        private void SetDefaultButton_Click(object sender, EventArgs e)
+        {
+            if (appConfsBindingSource != null)
+            {
+                AppConf asdf = (AppConf)appConfsBindingSource.Current;
+                if (confmgr.GetAll().Contains(asdf))
+                {
+                    confmgr.SetCurrent(asdf);
+                }
+                else
+                    MessageBox.Show("Prima aggiungi la conf");
+            }
+        }
+
+        private void AppConfDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (appConfsBindingSource.Current != null)
             {
@@ -159,18 +113,16 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             }
         }
 
-        private void setDefaultButton_Click(object sender, EventArgs e)
+        private void NuovoButton_Click(object sender, EventArgs e)
         {
-            if(appConfBindingSource != null)
-            {
-                AppConf asdf = (AppConf)appConfBindingSource.Current;
-                if (confmgr.GetAllConfs().Contains(asdf))
-                {
-                    confmgr.SetCurrent(asdf);
-                }
-                else
-                    MessageBox.Show("Prima aggiungi la conf");
-            }
+            appConfBindingSource.DataSource = null;
+            appConfBindingSource.DataSource = new AppConf();
+        }
+
+        private void SalvaButton_Click(object sender, EventArgs e)
+        {
+            confmgr.Save();
+            CaricaConf();
         }
     }
 }
