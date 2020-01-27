@@ -20,7 +20,7 @@
 
         <Menu>
             <MenuItem Header="Documenti">
-                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
+                <MenuItem Header="Fatture" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
                 <!--<MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>-->
             </MenuItem>
             <MenuItem Header="Magazino">

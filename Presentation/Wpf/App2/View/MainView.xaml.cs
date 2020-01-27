@@ -4,9 +4,9 @@ using System.Windows;
 
 namespace CiccioGest.Presentation.Wpf.App2.View
 {
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
             RegistraMessaggi();
@@ -17,13 +17,9 @@ namespace CiccioGest.Presentation.Wpf.App2.View
         {
             Messenger.Default.Register<NotificationMessage>(this, ns =>
             {
-                if (ns.Notification == "ApriFatturaView")
+                if (ns.Notification == "ApriFatture")
                 {
                      new FatturaView().Show();
-                }
-                else if (ns.Notification == "ApriSelezionaFatturaView")
-                {
-                    new ListaFattureView().ShowDialog();
                 }
                 else if (ns.Notification == "ApriProdotti")
                 {

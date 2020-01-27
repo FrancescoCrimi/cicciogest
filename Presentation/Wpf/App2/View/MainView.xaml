@@ -1,4 +1,4 @@
-﻿<Window x:Class="CiccioGest.Presentation.Wpf.App2.View.MainWindow"
+﻿<Window x:Class="CiccioGest.Presentation.Wpf.App2.View.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -25,7 +25,6 @@
 
         <Menu x:Name="menu">
             <MenuItem Header="Documenti">
-                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
                 <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Magazino">

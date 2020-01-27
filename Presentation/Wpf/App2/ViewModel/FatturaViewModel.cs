@@ -72,12 +72,6 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                     else
                         MostraFattura(await service.GetFattura(ns.Content));
                 }
-
-                else if (ns.Notification == "ApriFatturaSelezionata")
-                {
-                    MostraFattura(await service.GetFattura(ns.Content));
-                }
-
                 else if (ns.Notification == "IdProdotto")
                 {
                     Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
