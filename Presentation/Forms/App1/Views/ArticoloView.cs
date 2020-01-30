@@ -10,15 +10,15 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     public partial class ArticoloView : Form, ICazzo
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService service;
+        private readonly IMagazinoService magazinoService;
 
         public ArticoloView(
             ILogger logger,
-            IMagazinoService service)
+            IMagazinoService magazinoService)
         {
             InitializeComponent();
             this.logger = logger;
-            this.service = service;
+            this.magazinoService = magazinoService;
         }
         private void View_Load(object sender, EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             {
                 try
                 {
-                    service.SaveArticolo(p);
+                    magazinoService.SaveArticolo(p);
                 }
                 catch (Exception ex)
                 {
@@ -56,7 +56,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             {
                 try
                 {
-                    service.DeleteArticolo(p.Id);
+                    magazinoService.DeleteArticolo(p.Id);
                 }
                 catch (Exception ex)
                 {
@@ -76,13 +76,13 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             if (articoliBindingSource.Current != null)
 
-                articoloBindingSource.DataSource = await service.GetArticolo(((ArticoloReadOnly)articoliBindingSource.Current).Id);
+                articoloBindingSource.DataSource = await magazinoService.GetArticolo(((ArticoloReadOnly)articoliBindingSource.Current).Id);
         }
 
         private async void VisualizzaProdotti()
         {
-            categorieBindingSource.DataSource = await service.GetCategorie();
-            articoliBindingSource.DataSource = await service.GetArticoli();
+            categorieBindingSource.DataSource = await magazinoService.GetCategorie();
+            articoliBindingSource.DataSource = await magazinoService.GetArticoli();
             articoloBindingSource.DataSource = new Articolo();
         }
     }

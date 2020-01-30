@@ -9,20 +9,21 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 {
     public partial class ListaArticoliView : Form, ICazzo
     {
-        public int IdProdotto { get; private set; }
-        private readonly IMagazinoService service;
         private readonly ILogger logger;
+        private readonly IMagazinoService magazinoService;
 
-        public ListaArticoliView(ILogger logger, IMagazinoService service)
+        public ListaArticoliView(ILogger logger, IMagazinoService magazinoService)
         {
             InitializeComponent();
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.service = service;
+            this.logger = logger;
+            this.magazinoService = magazinoService;
         }
+
+        public int IdProdotto { get; private set; }
 
         private async void View_Load(object sender, EventArgs e)
         {
-            articoliBindingSource.DataSource = await service.GetArticoli();
+            articoliBindingSource.DataSource = await magazinoService.GetArticoli();
         }
 
         private void ArticoliDataGridView_DoubleClick(object sender, EventArgs e)

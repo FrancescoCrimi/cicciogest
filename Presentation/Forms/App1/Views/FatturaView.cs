@@ -13,18 +13,18 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
-        private readonly IFatturaService service;
+        private readonly IFatturaService fatturaService;
         private readonly int idFattura;
 
-        public FatturaView(ILogger logger, IKernel kernel, IFatturaService service)
-            : this(logger, kernel, service, 0)
+        public FatturaView(ILogger logger, IKernel kernel, IFatturaService fatturaService)
+            : this(logger, kernel, fatturaService, 0)
         { }
 
-        public FatturaView(ILogger logger, IKernel kernel, IFatturaService service, int idFattura)
+        public FatturaView(ILogger logger, IKernel kernel, IFatturaService fatturaService, int idFattura)
         {
             this.logger = logger;
             this.kernel = kernel;
-            this.service = service;
+            this.fatturaService = fatturaService;
             this.idFattura = idFattura;
             InitializeComponent();
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
@@ -59,12 +59,12 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private void SalvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            service.SaveFattura((Fattura)fatturaBindingSource.DataSource);
+            fatturaService.SaveFattura((Fattura)fatturaBindingSource.DataSource);
         }
 
         private async void EliminaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await service.DeleteFattura(((Fattura)fatturaBindingSource.DataSource).Id);
+            await fatturaService.DeleteFattura(((Fattura)fatturaBindingSource.DataSource).Id);
         }
 
         private void EsciToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,7 +120,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             if (idFattura == 0)
                 fatturaBindingSource.DataSource = new Fattura();
             else
-                fatturaBindingSource.DataSource = await service.GetFattura(idFattura);
+                fatturaBindingSource.DataSource = await fatturaService.GetFattura(idFattura);
             dettaglioBindingSource.DataSource = new Dettaglio();
         }
 
@@ -131,7 +131,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             int idProdotto = spv.IdProdotto;
             kernel.ReleaseComponent(spv);
             if (idProdotto != 0)
-                ((Dettaglio)dettaglioBindingSource.Current).Articolo = await service.GetArticolo(idProdotto);
+                ((Dettaglio)dettaglioBindingSource.Current).Articolo = await fatturaService.GetArticolo(idProdotto);
         }
     }
 }

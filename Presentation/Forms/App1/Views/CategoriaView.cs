@@ -10,15 +10,15 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     public partial class CategoriaView : Form, ICazzo
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService service;
+        private readonly IMagazinoService magazinoService;
 
         public CategoriaView(
             ILogger logger,
-            IMagazinoService service)
+            IMagazinoService magazinoService)
         {
             InitializeComponent();
             this.logger = logger;
-            this.service = service;
+            this.magazinoService = magazinoService;
         }
 
         private void CategoriaView_Load(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             {
                 try
                 {
-                    service.SaveCategoria(tp);
+                    magazinoService.SaveCategoria(tp);
                     VisualizzaCategorie();
                 }
                 catch (Exception ex)
@@ -56,7 +56,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             {
                 try
                 {
-                    service.DeleteCategoria(tp.Id);
+                    magazinoService.DeleteCategoria(tp.Id);
                     VisualizzaCategorie();
                 }
                 catch (Exception ex)
@@ -80,7 +80,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private async void VisualizzaCategorie()
         {
-            categorieBindingSource.DataSource = await service.GetCategorie();
+            categorieBindingSource.DataSource = await magazinoService.GetCategorie();
             categorieDataGridView.ClearSelection();
             CategoriaBindingSource.DataSource = new Categoria();
         }

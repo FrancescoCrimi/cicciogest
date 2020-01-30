@@ -56,10 +56,10 @@
   <object class="GtkTextBuffer" id="textbuffer1">
     <property name="text" translatable="yes">Suca Forte</property>
   </object>
-  <object class="GtkWindow" id="MainWindow">
+  <object class="GtkWindow" id="FatturaView">
     <property name="can_focus">False</property>
     <property name="default_width">500</property>
-    <property name="default_height">300</property>
+    <property name="default_height">500</property>
     <child>
       <placeholder/>
     </child>

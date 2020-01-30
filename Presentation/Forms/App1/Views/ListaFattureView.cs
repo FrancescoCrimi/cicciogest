@@ -15,14 +15,14 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     {
         public int IdFattura { get; private set; }
         private readonly ILogger logger;
-        private readonly IFatturaService service;
+        private readonly IFatturaService fatturaService;
         private BackgroundWorker backgroundWorker1;
 
-        public ListaFattureView(ILogger logger, IFatturaService service)
+        public ListaFattureView(ILogger logger, IFatturaService fatturaService)
         {
             InitializeComponent();
             this.logger = logger;
-            this.service = service;
+            this.fatturaService = fatturaService;
             backgroundWorker1 = new BackgroundWorker();
             backgroundWorker1.DoWork += BackgroundWorker1_DoWork;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
@@ -36,7 +36,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var lst = service.GetFatture().Result;
+            var lst = fatturaService.GetFatture().Result;
             //Thread.Sleep(2000);
             e.Result = lst;
         }
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             return Task.Run( () =>
             {
-                fattureBindingSource.DataSource =  service.GetFatture().Result;
+                fattureBindingSource.DataSource =  fatturaService.GetFatture().Result;
                 fattureDataGridView.ClearSelection();
             });
         }

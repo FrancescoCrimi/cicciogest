@@ -235,9 +235,6 @@
     <None Include="NLog.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\DataSources\CiccioGest.Domain.Magazino.Articolo.datasource" />
-    <None Include="Properties\DataSources\CiccioGest.Domain.Magazino.ArticoloReadOnly.datasource" />
-    <None Include="Properties\DataSources\CiccioGest.Infrastructure.Conf.AppConf.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -249,24 +246,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
-      <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
-      <Name>Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj">
-      <Project>{87e08e73-2c4f-4f31-beab-55e08711144a}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
-      <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Client\Client.csproj">
-      <Project>{cd5e37c0-b58e-4bbe-8886-7b4fa0294516}</Project>
-      <Name>Client</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="BouncyCastle">
       <Version>1.8.5</Version>
     </PackageReference>
@@ -276,6 +255,9 @@
     <PackageReference Include="Castle.LoggingFacility">
       <Version>5.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Castle.Windsor">
+      <Version>5.0.1</Version>
+    </PackageReference>
     <PackageReference Include="CiccioSoft.NhbCollections">
       <Version>1.0.1</Version>
     </PackageReference>
@@ -283,7 +265,7 @@
       <Version>3.11.2</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data">
-      <Version>8.0.18</Version>
+      <Version>8.0.19</Version>
     </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.6.8</Version>
@@ -324,6 +306,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Apri.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
+      <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj">
+      <Project>{87e08e73-2c4f-4f31-beab-55e08711144a}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
+      <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Client\Client.csproj">
+      <Project>{cd5e37c0-b58e-4bbe-8886-7b4fa0294516}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
