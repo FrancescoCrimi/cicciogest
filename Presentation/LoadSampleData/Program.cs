@@ -1,4 +1,5 @@
-﻿using Castle.Facilities.Logging;
+﻿using System.Linq;
+using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
@@ -19,7 +20,10 @@ namespace CiccioGest.Presentation.LoadSampleData
             IWindsorContainer windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             var confmgr = new ConfigurationManager();
-            //confmgr.ReadConfiguration();
+            var colconf = confmgr.GetAll();
+            var mysql = colconf.First(c => c.Name == "mysql");
+            //confmgr.SetCurrent(mysql);
+            //confmgr.Save();
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
                 Component.For<IAppConf>().Instance(conf),

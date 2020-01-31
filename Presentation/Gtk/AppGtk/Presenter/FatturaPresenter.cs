@@ -25,11 +25,12 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
         public void ShowFattura()
         {
             Fattura fattura = fatturaService.GetFattura(4).Result;
-            fatturaView.Textbuffer1.Text = fattura.Nome;
-            fatturaView.DettagliListStore.Clear();
+            fatturaView.IdFattura.Text = fattura.Id.ToString();
+            fatturaView.NomeFattura.Text = fattura.Nome;
+            fatturaView.Dettagli.Clear();
             foreach (var item in fattura.Dettagli)
             {
-                fatturaView.DettagliListStore.AppendValues(item.Id, item.NomeProdotto, item.PrezzoProdotto, item.Quantita, item.Totale);
+                fatturaView.Dettagli.AppendValues(item.Id, item.NomeProdotto, item.PrezzoProdotto, item.Quantita, item.Totale);
             }
         }
 

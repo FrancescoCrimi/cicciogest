@@ -7,6 +7,7 @@ using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Gtk.AppGtk.Presenter;
 using CiccioGest.Presentation.Gtk.AppGtk.View;
 using System;
+using System.Linq;
 using ui = Gtk;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk
@@ -39,7 +40,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
             var confmgr = new ConfigurationManager();
 
             //var colconf = confmgr.GetAll();
-            //var mysql = colconf.First(c => c.Name == "mysql");
+            //var mysql = colconf.First(c => c.Name == "sqlite2");
             //confmgr.SetCurrent(mysql);
             //confmgr.Save();
 

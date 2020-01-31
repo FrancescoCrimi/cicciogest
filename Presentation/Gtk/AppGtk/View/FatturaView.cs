@@ -11,9 +11,6 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
 {
     class FatturaView : Window, ICazzo, IFatturaView
     {
-        [UI] private Label _label1 = null;
-
-
         private readonly ILogger logger;
         private readonly FatturaPresenter fatturaPresenter;
         private readonly Builder builder;
@@ -23,6 +20,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         {
             this.logger = logger;
             this.fatturaPresenter = fatturaPresenter;
+            
             fatturaPresenter.SetView(this);
             fatturaPresenter.ShowFattura();
         }
@@ -36,8 +34,13 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             this.builder = builder;
         }
 
-        public ListStore DettagliListStore => (ListStore)builder.GetObject("liststore1");
-        public TextBuffer Textbuffer1 => (TextBuffer)builder.GetObject("textbuffer1");
+        public ListStore Dettagli => (ListStore)builder.GetObject("dettagliListStore");
+        public EntryBuffer IdFattura => (EntryBuffer)builder.GetObject("idFatturaEntryBuffer");
+        public EntryBuffer NomeFattura => (EntryBuffer)builder.GetObject("nomeFatturaEntryBuffer");
+        public EntryBuffer NomeArticolo => (EntryBuffer)builder.GetObject("nomeArticoloEntryBuffer");
+        public EntryBuffer Quantita => (EntryBuffer)builder.GetObject("quantitaEntryBuffer");
+        public EntryBuffer Prezzo => (EntryBuffer)builder.GetObject("prezzoEntryBuffer");
+        public EntryBuffer Totale => (EntryBuffer)builder.GetObject("totaleEntryBuffer");
 
         private void MainWindow_Shown(object sender, EventArgs e)
         {

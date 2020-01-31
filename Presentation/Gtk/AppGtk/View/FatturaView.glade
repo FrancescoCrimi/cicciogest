@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkListStore" id="liststore1">
+  <object class="GtkListStore" id="dettagliListStore">
     <columns>
       <!-- column-name id -->
       <column type="guint"/>
@@ -53,8 +53,23 @@
       </row>
     </data>
   </object>
-  <object class="GtkTextBuffer" id="textbuffer1">
-    <property name="text" translatable="yes">Suca Forte</property>
+  <object class="GtkEntryBuffer" id="idFatturaEntryBuffer">
+    <property name="text" translatable="yes">1</property>
+  </object>
+  <object class="GtkEntryBuffer" id="nomeArticoloEntryBuffer">
+    <property name="text" translatable="yes">Articolo 1</property>
+  </object>
+  <object class="GtkEntryBuffer" id="nomeFatturaEntryBuffer">
+    <property name="text" translatable="yes">Nome</property>
+  </object>
+  <object class="GtkEntryBuffer" id="prezzoEntryBuffer">
+    <property name="text" translatable="yes">100</property>
+  </object>
+  <object class="GtkEntryBuffer" id="quantitaEntryBuffer">
+    <property name="text" translatable="yes">1</property>
+  </object>
+  <object class="GtkEntryBuffer" id="totaleEntryBuffer">
+    <property name="text" translatable="yes">350</property>
   </object>
   <object class="GtkWindow" id="FatturaView">
     <property name="can_focus">False</property>
@@ -230,7 +245,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkToolButton">
+              <object class="GtkToolButton" id="newToolButton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">__glade_unnamed_23</property>
@@ -243,7 +258,20 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton">
+              <object class="GtkToolButton" id="openToolButton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">__glade_unnamed_65</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-open</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="saveToolButton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">__glade_unnamed_24</property>
@@ -256,7 +284,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton">
+              <object class="GtkToolButton" id="deleteToolButton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">__glade_unnamed_25</property>
@@ -269,7 +297,30 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton">
+              <object class="GtkSeparatorToolItem">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="nuovoDettaglioToolButton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">__glade_unnamed_22</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-new</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="addDettaglioToolButton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">__glade_unnamed_26</property>
@@ -282,7 +333,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton">
+              <object class="GtkToolButton" id="removeDettaglioToolButton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">__glade_unnamed_27</property>
@@ -335,7 +386,7 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Id</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -346,7 +397,7 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Nome</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -354,10 +405,10 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTextView">
+                          <object class="GtkEntry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">textbuffer1</property>
+                            <property name="buffer">idFatturaEntryBuffer</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -365,10 +416,10 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTextView">
+                          <object class="GtkEntry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">textbuffer1</property>
+                            <property name="buffer">nomeFatturaEntryBuffer</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -418,7 +469,7 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Articolo</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -429,7 +480,7 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Prezzo</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -440,7 +491,7 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Quantità</property>
                           </object>
                           <packing>
                             <property name="left_attach">2</property>
@@ -451,7 +502,7 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label" translatable="yes">Totale</property>
                           </object>
                           <packing>
                             <property name="left_attach">2</property>
@@ -459,10 +510,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTextView">
+                          <object class="GtkEntry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">textbuffer1</property>
+                            <property name="buffer">nomeArticoloEntryBuffer</property>
+                            <property name="width_chars">12</property>
+                            <property name="input_purpose">number</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -470,21 +523,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTextView">
+                          <object class="GtkEntry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">textbuffer1</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkTextView">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="buffer">textbuffer1</property>
+                            <property name="buffer">quantitaEntryBuffer</property>
+                            <property name="width_chars">6</property>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -492,10 +535,23 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTextView">
+                          <object class="GtkEntry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="buffer">textbuffer1</property>
+                            <property name="buffer">prezzoEntryBuffer</property>
+                            <property name="width_chars">12</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkEntry">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="buffer">totaleEntryBuffer</property>
+                            <property name="width_chars">0</property>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -550,7 +606,7 @@
                       <object class="GtkTreeView">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="model">liststore1</property>
+                        <property name="model">dettagliListStore</property>
                         <property name="search_column">0</property>
                         <property name="enable_grid_lines">both</property>
                         <child internal-child="selection">
