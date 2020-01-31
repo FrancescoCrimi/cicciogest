@@ -19,6 +19,12 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
         public void SetView(IListaArticoliView listaArticoliView)
         {
             this.listaArticoliView = listaArticoliView;
+            var lstart = magazinoService.GetArticoli().Result;
+            listaArticoliView.ArticoliListStore.Clear();
+            foreach (var art in lstart)
+            {
+                listaArticoliView.ArticoliListStore.AppendValues(art.Id, art.Nome, art.Prezzo);
+            }
         }
 
         public void SelezionaArticolo()

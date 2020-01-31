@@ -1,19 +1,23 @@
 ﻿using Castle.Core.Logging;
+using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Gtk.AppGtk.Contracts;
+using CiccioGest.Presentation.Gtk.AppGtk.View;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
     public class FatturaPresenter
     {
         private readonly ILogger logger;
+        private readonly IKernel kernel;
         private readonly IFatturaService fatturaService;
         private IFatturaView fatturaView;
 
-        public FatturaPresenter(ILogger logger, IFatturaService fatturaService)
+        public FatturaPresenter(ILogger logger, IKernel kernel, IFatturaService fatturaService)
         {
             this.logger = logger;
+            this.kernel = kernel;
             this.fatturaService = fatturaService;
         }
 
@@ -36,11 +40,11 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 
         public void ApriListaFatture()
         {
-
+            var asd = kernel.Resolve<ListaFattureView>();
+            asd.Show();
         }
         public void NuovaFattura()
         {
-
         }
         public void EliminaFattura()
         {
@@ -52,7 +56,8 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
         }
         public void NuovoDattaglio()
         {
-
+            var qwed = kernel.Resolve<ListaArticoliView>();
+            qwed.Show();
         }
         public void AggiungiDettaglio()
         {

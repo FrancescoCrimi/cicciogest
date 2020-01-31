@@ -73,8 +73,8 @@
   </object>
   <object class="GtkWindow" id="FatturaView">
     <property name="can_focus">False</property>
-    <property name="default_width">500</property>
-    <property name="default_height">500</property>
+    <property name="default_width">640</property>
+    <property name="default_height">480</property>
     <child>
       <placeholder/>
     </child>

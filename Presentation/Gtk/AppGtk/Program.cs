@@ -26,7 +26,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
 
             Init();
 
-            var win = windsor.Resolve<FatturaView>();
+            var win = windsor.Resolve<MainView>();
             app.AddWindow(win);
 
             win.Show();
