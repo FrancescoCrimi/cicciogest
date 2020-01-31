@@ -5,16 +5,16 @@
   <object class="GtkListStore" id="fattureListStore">
     <columns>
       <!-- column-name id -->
-      <column type="guint"/>
+      <column type="gint"/>
       <!-- column-name nome -->
       <column type="gchararray"/>
       <!-- column-name totale -->
-      <column type="guint"/>
+      <column type="gint"/>
     </columns>
     <data>
       <row>
         <col id="0">1</col>
-        <col id="1" translatable="yes">asdfgh</col>
+        <col id="1" translatable="yes">asdfg</col>
         <col id="2">100</col>
       </row>
       <row>
@@ -37,7 +37,7 @@
         <property name="can_focus">True</property>
         <property name="shadow_type">in</property>
         <child>
-          <object class="GtkTreeView">
+          <object class="GtkTreeView" id="fattureTreeView">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="model">fattureListStore</property>

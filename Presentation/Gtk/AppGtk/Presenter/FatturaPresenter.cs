@@ -29,6 +29,10 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
         public void ShowFattura()
         {
             Fattura fattura = fatturaService.GetFattura(4).Result;
+            ShowFattura(fattura);
+        }
+        private void ShowFattura(Fattura fattura)
+        {
             fatturaView.IdFattura.Text = fattura.Id.ToString();
             fatturaView.NomeFattura.Text = fattura.Nome;
             fatturaView.Dettagli.Clear();
@@ -40,9 +44,22 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 
         public void ApriListaFatture()
         {
-            var asd = kernel.Resolve<ListaFattureView>();
-            asd.Show();
+            var lfp = kernel.Resolve<ListaFatturePresenter>();
+            lfp.Suca += LfpOnSuca;
+            lfp.ShowView();
         }
+
+        private void LfpOnSuca(object? sender, int e)
+        {
+            ListaFatturePresenter lfp = (ListaFatturePresenter) sender;
+            lfp.Suca -= LfpOnSuca;
+            if (e != 0)
+            {
+                var fat = fatturaService.GetFattura(e).Result;
+                ShowFattura(fat);
+            }
+        }
+
         public void NuovaFattura()
         {
         }
