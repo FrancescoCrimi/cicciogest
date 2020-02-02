@@ -1,31 +1,33 @@
-﻿using System;
-using Castle.Core.Logging;
+﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts;
-using CiccioGest.Presentation.Gtk.AppGtk.View;
-using Gtk;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
+using System;
+using System.Globalization;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class ListaFatturePresenter : ICazzo
+    public class ListaFatturePresenter : IListaFatturePresenter, ICazzo
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
-        private readonly ListaFattureView listaFattureView;
-        //private IListaFattureView ilistaFattureView;
+        private readonly IListaFattureView listaFattureView;
 
-        public ListaFatturePresenter(ILogger logger, IFatturaService fatturaService, ListaFattureView listaFattureView)
+        public ListaFatturePresenter(ILogger logger,
+                                     IFatturaService fatturaService,
+                                     IListaFattureView listaFattureView)
         {
             this.logger = logger;
             this.fatturaService = fatturaService;
             this.listaFattureView = listaFattureView;
-            listaFattureView.setPresenter(this);
+            listaFattureView.SetPresenter(this);
+            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
-        
-        public event EventHandler<int> Suca;
 
-        public void Load( )
+        public event EventHandler<int> EventoSelezione;
+
+        public void Load()
         {
             var lstfat = fatturaService.GetFatture().Result;
             listaFattureView.FattureListStore.Clear();
@@ -35,19 +37,10 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
             }
         }
 
-        public void Unload()
-        {
-            Suca?.Invoke(this, 0);
-        }
-        
-        public void SelezionaFattura(TreePath argsPath)
-        {
-            listaFattureView.FattureListStore.GetIter(out var iter, argsPath);
-            var IdFattura = (int) listaFattureView.FattureListStore.GetValue (iter, 0);
-            Suca?.Invoke(this, IdFattura);
-        }
+        public void SelezionaFattura(int idFattura) => EventoSelezione?.Invoke(this, idFattura);
 
         public void ShowView() => listaFattureView.Show();
-        // public ListaFattureView GetView() => listaFattureView;
+
+        public void Unload() => EventoSelezione?.Invoke(this, 0);
     }
 }

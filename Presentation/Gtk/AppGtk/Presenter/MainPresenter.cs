@@ -1,31 +1,33 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts;
-using CiccioGest.Presentation.Gtk.AppGtk.View;
+using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
+using Gtk;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class MainPresenter
+    public class MainPresenter : IMainPresenter, ICazzo
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
-        private IMainView mainView;
+        private readonly IMainView mainView;
 
-        public MainPresenter(ILogger logger, IKernel kernel)
+        public MainPresenter(ILogger logger,
+                             IKernel kernel,
+                             IMainView mainView)
         {
             this.logger = logger;
             this.kernel = kernel;
-        }
-
-        public void SetView(IMainView mainView)
-        {
             this.mainView = mainView;
+            mainView.SetPresenter(this);
+            logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
 
         public void ApriFatture()
         {
-            var asd = kernel.Resolve<FatturaView>();
-            asd.Show();
+            var asd = kernel.Resolve<IFatturaPresenter>();
+            asd.ShowView();
         }
 
         public void ApriArticoli()
@@ -37,5 +39,19 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
         {
 
         }
+
+        public void Load()
+        {
+        }
+
+        public void ShowView()
+        {
+        }
+
+        public void Unload()
+        {
+        }
+
+        public Window View() => (Window)mainView;
     }
 }

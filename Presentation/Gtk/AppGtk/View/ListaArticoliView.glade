@@ -5,11 +5,11 @@
   <object class="GtkListStore" id="articoliListStore">
     <columns>
       <!-- column-name id -->
-      <column type="guint"/>
+      <column type="gint"/>
       <!-- column-name nome -->
       <column type="gchararray"/>
       <!-- column-name prezzo -->
-      <column type="guint"/>
+      <column type="gint"/>
     </columns>
     <data>
       <row>

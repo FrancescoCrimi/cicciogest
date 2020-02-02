@@ -4,6 +4,8 @@ using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
 using CiccioGest.Presentation.Gtk.AppGtk.Presenter;
 using CiccioGest.Presentation.Gtk.AppGtk.View;
 using System;
@@ -26,7 +28,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
 
             Init();
 
-            var win = windsor.Resolve<MainView>();
+            var win = windsor.Resolve<IMainPresenter>().View();
             app.AddWindow(win);
 
             win.Show();
@@ -51,14 +53,14 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
 
             windsor.Register(
-                Component.For<FatturaPresenter>().LifestyleTransient(),
-                Component.For<ListaArticoliPresenter>().LifestyleTransient(),
-                Component.For<ListaFatturePresenter>().LifeStyle.Transient,
-                Component.For<MainPresenter>().LifestyleTransient(),
-                Component.For<FatturaView>().LifestyleTransient(),
-                Component.For<ListaArticoliView>().LifestyleTransient(),
-                Component.For<ListaFattureView>().LifestyleTransient(),
-                Component.For<MainView>().LifestyleTransient());
+                Component.For<IFatturaPresenter, FatturaPresenter>().ImplementedBy<FatturaPresenter>().LifestyleTransient(),
+                Component.For<IListaArticoliPresenter, ListaArticoliPresenter>().ImplementedBy<ListaArticoliPresenter>().LifestyleTransient(),
+                Component.For<IListaFatturePresenter, ListaFatturePresenter>().ImplementedBy<ListaFatturePresenter>().LifestyleTransient(),
+                Component.For<IMainPresenter, MainPresenter>().ImplementedBy<MainPresenter>().LifestyleTransient(),
+                Component.For<IFatturaView, FatturaView>().ImplementedBy<FatturaView>().LifestyleTransient(),
+                Component.For<IListaArticoliView, ListaArticoliView>().ImplementedBy<ListaArticoliView>().LifestyleTransient(),
+                Component.For<IListaFattureView, ListaFattureView>().ImplementedBy<ListaFattureView>().LifestyleTransient(),
+                Component.For<IMainView, MainView>().ImplementedBy<MainView>().LifestyleTransient());
         }
     }
 }

@@ -1,41 +1,43 @@
-﻿using System;
-using Castle.Core.Logging;
-using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts;
-using CiccioGest.Presentation.Gtk.AppGtk.Presenter;
+﻿using Castle.Core.Logging;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
 using Gtk;
+using System;
 using gtk = Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.View
 {
-    public class MainView : Window, ICazzo, IMainView
+    public class MainView : Window, IMainView
     {
-        private readonly Builder builder;
         private readonly ILogger logger;
-        private readonly MainPresenter mainPresenter;
+        private IMainPresenter mainPresenter;
 
         [UI] private MenuItem fattureMenuItem = null;
         [UI] private MenuItem articoliMenuItem = null;
         [UI] private MenuItem categorieMenuItem = null;
 
-        private MainView(Builder builder)
-            : base(builder.GetObject("MainView").Handle)
+        public MainView(ILogger logger)
+            : this(new Builder("MainView.glade"))
         {
-            builder.Autoconnect(this);
+            this.logger = logger;
+            Shown += (sender, e) => mainPresenter.Load();
             DeleteEvent += (o, args) => gtk.Application.Quit();
             fattureMenuItem.Activated += (sender, args) => mainPresenter.ApriFatture();
             articoliMenuItem.Activated += (sender, args) => mainPresenter.ApriArticoli();
             categorieMenuItem.Activated += (sender, args) => mainPresenter.ApriCategorie();
-            this.builder = builder;
+            logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
-        
-        public MainView(ILogger logger, MainPresenter mainPresenter)
-            : this(new Builder("MainView.glade"))
+
+        private MainView(Builder builder)
+            : base(builder.GetObject("MainView").Handle)
         {
-            this.logger = logger;
+            builder.Autoconnect(this);
+        }
+
+        public void SetPresenter(IMainPresenter mainPresenter)
+        {
             this.mainPresenter = mainPresenter;
-            mainPresenter.SetView(this);
         }
     }
 }

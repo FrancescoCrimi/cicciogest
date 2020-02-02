@@ -2,35 +2,78 @@
 using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts;
-using CiccioGest.Presentation.Gtk.AppGtk.View;
+using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class FatturaPresenter
+    public class FatturaPresenter : IFatturaPresenter, ICazzo
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
         private readonly IFatturaService fatturaService;
-        private IFatturaView fatturaView;
+        private readonly IFatturaView fatturaView;
 
-        public FatturaPresenter(ILogger logger, IKernel kernel, IFatturaService fatturaService)
+        public FatturaPresenter(ILogger logger,
+                                IKernel kernel,
+                                IFatturaService fatturaService,
+                                IFatturaView fatturaView)
         {
             this.logger = logger;
             this.kernel = kernel;
             this.fatturaService = fatturaService;
-        }
-
-        public void SetView(IFatturaView fatturaView)
-        {
             this.fatturaView = fatturaView;
+            fatturaView.SetPresenter(this);
+            logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
 
-        public void ShowFattura()
+        public void AggiungiDettaglio()
+        {
+        }
+
+        public void AprFattura()
+        {
+            var lfp = kernel.Resolve<ListaFatturePresenter>();
+            lfp.EventoSelezione += Lfp_EventoSelezione;
+            lfp.ShowView();
+        }
+
+        public void EliminaFattura()
+        {
+        }
+
+        public void NuovaFattura()
+        {
+        }
+
+        public void NuovoDattaglio()
+        {
+            var lap = kernel.Resolve<ListaArticoliPresenter>();
+            lap.EventoSelezione += Lap_EventoSelezione;
+            lap.ShowView();
+        }
+
+        public void RimuoviDettaglio()
+        {
+        }
+
+        public void SalvaFattura()
+        {
+        }
+
+        public void Load()
         {
             Fattura fattura = fatturaService.GetFattura(4).Result;
             ShowFattura(fattura);
         }
+
+        public void ShowView() => fatturaView.Show();
+
+        public void Unload()
+        {
+        }
+
         private void ShowFattura(Fattura fattura)
         {
             fatturaView.IdFattura.Text = fattura.Id.ToString();
@@ -42,17 +85,9 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
             }
         }
 
-        public void ApriListaFatture()
+        private void Lfp_EventoSelezione(object sender, int e)
         {
-            var lfp = kernel.Resolve<ListaFatturePresenter>();
-            lfp.Suca += LfpOnSuca;
-            lfp.ShowView();
-        }
-
-        private void LfpOnSuca(object? sender, int e)
-        {
-            ListaFatturePresenter lfp = (ListaFatturePresenter) sender;
-            lfp.Suca -= LfpOnSuca;
+            ((ListaFatturePresenter)sender).EventoSelezione -= Lfp_EventoSelezione;
             if (e != 0)
             {
                 var fat = fatturaService.GetFattura(e).Result;
@@ -60,29 +95,12 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
             }
         }
 
-        public void NuovaFattura()
+        private void Lap_EventoSelezione(object sender, int e)
         {
-        }
-        public void EliminaFattura()
-        {
-
-        }
-        public void SalvaFattura()
-        {
-
-        }
-        public void NuovoDattaglio()
-        {
-            var qwed = kernel.Resolve<ListaArticoliView>();
-            qwed.Show();
-        }
-        public void AggiungiDettaglio()
-        {
-
-        }
-        public void RimuoviDettaglio()
-        {
-
+            ((ListaArticoliPresenter)sender).EventoSelezione -= Lap_EventoSelezione;
+            if (e != 0)
+            {
+            }
         }
     }
 }

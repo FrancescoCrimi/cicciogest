@@ -1,48 +1,45 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts;
-using CiccioGest.Presentation.Gtk.AppGtk.Presenter;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
+using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
 using Gtk;
-using System;
-using CiccioGest.Infrastructure;
 using UI = Gtk.Builder.ObjectAttribute;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.View
 {
     public class ListaFattureView : Window, IListaFattureView
     {
-        private readonly Builder builder;
         private readonly ILogger logger;
-        private  ListaFatturePresenter listaFatturePresenter;
-        //[UI] private ListStore fattureListStore = null;
-        [UI] private TreeView fattureTreeView = null;
-
-        private ListaFattureView(Builder builder)
-            : base(builder.GetObject("ListaFattureView").Handle)
-        {
-            builder.Autoconnect(this);
-            this.builder = builder;
-        }
+        [UI] private readonly TreeView fattureTreeView = null;
+        [UI] private readonly ListStore fattureListStore = null;
+        private IListaFatturePresenter listaFatturePresenter;
 
         public ListaFattureView(ILogger logger)
             : this(new Builder("ListaFattureView.glade"))
         {
             this.logger = logger;
-            fattureTreeView.RowActivated += FattureTreeViewOnRowActivated;
+            Shown += (sender, args) => listaFatturePresenter.Load();
             DeleteEvent += (o, args) => listaFatturePresenter.Unload();
-            Shown += (sender, args) => listaFatturePresenter.Load();;
-        }
-        
-        public void setPresenter(ListaFatturePresenter listaFatturePresenter)
-        {
-            this.listaFatturePresenter = listaFatturePresenter;
-        }
-        
-        private void FattureTreeViewOnRowActivated(object o, RowActivatedArgs args)
-        {
-            listaFatturePresenter.SelezionaFattura(args.Path);
-            Close();
+            fattureTreeView.RowActivated += FattureTreeViewOnRowActivated;
+            logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
 
-        public ListStore FattureListStore => (ListStore)builder.GetObject("fattureListStore");
+        private ListaFattureView(Builder builder)
+            : base(builder.GetObject("ListaFattureView").Handle)
+        {
+            builder.Autoconnect(this);
+        }
+
+        public void SetPresenter(IListaFatturePresenter listaFatturePresenter) =>
+            this.listaFatturePresenter = listaFatturePresenter;
+
+        public ListStore FattureListStore => fattureListStore;
+
+        private void FattureTreeViewOnRowActivated(object o, RowActivatedArgs args)
+        {
+            fattureListStore.GetIter(out var iter, args.Path);
+            var IdFattura = (int)fattureListStore.GetValue(iter, 0);
+            listaFatturePresenter.SelezionaFattura(IdFattura);
+            Close();
+        }
     }
 }
