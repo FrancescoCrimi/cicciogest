@@ -167,7 +167,7 @@
             this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
             this.esciToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
             this.esciToolStripMenuItem.Text = "Esci";
-            this.esciToolStripMenuItem.Click += new System.EventHandler(this.EsciToolStripMenuItem_Click_1);
+            this.esciToolStripMenuItem.Click += new System.EventHandler(this.EsciToolStripMenuItem_Click);
             // 
             // MainView
             // 

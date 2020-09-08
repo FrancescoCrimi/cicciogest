@@ -62,7 +62,7 @@
             this.fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.fattureDataGridView.Size = new System.Drawing.Size(342, 313);
             this.fattureDataGridView.TabIndex = 6;
-            this.fattureDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.fattureDataGridView_CellDoubleClick);
+            this.fattureDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FattureDataGridView_CellDoubleClick);
             // 
             // idDataGridViewTextBoxColumn
             // 

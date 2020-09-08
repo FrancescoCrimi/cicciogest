@@ -3,6 +3,8 @@ using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using System;
+using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
@@ -19,10 +21,12 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             InitializeComponent();
             this.logger = logger;
             this.magazinoService = magazinoService;
+            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
-        private void View_Load(object sender, EventArgs e)
+
+        private async void View_Load(object sender, EventArgs e)
         {
-            VisualizzaProdotti();
+            await VisualizzaProdotti();
         }
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
@@ -30,25 +34,24 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             articoloBindingSource.DataSource = new Articolo();
         }
 
-        private void SalvaToolStripButton_Click(object sender, EventArgs e)
+        private async void SalvaToolStripButton_Click(object sender, EventArgs e)
         {
             articoloBindingSource.EndEdit();
-            Articolo p = articoloBindingSource.Current as Articolo;
-            if (p != null)
+            if (articoloBindingSource.Current is Articolo p)
             {
                 try
                 {
-                    magazinoService.SaveArticolo(p);
+                    await magazinoService.SaveArticolo(p);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                VisualizzaProdotti();
+                await VisualizzaProdotti();
             }
         }
 
-        private void CancellaToolStripButton_Click(object sender, EventArgs e)
+        private async void CancellaToolStripButton_Click(object sender, EventArgs e)
         {
             articoloBindingSource.EndEdit();
             Articolo p = articoloBindingSource.Current as Articolo;
@@ -56,13 +59,13 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             {
                 try
                 {
-                    magazinoService.DeleteArticolo(p.Id);
+                    await magazinoService.DeleteArticolo(p.Id);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                VisualizzaProdotti();
+                await VisualizzaProdotti();
             }
         }
 
@@ -79,7 +82,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
                 articoloBindingSource.DataSource = await magazinoService.GetArticolo(((ArticoloReadOnly)articoliBindingSource.Current).Id);
         }
 
-        private async void VisualizzaProdotti()
+        private async Task VisualizzaProdotti()
         {
             categorieBindingSource.DataSource = await magazinoService.GetCategorie();
             articoliBindingSource.DataSource = await magazinoService.GetArticoli();

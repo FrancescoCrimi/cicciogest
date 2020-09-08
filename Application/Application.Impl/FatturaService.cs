@@ -30,61 +30,55 @@ namespace CiccioGest.Application.Impl
             logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + uow.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
-        public Task DeleteFattura(int id)
+        public async Task DeleteFattura(int id)
         {
-            return Task.Run(async () =>
+            try
             {
-                try
-                {
-                    await fatturaRepository.Delete(id);
-                    uow.Commit();
-                }
-                catch (Exception)
-                {
-                    uow.Rollback();
-                    throw;
-                }
-            });
-        }
-
-        public Task<Fattura> GetFattura(int id)
-        {
-            return fatturaRepository.GetById(id);
-        }
-
-        public Task<IList<FatturaReadOnly>> GetFatture()
-        {
-            return fatturaRepository.GetAll();
-        }
-
-        public Task<Fattura> SaveFattura(Fattura fattura)
-        {
-            return Task.Run(async () =>
+                await fatturaRepository.Delete(id);
+                uow.Commit();
+            }
+            catch (Exception)
             {
-                try
-                {
-                    if (fattura.Id == 0)
-                    {
-                        await fatturaRepository.Save(fattura);
-                    }
-                    else
-                    {
-                        await fatturaRepository.Update(fattura);
-                    }
-                    uow.Commit();
-                }
-                catch (Exception ex)
-                {
-                    uow.Rollback();
-                    throw;
-                }
-                return fattura;
-            });
+                uow.Rollback();
+                throw;
+            }
         }
 
-        public Task<Articolo> GetArticolo(int id)
+        public async Task<Fattura> GetFattura(int id)
         {
-            return articoloRepository.GetById(id);
+            return await fatturaRepository.GetById(id);
+        }
+
+        public async Task<IList<FatturaReadOnly>> GetFatture()
+        {
+            return await fatturaRepository.GetAll();
+        }
+
+        public async Task<Fattura> SaveFattura(Fattura fattura)
+        {
+            try
+            {
+                if (fattura.Id == 0)
+                {
+                    await fatturaRepository.Save(fattura);
+                }
+                else
+                {
+                    await fatturaRepository.Update(fattura);
+                }
+                uow.Commit();
+            }
+            catch (Exception ex)
+            {
+                uow.Rollback();
+                throw;
+            }
+            return fattura;
+        }
+
+        public async Task<Articolo> GetArticolo(int id)
+        {
+            return await articoloRepository.GetById(id);
         }
 
         public Task<Cliente> GetCliente(int idCliente)

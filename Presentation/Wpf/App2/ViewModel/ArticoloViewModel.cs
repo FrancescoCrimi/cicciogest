@@ -4,7 +4,6 @@ using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-//using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -22,7 +21,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         private ICommand nuovoCommand;
         private ICommand salvaCommand;
         private ICommand eliminaCommand;
-        private ArticoloReadOnly prodottoSelezionato;
+        private ArticoloReadOnly articoloSelezionato;
 
         public ArticoloViewModel(ILogger logger, IMagazinoService service)
         {
@@ -43,72 +42,66 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                     Prodotti.Add(pr);
                 }
             }
-            else
-            {
-                RegistraMessaggi();
-            }
-            //Aggiorna();
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand NuovoCommand => nuovoCommand ?? (nuovoCommand = new RelayCommand(Nuovo));
-        public ICommand EliminaCommand => eliminaCommand ?? (eliminaCommand = new RelayCommand(async () => await Elimina()));
-        public ICommand SalvaCommand => salvaCommand ?? (salvaCommand = new RelayCommand(async () => await Salva()));
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(Nuovo);
+
+        public ICommand EliminaCommand => eliminaCommand ??= new RelayCommand(async () =>
+        {
+            try
+            {
+                await service.DeleteArticolo(Prodotto.Id);
+                await Aggiorna();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Errore: " + e.Message);
+            }
+        });
+
+        public ICommand SalvaCommand => salvaCommand ??= new RelayCommand(async () =>
+        {
+            try
+            {
+                await service.SaveArticolo(Prodotto);
+                await Aggiorna();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Errore: " + e.Message);
+            }
+        });
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
             foreach (Categoria cat in await service.GetCategorie())
             {
                 Categorie.Add(cat);
             }
             await Aggiorna();
-        }));
+        });
 
         public Articolo Prodotto { get; private set; }
+
         public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
+
         public ObservableCollection<Categoria> Categorie { get; private set; }
+
         public ArticoloReadOnly ProdottoSelezionato
         {
             set
             {
-                if (value != prodottoSelezionato)
+                if (value != articoloSelezionato)
                 {
                     Task.Run(async () =>
                     {
-                        prodottoSelezionato = value;
+                        articoloSelezionato = value;
                         Prodotto = await service.GetArticolo(value.Id);
                         RaisePropertyChanged(nameof(Prodotto));
                     });
                 }
             }
-        }
-
-
-        #region Metodi Privati
-
-        private void RegistraMessaggi()
-        {
-            //MessengerInstance.Register<CaricaProdotto>(this, cp =>
-            //{
-            //    switch (cp.What)
-            //    {
-
-            //        case LoadType.Nuova:
-            //            aggiorna();
-            //            break;
-
-            //        case LoadType.Cerca:
-            //            var spv = new SelezionaProdottoView();
-            //            spv.ShowDialog();
-            //            break;
-
-            //        case LoadType.Carica:
-            //            Prodotto = service.GetProdotto(cp.IdProdotto);
-            //            RaisePropertyChanged("Prodotto");
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //});
         }
 
         private async Task Aggiorna()
@@ -124,34 +117,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         private void Nuovo()
         {
             Prodotto = new Articolo();
-            //Prodotto = null;
             RaisePropertyChanged(nameof(Prodotto));
-        }
-
-        private async Task Elimina()
-        {
-            try
-            {
-                await service.DeleteArticolo(Prodotto.Id);
-                await Aggiorna();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Errore: " + e.Message);
-            }
-        }
-
-        private async Task Salva()
-        {
-            try
-            {
-                await service.SaveArticolo(Prodotto);
-                await Aggiorna();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Errore: " + e.Message);
-            }
         }
 
         public void Dispose()
@@ -159,8 +125,5 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             Cleanup();
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
-
-        #endregion
-
     }
 }

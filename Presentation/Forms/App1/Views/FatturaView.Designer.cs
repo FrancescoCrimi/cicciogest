@@ -47,7 +47,6 @@
             this.nuovoDettaglioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aggiungiDettaglioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rimuoviDettaglioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selProdottoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -215,8 +214,7 @@
             this.dettagliToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuovoDettaglioToolStripMenuItem,
             this.aggiungiDettaglioToolStripMenuItem,
-            this.rimuoviDettaglioToolStripMenuItem,
-            this.selProdottoToolStripMenuItem});
+            this.rimuoviDettaglioToolStripMenuItem});
             this.dettagliToolStripMenuItem.Name = "dettagliToolStripMenuItem";
             this.dettagliToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
             this.dettagliToolStripMenuItem.Text = "Dettagli";
@@ -242,13 +240,6 @@
             this.rimuoviDettaglioToolStripMenuItem.Text = "Rimuovi";
             this.rimuoviDettaglioToolStripMenuItem.Click += new System.EventHandler(this.RimuoviDettaglioToolStripMenuItem_Click);
             // 
-            // selProdottoToolStripMenuItem
-            // 
-            this.selProdottoToolStripMenuItem.Name = "selProdottoToolStripMenuItem";
-            this.selProdottoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.selProdottoToolStripMenuItem.Text = "Prodotto";
-            this.selProdottoToolStripMenuItem.Click += new System.EventHandler(this.SelProdottoToolStripMenuItem_Click);
-            // 
             // toolStripMenuItem
             // 
             this.toolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -261,7 +252,7 @@
             // 
             this.aboutToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.About;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -507,9 +498,8 @@
             this.nomeProdottoTextBox.ReadOnly = true;
             this.nomeProdottoTextBox.Size = new System.Drawing.Size(100, 22);
             this.nomeProdottoTextBox.TabIndex = 1;
-            this.nomeProdottoTextBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NomeProdottoTextBox_MouseDoubleClick);
             // 
-            // FatturaView
+            // FatturaView2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -517,7 +507,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "FatturaView";
+            this.Name = "FatturaView2";
             this.Text = "Fattura";
             this.Load += new System.EventHandler(this.FatturaView_Load);
             this.menuStrip.ResumeLayout(false);
@@ -573,7 +563,6 @@
         private System.Windows.Forms.ToolStripMenuItem nuovoDettaglioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aggiungiDettaglioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rimuoviDettaglioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem selProdottoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem apriToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeProdottoDataGridViewTextBoxColumn;

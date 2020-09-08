@@ -36,26 +36,25 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         }
 
         public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
+
         public ArticoloReadOnly ProdottoSelezionato { private get; set; }
 
-        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ?? (selezionaProdottoCommand = new RelayCommand<Window>(ApriProdotto));
-
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
-        {
-            foreach (ArticoloReadOnly pr in await service.GetArticoli())
-            {
-                Prodotti.Add(pr);
-            }
-        }));
-
-        private void ApriProdotto(Window wnd)
+        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ??= new RelayCommand<Window>((wnd) =>
         {
             if (ProdottoSelezionato != null)
             {
                 MessengerInstance.Send(new NotificationMessage<int>(ProdottoSelezionato.Id, "IdProdotto"));
                 wnd.Close();
             }
-        }
+        });
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        {
+            foreach (ArticoloReadOnly pr in await service.GetArticoli())
+            {
+                Prodotti.Add(pr);
+            }
+        });
 
         public void Dispose()
         {

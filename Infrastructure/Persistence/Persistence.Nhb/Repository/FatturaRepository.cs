@@ -14,19 +14,16 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
-        public Task<IList<FatturaReadOnly>> GetAll()
+        public async Task<IList<FatturaReadOnly>> GetAll()
         {
-            return Task.Run(() =>
-            {
                 IList<FatturaReadOnly> list = new List<FatturaReadOnly>();
                 //IList qr = da.ISession.CreateQuery("select fat.Id, fat.Nome, fat.Totale from Fattura fat").List();
-                IList<Fattura> fatture = unitOfWork.ISession.CreateCriteria<Fattura>().List<Fattura>();
+                IList<Fattura> fatture = await unitOfWork.ISession.CreateCriteria<Fattura>().ListAsync<Fattura>();
                 foreach (Fattura item in fatture)
                 {
                     list.Add(new FatturaReadOnly(item.Id, item.Nome, item.Totale));
                 }
                 return list;
-            });
         }
     }
 }

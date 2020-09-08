@@ -43,14 +43,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         public Categoria Categoria { get; private set; }
         public Categoria CategoriaSelezionata { set { Mostra(value); } }
 
-        public ICommand SalvaCommand => salvaCommand ?? (salvaCommand = new RelayCommand(async () => await Salva()));
-        public ICommand RimuoviCommand => rimuoviCommand ?? (rimuoviCommand = new RelayCommand(async () => await Rimuovi()));
-        public ICommand NuovoCommand => nuovoCommand ?? (nuovoCommand = new RelayCommand(Nuova));
-        public ICommand LoadedCommand => loadedCommand ??
-            (loadedCommand = new RelayCommand( async () => await Aggiorna()));
-
-
-        private async Task Salva()
+        public ICommand SalvaCommand => salvaCommand ??= new RelayCommand(async () =>
         {
             try
             {
@@ -61,9 +54,9 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             {
                 MessageBox.Show("Errore: " + e.Message);
             }
-        }
+        });
 
-        private async Task Rimuovi()
+        public ICommand RimuoviCommand => rimuoviCommand ??= new RelayCommand(async () =>
         {
             try
             {
@@ -74,7 +67,11 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             {
                 MessageBox.Show("Errore: " + e.Message);
             }
-        }
+        });
+
+        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(() => Mostra(new Categoria()));
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () => await Aggiorna());
 
         private void Mostra(Categoria categoria)
         {
@@ -85,21 +82,15 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             }
         }
 
-        private void Nuova()
-        {
-            Mostra(new Categoria());
-        }
-
         private async Task Aggiorna()
         {
-            Nuova();
+            Mostra(new Categoria());
             Categorie.Clear();
             foreach (Categoria ca in await service.GetCategorie())
             {
                 Categorie.Add(ca);
             }
         }
-
 
         public void Dispose()
         {

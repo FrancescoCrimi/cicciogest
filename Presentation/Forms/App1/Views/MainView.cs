@@ -3,6 +3,7 @@ using Castle.MicroKernel;
 using CiccioGest.Infrastructure;
 using System;
 using System.Globalization;
+using System.IdentityModel;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
@@ -22,25 +23,16 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private void NuovaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FatturaView fv = kernel.Resolve<FatturaView>();
-            fv.FormClosing += FormClose;
+            var fv = kernel.Resolve<FatturaView>();
+            fv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
             fv.Show();
         }
 
         private void CercaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sfv = kernel.Resolve<ListaFattureView>();
-            sfv.ShowDialog();
-            var IdFattura = sfv.IdFattura;
-            kernel.ReleaseComponent(sfv);
-            if (IdFattura != 0)
-            {
-                // FatturaView fv = Bootstrap.Windsor.Resolve<FatturaView>(new { idFattura = 0 });
-                // fix windsor 5.0
-                FatturaView fv = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", IdFattura));
-                fv.FormClosing += FormClose;
-                fv.Show();
-            }
+            sfv.Show();
+            sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
         }
 
         private void ClientiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,22 +45,17 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             MessageBox.Show("Non implementato");
         }
 
-        private void FormClose(object sender, FormClosingEventArgs e)
-        {
-            kernel.ReleaseComponent(sender);
-        }
-
         private void ArticoliToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ArticoloView pv = kernel.Resolve<ArticoloView>();
-            pv.FormClosing += FormClose;
+            pv.FormClosing += (sender2, e2) => kernel.ReleaseComponent(sender2);
             pv.Show();
         }
 
         private void CategorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CategoriaView cv = kernel.Resolve<CategoriaView>();
-            cv.FormClosing += FormClose;
+            cv.FormClosing += (sender2, e2) => kernel.ReleaseComponent(sender2);
             cv.Show();
         }
 
@@ -77,15 +64,12 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             _ = new AboutBox().ShowDialog();
         }
 
-        private void EsciToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void EsciToolStripMenuItem_Click(object sender, EventArgs e) =>  Close();
 
         private void OpzioniToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sett = kernel.Resolve<SettingView>();
-            sett.FormClosing += FormClose;
+            sett.FormClosing += (sender2, e2) => kernel.ReleaseComponent(sender2);
             sett.Show();
         }
     }

@@ -5,6 +5,7 @@ using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
 using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
@@ -30,26 +31,22 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        private void FatturaView_Load(object sender, EventArgs e)
+        private async void FatturaView_Load(object sender, EventArgs e)
         {
-            ApriFattura(idFattura);
+            await ApriFattura(idFattura);
         }
 
-        private void NuovaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void NuovaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ApriFattura(0);
+            await ApriFattura(0);
         }
 
         private void ApriToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sfv = kernel.Resolve<ListaFattureView>();
-            sfv.ShowDialog();
-            int IdFattura = sfv.IdFattura;
-            kernel.ReleaseComponent(sfv);
-            if (IdFattura != 0)
-            {
-                ApriFattura(IdFattura);
-            }
+            sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+            sfv.Show();
+            Close();
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,9 +54,9 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             new AboutBox().ShowDialog();
         }
 
-        private void SalvaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void SalvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fatturaService.SaveFattura((Fattura)fatturaBindingSource.DataSource);
+            await fatturaService.SaveFattura((Fattura)fatturaBindingSource.DataSource);
         }
 
         private async void EliminaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,15 +64,19 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             await fatturaService.DeleteFattura(((Fattura)fatturaBindingSource.DataSource).Id);
         }
 
-        private void EsciToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void EsciToolStripMenuItem_Click(object sender, EventArgs e) => Close();
 
         private async void NuovoDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dettaglioBindingSource.DataSource = new Dettaglio();
-            SelectProduct();
+            ListaArticoliView spv = kernel.Resolve<ListaArticoliView>();
+            spv.ShowDialog();
+            int idProdotto = spv.IdProdotto;
+            kernel.ReleaseComponent(spv);
+            if (idProdotto != 0)
+            {
+                var articolo = await fatturaService.GetArticolo(idProdotto);
+                dettaglioBindingSource.DataSource = new Dettaglio { Articolo = articolo, Quantita = 1 };
+            }
         }
 
         private void AggiungiDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,22 +87,17 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             {
                 fattura.AddDettaglio(dettaglio);
             }
-            dettaglioBindingSource.DataSource = new Dettaglio(null, 1);
+            dettaglioBindingSource.DataSource = new Dettaglio(null, 0);
         }
 
         private void RimuoviDettaglioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
             Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
-            if (dettaglio.Id != 0)
-                fattura.RemoveDettaglio(dettaglio);
-            dettaglioBindingSource.DataSource = new Dettaglio(null, 1);
+            fattura.RemoveDettaglio(dettaglio);
+            dettaglioBindingSource.DataSource = new Dettaglio(null, 0);
         }
 
-        private void SelProdottoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SelectProduct();
-        }
 
         private void DettagliDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -109,13 +105,8 @@ namespace CiccioGest.Presentation.Forms.App1.Views
                 dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
         }
 
-        private void NomeProdottoTextBox_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            SelectProduct();
-        }
 
-
-        private async void ApriFattura(int idFattura)
+        private async Task ApriFattura(int idFattura)
         {
             if (idFattura == 0)
                 fatturaBindingSource.DataSource = new Fattura();
@@ -124,14 +115,6 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             dettaglioBindingSource.DataSource = new Dettaglio();
         }
 
-        private async void SelectProduct()
-        {
-            ListaArticoliView spv = kernel.Resolve<ListaArticoliView>();
-            spv.ShowDialog();
-            int idProdotto = spv.IdProdotto;
-            kernel.ReleaseComponent(spv);
-            if (idProdotto != 0)
-                ((Dettaglio)dettaglioBindingSource.Current).Articolo = await fatturaService.GetArticolo(idProdotto);
-        }
+
     }
 }

@@ -3,6 +3,7 @@ using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
@@ -17,6 +18,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             InitializeComponent();
             this.logger = logger;
             this.magazinoService = magazinoService;
+            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public int IdProdotto { get; private set; }

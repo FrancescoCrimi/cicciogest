@@ -3,6 +3,7 @@ using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
@@ -21,9 +22,9 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             this.magazinoService = magazinoService;
         }
 
-        private void CategoriaView_Load(object sender, EventArgs e)
+        private async void CategoriaView_Load(object sender, EventArgs e)
         {
-            VisualizzaCategorie();
+            await VisualizzaCategorie();
         }
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
@@ -32,15 +33,15 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             CategoriaBindingSource.DataSource = new Categoria();
         }
 
-        private void SalvaToolStripButton_Click(object sender, EventArgs e)
+        private async void SalvaToolStripButton_Click(object sender, EventArgs e)
         {
             CategoriaBindingSource.EndEdit();
             if (CategoriaBindingSource.Current is Categoria tp)
             {
                 try
                 {
-                    magazinoService.SaveCategoria(tp);
-                    VisualizzaCategorie();
+                    await magazinoService.SaveCategoria(tp);
+                    await VisualizzaCategorie();
                 }
                 catch (Exception ex)
                 {
@@ -49,15 +50,15 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             }
         }
 
-        private void CancellaToolStripButton_Click(object sender, EventArgs e)
+        private async void CancellaToolStripButton_Click(object sender, EventArgs e)
         {
             CategoriaBindingSource.EndEdit();
             if (CategoriaBindingSource.Current is Categoria tp)
             {
                 try
                 {
-                    magazinoService.DeleteCategoria(tp.Id);
-                    VisualizzaCategorie();
+                    await magazinoService.DeleteCategoria(tp.Id);
+                    await VisualizzaCategorie();
                 }
                 catch (Exception ex)
                 {
@@ -78,7 +79,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
                 CategoriaBindingSource.DataSource = categorieBindingSource.Current;
         }
 
-        private async void VisualizzaCategorie()
+        private async Task VisualizzaCategorie()
         {
             categorieBindingSource.DataSource = await magazinoService.GetCategorie();
             categorieDataGridView.ClearSelection();

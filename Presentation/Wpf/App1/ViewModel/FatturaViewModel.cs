@@ -55,23 +55,15 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??
-            (nuovaFatturaCommand = new RelayCommand(() => MostraFattura(new Fattura())));
-        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??
-            (salvaFatturaCommand = new RelayCommand(SalvaFattura));
-        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??
-            (rimuoviFatturaCommand = new RelayCommand(RimuoviFattura));
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??
-            (apriFatturaCommand = new RelayCommand(() => navigationService.NavigateTo("ListaFatture")));
-        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??
-            (nuovoDettaglioCommand = new RelayCommand(() => navigationService.NavigateTo("ListaArticoli")));
-        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??
-            (aggiungiDettaglioCommand = new RelayCommand(AggiungiDettagglio));
-        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??
-            (rimuoviDettaglioCommand = new RelayCommand(RimuoviDettaglio));
-        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??
-            (selezionaDettaglioCommand = new RelayCommand(SelezionaDettaglio));
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() => MostraFattura(new Fattura()));
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(SalvaFattura);
+        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new RelayCommand(RimuoviFattura);
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() => navigationService.NavigateTo("ListaFatture"));
+        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() => navigationService.NavigateTo("ListaArticoli"));
+        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(AggiungiDettagglio);
+        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(RimuoviDettaglio);
+        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??= new RelayCommand(SelezionaDettaglio);
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         private void RegistraMessaggi()
         {

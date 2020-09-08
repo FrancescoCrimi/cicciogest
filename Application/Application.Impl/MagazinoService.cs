@@ -30,31 +30,28 @@ namespace CiccioGest.Application.Impl
         }
 
 
-        public Task DeleteArticolo(int id)
+        public async Task DeleteArticolo(int id)
         {
-            return Task.Run(() =>
+            try
             {
-                try
-                {
-                    prodottoRepository.Delete(id);
-                    da.Commit();
-                }
-                catch (Exception)
-                {
-                    da.Rollback();
-                    throw;
-                }
-            });
+                await prodottoRepository.Delete(id);
+                da.Commit();
+            }
+            catch (Exception)
+            {
+                da.Rollback();
+                throw;
+            }
         }
 
-        public Task<IList<ArticoloReadOnly>> GetArticoli()
+        public async Task<IList<ArticoloReadOnly>> GetArticoli()
         {
-            return prodottoRepository.GetAll();
+            return await prodottoRepository.GetAll();
         }
 
-        public Task<Articolo> GetArticolo(int id)
+        public async Task<Articolo> GetArticolo(int id)
         {
-            return prodottoRepository.GetById(id);
+            return await prodottoRepository.GetById(id);
         }
 
         public async Task<Articolo> SaveArticolo(Articolo prodotto)
@@ -79,14 +76,14 @@ namespace CiccioGest.Application.Impl
             return prodotto;
         }
 
-        public Task<Categoria> GetCategoria(int id)
+        public async Task<Categoria> GetCategoria(int id)
         {
-            return categoriaRepository.GetById(id);
+            return await categoriaRepository.GetById(id);
         }
 
-        public Task<IList<Categoria>> GetCategorie()
+        public async Task<IList<Categoria>> GetCategorie()
         {
-            return categoriaRepository.GetAll();
+            return await categoriaRepository.GetAll();
         }
 
         public async Task<Categoria> SaveCategoria(Categoria categoria)

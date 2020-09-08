@@ -23,25 +23,16 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand ApriFattureCommand => apriFattureCommand ?? (apriFattureCommand = new RelayCommand(NuovaFattura));
-        public ICommand ApriProdottiCommand => apriProdottiCommand ?? (apriProdottiCommand = new RelayCommand(ApriProdotti));
-        public ICommand ApriCategorieCommand => apriCategorieCommand ?? (apriCategorieCommand = new RelayCommand(ApriCategorie));
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+        public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(() =>
+            MessengerInstance.Send(new NotificationMessage("ApriFatture")));
 
-        private void NuovaFattura()
-        {
-            MessengerInstance.Send(new NotificationMessage("ApriFatture"));
-        }
+        public ICommand ApriProdottiCommand => apriProdottiCommand ??= new RelayCommand(() =>        
+            MessengerInstance.Send(new NotificationMessage("ApriProdotti")));
+        
+        public ICommand ApriCategorieCommand => apriCategorieCommand ??= new RelayCommand(() =>
+            MessengerInstance.Send(new NotificationMessage("ApriCategorie")));
 
-        private void ApriCategorie()
-        {
-            MessengerInstance.Send(new NotificationMessage("ApriCategorie"));
-        }
-
-        private void ApriProdotti()
-        {
-            MessengerInstance.Send(new NotificationMessage("ApriProdotti"));
-        }
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         public void Dispose()
         {

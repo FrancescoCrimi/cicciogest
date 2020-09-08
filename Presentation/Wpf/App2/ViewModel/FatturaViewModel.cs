@@ -49,22 +49,22 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??(nuovaFatturaCommand = new RelayCommand(() => MostraFattura(new Fattura())));
-        public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new RelayCommand(SalvaFattura));
-        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ?? (rimuoviFatturaCommand = new RelayCommand(RimuoviFattura));
-        public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
-                MessengerInstance.Send(new NotificationMessage("SelezionaFattura"))));
-        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
-                MessengerInstance.Send(new NotificationMessage("SelezionaProdotto"))));
-        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(AggiungiDettagglio));
-        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ?? (rimuoviDettaglioCommand = new RelayCommand(RimuoviDettaglio));
-        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ?? (selezionaDettaglioCommand = new RelayCommand(SelezionaDettaglio));
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() => MostraFattura(new Fattura()));
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () => await SalvaFattura());
+        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new RelayCommand(async () => await RimuoviFattura());
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
+                MessengerInstance.Send(new NotificationMessage("SelezionaFattura")));
+        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
+                MessengerInstance.Send(new NotificationMessage("SelezionaProdotto")));
+        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(AggiungiDettagglio);
+        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(RimuoviDettaglio);
+        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??= new RelayCommand(SelezionaDettaglio);
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         private void RegistraMessaggi()
         {
             MessengerInstance.Register<NotificationMessage<int>>(this, async ns =>
-            {                
+            {
                 if (ns.Notification == "IdFattura")
                 {
                     if (ns.Content == 0)
@@ -93,12 +93,11 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             RaisePropertyChanged(nameof(Dettaglio));
         }
 
-        private void SalvaFattura()
+        private async Task SalvaFattura()
         {
             try
             {
-                service.SaveFattura(Fattura);
-                //window.Close();
+                await service.SaveFattura(Fattura);
             }
             catch (Exception e)
             {
@@ -106,12 +105,11 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             }
         }
 
-        private void RimuoviFattura()
+        private async Task RimuoviFattura()
         {
             try
             {
-                service.DeleteFattura(Fattura.Id);
-                //window.Close();
+                await service.DeleteFattura(Fattura.Id);
             }
             catch (Exception e)
             {

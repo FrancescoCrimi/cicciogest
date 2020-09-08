@@ -14,18 +14,15 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
-        public Task<IList<ArticoloReadOnly>> GetAll()
+        public async Task<IList<ArticoloReadOnly>> GetAll()
         {
-            return Task.Run(() =>
+            IList<ArticoloReadOnly> list = new List<ArticoloReadOnly>();
+            IList<Articolo> prodotti = await unitOfWork.ISession.CreateCriteria<Articolo>().ListAsync<Articolo>();
+            foreach (Articolo item in prodotti)
             {
-                IList<ArticoloReadOnly> list = new List<ArticoloReadOnly>();
-                IList<Articolo> prodotti = unitOfWork.ISession.CreateCriteria<Articolo>().List<Articolo>();
-                foreach (Articolo item in prodotti)
-                {
-                    list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.NomeCategoria));
-                }
-                return list;
-            });
+                list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.NomeCategoria));
+            }
+            return list;
         }
     }
 }
