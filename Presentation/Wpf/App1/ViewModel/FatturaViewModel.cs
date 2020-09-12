@@ -56,14 +56,61 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public Dettaglio DettaglioSelezionato { private get; set; }
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() => MostraFattura(new Fattura()));
-        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(SalvaFattura);
-        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new RelayCommand(RimuoviFattura);
+
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
+        {
+            try
+            {
+                await fatturaService.SaveFattura(Fattura);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Errore: " + e.Message);
+            }
+        });
+
+        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new RelayCommand(async () =>
+        {
+            try
+            {
+                await fatturaService.DeleteFattura(Fattura.Id);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Errore: " + e.Message);
+            }
+        });
+
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() => navigationService.NavigateTo("ListaFatture"));
+
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() => navigationService.NavigateTo("ListaArticoli"));
-        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(AggiungiDettagglio);
-        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(RimuoviDettaglio);
-        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??= new RelayCommand(SelezionaDettaglio);
+
+        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
+        {
+            if (Dettaglio.Quantita != 0)
+            {
+                Fattura.AddDettaglio(Dettaglio);
+                RaisePropertyChanged(nameof(Fattura));
+                NuovoDettaglio();
+            }
+        });
+
+        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(() =>
+        {
+            Fattura.RemoveDettaglio(Dettaglio);
+            RaisePropertyChanged(nameof(Fattura));
+            NuovoDettaglio();
+        });
+
+        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??= new RelayCommand(() =>
+        {
+            if (DettaglioSelezionato != null)
+                Dettaglio = DettaglioSelezionato;
+            RaisePropertyChanged(nameof(Dettaglio));
+        });
+
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
+
 
         private void RegistraMessaggi()
         {
@@ -93,54 +140,6 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         private void NuovoDettaglio()
         {
             Dettaglio = new Dettaglio(null, 1);
-            RaisePropertyChanged(nameof(Dettaglio));
-        }
-
-        private void SalvaFattura()
-        {
-            try
-            {
-                fatturaService.SaveFattura(Fattura);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Errore: " + e.Message);
-            }
-        }
-
-        private void RimuoviFattura()
-        {
-            try
-            {
-                fatturaService.DeleteFattura(Fattura.Id);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Errore: " + e.Message);
-            }
-        }
-
-        private void AggiungiDettagglio()
-        {
-            if (Dettaglio.Quantita != 0)
-            {
-                Fattura.AddDettaglio(Dettaglio);
-                RaisePropertyChanged(nameof(Fattura));
-                NuovoDettaglio();
-            }
-        }
-
-        private void RimuoviDettaglio()
-        {
-            Fattura.RemoveDettaglio(Dettaglio);
-            RaisePropertyChanged(nameof(Fattura));
-            NuovoDettaglio();
-        }
-
-        private void SelezionaDettaglio()
-        {
-            if (DettaglioSelezionato != null)
-                Dettaglio = DettaglioSelezionato;
             RaisePropertyChanged(nameof(Dettaglio));
         }
 

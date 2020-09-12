@@ -1,4 +1,5 @@
-﻿using CiccioGest.Domain.Documenti;
+﻿using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,6 +9,8 @@ namespace CiccioGest.Application.FakeImpl
     public static class FakeSampleData
     {
         public static readonly IList<Categoria> Categorie = new List<Categoria>();
+        public static readonly IList<Cliente> Clienti = new List<Cliente>();
+        public static readonly IList<Fornitore> Fornitori = new List<Fornitore>();
         public static readonly IList<Articolo> Articoli = new List<Articolo>();
         public static readonly IList<ArticoloReadOnly> ArticoliRO = new List<ArticoloReadOnly>();
         public static readonly IList<Fattura> Fatture = new List<Fattura>();
@@ -16,6 +19,8 @@ namespace CiccioGest.Application.FakeImpl
         static FakeSampleData()
         {
             CreaCategorie();
+            CreaClienti();
+            CreaFornitori();
             CreaArticoli();
             CreaFatture();
         }
@@ -26,6 +31,36 @@ namespace CiccioGest.Application.FakeImpl
             {
                 Categoria cat = new Categoria(c, "Categoria " + c.ToString(CultureInfo.InvariantCulture));
                 Categorie.Add(cat);
+            }
+        }
+
+        private static void CreaClienti()
+        {
+            for (int i = 0; i < 11; i++)
+            {
+                var cli = new Cliente
+                {
+                    Cognome = "Cognome " + i.ToString(),
+                    Nome = "Nome " + i.ToString(),
+                    Email = "cliente" + i.ToString() + "@pippo.com",
+                    Telefono = "123456789" + i.ToString()
+                };
+                Clienti.Add(cli);
+            }
+        }
+
+        private static void CreaFornitori()
+        {
+            for (int i = 0; i < 11; i++)
+            {
+                var forn = new Fornitore
+                {
+                    Cognome = "Cognome " + i.ToString(),
+                    Nome = "Nome " + i.ToString(),
+                    Email = "cliente" + i.ToString() + "@pippo.com",
+                    Telefono = "123456789" + i.ToString()
+                };
+                Fornitori.Add(forn);
             }
         }
 
@@ -45,7 +80,7 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int i = 1; i < 6; i++)
             {
-                Fattura fatt = new Fattura(i, "Fattura " + i.ToString(CultureInfo.InvariantCulture));
+                Fattura fatt = new Fattura(i, Clienti[i]);
                 for (int o = 1; o < (i + 1); o++)
                 {
                     Dettaglio dett = new Dettaglio(Articoli[o - 1], o);

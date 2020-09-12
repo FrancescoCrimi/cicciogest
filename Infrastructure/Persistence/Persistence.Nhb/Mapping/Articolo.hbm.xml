@@ -4,19 +4,13 @@
   namespace="CiccioGest.Domain.Magazino"
   xmlns="urn:nhibernate-mapping-2.2">
 
-  <class name="Articolo" table="Articoli">
-
-    <id name="Id" generator="native" unsaved-value="0"/>
-    <property name="Nome" not-null="true"/>
-    <property name="Prezzo" not-null="true"/>
-    <property name="NomeCategoria" not-null="true"/>
-    <many-to-one
-      name="Categoria"
-      column="IdCategoria"
-      foreign-key="FkProdottiCategoriaId"
-      access="field.camelcase"
-      not-null="true"/>
-
-  </class>
+	<class name="Articolo" table="Articoli">
+		<id name="Id" generator="native" unsaved-value="0"/>
+		<property name="Nome" not-null="true"/>
+		<property name="Prezzo" not-null="true"/>
+		<property name="NomeCategoria" not-null="true"/>
+		<many-to-one name="Fornitore" column="IdFornitore" foreign-key="FkArticoliFornitoreId" not-null="true"/>
+		<many-to-one name="Categoria" column="IdCategoria" foreign-key="FkArticoliCategoriaId" access="field.camelcase" not-null="true"/>
+	</class>
 
 </hibernate-mapping>

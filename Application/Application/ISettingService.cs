@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
@@ -9,6 +10,6 @@ namespace CiccioGest.Application
         void SaveConf();
         void CreateDataAccess();
         void VerifyDataAccess();
-        void LoadSampleData();
+        Task LoadSampleData();
     }
 }

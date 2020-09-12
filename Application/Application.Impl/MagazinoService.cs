@@ -12,20 +12,23 @@ namespace CiccioGest.Application.Impl
     internal class MagazinoService : IMagazinoService
     {
         private readonly ILogger logger;
-        private readonly IUnitOfWork da;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IArticoloRepository prodottoRepository;
         private readonly ICategoriaRepository categoriaRepository;
+        private readonly IFornitoreRepository fornitoreRepository;
 
         public MagazinoService(
             ILogger logger,
-            IUnitOfWork da,
+            IUnitOfWork unitOfWork,
             IArticoloRepository prodottoRepository,
-            ICategoriaRepository categoriaRepository)
+            ICategoriaRepository categoriaRepository,
+            IFornitoreRepository fornitoreRepository)
         {
             this.logger = logger;
-            this.da = da;
+            this.unitOfWork = unitOfWork;
             this.prodottoRepository = prodottoRepository;
             this.categoriaRepository = categoriaRepository;
+            this.fornitoreRepository = fornitoreRepository;
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -35,12 +38,12 @@ namespace CiccioGest.Application.Impl
             try
             {
                 await prodottoRepository.Delete(id);
-                da.Commit();
+                unitOfWork.Commit();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                da.Rollback();
-                throw;
+                unitOfWork.Rollback();
+                throw ex;
             }
         }
 
@@ -59,21 +62,17 @@ namespace CiccioGest.Application.Impl
             try
             {
                 if (prodotto.Id == 0)
-                {
                     await prodottoRepository.Save(prodotto);
-                }
                 else
-                {
                     await prodottoRepository.Update(prodotto);
-                }
-                da.Commit();
+                unitOfWork.Commit();
+                return prodotto;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                da.Rollback();
-                throw;
+                unitOfWork.Rollback();
+                throw ex;
             }
-            return prodotto;
         }
 
         public async Task<Categoria> GetCategoria(int id)
@@ -91,31 +90,36 @@ namespace CiccioGest.Application.Impl
             try
             {
                 if (categoria.Id == 0)
-                {
                     await categoriaRepository.Save(categoria);
-                }
                 else
-                {
                     await categoriaRepository.Update(categoria);
-                }
-                da.Commit();
+                unitOfWork.Commit();
+                return categoria;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                da.Rollback();
-                throw;
+                unitOfWork.Rollback();
+                throw ex;
             }
-            return categoria;
         }
 
-        public Task DeleteCategoria(int id)
+        public async Task DeleteCategoria(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await categoriaRepository.Delete(id);
+                unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.Rollback();
+                throw ex;
+            }
         }
 
-        public Task<Fornitore> GetFornitore(int id)
+        public async Task<Fornitore> GetFornitore(int id)
         {
-            throw new NotImplementedException();
+            return await fornitoreRepository.GetById(id);
         }
 
         public void Dispose()

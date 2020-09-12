@@ -1,3 +1,4 @@
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Common;
 using System;
 using System.Runtime.Serialization;
@@ -12,6 +13,7 @@ namespace CiccioGest.Domain.Magazino
         private string nome;
         private int prezzo;
         private Categoria categoria;
+        private Fornitore fornitore;
 
         public Articolo() { }
         public Articolo(string nome, int prezzo)
@@ -70,6 +72,13 @@ namespace CiccioGest.Domain.Magazino
 
         [DataMember]
         public virtual string NomeCategoria { get; protected set; }
+
+        [DataMember]
+        public virtual Fornitore Fornitore
+        {
+            get => fornitore;
+            set => fornitore = value;
+        }
 
         public override bool Equals(object obj)
         {

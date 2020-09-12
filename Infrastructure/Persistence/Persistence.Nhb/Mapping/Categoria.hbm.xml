@@ -3,11 +3,9 @@
                    namespace="CiccioGest.Domain.Magazino"
                    xmlns="urn:nhibernate-mapping-2.2">
 
-  <class name="Categoria" table="Categorie">
-
-    <id name="Id" generator="native" unsaved-value="0"/>
-    <property name="Nome" not-null="true"/>
-
-  </class>
+	<class name="Categoria" table="Categorie">
+		<id name="Id" generator="native" unsaved-value="0"/>
+		<property name="Nome" not-null="true"/>
+	</class>
 
 </hibernate-mapping>

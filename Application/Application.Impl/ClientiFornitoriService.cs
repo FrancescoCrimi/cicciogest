@@ -12,18 +12,21 @@ namespace CiccioGest.Application.Impl
     class ClientiFornitoriService : IClientiFornitoriService
     {
         private readonly ILogger logger;
-        private readonly IUnitOfWork da;
-        private readonly ICategoriaRepository categoriaRepository;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IClienteRepository clienteRepository;
+        private readonly IFornitoreRepository fornitoreRepository;
 
         public ClientiFornitoriService(
             ILogger logger,
-            IUnitOfWork da,
-            ICategoriaRepository categoriaRepository
+            IUnitOfWork unitOfWork,
+            IClienteRepository clienteRepository,
+            IFornitoreRepository fornitoreRepository
             )
         {
             this.logger = logger;
-            this.da = da;
-            this.categoriaRepository = categoriaRepository;
+            this.unitOfWork = unitOfWork;
+            this.clienteRepository = clienteRepository;
+            this.fornitoreRepository = fornitoreRepository;
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -32,14 +35,32 @@ namespace CiccioGest.Application.Impl
             throw new NotImplementedException();
         }
 
-        public Task DeleteCliente(int id)
+        public async Task DeleteCliente(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await clienteRepository.Delete(id);
+                unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.Rollback();
+                throw ex;
+            }
         }
 
-        public Task DeleteFornitore(int id)
+        public async Task DeleteFornitore(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await fornitoreRepository.Delete(id);
+                unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.Rollback();
+                throw ex;
+            }
         }
 
         public Task<IList<Citta>> GetCittà()
@@ -52,24 +73,24 @@ namespace CiccioGest.Application.Impl
             throw new NotImplementedException();
         }
 
-        public Task<Cliente> GetCliente(int id)
+        public async Task<Cliente> GetCliente(int id)
         {
-            throw new NotImplementedException();
+            return await clienteRepository.GetById(id);
         }
 
-        public Task<IList<Cliente>> GetClienti()
+        public async Task<IList<Cliente>> GetClienti()
         {
-            throw new NotImplementedException();
+            return await clienteRepository.GetAll();
         }
 
-        public Task<Fornitore> GetFornitore(int id)
+        public async Task<Fornitore> GetFornitore(int id)
         {
-            throw new NotImplementedException();
+            return await fornitoreRepository.GetById(id);
         }
 
-        public Task<IList<Fornitore>> GetFornitori()
+        public async Task<IList<Fornitore>> GetFornitori()
         {
-            throw new NotImplementedException();
+            return await fornitoreRepository.GetAll();
         }
 
         public Task<Citta> SaveCittà(Citta città)
@@ -77,14 +98,40 @@ namespace CiccioGest.Application.Impl
             throw new NotImplementedException();
         }
 
-        public Task<Cliente> SaveCliente(Cliente cliente)
+        public async Task<Cliente> SaveCliente(Cliente cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (cliente.Id == 0)
+                    await clienteRepository.Save(cliente);
+                else
+                    await clienteRepository.Update(cliente);
+                unitOfWork.Commit();
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.Rollback();
+                throw ex;
+            }
         }
 
-        public Task<Fornitore> SaveFornitore(Fornitore fornitore)
+        public async Task<Fornitore> SaveFornitore(Fornitore fornitore)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (fornitore.Id == 0)
+                    await fornitoreRepository.Save(fornitore);
+                else
+                    await fornitoreRepository.Update(fornitore);
+                unitOfWork.Commit();
+                return fornitore;
+            }
+            catch (Exception ex)
+            {
+                unitOfWork.Rollback();
+                throw ex;
+            }
         }
 
         public void Dispose()

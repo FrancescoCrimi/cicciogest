@@ -19,14 +19,9 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
             this.navigationService = navigationService;
         }
 
-        public void Initialize(Frame frame)
-        {
-            navigationService.CurrentFrame = frame;
-        }
+        public void Initialize(Frame frame) => navigationService.CurrentFrame = frame;
 
-        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<NavigationViewItemInvokedEventArgs>(OnItemInvoked));
-
-        private void OnItemInvoked(NavigationViewItemInvokedEventArgs obj)
+        public ICommand ItemInvokedCommand => itemInvokedCommand ??= new RelayCommand<NavigationViewItemInvokedEventArgs>((obj) =>
         {
             if (obj.IsSettingsInvoked == true)
             {
@@ -39,6 +34,6 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
                 //if (navItemTag == "FatturaPage") navigationService.NavigateTo("FatturaPage");
                 //NavView_Navigate(navItemTag, obj.RecommendedNavigationTransitionInfo);
             }
-        }
+        });
     }
 }

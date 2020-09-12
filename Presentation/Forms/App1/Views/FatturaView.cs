@@ -21,7 +21,10 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             : this(logger, kernel, fatturaService, 0)
         { }
 
-        public FatturaView(ILogger logger, IKernel kernel, IFatturaService fatturaService, int idFattura)
+        public FatturaView(ILogger logger,
+                           IKernel kernel,
+                           IFatturaService fatturaService,
+                           int idFattura)
         {
             this.logger = logger;
             this.kernel = kernel;
@@ -108,10 +111,10 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private async Task ApriFattura(int idFattura)
         {
-            if (idFattura == 0)
-                fatturaBindingSource.DataSource = new Fattura();
-            else
-                fatturaBindingSource.DataSource = await fatturaService.GetFattura(idFattura);
+            //if (idFattura == 0)
+            //    fatturaBindingSource.DataSource = new Fattura();
+            //else
+            //    fatturaBindingSource.DataSource = await fatturaService.GetFattura(idFattura);
             dettaglioBindingSource.DataSource = new Dettaglio();
         }
 

@@ -23,31 +23,15 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand FattureCommand => new RelayCommand(ApriFattura);
-        public ICommand ArticoliCommand => new RelayCommand(ApriArticolo);
-        public ICommand CategorieCommand => new RelayCommand(ApriCategoria);
-        public ICommand LoadedCommand => loadedCommand ??
-            (loadedCommand = new RelayCommand(() => navigationService.NavigateTo("Main")));
+        public ICommand FattureCommand => new RelayCommand(() => navigationService.NavigateTo("Fattura"));
 
-        public void Initialization(Frame frame)
-        {
-            navigationService.CurrentFrame = frame;
-        }
+        public ICommand ArticoliCommand => new RelayCommand(() => navigationService.NavigateTo("Articolo"));
 
-        private void ApriFattura()
-        {
-            navigationService.NavigateTo("Fattura");
-        }
+        public ICommand CategorieCommand => new RelayCommand(() => navigationService.NavigateTo("Categoria"));
 
-        private void ApriCategoria()
-        {
-            navigationService.NavigateTo("Categoria");
-        }
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => navigationService.NavigateTo("Main"));
 
-        private void ApriArticolo()
-        {
-            navigationService.NavigateTo("Articolo");
-        }
+        public void Initialization(Frame frame) => navigationService.CurrentFrame = frame;
 
         public void Dispose()
         {

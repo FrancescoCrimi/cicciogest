@@ -6,55 +6,36 @@ namespace CiccioGest.Domain.ClientiFornitori
 {
     [Serializable]
     [DataContract(Name = "Cliente", Namespace = "http://gest.cicciosoft.tk")]
-    public class Cliente : DomainEntity, IEquatable<Cliente>
+    public class Cliente : Persona, IEquatable<Cliente>
     {
-        private string nome;
-        private string cognome;
+        private string societa;
 
-        protected Cliente() { }
+        public Cliente() { }
 
-        public virtual string Nome
+
+        [DataMember]
+        public virtual string Societa
         {
-            get { return nome; }
+            get => societa;
             set
             {
-                if (value != nome)
+                if (value != societa)
                 {
-                    nome = value;
-                    NotifyPropertyChanged(nameof(Nome));
-                    ImpostaNomeCompleto();
+                    societa = value;
+                    NotifyPropertyChanged(nameof(Societa));
                 }
             }
         }
 
-        public virtual string Cognome
-        {
-            get { return cognome; }
-            set
-            {
-                if (value != cognome)
-                {
-                    cognome = value;
-                    NotifyPropertyChanged(nameof(Cognome));
-                    ImpostaNomeCompleto();
-                }
-            }
-        }
 
-        public virtual string NomeCompleto { get; protected set; }
-
-        private void ImpostaNomeCompleto()
-        {
-            NomeCompleto = Nome + " " + Cognome;
-            NotifyPropertyChanged(nameof(NomeCompleto));
-        }
+        public override string ToString() => $"{Nome} {Cognome}";
 
         public override bool Equals(object obj)
         {
             return Equals(obj as Cliente);
         }
 
-        public bool Equals(Cliente other)
+        public virtual bool Equals(Cliente other)
         {
             return other != null &&
                    Id == other.Id;

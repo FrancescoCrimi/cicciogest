@@ -1,3 +1,4 @@
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Common;
 using CiccioSoft.Collections.Generic;
 using System;
@@ -11,29 +12,26 @@ namespace CiccioGest.Domain.Documenti
     public class Fattura : DomainEntity, IEquatable<Fattura>
     {
         [NonSerialized]
-        private string nome;
+        //private string nome;
         private IList<Dettaglio> dettagli;
+        private Cliente cliente;
 
-        public Fattura()
+        protected Fattura()
         {
             Initialize();
         }
 
-        public Fattura(string nome)
-            : this()
-        {
-            Nome = nome;
-        }
-        public Fattura(int id, string nome)
-            : this(nome)
+        public Fattura(int id, Cliente cliente)
+            : this(cliente)
         {
             this.Id = id;
         }
 
-        private void Initialize()
+        public Fattura(Cliente cliente)
         {
-            dettagli = new CiccioList<Dettaglio>();
+            Cliente = cliente;
         }
+
 
         [OnDeserializing]
         void OnDeserializing(StreamingContext c)
@@ -41,20 +39,15 @@ namespace CiccioGest.Domain.Documenti
             Initialize();
         }
 
-
         [DataMember]
-        public virtual string Nome
+        public virtual Cliente Cliente
         {
-            get { return nome; }
-            set
-            {
-                if (value != nome)
-                {
-                    nome = value;
-                    NotifyPropertyChanged(nameof(Nome));
-                }
-            }
+            get => cliente;
+            protected set => cliente = value;
         }
+
+        //[DataMember]
+        public virtual string Nome => cliente.NomeCompleto;
 
         [DataMember]
         public virtual IList<Dettaglio> Dettagli
@@ -72,6 +65,7 @@ namespace CiccioGest.Domain.Documenti
 
         [DataMember]
         public virtual int Totale { get; protected set; }
+
 
         public virtual void AddDettaglio(Dettaglio dettaglio)
         {
@@ -103,6 +97,12 @@ namespace CiccioGest.Domain.Documenti
                 AddDettaglio(dettaglio);
         }
 
+
+        private void Initialize()
+        {
+            dettagli = new CiccioList<Dettaglio>();
+        }
+
         private void CalcolaTotale()
         {
             Totale = 0;
@@ -118,6 +118,7 @@ namespace CiccioGest.Domain.Documenti
             }
             NotifyPropertyChanged(nameof(Totale));
         }
+
 
         public override bool Equals(object obj)
         {

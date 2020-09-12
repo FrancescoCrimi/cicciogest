@@ -27,6 +27,6 @@ namespace CiccioGest.Application
         Task<Articolo> GetArticolo(int id);
 
         [OperationContract(Action = "http://gest.cicciosoft.tk/IFatturaService/GetCliente", ReplyAction = "http://gest.cicciosoft.tk/IFatturaService/GetClienteResponse")]
-        Task<Cliente> GetCliente(int idCliente);
+        Task<Cliente> GetCliente(int id);
     }
 }

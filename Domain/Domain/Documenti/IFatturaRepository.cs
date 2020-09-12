@@ -6,7 +6,6 @@ namespace CiccioGest.Domain.Documenti
 {
     public interface IFatturaRepository : IDomainRepository<Fattura>
     {
-        //Task<IEnumerable<FatturaReadOnly>> GetAll();
         Task<IList<FatturaReadOnly>> GetAll();
     }
 }

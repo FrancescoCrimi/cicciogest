@@ -38,9 +38,19 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         }
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
+
         public ArticoloReadOnly ArticoloSelezionato { private get; set; }
-        public ICommand SelezionaArticoloCommand => selezionaArticoloCommand ?? (selezionaArticoloCommand = new RelayCommand(ApriArticolo));
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+
+        public ICommand SelezionaArticoloCommand => selezionaArticoloCommand ??= new RelayCommand(() =>
+        {
+            if (ArticoloSelezionato != null)
+            {
+                MessengerInstance.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
+                ns.GoBack();
+            }
+        });
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
             Articoli.Clear();
             foreach (ArticoloReadOnly pr in await service.GetArticoli())
@@ -48,16 +58,8 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
                 Articoli.Add(pr);
             }
             logger.Debug("Ciao Ciao");
-        }));
+        });
 
-        private void ApriArticolo()
-        {
-            if (ArticoloSelezionato != null)
-            {
-                MessengerInstance.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
-                ns.GoBack();
-            }
-        }
 
         public void Dispose()
         {

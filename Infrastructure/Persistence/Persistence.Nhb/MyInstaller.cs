@@ -2,6 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure.Conf;
@@ -43,6 +44,8 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 //Component.For<ISessionFactory>().UsingFactoryMethod(k => k.Resolve<DataAccess>().SessionFactory()),
                 Component.For<IFatturaRepository>().ImplementedBy<FatturaRepository>().LifeStyle.Transient,
                 Component.For<IArticoloRepository>().ImplementedBy<ArticoloRepository>().LifeStyle.Transient,
+                Component.For<IClienteRepository>().ImplementedBy<ClienteRepository>().LifeStyle.Transient,
+                Component.For<IFornitoreRepository>().ImplementedBy<FornitoreRepository>().LifeStyle.Transient,
                 Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient);
 
             ComponentRegistration<IUnitOfWork> cr = Component.For<IUnitOfWork, UnitOfWork>().ImplementedBy<UnitOfWork>();           

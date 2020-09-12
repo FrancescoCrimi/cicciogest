@@ -13,21 +13,24 @@ namespace CiccioGest.Application.Impl
     class FatturaService : IFatturaService
     {
         private readonly ILogger logger;
-        private readonly IUnitOfWork uow;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IFatturaRepository fatturaRepository;
         private readonly IArticoloRepository articoloRepository;
+        private readonly IClienteRepository clienteRepository;
 
         public FatturaService(
             ILogger logger,
-            IUnitOfWork uow,
+            IUnitOfWork unitOfWork,
             IFatturaRepository fatturaRepository,
-            IArticoloRepository articoloRepository)
+            IArticoloRepository articoloRepository,
+            IClienteRepository clienteRepository)
         {
             this.logger = logger;
-            this.uow = uow;
+            this.unitOfWork = unitOfWork;
             this.fatturaRepository = fatturaRepository;
             this.articoloRepository = articoloRepository;
-            logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + uow.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
+            this.clienteRepository = clienteRepository;
+            logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
         }
 
         public async Task DeleteFattura(int id)
@@ -35,12 +38,12 @@ namespace CiccioGest.Application.Impl
             try
             {
                 await fatturaRepository.Delete(id);
-                uow.Commit();
+                unitOfWork.Commit();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                uow.Rollback();
-                throw;
+                unitOfWork.Rollback();
+                throw ex;
             }
         }
 
@@ -66,14 +69,14 @@ namespace CiccioGest.Application.Impl
                 {
                     await fatturaRepository.Update(fattura);
                 }
-                uow.Commit();
+                unitOfWork.Commit();
+                return fattura;
             }
             catch (Exception ex)
             {
-                uow.Rollback();
-                throw;
+                unitOfWork.Rollback();
+                throw ex;
             }
-            return fattura;
         }
 
         public async Task<Articolo> GetArticolo(int id)
@@ -81,14 +84,14 @@ namespace CiccioGest.Application.Impl
             return await articoloRepository.GetById(id);
         }
 
-        public Task<Cliente> GetCliente(int idCliente)
+        public async Task<Cliente> GetCliente(int id)
         {
-            throw new NotImplementedException();
+            return await clienteRepository.GetById(id);
         }
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + uow.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Disposed");
+            logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Disposed");
         }
     }
 }

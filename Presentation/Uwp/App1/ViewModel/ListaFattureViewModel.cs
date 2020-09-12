@@ -40,19 +40,17 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
             Fatture.Clear();
             foreach (FatturaReadOnly fatt in await service.GetFatture())
             {
                 Fatture.Add(fatt);
             }
-        }));
+        });
 
-        public ICommand RefreshCommand => refreshCommand ?? (refreshCommand = new RelayCommand(() =>
-        {
-                logger.Debug("Refresh Button fire");
-        }));
+        public ICommand RefreshCommand => refreshCommand ??= new RelayCommand(() =>
+            logger.Debug("Refresh Button fire"));
 
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
 
@@ -69,17 +67,14 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             }
         }
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??
-            (apriFatturaCommand = new RelayCommand(ApriFattura, () => FatturaSelezionata != null));
-
-        private void ApriFattura()
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
         {
             if (FatturaSelezionata != null)
             {
                 navigationService.GoBack();
                 MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
             }
-        }
+        }, () => FatturaSelezionata != null);
 
         public void Dispose()
         {

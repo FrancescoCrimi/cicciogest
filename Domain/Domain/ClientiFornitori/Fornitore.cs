@@ -6,16 +6,17 @@ namespace CiccioGest.Domain.ClientiFornitori
 {
     [Serializable]
     [DataContract(Namespace = "http://cicciogest.it")]
-    public class Fornitore : DomainEntity, IEquatable<Fornitore>
+    public class Fornitore : Persona, IEquatable<Fornitore>
     {
-        protected Fornitore() { }
+        public Fornitore() { }
+
 
         public override bool Equals(object obj)
         {
             return Equals(obj as Fornitore);
         }
 
-        public bool Equals(Fornitore other)
+        public virtual bool Equals(Fornitore other)
         {
             return other != null &&
                    Id == other.Id;

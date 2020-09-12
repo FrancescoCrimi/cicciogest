@@ -52,43 +52,69 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand LoadedCommand => loadedCommand ??
-            (loadedCommand = new RelayCommand(LoadedAsync));
-
-        private void LoadedAsync()
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
-            Task.Run(async () =>
-            {
                 Fattura fatt = await fatturaService.GetFattura(4);
                 Mostra(fatt);
-            });
-        }
+        });
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??
-            (nuovaFatturaCommand = new RelayCommand(() => logger.Debug("Nuova Fattura Button fire")));
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() => 
+            logger.Debug("Nuova Fattura Button fire"));
 
-        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??
-            (salvaFatturaCommand = new RelayCommand(Salva));
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
+        {
+            try
+            {
+                await fatturaService.SaveFattura(Fattura);
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show("Errore: " + e.Message);
+            }
+        });
 
-        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??
-            (rimuoviFatturaCommand = new RelayCommand(Elimina));
+        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new RelayCommand(async () =>
+        {
+            try
+            {
+                await fatturaService.DeleteFattura(Fattura.Id);
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show("Errore: " + e.Message);
+            }
+        });
 
-        public ICommand ApriCommand => apriFatturaCommand ??
-            (apriFatturaCommand = new RelayCommand(() =>
-            navigationService.NavigateTo("ListaFatture")));
+        public ICommand ApriCommand => apriFatturaCommand ??= new RelayCommand(() =>
+            navigationService.NavigateTo("ListaFatture"));
 
-        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??
-            (nuovoDettaglioCommand = new RelayCommand(() =>
-            navigationService.NavigateTo("ListaArticoli")));
+        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
+            navigationService.NavigateTo("ListaArticoli"));
 
-        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??
-            (aggiungiDettaglioCommand = new RelayCommand(AggiungiDettagglio));
+        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
+        {
+            if (Dettaglio.Quantita != 0)
+            {
+                Fattura.AddDettaglio(Dettaglio);
+                RaisePropertyChanged(nameof(Fattura));
+                NuovoDettaglio();
+            }
+        });
 
-        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??
-            (rimuoviDettaglioCommand = new RelayCommand(RimuoviDettaglio));
+        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(() =>
+        {
+            Fattura.RemoveDettaglio(Dettaglio);
+            RaisePropertyChanged(nameof(Fattura));
+            NuovoDettaglio();
+        });
 
-        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??
-            (selezionaDettaglioCommand = new RelayCommand(SelezionaDettaglio));
+        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??= new RelayCommand(() =>
+        {
+            if (DettaglioSelezionato != null)
+                Dettaglio = DettaglioSelezionato;
+            RaisePropertyChanged(nameof(Dettaglio));
+        });
+
 
         private void RegistraMessaggi()
         {
@@ -117,56 +143,6 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
         private void NuovoDettaglio()
         {
             Dettaglio = new Dettaglio(null, 1);
-            RaisePropertyChanged(nameof(Dettaglio));
-        }
-
-        private void Salva()
-        {
-            try
-            {
-                fatturaService.SaveFattura(Fattura);
-                //window.Close();
-            }
-            catch (Exception e)
-            {
-                //MessageBox.Show("Errore: " + e.Message);
-            }
-        }
-
-        private void Elimina()
-        {
-            try
-            {
-                fatturaService.DeleteFattura(Fattura.Id);
-                //window.Close();
-            }
-            catch (Exception e)
-            {
-                //MessageBox.Show("Errore: " + e.Message);
-            }
-        }
-
-        private void AggiungiDettagglio()
-        {
-            if (Dettaglio.Quantita != 0)
-            {
-                Fattura.AddDettaglio(Dettaglio);
-                RaisePropertyChanged(nameof(Fattura));
-                NuovoDettaglio();
-            }
-        }
-
-        private void RimuoviDettaglio()
-        {
-            Fattura.RemoveDettaglio(Dettaglio);
-            RaisePropertyChanged(nameof(Fattura));
-            NuovoDettaglio();
-        }
-
-        private void SelezionaDettaglio()
-        {
-            if (DettaglioSelezionato != null)
-                Dettaglio = DettaglioSelezionato;
             RaisePropertyChanged(nameof(Dettaglio));
         }
 

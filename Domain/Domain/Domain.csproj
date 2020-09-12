@@ -5,6 +5,7 @@
     <RootNamespace>CiccioGest.Domain</RootNamespace>
     <AssemblyName>Domain</AssemblyName>
     <Platforms>AnyCPU;x86;x64</Platforms>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

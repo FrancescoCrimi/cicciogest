@@ -1,9 +1,9 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.AppForm.Views;
 using System;
 using System.Globalization;
-using System.IdentityModel;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
@@ -21,41 +21,17 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        private void NuovaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var fv = kernel.Resolve<FatturaView>();
-            fv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-            fv.Show();
-        }
-
-        private void CercaFatturaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var sfv = kernel.Resolve<ListaFattureView>();
-            sfv.Show();
-            sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-        }
-
-        private void ClientiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Non implementato");
-        }
-
-        private void FornitoriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Non implementato");
-        }
-
         private void ArticoliToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ArticoloView pv = kernel.Resolve<ArticoloView>();
-            pv.FormClosing += (sender2, e2) => kernel.ReleaseComponent(sender2);
+            pv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
             pv.Show();
         }
 
         private void CategorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CategoriaView cv = kernel.Resolve<CategoriaView>();
-            cv.FormClosing += (sender2, e2) => kernel.ReleaseComponent(sender2);
+            cv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
             cv.Show();
         }
 
@@ -69,8 +45,29 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         private void OpzioniToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sett = kernel.Resolve<SettingView>();
-            sett.FormClosing += (sender2, e2) => kernel.ReleaseComponent(sender2);
+            sett.FormClosing += (s, a) => kernel.ReleaseComponent(s);
             sett.Show();
+        }
+
+        private void fattureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sfv = kernel.Resolve<ListaFattureView>();
+            sfv.Show();
+            sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+        }
+
+        private void clientiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var lcv = kernel.Resolve<ListaClientiView>();
+            lcv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+            lcv.Show();
+        }
+
+        private void fornitoriToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var lfv = kernel.Resolve<ListaFornitoriView>();
+            lfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+            lfv.Show();
         }
     }
 }

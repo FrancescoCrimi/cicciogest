@@ -5,6 +5,7 @@
     <AssemblyName>Client</AssemblyName>
     <RootNamespace>CiccioGest.Presentation.Client</RootNamespace>
     <Platforms>AnyCPU;x86;x64</Platforms>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
