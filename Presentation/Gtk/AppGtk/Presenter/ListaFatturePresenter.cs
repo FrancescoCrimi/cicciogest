@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class ListaFatturePresenter : IListaFatturePresenter, ICazzo
+    public class ListaFatturePresenter : IListaFatturePresenter
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;

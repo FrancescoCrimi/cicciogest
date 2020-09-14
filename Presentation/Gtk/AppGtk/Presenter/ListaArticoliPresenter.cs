@@ -7,7 +7,7 @@ using System;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class ListaArticoliPresenter : IListaArticoliPresenter, ICazzo
+    public class ListaArticoliPresenter : IListaArticoliPresenter
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;

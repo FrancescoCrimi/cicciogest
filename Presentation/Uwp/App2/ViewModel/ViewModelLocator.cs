@@ -44,9 +44,7 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
                 //confmgr.SetCurrent(mysql);
                 //confmgr.Save();
                 IAppConf conf = confmgr.GetCurrent();
-                windsor.Register(
-                    Component.For<IAppConf>().Instance(conf),
-                    Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+                windsor.Register(Component.For<IAppConf>().Instance(conf));
                 windsor.Install(new CiccioGest.Presentation.Uwp.Client.MyInstaller());
             }
             windsor.Register(

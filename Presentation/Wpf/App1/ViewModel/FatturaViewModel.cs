@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 {
-    public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class FatturaViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;

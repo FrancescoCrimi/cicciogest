@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Uwp.App1.ViewModel
 {
-    public sealed class FatturaViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class FatturaViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly NavigationService navigationService;

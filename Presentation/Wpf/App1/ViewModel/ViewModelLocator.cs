@@ -46,8 +46,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             windsor.Register(
                 Component.For<IAppConf>().Instance(conf),
                 Component.For<IPageService>().ImplementedBy<PageService>(),
-                Component.For<INavigationService>().ImplementedBy<NavigationService>(),
-                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>()); ;
+                Component.For<INavigationService>().ImplementedBy<NavigationService>());
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             registerVM();
         }

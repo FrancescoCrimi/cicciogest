@@ -173,7 +173,7 @@
             this.nuovaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuovaToolStripMenuItem.Image")));
             this.nuovaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuovaToolStripMenuItem.Name = "nuovaToolStripMenuItem";
-            this.nuovaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nuovaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.nuovaToolStripMenuItem.Text = "Nuova";
             this.nuovaToolStripMenuItem.Click += new System.EventHandler(this.NuovaToolStripMenuItem_Click);
             // 
@@ -181,7 +181,7 @@
             // 
             this.apriToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Apri;
             this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
-            this.apriToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.apriToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.apriToolStripMenuItem.Text = "Apri";
             this.apriToolStripMenuItem.Click += new System.EventHandler(this.ApriToolStripMenuItem_Click);
             // 
@@ -190,7 +190,7 @@
             this.salvaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripMenuItem.Image")));
             this.salvaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.salvaToolStripMenuItem.Name = "salvaToolStripMenuItem";
-            this.salvaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salvaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.salvaToolStripMenuItem.Text = "Salva";
             this.salvaToolStripMenuItem.Click += new System.EventHandler(this.SalvaToolStripMenuItem_Click);
             // 
@@ -198,14 +198,14 @@
             // 
             this.eliminaToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Delete;
             this.eliminaToolStripMenuItem.Name = "eliminaToolStripMenuItem";
-            this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.eliminaToolStripMenuItem.Text = "Elimina";
             this.eliminaToolStripMenuItem.Click += new System.EventHandler(this.EliminaToolStripMenuItem_Click);
             // 
             // esciToolStripMenuItem
             // 
             this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
-            this.esciToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.esciToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.esciToolStripMenuItem.Text = "Esci";
             this.esciToolStripMenuItem.Click += new System.EventHandler(this.EsciToolStripMenuItem_Click);
             // 
@@ -222,21 +222,21 @@
             // nuovoDettaglioToolStripMenuItem
             // 
             this.nuovoDettaglioToolStripMenuItem.Name = "nuovoDettaglioToolStripMenuItem";
-            this.nuovoDettaglioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nuovoDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.nuovoDettaglioToolStripMenuItem.Text = "Nuovo";
             this.nuovoDettaglioToolStripMenuItem.Click += new System.EventHandler(this.NuovoDettaglioToolStripMenuItem_Click);
             // 
             // aggiungiDettaglioToolStripMenuItem
             // 
             this.aggiungiDettaglioToolStripMenuItem.Name = "aggiungiDettaglioToolStripMenuItem";
-            this.aggiungiDettaglioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aggiungiDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.aggiungiDettaglioToolStripMenuItem.Text = "Aggiungi";
             this.aggiungiDettaglioToolStripMenuItem.Click += new System.EventHandler(this.AggiungiDettaglioToolStripMenuItem_Click);
             // 
             // rimuoviDettaglioToolStripMenuItem
             // 
             this.rimuoviDettaglioToolStripMenuItem.Name = "rimuoviDettaglioToolStripMenuItem";
-            this.rimuoviDettaglioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rimuoviDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.rimuoviDettaglioToolStripMenuItem.Text = "Rimuovi";
             this.rimuoviDettaglioToolStripMenuItem.Click += new System.EventHandler(this.RimuoviDettaglioToolStripMenuItem_Click);
             // 
@@ -499,7 +499,7 @@
             this.nomeProdottoTextBox.Size = new System.Drawing.Size(100, 22);
             this.nomeProdottoTextBox.TabIndex = 1;
             // 
-            // FatturaView2
+            // FatturaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -507,7 +507,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "FatturaView2";
+            this.Name = "FatturaView";
             this.Text = "Fattura";
             this.Load += new System.EventHandler(this.FatturaView_Load);
             this.menuStrip.ResumeLayout(false);

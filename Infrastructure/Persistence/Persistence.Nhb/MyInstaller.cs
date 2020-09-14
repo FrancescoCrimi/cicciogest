@@ -14,7 +14,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            ISetLifeStyle slf = container.Resolve<ISetLifeStyle>();
             IAppConf conf = container.Resolve<IAppConf>();
 
             container.Register(
@@ -42,15 +41,12 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             //}
             container.Register(
                 //Component.For<ISessionFactory>().UsingFactoryMethod(k => k.Resolve<DataAccess>().SessionFactory()),
+                Component.For<IUnitOfWork, UnitOfWork>().ImplementedBy< UnitOfWork>().LifestyleScoped(),
                 Component.For<IFatturaRepository>().ImplementedBy<FatturaRepository>().LifeStyle.Transient,
                 Component.For<IArticoloRepository>().ImplementedBy<ArticoloRepository>().LifeStyle.Transient,
                 Component.For<IClienteRepository>().ImplementedBy<ClienteRepository>().LifeStyle.Transient,
                 Component.For<IFornitoreRepository>().ImplementedBy<FornitoreRepository>().LifeStyle.Transient,
                 Component.For<ICategoriaRepository>().ImplementedBy<CategoriaRepository>().LifeStyle.Transient);
-
-            ComponentRegistration<IUnitOfWork> cr = Component.For<IUnitOfWork, UnitOfWork>().ImplementedBy<UnitOfWork>();           
-            ComponentRegistration<IUnitOfWork> cr2 = slf.Suca(cr);
-            container.Register(cr2);
         }
     }
 }

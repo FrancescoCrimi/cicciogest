@@ -34,8 +34,8 @@ namespace CiccioGest.Presentation.Forms.App1
             //confmgr.ReadConfiguration();
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
-                Component.For<IAppConf>().Instance(conf),
-                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+                Component.For<IWindsorContainer>().Instance(windsor),
+                Component.For<IAppConf>().Instance(conf));
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             windsor.Register(
                 Component.For<MainView>().LifestyleTransient(),

@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
 {
-    public partial class ListaFattureView : Form, ICazzo
+    public partial class ListaFattureView : Form
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
@@ -30,7 +30,8 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private async void Fatture_Load(object sender, EventArgs e)
         {
-            fattureBindingSource.DataSource = await fatturaService.GetFatture();
+            var listFatture = await fatturaService.GetFatture();
+            fattureBindingSource.DataSource = listFatture;
             fattureDataGridView.ClearSelection();
         }
 

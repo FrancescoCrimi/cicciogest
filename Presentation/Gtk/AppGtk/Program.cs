@@ -48,8 +48,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
 
             IAppConf conf = confmgr.GetCurrent();
             windsor.Register(
-                Component.For<IAppConf>().Instance(conf),
-                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+                Component.For<IAppConf>().Instance(conf));
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
 
             windsor.Register(

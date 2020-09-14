@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Wpf.App2.ViewModel
 {
-    public sealed class MainViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class MainViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private ICommand apriFattureCommand;

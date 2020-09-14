@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
 {
-    public partial class CategoriaView : Form, ICazzo
+    public partial class CategoriaView : Form
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;

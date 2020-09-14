@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Uwp.App2.ViewModel
 {
-    public class ListaFattureViewModel : ViewModelBase, ICazzo
+    public class ListaFattureViewModel : ViewModelBase
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;

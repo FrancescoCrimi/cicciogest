@@ -30,8 +30,7 @@ namespace CiccioGest.Interface.Wcf.AppService
             //IAppConf conf = confmgr.GetCurrent();
             IAppConf conf = ConfMgr.ReadConfiguration();
             container.Register(
-                Component.For<IAppConf>().Instance(conf),
-                Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+                Component.For<IAppConf>().Instance(conf));
             container.Install(new CiccioGest.Application.Impl.MyInstaller());
 
             var dummy = container.Resolve<IUnitOfWorkFactory>();

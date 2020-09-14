@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.Uwp.App1.ViewModel
 {
-    public sealed class ShellViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ShellViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly NavigationService navigationService;

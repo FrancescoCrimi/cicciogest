@@ -7,7 +7,7 @@ using Gtk;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class MainPresenter : IMainPresenter, ICazzo
+    public class MainPresenter : IMainPresenter
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;

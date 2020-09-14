@@ -10,38 +10,42 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.Forms.App1.Views
 {
-    public partial class FatturaView : Form, ICazzo
+    public partial class FatturaView : Form
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
         private readonly IFatturaService fatturaService;
-        private readonly int idFattura;
+        private readonly Fattura fattura;
+        //private readonly int idFattura;
 
-        public FatturaView(ILogger logger, IKernel kernel, IFatturaService fatturaService)
-            : this(logger, kernel, fatturaService, 0)
-        { }
+        //public FatturaView(ILogger logger,
+        //                   IKernel kernel,
+        //                   IFatturaService fatturaService)
+        //    : this(logger, kernel, fatturaService, 0)
+        //{ }
 
         public FatturaView(ILogger logger,
                            IKernel kernel,
                            IFatturaService fatturaService,
-                           int idFattura)
+                           Fattura fattura)
         {
             this.logger = logger;
             this.kernel = kernel;
             this.fatturaService = fatturaService;
-            this.idFattura = idFattura;
+            this.fattura = fattura;
+            //this.idFattura = idFattura;
             InitializeComponent();
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         private async void FatturaView_Load(object sender, EventArgs e)
         {
-            await ApriFattura(idFattura);
+            await ApriFattura(fattura);
         }
 
         private async void NuovaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await ApriFattura(0);
+            //await ApriFattura(0);
         }
 
         private void ApriToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,12 +113,13 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         }
 
 
-        private async Task ApriFattura(int idFattura)
+        private async Task ApriFattura(Fattura fattura)
         {
             //if (idFattura == 0)
             //    fatturaBindingSource.DataSource = new Fattura();
             //else
             //    fatturaBindingSource.DataSource = await fatturaService.GetFattura(idFattura);
+            fatturaBindingSource.DataSource = fattura;
             dettaglioBindingSource.DataSource = new Dettaglio();
         }
 

@@ -8,7 +8,7 @@ using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class FatturaPresenter : IFatturaPresenter, ICazzo
+    public class FatturaPresenter : IFatturaPresenter
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;

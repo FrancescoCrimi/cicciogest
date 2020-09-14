@@ -45,9 +45,4 @@ namespace CiccioGest.Infrastructure
         public CiccioGestConfigurationException(string message) : base(message) { }
         public CiccioGestConfigurationException(string message, Exception inner) : base(message, inner) { }
     }
-
-    public interface ICazzo
-    {
-
-    }
 }

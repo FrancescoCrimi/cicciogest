@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 {
-    public sealed class ListaFattureViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ListaFattureViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;

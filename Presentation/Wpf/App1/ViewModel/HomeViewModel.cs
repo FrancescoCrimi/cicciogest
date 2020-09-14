@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 {
-    public sealed class HomeViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class HomeViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
 

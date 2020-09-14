@@ -10,7 +10,7 @@ using GalaSoft.MvvmLight;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 {
-    sealed class SettingViewModel : ViewModelBase, IDisposable, ICazzo
+    sealed class SettingViewModel : ViewModelBase, IDisposable
     {
         private void LoadSampleData()
         {

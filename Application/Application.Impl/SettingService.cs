@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
 {
-    internal class SettingService : ISettingService, ICazzo
+    internal class SettingService : ISettingService
     {
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
         private readonly IFatturaService fatturaService;

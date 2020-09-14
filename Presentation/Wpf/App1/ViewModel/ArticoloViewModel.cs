@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 {
-    public sealed class ArticoloViewModel : ViewModelBase, IDisposable, ICazzo
+    public sealed class ArticoloViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;

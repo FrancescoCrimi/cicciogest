@@ -29,9 +29,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                 var confmgr = new ConfigurationManager();
                 //confmgr.ReadConfiguration();
                 IAppConf conf = confmgr.GetCurrent();
-                windsor.Register(
-                    Component.For<IAppConf>().Instance(conf),
-                    Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
+                windsor.Register(Component.For<IAppConf>().Instance(conf));
                 windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             }
             windsor.Register(
