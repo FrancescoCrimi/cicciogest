@@ -57,16 +57,16 @@ namespace CiccioGest.Application.Impl
             return await prodottoRepository.GetById(id);
         }
 
-        public async Task<Articolo> SaveArticolo(Articolo prodotto)
+        public async Task<Articolo> SaveArticolo(Articolo articolo)
         {
             try
             {
-                if (prodotto.Id == 0)
-                    await prodottoRepository.Save(prodotto);
+                if (articolo.Id == 0)
+                    await prodottoRepository.Save(articolo);
                 else
-                    await prodottoRepository.Update(prodotto);
+                    await prodottoRepository.Update(articolo);
                 unitOfWork.Commit();
-                return prodotto;
+                return articolo;
             }
             catch (Exception ex)
             {

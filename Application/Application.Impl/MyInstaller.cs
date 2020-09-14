@@ -38,7 +38,8 @@ namespace CiccioGest.Application.Impl
                         //Component.For<ICiccioService>().ImplementedBy<CiccioService>().LifestyleTransient(),
                         Component.For<IFatturaService>().ImplementedBy<FatturaService>().LifestyleTransient(),
                         Component.For<IMagazinoService>().ImplementedBy<MagazinoService>().LifestyleTransient(),
-                        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestyleTransient());
+                        Component.For<IClientiFornitoriService>().ImplementedBy<ClientiFornitoriService>().LifestyleTransient(),
+                        Component.For<ISettingService>().ImplementedBy<SettingService>().LifestyleTransient());
                 //    break;
                 //case UI.WPF:
                 //    container.Register(

@@ -8,20 +8,35 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
     internal class UnitOfWork : IUnitOfWork
     {
         private readonly ILogger logger;
-        private readonly UnitOfWorkFactory unitOfWorkFactory;
 
         public UnitOfWork(ILogger logger, UnitOfWorkFactory unitOfWorkFactory)
         {
             this.logger = logger;
-            this.unitOfWorkFactory = unitOfWorkFactory;
+            LiteDB = unitOfWorkFactory.LiteDB;
+            var result = LiteDB.BeginTrans();
+            if (!result)
+            {
+                LiteDB.Rollback();
+                LiteDB.BeginTrans();
+            }
             logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        internal LiteDatabase LiteDB => unitOfWorkFactory.LiteDB;
+        internal LiteDatabase LiteDB { get; }
 
 
         public void Commit()
         {
+            try
+            {
+                LiteDB.Commit();
+            }
+            catch (Exception ex)
+            {
+                LiteDB.Rollback();
+                LiteDB.BeginTrans();
+                throw ex;
+            }
             logger.Debug("HashCode: " + GetHashCode().ToString() + " Commit");
         }
 
@@ -37,6 +52,8 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 
         public void Rollback()
         {
+            LiteDB.Rollback();
+            LiteDB.BeginTrans();
             logger.Debug("HashCode: " + GetHashCode().ToString() + " Rollback");
         }
     }

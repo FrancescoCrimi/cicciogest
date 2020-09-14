@@ -29,7 +29,7 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int c = 1; c < 11; c++)
             {
-                Categoria cat = new Categoria(c, "Categoria " + c.ToString(CultureInfo.InvariantCulture));
+                Categoria cat = new Categoria("Categoria " + c.ToString(CultureInfo.InvariantCulture));
                 Categorie.Add(cat);
             }
         }
@@ -43,7 +43,8 @@ namespace CiccioGest.Application.FakeImpl
                     Cognome = "Cognome " + i.ToString(),
                     Nome = "Nome " + i.ToString(),
                     Email = "cliente" + i.ToString() + "@pippo.com",
-                    Telefono = "123456789" + i.ToString()
+                    Telefono = "123456789" + i.ToString(),
+                    Indirizzo = "Casa sua n° " + i + 1
                 };
                 Clienti.Add(cli);
             }
@@ -58,7 +59,8 @@ namespace CiccioGest.Application.FakeImpl
                     Cognome = "Cognome " + i.ToString(),
                     Nome = "Nome " + i.ToString(),
                     Email = "cliente" + i.ToString() + "@pippo.com",
-                    Telefono = "123456789" + i.ToString()
+                    Telefono = "123456789" + i.ToString(),
+                    Indirizzo = "Casa sua n° " + i + 1
                 };
                 Fornitori.Add(forn);
             }
@@ -68,7 +70,7 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int p = 1; p < 11; p++)
             {
-                Articolo prod = new Articolo(p, "Articolo " + p.ToString(CultureInfo.InvariantCulture), 10 + p);
+                Articolo prod = new Articolo("Articolo " + p.ToString(), 10 + p);
                 prod.Categoria = Categorie[p - 1];
                 Articoli.Add(prod);
                 ArticoloReadOnly pro = new ArticoloReadOnly(prod.Id, prod.Nome, prod.Prezzo, prod.NomeCategoria);
@@ -80,7 +82,7 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int i = 1; i < 6; i++)
             {
-                Fattura fatt = new Fattura(i, Clienti[i]);
+                Fattura fatt = new Fattura(Clienti[i -1]);
                 for (int o = 1; o < (i + 1); o++)
                 {
                     Dettaglio dett = new Dettaglio(Articoli[o - 1], o);

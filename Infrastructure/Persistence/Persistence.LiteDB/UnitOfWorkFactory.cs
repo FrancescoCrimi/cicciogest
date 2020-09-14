@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure.Conf;
@@ -11,7 +12,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
     {
         private readonly IAppConf conf;
         private readonly ILogger logger;
-        private LiteDatabase db;
+        //private LiteDatabase db;
 
         public UnitOfWorkFactory(IAppConf conf, ILogger logger)
         {
@@ -26,21 +27,26 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
             var mapper = BsonMapper.Global;
             mapper.Entity<Categoria>()
                 .Id(cat => cat.Id);
+            mapper.Entity<Cliente>()
+                .Id(cli => cli.Id);
+            mapper.Entity<Fornitore>()
+                .Id(forn => forn.Id);
             mapper.Entity<Articolo>()
                 .Id(art => art.Id)
+                .DbRef(x => x.Fornitore, "Fornitore")
                 .DbRef(x => x.Categoria, "Categoria");
             mapper.Entity<Dettaglio>()
                 .Id(det => det.Id)
                 .DbRef(x => x.Articolo, "Articolo");
-            //db.Mapper.Entity<Fattura>()
             mapper.Entity<Fattura>()
-                .Id(fat => fat.Id);
+                .Id(fat => fat.Id)
+                .DbRef(x => x.Cliente, "Cliente");
             //db = new LiteDatabase(@"CiccioGest.db");
-            db = new LiteDatabase(@conf.CS);
+            LiteDB = new LiteDatabase(@conf.CS);
         }
 
 
-        internal LiteDatabase LiteDB => db;
+        internal LiteDatabase LiteDB { get; private set; }
 
 
         public void CreateDataAccess()

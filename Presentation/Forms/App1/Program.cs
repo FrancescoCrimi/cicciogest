@@ -4,6 +4,7 @@ using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.AppForm.Views;
 using CiccioGest.Presentation.Forms.App1.Views;
 using System;
 using System.Reflection;
@@ -37,12 +38,14 @@ namespace CiccioGest.Presentation.Forms.App1
                 Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>());
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             windsor.Register(
+                Component.For<MainView>().LifestyleTransient(),
                 Component.For<ArticoloView>().LifestyleTransient(),
                 Component.For<CategoriaView>().LifestyleTransient(),
+                Component.For<FatturaView>().LifestyleTransient(),
+                Component.For<ListaClientiView>().LifestyleTransient(),
+                Component.For<ListaFornitoriView>().LifestyleTransient(),
                 Component.For<ListaArticoliView>().LifeStyle.Transient,
                 Component.For<ListaFattureView>().LifestyleTransient(),
-                Component.For<FatturaView>().LifestyleTransient(),
-                Component.For<MainView>().LifestyleTransient(),
                 Component.For<SettingView>().LifestyleTransient());
         }
     }

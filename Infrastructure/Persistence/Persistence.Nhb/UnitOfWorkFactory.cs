@@ -88,14 +88,14 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 conn = new MySqlConnection(conf.CS);
                 conn.Open();
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "create database if not exists test";
+                cmd.CommandText = "create database if not exists CiccioGestNhb";
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (MySqlException)
+            catch (MySqlException ex)
             {
-                return false;
-                throw;
+                //return false;
+                throw ex;
             }
             finally
             {

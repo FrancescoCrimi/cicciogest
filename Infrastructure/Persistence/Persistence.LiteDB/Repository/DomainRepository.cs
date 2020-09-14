@@ -9,7 +9,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
         : IDomainRepository<TEntity> where TEntity : DomainEntity
     {
         private readonly UnitOfWork unitOfWork;
-        protected readonly LiteCollection<TEntity> coll;
+        protected readonly ILiteCollection<TEntity> coll;
 
         public DomainRepository(UnitOfWork unitOfWork)
         {
@@ -21,7 +21,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
         {
             return Task.Run(() =>
             {
-                coll.Delete(te => te.Id == id);
+                coll.Delete(id);
             });
         }
 

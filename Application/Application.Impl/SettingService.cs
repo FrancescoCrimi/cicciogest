@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
 {
-    internal class SettingService : ISettingService
+    internal class SettingService : ISettingService, ICazzo
     {
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
         private readonly IFatturaService fatturaService;
@@ -66,11 +66,11 @@ namespace CiccioGest.Application.Impl
         private async Task CreaClienti()
         {
             foreach (var item in FakeSampleData.Clienti)
-            {
+                                                                                                                                                                                                                                                                                                        {
                 await clientiFornitoriService.SaveCliente(item);
             }
         }
-
+                                                                                      
         private async Task CreaFornitori()
         {
             foreach (var item in FakeSampleData.Fornitori)
@@ -82,11 +82,12 @@ namespace CiccioGest.Application.Impl
         private async Task CreaArticoli()
         {
 
-            for (int p = 0; p < FakeSampleData.Articoli.Count; p++)
+            for (int p = 1; p <= FakeSampleData.Articoli.Count; p++)
             {
-                Articolo prod = FakeSampleData.Articoli[p];
-                prod.Categoria = await magazinoService.GetCategoria(p);
-                await magazinoService.SaveArticolo(prod);
+                Articolo articolo = FakeSampleData.Articoli[p -1];
+                articolo.Categoria = await magazinoService.GetCategoria(p);
+                articolo.Fornitore = await magazinoService.GetFornitore(p);
+                await magazinoService.SaveArticolo(articolo);
             }
         }
 
@@ -95,7 +96,7 @@ namespace CiccioGest.Application.Impl
             for (int i = 1; i < 6; i++)
             {
                 var clie = await fatturaService.GetCliente(i);
-                Fattura fatt = new Fattura(i, clie);
+                Fattura fatt = new Fattura(clie);
                 for (int o = 1; o < (i + 1); o++)
                 {
 

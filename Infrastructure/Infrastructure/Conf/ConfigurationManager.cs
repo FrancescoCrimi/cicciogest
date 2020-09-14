@@ -15,8 +15,6 @@ namespace CiccioGest.Infrastructure.Conf
         private static readonly string fileName = "AppProperties.json";
         private static readonly string folderPath = Path.Combine(localAppData, configurationsFolder);
         private static readonly string filePath = Path.Combine(folderPath, fileName);
-        //string asswq = Assembly.GetCallingAssembly().GetName().Name;
-        //string aqwsa = Assembly.GetEntryAssembly().GetName().Name;
         private AppConfs privateAppConfs = null;
 
 
@@ -69,7 +67,6 @@ namespace CiccioGest.Infrastructure.Conf
 
         public void SetCurrent(AppConf conf)
         {
-            //var asdf = AppConfs.Available.Values.First(c => c.Name == "sqlite2");
             if (AppConfs.Available.ContainsValue(conf))
             {
                 AppConfs.Current = conf.Name;
@@ -181,7 +178,6 @@ namespace CiccioGest.Infrastructure.Conf
             };
             privateAppConfs.Available.Add(litedb.Name, litedb);
             privateAppConfs.Current = mysql.Name;
-            //SetCurrent(mysql);
             Save();
         }
     }

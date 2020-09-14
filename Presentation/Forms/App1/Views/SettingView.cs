@@ -1,4 +1,6 @@
 ﻿using Castle.Core.Logging;
+using Castle.MicroKernel;
+using CiccioGest.Application;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 using System;
@@ -9,17 +11,58 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     public partial class SettingView : Form
     {
         private readonly ILogger logger;
+        private readonly IKernel kernel;
+        private readonly IUnitOfWorkFactory unitOfWorkFactory;
         private ConfigurationManager confmgr;
 
-        public SettingView(ILogger logger)
+        public SettingView(ILogger logger,
+                           IKernel kernel,
+                           IUnitOfWorkFactory unitOfWorkFactory)
         {
             InitializeComponent();
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger;
+            this.kernel = kernel;
+            this.unitOfWorkFactory = unitOfWorkFactory;
             dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
             databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
             confmgr = new ConfigurationManager();
             CaricaConf();
         }
+
+        private void verificaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                unitOfWorkFactory.VerifyDataAccess();
+                MessageBox.Show("Eseguito con successo");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void creaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                unitOfWorkFactory.CreateDataAccess();
+                MessageBox.Show("Eseguito con successo");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void popolaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sett = kernel.Resolve<ISettingService>();
+            await sett.LoadSampleData();
+            MessageBox.Show("Eseguito con successo");
+        }
+
+
 
         private void CaricaConf()
         {
@@ -29,54 +72,29 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             appConfBindingSource.DataSource = assa;
         }
 
-        private void LoadSampleButton_Click(object sender, EventArgs e)
-        {
-            confmgr.LoadSample();
-            CaricaConf();
-        }
-
-        private void VerifyDbButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //Bootstrap.Restart(conf);
-                //Bootstrap.Windsor.Install(new CiccioGest.Application.Installer());
-                //uowf = Bootstrap.Windsor.Resolve<IUnitOfWorkFactory>();
-                //uowf.VerifyDataAccess();
-                MessageBox.Show("Eseguito con successo");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void CreateDbButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //uowf.CreateDataAccess();
-                MessageBox.Show("Eseguito con successo");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void RimuoviButton_Click(object sender, EventArgs e)
+        private void AppConfDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (appConfsBindingSource.Current != null)
             {
                 AppConf cnf = (AppConf)appConfsBindingSource.Current;
-                confmgr.Remove(cnf);
-                appConfsBindingSource.DataSource = null;
-                appConfsBindingSource.DataSource = confmgr.GetAll();
+                //appConfBindingSource.DataSource = null;
+                appConfBindingSource.DataSource = cnf;
             }
         }
 
+        private void nuovoToolStripButton_Click(object sender, EventArgs e)
+        {
+            appConfBindingSource.DataSource = null;
+            appConfBindingSource.DataSource = new AppConf();
+        }
 
-        private void AggiungiButton_Click(object sender, EventArgs e)
+        private void salvaToolStripButton_Click(object sender, EventArgs e)
+        {
+            confmgr.Save();
+            CaricaConf();
+        }
+
+        private void aggiungiToolStripButton_Click(object sender, EventArgs e)
         {
             if (appConfBindingSource.DataSource != null)
             {
@@ -89,7 +107,18 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             }
         }
 
-        private void SetDefaultButton_Click(object sender, EventArgs e)
+        private void rimuoviToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (appConfsBindingSource.Current != null)
+            {
+                AppConf cnf = (AppConf)appConfsBindingSource.Current;
+                confmgr.Remove(cnf);
+                appConfsBindingSource.DataSource = null;
+                appConfsBindingSource.DataSource = confmgr.GetAll();
+            }
+        }
+
+        private void defaultToolStripButton_Click(object sender, EventArgs e)
         {
             if (appConfsBindingSource != null)
             {
@@ -103,26 +132,17 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             }
         }
 
-        private void AppConfDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void caricaDefaultToolStripButton1_Click(object sender, EventArgs e)
         {
-            if (appConfsBindingSource.Current != null)
+            try
             {
-                AppConf cnf = (AppConf)appConfsBindingSource.Current;
-                //appConfBindingSource.DataSource = null;
-                appConfBindingSource.DataSource = cnf;
+                confmgr.LoadSample();
+                CaricaConf();
             }
-        }
-
-        private void NuovoButton_Click(object sender, EventArgs e)
-        {
-            appConfBindingSource.DataSource = null;
-            appConfBindingSource.DataSource = new AppConf();
-        }
-
-        private void SalvaButton_Click(object sender, EventArgs e)
-        {
-            confmgr.Save();
-            CaricaConf();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
