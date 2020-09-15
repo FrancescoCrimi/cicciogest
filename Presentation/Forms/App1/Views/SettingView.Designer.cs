@@ -321,11 +321,11 @@
             // 
             // appConfsBindingSource
             // 
-            this.appConfsBindingSource.DataSource = typeof(CiccioGest.Infrastructure.Conf.AppConf);
+            this.appConfsBindingSource.DataSource = typeof(CiccioGest.Infrastructure.Conf.CiccioGestConf);
             // 
             // appConfBindingSource
             // 
-            this.appConfBindingSource.DataSource = typeof(CiccioGest.Infrastructure.Conf.AppConf);
+            this.appConfBindingSource.DataSource = typeof(CiccioGest.Infrastructure.Conf.CiccioGestConf);
             // 
             // toolStrip1
             // 

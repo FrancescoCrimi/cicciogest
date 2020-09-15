@@ -40,11 +40,9 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public void Startup(IWindsorContainer windsorContainer)
         {
             windsor = windsorContainer;
-            var confmgr = new ConfigurationManager();
-            //confmgr.ReadConfiguration();
-            IAppConf conf = confmgr.GetCurrent();
+            CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
             windsor.Register(
-                Component.For<IAppConf>().Instance(conf),
+                Component.For<CiccioGestConf>().Instance(conf),
                 Component.For<IPageService>().ImplementedBy<PageService>(),
                 Component.For<INavigationService>().ImplementedBy<NavigationService>());
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());

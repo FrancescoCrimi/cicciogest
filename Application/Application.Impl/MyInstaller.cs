@@ -10,7 +10,7 @@ namespace CiccioGest.Application.Impl
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            IAppConf conf = container.Resolve<IAppConf>();
+            CiccioGestConf conf = container.Resolve<CiccioGestConf>();
 
             switch (conf.DataAccess)
             {

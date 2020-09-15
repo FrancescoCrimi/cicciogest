@@ -33,12 +33,12 @@ namespace CiccioGest.Presentation.Uwp.Client.Wcf
 
     internal class FatturaService : FatturaServiceClient, Application.IFatturaService
     {
-        public FatturaService(IAppConf conf)
+        public FatturaService(CiccioGestConf conf)
             : base(EndpointConfiguration.BasicHttpBinding_IFatturaService, GetRemoteAddress(conf))
         {
         }
 
-        private static string GetRemoteAddress(IAppConf conf)
+        private static string GetRemoteAddress(CiccioGestConf conf)
         {
             return conf.CS + "/fatturaservice.svc";
         }

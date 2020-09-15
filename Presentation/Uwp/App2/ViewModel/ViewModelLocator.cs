@@ -38,13 +38,8 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
             }
             else
             {
-                var confmgr = new ConfigurationManager();
-                //var colconf = confmgr.GetAll();
-                //var mysql = colconf.First(c => c.Name == "mysql");
-                //confmgr.SetCurrent(mysql);
-                //confmgr.Save();
-                IAppConf conf = confmgr.GetCurrent();
-                windsor.Register(Component.For<IAppConf>().Instance(conf));
+                CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
+                windsor.Register(Component.For<CiccioGestConf>().Instance(conf));
                 windsor.Install(new CiccioGest.Presentation.Uwp.Client.MyInstaller());
             }
             windsor.Register(

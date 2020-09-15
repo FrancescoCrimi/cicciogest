@@ -298,7 +298,7 @@
       <Version>3.11.2</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data">
-      <Version>8.0.19</Version>
+      <Version>8.0.21</Version>
     </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.6.8</Version>

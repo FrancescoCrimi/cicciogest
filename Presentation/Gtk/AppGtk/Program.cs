@@ -39,16 +39,10 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
         {
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-            var confmgr = new ConfigurationManager();
 
-            //var colconf = confmgr.GetAll();
-            //var mysql = colconf.First(c => c.Name == "sqlite2");
-            //confmgr.SetCurrent(mysql);
-            //confmgr.Save();
+            CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
+            windsor.Register(Component.For<CiccioGestConf>().Instance(conf));
 
-            IAppConf conf = confmgr.GetCurrent();
-            windsor.Register(
-                Component.For<IAppConf>().Instance(conf));
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
 
             windsor.Register(

@@ -5,7 +5,6 @@ using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Interface.Wcf.WebService.Conf;
 using System;
 
 namespace CiccioGest.Interface.Wcf.WebService
@@ -17,14 +16,10 @@ namespace CiccioGest.Interface.Wcf.WebService
             IWindsorContainer container = new WindsorContainer();
             container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             container.AddFacility<WcfFacility>();
-            //var confmgr = new ConfigurationManager();
-            //confmgr.ReadConfiguration();
-            //IAppConf conf = confmgr.GetCurrent();
-            IAppConf conf = ConfMgr.ReadConfiguration();
-            container.Register(
-                Component.For<IAppConf>().Instance(conf)
-                //Component.For<ISetLifeStyle>().ImplementedBy<SetLifeStyle>()
-                );
+
+            CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
+            container.Register(Component.For<CiccioGestConf>().Instance(conf));
+
             container.Install(new CiccioGest.Application.Impl.MyInstaller());
         }       
     }

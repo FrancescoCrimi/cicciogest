@@ -8,17 +8,17 @@ using System.Text;
 
 namespace CiccioGest.Infrastructure.Conf
 {
-    public class ConfigurationManager : IConfigurationManager
+    public static class CiccioGestConfMgr
     {
         private static readonly string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         private static readonly string configurationsFolder = @"CiccioGest\Configurations";
         private static readonly string fileName = "AppProperties.json";
         private static readonly string folderPath = Path.Combine(localAppData, configurationsFolder);
         private static readonly string filePath = Path.Combine(folderPath, fileName);
-        private AppConfs privateAppConfs = null;
+        private static CiccioGestConfs privateAppConfs = null;
 
 
-        private AppConfs AppConfs
+        private static CiccioGestConfs AppConfs
         {
             get
             {
@@ -33,16 +33,17 @@ namespace CiccioGest.Infrastructure.Conf
             }
         }
 
-        private void ReadConfiguration()
+        private static void ReadConfiguration()
         {
             if (File.Exists(filePath))
             {
                 var json = File.ReadAllText(filePath);
-                privateAppConfs = JsonConvert.DeserializeObject<AppConfs>(json);
+                privateAppConfs = JsonConvert.DeserializeObject<CiccioGestConfs>(json);
             }
         }
 
-        public void Save()
+
+        public static void Save()
         {
             if (privateAppConfs != null)
             {
@@ -55,17 +56,17 @@ namespace CiccioGest.Infrastructure.Conf
             }
         }
 
-        public void Add(AppConf conf)
+        public static void Add(CiccioGestConf conf)
         {
             AppConfs.Available.Add(conf.Name, conf);
         }
 
-        public void Remove(AppConf conf)
+        public static void Remove(CiccioGestConf conf)
         {
             AppConfs.Available.Remove(conf.Name);
         }
 
-        public void SetCurrent(AppConf conf)
+        public static void SetCurrent(CiccioGestConf conf)
         {
             if (AppConfs.Available.ContainsValue(conf))
             {
@@ -73,21 +74,21 @@ namespace CiccioGest.Infrastructure.Conf
             }
         }
 
-        public AppConf GetCurrent()
+        public static CiccioGestConf GetCurrent()
         {
-            AppConfs.Available.TryGetValue(AppConfs.Current, out AppConf value);
+            AppConfs.Available.TryGetValue(AppConfs.Current, out CiccioGestConf value);
             return value;
         }
 
-        public ICollection<AppConf> GetAll()
+        public static ICollection<CiccioGestConf> GetAll()
         {
             return AppConfs.Available.Values;
         }
 
-        public void LoadSample()
+        public static void LoadSample()
         {
-            privateAppConfs = new AppConfs();
-            var mysql = new AppConf()
+            privateAppConfs = new CiccioGestConfs();
+            var mysql = new CiccioGestConf()
             {
                 CS = "server=localhost;User Id=CiccioGestNhb;password=CiccioGestNhb;database=CiccioGestNhb",
                 DataAccess = Storage.NHibernate,
@@ -96,7 +97,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "mysql"
             };
             privateAppConfs.Available.Add(mysql.Name, mysql);
-            var ssee1 = new AppConf()
+            var ssee1 = new CiccioGestConf()
             {
                 CS = @"Data Source=CICCIOBOOK\SQLEXPRESS;Initial Catalog=CiccioGestNhb;Integrated Security=True",
                 DataAccess = Storage.NHibernate,
@@ -105,7 +106,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "ssee1"
             };
             privateAppConfs.Available.Add(ssee1.Name, ssee1);
-            var ssee2 = new AppConf()
+            var ssee2 = new CiccioGestConf()
             {
                 CS = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\CiccioGestNhb.mdf;Integrated Security=True",
                 DataAccess = Storage.NHibernate,
@@ -114,7 +115,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "ssee2"
             };
             privateAppConfs.Available.Add(ssee2.Name, ssee2);
-            var sqlite1 = new AppConf()
+            var sqlite1 = new CiccioGestConf()
             {
                 CS = "Data Source=CiccioGestNhb.db;Version=3;BinaryGuid=False",
                 DataAccess = Storage.NHibernate,
@@ -123,7 +124,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "sqlite1"
             };
             privateAppConfs.Available.Add(sqlite1.Name, sqlite1);
-            var sqlite2 = new AppConf()
+            var sqlite2 = new CiccioGestConf()
             {
                 CS = "Data Source=CiccioGestNhb.db;Version=3;Default IsolationLevel=ReadCommitted;BinaryGuid=False",
                 DataAccess = Storage.NHibernate,
@@ -132,7 +133,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "sqlite2"
             };
             privateAppConfs.Available.Add(sqlite2.Name, sqlite2);
-            var wcf1 = new AppConf()
+            var wcf1 = new CiccioGestConf()
             {
                 CS = "http://localhost:8000",
                 DataAccess = Storage.WCF,
@@ -141,7 +142,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "wcf1"
             };
             privateAppConfs.Available.Add(wcf1.Name, wcf1);
-            var wcf2 = new AppConf()
+            var wcf2 = new CiccioGestConf()
             {
                 CS = "http://localhost:8100",
                 DataAccess = Storage.WCF,
@@ -150,7 +151,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "wcf2"
             };
             privateAppConfs.Available.Add(wcf2.Name, wcf2);
-            var db4o = new AppConf()
+            var db4o = new CiccioGestConf()
             {
                 CS = "CiccioGest.db4o",
                 DataAccess = Storage.Db4o,
@@ -159,7 +160,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "db4o"
             };
             privateAppConfs.Available.Add(db4o.Name, db4o);
-            var memory = new AppConf()
+            var memory = new CiccioGestConf()
             {
                 CS = "",
                 DataAccess = Storage.LiteDb,
@@ -168,7 +169,7 @@ namespace CiccioGest.Infrastructure.Conf
                 Name = "memory"
             };
             privateAppConfs.Available.Add(memory.Name, memory);
-            var litedb = new AppConf()
+            var litedb = new CiccioGestConf()
             {
                 CS = "CiccioGest.db",
                 DataAccess = Storage.LiteDb,

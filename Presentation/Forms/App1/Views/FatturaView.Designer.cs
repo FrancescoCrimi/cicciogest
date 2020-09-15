@@ -152,7 +152,7 @@
             this.toolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(502, 28);
+            this.menuStrip.Size = new System.Drawing.Size(622, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -269,7 +269,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(502, 325);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(622, 405);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // dettagliDataGridView
@@ -295,7 +295,7 @@
             this.dettagliDataGridView.RowHeadersVisible = false;
             this.dettagliDataGridView.RowHeadersWidth = 51;
             this.dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dettagliDataGridView.Size = new System.Drawing.Size(496, 232);
+            this.dettagliDataGridView.Size = new System.Drawing.Size(616, 312);
             this.dettagliDataGridView.TabIndex = 6;
             this.dettagliDataGridView.TabStop = false;
             this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DettagliDataGridView_CellClick);
@@ -372,7 +372,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(496, 83);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(616, 83);
             this.tableLayoutPanel2.TabIndex = 7;
             // 
             // groupBox1
@@ -430,7 +430,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(179, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(314, 77);
+            this.groupBox2.Size = new System.Drawing.Size(434, 77);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dettaglio";
@@ -457,7 +457,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(308, 56);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(428, 56);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // totaleTextBox1
@@ -503,7 +503,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 353);
+            this.ClientSize = new System.Drawing.Size(622, 433);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;

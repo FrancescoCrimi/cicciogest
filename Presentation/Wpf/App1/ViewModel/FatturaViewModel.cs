@@ -46,7 +46,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             else
             {
                 RegistraMessaggi();
-                MostraFattura(new Fattura());
+                //MostraFattura(new Fattura());
             }
             logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
@@ -55,7 +55,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() => MostraFattura(new Fattura()));
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() => { } /*MostraFattura(new Fattura())*/);
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
         {

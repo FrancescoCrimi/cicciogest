@@ -43,12 +43,8 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
             }
             else
             {
-                var confmgr = new ConfigurationManager();
-                //confmgr.LoadSample();
-                //confmgr.WriteConfiguration();
-                //confmgr.ReadConfiguration();
-                IAppConf conf = confmgr.GetCurrent();
-                windsor.Register(Component.For<IAppConf>().Instance(conf));
+                CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
+                windsor.Register(Component.For<CiccioGestConf>().Instance(conf));
                 windsor.Install(new CiccioGest.Presentation.Uwp.Client.MyInstaller());
             }
 

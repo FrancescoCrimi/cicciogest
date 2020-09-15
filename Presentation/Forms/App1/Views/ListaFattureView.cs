@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
@@ -33,16 +34,20 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             var listFatture = await fatturaService.GetFatture();
             fattureBindingSource.DataSource = listFatture;
             fattureDataGridView.ClearSelection();
+            logger.Debug("Loaded");
         }
 
         private void FattureDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (fattureBindingSource.Current != null)
             {
-                var IdFattura = ((FatturaReadOnly)fattureBindingSource.Current).Id;
-                var fv = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", IdFattura));
-                fv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                fv.Show();
+                using (kernel.BeginScope())
+                {
+                    var IdFattura = ((FatturaReadOnly)fattureBindingSource.Current).Id;
+                    var fv = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", IdFattura));
+                    fv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+                    fv.Show();
+                }
                 Close();
             }
         }

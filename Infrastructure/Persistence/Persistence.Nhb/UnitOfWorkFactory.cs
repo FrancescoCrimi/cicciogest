@@ -12,11 +12,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
     internal class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly IAppConf conf;
+        private readonly CiccioGestConf conf;
         private readonly ILogger logger;
         private static ISessionFactory sessionFactory;
 
-        public UnitOfWorkFactory(IAppConf conf, ILogger logger)
+        public UnitOfWorkFactory(CiccioGestConf conf, ILogger logger)
         {
             this.conf = conf;
             this.logger = logger;

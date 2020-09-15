@@ -13,7 +13,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         private readonly ILogger logger;
         private readonly IKernel kernel;
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
-        private ConfigurationManager confmgr;
+        //private CiccioGestConfMgr confmgr;
 
         public SettingView(ILogger logger,
                            IKernel kernel,
@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             this.unitOfWorkFactory = unitOfWorkFactory;
             dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
             databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
-            confmgr = new ConfigurationManager();
+            //confmgr = new CiccioGestConfMgr();
             CaricaConf();
         }
 
@@ -66,9 +66,9 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private void CaricaConf()
         {
-            var asdf = confmgr.GetAll();
+            var asdf = CiccioGestConfMgr.GetAll();
             appConfsBindingSource.DataSource = asdf;
-            var assa = confmgr.GetCurrent();
+            var assa = CiccioGestConfMgr.GetCurrent();
             appConfBindingSource.DataSource = assa;
         }
 
@@ -76,8 +76,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             if (appConfsBindingSource.Current != null)
             {
-                AppConf cnf = (AppConf)appConfsBindingSource.Current;
-                //appConfBindingSource.DataSource = null;
+                CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
                 appConfBindingSource.DataSource = cnf;
             }
         }
@@ -85,12 +84,12 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         private void nuovoToolStripButton_Click(object sender, EventArgs e)
         {
             appConfBindingSource.DataSource = null;
-            appConfBindingSource.DataSource = new AppConf();
+            appConfBindingSource.DataSource = new CiccioGestConf();
         }
 
         private void salvaToolStripButton_Click(object sender, EventArgs e)
         {
-            confmgr.Save();
+            CiccioGestConfMgr.Save();
             CaricaConf();
         }
 
@@ -98,12 +97,12 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             if (appConfBindingSource.DataSource != null)
             {
-                AppConf cnf = (AppConf)appConfsBindingSource.Current;
-                confmgr.Add(cnf);
+                CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
+                CiccioGestConfMgr.Add(cnf);
                 appConfBindingSource.DataSource = null;
-                appConfBindingSource.DataSource = new AppConf();
+                appConfBindingSource.DataSource = new CiccioGestConf();
                 appConfsBindingSource.DataSource = null;
-                appConfsBindingSource.DataSource = confmgr.GetAll();
+                appConfsBindingSource.DataSource = CiccioGestConfMgr.GetAll();
             }
         }
 
@@ -111,10 +110,10 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             if (appConfsBindingSource.Current != null)
             {
-                AppConf cnf = (AppConf)appConfsBindingSource.Current;
-                confmgr.Remove(cnf);
+                CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
+                CiccioGestConfMgr.Remove(cnf);
                 appConfsBindingSource.DataSource = null;
-                appConfsBindingSource.DataSource = confmgr.GetAll();
+                appConfsBindingSource.DataSource = CiccioGestConfMgr.GetAll();
             }
         }
 
@@ -122,10 +121,10 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             if (appConfsBindingSource != null)
             {
-                AppConf asdf = (AppConf)appConfsBindingSource.Current;
-                if (confmgr.GetAll().Contains(asdf))
+                CiccioGestConf asdf = (CiccioGestConf)appConfsBindingSource.Current;
+                if (CiccioGestConfMgr.GetAll().Contains(asdf))
                 {
-                    confmgr.SetCurrent(asdf);
+                    CiccioGestConfMgr.SetCurrent(asdf);
                 }
                 else
                     MessageBox.Show("Prima aggiungi la conf");
@@ -136,7 +135,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             try
             {
-                confmgr.LoadSample();
+                CiccioGestConfMgr.LoadSample();
                 CaricaConf();
             }
             catch (Exception ex)

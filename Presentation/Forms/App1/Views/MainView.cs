@@ -63,6 +63,7 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private void fattureToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            logger.Debug("Clicked");
             using (kernel.BeginScope())
             {
                 var sfv = kernel.Resolve<ListaFattureView>();

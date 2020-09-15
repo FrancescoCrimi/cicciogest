@@ -15,31 +15,41 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         private readonly ILogger logger;
         private readonly IKernel kernel;
         private readonly IFatturaService fatturaService;
-        private readonly Fattura fattura;
-        //private readonly int idFattura;
-
-        //public FatturaView(ILogger logger,
-        //                   IKernel kernel,
-        //                   IFatturaService fatturaService)
-        //    : this(logger, kernel, fatturaService, 0)
-        //{ }
+        private Fattura fattura;
+        private readonly int idFattura;
+        private readonly int idCliente;
 
         public FatturaView(ILogger logger,
                            IKernel kernel,
                            IFatturaService fatturaService,
-                           Fattura fattura)
+                           int idFattura = 0,
+                           int idCliente = 0)
         {
+            if (idFattura == 0 & idCliente == 0)
+                throw new Exception("idFattura e idCliente non possono essere entrambi 0");
+
             this.logger = logger;
             this.kernel = kernel;
             this.fatturaService = fatturaService;
-            this.fattura = fattura;
-            //this.idFattura = idFattura;
+            this.idFattura = idFattura;
+            this.idCliente = idCliente;
             InitializeComponent();
-            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
+
 
         private async void FatturaView_Load(object sender, EventArgs e)
         {
+            
+            if (idFattura != 0)
+            {
+                fattura = await fatturaService.GetFattura(idFattura);
+            }
+            else
+            {
+                var cliente = await fatturaService.GetCliente(idCliente);
+                fattura = new Fattura(cliente);
+            }
             await ApriFattura(fattura);
         }
 

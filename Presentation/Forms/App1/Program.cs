@@ -2,12 +2,10 @@
 using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
-using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.AppForm.Views;
 using CiccioGest.Presentation.Forms.App1.Views;
 using System;
-using System.Reflection;
 
 namespace CiccioGest.Presentation.Forms.App1
 {
@@ -28,14 +26,10 @@ namespace CiccioGest.Presentation.Forms.App1
         {
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-            var confmgr = new ConfigurationManager();
-            //confmgr.SampleConf();
-            //confmgr.WriteConfiguration();
-            //confmgr.ReadConfiguration();
-            IAppConf conf = confmgr.GetCurrent();
-            windsor.Register(
-                Component.For<IWindsorContainer>().Instance(windsor),
-                Component.For<IAppConf>().Instance(conf));
+
+            CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
+            windsor.Register(Component.For<CiccioGestConf>().Instance(conf));
+
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             windsor.Register(
                 Component.For<MainView>().LifestyleTransient(),
