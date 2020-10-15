@@ -39,24 +39,21 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         public void Commit()
         {
-            session.Transaction.Commit();
+            session.GetCurrentTransaction().Commit();
             DisposeSession();
             session.BeginTransaction();
         }
 
-        public Task CommitAsync()
+        public async Task CommitAsync()
         {
-            return Task.Run(() =>
-            {
-                session.Transaction.Rollback();
-                DisposeSession();
-                session.BeginTransaction();
-            });
+            await session.GetCurrentTransaction().RollbackAsync();
+            DisposeSession();
+            session.BeginTransaction();
         }
 
         public void Rollback()
         {
-            session.Transaction.Rollback();
+            session.GetCurrentTransaction().Rollback();
             DisposeSession();
             session.BeginTransaction();
         }
@@ -67,13 +64,13 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             {
                 //try
                 //{
-                if (session.Transaction != null)
+                if (session.GetCurrentTransaction() != null)
                 {
                     try
                     {
-                        if (session.Transaction.IsActive)
+                        if (session.GetCurrentTransaction().IsActive)
                         {
-                            session.Transaction.Rollback();
+                            session.GetCurrentTransaction().Rollback();
                         }
                         //session.Transaction.Dispose();
                     }

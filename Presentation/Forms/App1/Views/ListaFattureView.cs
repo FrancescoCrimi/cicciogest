@@ -3,7 +3,7 @@ using Castle.MicroKernel;
 using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.AppForm.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,10 +46,34 @@ namespace CiccioGest.Presentation.Forms.App1.Views
                     var IdFattura = ((FatturaReadOnly)fattureBindingSource.Current).Id;
                     var fv = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", IdFattura));
                     fv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                    fv.Show();
+                    fv.ShowDialog();
                 }
-                Close();
+                //Close();
             }
+        }
+
+        private void nuovaToolStripButton_Click(object sender, EventArgs e)
+        {
+            using (kernel.BeginScope())
+            {
+                var lcd = kernel.Resolve<ClientiDialog>();
+                lcd.ShowDialog();
+                if (lcd.Cliente != null)
+                {
+                    var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
+                    asasa.ShowDialog();
+                }
+            }
+        }
+
+        private void apriToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void esciToolStripButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

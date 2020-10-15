@@ -36,19 +36,6 @@
             System.Windows.Forms.Label nomeLabel1;
             System.Windows.Forms.Label totaleLabel2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FatturaView));
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.fatturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuovaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.apriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salvaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.esciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dettagliToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuovoDettaglioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aggiungiDettaglioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rimuoviDettaglioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dettagliDataGridView = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,13 +57,21 @@
             this.quantitàTextBox = new System.Windows.Forms.TextBox();
             this.prezzoProdottoTextBox = new System.Windows.Forms.TextBox();
             this.nomeProdottoTextBox = new System.Windows.Forms.TextBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.esciToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.eliminaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.nuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aggiungiToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.rimuoviToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             nomeProdottoLabel = new System.Windows.Forms.Label();
             prezzoProdottoLabel = new System.Windows.Forms.Label();
             quantitàLabel = new System.Windows.Forms.Label();
             totaleLabel1 = new System.Windows.Forms.Label();
             nomeLabel1 = new System.Windows.Forms.Label();
             totaleLabel2 = new System.Windows.Forms.Label();
-            this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dettagliBindingSource)).BeginInit();
@@ -87,6 +82,7 @@
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dettaglioBindingSource)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // nomeProdottoLabel
@@ -143,133 +139,22 @@
             totaleLabel2.TabIndex = 2;
             totaleLabel2.Text = "Totale:";
             // 
-            // menuStrip
-            // 
-            this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fatturaToolStripMenuItem,
-            this.dettagliToolStripMenuItem,
-            this.toolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(622, 28);
-            this.menuStrip.TabIndex = 0;
-            this.menuStrip.Text = "menuStrip1";
-            // 
-            // fatturaToolStripMenuItem
-            // 
-            this.fatturaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuovaToolStripMenuItem,
-            this.apriToolStripMenuItem,
-            this.salvaToolStripMenuItem,
-            this.eliminaToolStripMenuItem,
-            this.esciToolStripMenuItem});
-            this.fatturaToolStripMenuItem.Name = "fatturaToolStripMenuItem";
-            this.fatturaToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
-            this.fatturaToolStripMenuItem.Text = "Fattura";
-            // 
-            // nuovaToolStripMenuItem
-            // 
-            this.nuovaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuovaToolStripMenuItem.Image")));
-            this.nuovaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovaToolStripMenuItem.Name = "nuovaToolStripMenuItem";
-            this.nuovaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.nuovaToolStripMenuItem.Text = "Nuova";
-            this.nuovaToolStripMenuItem.Click += new System.EventHandler(this.NuovaToolStripMenuItem_Click);
-            // 
-            // apriToolStripMenuItem
-            // 
-            this.apriToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Apri;
-            this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
-            this.apriToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.apriToolStripMenuItem.Text = "Apri";
-            this.apriToolStripMenuItem.Click += new System.EventHandler(this.ApriToolStripMenuItem_Click);
-            // 
-            // salvaToolStripMenuItem
-            // 
-            this.salvaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripMenuItem.Image")));
-            this.salvaToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.salvaToolStripMenuItem.Name = "salvaToolStripMenuItem";
-            this.salvaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.salvaToolStripMenuItem.Text = "Salva";
-            this.salvaToolStripMenuItem.Click += new System.EventHandler(this.SalvaToolStripMenuItem_Click);
-            // 
-            // eliminaToolStripMenuItem
-            // 
-            this.eliminaToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Delete;
-            this.eliminaToolStripMenuItem.Name = "eliminaToolStripMenuItem";
-            this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.eliminaToolStripMenuItem.Text = "Elimina";
-            this.eliminaToolStripMenuItem.Click += new System.EventHandler(this.EliminaToolStripMenuItem_Click);
-            // 
-            // esciToolStripMenuItem
-            // 
-            this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
-            this.esciToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.esciToolStripMenuItem.Text = "Esci";
-            this.esciToolStripMenuItem.Click += new System.EventHandler(this.EsciToolStripMenuItem_Click);
-            // 
-            // dettagliToolStripMenuItem
-            // 
-            this.dettagliToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuovoDettaglioToolStripMenuItem,
-            this.aggiungiDettaglioToolStripMenuItem,
-            this.rimuoviDettaglioToolStripMenuItem});
-            this.dettagliToolStripMenuItem.Name = "dettagliToolStripMenuItem";
-            this.dettagliToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
-            this.dettagliToolStripMenuItem.Text = "Dettagli";
-            // 
-            // nuovoDettaglioToolStripMenuItem
-            // 
-            this.nuovoDettaglioToolStripMenuItem.Name = "nuovoDettaglioToolStripMenuItem";
-            this.nuovoDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
-            this.nuovoDettaglioToolStripMenuItem.Text = "Nuovo";
-            this.nuovoDettaglioToolStripMenuItem.Click += new System.EventHandler(this.NuovoDettaglioToolStripMenuItem_Click);
-            // 
-            // aggiungiDettaglioToolStripMenuItem
-            // 
-            this.aggiungiDettaglioToolStripMenuItem.Name = "aggiungiDettaglioToolStripMenuItem";
-            this.aggiungiDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
-            this.aggiungiDettaglioToolStripMenuItem.Text = "Aggiungi";
-            this.aggiungiDettaglioToolStripMenuItem.Click += new System.EventHandler(this.AggiungiDettaglioToolStripMenuItem_Click);
-            // 
-            // rimuoviDettaglioToolStripMenuItem
-            // 
-            this.rimuoviDettaglioToolStripMenuItem.Name = "rimuoviDettaglioToolStripMenuItem";
-            this.rimuoviDettaglioToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
-            this.rimuoviDettaglioToolStripMenuItem.Text = "Rimuovi";
-            this.rimuoviDettaglioToolStripMenuItem.Click += new System.EventHandler(this.RimuoviDettaglioToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem
-            // 
-            this.toolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.toolStripMenuItem.Name = "toolStripMenuItem";
-            this.toolStripMenuItem.Size = new System.Drawing.Size(30, 24);
-            this.toolStripMenuItem.Text = "?";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.About;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.dettagliDataGridView, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dettagliDataGridView, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(622, 405);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(622, 433);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // dettagliDataGridView
@@ -287,7 +172,7 @@
             this.totaleDataGridViewTextBoxColumn});
             this.dettagliDataGridView.DataSource = this.dettagliBindingSource;
             this.dettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dettagliDataGridView.Location = new System.Drawing.Point(3, 91);
+            this.dettagliDataGridView.Location = new System.Drawing.Point(3, 122);
             this.dettagliDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dettagliDataGridView.MultiSelect = false;
             this.dettagliDataGridView.Name = "dettagliDataGridView";
@@ -295,7 +180,7 @@
             this.dettagliDataGridView.RowHeadersVisible = false;
             this.dettagliDataGridView.RowHeadersWidth = 51;
             this.dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dettagliDataGridView.Size = new System.Drawing.Size(616, 312);
+            this.dettagliDataGridView.Size = new System.Drawing.Size(616, 309);
             this.dettagliDataGridView.TabIndex = 6;
             this.dettagliDataGridView.TabStop = false;
             this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DettagliDataGridView_CellClick);
@@ -363,12 +248,12 @@
             // 
             this.tableLayoutPanel2.AutoSize = true;
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 34);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -382,7 +267,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(170, 77);
+            this.groupBox1.Size = new System.Drawing.Size(199, 77);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Fattura";
@@ -403,7 +288,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(164, 56);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(193, 56);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // totaleTextBox2
@@ -412,7 +297,7 @@
             this.totaleTextBox2.Location = new System.Drawing.Point(61, 31);
             this.totaleTextBox2.Name = "totaleTextBox2";
             this.totaleTextBox2.ReadOnly = true;
-            this.totaleTextBox2.Size = new System.Drawing.Size(100, 22);
+            this.totaleTextBox2.Size = new System.Drawing.Size(129, 22);
             this.totaleTextBox2.TabIndex = 3;
             // 
             // nomeTextBox
@@ -420,7 +305,7 @@
             this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fatturaBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nomeTextBox.Location = new System.Drawing.Point(61, 3);
             this.nomeTextBox.Name = "nomeTextBox";
-            this.nomeTextBox.Size = new System.Drawing.Size(100, 22);
+            this.nomeTextBox.Size = new System.Drawing.Size(129, 22);
             this.nomeTextBox.TabIndex = 1;
             // 
             // groupBox2
@@ -428,9 +313,9 @@
             this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(179, 3);
+            this.groupBox2.Location = new System.Drawing.Point(208, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(434, 77);
+            this.groupBox2.Size = new System.Drawing.Size(405, 77);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dettaglio";
@@ -457,7 +342,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(428, 56);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(399, 56);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // totaleTextBox1
@@ -499,19 +384,103 @@
             this.nomeProdottoTextBox.Size = new System.Drawing.Size(100, 22);
             this.nomeProdottoTextBox.TabIndex = 1;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.esciToolStripButton,
+            this.salvaToolStripButton,
+            this.eliminaToolStripButton,
+            this.toolStripSeparator,
+            this.nuovoToolStripButton,
+            this.aggiungiToolStripButton,
+            this.rimuoviToolStripButton1,
+            this.ToolStripButton});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(622, 31);
+            this.toolStrip1.TabIndex = 8;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // esciToolStripButton
+            // 
+            this.esciToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("esciToolStripButton.Image")));
+            this.esciToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.esciToolStripButton.Name = "esciToolStripButton";
+            this.esciToolStripButton.Size = new System.Drawing.Size(58, 28);
+            this.esciToolStripButton.Text = "Esci";
+            this.esciToolStripButton.Click += new System.EventHandler(this.esciToolStripButton_Click);
+            // 
+            // salvaToolStripButton
+            // 
+            this.salvaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripButton.Image")));
+            this.salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.salvaToolStripButton.Name = "salvaToolStripButton";
+            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
+            this.salvaToolStripButton.Text = "Salva";
+            this.salvaToolStripButton.Click += new System.EventHandler(this.salvaToolStripButton_Click);
+            // 
+            // eliminaToolStripButton
+            // 
+            this.eliminaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("eliminaToolStripButton.Image")));
+            this.eliminaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.eliminaToolStripButton.Name = "eliminaToolStripButton";
+            this.eliminaToolStripButton.Size = new System.Drawing.Size(82, 24);
+            this.eliminaToolStripButton.Text = "Elimina";
+            this.eliminaToolStripButton.Click += new System.EventHandler(this.eliminaToolStripButton_Click);
+            // 
+            // ToolStripButton
+            // 
+            this.ToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton.Image")));
+            this.ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolStripButton.Name = "ToolStripButton";
+            this.ToolStripButton.Size = new System.Drawing.Size(29, 24);
+            this.ToolStripButton.Text = "&?";
+            this.ToolStripButton.Click += new System.EventHandler(this.ToolStripButton_Click);
+            // 
+            // nuovoToolStripButton
+            // 
+            this.nuovoToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoToolStripButton.Image")));
+            this.nuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuovoToolStripButton.Name = "nuovoToolStripButton";
+            this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
+            this.nuovoToolStripButton.Text = "Nuovo";
+            this.nuovoToolStripButton.Click += new System.EventHandler(this.nuovoToolStripButton_Click);
+            // 
+            // aggiungiToolStripButton
+            // 
+            this.aggiungiToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiungiToolStripButton.Image")));
+            this.aggiungiToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aggiungiToolStripButton.Name = "aggiungiToolStripButton";
+            this.aggiungiToolStripButton.Size = new System.Drawing.Size(94, 24);
+            this.aggiungiToolStripButton.Text = "Aggiungi";
+            this.aggiungiToolStripButton.Click += new System.EventHandler(this.aggiungiToolStripButton_Click);
+            // 
+            // rimuoviToolStripButton1
+            // 
+            this.rimuoviToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("rimuoviToolStripButton1.Image")));
+            this.rimuoviToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rimuoviToolStripButton1.Name = "rimuoviToolStripButton1";
+            this.rimuoviToolStripButton1.Size = new System.Drawing.Size(87, 24);
+            this.rimuoviToolStripButton1.Text = "Rimuovi";
+            this.rimuoviToolStripButton1.Click += new System.EventHandler(this.rimuoviToolStripButton1_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 27);
+            // 
             // FatturaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 433);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.menuStrip);
-            this.MainMenuStrip = this.menuStrip;
             this.Name = "FatturaView";
             this.Text = "Fattura";
             this.Load += new System.EventHandler(this.FatturaView_Load);
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).EndInit();
@@ -528,22 +497,15 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dettaglioBindingSource)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem fatturaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nuovaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salvaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem esciToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.DataGridView dettagliDataGridView;
         private System.Windows.Forms.BindingSource dettagliBindingSource;
         private System.Windows.Forms.BindingSource dettaglioBindingSource;
@@ -559,15 +521,19 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox totaleTextBox2;
         private System.Windows.Forms.TextBox nomeTextBox;
-        private System.Windows.Forms.ToolStripMenuItem dettagliToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nuovoDettaglioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aggiungiDettaglioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rimuoviDettaglioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem apriToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeProdottoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
         private System.Windows.Forms.DataGridViewTextBoxColumn prezzoProdottoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totaleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton esciToolStripButton;
+        private System.Windows.Forms.ToolStripButton salvaToolStripButton;
+        private System.Windows.Forms.ToolStripButton eliminaToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripButton nuovoToolStripButton;
+        private System.Windows.Forms.ToolStripButton aggiungiToolStripButton;
+        private System.Windows.Forms.ToolStripButton rimuoviToolStripButton1;
+        private System.Windows.Forms.ToolStripButton ToolStripButton;
     }
 }

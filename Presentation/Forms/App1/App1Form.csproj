@@ -9,9 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CiccioGest.Presentation.AppForm</RootNamespace>
     <AssemblyName>App1</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
@@ -117,33 +117,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Drawing.Design" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Presenter\MainPresenter.cs" />
@@ -160,6 +141,12 @@
     </Compile>
     <Compile Include="Views\CategoriaView.Designer.cs">
       <DependentUpon>CategoriaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientiDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ClientiDialog.Designer.cs">
+      <DependentUpon>ClientiDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\FatturaView.cs">
       <SubType>Form</SubType>
@@ -190,6 +177,12 @@
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MDIParent1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MDIParent1.Designer.cs">
+      <DependentUpon>MDIParent1.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingView.cs">
       <SubType>Form</SubType>
@@ -225,6 +218,9 @@
     <EmbeddedResource Include="Views\CategoriaView.resx">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClientiDialog.resx">
+      <DependentUpon>ClientiDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FatturaView.resx">
       <DependentUpon>FatturaView.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MDIParent1.resx">
+      <DependentUpon>MDIParent1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SettingView.resx">
       <DependentUpon>SettingView.cs</DependentUpon>
@@ -279,29 +278,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BouncyCastle">
-      <Version>1.8.5</Version>
+    <PackageReference Include="Castle.Core">
+      <Version>4.4.1</Version>
     </PackageReference>
     <PackageReference Include="Castle.Core-NLog">
-      <Version>4.4.0</Version>
+      <Version>4.4.1</Version>
     </PackageReference>
     <PackageReference Include="Castle.LoggingFacility">
       <Version>5.0.1</Version>
     </PackageReference>
     <PackageReference Include="Castle.Windsor">
       <Version>5.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="CiccioSoft.NhbCollections">
-      <Version>1.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Google.Protobuf">
-      <Version>3.11.2</Version>
-    </PackageReference>
-    <PackageReference Include="MySql.Data">
-      <Version>8.0.21</Version>
-    </PackageReference>
-    <PackageReference Include="NLog">
-      <Version>4.6.8</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

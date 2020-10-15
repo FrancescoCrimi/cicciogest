@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -28,10 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core-NLog" Version="4.4.0" />
+    <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="Castle.Core-NLog" Version="4.4.1" />
     <PackageReference Include="Castle.LoggingFacility" Version="5.0.1" />
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
-    <PackageReference Include="GtkSharp" Version="3.22.25.56" />
+    <PackageReference Include="GtkSharp" Version="3.22.25.128" />
   </ItemGroup>
 
   <ItemGroup>

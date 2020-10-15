@@ -27,7 +27,7 @@ namespace CiccioGest.Presentation.Forms.App1
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
 
-            CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
+            var conf = CiccioGestConfMgr.GetCurrent();
             windsor.Register(Component.For<CiccioGestConf>().Instance(conf));
 
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
@@ -40,6 +40,7 @@ namespace CiccioGest.Presentation.Forms.App1
                 Component.For<ListaFornitoriView>().LifestyleTransient(),
                 Component.For<ListaArticoliView>().LifeStyle.Transient,
                 Component.For<ListaFattureView>().LifestyleTransient(),
+                Component.For<ClientiDialog>().LifestyleTransient(),
                 Component.For<SettingView>().LifestyleTransient());
         }
     }

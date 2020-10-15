@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Application;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
@@ -12,17 +13,18 @@ namespace CiccioGest.Presentation.Forms.App1.Views
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
-        private readonly IUnitOfWorkFactory unitOfWorkFactory;
+        //private readonly IUnitOfWorkFactory unitOfWorkFactory;
         //private CiccioGestConfMgr confmgr;
 
         public SettingView(ILogger logger,
-                           IKernel kernel,
-                           IUnitOfWorkFactory unitOfWorkFactory)
+                           IKernel kernel
+                           //IUnitOfWorkFactory unitOfWorkFactory
+            )
         {
             InitializeComponent();
             this.logger = logger;
             this.kernel = kernel;
-            this.unitOfWorkFactory = unitOfWorkFactory;
+            //this.unitOfWorkFactory = unitOfWorkFactory;
             dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
             databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
             //confmgr = new CiccioGestConfMgr();
@@ -33,7 +35,8 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             try
             {
-                unitOfWorkFactory.VerifyDataAccess();
+                var uowf = kernel.Resolve<IUnitOfWorkFactory>();
+                uowf.VerifyDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)
@@ -46,7 +49,8 @@ namespace CiccioGest.Presentation.Forms.App1.Views
         {
             try
             {
-                unitOfWorkFactory.CreateDataAccess();
+                var uowf = kernel.Resolve<IUnitOfWorkFactory>();
+                uowf.CreateDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)
@@ -57,9 +61,12 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private async void popolaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var sett = kernel.Resolve<ISettingService>();
-            await sett.LoadSampleData();
-            MessageBox.Show("Eseguito con successo");
+            using (kernel.BeginScope())
+            {
+                var sett = kernel.Resolve<ISettingService>();
+                await sett.LoadSampleData();
+                MessageBox.Show("Eseguito con successo");
+            }
         }
 
 

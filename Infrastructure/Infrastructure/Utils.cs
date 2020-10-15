@@ -24,7 +24,8 @@ namespace CiccioGest.Infrastructure
     {
         MySql = 1,
         SQLite,
-        SSEE
+        SSEE,
+        PgSql
     }
 
     [Serializable]

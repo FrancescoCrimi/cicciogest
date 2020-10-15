@@ -14,15 +14,15 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class ListaClientiView : Form
+    public partial class ClientiDialog : Form
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
         private readonly IClientiFornitoriService clientiFornitoriService;
 
-        public ListaClientiView(ILogger logger,
-                                IKernel kernel,
-                                IClientiFornitoriService clientiFornitoriService)
+        public ClientiDialog(ILogger logger,
+                             IKernel kernel,
+                             IClientiFornitoriService clientiFornitoriService)
         {
             InitializeComponent();
             this.logger = logger;
@@ -32,7 +32,7 @@ namespace CiccioGest.Presentation.AppForm.Views
 
         public Cliente Cliente { get; private set; }
 
-        private async void ListaClienti_Load(object sender, EventArgs e)
+        private async void ClientiDialog_Load(object sender, EventArgs e)
         {
             clientiBindingSource.DataSource = await clientiFornitoriService.GetClienti();
         }
@@ -43,6 +43,7 @@ namespace CiccioGest.Presentation.AppForm.Views
             {
                 Cliente = (Cliente)clientiBindingSource.Current;
             }
+            Close();
         }
     }
 }

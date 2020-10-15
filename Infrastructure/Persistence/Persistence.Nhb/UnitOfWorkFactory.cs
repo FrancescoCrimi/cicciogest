@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Infrastructure.Conf;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
+//using MySqlConnector;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -43,8 +44,14 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             switch (conf.Database)
             {
                 case Databases.MySql:
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
+                    //configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlConnector.MySqlConnectorDriver, NHibernate.Driver.MySqlConnector");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL55Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                    break;
+                case Databases.PgSql:
+                    configuration.SetProperty(Environment.ConnectionDriver, "NHibernate.Driver.NpgsqlDriver");
+                    configuration.SetProperty(Environment.Dialect, "NHibernate.Dialect.PostgreSQL83Dialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
                 case Databases.SQLite:
@@ -79,31 +86,31 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             return configuration;
         }
 
-        private MySqlConnection conn;
-        private MySqlCommand cmd;
-        private bool InitMySql()
-        {
-            try
-            {
-                conn = new MySqlConnection(conf.CS);
-                conn.Open();
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "create database if not exists CiccioGestNhb";
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                //return false;
-                throw ex;
-            }
-            finally
-            {
-                cmd.Dispose();
-                conn.Close();
-                conn.Dispose();
-            }
-        }
+        //private MySqlConnection conn;
+        //private MySqlCommand cmd;
+        //private bool InitMySql()
+        //{
+        //    try
+        //    {
+        //        conn = new MySqlConnection(conf.CS);
+        //        conn.Open();
+        //        cmd = conn.CreateCommand();
+        //        cmd.CommandText = "create database if not exists CiccioGestNhb";
+        //        cmd.ExecuteNonQuery();
+        //        return true;
+        //    }
+        //    catch (MySqlException ex)
+        //    {
+        //        //return false;
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        cmd.Dispose();
+        //        conn.Close();
+        //        conn.Dispose();
+        //    }
+        //}
 
         private bool InitSQLite()
         {
@@ -133,7 +140,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             switch (conf.Database)
             {
                 case Databases.MySql:
-                    InitMySql();
+                    //InitMySql();
                     break;
                 case Databases.SQLite:
                     InitSQLite();
