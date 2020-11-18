@@ -14,9 +14,9 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
         {
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            return Task.Run(() =>
+            await Task.Run(() =>
             {
                 var asd = entities.First(fa => fa.Id == id);
                 if (asd != null) entities.Remove(asd);

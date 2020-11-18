@@ -1,4 +1,4 @@
-﻿namespace CiccioGest.Presentation.Forms.App1.Views
+﻿namespace CiccioGest.Presentation.AppForm.Views
 {
     partial class FatturaView
     {
@@ -61,11 +61,11 @@
             this.esciToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.eliminaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.ToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.nuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.aggiungiToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.rimuoviToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.nuovoDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aggiungiDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.rimuoviDettaglioToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.ToolStripButton = new System.Windows.Forms.ToolStripButton();
             nomeProdottoLabel = new System.Windows.Forms.Label();
             prezzoProdottoLabel = new System.Windows.Forms.Label();
             quantitàLabel = new System.Windows.Forms.Label();
@@ -172,7 +172,7 @@
             this.totaleDataGridViewTextBoxColumn});
             this.dettagliDataGridView.DataSource = this.dettagliBindingSource;
             this.dettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dettagliDataGridView.Location = new System.Drawing.Point(3, 122);
+            this.dettagliDataGridView.Location = new System.Drawing.Point(3, 118);
             this.dettagliDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dettagliDataGridView.MultiSelect = false;
             this.dettagliDataGridView.Name = "dettagliDataGridView";
@@ -180,10 +180,10 @@
             this.dettagliDataGridView.RowHeadersVisible = false;
             this.dettagliDataGridView.RowHeadersWidth = 51;
             this.dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dettagliDataGridView.Size = new System.Drawing.Size(616, 309);
+            this.dettagliDataGridView.Size = new System.Drawing.Size(616, 313);
             this.dettagliDataGridView.TabIndex = 6;
             this.dettagliDataGridView.TabStop = false;
-            this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DettagliDataGridView_CellClick);
+            this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DettagliDataGridViewCellClick);
             // 
             // Id
             // 
@@ -253,7 +253,7 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 34);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 30);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -392,13 +392,13 @@
             this.salvaToolStripButton,
             this.eliminaToolStripButton,
             this.toolStripSeparator,
-            this.nuovoToolStripButton,
-            this.aggiungiToolStripButton,
-            this.rimuoviToolStripButton1,
+            this.nuovoDettaglioToolStripButton,
+            this.aggiungiDettaglioToolStripButton,
+            this.rimuoviDettaglioToolStripButton1,
             this.ToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(622, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(622, 27);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -407,9 +407,9 @@
             this.esciToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("esciToolStripButton.Image")));
             this.esciToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.esciToolStripButton.Name = "esciToolStripButton";
-            this.esciToolStripButton.Size = new System.Drawing.Size(58, 28);
+            this.esciToolStripButton.Size = new System.Drawing.Size(58, 24);
             this.esciToolStripButton.Text = "Esci";
-            this.esciToolStripButton.Click += new System.EventHandler(this.esciToolStripButton_Click);
+            this.esciToolStripButton.Click += new System.EventHandler(this.EsciClick);
             // 
             // salvaToolStripButton
             // 
@@ -418,7 +418,7 @@
             this.salvaToolStripButton.Name = "salvaToolStripButton";
             this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
             this.salvaToolStripButton.Text = "Salva";
-            this.salvaToolStripButton.Click += new System.EventHandler(this.salvaToolStripButton_Click);
+            this.salvaToolStripButton.Click += new System.EventHandler(this.SalvaClick);
             // 
             // eliminaToolStripButton
             // 
@@ -427,7 +427,39 @@
             this.eliminaToolStripButton.Name = "eliminaToolStripButton";
             this.eliminaToolStripButton.Size = new System.Drawing.Size(82, 24);
             this.eliminaToolStripButton.Text = "Elimina";
-            this.eliminaToolStripButton.Click += new System.EventHandler(this.eliminaToolStripButton_Click);
+            this.eliminaToolStripButton.Click += new System.EventHandler(this.EliminaClick);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 27);
+            // 
+            // nuovoDettaglioToolStripButton
+            // 
+            this.nuovoDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoDettaglioToolStripButton.Image")));
+            this.nuovoDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuovoDettaglioToolStripButton.Name = "nuovoDettaglioToolStripButton";
+            this.nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(77, 24);
+            this.nuovoDettaglioToolStripButton.Text = "Nuovo";
+            this.nuovoDettaglioToolStripButton.Click += new System.EventHandler(this.NuovoDettaglioClick);
+            // 
+            // aggiungiDettaglioToolStripButton
+            // 
+            this.aggiungiDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiungiDettaglioToolStripButton.Image")));
+            this.aggiungiDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aggiungiDettaglioToolStripButton.Name = "aggiungiDettaglioToolStripButton";
+            this.aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(94, 24);
+            this.aggiungiDettaglioToolStripButton.Text = "Aggiungi";
+            this.aggiungiDettaglioToolStripButton.Click += new System.EventHandler(this.AggiungiDettaglioClick);
+            // 
+            // rimuoviDettaglioToolStripButton1
+            // 
+            this.rimuoviDettaglioToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("rimuoviDettaglioToolStripButton1.Image")));
+            this.rimuoviDettaglioToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rimuoviDettaglioToolStripButton1.Name = "rimuoviDettaglioToolStripButton1";
+            this.rimuoviDettaglioToolStripButton1.Size = new System.Drawing.Size(87, 24);
+            this.rimuoviDettaglioToolStripButton1.Text = "Rimuovi";
+            this.rimuoviDettaglioToolStripButton1.Click += new System.EventHandler(this.RimuoviDettaglioClick);
             // 
             // ToolStripButton
             // 
@@ -440,38 +472,6 @@
             this.ToolStripButton.Text = "&?";
             this.ToolStripButton.Click += new System.EventHandler(this.ToolStripButton_Click);
             // 
-            // nuovoToolStripButton
-            // 
-            this.nuovoToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoToolStripButton.Image")));
-            this.nuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovoToolStripButton.Name = "nuovoToolStripButton";
-            this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
-            this.nuovoToolStripButton.Text = "Nuovo";
-            this.nuovoToolStripButton.Click += new System.EventHandler(this.nuovoToolStripButton_Click);
-            // 
-            // aggiungiToolStripButton
-            // 
-            this.aggiungiToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiungiToolStripButton.Image")));
-            this.aggiungiToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aggiungiToolStripButton.Name = "aggiungiToolStripButton";
-            this.aggiungiToolStripButton.Size = new System.Drawing.Size(94, 24);
-            this.aggiungiToolStripButton.Text = "Aggiungi";
-            this.aggiungiToolStripButton.Click += new System.EventHandler(this.aggiungiToolStripButton_Click);
-            // 
-            // rimuoviToolStripButton1
-            // 
-            this.rimuoviToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("rimuoviToolStripButton1.Image")));
-            this.rimuoviToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.rimuoviToolStripButton1.Name = "rimuoviToolStripButton1";
-            this.rimuoviToolStripButton1.Size = new System.Drawing.Size(87, 24);
-            this.rimuoviToolStripButton1.Text = "Rimuovi";
-            this.rimuoviToolStripButton1.Click += new System.EventHandler(this.rimuoviToolStripButton1_Click);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 27);
-            // 
             // FatturaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -480,7 +480,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FatturaView";
             this.Text = "Fattura";
-            this.Load += new System.EventHandler(this.FatturaView_Load);
+            this.Load += new System.EventHandler(this.FatturaViewLoad);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).EndInit();
@@ -531,9 +531,9 @@
         private System.Windows.Forms.ToolStripButton salvaToolStripButton;
         private System.Windows.Forms.ToolStripButton eliminaToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripButton nuovoToolStripButton;
-        private System.Windows.Forms.ToolStripButton aggiungiToolStripButton;
-        private System.Windows.Forms.ToolStripButton rimuoviToolStripButton1;
+        private System.Windows.Forms.ToolStripButton nuovoDettaglioToolStripButton;
+        private System.Windows.Forms.ToolStripButton aggiungiDettaglioToolStripButton;
+        private System.Windows.Forms.ToolStripButton rimuoviDettaglioToolStripButton1;
         private System.Windows.Forms.ToolStripButton ToolStripButton;
     }
 }

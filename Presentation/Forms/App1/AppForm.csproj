@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CiccioGest.Presentation.AppForm</RootNamespace>
-    <AssemblyName>App1</AssemblyName>
+    <AssemblyName>AppForm</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,7 +54,7 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CiccioGest.Presentation.Forms.App1.Program</StartupObject>
+    <StartupObject>CiccioGest.Presentation.AppForm.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -127,6 +127,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presenter\CategoriaPresenter.cs" />
+    <Compile Include="Presenter\ListaClientiPresenter.cs" />
+    <Compile Include="Presenter\FatturaPresenter.cs" />
+    <Compile Include="Presenter\IPresenter.cs" />
+    <Compile Include="Presenter\ListaFatturePresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,18 +147,26 @@
     <Compile Include="Views\CategoriaView.Designer.cs">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Class1.cs" />
     <Compile Include="Views\ClientiDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ClientiDialog.Designer.cs">
       <DependentUpon>ClientiDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenter\FatturaDettaglioEventHandler.cs" />
     <Compile Include="Views\FatturaView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\FatturaView.Designer.cs">
       <DependentUpon>FatturaView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ICategoriaView.cs" />
+    <Compile Include="Views\IFatturaView.cs" />
+    <Compile Include="Views\IListaClientiView.cs" />
+    <Compile Include="Views\IListaFattureView.cs" />
+    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IView.cs" />
     <Compile Include="Views\ListaClientiView.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,4 +1,4 @@
-﻿namespace CiccioGest.Presentation.Forms.App1.Views
+﻿namespace CiccioGest.Presentation.AppForm.Views
 {
     partial class ListaFattureView
     {
@@ -71,7 +71,7 @@
             this.fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.fattureDataGridView.Size = new System.Drawing.Size(614, 398);
             this.fattureDataGridView.TabIndex = 6;
-            this.fattureDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FattureDataGridView_CellDoubleClick);
+            this.fattureDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FattureDataGridViewCellDoubleClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -141,7 +141,7 @@
             this.nuovaToolStripButton.Name = "nuovaToolStripButton";
             this.nuovaToolStripButton.Size = new System.Drawing.Size(76, 24);
             this.nuovaToolStripButton.Text = "Nuova";
-            this.nuovaToolStripButton.Click += new System.EventHandler(this.nuovaToolStripButton_Click);
+            this.nuovaToolStripButton.Click += new System.EventHandler(this.NuovaClick);
             // 
             // apriToolStripButton
             // 
@@ -150,7 +150,7 @@
             this.apriToolStripButton.Name = "apriToolStripButton";
             this.apriToolStripButton.Size = new System.Drawing.Size(61, 24);
             this.apriToolStripButton.Text = "Apri";
-            this.apriToolStripButton.Click += new System.EventHandler(this.apriToolStripButton_Click);
+            this.apriToolStripButton.Click += new System.EventHandler(this.ApriClick);
             // 
             // esciToolStripButton
             // 
@@ -159,7 +159,7 @@
             this.esciToolStripButton.Name = "esciToolStripButton";
             this.esciToolStripButton.Size = new System.Drawing.Size(58, 24);
             this.esciToolStripButton.Text = "Esci";
-            this.esciToolStripButton.Click += new System.EventHandler(this.esciToolStripButton_Click);
+            this.esciToolStripButton.Click += new System.EventHandler(this.EsciClick);
             // 
             // ToolStripButton
             // 
@@ -179,7 +179,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ListaFattureView";
             this.Text = "Fatture";
-            this.Load += new System.EventHandler(this.Fatture_Load);
+            this.Load += new System.EventHandler(this.ListaFattureViewLoad);
             ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

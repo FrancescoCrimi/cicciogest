@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Impl", "Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.LiteDB", "Infrastructure\Persistence\Persistence.LiteDB\Persistence.LiteDB.csproj", "{AE48D2EE-11CB-44AF-A99D-9FF4B20F2276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1Form", "Presentation\Forms\App1\App1Form.csproj", "{30476955-DCD7-4EF9-A6E5-F15CD4A78505}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppForm", "Presentation\Forms\App1\AppForm.csproj", "{30476955-DCD7-4EF9-A6E5-F15CD4A78505}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1", "Presentation\Uwp\App1\App1.csproj", "{8645863F-9ACA-4723-802A-45AD8C7A738F}"
 EndProject

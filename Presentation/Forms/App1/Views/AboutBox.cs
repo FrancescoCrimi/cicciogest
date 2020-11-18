@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.Forms.App1.Views
+namespace CiccioGest.Presentation.AppForm.Views
 {
     partial class AboutBox : Form
     {

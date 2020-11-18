@@ -1,79 +1,62 @@
 ﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppForm.Views;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.Forms.App1.Views
+namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class ListaFattureView : Form
+    public partial class ListaFattureView : Form, IListaFattureView
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
-        private readonly IFatturaService fatturaService;
 
-        public ListaFattureView(ILogger logger, IKernel kernel, IFatturaService fatturaService)
+        public event EventHandler EventLoad;
+        public event EventHandler<int> EventSelectFattura;
+        public event EventHandler EventNuova;
+        public event EventHandler EventApri;
+        public event EventHandler EventEsci;
+
+        public ListaFattureView(ILogger logger)
         {
             this.logger = logger;
-            this.kernel = kernel;
-            this.fatturaService = fatturaService;
             InitializeComponent();
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        private async void Fatture_Load(object sender, EventArgs e)
+        public void ViewFatture(IList<FatturaReadOnly> listFatture)
         {
-            var listFatture = await fatturaService.GetFatture();
             fattureBindingSource.DataSource = listFatture;
             fattureDataGridView.ClearSelection();
-            logger.Debug("Loaded");
         }
 
-        private void FattureDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void ListaFattureViewLoad(object s, EventArgs e)
+        {
+            EventLoad?.Invoke(this, e);
+        }
+
+        private void FattureDataGridViewCellDoubleClick(object s, DataGridViewCellEventArgs e)
         {
             if (fattureBindingSource.Current != null)
             {
-                using (kernel.BeginScope())
-                {
-                    var IdFattura = ((FatturaReadOnly)fattureBindingSource.Current).Id;
-                    var fv = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", IdFattura));
-                    fv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                    fv.ShowDialog();
-                }
-                //Close();
+                int IdFattura = ((FatturaReadOnly)fattureBindingSource.Current).Id;
+                EventSelectFattura?.Invoke(this, IdFattura);
             }
         }
 
-        private void nuovaToolStripButton_Click(object sender, EventArgs e)
+        private void NuovaClick(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
-            {
-                var lcd = kernel.Resolve<ClientiDialog>();
-                lcd.ShowDialog();
-                if (lcd.Cliente != null)
-                {
-                    var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
-                    asasa.ShowDialog();
-                }
-            }
+            EventNuova?.Invoke(this, e);
         }
 
-        private void apriToolStripButton_Click(object sender, EventArgs e)
+        private void ApriClick(object sender, EventArgs e)
         {
-
+            EventApri?.Invoke(this, e);
         }
 
-        private void esciToolStripButton_Click(object sender, EventArgs e)
+        private void EsciClick(object sender, EventArgs e)
         {
-
+            EventEsci?.Invoke(this, e);
         }
     }
 }

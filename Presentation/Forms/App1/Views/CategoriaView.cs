@@ -1,30 +1,39 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.Forms.App1.Views
+namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class CategoriaView : Form
+    public partial class CategoriaView : Form, ICategoriaView
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService magazinoService;
 
-        public CategoriaView(
-            ILogger logger,
-            IMagazinoService magazinoService)
+        public event EventHandler LoadEvent;
+        public event EventHandler<Categoria> SalvaCategoriaEvent;
+        public event EventHandler<int> CancellaCategoriaEvent;
+
+        public CategoriaView(ILogger logger)
         {
             InitializeComponent();
             this.logger = logger;
-            this.magazinoService = magazinoService;
         }
 
-        private async void CategoriaView_Load(object sender, EventArgs e)
+        public void MostraCategorie(IList<Categoria> list)
         {
-            await VisualizzaCategorie();
+            categorieBindingSource.DataSource = list;
+            categorieDataGridView.ClearSelection();
+        }
+
+        public void MostraCategoria(Categoria categoria)
+        {
+            CategoriaBindingSource.DataSource = categoria;
+        }
+
+        private void CategoriaView_Load(object s, EventArgs e)
+        {
+            LoadEvent?.Invoke(s, e);
         }
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
@@ -33,15 +42,14 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             CategoriaBindingSource.DataSource = new Categoria();
         }
 
-        private async void SalvaToolStripButton_Click(object sender, EventArgs e)
+        private void SalvaToolStripButton_Click(object s, EventArgs e)
         {
             CategoriaBindingSource.EndEdit();
             if (CategoriaBindingSource.Current is Categoria tp)
             {
                 try
                 {
-                    await magazinoService.SaveCategoria(tp);
-                    await VisualizzaCategorie();
+                    SalvaCategoriaEvent?.Invoke(s, tp);
                 }
                 catch (Exception ex)
                 {
@@ -50,15 +58,14 @@ namespace CiccioGest.Presentation.Forms.App1.Views
             }
         }
 
-        private async void CancellaToolStripButton_Click(object sender, EventArgs e)
+        private  void CancellaToolStripButton_Click(object s, EventArgs e)
         {
             CategoriaBindingSource.EndEdit();
             if (CategoriaBindingSource.Current is Categoria tp)
             {
                 try
                 {
-                    await magazinoService.DeleteCategoria(tp.Id);
-                    await VisualizzaCategorie();
+                    CancellaCategoriaEvent?.Invoke(s, tp.Id);
                 }
                 catch (Exception ex)
                 {
@@ -69,21 +76,13 @@ namespace CiccioGest.Presentation.Forms.App1.Views
 
         private void AboutToolStripButton_Click(object sender, EventArgs e)
         {
-            var about = new AboutBox();
-            about.ShowDialog();
+            new AboutBox().ShowDialog();
         }
 
         private void CategorieDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (categorieBindingSource.Current != null)
                 CategoriaBindingSource.DataSource = categorieBindingSource.Current;
-        }
-
-        private async Task VisualizzaCategorie()
-        {
-            categorieBindingSource.DataSource = await magazinoService.GetCategorie();
-            categorieDataGridView.ClearSelection();
-            CategoriaBindingSource.DataSource = new Categoria();
         }
     }
 }

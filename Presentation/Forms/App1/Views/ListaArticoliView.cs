@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.Forms.App1.Views
+namespace CiccioGest.Presentation.AppForm.Views
 {
     public partial class ListaArticoliView : Form
     {
