@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.AppForm.Views
+namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ListaClientiView : Form, IListaClientiView
     {

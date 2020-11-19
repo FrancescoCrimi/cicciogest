@@ -3,11 +3,9 @@ using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.Presenter;
 using CiccioGest.Presentation.Mvp.View;
 using System;
-using System.Globalization;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.AppForm.Views
+namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class FatturaView : Form, IFatturaView
     {

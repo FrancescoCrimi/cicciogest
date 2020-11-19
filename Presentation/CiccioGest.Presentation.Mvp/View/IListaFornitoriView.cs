@@ -3,7 +3,7 @@ using CiccioGest.Presentation.Mvp.View;
 using System;
 using System.Collections.Generic;
 
-namespace CiccioGest.Presentation.Mvp.Views
+namespace CiccioGest.Presentation.Mvp.View
 {
     public interface IListaFornitoriView : IView
     {

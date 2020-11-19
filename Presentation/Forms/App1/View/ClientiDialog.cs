@@ -3,16 +3,9 @@ using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.AppForm.Views
+namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ClientiDialog : Form
     {

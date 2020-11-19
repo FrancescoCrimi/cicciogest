@@ -7,7 +7,7 @@ using CiccioGest.Infrastructure.Conf;
 using System;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.AppForm.Views
+namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class SettingView : Form
     {

@@ -1,10 +1,11 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Presentation.Mvp.View;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.AppForm.Views
+namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class CategoriaView : Form, ICategoriaView
     {
@@ -13,6 +14,7 @@ namespace CiccioGest.Presentation.AppForm.Views
         public event EventHandler LoadEvent;
         public event EventHandler<Categoria> SalvaCategoriaEvent;
         public event EventHandler<int> CancellaCategoriaEvent;
+        public event EventHandler CloseEvent;
 
         public CategoriaView(ILogger logger)
         {
@@ -20,15 +22,15 @@ namespace CiccioGest.Presentation.AppForm.Views
             this.logger = logger;
         }
 
-        public void MostraCategorie(IList<Categoria> list)
+        public void SetCategoria(Categoria categoria)
+        {
+            CategoriaBindingSource.DataSource = categoria;
+        }
+
+        public void SetCategorie(IList<Categoria> list)
         {
             categorieBindingSource.DataSource = list;
             categorieDataGridView.ClearSelection();
-        }
-
-        public void MostraCategoria(Categoria categoria)
-        {
-            CategoriaBindingSource.DataSource = categoria;
         }
 
         private void CategoriaView_Load(object s, EventArgs e)

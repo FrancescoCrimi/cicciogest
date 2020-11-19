@@ -1,4 +1,4 @@
-﻿namespace CiccioGest.Presentation.AppForm.Views
+﻿namespace CiccioGest.Presentation.AppForm.View
 {
     partial class ListaFornitoriView
     {

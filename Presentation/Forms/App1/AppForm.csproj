@@ -129,76 +129,76 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\AboutBox.cs">
+    <Compile Include="View\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AboutBox.Designer.cs">
+    <Compile Include="View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\CategoriaView.cs">
+    <Compile Include="View\CategoriaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\CategoriaView.Designer.cs">
+    <Compile Include="View\CategoriaView.Designer.cs">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ClientiDialog.cs">
+    <Compile Include="View\ClientiDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ClientiDialog.Designer.cs">
+    <Compile Include="View\ClientiDialog.Designer.cs">
       <DependentUpon>ClientiDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\FatturaView.cs">
+    <Compile Include="View\FatturaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\FatturaView.Designer.cs">
+    <Compile Include="View\FatturaView.Designer.cs">
       <DependentUpon>FatturaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListaClientiView.cs">
+    <Compile Include="View\ListaClientiView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ListaClientiView.Designer.cs">
+    <Compile Include="View\ListaClientiView.Designer.cs">
       <DependentUpon>ListaClientiView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListaFattureView.cs">
+    <Compile Include="View\ListaFattureView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ListaFattureView.Designer.cs">
+    <Compile Include="View\ListaFattureView.Designer.cs">
       <DependentUpon>ListaFattureView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListaFornitoriView.cs">
+    <Compile Include="View\ListaFornitoriView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ListaFornitoriView.Designer.cs">
+    <Compile Include="View\ListaFornitoriView.Designer.cs">
       <DependentUpon>ListaFornitoriView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainView.cs">
+    <Compile Include="View\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MainView.Designer.cs">
+    <Compile Include="View\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MDIParent1.cs">
+    <Compile Include="View\MDIParent1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MDIParent1.Designer.cs">
+    <Compile Include="View\MDIParent1.Designer.cs">
       <DependentUpon>MDIParent1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingView.cs">
+    <Compile Include="View\SettingView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\SettingView.Designer.cs">
+    <Compile Include="View\SettingView.Designer.cs">
       <DependentUpon>SettingView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ArticoloView.cs">
+    <Compile Include="View\ArticoloView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ArticoloView.Designer.cs">
+    <Compile Include="View\ArticoloView.Designer.cs">
       <DependentUpon>ArticoloView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListaArticoliView.cs">
+    <Compile Include="View\ListaArticoliView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ListaArticoliView.Designer.cs">
+    <Compile Include="View\ListaArticoliView.Designer.cs">
       <DependentUpon>ListaArticoliView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -211,40 +211,40 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\AboutBox.resx">
+    <EmbeddedResource Include="View\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CategoriaView.resx">
+    <EmbeddedResource Include="View\CategoriaView.resx">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ClientiDialog.resx">
+    <EmbeddedResource Include="View\ClientiDialog.resx">
       <DependentUpon>ClientiDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\FatturaView.resx">
+    <EmbeddedResource Include="View\FatturaView.resx">
       <DependentUpon>FatturaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ListaClientiView.resx">
+    <EmbeddedResource Include="View\ListaClientiView.resx">
       <DependentUpon>ListaClientiView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ListaFattureView.resx">
+    <EmbeddedResource Include="View\ListaFattureView.resx">
       <DependentUpon>ListaFattureView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ListaFornitoriView.resx">
+    <EmbeddedResource Include="View\ListaFornitoriView.resx">
       <DependentUpon>ListaFornitoriView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainView.resx">
+    <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MDIParent1.resx">
+    <EmbeddedResource Include="View\MDIParent1.resx">
       <DependentUpon>MDIParent1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SettingView.resx">
+    <EmbeddedResource Include="View\SettingView.resx">
       <DependentUpon>SettingView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ArticoloView.resx">
+    <EmbeddedResource Include="View\ArticoloView.resx">
       <DependentUpon>ArticoloView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ListaArticoliView.resx">
+    <EmbeddedResource Include="View\ListaArticoliView.resx">
       <DependentUpon>ListaArticoliView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
@@ -348,9 +348,7 @@
       <Name>Client</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Presenter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

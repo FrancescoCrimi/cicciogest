@@ -1,7 +1,7 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
 using CiccioGest.Application;
-using CiccioGest.Presentation.Mvp.Views;
+using CiccioGest.Presentation.Mvp.View;
 using System;
 
 namespace CiccioGest.Presentation.Mvp.Presenter

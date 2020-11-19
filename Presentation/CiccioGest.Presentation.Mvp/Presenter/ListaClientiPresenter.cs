@@ -1,7 +1,6 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
 using CiccioGest.Application;
-using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Presentation.Mvp.View;
 using System;
 

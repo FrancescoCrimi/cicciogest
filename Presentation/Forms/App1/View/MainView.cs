@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using System.Windows.Forms;
 
-namespace CiccioGest.Presentation.AppForm.Views
+namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class MainView : Form, IMainView
     {
