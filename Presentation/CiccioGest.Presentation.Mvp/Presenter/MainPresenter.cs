@@ -1,12 +1,11 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Presentation.AppForm.Views;
-using CiccioGest.Presentation.Forms.App1.Views;
+using CiccioGest.Presentation.Mvp.View;
 using System;
 using System.Globalization;
 
-namespace CiccioGest.Presentation.AppForm.Presenter
+namespace CiccioGest.Presentation.Mvp.Presenter
 {
     public class MainPresenter : IPresenter
     {
@@ -21,14 +20,14 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.kernel = kernel;
             View = view;
 
-            view.EventLoad += Load;
-            view.EventFatture += Fatture;
-            view.EventClienti += Clienti;
-            view.EventFornitori += Fornitori;
-            view.EventArticoli += Articoli;
-            view.EventCategorie += Categorie;
-            view.EventInformazioni += Informazioni;
-            view.EventOpzioni += Opzioni;
+            view.LoadEvent += Load;
+            view.FattureEvent += Fatture;
+            view.ClientiEvent += Clienti;
+            view.FornitoriEvent += Fornitori;
+            view.ArticoliEvent += Articoli;
+            view.CategorieEvent += Categorie;
+            //view.InformazioniEvent += Informazioni;
+            view.OpzioniEvent += Opzioni;
 
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
@@ -66,8 +65,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             using (kernel.BeginScope())
             {
-                var lfv = kernel.Resolve<ListaFornitoriView>();
-                lfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+                var lfv = kernel.Resolve<ListaFornitoriPresenter>();
+                //lfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
                 lfv.Show();
             }
         }
@@ -76,8 +75,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             using (kernel.BeginScope())
             {
-                ArticoloView pv = kernel.Resolve<ArticoloView>();
-                pv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+                var pv = kernel.Resolve<ArticoloPresenter>();
+                //pv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
                 pv.Show();
             }
         }
@@ -92,19 +91,14 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-        private void Informazioni(object s, EventArgs e)
-        {
-            _ = new AboutBox().ShowDialog();
-        }
-
         private void Opzioni(object s, EventArgs e)
         {
-            using (kernel.BeginScope())
-            {
-                var sett = kernel.Resolve<SettingView>();
-                sett.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                sett.Show();
-            }
+            //using (kernel.BeginScope())
+            //{
+            //    var sett = kernel.Resolve<SettingView>();
+            //    sett.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+            //    sett.Show();
+            //}
         }
 
         public void Show() { }

@@ -1,37 +1,45 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Mvp.View;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class ListaArticoliView : Form
+    public partial class ListaArticoliView : Form, IListaArticoliView
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService magazinoService;
 
-        public ListaArticoliView(ILogger logger, IMagazinoService magazinoService)
+        public event EventHandler<int> SelezionaArticoloEvent;
+        public event EventHandler LoadEvent;
+        public event EventHandler CloseEvent;
+
+        public ListaArticoliView(ILogger logger)
         {
             InitializeComponent();
             this.logger = logger;
-            this.magazinoService = magazinoService;
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public int IdProdotto { get; private set; }
-
-        private async void View_Load(object sender, EventArgs e)
+        private void View_Load(object sender, EventArgs e)
         {
-            articoliBindingSource.DataSource = await magazinoService.GetArticoli();
+            LoadEvent?.Invoke(sender, e);
         }
 
         private void ArticoliDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            IdProdotto = ((ArticoloReadOnly)articoliBindingSource.Current).Id;
-            Close();
+            if(articoliBindingSource.Current is ArticoloReadOnly art)
+            {
+                SelezionaArticoloEvent?.Invoke(sender, art.Id);
+                Close();
+            }
+        }
+
+        public void SetArticoli(IList<ArticoloReadOnly> articoli)
+        {
+            articoliBindingSource.DataSource = articoli;
         }
     }
 }

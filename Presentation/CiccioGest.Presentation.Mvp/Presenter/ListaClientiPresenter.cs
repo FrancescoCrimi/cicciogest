@@ -2,10 +2,10 @@
 using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.AppForm.Views;
+using CiccioGest.Presentation.Mvp.View;
 using System;
 
-namespace CiccioGest.Presentation.AppForm.Presenter
+namespace CiccioGest.Presentation.Mvp.Presenter
 {
     public class ListaClientiPresenter : IPresenter
     {
@@ -24,10 +24,10 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.clientiFornitoriService = clientiFornitoriService;
             this.view = view;
             view.LoadEvent += View_LoadEvent;
-            view.SelezionaClienteEvent += View_SelezionaClienteEvent;
+            view.SelectClienteEvent += View_SelezionaClienteEvent;
         }
 
-        private void View_SelezionaClienteEvent(object sender, Cliente e)
+        private void View_SelezionaClienteEvent(object sender, int e)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private async void View_LoadEvent(object sender, EventArgs e)
         {
             var clienti = await clientiFornitoriService.GetClienti();
-            view.MostraClienti(clienti);
+            view.SetClienti(clienti);
         }
 
         public void Show() => view.Show();

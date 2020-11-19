@@ -2,14 +2,14 @@
 using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppForm.Views;
+using CiccioGest.Presentation.Mvp.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.AppForm.Presenter
+namespace CiccioGest.Presentation.Mvp.Presenter
 {
     public class FatturaPresenter : IPresenter
     {
@@ -30,12 +30,12 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
             view.AggiungiDettaglioEvent += View_AggiungiDettaglioEvent;
             view.ApriFatturaEvent += View_ApriFatturaEvent;
-            view.EliminaEvent += View_EliminaEvent;
-            view.EsciEvent += View_EsciEvent;
+            view.EliminaFatturaEvent += View_EliminaEvent;
+            view.CloseEvent += View_EsciEvent;
             view.LoadEvent += View_LoadEvent;
             view.NuovoDettaglioEvent += View_NuovoDettaglioEvent;
             view.RimuoviDettaglioEvent += View_RimuoviDettaglioEvent;
-            view.SalvaEvent += View_SalvaEvent;
+            view.SalvaFatturaEvent += View_SalvaEvent;
 
             this.logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
@@ -76,10 +76,10 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_NuovoDettaglioEvent(object sender, EventArgs e)
         {
-            ListaArticoliView spv = kernel.Resolve<ListaArticoliView>();
-            spv.ShowDialog();
+            var spv = kernel.Resolve<ListaArticoliPresenter>();
+            spv.Show();
             int idProdotto = spv.IdProdotto;
-            kernel.ReleaseComponent(spv);
+            //kernel.ReleaseComponent(spv);
             if (idProdotto != 0)
             {
                 var articolo = await fatturaService.GetArticolo(idProdotto);
@@ -102,8 +102,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_ApriFatturaEvent(object sender, EventArgs e)
         {
-            var sfv = kernel.Resolve<ListaFattureView>();
-            sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+            var sfv = kernel.Resolve<ListaFatturePresenter>();
+            //sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
             sfv.Show();
         }
 

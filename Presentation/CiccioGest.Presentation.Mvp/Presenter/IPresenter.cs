@@ -1,4 +1,4 @@
-﻿namespace CiccioGest.Presentation.AppForm.Presenter
+﻿namespace CiccioGest.Presentation.Mvp.Presenter
 {
     public interface IPresenter
     {

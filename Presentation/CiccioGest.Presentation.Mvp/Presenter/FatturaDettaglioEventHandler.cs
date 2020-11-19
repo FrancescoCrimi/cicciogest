@@ -1,7 +1,7 @@
 ﻿using CiccioGest.Domain.Documenti;
 using System;
 
-namespace CiccioGest.Presentation.AppForm.Presenter
+namespace CiccioGest.Presentation.Mvp.Presenter
 {
 
     public delegate void FatturaDettaglioEventHandler(object sender, FatturaDettaglioEventArgs e);

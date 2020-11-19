@@ -1,71 +1,69 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Mvp.View;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class ArticoloView : Form
+    public partial class ArticoloView : Form, IArticoloView
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService magazinoService;
 
-        public ArticoloView(
-            ILogger logger,
-            IMagazinoService magazinoService)
+        public event EventHandler AggiungiCategoriaEvent;
+        public event EventHandler ApriArticoloEvent;
+        public event EventHandler<int> EliminaArticoloEvent;
+        public event EventHandler RimuoviCategoriaEvent;
+        public event EventHandler<Articolo> SalvaArticoloEvent;
+        public event EventHandler LoadEvent;
+        public event EventHandler CloseEvent;
+        public event EventHandler<int> SelezionaArticoloEvent;
+
+        public ArticoloView(ILogger logger)
         {
             InitializeComponent();
             this.logger = logger;
-            this.magazinoService = magazinoService;
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        private async void View_Load(object sender, EventArgs e)
-        {
-            await VisualizzaProdotti();
-        }
+        private void View_Load(object s, EventArgs e) => LoadEvent?.Invoke(s, e);
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
         {
             articoloBindingSource.DataSource = new Articolo();
         }
 
-        private async void SalvaToolStripButton_Click(object sender, EventArgs e)
+        private void SalvaToolStripButton_Click(object s, EventArgs e)
         {
             articoloBindingSource.EndEdit();
             if (articoloBindingSource.Current is Articolo p)
             {
                 try
                 {
-                    await magazinoService.SaveArticolo(p);
+                    SalvaArticoloEvent?.Invoke(s, p);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                await VisualizzaProdotti();
             }
         }
 
-        private async void CancellaToolStripButton_Click(object sender, EventArgs e)
+        private void CancellaToolStripButton_Click(object s, EventArgs e)
         {
             articoloBindingSource.EndEdit();
-            Articolo p = articoloBindingSource.Current as Articolo;
-            if (p != null)
+            if (articoloBindingSource.Current is Articolo p)
             {
                 try
                 {
-                    await magazinoService.DeleteArticolo(p.Id);
+                    EliminaArticoloEvent?.Invoke(s, p.Id);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                await VisualizzaProdotti();
             }
         }
 
@@ -75,18 +73,25 @@ namespace CiccioGest.Presentation.AppForm.Views
             about.ShowDialog();
         }
 
-        private async void ProdottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ProdottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (articoliBindingSource.Current != null)
-
-                articoloBindingSource.DataSource = await magazinoService.GetArticolo(((ArticoloReadOnly)articoliBindingSource.Current).Id);
+            if (articoliBindingSource.Current is ArticoloReadOnly art)
+                SelezionaArticoloEvent?.Invoke(sender, art.Id);
         }
 
-        private async Task VisualizzaProdotti()
+        public void SetArticolo(Articolo articolo)
         {
-            categorieBindingSource.DataSource = await magazinoService.GetCategorie();
-            articoliBindingSource.DataSource = await magazinoService.GetArticoli();
-            articoloBindingSource.DataSource = new Articolo();
+            articoloBindingSource.DataSource = articolo;
+        }
+
+        public void SetArticoli(IList<ArticoloReadOnly> list)
+        {
+            articoliBindingSource.DataSource = list;
+        }
+
+        public void SetCategorie(IList<Categoria> list)
+        {
+            categorieBindingSource.DataSource = list;
         }
     }
 }

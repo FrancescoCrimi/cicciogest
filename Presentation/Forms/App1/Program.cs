@@ -3,9 +3,11 @@ using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.AppForm.Presenter;
+//using CiccioGest.Presentation.AppForm.Presenter;
 using CiccioGest.Presentation.AppForm.Views;
-using CiccioGest.Presentation.Forms.App1.Views;
+using CiccioGest.Presentation.Mvp.Presenter;
+using CiccioGest.Presentation.Mvp.View;
+//using CiccioGest.Presentation.Forms.App1.Views;
 using System;
 
 namespace CiccioGest.Presentation.AppForm

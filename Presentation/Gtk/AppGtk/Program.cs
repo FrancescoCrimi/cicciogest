@@ -28,7 +28,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
 
             Init();
 
-            var win = windsor.Resolve<IMainPresenter>().View();
+            var win = windsor.Resolve<MainPresenter>().View();
             app.AddWindow(win);
 
             win.Show();
@@ -46,14 +46,16 @@ namespace CiccioGest.Presentation.Gtk.AppGtk
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
 
             windsor.Register(
+                Component.For<IMainView, MainView>().ImplementedBy<MainView>().LifestyleTransient(),
+                Component.For<MainPresenter>().LifestyleTransient(),
+
                 Component.For<IFatturaPresenter, FatturaPresenter>().ImplementedBy<FatturaPresenter>().LifestyleTransient(),
                 Component.For<IListaArticoliPresenter, ListaArticoliPresenter>().ImplementedBy<ListaArticoliPresenter>().LifestyleTransient(),
                 Component.For<IListaFatturePresenter, ListaFatturePresenter>().ImplementedBy<ListaFatturePresenter>().LifestyleTransient(),
-                Component.For<IMainPresenter, MainPresenter>().ImplementedBy<MainPresenter>().LifestyleTransient(),
                 Component.For<IFatturaView, FatturaView>().ImplementedBy<FatturaView>().LifestyleTransient(),
                 Component.For<IListaArticoliView, ListaArticoliView>().ImplementedBy<ListaArticoliView>().LifestyleTransient(),
-                Component.For<IListaFattureView, ListaFattureView>().ImplementedBy<ListaFattureView>().LifestyleTransient(),
-                Component.For<IMainView, MainView>().ImplementedBy<MainView>().LifestyleTransient());
+                Component.For<IListaFattureView, ListaFattureView>().ImplementedBy<ListaFattureView>().LifestyleTransient()
+                );
         }
     }
 }

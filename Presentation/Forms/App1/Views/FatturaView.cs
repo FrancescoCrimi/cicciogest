@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppForm.Presenter;
+using CiccioGest.Presentation.Mvp.Presenter;
+using CiccioGest.Presentation.Mvp.View;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace CiccioGest.Presentation.AppForm.Views
 
         public event EventHandler LoadEvent;
         public event EventHandler ApriFatturaEvent;
-        public event EventHandler EsciEvent;
-        public event EventHandler<Fattura> SalvaEvent;
-        public event EventHandler<int> EliminaEvent;
+        public event EventHandler CloseEvent;
+        public event EventHandler<Fattura> SalvaFatturaEvent;
+        public event EventHandler<int> EliminaFatturaEvent;
         public event EventHandler NuovoDettaglioEvent;
         public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
         public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
@@ -54,13 +55,13 @@ namespace CiccioGest.Presentation.AppForm.Views
                 dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
         }
 
-        private void EsciClick(object s, EventArgs e) => EsciEvent?.Invoke(s, e);
+        private void EsciClick(object s, EventArgs e) => CloseEvent?.Invoke(s, e);
 
         private void SalvaClick(object s, EventArgs e)
         {
             try
             {
-                SalvaEvent?.Invoke(s, (Fattura)fatturaBindingSource.DataSource);
+                SalvaFatturaEvent?.Invoke(s, (Fattura)fatturaBindingSource.DataSource);
             }
             catch (Exception ex)
             {
@@ -72,7 +73,7 @@ namespace CiccioGest.Presentation.AppForm.Views
         {
             try
             {
-                EliminaEvent?.Invoke(s, ((Fattura)fatturaBindingSource.DataSource).Id);
+                EliminaFatturaEvent?.Invoke(s, ((Fattura)fatturaBindingSource.DataSource).Id);
             }
             catch (Exception ex)
             {

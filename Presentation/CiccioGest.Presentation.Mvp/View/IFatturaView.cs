@@ -1,19 +1,17 @@
 ﻿using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppForm.Presenter;
+using CiccioGest.Presentation.Mvp.Presenter;
 using System;
 
-namespace CiccioGest.Presentation.AppForm.Views
+namespace CiccioGest.Presentation.Mvp.View
 {
     public interface IFatturaView : IView
     {
         event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
         event EventHandler ApriFatturaEvent;
-        event EventHandler<int> EliminaEvent;
-        event EventHandler EsciEvent;
-        event EventHandler LoadEvent;
+        event EventHandler<int> EliminaFatturaEvent;
         event EventHandler NuovoDettaglioEvent;
         event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
-        event EventHandler<Fattura> SalvaEvent;
+        event EventHandler<Fattura> SalvaFatturaEvent;
 
         void SetDettaglio(Dettaglio dettaglio);
         void SetFattura(Fattura fattura);

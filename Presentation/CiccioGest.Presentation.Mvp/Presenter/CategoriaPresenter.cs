@@ -1,14 +1,11 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.AppForm.Views;
+using CiccioGest.Presentation.Mvp.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.AppForm.Presenter
+namespace CiccioGest.Presentation.Mvp.Presenter
 {
     public class CategoriaPresenter : IPresenter
     {
@@ -50,8 +47,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private async Task Refresh()
         {
             var list = await magazinoService.GetCategorie();
-            view.MostraCategorie(list);
-            view.MostraCategoria(new Categoria());
+            view.SetCategorie(list);
+            view.SetCategoria(new Categoria());
         }
     }
 }

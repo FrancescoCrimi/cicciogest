@@ -3,12 +3,12 @@ using Castle.MicroKernel;
 using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppForm.Views;
+using CiccioGest.Presentation.Mvp.View;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace CiccioGest.Presentation.AppForm.Presenter
+namespace CiccioGest.Presentation.Mvp.Presenter
 {
     public class ListaFatturePresenter : IPresenter
     {
@@ -27,11 +27,11 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.view = view;
             this.fatturaService = fatturaService;
 
-            view.EventLoad += Load;
-            view.EventSelectFattura += ApriFattura;
-            view.EventNuova += Nuova;
-            view.EventApri += Apri;
-            view.EventEsci += Esci;
+            view.LoadEvent += Load;
+            view.SelectFatturaEvent += ApriFattura;
+            view.NuovaEvent += Nuova;
+            view.ApriEvent += Apri;
+            view.CloseEvent += Esci;
 
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
@@ -39,7 +39,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private async void Load(object s, EventArgs e)
         {
             IList<FatturaReadOnly> fatture = await fatturaService.GetFatture();
-            view.ViewFatture(fatture);
+            view.SetFatture(fatture);
         }
 
         private void ApriFattura(object sender, int IdFattura)
@@ -57,19 +57,19 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void Nuova(object s, EventArgs e)
         {
-            using (kernel.BeginScope())
-            {
-                var lcd = kernel.Resolve<ClientiDialog>();
-                lcd.ShowDialog();
-                if (lcd.Cliente != null)
-                {
-                    //var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
-                    //asasa.ShowDialog();
-                    var fp = kernel.Resolve<FatturaPresenter>();
-                    fp.NuovaFattura(lcd.Cliente.Id);
-                    fp.Show();
-                }
-            }
+            //using (kernel.BeginScope())
+            //{
+            //    var lcd = kernel.Resolve<ClientiDialog>();
+            //    lcd.ShowDialog();
+            //    if (lcd.Cliente != null)
+            //    {
+            //        //var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
+            //        //asasa.ShowDialog();
+            //        var fp = kernel.Resolve<FatturaPresenter>();
+            //        fp.NuovaFattura(lcd.Cliente.Id);
+            //        fp.Show();
+            //    }
+            //}
         }
 
         private void Apri(object s, EventArgs e)

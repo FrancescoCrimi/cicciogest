@@ -1,37 +1,35 @@
 ﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using CiccioGest.Application;
+using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Presentation.Mvp.Views;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public partial class ListaFornitoriView : Form
+
+    public partial class ListaFornitoriView : Form, IListaFornitoriView
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
-        private readonly IClientiFornitoriService clientiFornitoriService;
 
-        public ListaFornitoriView(ILogger logger,
-                                  IKernel kernel,
-                                  IClientiFornitoriService clientiFornitoriService)
+        public event EventHandler LoadEvent;
+        public event EventHandler<int> SelectFornitoreEvent;
+
+
+        public ListaFornitoriView(ILogger logger)
         {
             InitializeComponent();
             this.logger = logger;
-            this.kernel = kernel;
-            this.clientiFornitoriService = clientiFornitoriService;
         }
 
-        private async void ListaFornitoriView_Load(object sender, EventArgs e)
+        public void SetFornitori(IList<Fornitore> fornitori)
         {
-            fornitoriBindingSource.DataSource = await clientiFornitoriService.GetFornitori();
+            fornitoriBindingSource.DataSource = fornitori;
+        }
+
+        private void ListaFornitoriView_Load(object sender, EventArgs e)
+        {
+            LoadEvent?.Invoke(sender, e);
         }
     }
 }

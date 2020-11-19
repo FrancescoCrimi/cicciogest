@@ -127,12 +127,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenter\CategoriaPresenter.cs" />
-    <Compile Include="Presenter\ListaClientiPresenter.cs" />
-    <Compile Include="Presenter\FatturaPresenter.cs" />
-    <Compile Include="Presenter\IPresenter.cs" />
-    <Compile Include="Presenter\ListaFatturePresenter.cs" />
-    <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AboutBox.cs">
@@ -147,26 +141,18 @@
     <Compile Include="Views\CategoriaView.Designer.cs">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Class1.cs" />
     <Compile Include="Views\ClientiDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ClientiDialog.Designer.cs">
       <DependentUpon>ClientiDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenter\FatturaDettaglioEventHandler.cs" />
     <Compile Include="Views\FatturaView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\FatturaView.Designer.cs">
       <DependentUpon>FatturaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ICategoriaView.cs" />
-    <Compile Include="Views\IFatturaView.cs" />
-    <Compile Include="Views\IListaClientiView.cs" />
-    <Compile Include="Views\IListaFattureView.cs" />
-    <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Views\IView.cs" />
     <Compile Include="Views\ListaClientiView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,12 +339,18 @@
       <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CiccioGest.Presentation.Mvp\Mvp.csproj">
+      <Project>{2cfe3b43-d918-4868-ae1a-a83eb662990b}</Project>
+      <Name>Mvp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Client\Client.csproj">
       <Project>{cd5e37c0-b58e-4bbe-8886-7b4fa0294516}</Project>
       <Name>Client</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Presenter\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

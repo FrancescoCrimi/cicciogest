@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
 using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
@@ -7,11 +8,11 @@ using Gtk;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
-    public class MainPresenter : IMainPresenter
+    public class MainPresenter
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
-        private readonly IMainView mainView;
+        private readonly IMainView view;
 
         public MainPresenter(ILogger logger,
                              IKernel kernel,
@@ -19,39 +20,20 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
         {
             this.logger = logger;
             this.kernel = kernel;
-            this.mainView = mainView;
-            mainView.SetPresenter(this);
+            view = mainView;
+            view.FattureEvent += View_FattureEvent;
             logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
 
-        public void ApriFatture()
+        private void View_FattureEvent(object sender, System.EventArgs e)
         {
-            var asd = kernel.Resolve<IFatturaPresenter>();
-            asd.ShowView();
+            using (kernel.BeginScope())
+            {
+                var asd = kernel.Resolve<IFatturaPresenter>();
+                asd.ShowView();
+            }
         }
 
-        public void ApriArticoli()
-        {
-
-        }
-
-        public void ApriCategorie()
-        {
-
-        }
-
-        public void Load()
-        {
-        }
-
-        public void ShowView()
-        {
-        }
-
-        public void Unload()
-        {
-        }
-
-        public Window View() => (Window)mainView;
+        public Window View() => (Window)view;
     }
 }
