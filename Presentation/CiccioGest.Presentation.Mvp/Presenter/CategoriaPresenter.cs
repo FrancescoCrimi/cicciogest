@@ -10,26 +10,34 @@ namespace CiccioGest.Presentation.Mvp.Presenter
     public class CategoriaPresenter : IPresenter
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService magazinoService;
+        private readonly IMagazinoService service;
         private readonly ICategoriaView view;
+
+        public event EventHandler CloseEvent;
 
         public CategoriaPresenter(ILogger logger,
                                   IMagazinoService magazinoService,
-                                  ICategoriaView view)
+                                  ICategoriaView categoriaView)
         {
             this.logger = logger;
-            this.magazinoService = magazinoService;
-            this.view = view;
-            view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
+            this.service = magazinoService;
+            view = categoriaView;
             view.LoadEvent += View_LoadEvent;
+            view.CloseEvent += View_CloseEvent;
+            view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
             view.CancellaCategoriaEvent += View_CancellaCategoriaEvent;
+        }
+
+        private void View_CloseEvent(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public void Show() => view.Show();
 
         private async void View_CancellaCategoriaEvent(object sender, int e)
         {
-            await magazinoService.DeleteCategoria(e);
+            await service.DeleteCategoria(e);
             await Refresh();
         }
 
@@ -40,13 +48,13 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private async void View_SalvaCategoriaEvent(object s, Categoria e)
         {
-            await magazinoService.SaveCategoria(e);
+            await service.SaveCategoria(e);
             await Refresh();
         }
 
         private async Task Refresh()
         {
-            var list = await magazinoService.GetCategorie();
+            var list = await service.GetCategorie();
             view.SetCategorie(list);
             view.SetCategoria(new Categoria());
         }

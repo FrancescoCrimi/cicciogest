@@ -19,6 +19,7 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler NuovoDettaglioEvent;
         public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
         public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
+        public event EventHandler NuovaFattura;
 
         public FatturaView(ILogger logger)
         {
@@ -101,6 +102,13 @@ namespace CiccioGest.Presentation.AppForm.View
         private void ToolStripButton_Click(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
+        }
+
+        void IView.ShowDialog() => ShowDialog();
+
+        private void FatturaView_FormClosed(object s, FormClosedEventArgs e)
+        {
+            CloseEvent?.Invoke(s, e);
         }
     }
 }

@@ -26,10 +26,18 @@ namespace CiccioGest.Presentation.AppForm.View
             clientiBindingSource.DataSource = clienti;
         }
 
-        private void ListaClientiView_Load(object s, EventArgs e)
+        void IView.ShowDialog() => ShowDialog();
+
+        private void AboutTSB_Click(object sender, EventArgs e)
         {
-            LoadEvent?.Invoke(s, e);
+            new AboutBox().ShowDialog();
         }
+
+        private void ListaClientiView_FormClosed(object s, FormClosedEventArgs e) =>
+            CloseEvent?.Invoke(s, e);
+
+        private void ListaClientiView_Load(object s, EventArgs e) =>
+            LoadEvent?.Invoke(s, e);
 
         private void ClientiDataGridView_CellDoubleClick(object s, DataGridViewCellEventArgs e)
         {
@@ -37,11 +45,6 @@ namespace CiccioGest.Presentation.AppForm.View
             {
                 SelectClienteEvent?.Invoke(s, cliente.Id);
             }
-        }
-
-        private void AboutTSB_Click(object sender, EventArgs e)
-        {
-            new AboutBox().ShowDialog();
         }
     }
 }

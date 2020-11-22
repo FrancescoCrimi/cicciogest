@@ -93,5 +93,12 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             categorieBindingSource.DataSource = list;
         }
+
+        void IView.ShowDialog() => ShowDialog();
+
+        private void ArticoloView_FormClosed(object s, FormClosedEventArgs e)
+        {
+            CloseEvent?.Invoke(s, e);
+        }
     }
 }

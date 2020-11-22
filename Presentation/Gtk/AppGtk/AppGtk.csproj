@@ -38,6 +38,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\CiccioGest.Presentation.Mvp\Mvp.csproj" />
     <ProjectReference Include="..\..\Client\Client.csproj" />
   </ItemGroup>
 

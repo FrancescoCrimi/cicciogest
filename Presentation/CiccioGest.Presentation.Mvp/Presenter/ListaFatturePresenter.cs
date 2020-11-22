@@ -14,62 +14,63 @@ namespace CiccioGest.Presentation.Mvp.Presenter
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
-        private readonly IFatturaService fatturaService;
+        private readonly IFatturaService service;
         private readonly IListaFattureView view;
+        private int idFattura = 0;
+
+        public event IdEventHandler CloseEvent;
 
         public ListaFatturePresenter(ILogger logger,
                                      IKernel kernel,
-                                     IListaFattureView view,
+                                     IListaFattureView listaFattureView,
                                      IFatturaService fatturaService)
         {
             this.logger = logger;
             this.kernel = kernel;
-            this.view = view;
-            this.fatturaService = fatturaService;
+            view = listaFattureView;
+            service = fatturaService;
 
             view.LoadEvent += Load;
-            view.SelectFatturaEvent += ApriFattura;
+            view.CloseEvent += View_CloseEvent;
+            view.SelectFatturaEvent += View_SelectFatturaEvent;
             view.NuovaEvent += Nuova;
             view.ApriEvent += Apri;
-            view.CloseEvent += Esci;
 
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        private async void Load(object s, EventArgs e)
+        private void View_CloseEvent(object sender, EventArgs e)
         {
-            IList<FatturaReadOnly> fatture = await fatturaService.GetFatture();
-            view.SetFatture(fatture);
+            CloseEvent?.Invoke(this, new IdEventArgs(idFattura));
         }
 
-        private void ApriFattura(object sender, int IdFattura)
+        private void View_SelectFatturaEvent(object sender, int e)
         {
-            using (kernel.BeginScope())
-            {
-                //var fv = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idFattura", IdFattura));
-                //fv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                //fv.ShowDialog();
-                var fp = kernel.Resolve<FatturaPresenter>();
-                fp.MostraFattura(IdFattura);
-                fp.Show();
-            }
+            idFattura = e;
+            view.Close();
+        }
+
+        private async void Load(object s, EventArgs e)
+        {
+            IList<FatturaReadOnly> fatture = await service.GetFatture();
+            view.SetFatture(fatture);
         }
 
         private void Nuova(object s, EventArgs e)
         {
-            //using (kernel.BeginScope())
-            //{
-            //    var lcd = kernel.Resolve<ClientiDialog>();
-            //    lcd.ShowDialog();
-            //    if (lcd.Cliente != null)
-            //    {
-            //        //var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
-            //        //asasa.ShowDialog();
-            //        var fp = kernel.Resolve<FatturaPresenter>();
-            //        fp.NuovaFattura(lcd.Cliente.Id);
-            //        fp.Show();
-            //    }
-            //}
+            using (kernel.BeginScope())
+            {
+                var lcd = kernel.Resolve<SelectClientePresenter>();
+                lcd.Show();
+                if (lcd.IdCliente != 0)
+                {
+                    //var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
+                    //asasa.ShowDialog();
+                    var fp = kernel.Resolve<FatturaPresenter>();
+                    fp.NuovaFattura(lcd.IdCliente);
+                    fp.Show();
+                }
+            }
         }
 
         private void Apri(object s, EventArgs e)

@@ -8,6 +8,7 @@ namespace CiccioGest.Presentation.Mvp.View
     {
         event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
         event EventHandler ApriFatturaEvent;
+        event EventHandler NuovaFattura;
         event EventHandler<int> EliminaFatturaEvent;
         event EventHandler NuovoDettaglioEvent;
         event FatturaDettaglioEventHandler RimuoviDettaglioEvent;

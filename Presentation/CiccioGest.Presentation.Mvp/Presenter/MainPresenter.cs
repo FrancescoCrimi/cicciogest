@@ -20,87 +20,143 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             this.kernel = kernel;
             View = view;
 
-            view.LoadEvent += Load;
-            view.FattureEvent += Fatture;
-            view.ClientiEvent += Clienti;
-            view.FornitoriEvent += Fornitori;
-            view.ArticoliEvent += Articoli;
-            view.CategorieEvent += Categorie;
-            //view.InformazioniEvent += Informazioni;
-            view.OpzioniEvent += Opzioni;
-
+            view.ApriFatturaEvent += View_ApriFatturaEvent;
+            view.NuovaFatturaEvent += View_NuovaFatturaEvent;
+            view.ApriClienteEvent += View_ApriClienteEvent;
+            view.NuovoClienteEvent += View_NuovoClienteEvent;
+            view.ApriFornitoreEvent += View_ApriFornitoreEvent;
+            view.NuovoFornitoreEvent += View_NuovoFornitoreEvent;
+            view.ApriArticoloEvent += View_ApriArticoloEvent;
+            view.NuovoArticoloEvent += View_NuovoArticoloEvent;
+            view.CategorieEvent += View_CategorieEvent;
             this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public IMainView View { get; }
-
-
-        private void Load(object s, EventArgs e)
-        {
-        }
-
-        private void Fatture(object s, EventArgs e)
+        private void View_CategorieEvent(object sender, EventArgs e)
         {
             using (kernel.BeginScope())
             {
-                var sfv = kernel.Resolve<ListaFatturePresenter>();
-                sfv.Show();
-                //sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+                CategoriaPresenter catePres = kernel.Resolve<CategoriaPresenter>();
+                catePres.CloseEvent += CatePres_Close;
+                catePres.Show();
             }
         }
 
-        private void Clienti(object s, EventArgs e)
+        private void CatePres_Close(object sender, EventArgs e)
+        {
+            ((CategoriaPresenter)sender).CloseEvent -= CatePres_Close;
+            kernel.ReleaseComponent(sender);
+        }
+
+        private void View_NuovoArticoloEvent(object sender, EventArgs e)
+        {
+        }
+
+        private void View_ApriArticoloEvent(object sender, EventArgs e)
         {
             using (kernel.BeginScope())
             {
-                //var lcv = kernel.Resolve<ListaClientiView>();
-                //lcv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                //lcv.Show();
-                var lcp = kernel.Resolve<ListaClientiPresenter>();
-                lcp.Show();
+                var artiPres = kernel.Resolve<ArticoloPresenter>();
+                artiPres.CloseEvent += ArtiPres_Close;
+                artiPres.Show();
             }
         }
 
-        private void Fornitori(object s, EventArgs e)
+        private void ArtiPres_Close(object sender, EventArgs e)
+        {
+            ((ArticoloPresenter)sender).CloseEvent -= ArtiPres_Close;
+            kernel.ReleaseComponent(sender);
+        }
+
+        private void View_NuovoFornitoreEvent(object sender, EventArgs e)
+        {
+        }
+
+        private void View_ApriFornitoreEvent(object sender, EventArgs e)
         {
             using (kernel.BeginScope())
             {
-                var lfv = kernel.Resolve<ListaFornitoriPresenter>();
-                //lfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                lfv.Show();
+                var listFornPres = kernel.Resolve<ListaFornitoriPresenter>();
+                listFornPres.CloseEvent += ListFornPres_CloseEvent;
+                listFornPres.Show();
             }
         }
 
-        private void Articoli(object s, EventArgs e)
+        private void ListFornPres_CloseEvent(object sender, EventArgs e)
+        {
+            ((ListaFornitoriPresenter)sender).CloseEvent -= ListFornPres_CloseEvent;
+            kernel.ReleaseComponent(sender);
+        }
+
+        private void View_NuovoClienteEvent(object sender, EventArgs e)
+        {
+        }
+
+        private void View_ApriClienteEvent(object sender, EventArgs e)
         {
             using (kernel.BeginScope())
             {
-                var pv = kernel.Resolve<ArticoloPresenter>();
-                //pv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                pv.Show();
+                var listCliePres = kernel.Resolve<ListaClientiPresenter>();
+                listCliePres.CloseEvent += ListCliePres_CloseEvent;
+                listCliePres.Show();
             }
         }
 
-        private void Categorie(object s, EventArgs e)
+        private void ListCliePres_CloseEvent(object sender, IdEventArgs e)
+        {
+            ((ListaClientiPresenter)sender).CloseEvent -= ListCliePres_CloseEvent;
+            kernel.ReleaseComponent(sender);
+            if(e.Id != 0)
+            {                
+            }
+        }
+
+        private void View_NuovaFatturaEvent(object sender, EventArgs e)
         {
             using (kernel.BeginScope())
             {
-                CategoriaPresenter cv = kernel.Resolve<CategoriaPresenter>();
-                //cv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-                cv.Show();
+                var fattPres = kernel.Resolve<FatturaPresenter>();
+                fattPres.CloseEvent += FattPres_CloseEvent;
+                fattPres.NuovaFattura();
+                fattPres.Show();
             }
         }
 
-        private void Opzioni(object s, EventArgs e)
+        private void View_ApriFatturaEvent(object sender, EventArgs e)
         {
-            //using (kernel.BeginScope())
-            //{
-            //    var sett = kernel.Resolve<SettingView>();
-            //    sett.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-            //    sett.Show();
-            //}
+            using (kernel.BeginScope())
+            {
+                var listFattPres = kernel.Resolve<ListaFatturePresenter>();
+                listFattPres.CloseEvent += ListFattPres_CloseEvent;
+                listFattPres.Show();
+            }
         }
+
+        private void ListFattPres_CloseEvent(object sender, IdEventArgs e)
+        {
+            ((ListaFatturePresenter)sender).CloseEvent -= ListFattPres_CloseEvent;
+            kernel.ReleaseComponent(sender);
+            if (e.Id != 0)
+            {
+                using (kernel.BeginScope())
+                {
+                    var fattPres = kernel.Resolve<FatturaPresenter>();
+                    fattPres.CloseEvent += FattPres_CloseEvent;
+                    fattPres.MostraFattura(e.Id);
+                    fattPres.Show();
+                }
+            }
+        }
+
+        private void FattPres_CloseEvent(object sender, EventArgs e)
+        {
+            ((FatturaPresenter)sender).CloseEvent -= FattPres_CloseEvent;
+            kernel.ReleaseComponent(sender);
+        }
+
 
         public void Show() { }
+
+        public IMainView View { get; }
     }
 }

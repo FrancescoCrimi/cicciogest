@@ -15,6 +15,8 @@ namespace CiccioGest.Presentation.Mvp.Presenter
         private readonly IMagazinoService service;
         private readonly IArticoloView view;
 
+        public event EventHandler CloseEvent;
+
         public ArticoloPresenter(ILogger logger,
                                  IMagazinoService magazinoService,
                                  IArticoloView articoloView)
@@ -22,11 +24,11 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             this.logger = logger;
             service = magazinoService;
             view = articoloView;
+            view.LoadEvent += View_LoadEvent;
+            view.CloseEvent += View_CloseEvent;
             view.AggiungiCategoriaEvent += View_AggiungiCategoriaEvent;
             view.ApriArticoloEvent += View_ApriArticoloEvent;
-            view.CloseEvent += View_CloseEvent;
             view.EliminaArticoloEvent += View_EliminaArticoloEvent;
-            view.LoadEvent += View_LoadEvent;
             view.RimuoviCategoriaEvent += View_RimuoviCategoriaEvent;
             view.SalvaArticoloEvent += View_SalvaArticoloEvent;
             view.SelezionaArticoloEvent += View_SelezionaArticoloEvent;

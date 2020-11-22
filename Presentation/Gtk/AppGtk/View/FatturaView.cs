@@ -1,15 +1,16 @@
 using Castle.Core.Logging;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
+using CiccioGest.Domain.Documenti;
+using CiccioGest.Presentation.Mvp.Presenter;
+using CiccioGest.Presentation.Mvp.View;
 using Gtk;
+using System;
 using UI = Gtk.Builder.ObjectAttribute;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.View
 {
-    class FatturaView : Window, IFatturaView
+    class FatturaView : Dialog, IFatturaView
     {
         private readonly ILogger logger;
-        private IFatturaPresenter fatturaPresenter;
 
         [UI] private ListStore dettagliListStore = null;
         [UI] private EntryBuffer idFatturaEntryBuffer = null;
@@ -26,19 +27,29 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         [UI] private ToolButton addDettaglioToolButton = null;
         [UI] private ToolButton removeDettaglioToolButton = null;
 
+        public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
+        public event EventHandler ApriFatturaEvent;
+        public event EventHandler<int> EliminaFatturaEvent;
+        public event EventHandler NuovoDettaglioEvent;
+        public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
+        public event EventHandler<Fattura> SalvaFatturaEvent;
+        public event EventHandler LoadEvent;
+        public event EventHandler CloseEvent;
+        public event EventHandler NuovaFattura;
+
         public FatturaView(ILogger logger)
             : this(new Builder("FatturaView.glade"))
         {
             this.logger = logger;
-            Shown += (sender, args) => fatturaPresenter.Load();
-            DeleteEvent += (o, args) => fatturaPresenter.Unload();
-            newToolButton.Clicked += (sender, args) => fatturaPresenter.NuovaFattura();
-            openToolButton.Clicked += (sender, args) => fatturaPresenter.AprFattura();
-            saveToolButton.Clicked += (sender, args) => fatturaPresenter.SalvaFattura();
-            deleteToolButton.Clicked += (sender, args) => fatturaPresenter.EliminaFattura();
-            nuovoDettaglioToolButton.Clicked += (sender, args) => fatturaPresenter.NuovoDattaglio();
-            addDettaglioToolButton.Clicked += (sender, args) => fatturaPresenter.NuovoDattaglio();
-            removeDettaglioToolButton.Clicked += (sender, args) => fatturaPresenter.RimuoviDettaglio();
+            Shown += (sender, args) => LoadEvent?.Invoke(sender, args);
+            DeleteEvent += (sender, args) => CloseEvent?.Invoke(sender, args);
+            newToolButton.Clicked += (sender, args) => NuovaFattura?.Invoke(sender, args);
+            openToolButton.Clicked += (sender, args) => ApriFatturaEvent?.Invoke(sender, args);
+            saveToolButton.Clicked += SaveToolButton_Clicked;
+            deleteToolButton.Clicked += DeleteToolButton_Clicked;
+            nuovoDettaglioToolButton.Clicked += (sender, args) => NuovoDettaglioEvent?.Invoke(sender, args);
+            addDettaglioToolButton.Clicked += AddDettaglioToolButton_Clicked;
+            removeDettaglioToolButton.Clicked += RemoveDettaglioToolButton_Clicked;
             logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
 
@@ -48,15 +59,45 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             builder.Autoconnect(this);
         }
 
-        //public ListStore Dettagli => (ListStore)builder.GetObject("dettagliListStore");
-        public ListStore Dettagli => dettagliListStore;
-        public EntryBuffer IdFattura => idFatturaEntryBuffer;
-        public EntryBuffer NomeFattura => nomeFatturaEntryBuffer;
-        public EntryBuffer NomeArticolo => nomeArticoloEntryBuffer;
-        public EntryBuffer Quantita => quantitaEntryBuffer;
-        public EntryBuffer Prezzo => prezzoEntryBuffer;
-        public EntryBuffer Totale => totaleEntryBuffer;
+        private void RemoveDettaglioToolButton_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
-        public void SetPresenter(IFatturaPresenter fatturaPresenter) => this.fatturaPresenter = fatturaPresenter;
+        private void AddDettaglioToolButton_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeleteToolButton_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SaveToolButton_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetDettaglio(Dettaglio dettaglio)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void SetFattura(Fattura fattura)
+        {
+            idFatturaEntryBuffer.Text = fattura.Id.ToString();
+            nomeFatturaEntryBuffer.Text = fattura.Nome;
+            dettagliListStore.Clear();
+            foreach (var item in fattura.Dettagli)
+            {
+                dettagliListStore.AppendValues(item.Id, item.NomeProdotto, item.PrezzoProdotto, item.Quantita, item.Totale);
+            }
+        }
+
+        public void ShowDialog()
+        {
+            Show();
+        }
     }
 }

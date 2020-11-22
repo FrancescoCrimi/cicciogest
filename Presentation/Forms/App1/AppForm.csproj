@@ -141,11 +141,11 @@
     <Compile Include="View\CategoriaView.Designer.cs">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientiDialog.cs">
+    <Compile Include="View\SelectClienteView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ClientiDialog.Designer.cs">
-      <DependentUpon>ClientiDialog.cs</DependentUpon>
+    <Compile Include="View\SelectClienteView.Designer.cs">
+      <DependentUpon>SelectClienteView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FatturaView.cs">
       <SubType>Form</SubType>
@@ -217,8 +217,8 @@
     <EmbeddedResource Include="View\CategoriaView.resx">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ClientiDialog.resx">
-      <DependentUpon>ClientiDialog.cs</DependentUpon>
+    <EmbeddedResource Include="View\SelectClienteView.resx">
+      <DependentUpon>SelectClienteView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FatturaView.resx">
       <DependentUpon>FatturaView.cs</DependentUpon>

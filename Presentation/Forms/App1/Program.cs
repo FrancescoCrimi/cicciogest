@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.AppForm
             var conf = CiccioGestConfMgr.GetCurrent();
             windsor.Register(Component.For<CiccioGestConf>().Instance(conf));
 
-            windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
+            windsor.Install(new CiccioGest.Presentation.Mvp.Installer());
             windsor.Register(
                 Component.For<IMainView>().ImplementedBy<MainView>().LifestyleTransient(),
                 Component.For<IListaFattureView>().ImplementedBy<ListaFattureView>().LifestyleTransient(),
@@ -41,21 +41,8 @@ namespace CiccioGest.Presentation.AppForm
                 Component.For<IArticoloView>().ImplementedBy<ArticoloView>().LifestyleTransient(),
                 Component.For<IListaFornitoriView>().ImplementedBy<ListaFornitoriView>().LifestyleTransient(),
                 Component.For<IListaArticoliView>().ImplementedBy<ListaArticoliView>().LifeStyle.Transient,
-
-                Component.For<ClientiDialog>().LifestyleTransient(),
-                Component.For<SettingView>().LifestyleTransient(),
-
-
-                Component.For<MainPresenter>().LifestyleTransient(),
-                Component.For<ListaFatturePresenter>().LifestyleTransient(),
-                Component.For<FatturaPresenter>().LifestyleTransient(),
-                Component.For<ListaClientiPresenter>().LifestyleTransient(),
-                Component.For<CategoriaPresenter>().LifestyleTransient(),
-                Component.For<ArticoloPresenter>().LifestyleTransient(),
-                Component.For<ListaFornitoriPresenter>().LifestyleTransient(),
-                Component.For<ListaArticoliPresenter>().LifestyleTransient()
-                );
-
+                Component.For<ISelectClienteView>().ImplementedBy<SelectClienteView>().LifestyleTransient(),
+                Component.For<SettingView>().LifestyleTransient());
         }
     }
 }

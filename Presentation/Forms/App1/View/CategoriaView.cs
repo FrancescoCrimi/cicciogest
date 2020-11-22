@@ -86,5 +86,12 @@ namespace CiccioGest.Presentation.AppForm.View
             if (categorieBindingSource.Current != null)
                 CategoriaBindingSource.DataSource = categorieBindingSource.Current;
         }
+
+        void IView.ShowDialog() => ShowDialog();
+
+        private void CategoriaView_FormClosed(object s, FormClosedEventArgs e)
+        {
+            CloseEvent?.Invoke(s, e);
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
+using CiccioGest.Domain.Magazino;
+using CiccioGest.Presentation.Mvp.View;
 using Gtk;
+using System.Collections.Generic;
 using UI = Gtk.Builder.ObjectAttribute;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.View
@@ -11,15 +12,18 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         private readonly ILogger logger;
         [UI] private readonly TreeView articoliTreeView = null;
         [UI] private readonly ListStore articoliListStore = null;
-        private IListaArticoliPresenter listaArticoliPresenter;
+
+        public event System.EventHandler<int> SelectArticoloEvent;
+        public event System.EventHandler LoadEvent;
+        public event System.EventHandler CloseEvent;
 
         public ListaArticoliView(ILogger logger)
             : this(new Builder("ListaArticoliView.glade"))
         {
             this.logger = logger;
+            Shown += (sender, args) => LoadEvent?.Invoke(sender, args);
+            DeleteEvent += (o, args) => CloseEvent?.Invoke(o, args);
             articoliTreeView.RowActivated += ArticoliTreeView_RowActivated;
-            DeleteEvent += (o, args) => listaArticoliPresenter.Unload();
-            Shown += (sender, args) => listaArticoliPresenter.Load();
             logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
 
@@ -29,16 +33,25 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             builder.Autoconnect(this);
         }
 
-        public ListStore ArticoliListStore => articoliListStore;
+        public void SetArticoli(IList<ArticoloReadOnly> articoli)
+        {
+            articoliListStore.Clear();
+            foreach (var art in articoli)
+            {
+                articoliListStore.AppendValues(art.Id, art.Nome, art.Prezzo);
+            }
+        }
 
-        public void SetPresenter(IListaArticoliPresenter listaArticoliPresenter) =>
-            this.listaArticoliPresenter = listaArticoliPresenter;
+        public void ShowDialog()
+        {
+            throw new System.NotImplementedException();
+        }
 
         private void ArticoliTreeView_RowActivated(object o, RowActivatedArgs args)
         {
             articoliListStore.GetIter(out var iter, args.Path);
             var idArticolo = (int)articoliListStore.GetValue(iter, 0);
-            listaArticoliPresenter.SelezionaArticolo(idArticolo);
+            SelectArticoloEvent?.Invoke(o, idArticolo);
             Close();
         }
     }

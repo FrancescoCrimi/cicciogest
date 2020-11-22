@@ -7,5 +7,7 @@ namespace CiccioGest.Presentation.Mvp.View
         event EventHandler LoadEvent;
         event EventHandler CloseEvent;
         void Show();
+        void ShowDialog();
+        void Close();
     }
 }

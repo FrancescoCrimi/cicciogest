@@ -4,10 +4,6 @@ using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvp.Presenter
 {
@@ -15,18 +11,20 @@ namespace CiccioGest.Presentation.Mvp.Presenter
     {
         private readonly ILogger logger;
         private readonly IKernel kernel;
-        private readonly IFatturaService fatturaService;
+        private readonly IFatturaService service;
         private readonly IFatturaView view;
+
+        public event EventHandler CloseEvent;
 
         public FatturaPresenter(ILogger logger,
                            IKernel kernel,
-                           IFatturaView view,
+                           IFatturaView fatturaView,
                            IFatturaService fatturaService)
         {
             this.logger = logger;
             this.kernel = kernel;
-            this.view = view;
-            this.fatturaService = fatturaService;
+            view = fatturaView;
+            service = fatturaService;
 
             view.AggiungiDettaglioEvent += View_AggiungiDettaglioEvent;
             view.ApriFatturaEvent += View_ApriFatturaEvent;
@@ -44,7 +42,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
         {
             if (idCliente != 0)
             {
-                var cliente = await fatturaService.GetCliente(idCliente);
+                var cliente = await service.GetCliente(idCliente);
                 var fattura = new Fattura(cliente);
                 view.SetFattura(fattura);
                 view.SetDettaglio(new Dettaglio());
@@ -55,17 +53,17 @@ namespace CiccioGest.Presentation.Mvp.Presenter
         {
             if (idFattura != 0)
             {
-                var fattura = await fatturaService.GetFattura(idFattura);
+                var fattura = await service.GetFattura(idFattura);
                 view.SetFattura(fattura);
                 view.SetDettaglio(new Dettaglio());
             }
         }
 
-        public void Show() => view.Show();
+        public void Show() => view.ShowDialog();
 
         private async void View_SalvaEvent(object sender, Fattura e)
         {
-            await fatturaService.SaveFattura(e);
+            await service.SaveFattura(e);
         }
 
         private void View_RimuoviDettaglioEvent(object sender, FatturaDettaglioEventArgs e)
@@ -79,10 +77,10 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             var spv = kernel.Resolve<ListaArticoliPresenter>();
             spv.Show();
             int idProdotto = spv.IdProdotto;
-            //kernel.ReleaseComponent(spv);
+            kernel.ReleaseComponent(spv);
             if (idProdotto != 0)
             {
-                var articolo = await fatturaService.GetArticolo(idProdotto);
+                var articolo = await service.GetArticolo(idProdotto);
                 view.SetDettaglio(new Dettaglio { Articolo = articolo, Quantita = 1 });
             }
         }
@@ -97,7 +95,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private async void View_EliminaEvent(object sender, int e)
         {
-            await fatturaService.DeleteFattura(e);
+            await service.DeleteFattura(e);
         }
 
         private void View_ApriFatturaEvent(object sender, EventArgs e)

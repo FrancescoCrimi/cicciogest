@@ -1,6 +1,5 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts.Presenter;
-using CiccioGest.Presentation.Gtk.AppGtk.Contracts.View;
+using CiccioGest.Presentation.Mvp.View;
 using Gtk;
 using System;
 using gtk = Gtk;
@@ -11,27 +10,38 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
     public class MainView : Window, IMainView
     {
         private readonly ILogger logger;
-        //private IMainPresenter mainPresenter;
 
         [UI] private MenuItem fattureMenuItem = null;
         [UI] private MenuItem articoliMenuItem = null;
         [UI] private MenuItem categorieMenuItem = null;
+
+        public event EventHandler LoadEvent;
+        public event EventHandler CloseEvent;
+        //public event EventHandler FattureEvent;
+        //public event EventHandler ClientiEvent;
+        //public event EventHandler FornitoriEvent;
+        //public event EventHandler ArticoliEvent;
+        public event EventHandler CategorieEvent;
+        public event EventHandler OpzioniEvent;
+        public event EventHandler ApriFatturaEvent;
+        public event EventHandler NuovaFatturaEvent;
+        public event EventHandler ApriClienteEvent;
+        public event EventHandler NuovoClienteEvent;
+        public event EventHandler ApriFornitoreEvent;
+        public event EventHandler NuovoFornitoreEvent;
+        public event EventHandler ApriArticoloEvent;
+        public event EventHandler NuovoArticoloEvent;
 
         public MainView(ILogger logger)
             : this(new Builder("MainView.glade"))
         {
             this.logger = logger;
 
-            //Shown += (sender, e) => mainPresenter.Load();
-            //fattureMenuItem.Activated += (sender, args) => mainPresenter.ApriFatture();
-            //articoliMenuItem.Activated += (sender, args) => mainPresenter.ApriArticoli();
-            //categorieMenuItem.Activated += (sender, args) => mainPresenter.ApriCategorie();
-
             Shown += (s, e) => LoadEvent?.Invoke(s, e);
-            DeleteEvent += (o, args) => gtk.Application.Quit();
-            fattureMenuItem.Activated += (s, e) => FattureEvent?.Invoke(s, e);
-            articoliMenuItem.Activated += (s, e) => ArticoliEvent?.Invoke(s, e);
+            fattureMenuItem.Activated += (s, e) => ApriFatturaEvent?.Invoke(s, e);
+            articoliMenuItem.Activated += (s, e) => ApriArticoloEvent?.Invoke(s, e);
             categorieMenuItem.Activated += (s, e) => CategorieEvent?.Invoke(s, e);
+            DeleteEvent += (o, args) => gtk.Application.Quit();
 
             logger.Debug("HashCode: " + this.GetHashCode().ToString());
         }
@@ -42,17 +52,9 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             builder.Autoconnect(this);
         }
 
-        public event EventHandler LoadEvent;
-        public event EventHandler FattureEvent;
-        public event EventHandler ClientiEvent;
-        public event EventHandler FornitoriEvent;
-        public event EventHandler ArticoliEvent;
-        public event EventHandler CategorieEvent;
-        public event EventHandler OpzioniEvent;
-
-        //public void SetPresenter(IMainPresenter mainPresenter)
-        //{
-        //    this.mainPresenter = mainPresenter;
-        //}
+        public void ShowDialog()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -45,19 +45,26 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void NuovaClick(object sender, EventArgs e)
+        private void NuovaClick(object s, EventArgs e)
         {
-            NuovaEvent?.Invoke(this, e);
+            NuovaEvent?.Invoke(s, e);
         }
 
-        private void ApriClick(object sender, EventArgs e)
+        private void ApriClick(object s, EventArgs e)
         {
-            ApriEvent?.Invoke(this, e);
+            ApriEvent?.Invoke(s, e);
         }
 
-        private void EsciClick(object sender, EventArgs e)
+        private void EsciClick(object s, EventArgs e)
         {
-            CloseEvent?.Invoke(this, e);
+            CloseEvent?.Invoke(s, e);
+        }
+
+        void IView.ShowDialog() => ShowDialog();
+
+        private void ListaFattureView_FormClosed(object s, FormClosedEventArgs e)
+        {
+            CloseEvent?.Invoke(s, e);
         }
     }
 }

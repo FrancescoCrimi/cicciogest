@@ -11,6 +11,8 @@ namespace CiccioGest.Presentation.Mvp.Presenter
         private readonly IMagazinoService service;
         private readonly IListaArticoliView view;
 
+        public event EventHandler CloseEvent;
+
         public int IdProdotto { get; private set; }
 
         public ListaArticoliPresenter(ILogger logger,
@@ -20,7 +22,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             this.logger = logger;
             service = magazinoService;
             view = listaArticoliView;
-            view.SelezionaArticoloEvent += View_SelezionaArticoloEvent;
+            view.SelectArticoloEvent += View_SelezionaArticoloEvent;
             view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
         }
@@ -39,6 +41,6 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             IdProdotto = e;
         }
 
-        public void Show() => view.Show();
+        public void Show() => view.ShowDialog();
     }
 }

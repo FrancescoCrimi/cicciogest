@@ -301,6 +301,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ArticoloView";
             this.Text = "Articolo";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ArticoloView_FormClosed);
             this.Load += new System.EventHandler(this.View_Load);
             ((System.ComponentModel.ISupportInitialize)(this.articoliDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).EndInit();

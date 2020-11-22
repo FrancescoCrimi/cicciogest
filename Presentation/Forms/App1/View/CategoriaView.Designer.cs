@@ -214,6 +214,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CategoriaView";
             this.Text = "Categorie";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CategoriaView_FormClosed);
             this.Load += new System.EventHandler(this.CategoriaView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.categorieDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).EndInit();

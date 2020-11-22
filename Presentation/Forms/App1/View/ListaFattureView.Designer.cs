@@ -159,7 +159,6 @@
             this.esciToolStripButton.Name = "esciToolStripButton";
             this.esciToolStripButton.Size = new System.Drawing.Size(58, 24);
             this.esciToolStripButton.Text = "Esci";
-            this.esciToolStripButton.Click += new System.EventHandler(this.EsciClick);
             // 
             // ToolStripButton
             // 
@@ -179,6 +178,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ListaFattureView";
             this.Text = "Fatture";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ListaFattureView_FormClosed);
             this.Load += new System.EventHandler(this.ListaFattureViewLoad);
             ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).EndInit();

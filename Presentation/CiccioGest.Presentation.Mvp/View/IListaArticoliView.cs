@@ -6,7 +6,7 @@ namespace CiccioGest.Presentation.Mvp.View
 {
     public interface IListaArticoliView : IView
     {
-        event EventHandler<int> SelezionaArticoloEvent;
+        event EventHandler<int> SelectArticoloEvent;
 
         void SetArticoli(IList<ArticoloReadOnly> articoli);
     }

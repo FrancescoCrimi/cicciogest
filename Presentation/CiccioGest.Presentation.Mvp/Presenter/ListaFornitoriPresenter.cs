@@ -26,6 +26,8 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             view.SelectFornitoreEvent += View_SelezionaFornitoreEvent;
         }
 
+        public event EventHandler CloseEvent;
+
         public void Show() => view.Show();
 
         private async void View_LoadEvent(object sender, EventArgs e)

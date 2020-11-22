@@ -480,6 +480,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FatturaView";
             this.Text = "Fattura";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FatturaView_FormClosed);
             this.Load += new System.EventHandler(this.FatturaViewLoad);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

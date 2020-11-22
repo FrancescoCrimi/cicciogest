@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaArticoliView));
             System.Windows.Forms.Label nomeLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaArticoliView));
             this.articoliBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.articoliDataGridView = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +59,15 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
+            // nomeLabel
+            // 
+            nomeLabel.AutoSize = true;
+            nomeLabel.Location = new System.Drawing.Point(3, 0);
+            nomeLabel.Name = "nomeLabel";
+            nomeLabel.Size = new System.Drawing.Size(49, 17);
+            nomeLabel.TabIndex = 0;
+            nomeLabel.Text = "Cerca:";
+            // 
             // articoliBindingSource
             // 
             this.articoliBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Articolo);
@@ -77,7 +86,7 @@
             this.prezzoDataGridViewTextBoxColumn});
             this.articoliDataGridView.DataSource = this.articoliBindingSource;
             this.articoliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.articoliDataGridView.Location = new System.Drawing.Point(4, 69);
+            this.articoliDataGridView.Location = new System.Drawing.Point(4, 65);
             this.articoliDataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.articoliDataGridView.MultiSelect = false;
             this.articoliDataGridView.Name = "articoliDataGridView";
@@ -85,7 +94,7 @@
             this.articoliDataGridView.RowHeadersVisible = false;
             this.articoliDataGridView.RowHeadersWidth = 51;
             this.articoliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.articoliDataGridView.Size = new System.Drawing.Size(614, 360);
+            this.articoliDataGridView.Size = new System.Drawing.Size(614, 364);
             this.articoliDataGridView.TabIndex = 1;
             this.articoliDataGridView.DoubleClick += new System.EventHandler(this.ArticoliDataGridView_DoubleClick);
             // 
@@ -160,7 +169,7 @@
             this.ToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(622, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(622, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -169,7 +178,7 @@
             this.nuovoToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoToolStripButton.Image")));
             this.nuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuovoToolStripButton.Name = "nuovoToolStripButton";
-            this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 28);
+            this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
             this.nuovoToolStripButton.Text = "&Nuovo";
             // 
             // apriToolStripButton
@@ -177,7 +186,7 @@
             this.apriToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("apriToolStripButton.Image")));
             this.apriToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.apriToolStripButton.Name = "apriToolStripButton";
-            this.apriToolStripButton.Size = new System.Drawing.Size(61, 28);
+            this.apriToolStripButton.Size = new System.Drawing.Size(61, 24);
             this.apriToolStripButton.Text = "&Apri";
             // 
             // salvaToolStripButton
@@ -185,7 +194,7 @@
             this.salvaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripButton.Image")));
             this.salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.salvaToolStripButton.Name = "salvaToolStripButton";
-            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 28);
+            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
             this.salvaToolStripButton.Text = "&Salva";
             // 
             // stampaToolStripButton
@@ -194,20 +203,20 @@
             this.stampaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("stampaToolStripButton.Image")));
             this.stampaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.stampaToolStripButton.Name = "stampaToolStripButton";
-            this.stampaToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.stampaToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.stampaToolStripButton.Text = "&Stampa";
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 27);
             // 
             // tagliaToolStripButton
             // 
             this.tagliaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("tagliaToolStripButton.Image")));
             this.tagliaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tagliaToolStripButton.Name = "tagliaToolStripButton";
-            this.tagliaToolStripButton.Size = new System.Drawing.Size(72, 28);
+            this.tagliaToolStripButton.Size = new System.Drawing.Size(72, 24);
             this.tagliaToolStripButton.Text = "&Taglia";
             // 
             // copiaToolStripButton
@@ -215,7 +224,7 @@
             this.copiaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copiaToolStripButton.Image")));
             this.copiaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copiaToolStripButton.Name = "copiaToolStripButton";
-            this.copiaToolStripButton.Size = new System.Drawing.Size(72, 28);
+            this.copiaToolStripButton.Size = new System.Drawing.Size(72, 24);
             this.copiaToolStripButton.Text = "&Copia";
             // 
             // incollaToolStripButton
@@ -223,13 +232,13 @@
             this.incollaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("incollaToolStripButton.Image")));
             this.incollaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.incollaToolStripButton.Name = "incollaToolStripButton";
-            this.incollaToolStripButton.Size = new System.Drawing.Size(77, 28);
+            this.incollaToolStripButton.Size = new System.Drawing.Size(77, 24);
             this.incollaToolStripButton.Text = "&Incolla";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // ToolStripButton
             // 
@@ -238,7 +247,7 @@
             this.ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton.Image")));
             this.ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolStripButton.Name = "ToolStripButton";
-            this.ToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.ToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.ToolStripButton.Text = "&?";
             // 
             // tableLayoutPanel2
@@ -250,21 +259,12 @@
             this.tableLayoutPanel2.Controls.Add(nomeLabel, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.nomeTextBox, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 34);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 30);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(616, 28);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // nomeLabel
-            // 
-            nomeLabel.AutoSize = true;
-            nomeLabel.Location = new System.Drawing.Point(3, 0);
-            nomeLabel.Name = "nomeLabel";
-            nomeLabel.Size = new System.Drawing.Size(49, 17);
-            nomeLabel.TabIndex = 0;
-            nomeLabel.Text = "Cerca:";
             // 
             // nomeTextBox
             // 
@@ -284,7 +284,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ListaArticoliView";
             this.Text = "Articoli";
-            this.Load += new System.EventHandler(this.View_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ListaArticoliView_FormClosed);
+            this.Load += new System.EventHandler(this.ListaArticoliView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.articoliDataGridView)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

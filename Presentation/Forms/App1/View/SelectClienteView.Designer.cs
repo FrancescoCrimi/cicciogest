@@ -1,6 +1,6 @@
 ﻿namespace CiccioGest.Presentation.AppForm.View
 {
-    partial class ClientiDialog
+    partial class SelectClienteView
     {
         /// <summary>
         /// Required designer variable.
@@ -32,21 +32,30 @@
             System.Windows.Forms.Label nomeCompletoLabel;
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.nomeCompletoTextBox = new System.Windows.Forms.TextBox();
-            this.clientiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomeCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.societaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.indirizzoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partitaIvaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codiceFiscaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clientiBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.nomeCompletoTextBox = new System.Windows.Forms.TextBox();
             nomeCompletoLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientiBindingSource)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // nomeCompletoLabel
+            // 
+            nomeCompletoLabel.AutoSize = true;
+            nomeCompletoLabel.Location = new System.Drawing.Point(3, 0);
+            nomeCompletoLabel.Name = "nomeCompletoLabel";
+            nomeCompletoLabel.Size = new System.Drawing.Size(49, 17);
+            nomeCompletoLabel.TabIndex = 0;
+            nomeCompletoLabel.Text = "Cerca:";
             // 
             // tableLayoutPanel1
             // 
@@ -89,45 +98,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(794, 410);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(nomeCompletoLabel, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.nomeCompletoTextBox, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(794, 28);
-            this.tableLayoutPanel2.TabIndex = 2;
-            // 
-            // nomeCompletoLabel
-            // 
-            nomeCompletoLabel.AutoSize = true;
-            nomeCompletoLabel.Location = new System.Drawing.Point(3, 0);
-            nomeCompletoLabel.Name = "nomeCompletoLabel";
-            nomeCompletoLabel.Size = new System.Drawing.Size(49, 17);
-            nomeCompletoLabel.TabIndex = 0;
-            nomeCompletoLabel.Text = "Cerca:";
-            // 
-            // nomeCompletoTextBox
-            // 
-            this.nomeCompletoTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nomeCompletoTextBox.Location = new System.Drawing.Point(58, 3);
-            this.nomeCompletoTextBox.Name = "nomeCompletoTextBox";
-            this.nomeCompletoTextBox.Size = new System.Drawing.Size(733, 22);
-            this.nomeCompletoTextBox.TabIndex = 1;
-            // 
-            // clientiBindingSource
-            // 
-            this.clientiBindingSource.AllowNew = false;
-            this.clientiBindingSource.DataSource = typeof(CiccioGest.Domain.ClientiFornitori.Cliente);
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellDoubleClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -184,21 +155,51 @@
             this.codiceFiscaleDataGridViewTextBoxColumn.ReadOnly = true;
             this.codiceFiscaleDataGridViewTextBoxColumn.Width = 125;
             // 
-            // ClientiDialog
+            // clientiBindingSource
+            // 
+            this.clientiBindingSource.AllowNew = false;
+            this.clientiBindingSource.DataSource = typeof(CiccioGest.Domain.ClientiFornitori.Cliente);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(nomeCompletoLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.nomeCompletoTextBox, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(794, 28);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // nomeCompletoTextBox
+            // 
+            this.nomeCompletoTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nomeCompletoTextBox.Location = new System.Drawing.Point(58, 3);
+            this.nomeCompletoTextBox.Name = "nomeCompletoTextBox";
+            this.nomeCompletoTextBox.Size = new System.Drawing.Size(733, 22);
+            this.nomeCompletoTextBox.TabIndex = 1;
+            // 
+            // SelectClienteView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "ClientiDialog";
+            this.Name = "SelectClienteView";
             this.Text = "Seleziona Cliente";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectClienteView_FormClosed);
             this.Load += new System.EventHandler(this.ClientiDialog_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientiBindingSource)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clientiBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

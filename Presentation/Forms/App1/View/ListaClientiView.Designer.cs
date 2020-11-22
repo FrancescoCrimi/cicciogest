@@ -291,6 +291,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ListaClientiView";
             this.Text = "Clienti";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ListaClientiView_FormClosed);
             this.Load += new System.EventHandler(this.ListaClientiView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.clientiDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientiBindingSource)).EndInit();
