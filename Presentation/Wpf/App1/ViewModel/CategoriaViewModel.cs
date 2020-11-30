@@ -28,8 +28,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             RimuoviCommand = new RelayCommand(Rimuovi);
             NuovoCommand = new RelayCommand(Nuova);
 
-            //if (App.InDesignMode())
-            if (IsInDesignModeStatic)
+            if (IsInDesignMode)
             {
                 foreach (Categoria ca in service.GetCategorie().Result)
                 {

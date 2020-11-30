@@ -1,14 +1,11 @@
 ﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Globalization;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -32,7 +29,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 MostraFattura(service.GetFattura(4).Result);
                 Dettaglio = Fattura.Dettagli[3];

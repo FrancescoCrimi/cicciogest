@@ -1,7 +1,6 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -30,7 +29,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
             Categorie = new ObservableCollection<Categoria>();
 
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 Prodotto = service.GetArticolo(4).Result;
                 foreach (Categoria cat in service.GetCategorie().Result)

@@ -21,11 +21,11 @@ namespace CiccioGest.Domain.Documenti
             Initialize();
         }
 
-        //public Fattura(int id, Cliente cliente)
-        //    : this(cliente)
-        //{
-        //    this.Id = id;
-        //}
+        public Fattura(int id, Cliente cliente)
+            : this(cliente)
+        {
+            this.Id = id;
+        }
 
         public Fattura(Cliente cliente)
         {

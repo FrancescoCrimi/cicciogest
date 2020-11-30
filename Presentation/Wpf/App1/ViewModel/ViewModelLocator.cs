@@ -21,8 +21,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 
         public ViewModelLocator()
         {
-            if (App.InDesignMode)
-            //if (IsInDesignModeStatic)
+            if (IsInDesignMode)
             {
                 windsor = new WindsorContainer();
                 windsor.AddFacility<LoggingFacility>();

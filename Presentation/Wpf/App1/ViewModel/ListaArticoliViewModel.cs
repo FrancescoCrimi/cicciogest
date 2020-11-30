@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             this.magazinoService = magazinoService;
             this.navigationService = navigationService;
             Articoli = new ObservableCollection<ArticoloReadOnly>();
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 foreach (ArticoloReadOnly pr in magazinoService.GetArticoli().Result)
                 {

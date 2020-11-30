@@ -37,7 +37,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             this.logger = logger;
             this.fatturaService = fatturaService;
             this.navigationService = navigationService;
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 Fattura fatt = this.fatturaService.GetFattura(4).Result;
                 MostraFattura(fatt);

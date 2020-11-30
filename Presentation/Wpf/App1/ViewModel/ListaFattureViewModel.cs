@@ -29,7 +29,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             this.navigationService = navigationService;
             if (fatturaService == null) throw new ArgumentNullException(nameof(fatturaService));
             Fatture = new ObservableCollection<FatturaReadOnly>();
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 foreach (FatturaReadOnly fatt in fatturaService.GetFatture().Result)
                 {

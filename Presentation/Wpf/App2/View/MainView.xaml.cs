@@ -1,5 +1,6 @@
 ﻿using CiccioGest.Presentation.Wpf.App2.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CiccioGest.Presentation.Wpf.App2.View
@@ -32,7 +33,7 @@ namespace CiccioGest.Presentation.Wpf.App2.View
             });
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             App.Windsor.Release(DataContext);
             Messenger.Default.Unregister(this);

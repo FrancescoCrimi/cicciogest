@@ -5,16 +5,17 @@ using CiccioGest.Application;
 using CiccioGest.Application.FakeImpl;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
+using GalaSoft.MvvmLight;
 
 namespace CiccioGest.Presentation.Wpf.App2.ViewModel
 {
-    public sealed class ViewModelLocator
+    public sealed class ViewModelLocator : ViewModelBase
     {
         private readonly IWindsorContainer windsor;
 
         public ViewModelLocator()
         {
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 windsor = new WindsorContainer();
                 windsor.AddFacility<LoggingFacility>();

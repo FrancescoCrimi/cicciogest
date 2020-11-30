@@ -1,7 +1,6 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -25,7 +24,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service;
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
                 {

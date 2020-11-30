@@ -28,7 +28,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             Categorie = new ObservableCollection<Categoria>();
 
-            if (App.InDesignMode)
+            if (IsInDesignMode)
             {
                 foreach (Categoria ca in service.GetCategorie().Result)
                 {

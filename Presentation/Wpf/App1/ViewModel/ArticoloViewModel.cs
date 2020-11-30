@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             Prodotti = new ObservableCollection<ArticoloReadOnly>();
             Categorie = new ObservableCollection<Categoria>();
 
-            if (IsInDesignModeStatic)
+            if (IsInDesignMode)
             {
                 Prodotto = service.GetArticolo(4).Result;
                 foreach (Categoria cat in service.GetCategorie().Result)

@@ -1,5 +1,5 @@
-﻿using CiccioGest.Infrastructure;
-using GalaSoft.MvvmLight.Messaging;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CiccioGest.Presentation.Wpf.App2.View
@@ -12,7 +12,7 @@ namespace CiccioGest.Presentation.Wpf.App2.View
             Closing += SelezionaProdottoView_Closing;
         }
 
-        private void SelezionaProdottoView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SelezionaProdottoView_Closing(object sender, CancelEventArgs e)
         {
             Messenger.Default.Unregister(this);
             App.Windsor.Release(DataContext);

@@ -11,18 +11,6 @@ namespace CiccioGest.Presentation.Wpf.App1
 {
     public partial class App : System.Windows.Application
     {
-        public static bool InDesignMode
-        {
-            get
-            {
-                if (App.Current.MainWindow != null)
-                    return System.ComponentModel.DesignerProperties.GetIsInDesignMode(App.Current.MainWindow);
-                //return System.ComponentModel.DesignerProperties.IsInDesignModeProperty;
-                //return (System.Windows.Application.Current is App);
-                return true;
-            }
-        }
-
         private void Init()
         {
             ViewModelLocator locator = Resources["Locator"] as ViewModelLocator;
