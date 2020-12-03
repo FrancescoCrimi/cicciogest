@@ -15,6 +15,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
     {
         private readonly ILogger logger;
         private readonly IFatturaService service;
+        private readonly IWindowManagerService windowManagerService;
         private ICommand nuovaFatturaCommand;
         private ICommand salvaFatturaCommand;
         private ICommand rimuoviFatturaCommand;
@@ -25,10 +26,13 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         private ICommand selezionaDettaglioCommand;
         private ICommand loadedCommand;
 
-        public FatturaViewModel(ILogger logger, IFatturaService service)
+        public FatturaViewModel(ILogger logger,
+                                IFatturaService service,
+                                IWindowManagerService windowManagerService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.windowManagerService = windowManagerService;
             if (IsInDesignMode)
             {
                 MostraFattura(service.GetFattura(4).Result);
@@ -73,10 +77,10 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
-                MessengerInstance.Send(new NotificationMessage("SelezionaFattura")));
+                windowManagerService.OpenInDialog(WindowKey.ListaFatture));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
-                MessengerInstance.Send(new NotificationMessage("SelezionaProdotto")));
+                windowManagerService.OpenInDialog(WindowKey.ListaArticoli));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {

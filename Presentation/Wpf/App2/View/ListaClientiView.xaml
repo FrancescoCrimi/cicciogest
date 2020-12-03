@@ -1,0 +1,34 @@
+﻿      <Window x:Class="CiccioGest.Presentation.Wpf.App2.View.ListaClientiView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CiccioGest.Presentation.Wpf.App2.View"
+        mc:Ignorable="d"
+        Title="ListaClientiView" Height="300" Width="500" DataContext="{Binding ListaClienti, Mode=OneWay, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        </Grid>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Clienti, Mode=OneWay}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Nome}" Header="Nome"/>
+                <DataGridTextColumn Binding="{Binding Societa}" Header="Societa"/>
+                <DataGridTextColumn Binding="{Binding Indirizzo}" Header="Indirizzo"/>
+                <DataGridTextColumn Binding="{Binding PartitaIva}" Header="Partita Iva"/>
+                <DataGridTextColumn Binding="{Binding CodiceFiscale}" Header="Codice Fiscale"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

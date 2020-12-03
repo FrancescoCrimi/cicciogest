@@ -39,7 +39,7 @@ namespace CiccioGest.Application.FakeImpl
 
         public Task<IList<Cliente>> GetClienti()
         {
-            throw new NotImplementedException();
+            return Task.Run(() => FakeSampleData.Clienti);
         }
 
         public Task<Fornitore> GetFornitore(int id)

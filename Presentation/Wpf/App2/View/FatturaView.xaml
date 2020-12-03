@@ -60,7 +60,7 @@
                             Content="Nome:" Grid.Column="0" Grid.Row="0" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <TextBox
                             Height="23" Width="120" Margin="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"
-                            Text="{Binding Fattura.Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            Text="{Binding Fattura.Nome, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>

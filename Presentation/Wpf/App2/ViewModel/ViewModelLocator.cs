@@ -22,7 +22,8 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                 windsor.Register(
                     Component.For<IFatturaService>().ImplementedBy<DesignFatturaService>(),
                     Component.For<IMagazinoService>().ImplementedBy<DesignMagazinoService>(),
-                    Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>());
+                    Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>(),
+                    Component.For<IWindowManagerService>().ImplementedBy<WindowManagerService>().LifestyleSingleton());
             }
             else
             {
@@ -35,6 +36,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                 Component.For<MainViewModel>(),
                 Component.For<ListaFattureViewModel>().LifestyleTransient(),
                 Component.For<ListaArticoliViewModel>().LifestyleTransient(),
+                Component.For<ListaClientiViewModel>().LifestyleTransient(),
                 Component.For<CategoriaViewModel>().LifestyleTransient(),
                 Component.For<FatturaViewModel>().LifestyleTransient(),
                 Component.For<ArticoloViewModel>().LifestyleTransient());
@@ -43,6 +45,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         public MainViewModel Main => windsor.Resolve<MainViewModel>();
         public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
         public ListaArticoliViewModel ListaArticoli => windsor.Resolve<ListaArticoliViewModel>();
+        public ListaClientiViewModel ListaClienti => windsor.Resolve<ListaClientiViewModel>();
         public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
         public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
         public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
