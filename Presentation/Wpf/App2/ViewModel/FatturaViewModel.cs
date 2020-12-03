@@ -50,7 +50,10 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() => { } /*MostraFattura(new Fattura())*/);
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
+        {
+            windowManagerService.OpenInDialog(WindowKey.ListaClienti);
+        });
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
         {
@@ -114,15 +117,21 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             {
                 if (ns.Notification == "IdFattura")
                 {
-                    if (ns.Content == 0)
-                        MessengerInstance.Send(new NotificationMessage("SelezionaFattura"));
-                    else
+                    if (ns.Content != 0)
                         MostraFattura(await service.GetFattura(ns.Content));
                 }
                 else if (ns.Notification == "IdProdotto")
                 {
-                    Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
-                    RaisePropertyChanged(nameof(Dettaglio));
+                    if (ns.Content != 0)
+                    {
+                        Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
+                        RaisePropertyChanged(nameof(Dettaglio));
+                    }
+                }
+                else if (ns.Notification == "IdCliente")
+                {
+                    if (ns.Content != 0)
+                        MostraFattura(new Fattura(await service.GetCliente(ns.Content)));
                 }
             });
         }

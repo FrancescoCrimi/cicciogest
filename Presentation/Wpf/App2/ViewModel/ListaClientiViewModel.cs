@@ -3,6 +3,7 @@ using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -38,7 +39,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
 
         public Cliente ClienteSelezionato { get; set; }
 
-        public ICommand LoadCommand => loadCommand ??= new RelayCommand(async () => 
+        public ICommand LoadedCommand => loadCommand ??= new RelayCommand(async () => 
         {
             Clienti.Clear();
             foreach (var item in await clientiFornitoriService.GetClienti())
@@ -51,7 +52,8 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         {
             if (ClienteSelezionato != null)
             {
-
+                MessengerInstance.Send(new NotificationMessage<int>(ClienteSelezionato.Id, "IdCliente"));
+                wnd.Close();
             }
         });
 
