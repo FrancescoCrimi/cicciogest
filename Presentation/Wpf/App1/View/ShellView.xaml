@@ -6,8 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:CiccioGest.Presentation.Wpf.App1.View"
     mc:Ignorable="d"
-    Height="450"
-    Width="800"
+    Height="350"
+    Width="600"
     Title="CiccioGest"
     DataContext="{Binding Shell, Source={StaticResource Locator}}">
 
@@ -24,7 +24,7 @@
                 <!--<MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>-->
             </MenuItem>
             <MenuItem Header="Magazino">
-                <MenuItem Header="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>
+                <MenuItem Header="Articoli" Command="{Binding ApriArticoliCommand, Mode=OneWay}"/>
                 <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Anagrafica">

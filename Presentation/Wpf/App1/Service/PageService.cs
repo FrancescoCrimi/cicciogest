@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Logging;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Presentation.Wpf.App1.Contracts;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,10 @@ namespace CiccioGest.Presentation.Wpf.App1.Service
         public Page GetPage(string key)
         {
             var pageType = GetPageType(key);
-            return kernel.Resolve(pageType) as Page;
+            using (kernel.BeginScope())
+            {
+                return kernel.Resolve(pageType) as Page;
+            }
         }
 
         public Type GetPageType(string key)

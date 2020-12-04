@@ -43,18 +43,15 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
         public FatturaReadOnly FatturaSelezionata { private get; set; }
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
             foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
             {
                 Fatture.Add(fatt);
             }
-        }));
+        });
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand
-            ?? (apriFatturaCommand = new RelayCommand(ApriFattura));
-
-        private void ApriFattura()
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
         {
             if (FatturaSelezionata != null)
             {
@@ -62,7 +59,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
                     navigationService.GoBack();
                 MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
             }
-        }
+        });
 
         public void Dispose()
         {

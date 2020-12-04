@@ -1,11 +1,10 @@
-﻿using CiccioGest.Domain.ClientiFornitori;
+﻿using Castle.Core.Logging;
+using CiccioGest.Application;
+using CiccioGest.Domain.ClientiFornitori;
 using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CiccioGest.Application;
 using System.Windows.Input;
-using Castle.Core.Logging;
 
 namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 {
@@ -19,11 +18,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         {
             this.logger = logger;
             this.clientiFornitoriService = clientiFornitoriService;
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ObservableCollection<Cliente> Clienti { get; }
@@ -33,5 +28,10 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         public ICommand LoadCommand { get; }
 
         public ICommand SelezionaClienteCommand { get; }
+
+        public void Dispose()
+        {
+            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+        }
     }
 }

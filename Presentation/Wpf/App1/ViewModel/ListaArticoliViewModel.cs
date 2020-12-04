@@ -1,9 +1,7 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Wpf.App1.Contracts;
-using CiccioGest.Presentation.Wpf.App1.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -44,26 +42,22 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
 
         public ArticoloReadOnly ArticoloSelezionato { private get; set; }
 
-        public ICommand SelezionaArticoloCommand => selezionaArticoloCommand 
-            ?? (selezionaArticoloCommand = new RelayCommand(ApriArticolo));
-
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
-        {
-            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
-            {
-                Articoli.Add(pr);
-            }
-        }));
-
-
-        private void ApriArticolo()
+        public ICommand SelezionaArticoloCommand => selezionaArticoloCommand ??= new RelayCommand(() =>
         {
             if (ArticoloSelezionato != null)
             {
                 MessengerInstance.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
                 navigationService.GoBack();
             }
-        }
+        });
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        {
+            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
+            {
+                Articoli.Add(pr);
+            }
+        });
 
         public void Dispose()
         {

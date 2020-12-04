@@ -1,7 +1,6 @@
 ﻿using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -21,112 +20,82 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         private ICommand nuovoCommand;
         private ICommand salvaCommand;
         private ICommand eliminaCommand;
-        private ArticoloReadOnly prodottoSelezionato;
 
         public ArticoloViewModel(ILogger logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
-            Prodotti = new ObservableCollection<ArticoloReadOnly>();
+            Articoli = new ObservableCollection<ArticoloReadOnly>();
             Categorie = new ObservableCollection<Categoria>();
 
             if (IsInDesignMode)
             {
-                Prodotto = service.GetArticolo(4).Result;
+                Articolo = service.GetArticolo(4).Result;
                 foreach (Categoria cat in service.GetCategorie().Result)
                 {
                     Categorie.Add(cat);
                 }
                 foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
                 {
-                    Prodotti.Add(pr);
+                    Articoli.Add(pr);
                 }
             }
-            else
-            {
-                RegistraMessaggi();
-            }
+
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
+        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
         public ObservableCollection<Categoria> Categorie { get; private set; }
-        public Articolo Prodotto { get; private set; }
+        public Articolo Articolo { get; private set; }
 
-        public ICommand NuovoCommand => nuovoCommand ?? (nuovoCommand = new RelayCommand(Nuovo));
-        public ICommand EliminaCommand => eliminaCommand ?? (eliminaCommand = new RelayCommand(Elimina));
-        public ICommand SalvaCommand => salvaCommand ?? (salvaCommand = new RelayCommand(Salva));
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(Nuovo);
+        public ICommand EliminaCommand => eliminaCommand ??= new RelayCommand(Elimina);
+        public ICommand SalvaCommand => salvaCommand ??= new RelayCommand(Salva);
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
             foreach (Categoria cat in await service.GetCategorie())
             {
                 Categorie.Add(cat);
             }
             await Aggiorna();
-        }));
+        });
 
-        public ArticoloReadOnly ProdottoSelezionato
+        public ArticoloReadOnly ArticoloSelezionato
         {
-            private get => prodottoSelezionato;
             set
             {
-                if (value != prodottoSelezionato)
+                if (value != null && value.Id != 0)
                 {
-                    Task.Run(async () => Prodotto = await service.GetArticolo(value.Id));
-                    RaisePropertyChanged(nameof(Prodotto));
+                    Task.Run(async () =>
+                    {
+                        Articolo = await service.GetArticolo(value.Id);
+                        RaisePropertyChanged(nameof(Articolo));
+                    });
                 }
             }
         }
 
-
-        private void RegistraMessaggi()
-        {
-            //MessengerInstance.Register<CaricaProdotto>(this, cp =>
-            //{
-            //    switch (cp.What)
-            //    {
-
-            //        case LoadType.Nuova:
-            //            aggiorna();
-            //            break;
-
-            //        case LoadType.Cerca:
-            //            var spv = new SelezionaProdottoView();
-            //            spv.ShowDialog();
-            //            break;
-
-            //        case LoadType.Carica:
-            //            Prodotto = service.GetProdotto(cp.IdProdotto);
-            //            RaisePropertyChanged("Prodotto");
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //});
-        }
-
         private async Task Aggiorna()
         {
-            Prodotti.Clear();
+            Articoli.Clear();
             foreach (ArticoloReadOnly pr in await service.GetArticoli())
             {
-                Prodotti.Add(pr);
+                Articoli.Add(pr);
             }
             Nuovo();
         }
 
         private void Nuovo()
         {
-            Prodotto = new Articolo();
-            //Prodotto = null;
-            RaisePropertyChanged(nameof(Prodotto));
+            Articolo = new Articolo();
+            RaisePropertyChanged(nameof(Articolo));
         }
 
         private async void Elimina()
         {
             try
             {
-                await service.DeleteArticolo(Prodotto.Id);
+                await service.DeleteArticolo(Articolo.Id);
                 await Aggiorna();
             }
             catch (Exception e)
@@ -139,7 +108,7 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
         {
             try
             {
-                await service.SaveArticolo(Prodotto);
+                await service.SaveArticolo(Articolo);
                 await Aggiorna();
             }
             catch (Exception e)

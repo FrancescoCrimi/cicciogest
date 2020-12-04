@@ -7,8 +7,8 @@
     xmlns:local="clr-namespace:CiccioGest.Presentation.Wpf.App1.View"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d" 
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="350"
+    d:DesignWidth="600"
     Title="ArticoloView"
     Background="White"
     DataContext="{Binding Articolo, Source={StaticResource Locator}}">
@@ -41,7 +41,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="nomeTextBox" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Prodotto.Nome}" VerticalAlignment="Center" Width="100"/>
+                <TextBox x:Name="nomeTextBox" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Articolo.Nome}" VerticalAlignment="Center" Width="100"/>
             </Grid>
 
             <Grid x:Name="gridPrezzo" Margin="0">
@@ -50,7 +50,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Prezzo:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="prezzoTextBox" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Prodotto.Prezzo}" VerticalAlignment="Center" Width="60"/>
+                <TextBox x:Name="prezzoTextBox" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Articolo.Prezzo}" VerticalAlignment="Center" Width="60"/>
             </Grid>
 
             <Grid x:Name="gridTipoProdotto" Margin="0">
@@ -59,7 +59,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Categoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <ComboBox x:Name="idProdottoComboBox" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="100" ItemsSource="{Binding Categorie}" DisplayMemberPath="Nome"  SelectedValue="{Binding Prodotto.Categoria, Mode=TwoWay}" SelectedItem="{Binding Prodotto.Categoria, Mode=TwoWay}">
+                <ComboBox x:Name="idProdottoComboBox" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="100" ItemsSource="{Binding Categorie}" DisplayMemberPath="Nome"  SelectedValue="{Binding Articolo.Categoria, Mode=TwoWay}" SelectedItem="{Binding Articolo.Categoria, Mode=TwoWay}">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel/>
@@ -71,8 +71,8 @@
         </StackPanel>
 
         <DataGrid
-            ItemsSource="{Binding Prodotti}"
-            SelectedItem="{Binding ProdottoSelezionato, Mode=OneWayToSource}"
+            ItemsSource="{Binding Articoli}"
+            SelectedItem="{Binding ArticoloSelezionato, Mode=OneWayToSource}"
             SelectionMode="Single"
             AutoGenerateColumns="False"
             IsReadOnly="True"

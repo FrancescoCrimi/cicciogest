@@ -1,5 +1,4 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Wpf.App1.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -21,26 +20,14 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand NuovaFatturaCommand => new RelayCommand(NuovaFattura);
+        public ICommand NuovaFatturaCommand =>
+            new RelayCommand(() => ns.NavigateTo("Fattura", true));
 
-        private void NuovaFattura()
-        {
-            ns.NavigateTo("Fattura", true);
-        }
+        public ICommand ApriArticoliCommand =>
+            new RelayCommand(() => ns.NavigateTo("Articolo", true));
 
-        public ICommand ApriProdottiCommand => new RelayCommand(ApriProdotti);
-
-        private void ApriProdotti()
-        {
-            ns.NavigateTo("Articolo", true);
-        }
-
-        public ICommand ApriCategorieCommand => new RelayCommand(ApriCategorie);
-
-        private void ApriCategorie()
-        {
-            ns.NavigateTo("Categoria", true);
-        }
+        public ICommand ApriCategorieCommand =>
+            new RelayCommand(() => ns.NavigateTo("Categoria", true));
 
         public void Dispose()
         {
