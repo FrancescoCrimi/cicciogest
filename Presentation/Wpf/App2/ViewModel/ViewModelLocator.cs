@@ -4,6 +4,8 @@ using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Application.FakeImpl;
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.Wpf.App2.Contracts;
+using CiccioGest.Presentation.Wpf.App2.Services;
 using GalaSoft.MvvmLight;
 
 namespace CiccioGest.Presentation.Wpf.App2.ViewModel
@@ -28,7 +30,9 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             {
                 windsor = App.Windsor;
                 CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
-                windsor.Register(Component.For<CiccioGestConf>().Instance(conf));
+                windsor.Register(
+                    Component.For<CiccioGestConf>().Instance(conf),
+                    Component.For<IWindowManagerService>().ImplementedBy<WindowManagerService>().LifestyleSingleton());
                 windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
             }
             windsor.Register(
@@ -41,7 +45,15 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                 Component.For<ArticoloViewModel>().LifestyleTransient());
         }
 
-        public MainViewModel Main => windsor.Resolve<MainViewModel>();
+        public MainViewModel Main
+        {
+            get
+            {
+                var vm = windsor.Resolve<MainViewModel>();
+                return vm;
+            }
+        }
+
         public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
         public ListaArticoliViewModel ListaArticoli => windsor.Resolve<ListaArticoliViewModel>();
         public ListaClientiViewModel ListaClienti => windsor.Resolve<ListaClientiViewModel>();

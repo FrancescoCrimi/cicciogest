@@ -1,5 +1,6 @@
 ﻿using Castle.MicroKernel;
 using Castle.MicroKernel.Lifestyle;
+using CiccioGest.Presentation.Wpf.App2.Contracts;
 using CiccioGest.Presentation.Wpf.App2.View;
 using System;
 using System.Windows;
@@ -15,11 +16,14 @@ namespace CiccioGest.Presentation.Wpf.App2.Services
             this.kernel = kernel;
         }
 
+        public Window MainWindow
+            => System.Windows.Application.Current.MainWindow;
+
         public bool? OpenInDialog(WindowKey key)
         {
             using (kernel.BeginScope())
             {
-                var window = GetWindow(key);
+                var window = GetNewWindow(key);
                 window.Closed += OnWindowClosed;
                 return window.ShowDialog();
             }
@@ -27,12 +31,35 @@ namespace CiccioGest.Presentation.Wpf.App2.Services
 
         public void OpenInNewWindow(WindowKey key)
         {
-            using (kernel.BeginScope())
+            var window = GetWindow(key);
+            if (window != null)
             {
-                var window = GetWindow(key);
-                window.Closed += OnWindowClosed;
-                window.Show();
+                window.Activate();
             }
+            else
+            {
+                using (kernel.BeginScope())
+                {
+                    window = GetNewWindow(key);
+                    window.Closed += OnWindowClosed;
+                    window.Show();
+                }
+            }
+        }
+
+        public Window GetWindow(WindowKey pageKey)
+        {
+            foreach (Window window in System.Windows.Application.Current.Windows)
+            {
+                if (window is IView view)
+                {
+                    if (view.WindowKey == pageKey)
+                    {
+                        return window;
+                    }
+                }
+            }
+            return null;
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
@@ -42,7 +69,7 @@ namespace CiccioGest.Presentation.Wpf.App2.Services
             kernel.ReleaseComponent(window.DataContext);
         }
 
-        private Window GetWindow(WindowKey key)
+        private Window GetNewWindow(WindowKey key)
         {
             switch (key)
             {

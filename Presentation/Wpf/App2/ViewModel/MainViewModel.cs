@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using CiccioGest.Presentation.Wpf.App2.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
