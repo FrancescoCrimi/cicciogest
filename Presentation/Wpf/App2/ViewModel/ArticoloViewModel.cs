@@ -26,19 +26,19 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
-            Prodotti = new ObservableCollection<ArticoloReadOnly>();
+            Articoli = new ObservableCollection<ArticoloReadOnly>();
             Categorie = new ObservableCollection<Categoria>();
 
             if (IsInDesignMode)
             {
-                Prodotto = service.GetArticolo(4).Result;
+                Articolo = service.GetArticolo(4).Result;
                 foreach (Categoria cat in service.GetCategorie().Result)
                 {
                     Categorie.Add(cat);
                 }
                 foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
                 {
-                    Prodotti.Add(pr);
+                    Articoli.Add(pr);
                 }
             }
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         {
             try
             {
-                await service.DeleteArticolo(Prodotto.Id);
+                await service.DeleteArticolo(Articolo.Id);
                 await Aggiorna();
             }
             catch (Exception e)
@@ -63,7 +63,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         {
             try
             {
-                await service.SaveArticolo(Prodotto);
+                await service.SaveArticolo(Articolo);
                 await Aggiorna();
             }
             catch (Exception e)
@@ -81,13 +81,13 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
             await Aggiorna();
         });
 
-        public Articolo Prodotto { get; private set; }
+        public Articolo Articolo { get; private set; }
 
-        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
+        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
 
         public ObservableCollection<Categoria> Categorie { get; private set; }
 
-        public ArticoloReadOnly ProdottoSelezionato
+        public ArticoloReadOnly ArticoloSelezionato
         {
             set
             {
@@ -96,8 +96,8 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                     Task.Run(async () =>
                     {
                         articoloSelezionato = value;
-                        Prodotto = await service.GetArticolo(value.Id);
-                        RaisePropertyChanged(nameof(Prodotto));
+                        Articolo = await service.GetArticolo(value.Id);
+                        RaisePropertyChanged(nameof(Articolo));
                     });
                 }
             }
@@ -105,18 +105,18 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
 
         private async Task Aggiorna()
         {
-            Prodotti.Clear();
+            Articoli.Clear();
             foreach (ArticoloReadOnly pr in await service.GetArticoli())
             {
-                Prodotti.Add(pr);
+                Articoli.Add(pr);
             }
             Nuovo();
         }
 
         private void Nuovo()
         {
-            Prodotto = new Articolo();
-            RaisePropertyChanged(nameof(Prodotto));
+            Articolo = new Articolo();
+            RaisePropertyChanged(nameof(Articolo));
         }
 
         public void Dispose()

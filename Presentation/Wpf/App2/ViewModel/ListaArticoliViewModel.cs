@@ -16,33 +16,33 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
-        private ICommand selezionaProdottoCommand;
+        private ICommand selezionaArticoloCommand;
         private ICommand loadedCommand;
 
         public ListaArticoliViewModel(ILogger logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service;
-            Prodotti = new ObservableCollection<ArticoloReadOnly>();
+            Articoli = new ObservableCollection<ArticoloReadOnly>();
             if (IsInDesignMode)
             {
                 foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
                 {
-                    Prodotti.Add(pr);
+                    Articoli.Add(pr);
                 }
             }
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ObservableCollection<ArticoloReadOnly> Prodotti { get; private set; }
+        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
 
-        public ArticoloReadOnly ProdottoSelezionato { private get; set; }
+        public ArticoloReadOnly ArticoloSelezionato { private get; set; }
 
-        public ICommand SelezionaProdottoCommand => selezionaProdottoCommand ??= new RelayCommand<Window>((wnd) =>
+        public ICommand SelezionaArticoloCommand => selezionaArticoloCommand ??= new RelayCommand<Window>((wnd) =>
         {
-            if (ProdottoSelezionato != null)
+            if (ArticoloSelezionato != null)
             {
-                MessengerInstance.Send(new NotificationMessage<int>(ProdottoSelezionato.Id, "IdProdotto"));
+                MessengerInstance.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
                 wnd.Close();
             }
         });
@@ -51,7 +51,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         {
             foreach (ArticoloReadOnly pr in await service.GetArticoli())
             {
-                Prodotti.Add(pr);
+                Articoli.Add(pr);
             }
         });
 

@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
     public class ListaClientiViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
-        private readonly IClientiFornitoriService clientiFornitoriService;
+        private readonly IClientiFornitoriService service;
         private ICommand loadCommand;
         private ICommand selezionaClienteCommand;
 
@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
                                      IClientiFornitoriService clientiFornitoriService)
         {
             this.logger = logger;
-            this.clientiFornitoriService = clientiFornitoriService;
+            service = clientiFornitoriService;
             Clienti = new ObservableCollection<Cliente>();
             if (IsInDesignMode)
             {
-                foreach (var item in clientiFornitoriService.GetClienti().Result)
+                foreach (var item in service.GetClienti().Result)
                 {
                     Clienti.Add(item);
                 }
@@ -39,16 +39,16 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
 
         public Cliente ClienteSelezionato { get; set; }
 
-        public ICommand LoadedCommand => loadCommand ??= new RelayCommand(async () => 
+        public ICommand LoadedCommand => loadCommand ??= new RelayCommand(async () =>
         {
             Clienti.Clear();
-            foreach (var item in await clientiFornitoriService.GetClienti())
+            foreach (var item in await service.GetClienti())
             {
                 Clienti.Add(item);
             }
         });
 
-        public ICommand SelezionaClienteCommand => selezionaClienteCommand ??= new RelayCommand<Window>(async (wnd) => 
+        public ICommand SelezionaClienteCommand => selezionaClienteCommand ??= new RelayCommand<Window>((wnd) =>
         {
             if (ClienteSelezionato != null)
             {

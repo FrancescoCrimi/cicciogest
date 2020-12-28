@@ -9,8 +9,8 @@
     xmlns:model="using:CiccioGest.Domain.Documenti"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    mc:Ignorable="d"      
-    DataContext="{Binding ListaFatture, Source={StaticResource Locator}}"    
+    mc:Ignorable="d"
+    DataContext="{Binding ListaFatture, Source={StaticResource Locator}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <interactivity:Interaction.Behaviors>

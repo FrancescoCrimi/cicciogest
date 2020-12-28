@@ -4,7 +4,7 @@ using CiccioGest.Presentation.Wpf.App2.View;
 using System;
 using System.Windows;
 
-namespace CiccioGest.Presentation.Wpf.App2
+namespace CiccioGest.Presentation.Wpf.App2.Services
 {
     public class WindowManagerService : IWindowManagerService
     {

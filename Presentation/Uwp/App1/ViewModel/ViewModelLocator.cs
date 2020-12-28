@@ -1,4 +1,5 @@
 ﻿using Castle.Facilities.Logging;
+using Castle.MicroKernel.Lifestyle;
 using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
@@ -60,7 +61,25 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
 
         public ShellViewModel Shell => windsor.Resolve<ShellViewModel>();
         public MainViewModel Main => windsor.Resolve<MainViewModel>();
-        public FatturaViewModel Fatture => windsor.Resolve<FatturaViewModel>();
+        public FatturaViewModel Fatture
+        {
+            get
+            {
+                try
+                {
+                    using (windsor.BeginScope())
+                    {
+                        var aaa = windsor.Resolve<FatturaViewModel>();
+                        return aaa;
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    throw;
+                }
+            }
+        }
+
         public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
         public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
         public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();

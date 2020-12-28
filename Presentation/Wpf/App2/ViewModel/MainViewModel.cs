@@ -1,8 +1,6 @@
 ﻿using Castle.Core.Logging;
-using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Globalization;
 using System.Windows.Input;
@@ -26,19 +24,13 @@ namespace CiccioGest.Presentation.Wpf.App2.ViewModel
         }
 
         public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(() =>
-        //MessengerInstance.Send(new NotificationMessage("ApriFatture"))
-        windowManagerService.OpenInNewWindow(WindowKey.Fattura)
-        );
+            windowManagerService.OpenInNewWindow(WindowKey.Fattura));
 
-        public ICommand ApriProdottiCommand => apriProdottiCommand ??= new RelayCommand(() =>
-        //MessengerInstance.Send(new NotificationMessage("ApriProdotti"))
-        windowManagerService.OpenInNewWindow(WindowKey.Articolo)
-        );
+        public ICommand ApriArticoliCommand => apriProdottiCommand ??= new RelayCommand(() =>
+            windowManagerService.OpenInNewWindow(WindowKey.Articolo));
 
         public ICommand ApriCategorieCommand => apriCategorieCommand ??= new RelayCommand(() =>
-            //MessengerInstance.Send(new NotificationMessage("ApriCategorie"))
-        windowManagerService.OpenInNewWindow(WindowKey.Categoria)
-        );
+            windowManagerService.OpenInNewWindow(WindowKey.Categoria));
 
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 

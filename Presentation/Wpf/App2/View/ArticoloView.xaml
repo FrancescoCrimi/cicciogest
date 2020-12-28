@@ -4,8 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        mc:Ignorable="d ignore"
+        mc:Ignorable="d"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         Width="300"
         Height="285"
@@ -39,10 +38,10 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <Label Content="Nome:" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center"/>
                 <TextBox 
                     HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" 
-                    Text="{Binding Prodotto.Nome}" VerticalAlignment="Center" Width="100"/>
+                    Text="{Binding Articolo.Nome}" VerticalAlignment="Center" Width="100"/>
             </Grid>
 
             <Grid>
@@ -52,16 +51,15 @@
                 </Grid.RowDefinitions>
                 <Label
                     Content="Prezzo:"
-                    Grid.Column="0"
                     HorizontalAlignment="Left" 
-                    Margin="3" Grid.Row="0"
+                    Margin="3"
                     VerticalAlignment="Center"/>
                 <TextBox 
                     HorizontalAlignment="Left"
                     Height="23"
                     Margin="3"
                     Grid.Row="1" 
-                    Text="{Binding Prodotto.Prezzo}" 
+                    Text="{Binding Articolo.Prezzo}" 
                     VerticalAlignment="Center"
                     Width="60"/>
             </Grid>
@@ -72,11 +70,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label
-                    Content="Categoria:"
-                    Grid.Column="0" 
+                    Content="Categoria:" 
                     HorizontalAlignment="Left"
                     Margin="3"
-                    Grid.Row="0"
                     VerticalAlignment="Center"/>
                 <ComboBox 
                     HorizontalAlignment="Left"
@@ -87,8 +83,8 @@
                     Width="100" 
                     ItemsSource="{Binding Categorie}" 
                     DisplayMemberPath="Nome"
-                    SelectedValue="{Binding Prodotto.Categoria, Mode=TwoWay}" 
-                    SelectedItem="{Binding Prodotto.Categoria, Mode=TwoWay}">
+                    SelectedValue="{Binding Articolo.Categoria, Mode=TwoWay}" 
+                    SelectedItem="{Binding Articolo.Categoria, Mode=TwoWay}">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel/>
@@ -101,8 +97,8 @@
 
         <DataGrid
             Grid.Row="2"
-            ItemsSource="{Binding Prodotti}"
-            SelectedItem="{Binding ProdottoSelezionato, Mode=OneWayToSource}" 
+            ItemsSource="{Binding Articoli}"
+            SelectedItem="{Binding ArticoloSelezionato, Mode=OneWayToSource}" 
             IsReadOnly="True"
             AutoGenerateColumns="False"
             SelectionMode="Single">
@@ -112,7 +108,6 @@
                 <DataGridTextColumn Binding="{Binding NomeCategoria}" Header="Categoria" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-
 
     </Grid>
 </Window>

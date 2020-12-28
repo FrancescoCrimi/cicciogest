@@ -1,4 +1,6 @@
 ﻿using Castle.Core.Logging;
+using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -13,17 +15,28 @@ namespace CiccioGest.Presentation.Uwp.App1.ViewModel
     public sealed class ShellViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
+        private readonly IKernel kernel;
         private readonly NavigationService navigationService;
         private RelayCommand loadedCommand;
 
-        public ShellViewModel(ILogger logger, NavigationService navigationService)
+        public ShellViewModel(ILogger logger, IKernel kernel, NavigationService navigationService)
         {
             this.logger = logger;
+            this.kernel = kernel;
             this.navigationService = navigationService;
             logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        public ICommand FattureCommand => new RelayCommand(() => navigationService.NavigateTo("Fattura"));
+        public ICommand FattureCommand
+        {
+            get
+            {
+                //using (kernel.BeginScope())
+                //{
+                    return new RelayCommand(() => navigationService.NavigateTo("Fattura"));
+                //}
+            }
+        }
 
         public ICommand ArticoliCommand => new RelayCommand(() => navigationService.NavigateTo("Articolo"));
 

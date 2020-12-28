@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CiccioGest.Presentation.Wpf.App2
+﻿namespace CiccioGest.Presentation.Wpf.App2.Contracts
 {
     public interface IWindowManagerService
     {

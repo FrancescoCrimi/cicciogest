@@ -1,4 +1,6 @@
 ﻿using Castle.Core.Logging;
+using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -10,12 +12,14 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
     public class ShellViewModel : ViewModelBase
     {
         private readonly ILogger logger;
+        private readonly IKernel kernel;
         private readonly NavigationService navigationService;
         private ICommand itemInvokedCommand;
 
-        public ShellViewModel(ILogger logger, NavigationService navigationService)
+        public ShellViewModel(ILogger logger, IKernel kernel, NavigationService navigationService)
         {
             this.logger = logger;
+            this.kernel = kernel;
             this.navigationService = navigationService;
         }
 
@@ -30,7 +34,10 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
             else if (obj.InvokedItemContainer != null)
             {
                 var navItemTag = obj.InvokedItemContainer.Tag.ToString();
-                navigationService.NavigateTo(navItemTag);
+                using (kernel.BeginScope())
+                {
+                    navigationService.NavigateTo(navItemTag);
+                }
                 //if (navItemTag == "FatturaPage") navigationService.NavigateTo("FatturaPage");
                 //NavView_Navigate(navItemTag, obj.RecommendedNavigationTransitionInfo);
             }

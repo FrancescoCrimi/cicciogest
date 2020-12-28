@@ -4,8 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        mc:Ignorable="d ignore"
+        mc:Ignorable="d"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         Width="300"
         Height="300"
@@ -18,7 +17,7 @@
         </b:EventTrigger>
     </b:Interaction.Triggers>
 
-    <Grid x:Name="LayoutRoot">
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,7 +29,7 @@
                 <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Magazino">
-                <MenuItem Header="Prodotti" Command="{Binding ApriProdottiCommand, Mode=OneWay}"/>
+                <MenuItem Header="Articoli" Command="{Binding ApriArticoliCommand, Mode=OneWay}"/>
                 <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Anagrafica">

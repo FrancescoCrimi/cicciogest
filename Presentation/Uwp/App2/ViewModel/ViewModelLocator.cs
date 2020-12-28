@@ -25,6 +25,7 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
             nav.Configure("Categoria", typeof(CategoriaPage));
             nav.Configure("ListaFatture", typeof(ListaFatturePage));
             nav.Configure("ListaArticoli", typeof(ListaArticoliPage));
+            nav.Configure("ListaClienti", typeof(ListaClientiPage));
 
             windsor = new WindsorContainer();
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
@@ -34,7 +35,11 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
 
             if (ViewModelBase.IsInDesignModeStatic || UseDesignTimeData)
             {
-                windsor.Register(Component.For<IFatturaService>().ImplementedBy<DesignFatturaService>());
+                windsor.Register(
+                    Component.For<IFatturaService>().ImplementedBy<DesignFatturaService>(),
+                    Component.For<IMagazinoService>().ImplementedBy<DesignMagazinoService>(),
+                    Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>()
+                    );
             }
             else
             {
@@ -44,15 +49,38 @@ namespace CiccioGest.Presentation.Uwp.App2.ViewModel
             }
             windsor.Register(
                 Component.For<ShellViewModel>(),
-                Component.For<FatturaViewModel>(),
-                Component.For<ListaFattureViewModel>());
+                Component.For<FatturaViewModel>().LifestyleTransient(),
+                Component.For<ArticoloViewModel>().LifestyleTransient(),
+                Component.For<CategoriaViewModel>().LifestyleTransient(),
+                Component.For<ListaFattureViewModel>().LifestyleTransient(),
+                Component.For<ListaClientiViewModel>().LifestyleTransient(),
+                Component.For<ListaArticoliViewModel>().LifestyleTransient()
+                );
         }
 
         public ShellViewModel Shell => windsor.Resolve<ShellViewModel>();
-        public FatturaViewModel Fattura => windsor.Resolve<FatturaViewModel>();
+        public FatturaViewModel Fattura
+        {
+            get
+            {
+                try
+                {
+                    var aaa = windsor.Resolve<FatturaViewModel>();
+                    return aaa;
+                }
+                catch (System.Exception e)
+                {
+                    
+                    throw;
+                }
+            }
+        }
+
         public ArticoloViewModel Articolo => windsor.Resolve<ArticoloViewModel>();
         public CategoriaViewModel Categoria => windsor.Resolve<CategoriaViewModel>();
         public ListaFattureViewModel ListaFatture => windsor.Resolve<ListaFattureViewModel>();
         public ListaArticoliViewModel ListaArticoli => windsor.Resolve<ListaArticoliViewModel>();
+        public ListaClientiViewModel ListaClienti => windsor.Resolve<ListaClientiViewModel>();
+
     }
 }

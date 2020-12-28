@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CiccioSoft.Collections" Version="1.0.1" />
+    <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

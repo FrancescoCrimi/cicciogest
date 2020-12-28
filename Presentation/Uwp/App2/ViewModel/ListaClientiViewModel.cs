@@ -7,7 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.Wpf.App1.ViewModel
+namespace CiccioGest.Presentation.Uwp.App2.ViewModel
 {
     public class ListaClientiViewModel : ViewModelBase, IDisposable
     {
@@ -45,7 +45,13 @@ namespace CiccioGest.Presentation.Wpf.App1.ViewModel
             }
         });
 
-        public ICommand SelezionaClienteCommand { get; }
+        public ICommand SelezionaClienteCommand => selezionaClienteCommand ??= new RelayCommand(() => 
+        {
+            if (ClienteSelezionato != null)
+            {
+
+            }
+        });
 
         public void Dispose()
         {
