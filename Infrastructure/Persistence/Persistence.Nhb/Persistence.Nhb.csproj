@@ -52,12 +52,12 @@
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="Castle.Windsor" Version="5.0.1" />
+    <PackageReference Include="Castle.Windsor" Version="5.1.1" />
     <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
     <PackageReference Include="CiccioSoft.NhbCollections" Version="2.0.0" />
     <PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.0" />
-    <PackageReference Include="Npgsql" Version="4.1.4" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.6" />
+    <PackageReference Include="Npgsql" Version="5.0.1.1" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.7" />
   </ItemGroup>
 
   <ItemGroup>

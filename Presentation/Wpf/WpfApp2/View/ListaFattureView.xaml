@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="CiccioGest.Presentation.WpfApp2.View.ListaFattureView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    mc:Ignorable="d" 
+    d:DesignHeight="350"
+    d:DesignWidth="500"
+    Background="White"
+    Title="ListaFattureView"
+    DataContext="{Binding ListaFatture, Source={StaticResource Locator}}">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+
+        <DataGrid
+            ItemsSource="{Binding Fatture}"
+            SelectedItem="{Binding FatturaSelezionata}"
+            SelectionMode="Single"
+            AutoGenerateColumns="False"
+            IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Nome}" Header="Nome" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Totale}" Header="Totale" Width="0.4*"/>
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding ApriFatturaCommand, Mode=OneWay}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+
+    </Grid>
+</Page>

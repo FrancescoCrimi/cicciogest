@@ -1,0 +1,41 @@
+﻿<Window 
+    x:Class="CiccioGest.Presentation.WpfApp2.View.ShellView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="350"
+    Width="600"
+    Title="CiccioGest"
+    DataContext="{Binding Shell, Source={StaticResource Locator}}">
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Documenti">
+                <MenuItem Header="Fatture" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
+                <!--<MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>-->
+            </MenuItem>
+            <MenuItem Header="Magazino">
+                <MenuItem Header="Articoli" Command="{Binding ApriArticoliCommand, Mode=OneWay}"/>
+                <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
+            </MenuItem>
+            <MenuItem Header="Anagrafica">
+                <MenuItem Header="Clienti"/>
+                <MenuItem Header="Fornitori"/>
+            </MenuItem>
+            <MenuItem x:Name="aboutMenuItem" Header="?"/>
+        </Menu>
+
+        <Frame Grid.Row="1" x:Name="shellFrame" NavigationUIVisibility="Hidden" />
+        <!--<Frame Grid.Row="1" x:Name="shellFrame" Source="HomeView.xaml" NavigationUIVisibility="Hidden" />-->
+
+    </Grid>
+
+</Window>

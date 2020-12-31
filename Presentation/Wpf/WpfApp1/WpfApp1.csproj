@@ -1,0 +1,97 @@
+﻿ <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+                                                                                                                                                                                                                               
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>CiccioGest.Presentation.WpfApp1</RootNamespace>
+    <AssemblyName>WpfApp1</AssemblyName>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="View\CategoriaView.xaml" />
+    <None Remove="View\FatturaView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="Castle.Core-NLog" Version="4.4.1" />
+    <PackageReference Include="Castle.LoggingFacility" Version="5.1.1" />
+    <PackageReference Include="Castle.Windsor" Version="5.1.1" />
+    <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
+    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Client\Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\CategoriaView.xaml.cs">
+      <DependentUpon>CategoriaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\FatturaView.xaml.cs">
+      <DependentUpon>FatturaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\MainView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\ArticoloView.xaml.cs">
+      <DependentUpon>ArticoloView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\ListaFattureView.xaml.cs">
+      <DependentUpon>ListaFattureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\ListaArticoliView.xaml.cs">
+      <DependentUpon>ListaArticoliView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\CategoriaView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\FatturaView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ArticoloView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ListaFattureView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ListaArticoliView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
