@@ -1,8 +1,8 @@
-using Castle.Core.Logging;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.Presenter;
 using CiccioGest.Presentation.Mvp.View;
 using Gtk;
+using Microsoft.Extensions.Logging;
 using System;
 using UI = Gtk.Builder.ObjectAttribute;
 
@@ -37,7 +37,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         public event EventHandler CloseEvent;
         public event EventHandler NuovaFattura;
 
-        public FatturaView(ILogger logger)
+        public FatturaView(ILogger<FatturaView> logger)
             : this(new Builder("FatturaView.glade"))
         {
             this.logger = logger;
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             nuovoDettaglioToolButton.Clicked += (sender, args) => NuovoDettaglioEvent?.Invoke(sender, args);
             addDettaglioToolButton.Clicked += AddDettaglioToolButton_Clicked;
             removeDettaglioToolButton.Clicked += RemoveDettaglioToolButton_Clicked;
-            logger.Debug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
         }
 
         private FatturaView(Builder builder)

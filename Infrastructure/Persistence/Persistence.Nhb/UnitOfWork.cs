@@ -1,4 +1,4 @@
-﻿using Castle.Core.Logging;
+﻿using Microsoft.Extensions.Logging;
 using NHibernate;
 using System;
 using System.Globalization;
@@ -12,11 +12,12 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
         private readonly ISessionFactory sessionFactory;
         private ISession session;
 
-        public UnitOfWork(ILogger logger, UnitOfWorkFactory unitOfWorkFactory)
+        public UnitOfWork(ILogger<UnitOfWork> logger,
+                          IUnitOfWorkFactory unitOfWorkFactory)
         {
             this.logger = logger;
-            this.sessionFactory = unitOfWorkFactory.SessionFactory();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.sessionFactory = ((UnitOfWorkFactory)unitOfWorkFactory).SessionFactory();
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         internal ISession ISession
@@ -95,7 +96,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             //    session.Close();
             //    session.Dispose();
             //    session = null;
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

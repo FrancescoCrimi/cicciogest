@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace CiccioGest.Presentation.Mvp.Presenter
@@ -15,7 +16,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         public int IdProdotto { get; private set; }
 
-        public ListaArticoliPresenter(ILogger logger,
+        public ListaArticoliPresenter(ILogger<ListaArticoliPresenter> logger,
                                       IMagazinoService magazinoService,
                                       IListaArticoliView listaArticoliView)
         {
@@ -25,6 +26,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             view.SelectArticoloEvent += View_SelezionaArticoloEvent;
             view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
+            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
         }
 
         private void View_CloseEvent(object sender, EventArgs e)

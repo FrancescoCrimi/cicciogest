@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
                     Component.For<IMagazinoService>().ImplementedBy<DesignMagazinoService>(),
                     Component.For<IClientiFornitoriService>().ImplementedBy<DesignClientiFornitoriService>()
                     );
-                registerVM();
+                RegisterVM();
             }
         }
 
@@ -43,10 +43,10 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
                 Component.For<IPageService>().ImplementedBy<PageService>(),
                 Component.For<INavigationService>().ImplementedBy<NavigationService>());
             windsor.Install(new CiccioGest.Presentation.Client.MyInstaller());
-            registerVM();
+            RegisterVM();
         }
 
-        private void registerVM()
+        private void RegisterVM()
         {
             windsor.Register(
                 Component.For<ShellView>(),

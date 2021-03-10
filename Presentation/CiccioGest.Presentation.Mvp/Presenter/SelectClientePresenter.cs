@@ -1,6 +1,6 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace CiccioGest.Presentation.Mvp.Presenter
@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         public int IdCliente { get; private set; }
 
-        public SelectClientePresenter(ILogger logger,
+        public SelectClientePresenter(ILogger<SelectClientePresenter> logger,
                                       IClientiFornitoriService clientiFornitoriService,
                                       ISelectClienteView selectClienteView)
         {
@@ -25,6 +25,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             view.CloseEvent += View_CloseEvent;
             view.LoadEvent += View_LoadEvent;
             view.SelectClienteEvent += View_SelectClienteEvent;
+            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
         }
 
         private void View_CloseEvent(object s, EventArgs e) { }

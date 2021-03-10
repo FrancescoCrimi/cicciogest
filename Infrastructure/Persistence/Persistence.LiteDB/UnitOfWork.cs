@@ -1,5 +1,5 @@
-﻿using Castle.Core.Logging;
-using LiteDB;
+﻿using LiteDB;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
     {
         private readonly ILogger logger;
 
-        public UnitOfWork(ILogger logger, UnitOfWorkFactory unitOfWorkFactory)
+        public UnitOfWork(ILogger<UnitOfWork> logger, UnitOfWorkFactory unitOfWorkFactory)
         {
             this.logger = logger;
             LiteDB = unitOfWorkFactory.LiteDB;
@@ -19,7 +19,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
                 LiteDB.Rollback();
                 LiteDB.BeginTrans();
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         internal LiteDatabase LiteDB { get; }
@@ -37,7 +37,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
                 LiteDB.BeginTrans();
                 throw ex;
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Commit");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Commit");
         }
 
         public Task CommitAsync()
@@ -47,14 +47,14 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
 
         public void Rollback()
         {
             LiteDB.Rollback();
             LiteDB.BeginTrans();
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Rollback");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Rollback");
         }
     }
 }

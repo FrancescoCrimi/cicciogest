@@ -1,8 +1,8 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Domain.ClientiFornitori;
+﻿using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,19 +18,18 @@ namespace CiccioGest.Application.Impl
         private readonly IArticoloRepository articoloRepository;
         private readonly IClienteRepository clienteRepository;
 
-        public FatturaService(
-            ILogger logger,
-            IUnitOfWork unitOfWork,
-            IFatturaRepository fatturaRepository,
-            IArticoloRepository articoloRepository,
-            IClienteRepository clienteRepository)
+        public FatturaService(ILogger<FatturaService> logger,
+                              IUnitOfWork unitOfWork,
+                              IFatturaRepository fatturaRepository,
+                              IArticoloRepository articoloRepository,
+                              IClienteRepository clienteRepository)
         {
             this.logger = logger;
             this.unitOfWork = unitOfWork;
             this.fatturaRepository = fatturaRepository;
             this.articoloRepository = articoloRepository;
             this.clienteRepository = clienteRepository;
-            logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
+            logger.LogDebug("HashCode: " + GetHashCode() + " (uow: " + unitOfWork.GetHashCode() + ") Created");
         }
 
         public async Task DeleteFattura(int id)
@@ -91,7 +90,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Disposed");
+            logger.LogDebug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Disposed");
         }
     }
 }

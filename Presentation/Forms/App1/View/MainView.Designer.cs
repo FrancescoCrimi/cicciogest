@@ -60,7 +60,7 @@
             this.esciToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(382, 28);
+            this.menuStrip.Size = new System.Drawing.Size(482, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -139,21 +139,21 @@
             // apriArticoloToolStripMenuItem
             // 
             this.apriArticoloToolStripMenuItem.Name = "apriArticoloToolStripMenuItem";
-            this.apriArticoloToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.apriArticoloToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.apriArticoloToolStripMenuItem.Text = "Apri Articolo";
             this.apriArticoloToolStripMenuItem.Click += new System.EventHandler(this.ApriArticoloToolStripMenuItem_Click);
             // 
             // nuovoArticoloToolStripMenuItem
             // 
             this.nuovoArticoloToolStripMenuItem.Name = "nuovoArticoloToolStripMenuItem";
-            this.nuovoArticoloToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nuovoArticoloToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.nuovoArticoloToolStripMenuItem.Text = "Nuovo Articolo";
             this.nuovoArticoloToolStripMenuItem.Click += new System.EventHandler(this.NuovoArticoloToolStripMenuItem_Click);
             // 
             // categorieToolStripMenuItem
             // 
             this.categorieToolStripMenuItem.Name = "categorieToolStripMenuItem";
-            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.categorieToolStripMenuItem.Text = "Categorie";
             this.categorieToolStripMenuItem.Click += new System.EventHandler(this.categorieToolStripMenuItem_Click);
             // 
@@ -198,7 +198,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 313);
+            this.ClientSize = new System.Drawing.Size(482, 353);
             this.Controls.Add(this.menuStrip);
             this.Name = "MainView";
             this.Text = "CiccioGest";

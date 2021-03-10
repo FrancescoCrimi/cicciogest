@@ -1,11 +1,8 @@
 ﻿using CiccioGest.Application.FakeImpl;
-using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl

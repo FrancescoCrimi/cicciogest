@@ -1,5 +1,5 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
@@ -9,12 +9,12 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
 
-        public ListaArticoliPresenter(ILogger logger,
+        public ListaArticoliPresenter(ILogger<ListaArticoliPresenter> logger,
                                       IMagazinoService magazinoService)
         {
             this.logger = logger;
             this.magazinoService = magazinoService;
-            logger.Debug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
         }
 
         public event EventHandler<int> EventoSelezione;

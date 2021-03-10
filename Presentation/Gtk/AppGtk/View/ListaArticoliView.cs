@@ -1,7 +1,7 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Domain.Magazino;
+﻿using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.Mvp.View;
 using Gtk;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using UI = Gtk.Builder.ObjectAttribute;
 
@@ -17,14 +17,14 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         public event System.EventHandler LoadEvent;
         public event System.EventHandler CloseEvent;
 
-        public ListaArticoliView(ILogger logger)
+        public ListaArticoliView(ILogger<ListaArticoliView> logger)
             : this(new Builder("ListaArticoliView.glade"))
         {
             this.logger = logger;
             Shown += (sender, args) => LoadEvent?.Invoke(sender, args);
             DeleteEvent += (o, args) => CloseEvent?.Invoke(o, args);
             articoliTreeView.RowActivated += ArticoliTreeView_RowActivated;
-            logger.Debug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
         }
 
         private ListaArticoliView(Builder builder)

@@ -1,4 +1,5 @@
 ﻿using CiccioGest.Domain.Common;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
@@ -6,11 +7,14 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
     internal abstract class DomainRepository<TEntity>
         : IDomainRepository<TEntity> where TEntity : DomainEntity
     {
-        protected UnitOfWork unitOfWork;
+        private readonly ILogger logger;
+        protected readonly UnitOfWork unitOfWork;
 
-        protected DomainRepository(UnitOfWork unitOfWork)
+        protected DomainRepository(ILogger logger,
+                                   IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            this.logger = logger;
+            this.unitOfWork = (UnitOfWork)unitOfWork;
         }
 
 

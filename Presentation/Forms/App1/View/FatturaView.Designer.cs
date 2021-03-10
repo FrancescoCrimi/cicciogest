@@ -172,7 +172,7 @@
             this.totaleDataGridViewTextBoxColumn});
             this.dettagliDataGridView.DataSource = this.dettagliBindingSource;
             this.dettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dettagliDataGridView.Location = new System.Drawing.Point(3, 118);
+            this.dettagliDataGridView.Location = new System.Drawing.Point(3, 122);
             this.dettagliDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dettagliDataGridView.MultiSelect = false;
             this.dettagliDataGridView.Name = "dettagliDataGridView";
@@ -180,7 +180,7 @@
             this.dettagliDataGridView.RowHeadersVisible = false;
             this.dettagliDataGridView.RowHeadersWidth = 51;
             this.dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dettagliDataGridView.Size = new System.Drawing.Size(616, 313);
+            this.dettagliDataGridView.Size = new System.Drawing.Size(616, 309);
             this.dettagliDataGridView.TabIndex = 6;
             this.dettagliDataGridView.TabStop = false;
             this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DettagliDataGridViewCellClick);
@@ -253,7 +253,7 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 30);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 34);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -398,7 +398,7 @@
             this.ToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(622, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(622, 31);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -407,7 +407,7 @@
             this.esciToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("esciToolStripButton.Image")));
             this.esciToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.esciToolStripButton.Name = "esciToolStripButton";
-            this.esciToolStripButton.Size = new System.Drawing.Size(58, 24);
+            this.esciToolStripButton.Size = new System.Drawing.Size(58, 28);
             this.esciToolStripButton.Text = "Esci";
             this.esciToolStripButton.Click += new System.EventHandler(this.EsciClick);
             // 
@@ -416,7 +416,7 @@
             this.salvaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripButton.Image")));
             this.salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.salvaToolStripButton.Name = "salvaToolStripButton";
-            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
+            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 28);
             this.salvaToolStripButton.Text = "Salva";
             this.salvaToolStripButton.Click += new System.EventHandler(this.SalvaClick);
             // 
@@ -425,21 +425,21 @@
             this.eliminaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("eliminaToolStripButton.Image")));
             this.eliminaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.eliminaToolStripButton.Name = "eliminaToolStripButton";
-            this.eliminaToolStripButton.Size = new System.Drawing.Size(82, 24);
+            this.eliminaToolStripButton.Size = new System.Drawing.Size(82, 28);
             this.eliminaToolStripButton.Text = "Elimina";
             this.eliminaToolStripButton.Click += new System.EventHandler(this.EliminaClick);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 31);
             // 
             // nuovoDettaglioToolStripButton
             // 
             this.nuovoDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoDettaglioToolStripButton.Image")));
             this.nuovoDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuovoDettaglioToolStripButton.Name = "nuovoDettaglioToolStripButton";
-            this.nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(77, 24);
+            this.nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(77, 28);
             this.nuovoDettaglioToolStripButton.Text = "Nuovo";
             this.nuovoDettaglioToolStripButton.Click += new System.EventHandler(this.NuovoDettaglioClick);
             // 
@@ -448,7 +448,7 @@
             this.aggiungiDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiungiDettaglioToolStripButton.Image")));
             this.aggiungiDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.aggiungiDettaglioToolStripButton.Name = "aggiungiDettaglioToolStripButton";
-            this.aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(94, 24);
+            this.aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(94, 28);
             this.aggiungiDettaglioToolStripButton.Text = "Aggiungi";
             this.aggiungiDettaglioToolStripButton.Click += new System.EventHandler(this.AggiungiDettaglioClick);
             // 
@@ -457,7 +457,7 @@
             this.rimuoviDettaglioToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("rimuoviDettaglioToolStripButton1.Image")));
             this.rimuoviDettaglioToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rimuoviDettaglioToolStripButton1.Name = "rimuoviDettaglioToolStripButton1";
-            this.rimuoviDettaglioToolStripButton1.Size = new System.Drawing.Size(87, 24);
+            this.rimuoviDettaglioToolStripButton1.Size = new System.Drawing.Size(87, 28);
             this.rimuoviDettaglioToolStripButton1.Text = "Rimuovi";
             this.rimuoviDettaglioToolStripButton1.Click += new System.EventHandler(this.RimuoviDettaglioClick);
             // 
@@ -468,7 +468,7 @@
             this.ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton.Image")));
             this.ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolStripButton.Name = "ToolStripButton";
-            this.ToolStripButton.Size = new System.Drawing.Size(29, 24);
+            this.ToolStripButton.Size = new System.Drawing.Size(29, 28);
             this.ToolStripButton.Text = "&?";
             this.ToolStripButton.Click += new System.EventHandler(this.ToolStripButton_Click);
             // 

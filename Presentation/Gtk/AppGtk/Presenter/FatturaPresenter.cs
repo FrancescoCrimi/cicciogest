@@ -1,24 +1,25 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
+﻿//using Castle.Core.Logging;
+//using Castle.MicroKernel;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
+using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Presentation.Gtk.AppGtk.Presenter
 {
     public class FatturaPresenter 
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
+        //private readonly IKernel kernel;
         private readonly IFatturaService fatturaService;
 
-        public FatturaPresenter(ILogger logger,
-                                IKernel kernel,
+        public FatturaPresenter(ILogger<FatturaPresenter> logger,
+                                //IKernel kernel,
                                 IFatturaService fatturaService)
         {
             this.logger = logger;
-            this.kernel = kernel;
+            //this.kernel = kernel;
             this.fatturaService = fatturaService;
-            logger.Debug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
         }
 
         //public void AprFattura()

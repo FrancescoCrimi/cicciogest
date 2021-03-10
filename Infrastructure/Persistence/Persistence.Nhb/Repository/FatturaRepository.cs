@@ -1,17 +1,17 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Domain.Documenti;
+﻿using CiccioGest.Domain.Documenti;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
     internal class FatturaRepository : DomainRepository<Fattura>, IFatturaRepository
     {
-        public FatturaRepository(ILogger logger, UnitOfWork unitOfWork)
-            : base(unitOfWork)
+        public FatturaRepository(ILogger<FatturaRepository> logger,
+                                 IUnitOfWork unitOfWork)
+            : base(logger, unitOfWork)
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Created");
+            logger.LogDebug("HashCode: " + GetHashCode() + " (uow: " + unitOfWork.GetHashCode()+ ") Created");
         }
 
         public async Task<IList<FatturaReadOnly>> GetAll()

@@ -10,6 +10,22 @@ namespace CiccioGest.Presentation.WpfApp2
 {
     public partial class App : System.Windows.Application
     {
+
+        private void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        {
+            Init();
+        }
+
+        private void OnExit(object sender, System.Windows.ExitEventArgs e)
+        {
+
+        }
+
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+
+        }
+
         private void Init()
         {
             ViewModelLocator locator = Resources["Locator"] as ViewModelLocator;
@@ -17,21 +33,6 @@ namespace CiccioGest.Presentation.WpfApp2
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             locator.Startup(windsor);
             windsor.Resolve<ShellView>().Show();
-        }
-
-        private void Application_Startup(object sender, System.Windows.StartupEventArgs e)
-        {
-            Init();
-        }
-
-        private void Application_Exit(object sender, System.Windows.ExitEventArgs e)
-        {
-
-        }
-
-        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-
-        }
+        } 
     }
 }

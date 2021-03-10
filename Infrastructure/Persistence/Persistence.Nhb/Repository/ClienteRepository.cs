@@ -1,14 +1,15 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
-using System;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 {
     internal class ClienteRepository : DomainRepository<Cliente>, IClienteRepository
     {
-        public ClienteRepository(UnitOfWork unitOfWork) : base(unitOfWork)
+        public ClienteRepository(ILogger<ClienteRepository> logger,
+                                 IUnitOfWork unitOfWork)
+            : base(logger, unitOfWork)
         {
         }
 

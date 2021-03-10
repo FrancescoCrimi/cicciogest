@@ -27,10 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="Castle.Windsor" Version="5.1.1" />
-    <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
-    <PackageReference Include="System.ServiceModel.Primitives" Version="4.8.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>

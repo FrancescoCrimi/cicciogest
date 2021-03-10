@@ -1,7 +1,7 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Domain.ClientiFornitori;
+﻿using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,19 +17,18 @@ namespace CiccioGest.Application.Impl
         private readonly ICategoriaRepository categoriaRepository;
         private readonly IFornitoreRepository fornitoreRepository;
 
-        public MagazinoService(
-            ILogger logger,
-            IUnitOfWork unitOfWork,
-            IArticoloRepository prodottoRepository,
-            ICategoriaRepository categoriaRepository,
-            IFornitoreRepository fornitoreRepository)
+        public MagazinoService(ILogger<MagazinoService> logger,
+                               IUnitOfWork unitOfWork,
+                               IArticoloRepository prodottoRepository,
+                               ICategoriaRepository categoriaRepository,
+                               IFornitoreRepository fornitoreRepository)
         {
             this.logger = logger;
             this.unitOfWork = unitOfWork;
             this.prodottoRepository = prodottoRepository;
             this.categoriaRepository = categoriaRepository;
             this.fornitoreRepository = fornitoreRepository;
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode() + " (uow: " + unitOfWork.GetHashCode() + ") Created");
         }
 
 
@@ -124,7 +123,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

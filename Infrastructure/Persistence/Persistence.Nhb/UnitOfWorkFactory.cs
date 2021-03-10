@@ -1,5 +1,6 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Infrastructure.Conf;
+using Microsoft.Extensions.Logging;
 //using MySql.Data.MySqlClient;
 //using MySqlConnector;
 using NHibernate;
@@ -17,7 +18,8 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
         private readonly ILogger logger;
         private static ISessionFactory sessionFactory;
 
-        public UnitOfWorkFactory(CiccioGestConf conf, ILogger logger)
+        public UnitOfWorkFactory(ILogger<UnitOfWorkFactory> logger,
+                                 CiccioGestConf conf)
         {
             this.conf = conf;
             this.logger = logger;
@@ -30,7 +32,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 }
                 sessionFactory = GetNhbConfiguration().BuildSessionFactory();
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
 
@@ -162,7 +164,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace CiccioGest.Presentation.Mvp.Presenter
@@ -10,19 +10,22 @@ namespace CiccioGest.Presentation.Mvp.Presenter
     public class FatturaPresenter : IPresenter
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
+        private readonly IServiceProvider serviceProvider;
+        private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly IFatturaService service;
         private readonly IFatturaView view;
 
         public event EventHandler CloseEvent;
 
-        public FatturaPresenter(ILogger logger,
-                           IKernel kernel,
-                           IFatturaView fatturaView,
-                           IFatturaService fatturaService)
+        public FatturaPresenter(ILogger<FatturaPresenter> logger,
+                                IServiceProvider serviceProvider,
+                                IServiceScopeFactory serviceScopeFactory,
+                                IFatturaView fatturaView,
+                                IFatturaService fatturaService)
         {
             this.logger = logger;
-            this.kernel = kernel;
+            this.serviceProvider = serviceProvider;
+            this.serviceScopeFactory = serviceScopeFactory;
             view = fatturaView;
             service = fatturaService;
 
@@ -35,7 +38,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             view.RimuoviDettaglioEvent += View_RimuoviDettaglioEvent;
             view.SalvaFatturaEvent += View_SalvaEvent;
 
-            this.logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public async void NuovaFattura(int idCliente = 0)
@@ -74,10 +77,10 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private async void View_NuovoDettaglioEvent(object sender, EventArgs e)
         {
-            var spv = kernel.Resolve<ListaArticoliPresenter>();
+            var spv = serviceProvider.GetService<ListaArticoliPresenter>();
             spv.Show();
             int idProdotto = spv.IdProdotto;
-            kernel.ReleaseComponent(spv);
+            //kernel.ReleaseComponent(spv);
             if (idProdotto != 0)
             {
                 var articolo = await service.GetArticolo(idProdotto);
@@ -100,7 +103,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private void View_ApriFatturaEvent(object sender, EventArgs e)
         {
-            var sfv = kernel.Resolve<ListaFatturePresenter>();
+            var sfv = serviceProvider.GetService<ListaFatturePresenter>();
             //sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
             sfv.Show();
         }

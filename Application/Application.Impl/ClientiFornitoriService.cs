@@ -1,7 +1,6 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Domain.Magazino;
+﻿using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Infrastructure;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,18 +15,16 @@ namespace CiccioGest.Application.Impl
         private readonly IClienteRepository clienteRepository;
         private readonly IFornitoreRepository fornitoreRepository;
 
-        public ClientiFornitoriService(
-            ILogger logger,
-            IUnitOfWork unitOfWork,
-            IClienteRepository clienteRepository,
-            IFornitoreRepository fornitoreRepository
-            )
+        public ClientiFornitoriService(ILogger<ClientiFornitoriService> logger,
+                                       IUnitOfWork unitOfWork,
+                                       IClienteRepository clienteRepository,
+                                       IFornitoreRepository fornitoreRepository)
         {
             this.logger = logger;
             this.unitOfWork = unitOfWork;
             this.clienteRepository = clienteRepository;
             this.fornitoreRepository = fornitoreRepository;
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode() + " (uow: " + unitOfWork.GetHashCode() + " Created");
         }
 
         public Task DeleteCittà(int id)
@@ -136,7 +133,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

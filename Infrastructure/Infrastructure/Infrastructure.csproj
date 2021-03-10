@@ -25,10 +25,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="Castle.LoggingFacility" Version="5.1.1" />
-    <PackageReference Include="Castle.Windsor" Version="5.1.1" />
     <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>

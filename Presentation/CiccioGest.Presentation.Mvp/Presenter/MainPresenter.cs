@@ -1,7 +1,6 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Presentation.Mvp.View;
+﻿using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 
@@ -10,14 +9,17 @@ namespace CiccioGest.Presentation.Mvp.Presenter
     public class MainPresenter : IPresenter
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
+        private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly IServiceProvider serviceProvider;
 
-        public MainPresenter(ILogger logger,
-                             IKernel kernel,
+        public MainPresenter(ILogger<MainPresenter> logger,
+                             IServiceScopeFactory serviceScopeFactory,
+                             IServiceProvider serviceProvider,
                              IMainView view)
         {
             this.logger = logger;
-            this.kernel = kernel;
+            this.serviceScopeFactory = serviceScopeFactory;
+            this.serviceProvider = serviceProvider;
             View = view;
 
             view.ApriFatturaEvent += View_ApriFatturaEvent;
@@ -29,23 +31,23 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             view.ApriArticoloEvent += View_ApriArticoloEvent;
             view.NuovoArticoloEvent += View_NuovoArticoloEvent;
             view.CategorieEvent += View_CategorieEvent;
-            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
         }
 
         private void View_CategorieEvent(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
-            {
-                CategoriaPresenter catePres = kernel.Resolve<CategoriaPresenter>();
-                catePres.CloseEvent += CatePres_Close;
-                catePres.Show();
-            }
+            //using (var scope = serviceScopeFactory.CreateScope())
+            //{
+            CategoriaPresenter catePres = serviceProvider.GetService<CategoriaPresenter>();
+            catePres.CloseEvent += CatePres_Close;
+            catePres.Show();
+            //}
         }
 
         private void CatePres_Close(object sender, EventArgs e)
         {
             ((CategoriaPresenter)sender).CloseEvent -= CatePres_Close;
-            kernel.ReleaseComponent(sender);
+            //kernel.ReleaseComponent(sender);
         }
 
         private void View_NuovoArticoloEvent(object sender, EventArgs e)
@@ -54,18 +56,18 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private void View_ApriArticoloEvent(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
-            {
-                var artiPres = kernel.Resolve<ArticoloPresenter>();
-                artiPres.CloseEvent += ArtiPres_Close;
-                artiPres.Show();
-            }
+            //using (IServiceScope scope = serviceScopeFactory.CreateScope())
+            //{
+            var artiPres = serviceProvider.GetService<ArticoloPresenter>();
+            artiPres.CloseEvent += ArtiPres_Close;
+            artiPres.Show();
+            //}
         }
 
         private void ArtiPres_Close(object sender, EventArgs e)
         {
             ((ArticoloPresenter)sender).CloseEvent -= ArtiPres_Close;
-            kernel.ReleaseComponent(sender);
+            //kernel.ReleaseComponent(sender);
         }
 
         private void View_NuovoFornitoreEvent(object sender, EventArgs e)
@@ -74,18 +76,15 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private void View_ApriFornitoreEvent(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
-            {
-                var listFornPres = kernel.Resolve<ListaFornitoriPresenter>();
-                listFornPres.CloseEvent += ListFornPres_CloseEvent;
-                listFornPres.Show();
-            }
+            var listFornPres = serviceProvider.GetService<ListaFornitoriPresenter>();
+            listFornPres.CloseEvent += ListFornPres_CloseEvent;
+            listFornPres.Show();
         }
 
         private void ListFornPres_CloseEvent(object sender, EventArgs e)
         {
             ((ListaFornitoriPresenter)sender).CloseEvent -= ListFornPres_CloseEvent;
-            kernel.ReleaseComponent(sender);
+            //kernel.ReleaseComponent(sender);
         }
 
         private void View_NuovoClienteEvent(object sender, EventArgs e)
@@ -94,28 +93,25 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private void View_ApriClienteEvent(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
-            {
-                var listCliePres = kernel.Resolve<ListaClientiPresenter>();
-                listCliePres.CloseEvent += ListCliePres_CloseEvent;
-                listCliePres.Show();
-            }
+            var listCliePres = serviceProvider.GetService<ListaClientiPresenter>();
+            listCliePres.CloseEvent += ListCliePres_CloseEvent;
+            listCliePres.Show();
         }
 
         private void ListCliePres_CloseEvent(object sender, IdEventArgs e)
         {
             ((ListaClientiPresenter)sender).CloseEvent -= ListCliePres_CloseEvent;
-            kernel.ReleaseComponent(sender);
-            if(e.Id != 0)
-            {                
+            //kernel.ReleaseComponent(sender);
+            if (e.Id != 0)
+            {
             }
         }
 
         private void View_NuovaFatturaEvent(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
+            using (var scope = serviceScopeFactory.CreateScope())
             {
-                var fattPres = kernel.Resolve<FatturaPresenter>();
+                var fattPres = scope.ServiceProvider.GetService<FatturaPresenter>();
                 fattPres.CloseEvent += FattPres_CloseEvent;
                 fattPres.NuovaFattura();
                 fattPres.Show();
@@ -124,9 +120,9 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private void View_ApriFatturaEvent(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
+            using (var scope = serviceScopeFactory.CreateScope())
             {
-                var listFattPres = kernel.Resolve<ListaFatturePresenter>();
+                var listFattPres = serviceProvider.GetService<ListaFatturePresenter>();
                 listFattPres.CloseEvent += ListFattPres_CloseEvent;
                 listFattPres.Show();
             }
@@ -135,23 +131,23 @@ namespace CiccioGest.Presentation.Mvp.Presenter
         private void ListFattPres_CloseEvent(object sender, IdEventArgs e)
         {
             ((ListaFatturePresenter)sender).CloseEvent -= ListFattPres_CloseEvent;
-            kernel.ReleaseComponent(sender);
+            //kernel.ReleaseComponent(sender);
             if (e.Id != 0)
             {
-                using (kernel.BeginScope())
-                {
-                    var fattPres = kernel.Resolve<FatturaPresenter>();
-                    fattPres.CloseEvent += FattPres_CloseEvent;
-                    fattPres.MostraFattura(e.Id);
-                    fattPres.Show();
-                }
+                //using (var scope = serviceScopeFactory.CreateScope())
+                //{
+                var fattPres = serviceProvider.GetService<FatturaPresenter>();
+                fattPres.CloseEvent += FattPres_CloseEvent;
+                fattPres.MostraFattura(e.Id);
+                fattPres.Show();
+                //}
             }
         }
 
         private void FattPres_CloseEvent(object sender, EventArgs e)
         {
             ((FatturaPresenter)sender).CloseEvent -= FattPres_CloseEvent;
-            kernel.ReleaseComponent(sender);
+            //kernel.ReleaseComponent(sender);
         }
 
 

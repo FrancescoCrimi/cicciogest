@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Presentation.Mvp.View;
 using Gtk;
+using Microsoft.Extensions.Logging;
 using System;
 using gtk = Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
@@ -32,7 +33,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         public event EventHandler ApriArticoloEvent;
         public event EventHandler NuovoArticoloEvent;
 
-        public MainView(ILogger logger)
+        public MainView(ILogger<MainView> logger)
             : this(new Builder("MainView.glade"))
         {
             this.logger = logger;
@@ -43,7 +44,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             categorieMenuItem.Activated += (s, e) => CategorieEvent?.Invoke(s, e);
             DeleteEvent += (o, args) => gtk.Application.Quit();
 
-            logger.Debug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
         }
 
         private MainView(Builder builder)

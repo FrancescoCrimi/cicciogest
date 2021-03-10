@@ -1,7 +1,7 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Domain.Documenti;
+﻿using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.View;
 using Gtk;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using UI = Gtk.Builder.ObjectAttribute;
 
@@ -19,14 +19,14 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         public event System.EventHandler LoadEvent;
         public event System.EventHandler CloseEvent;
 
-        public ListaFattureView(ILogger logger)
+        public ListaFattureView(ILogger<ListaFattureView> logger)
             : this(new Builder("ListaFattureView.glade"))
         {
             this.logger = logger;
             Shown += (sender, args) => LoadEvent?.Invoke(sender, args);
             DeleteEvent += (o, args) => CloseEvent?.Invoke(o, args);
             fattureTreeView.RowActivated += FattureTreeViewOnRowActivated;
-            logger.Debug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
         }
 
         private ListaFattureView(Builder builder)

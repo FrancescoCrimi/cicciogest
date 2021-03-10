@@ -1,7 +1,6 @@
-﻿using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Presentation.WpfApp1.Contracts;
+﻿using CiccioGest.Presentation.WpfApp1.Contracts;
 using CiccioGest.Presentation.WpfApp1.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Windows;
 
@@ -9,11 +8,16 @@ namespace CiccioGest.Presentation.WpfApp1.Services
 {
     public class WindowManagerService : IWindowManagerService
     {
-        private readonly IKernel kernel;
+        private readonly ILogger<WindowManagerService> logger;
+        private readonly IServiceProvider serviceProvider;
+        //private readonly IKernel kernel;
 
-        public WindowManagerService(IKernel kernel)
+        public WindowManagerService(ILogger<WindowManagerService> logger,
+            IServiceProvider serviceProvider)
         {
-            this.kernel = kernel;
+            this.logger = logger;
+            this.serviceProvider = serviceProvider;
+            //this.kernel = kernel;
         }
 
         public Window MainWindow

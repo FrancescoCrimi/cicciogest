@@ -1,9 +1,10 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Infrastructure.Conf;
 using LiteDB;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace CiccioGest.Infrastructure.Persistence.LiteDB
@@ -14,12 +15,13 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
         private readonly ILogger logger;
         //private LiteDatabase db;
 
-        public UnitOfWorkFactory(CiccioGestConf conf, ILogger logger)
+        public UnitOfWorkFactory(ILogger<UnitOfWorkFactory> logger,
+                                 CiccioGestConf conf)
         {
             this.conf = conf;
             this.logger = logger;
             ConfigureLiteDb();
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         private void ConfigureLiteDb()
@@ -51,18 +53,18 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 
         public void CreateDataAccess()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " CreateDataAccess");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " CreateDataAccess");
         }
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
             //db.Dispose();
         }
 
         public void VerifyDataAccess()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " VerifyDataAccess");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " VerifyDataAccess");
         }
     }
 }

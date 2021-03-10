@@ -1,32 +1,33 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace CiccioGest.Presentation.Mvp.Presenter
 {
     public class ListaFatturePresenter : IPresenter
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
+        private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly IServiceProvider serviceProvider;
         private readonly IFatturaService service;
         private readonly IListaFattureView view;
         private int idFattura = 0;
 
         public event IdEventHandler CloseEvent;
 
-        public ListaFatturePresenter(ILogger logger,
-                                     IKernel kernel,
+        public ListaFatturePresenter(ILogger<ListaFatturePresenter> logger,
+                                     IServiceScopeFactory serviceScopeFactory,
+                                     IServiceProvider serviceProvider,
                                      IListaFattureView listaFattureView,
                                      IFatturaService fatturaService)
         {
             this.logger = logger;
-            this.kernel = kernel;
+            this.serviceScopeFactory = serviceScopeFactory;
+            this.serviceProvider = serviceProvider;
             view = listaFattureView;
             service = fatturaService;
 
@@ -36,7 +37,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             view.NuovaEvent += Nuova;
             view.ApriEvent += Apri;
 
-            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
         }
 
         private void View_CloseEvent(object sender, EventArgs e)
@@ -58,15 +59,15 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private void Nuova(object s, EventArgs e)
         {
-            using (kernel.BeginScope())
+            using (var scope = serviceScopeFactory.CreateScope())
             {
-                var lcd = kernel.Resolve<SelectClientePresenter>();
+                var lcd = scope.ServiceProvider.GetService<SelectClientePresenter>();
                 lcd.Show();
                 if (lcd.IdCliente != 0)
                 {
                     //var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
                     //asasa.ShowDialog();
-                    var fp = kernel.Resolve<FatturaPresenter>();
+                    var fp = scope.ServiceProvider.GetService<FatturaPresenter>();
                     fp.NuovaFattura(lcd.IdCliente);
                     fp.Show();
                 }

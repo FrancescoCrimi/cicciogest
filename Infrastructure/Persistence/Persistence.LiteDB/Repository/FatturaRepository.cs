@@ -1,5 +1,5 @@
-﻿using Castle.Core.Logging;
-using CiccioGest.Domain.Documenti;
+﻿using CiccioGest.Domain.Documenti;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,7 +10,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
         private readonly ILogger logger;
         private readonly UnitOfWork unitOfWork;
 
-        public FatturaRepository(ILogger logger, UnitOfWork unitOfWork)
+        public FatturaRepository(ILogger<FatturaRepository> logger, UnitOfWork unitOfWork)
             : base(unitOfWork)
         {
             this.logger = logger;

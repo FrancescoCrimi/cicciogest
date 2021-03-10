@@ -1,7 +1,8 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +18,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         public event EventHandler CloseEvent;
 
-        public ArticoloPresenter(ILogger logger,
+        public ArticoloPresenter(ILogger<ArticoloPresenter> logger,
                                  IMagazinoService magazinoService,
                                  IArticoloView articoloView)
         {
@@ -32,6 +33,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
             view.RimuoviCategoriaEvent += View_RimuoviCategoriaEvent;
             view.SalvaArticoloEvent += View_SalvaArticoloEvent;
             view.SelezionaArticoloEvent += View_SelezionaArticoloEvent;
+            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
         }
 
         private void View_AggiungiCategoriaEvent(object sender, EventArgs e)
@@ -46,7 +48,7 @@ namespace CiccioGest.Presentation.Mvp.Presenter
 
         private void View_CloseEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private async void View_EliminaArticoloEvent(object sender, int e)
