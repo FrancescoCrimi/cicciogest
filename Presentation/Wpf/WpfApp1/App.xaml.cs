@@ -1,6 +1,6 @@
-﻿using Castle.Facilities.Logging;
-using Castle.Services.Logging.NLogIntegration;
-using Castle.Windsor;
+﻿//using Castle.Facilities.Logging;
+//using Castle.Services.Logging.NLogIntegration;
+//using Castle.Windsor;
 
 namespace CiccioGest.Presentation.WpfApp1
 {

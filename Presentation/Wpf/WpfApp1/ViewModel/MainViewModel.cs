@@ -1,7 +1,8 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Presentation.WpfApp1.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.Windows.Input;
@@ -17,11 +18,11 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         private ICommand apriCategorieCommand;
         private ICommand loadedCommand;
 
-        public MainViewModel(ILogger logger, IWindowManagerService windowManagerService)
+        public MainViewModel(ILogger<MainViewModel> logger, IWindowManagerService windowManagerService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.windowManagerService = windowManagerService;
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(() =>
@@ -38,7 +39,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

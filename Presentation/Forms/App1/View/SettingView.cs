@@ -1,29 +1,27 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class SettingView : Form
     {
-        private readonly ILogger logger;
-        private readonly IKernel kernel;
-        //private readonly IUnitOfWorkFactory unitOfWorkFactory;
-        //private CiccioGestConfMgr confmgr;
+        private readonly ILogger<SettingView> logger;
+        private readonly IServiceProvider serviceProvider;
 
-        public SettingView(ILogger logger,
-                           IKernel kernel
+        public SettingView(ILogger<SettingView> logger,
+                           IServiceProvider serviceProvider
                            //IUnitOfWorkFactory unitOfWorkFactory
             )
         {
             InitializeComponent();
             this.logger = logger;
-            this.kernel = kernel;
+            this.serviceProvider = serviceProvider;
+            //this.kernel = kernel;
             //this.unitOfWorkFactory = unitOfWorkFactory;
             dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
             databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
@@ -35,7 +33,7 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             try
             {
-                var uowf = kernel.Resolve<IUnitOfWorkFactory>();
+                var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
                 uowf.VerifyDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
@@ -49,7 +47,7 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             try
             {
-                var uowf = kernel.Resolve<IUnitOfWorkFactory>();
+                var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
                 uowf.CreateDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
@@ -61,9 +59,9 @@ namespace CiccioGest.Presentation.AppForm.View
 
         private async void popolaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
+            using (var scope = serviceProvider.CreateScope())
             {
-                var sett = kernel.Resolve<ISettingService>();
+                var sett = scope.ServiceProvider.GetService<ISettingService>();
                 await sett.LoadSampleData();
                 MessageBox.Show("Eseguito con successo");
             }

@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,9 +10,9 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class SelectClienteView : Form, ISelectClienteView
     {
-        private readonly ILogger logger;
+        private readonly ILogger<SelectClienteView> logger;
 
-        public SelectClienteView(ILogger logger)
+        public SelectClienteView(ILogger<SelectClienteView> logger)
         {
             InitializeComponent();
             this.logger = logger;

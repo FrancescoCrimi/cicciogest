@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,14 +10,14 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class CategoriaView : Form, ICategoriaView
     {
-        private readonly ILogger logger;
+        private readonly ILogger<CategoriaView> logger;
 
         public event EventHandler LoadEvent;
         public event EventHandler<Categoria> SalvaCategoriaEvent;
         public event EventHandler<int> CancellaCategoriaEvent;
         public event EventHandler CloseEvent;
 
-        public CategoriaView(ILogger logger)
+        public CategoriaView(ILogger<CategoriaView> logger)
         {
             InitializeComponent();
             this.logger = logger;

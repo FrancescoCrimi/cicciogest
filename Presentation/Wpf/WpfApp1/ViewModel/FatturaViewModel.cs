@@ -1,10 +1,11 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp1.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -27,7 +28,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         private ICommand selezionaDettaglioCommand;
         private ICommand loadedCommand;
 
-        public FatturaViewModel(ILogger logger,
+        public FatturaViewModel(ILogger<FatturaViewModel> logger,
                                 IFatturaService service,
                                 IWindowManagerService windowManagerService)
         {
@@ -43,7 +44,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
             {
                 RegistraMessaggi();
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public Fattura Fattura { get; private set; }
@@ -152,7 +153,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

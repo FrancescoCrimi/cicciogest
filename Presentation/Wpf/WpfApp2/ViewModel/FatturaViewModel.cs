@@ -1,10 +1,11 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp2.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -27,7 +28,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         private ICommand selezionaDettaglioCommand;
         private ICommand loadedCommand;
 
-        public FatturaViewModel(ILogger logger,
+        public FatturaViewModel(ILogger<FatturaViewModel> logger,
                                 IFatturaService fatturaService,
                                 INavigationService navigationService)
         {
@@ -44,7 +45,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             {
                 RegistraMessaggi();
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public Fattura Fattura { get; private set; }
@@ -135,7 +136,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
 
         private void MostraFattura(Fattura fattura)
         {
-            logger.Debug("MostraFattura " + fattura.Id + " HashCode: " + GetHashCode().ToString());
+            logger.LogDebug("MostraFattura " + fattura.Id + " HashCode: " + GetHashCode().ToString());
             Fattura = fattura;
             RaisePropertyChanged(nameof(Fattura));
             NuovoDettaglio();
@@ -150,7 +151,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

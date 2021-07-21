@@ -1,7 +1,6 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
-using CiccioGest.Presentation.Mvp.View;
+﻿using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.Windows.Forms;
@@ -10,8 +9,8 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class MainView : Form, IMainView
     {
-        private readonly ILogger logger;
-        private readonly IKernel kernel;
+        private readonly ILogger<MainView> logger;
+        private readonly IServiceProvider serviceProvider;
 
         public event EventHandler LoadEvent;
         public event EventHandler ApriFatturaEvent;
@@ -26,12 +25,13 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler OpzioniEvent;
         public event EventHandler CloseEvent;
 
-        public MainView(ILogger logger, IKernel kernel)
+        public MainView(ILogger<MainView> logger, IServiceProvider serviceProvider)
         {
             this.logger = logger;
-            this.kernel = kernel;
+            this.serviceProvider = serviceProvider;
+            //this.kernel = kernel;
             InitializeComponent();
-            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         void IView.ShowDialog() { }
@@ -85,10 +85,10 @@ namespace CiccioGest.Presentation.AppForm.View
 
         private void OpzioniToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (kernel.BeginScope())
+            using (var scope = serviceProvider.CreateScope())
             {
-                var sett = kernel.Resolve<SettingView>();
-                sett.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+                var sett = scope.ServiceProvider.GetService<SettingView>();
+                //sett.FormClosing += (s, a) => kernel.ReleaseComponent(s);
                 sett.Show();
             }
         }

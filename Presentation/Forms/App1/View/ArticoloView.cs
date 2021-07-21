@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,11 +22,11 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler CloseEvent;
         public event EventHandler<int> SelezionaArticoloEvent;
 
-        public ArticoloView(ILogger logger)
+        public ArticoloView(ILogger<ArticoloView> logger)
         {
             InitializeComponent();
             this.logger = logger;
-            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         private void View_Load(object s, EventArgs e) => LoadEvent?.Invoke(s, e);

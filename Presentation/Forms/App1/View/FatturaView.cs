@@ -1,7 +1,8 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.Presenter;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;
 
@@ -9,7 +10,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class FatturaView : Form, IFatturaView
     {
-        private readonly ILogger logger;
+        private readonly ILogger<FatturaView> logger;
 
         public event EventHandler LoadEvent;
         public event EventHandler ApriFatturaEvent;
@@ -21,11 +22,11 @@ namespace CiccioGest.Presentation.AppForm.View
         public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
         public event EventHandler NuovaFattura;
 
-        public FatturaView(ILogger logger)
+        public FatturaView(ILogger<FatturaView> logger)
         {
             this.logger = logger;
             InitializeComponent();
-            this.logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void SetDettaglio(Dettaglio dettaglio)

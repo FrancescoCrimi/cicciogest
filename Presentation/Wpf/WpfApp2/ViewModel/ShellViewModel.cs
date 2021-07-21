@@ -1,7 +1,8 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Presentation.WpfApp2.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.Windows.Input;
@@ -13,11 +14,11 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         private readonly ILogger logger;
         private readonly INavigationService ns;
 
-        public ShellViewModel(ILogger logger, INavigationService ns)
+        public ShellViewModel(ILogger<ShellViewModel> logger, INavigationService ns)
         {
             this.logger = logger;
             this.ns = ns;
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ICommand NuovaFatturaCommand =>
@@ -32,7 +33,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

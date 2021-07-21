@@ -1,8 +1,9 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -16,7 +17,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         private ICommand loadCommand;
         private ICommand selezionaClienteCommand;
 
-        public ListaClientiViewModel(ILogger logger,
+        public ListaClientiViewModel(ILogger<ListaClientiViewModel> logger,
                                      IClientiFornitoriService clientiFornitoriService)
         {
             this.logger = logger;
@@ -29,7 +30,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
                     Clienti.Add(item);
                 }
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ObservableCollection<Cliente> Clienti { get; }
@@ -49,7 +50,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
 
         public void Dispose()
         {
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

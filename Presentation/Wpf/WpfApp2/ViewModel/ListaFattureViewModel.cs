@@ -1,4 +1,4 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
@@ -6,6 +6,7 @@ using CiccioGest.Presentation.WpfApp2.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -20,7 +21,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         private ICommand loadedCommand;
         private ICommand apriFatturaCommand;
 
-        public ListaFattureViewModel(ILogger logger,
+        public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger,
                                      IFatturaService fatturaService,
                                      INavigationService navigationService)
         {
@@ -36,7 +37,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
                     Fatture.Add(fatt);
                 }
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public string Title { get => "Suca Forte"; }
@@ -64,7 +65,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

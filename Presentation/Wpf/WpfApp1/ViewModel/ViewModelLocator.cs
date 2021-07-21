@@ -1,6 +1,6 @@
-﻿using Castle.Facilities.Logging;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
+﻿//using Castle.Facilities.Logging;
+//using Castle.MicroKernel.Registration;
+//using Castle.Windsor;
 using CiccioGest.Application;
 using CiccioGest.Application.FakeImpl;
 using CiccioGest.Infrastructure.Conf;

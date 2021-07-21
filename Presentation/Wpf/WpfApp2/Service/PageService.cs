@@ -1,7 +1,8 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Lifestyle;
+﻿//using Castle.Core.Logging;
+//using Castle.MicroKernel;
+//using Castle.MicroKernel.Lifestyle;
 using CiccioGest.Presentation.WpfApp2.Contracts;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace CiccioGest.Presentation.WpfApp2.Service
         private readonly ILogger logger;
         private readonly IKernel kernel;
 
-        public PageService(ILogger logger, IKernel kernel)
+        public PageService(ILogger<PageService> logger, IKernel kernel)
         {
             this.logger = logger;
             this.kernel = kernel;

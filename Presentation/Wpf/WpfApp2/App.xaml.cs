@@ -1,6 +1,6 @@
-﻿using Castle.Facilities.Logging;
-using Castle.Services.Logging.NLogIntegration;
-using Castle.Windsor;
+﻿//using Castle.Facilities.Logging;
+//using Castle.Services.Logging.NLogIntegration;
+//using Castle.Windsor;
 using CiccioGest.Presentation.WpfApp2.View;
 using CiccioGest.Presentation.WpfApp2.ViewModel;
 using System.Threading.Tasks;

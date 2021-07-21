@@ -1,10 +1,11 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.WpfApp2.Contracts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -20,7 +21,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         private ICommand loadedCommand;
         private ICommand selezionaArticoloCommand;
 
-        public ListaArticoliViewModel(ILogger logger,
+        public ListaArticoliViewModel(ILogger<ListaArticoliViewModel> logger,
                                       IMagazinoService magazinoService,
                                       INavigationService navigationService)
         {
@@ -35,7 +36,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
                     Articoli.Add(pr);
                 }
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
@@ -62,7 +63,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

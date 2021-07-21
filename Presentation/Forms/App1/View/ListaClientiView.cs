@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,13 +10,13 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ListaClientiView : Form, IListaClientiView
     {
-        private readonly ILogger logger;
+        private readonly ILogger<ListaClientiView> logger;
 
         public event EventHandler LoadEvent;
         public event EventHandler<int> SelectClienteEvent;
         public event EventHandler CloseEvent;
 
-        public ListaClientiView(ILogger logger)
+        public ListaClientiView(ILogger<ListaClientiView> logger)
         {
             InitializeComponent();
             this.logger = logger;

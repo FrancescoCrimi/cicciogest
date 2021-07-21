@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,7 +11,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ListaFattureView : Form, IListaFattureView
     {
-        private readonly ILogger logger;
+        private readonly ILogger<ListaFattureView> logger;
 
         public event EventHandler LoadEvent;
         public event EventHandler<int> SelectFatturaEvent;
@@ -18,11 +19,11 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler ApriEvent;
         public event EventHandler CloseEvent;
 
-        public ListaFattureView(ILogger logger)
+        public ListaFattureView(ILogger<ListaFattureView> logger)
         {
             this.logger = logger;
             InitializeComponent();
-            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public void SetFatture(IList<FatturaReadOnly> listFatture)

@@ -1,8 +1,9 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -21,7 +22,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         private ICommand rimuoviCommand;
         private ICommand salvaCommand;
 
-        public CategoriaViewModel(ILogger logger, IMagazinoService service)
+        public CategoriaViewModel(ILogger<CategoriaViewModel> logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
@@ -35,7 +36,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
                 }
                 Categoria = service.GetCategoria(4).Result;
             }
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public ObservableCollection<Categoria> Categorie { get; private set; }
@@ -94,7 +95,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
 }

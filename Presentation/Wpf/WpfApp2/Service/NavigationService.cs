@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel;
+﻿//using Castle.Core.Logging;
+//using Castle.MicroKernel;
 using CiccioGest.Presentation.WpfApp2.Contracts;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,12 +20,12 @@ namespace CiccioGest.Presentation.WpfApp2.Service
         private bool clearNavigation;
         private readonly HashSet<Page> listPages = new HashSet<Page>();
 
-        public NavigationService(ILogger logger, IKernel kernel, IPageService pageService)
+        public NavigationService(ILogger<NavigationService> logger, IKernel kernel, IPageService pageService)
         {
             this.logger = logger;
             this.kernel = kernel;
             this.pageService = pageService;
-            logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public void Initialize(Frame shellFrame)

@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.Mvp.View;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,17 +11,17 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ListaArticoliView : Form, IListaArticoliView
     {
-        private readonly ILogger logger;
+        private readonly ILogger<ListaArticoliView> logger;
 
         public event EventHandler LoadEvent;
         public event EventHandler CloseEvent;
         public event EventHandler<int> SelectArticoloEvent;
 
-        public ListaArticoliView(ILogger logger)
+        public ListaArticoliView(ILogger<ListaArticoliView> logger)
         {
             InitializeComponent();
             this.logger = logger;
-            this.logger.Debug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            this.logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
         public void SetArticoli(IList<ArticoloReadOnly> articoli)

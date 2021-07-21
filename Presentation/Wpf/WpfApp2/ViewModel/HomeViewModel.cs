@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿//using Castle.Core.Logging;
 using CiccioGest.Infrastructure;
 using GalaSoft.MvvmLight;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 
@@ -10,16 +11,16 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
     {
         private readonly ILogger logger;
 
-        public HomeViewModel(ILogger logger)
+        public HomeViewModel(ILogger<HomeViewModel> logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void Dispose()
         {
             Cleanup();
-            logger.Debug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }
