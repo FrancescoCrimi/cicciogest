@@ -1,12 +1,14 @@
-﻿using System.Windows.Controls;
+﻿using CiccioGest.Presentation.WpfApp2.ViewModel;
+using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp2.View
 {
     public partial class ListaClientiView : Page
     {
-        public ListaClientiView()
+        public ListaClientiView(ListaClientiViewModel listaClientiViewModel)
         {
             InitializeComponent();
+            DataContext = listaClientiViewModel;
         }
     }
 }

@@ -1,15 +1,15 @@
 ﻿using CiccioGest.Presentation.WpfApp1.Contracts;
+using CiccioGest.Presentation.WpfApp1.ViewModel;
 using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp1.View
 {
-    public partial class CategoriaView : Window, IView
+    public partial class CategoriaView : Window
     {
-        public CategoriaView()
+        public CategoriaView(CategoriaViewModel categoriaViewModel)
         {
             InitializeComponent();
+            DataContext = categoriaViewModel;
         }
-
-        public WindowKey WindowKey => WindowKey.Categoria;
     }
 }

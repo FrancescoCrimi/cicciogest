@@ -1,9 +1,9 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CiccioGest.Presentation.WpfApp1.Helpers;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp1.ViewModel
 {
-    public sealed class ListaFattureViewModel : ViewModelBase, IDisposable
+    public sealed class ListaFattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
@@ -25,13 +25,6 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.fatturaService = fatturaService;
             Fatture = new ObservableCollection<FatturaReadOnly>();
-            if (IsInDesignMode)
-            {
-                foreach (FatturaReadOnly fatt in fatturaService.GetFatture().Result)
-                {
-                    Fatture.Add(fatt);
-                }
-            }
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -43,7 +36,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         {
             if (FatturaSelezionata != null)
             {
-                MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
+                Messenger.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
                 wnd.Close();
             }
         });
@@ -59,7 +52,6 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }

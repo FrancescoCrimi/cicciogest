@@ -1,12 +1,13 @@
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.AppForm.View;
+using CiccioGest.Presentation.Mvp;
 using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using CiccioGest.Presentation.Mvp;
-using CiccioGest.Infrastructure.Conf;
 using NLog.Extensions.Logging;
+using System;
+using System.Linq;
 
 namespace CiccioGest.Presentation.AppForm
 {
@@ -29,7 +30,15 @@ namespace CiccioGest.Presentation.AppForm
                 })
                 .ConfigureServices(ConfigureServices)
                 .Build();
-            host.Run();
+            if (args.Contains("config"))
+            {
+                var asdfg = host.Services.GetService<SettingView>();
+                System.Windows.Forms.Application.Run(asdfg);
+            }
+            else
+            {
+                host.Run();
+            }
         }
 
         private void ConfigureServices(HostBuilderContext hostBuilderContext,

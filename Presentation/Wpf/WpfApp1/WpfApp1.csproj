@@ -23,15 +23,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="View\CategoriaView.xaml" />
-    <None Remove="View\FatturaView.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="7.0.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,28 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\CategoriaView.xaml.cs">
-      <DependentUpon>CategoriaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\FatturaView.xaml.cs">
-      <DependentUpon>FatturaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\MainView.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\ArticoloView.xaml.cs">
-      <DependentUpon>ArticoloView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\ListaFattureView.xaml.cs">
-      <DependentUpon>ListaFattureView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\ListaArticoliView.xaml.cs">
-      <DependentUpon>ListaArticoliView.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -71,24 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="View\CategoriaView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\FatturaView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\MainView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\ArticoloView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\ListaFattureView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\ListaArticoliView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
+    <Folder Include="Design\" />
   </ItemGroup>
 
 </Project>

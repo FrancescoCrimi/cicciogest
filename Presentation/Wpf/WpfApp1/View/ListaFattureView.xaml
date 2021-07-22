@@ -8,8 +8,7 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         Width="300"
         Height="300"
-        Title="Lista Fatture"
-        DataContext="{Binding ListaFatture, Source={StaticResource Locator}}">
+        Title="Lista Fatture">
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">

@@ -29,7 +29,7 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int c = 1; c < 11; c++)
             {
-                Categoria cat = new Categoria(c, "Categoria " + c.ToString(CultureInfo.InvariantCulture));
+                Categoria cat = new Categoria("Categoria " + c.ToString(CultureInfo.InvariantCulture));
                 Categorie.Add(cat);
             }
         }
@@ -70,7 +70,7 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int p = 1; p < 11; p++)
             {
-                Articolo prod = new Articolo(p, "Articolo " + p.ToString(), 10 + p);
+                Articolo prod = new Articolo("Articolo " + p.ToString(), 10 + p);
                 prod.Categoria = Categorie[p - 1];
                 Articoli.Add(prod);
                 ArticoloReadOnly pro = new ArticoloReadOnly(prod.Id, prod.Nome, prod.Prezzo, prod.NomeCategoria);

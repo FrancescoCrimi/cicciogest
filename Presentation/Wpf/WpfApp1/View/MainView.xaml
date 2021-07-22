@@ -9,7 +9,7 @@
         Width="300"
         Height="300"
         Title="CiccioGest"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        Closing="Main_Closing">
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">

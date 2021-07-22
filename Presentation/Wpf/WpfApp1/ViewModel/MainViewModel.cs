@@ -1,7 +1,7 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Presentation.WpfApp1.Contracts;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CiccioGest.Presentation.WpfApp1.Contracts;
+using CiccioGest.Presentation.WpfApp1.View;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp1.ViewModel
 {
-    public sealed class MainViewModel : ViewModelBase, IDisposable
+    public sealed class MainViewModel : ObservableObject, IDisposable
     {
         private readonly ILogger logger;
         private readonly IWindowManagerService windowManagerService;
@@ -26,19 +26,20 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         }
 
         public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(() =>
-            windowManagerService.OpenInNewWindow(WindowKey.Fattura));
+        {
+            windowManagerService.OpenWindow(typeof(FatturaView));
+        });
 
         public ICommand ApriArticoliCommand => apriProdottiCommand ??= new RelayCommand(() =>
-            windowManagerService.OpenInNewWindow(WindowKey.Articolo));
+            windowManagerService.OpenWindow(typeof(ArticoloView)));
 
         public ICommand ApriCategorieCommand => apriCategorieCommand ??= new RelayCommand(() =>
-            windowManagerService.OpenInNewWindow(WindowKey.Categoria));
+            windowManagerService.OpenWindow(typeof(CategoriaView)));
 
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }

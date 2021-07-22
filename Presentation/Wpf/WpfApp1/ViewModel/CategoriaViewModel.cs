@@ -1,8 +1,7 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +12,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp1.ViewModel
 {
-    public sealed class CategoriaViewModel : ViewModelBase, IDisposable
+    public sealed class CategoriaViewModel : ObservableObject, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -28,14 +27,14 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             Categorie = new ObservableCollection<Categoria>();
 
-            if (IsInDesignMode)
-            {
-                foreach (Categoria ca in service.GetCategorie().Result)
-                {
-                    Categorie.Add(ca);
-                }
-                Categoria = service.GetCategoria(4).Result;
-            }
+            //if (IsInDesignMode)
+            //{
+            //    foreach (Categoria ca in service.GetCategorie().Result)
+            //    {
+            //        Categorie.Add(ca);
+            //    }
+            //    Categoria = service.GetCategoria(4).Result;
+            //}
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -78,7 +77,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
             if (categoria != null && categoria != Categoria)
             {
                 Categoria = categoria;
-                RaisePropertyChanged(nameof(Categoria));
+                OnPropertyChanged(nameof(Categoria));
             }
         }
 
@@ -94,7 +93,6 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }

@@ -1,12 +1,14 @@
-﻿using System.Windows.Controls;
+﻿using CiccioGest.Presentation.WpfApp2.ViewModel;
+using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp2.View
 {
     public partial class ArticoloView : Page
     {
-        public ArticoloView()
+        public ArticoloView(ArticoloViewModel articoloViewModel)
         {
             InitializeComponent();
+            DataContext = articoloViewModel;
         }
     }
 }

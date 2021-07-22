@@ -267,7 +267,7 @@
             this.nuovoToolStripButton.Name = "nuovoToolStripButton";
             this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
             this.nuovoToolStripButton.Text = "&Nuovo";
-            this.nuovoToolStripButton.Click += new System.EventHandler(this.nuovoToolStripButton_Click);
+            this.nuovoToolStripButton.Click += new System.EventHandler(this.NuovoToolStripButton_Click);
             // 
             // aggiungiToolStripButton
             // 
@@ -276,7 +276,7 @@
             this.aggiungiToolStripButton.Name = "aggiungiToolStripButton";
             this.aggiungiToolStripButton.Size = new System.Drawing.Size(94, 24);
             this.aggiungiToolStripButton.Text = "&Aggiungi";
-            this.aggiungiToolStripButton.Click += new System.EventHandler(this.aggiungiToolStripButton_Click);
+            this.aggiungiToolStripButton.Click += new System.EventHandler(this.AggiungiToolStripButton_Click);
             // 
             // salvaToolStripButton
             // 
@@ -285,7 +285,7 @@
             this.salvaToolStripButton.Name = "salvaToolStripButton";
             this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
             this.salvaToolStripButton.Text = "&Salva";
-            this.salvaToolStripButton.Click += new System.EventHandler(this.salvaToolStripButton_Click);
+            this.salvaToolStripButton.Click += new System.EventHandler(this.SalvaToolStripButton_Click);
             // 
             // rimuoviToolStripButton
             // 
@@ -294,7 +294,7 @@
             this.rimuoviToolStripButton.Name = "rimuoviToolStripButton";
             this.rimuoviToolStripButton.Size = new System.Drawing.Size(87, 24);
             this.rimuoviToolStripButton.Text = "&Rimuovi";
-            this.rimuoviToolStripButton.Click += new System.EventHandler(this.rimuoviToolStripButton_Click);
+            this.rimuoviToolStripButton.Click += new System.EventHandler(this.RimuoviToolStripButton_Click);
             // 
             // defaultToolStripButton
             // 
@@ -303,7 +303,7 @@
             this.defaultToolStripButton.Name = "defaultToolStripButton";
             this.defaultToolStripButton.Size = new System.Drawing.Size(140, 24);
             this.defaultToolStripButton.Text = "&Imposta Default";
-            this.defaultToolStripButton.Click += new System.EventHandler(this.defaultToolStripButton_Click);
+            this.defaultToolStripButton.Click += new System.EventHandler(this.DefaultToolStripButton_Click);
             // 
             // caricaDefaultToolStripButton1
             // 
@@ -312,7 +312,7 @@
             this.caricaDefaultToolStripButton1.Name = "caricaDefaultToolStripButton1";
             this.caricaDefaultToolStripButton1.Size = new System.Drawing.Size(127, 24);
             this.caricaDefaultToolStripButton1.Text = "Carica Default";
-            this.caricaDefaultToolStripButton1.Click += new System.EventHandler(this.caricaDefaultToolStripButton1_Click);
+            this.caricaDefaultToolStripButton1.Click += new System.EventHandler(this.CaricaDefaultToolStripButton1_Click);
             // 
             // menuStrip1
             // 
@@ -356,21 +356,21 @@
             this.verificaToolStripMenuItem.Name = "verificaToolStripMenuItem";
             this.verificaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.verificaToolStripMenuItem.Text = "Verifica";
-            this.verificaToolStripMenuItem.Click += new System.EventHandler(this.verificaToolStripMenuItem_Click);
+            this.verificaToolStripMenuItem.Click += new System.EventHandler(this.VerificaToolStripMenuItem_Click);
             // 
             // creaToolStripMenuItem
             // 
             this.creaToolStripMenuItem.Name = "creaToolStripMenuItem";
             this.creaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.creaToolStripMenuItem.Text = "Crea";
-            this.creaToolStripMenuItem.Click += new System.EventHandler(this.creaToolStripMenuItem_Click);
+            this.creaToolStripMenuItem.Click += new System.EventHandler(this.CreaToolStripMenuItem_Click);
             // 
             // popolaToolStripMenuItem
             // 
             this.popolaToolStripMenuItem.Name = "popolaToolStripMenuItem";
             this.popolaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.popolaToolStripMenuItem.Text = "Popola";
-            this.popolaToolStripMenuItem.Click += new System.EventHandler(this.popolaToolStripMenuItem_Click);
+            this.popolaToolStripMenuItem.Click += new System.EventHandler(this.PopolaToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem
             // 

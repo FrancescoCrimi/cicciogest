@@ -56,9 +56,7 @@
   <PropertyGroup>
     <StartupObject>CiccioGest.Presentation.AppForm.Program</StartupObject>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <ManifestCertificateThumbprint>78F99FC1AE586D376415BFD9813BC7E86CF49559</ManifestCertificateThumbprint>
   </PropertyGroup>
@@ -249,8 +247,6 @@
       <DependentUpon>ListaArticoliView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="app.manifest" />
-    <None Include="App1_TemporaryKey.pfx" />
     <None Include="NLog.config">
       <SubType>Designer</SubType>
     </None>

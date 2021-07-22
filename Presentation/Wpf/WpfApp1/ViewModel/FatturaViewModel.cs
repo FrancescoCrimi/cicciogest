@@ -1,10 +1,11 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp1.Contracts;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CiccioGest.Presentation.WpfApp1.Helpers;
+using CiccioGest.Presentation.WpfApp1.View;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
@@ -13,11 +14,12 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp1.ViewModel
 {
-    public sealed class FatturaViewModel : ViewModelBase, IDisposable
+    public sealed class FatturaViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService service;
         private readonly IWindowManagerService windowManagerService;
+        private readonly IWindowDialogService windowDialogService;
         private ICommand nuovaFatturaCommand;
         private ICommand salvaFatturaCommand;
         private ICommand rimuoviFatturaCommand;
@@ -30,20 +32,14 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
 
         public FatturaViewModel(ILogger<FatturaViewModel> logger,
                                 IFatturaService service,
-                                IWindowManagerService windowManagerService)
+                                IWindowManagerService windowManagerService,
+                                IWindowDialogService windowDialogService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             this.windowManagerService = windowManagerService;
-            if (IsInDesignMode)
-            {
-                MostraFattura(service.GetFattura(4).Result);
-                Dettaglio = Fattura.Dettagli[3];
-            }
-            else
-            {
-                RegistraMessaggi();
-            }
+            this.windowDialogService = windowDialogService;
+            RegistraMessaggi();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -53,7 +49,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
         {
-            windowManagerService.OpenInDialog(WindowKey.ListaClienti);
+            windowDialogService.OpenDialog(typeof(ListaClientiView));
         });
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
@@ -81,17 +77,17 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
-                windowManagerService.OpenInDialog(WindowKey.ListaFatture));
+                windowDialogService.OpenDialog(typeof(ListaFattureView)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
-                windowManagerService.OpenInDialog(WindowKey.ListaArticoli));
+                windowDialogService.OpenDialog(typeof(ListaArticoliView)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {
             if (Dettaglio.Quantita != 0)
             {
                 Fattura.AddDettaglio(Dettaglio);
-                RaisePropertyChanged(nameof(Fattura));
+                OnPropertyChanged(nameof(Fattura));
                 NuovoDettaglio();
             }
         });
@@ -99,7 +95,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(() =>
         {
             Fattura.RemoveDettaglio(Dettaglio);
-            RaisePropertyChanged(nameof(Fattura));
+            OnPropertyChanged(nameof(Fattura));
             NuovoDettaglio();
         });
 
@@ -107,14 +103,14 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         {
             if (DettaglioSelezionato != null)
                 Dettaglio = DettaglioSelezionato;
-            RaisePropertyChanged(nameof(Dettaglio));
+            OnPropertyChanged(nameof(Dettaglio));
         });
 
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         private void RegistraMessaggi()
         {
-            MessengerInstance.Register<NotificationMessage<int>>(this, async ns =>
+            Messenger.Register<FatturaViewModel, NotificationMessage<int>>(this,  async (r, ns) =>
             {
                 if (ns.Notification == "IdFattura")
                 {
@@ -126,7 +122,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
                     if (ns.Content != 0)
                     {
                         Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
-                        RaisePropertyChanged(nameof(Dettaglio));
+                        OnPropertyChanged(nameof(Dettaglio));
                     }
                 }
                 else if (ns.Notification == "IdCliente")
@@ -140,19 +136,18 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         private void MostraFattura(Fattura fattura)
         {
             Fattura = fattura;
-            RaisePropertyChanged(nameof(Fattura));
+            OnPropertyChanged(nameof(Fattura));
             NuovoDettaglio();
         }
 
         private void NuovoDettaglio()
         {
             Dettaglio = new Dettaglio(null, 1);
-            RaisePropertyChanged(nameof(Dettaglio));
+            OnPropertyChanged(nameof(Dettaglio));
         }
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }

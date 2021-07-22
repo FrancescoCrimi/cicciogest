@@ -37,7 +37,7 @@ namespace CiccioGest.Presentation.AppForm.View
             CaricaConf();
         }
 
-        private void verificaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void VerificaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void creaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private async void popolaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void PopolaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var scope = serviceScopeFactory.CreateScope())
             {
@@ -94,19 +94,19 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void nuovoToolStripButton_Click(object sender, EventArgs e)
+        private void NuovoToolStripButton_Click(object sender, EventArgs e)
         {
             appConfBindingSource.DataSource = null;
             appConfBindingSource.DataSource = new CiccioGestConf();
         }
 
-        private void salvaToolStripButton_Click(object sender, EventArgs e)
+        private void SalvaToolStripButton_Click(object sender, EventArgs e)
         {
             CiccioGestConfMgr.Save();
             CaricaConf();
         }
 
-        private void aggiungiToolStripButton_Click(object sender, EventArgs e)
+        private void AggiungiToolStripButton_Click(object sender, EventArgs e)
         {
             if (appConfBindingSource.DataSource != null)
             {
@@ -119,7 +119,7 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void rimuoviToolStripButton_Click(object sender, EventArgs e)
+        private void RimuoviToolStripButton_Click(object sender, EventArgs e)
         {
             if (appConfsBindingSource.Current != null)
             {
@@ -130,7 +130,7 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void defaultToolStripButton_Click(object sender, EventArgs e)
+        private void DefaultToolStripButton_Click(object sender, EventArgs e)
         {
             if (appConfsBindingSource != null)
             {
@@ -144,7 +144,7 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void caricaDefaultToolStripButton1_Click(object sender, EventArgs e)
+        private void CaricaDefaultToolStripButton1_Click(object sender, EventArgs e)
         {
             try
             {

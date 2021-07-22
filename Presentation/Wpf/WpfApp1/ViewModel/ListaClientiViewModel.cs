@@ -1,9 +1,9 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CiccioGest.Presentation.WpfApp1.Helpers;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp1.ViewModel
 {
-    public class ListaClientiViewModel : ViewModelBase, IDisposable
+    public class ListaClientiViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IClientiFornitoriService service;
@@ -26,13 +26,6 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
             this.logger = logger;
             service = clientiFornitoriService;
             Clienti = new ObservableCollection<Cliente>();
-            if (IsInDesignMode)
-            {
-                foreach (var item in service.GetClienti().Result)
-                {
-                    Clienti.Add(item);
-                }
-            }
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -53,7 +46,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         {
             if (ClienteSelezionato != null)
             {
-                MessengerInstance.Send(new NotificationMessage<int>(ClienteSelezionato.Id, "IdCliente"));
+                Messenger.Send(new NotificationMessage<int>(ClienteSelezionato.Id, "IdCliente"));
                 wnd.Close();
             }
         });

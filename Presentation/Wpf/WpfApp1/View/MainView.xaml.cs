@@ -1,26 +1,21 @@
 ﻿using CiccioGest.Presentation.WpfApp1.Contracts;
 using CiccioGest.Presentation.WpfApp1.ViewModel;
-using GalaSoft.MvvmLight.Messaging;
 using System.ComponentModel;
 using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp1.View
 {
-    public partial class MainView : Window, IView
+    public partial class MainView : Window
     {
-        public MainView()
+        public MainView(MainViewModel mainViewModel)
         {
             InitializeComponent();
-            Closing += MainWindow_Closing;
+            DataContext = mainViewModel;
         }
 
-        public WindowKey WindowKey => WindowKey.Main;
-
-        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        private void Main_Closing(object sender, CancelEventArgs e)
         {
-            App.Windsor.Release(DataContext);
-            Messenger.Default.Unregister(this);
-            ViewModelLocator.Cleanup();
+            //Messenger.Default.Unregister(this);
         }
     }
 }

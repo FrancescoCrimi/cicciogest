@@ -1,10 +1,9 @@
-﻿using CiccioGest.Infrastructure;
-using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
 namespace CiccioGest.Presentation.WpfApp1.ViewModel
 {
-    sealed class SettingViewModel : ViewModelBase, IDisposable
+    sealed class SettingViewModel : ObservableObject, IDisposable
     {
         private void LoadSampleData()
         {

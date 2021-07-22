@@ -1,99 +1,49 @@
 ﻿using CiccioGest.Presentation.WpfApp1.Contracts;
-using CiccioGest.Presentation.WpfApp1.View;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Windows;
 
+
 namespace CiccioGest.Presentation.WpfApp1.Services
 {
-    public class WindowManagerService : IWindowManagerService
+    public class WindowManagerService : IWindowManagerService, IDisposable
     {
         private readonly ILogger<WindowManagerService> logger;
-        private readonly IServiceProvider serviceProvider;
-        //private readonly IKernel kernel;
+        private readonly IServiceScopeFactory serviceScopeFactory;
 
         public WindowManagerService(ILogger<WindowManagerService> logger,
-            IServiceProvider serviceProvider)
+                                    IServiceScopeFactory serviceScopeFactory)
         {
             this.logger = logger;
-            this.serviceProvider = serviceProvider;
-            //this.kernel = kernel;
+            this.serviceScopeFactory = serviceScopeFactory;
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public Window MainWindow
-            => System.Windows.Application.Current.MainWindow;
-
-        public bool? OpenInDialog(WindowKey key)
+        public void OpenWindow(Type windowType, object parameter = null)
         {
-            using (kernel.BeginScope())
+            if (windowType.IsAssignableTo(typeof(System.Windows.Window)))
             {
-                var window = GetNewWindow(key);
+                var scope = serviceScopeFactory.CreateScope();
+                var window = (System.Windows.Window)scope.ServiceProvider.GetService(windowType);
                 window.Closed += OnWindowClosed;
-                return window.ShowDialog();
-            }
-        }
-
-        public void OpenInNewWindow(WindowKey key)
-        {
-            var window = GetWindow(key);
-            if (window != null)
-            {
-                window.Activate();
-            }
-            else
-            {
-                using (kernel.BeginScope())
+                void OnWindowClosed(object sender, EventArgs e)
                 {
-                    window = GetNewWindow(key);
-                    window.Closed += OnWindowClosed;
-                    window.Show();
+                    scope.Dispose();
+                    scope = null;
+                    window.Closed -= OnWindowClosed;
                 }
-            }
-        }
-
-        public Window GetWindow(WindowKey key)
-        {
-            foreach (Window window in System.Windows.Application.Current.Windows)
-            {
-                if (window is IView view)
+                if (window.DataContext is INavigationAware navigationAware)
                 {
-                    if (view.WindowKey == key)
-                    {
-                        return window;
-                    }
+                    navigationAware.OnNavigatedTo(parameter);
                 }
+                window.Show();
             }
-            return null;
         }
 
-        private void OnWindowClosed(object sender, EventArgs e)
+        public void Dispose()
         {
-            Window window = (Window)sender;
-            window.Closed -= OnWindowClosed;
-            kernel.ReleaseComponent(window.DataContext);
-        }
-
-        private Window GetNewWindow(WindowKey key)
-        {
-            switch (key)
-            {
-                case WindowKey.Main:
-                    return new MainView();
-                case WindowKey.Fattura:
-                    return new FatturaView();
-                case WindowKey.Articolo:
-                    return new ArticoloView();
-                case WindowKey.Categoria:
-                    return new CategoriaView();
-                case WindowKey.ListaArticoli:
-                    return new ListaArticoliView();
-                case WindowKey.ListaFatture:
-                    return new ListaFattureView();
-                case WindowKey.ListaClienti:
-                    return new ListaClientiView();
-                default:
-                    return null;
-            }
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

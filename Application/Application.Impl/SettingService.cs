@@ -63,7 +63,7 @@ namespace CiccioGest.Application.Impl
         private async Task CreaClienti()
         {
             foreach (var item in FakeSampleData.Clienti)
-                                                                                                                                                                                                                                                                                                        {
+            {
                 await clientiFornitoriService.SaveCliente(item);
             }
         }

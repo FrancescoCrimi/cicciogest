@@ -1,8 +1,7 @@
-﻿//using Castle.Facilities.Logging;
-//using Castle.Services.Logging.NLogIntegration;
-//using Castle.Windsor;
-using CiccioGest.Presentation.WpfApp2.View;
+﻿using CiccioGest.Presentation.WpfApp2.View;
 using CiccioGest.Presentation.WpfApp2.ViewModel;
+using Microsoft.Extensions.Hosting;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
@@ -11,14 +10,14 @@ namespace CiccioGest.Presentation.WpfApp2
     public partial class App : System.Windows.Application
     {
 
-        private void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        private async void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
-            Init();
+            await CreateHostBuilder(e.Args).Build().RunAsync();
         }
 
-        private void OnExit(object sender, System.Windows.ExitEventArgs e)
+        private IHostBuilder CreateHostBuilder(string[] args)
         {
-
+            throw new NotImplementedException();
         }
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -33,6 +32,11 @@ namespace CiccioGest.Presentation.WpfApp2
             windsor.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
             locator.Startup(windsor);
             windsor.Resolve<ShellView>().Show();
-        } 
+        }
+
+        private void OnExit(object sender, System.Windows.ExitEventArgs e)
+        {
+
+        }
     }
 }

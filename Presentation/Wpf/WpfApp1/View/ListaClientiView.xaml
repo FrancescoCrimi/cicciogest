@@ -9,8 +9,7 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         Title="ListaClientiView"
         Height="300"
-        Width="500"
-        DataContext="{Binding ListaClienti, Mode=OneWay, Source={StaticResource Locator}}">
+        Width="500">
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
