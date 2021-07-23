@@ -7,8 +7,7 @@
       d:DesignHeight="450"
       d:DesignWidth="800"
       Title="HomeView"
-      Background="White"
-      DataContext="{Binding Home, Source={StaticResource Locator}}">
+      Background="White">
 
     <Grid>
 

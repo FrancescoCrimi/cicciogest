@@ -1,11 +1,11 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WpfApp2.Contracts;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CiccioGest.Presentation.WpfApp2.Helpers;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp2.ViewModel
 {
-    public sealed class ListaFattureViewModel : ViewModelBase, IDisposable
+    public sealed class ListaFattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
@@ -30,13 +30,6 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             this.navigationService = navigationService;
             if (fatturaService == null) throw new ArgumentNullException(nameof(fatturaService));
             Fatture = new ObservableCollection<FatturaReadOnly>();
-            if (IsInDesignMode)
-            {
-                foreach (FatturaReadOnly fatt in fatturaService.GetFatture().Result)
-                {
-                    Fatture.Add(fatt);
-                }
-            }
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
@@ -58,13 +51,12 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             {
                 if (navigationService.CanGoBack)
                     navigationService.GoBack();
-                MessengerInstance.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
+                Messenger.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
             }
         });
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }

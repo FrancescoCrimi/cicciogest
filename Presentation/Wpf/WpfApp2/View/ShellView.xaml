@@ -7,8 +7,7 @@
     mc:Ignorable="d"
     Height="350"
     Width="600"
-    Title="CiccioGest"
-    DataContext="{Binding Shell, Source={StaticResource Locator}}">
+    Title="CiccioGest">
 
     <Grid x:Name="LayoutRoot">
 

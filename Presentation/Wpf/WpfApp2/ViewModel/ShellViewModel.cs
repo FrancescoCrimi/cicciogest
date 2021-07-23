@@ -1,7 +1,7 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Presentation.WpfApp2.Contracts;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CiccioGest.Presentation.WpfApp2.Contracts;
+using CiccioGest.Presentation.WpfApp2.View;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp2.ViewModel
 {
-    public sealed class ShellViewModel : ViewModelBase, IDisposable
+    public sealed class ShellViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly INavigationService ns;
@@ -22,17 +22,16 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         }
 
         public ICommand NuovaFatturaCommand =>
-            new RelayCommand(() => ns.NavigateTo("Fattura", true));
+            new RelayCommand(() => ns.NavigateTo(typeof(FatturaView), true));
 
         public ICommand ApriArticoliCommand =>
-            new RelayCommand(() => ns.NavigateTo("Articolo", true));
+            new RelayCommand(() => ns.NavigateTo(typeof(ArticoloView), true));
 
         public ICommand ApriCategorieCommand =>
-            new RelayCommand(() => ns.NavigateTo("Categoria", true));
+            new RelayCommand(() => ns.NavigateTo(typeof(CategoriaView), true));
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }

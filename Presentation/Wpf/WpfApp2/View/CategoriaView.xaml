@@ -8,8 +8,7 @@
       d:DesignHeight="350"
       d:DesignWidth="600"
       Title="CategoriaView"
-      Background="White"
-      DataContext="{Binding Categoria, Source={StaticResource Locator}}">
+      Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

@@ -8,8 +8,7 @@
       d:DesignHeight="350"
       d:DesignWidth="600"
       Title="FatturaView"
-      Background="White"
-      DataContext="{Binding Fattura, Source={StaticResource Locator}}">
+      Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

@@ -9,8 +9,7 @@
     d:DesignHeight="350"
     d:DesignWidth="600"
     Title="ArticoloView"
-    Background="White"
-    DataContext="{Binding Articolo, Source={StaticResource Locator}}">
+    Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

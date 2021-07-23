@@ -1,8 +1,7 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +12,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp2.ViewModel
 {
-    public sealed class ArticoloViewModel : ViewModelBase, IDisposable
+    public sealed class ArticoloViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -28,20 +27,6 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             Articoli = new ObservableCollection<ArticoloReadOnly>();
             Categorie = new ObservableCollection<Categoria>();
-
-            if (IsInDesignMode)
-            {
-                Articolo = service.GetArticolo(4).Result;
-                foreach (Categoria cat in service.GetCategorie().Result)
-                {
-                    Categorie.Add(cat);
-                }
-                foreach (ArticoloReadOnly pr in service.GetArticoli().Result)
-                {
-                    Articoli.Add(pr);
-                }
-            }
-
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -70,7 +55,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
                     Task.Run(async () =>
                     {
                         Articolo = await service.GetArticolo(value.Id);
-                        RaisePropertyChanged(nameof(Articolo));
+                        OnPropertyChanged(nameof(Articolo));
                     });
                 }
             }
@@ -89,7 +74,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         private void Nuovo()
         {
             Articolo = new Articolo();
-            RaisePropertyChanged(nameof(Articolo));
+            OnPropertyChanged(nameof(Articolo));
         }
 
         private async void Elimina()
@@ -120,7 +105,6 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
 

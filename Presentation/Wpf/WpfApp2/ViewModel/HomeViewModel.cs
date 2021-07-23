@@ -1,13 +1,12 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Infrastructure;
-using GalaSoft.MvvmLight;
+﻿using CiccioGest.Infrastructure;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 
 namespace CiccioGest.Presentation.WpfApp2.ViewModel
 {
-    public sealed class HomeViewModel : ViewModelBase, IDisposable
+    public sealed class HomeViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
 
@@ -19,7 +18,6 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }

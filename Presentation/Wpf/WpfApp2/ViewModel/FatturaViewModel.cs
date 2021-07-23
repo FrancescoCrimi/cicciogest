@@ -1,19 +1,20 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp2.Contracts;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CiccioGest.Presentation.WpfApp2.Helpers;
+using CiccioGest.Presentation.WpfApp2.View;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.WpfApp2.ViewModel
 {
-    public sealed class FatturaViewModel : ViewModelBase, IDisposable
+    public sealed class FatturaViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
@@ -35,16 +36,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             this.logger = logger;
             this.fatturaService = fatturaService;
             this.navigationService = navigationService;
-            if (IsInDesignMode)
-            {
-                Fattura fatt = this.fatturaService.GetFattura(4).Result;
-                MostraFattura(fatt);
-                Dettaglio = fatt.Dettagli[3];
-            }
-            else
-            {
-                RegistraMessaggi();
-            }
+            RegistraMessaggi();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
@@ -53,7 +45,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         public Dettaglio DettaglioSelezionato { private get; set; }
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
-            navigationService.NavigateTo("ListaClienti"));
+            navigationService.NavigateTo(typeof(ListaClientiView)));
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
         {
@@ -80,17 +72,17 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() 
-            => navigationService.NavigateTo("ListaFatture"));
+            => navigationService.NavigateTo(typeof(ListaFattureView)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() 
-            => navigationService.NavigateTo("ListaArticoli"));
+            => navigationService.NavigateTo(typeof(ListaArticoliView)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {
             if (Dettaglio.Quantita != 0)
             {
                 Fattura.AddDettaglio(Dettaglio);
-                RaisePropertyChanged(nameof(Fattura));
+                OnPropertyChanged(nameof(Fattura));
                 NuovoDettaglio();
             }
         });
@@ -98,7 +90,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(() =>
         {
             Fattura.RemoveDettaglio(Dettaglio);
-            RaisePropertyChanged(nameof(Fattura));
+            OnPropertyChanged(nameof(Fattura));
             NuovoDettaglio();
         });
 
@@ -106,7 +98,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         {
             if (DettaglioSelezionato != null)
                 Dettaglio = DettaglioSelezionato;
-            RaisePropertyChanged(nameof(Dettaglio));
+            OnPropertyChanged(nameof(Dettaglio));
         });
 
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
@@ -114,7 +106,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
 
         private void RegistraMessaggi()
         {
-            MessengerInstance.Register<NotificationMessage<int>>(this, async ns =>
+            Messenger.Register<FatturaViewModel, NotificationMessage<int>>(this, async (r, ns) =>
             {
                 if (ns.Notification == "IdFattura")
                 {
@@ -124,7 +116,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
                 else if (ns.Notification == "IdProdotto")
                 {
                     Dettaglio = new Dettaglio(await fatturaService.GetArticolo(ns.Content), 1);
-                    RaisePropertyChanged(nameof(Dettaglio));
+                    OnPropertyChanged(nameof(Dettaglio));
                 }
                 else if (ns.Notification == "IdCliente")
                 {
@@ -138,19 +130,18 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         {
             logger.LogDebug("MostraFattura " + fattura.Id + " HashCode: " + GetHashCode().ToString());
             Fattura = fattura;
-            RaisePropertyChanged(nameof(Fattura));
+            OnPropertyChanged(nameof(Fattura));
             NuovoDettaglio();
         }
 
         private void NuovoDettaglio()
         {
             Dettaglio = new Dettaglio(null, 1);
-            RaisePropertyChanged(nameof(Dettaglio));
+            OnPropertyChanged(nameof(Dettaglio));
         }
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }

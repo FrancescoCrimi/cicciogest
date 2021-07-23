@@ -1,10 +1,7 @@
-﻿//using Castle.Core.Logging;
-//using Castle.MicroKernel;
-using CiccioGest.Presentation.WpfApp2.Contracts;
+﻿using CiccioGest.Presentation.WpfApp2.Contracts;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -14,17 +11,16 @@ namespace CiccioGest.Presentation.WpfApp2.Service
     public class NavigationService : INavigationService
     {
         private readonly ILogger logger;
-        private readonly IKernel kernel;
-        private readonly IPageService pageService;
+        private readonly IServiceScopeFactory serviceScopeFactory;
         private Frame frame;
         private bool clearNavigation;
-        private readonly HashSet<Page> listPages = new HashSet<Page>();
+        private IServiceScope scope;
+        private IServiceScope oldScope;
 
-        public NavigationService(ILogger<NavigationService> logger, IKernel kernel, IPageService pageService)
+        public NavigationService(ILogger<NavigationService> logger, IServiceScopeFactory serviceScopeFactory)
         {
             this.logger = logger;
-            this.kernel = kernel;
-            this.pageService = pageService;
+            this.serviceScopeFactory = serviceScopeFactory;
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -40,30 +36,25 @@ namespace CiccioGest.Presentation.WpfApp2.Service
         public bool CanGoBack => frame.CanGoBack;
         public void GoBack() => frame.GoBack();
 
-        public void NavigateTo(string pageKey, bool clearNavigation = false)
+        public void NavigateTo(Type pageType, bool clearNavigation = false)
         {
-            var pageType = pageService.GetPageType(pageKey);
             if (frame.Content?.GetType() != pageType)
             {
-                var page = pageService.GetPage(pageKey);
-                frame.Navigate(page);
+                if (clearNavigation)
+                {
+                    oldScope = scope;
+                    scope = serviceScopeFactory.CreateScope();
+                }
                 this.clearNavigation = clearNavigation;
-            }
-        }
 
-        public void CleanNavigation()
-        {
-            while (frame.CanGoBack)
-            {
-                frame.RemoveBackEntry();
+                if (scope == null)
+                {
+                    scope = serviceScopeFactory.CreateScope();
+                }
+
+                var page = scope.ServiceProvider.GetService(pageType);
+                frame.Navigate(page);
             }
-            foreach (var item in listPages)
-            {
-                Debug.WriteLine("Item Deleted: " + item.GetHashCode().ToString());
-                kernel.ReleaseComponent(item);
-            }
-            listPages.Clear();
-            clearNavigation = false;
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e)
@@ -72,14 +63,28 @@ namespace CiccioGest.Presentation.WpfApp2.Service
             {
                 if (clearNavigation)
                 {
-                    CleanNavigation();
-                }
-                if (frame.Content != null)
-                {
-                    var currentPage = (Page)frame.Content;
-                    listPages.Add(currentPage);
+                    while (frame.CanGoBack)
+                    {
+                        frame.RemoveBackEntry();
+                    }
+                    if (oldScope != null)
+                    {
+                        oldScope.Dispose();
+                        oldScope = null;
+                    }
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            frame.Navigated -= OnNavigated;
+            if (scope != null)
+            {
+                scope.Dispose();
+                scope = null;
+            }
+            logger.LogDebug("Disposed " + GetHashCode().ToString());
         }
     }
 }

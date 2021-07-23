@@ -110,7 +110,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
 
         private void RegistraMessaggi()
         {
-            Messenger.Register<FatturaViewModel, NotificationMessage<int>>(this,  async (r, ns) =>
+            Messenger.Register<FatturaViewModel, NotificationMessage<int>>(this, async (r, ns) =>
             {
                 if (ns.Notification == "IdFattura")
                 {

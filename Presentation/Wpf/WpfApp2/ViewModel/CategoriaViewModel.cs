@@ -1,8 +1,7 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Application;
+﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +12,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp2.ViewModel
 {
-    public sealed class CategoriaViewModel : ViewModelBase, IDisposable
+    public sealed class CategoriaViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -27,19 +26,6 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             SalvaCommand = new RelayCommand(Salva);
             RimuoviCommand = new RelayCommand(Rimuovi);
             NuovoCommand = new RelayCommand(Nuova);
-
-            if (IsInDesignMode)
-            {
-                foreach (Categoria ca in service.GetCategorie().Result)
-                {
-                    Categorie.Add(ca);
-                }
-                Categoria = service.GetCategoria(4).Result;
-            }
-            //else
-            //{
-            //    Aggiorna();
-            //}
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
@@ -87,7 +73,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             if (categoria != null && categoria != Categoria)
             {
                 Categoria = categoria;
-                RaisePropertyChanged(nameof(Categoria));
+                OnPropertyChanged(nameof(Categoria));
             }
         }
 
@@ -109,7 +95,6 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
 
         public void Dispose()
         {
-            Cleanup();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
     }
