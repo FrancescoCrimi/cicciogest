@@ -8,12 +8,12 @@ using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp1.Hosting
 {
-    public class WpfAppHostedService<T> : IHostedService, IDisposable where T : Window
+    public class WpfAppHostedService<TWindow> : IHostedService, IDisposable where TWindow : Window
     {
         private readonly ILogger logger;
         private readonly IWindowManagerService windowManagerService;
 
-        public WpfAppHostedService(ILogger<WpfAppHostedService<T>> logger,
+        public WpfAppHostedService(ILogger<WpfAppHostedService<TWindow>> logger,
                                    IWindowManagerService windowManagerService)
         {
             this.logger = logger;
@@ -23,7 +23,7 @@ namespace CiccioGest.Presentation.WpfApp1.Hosting
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            windowManagerService.OpenWindow(typeof(T));
+            windowManagerService.OpenWindow(typeof(TWindow));
             logger.LogDebug("StartAsync: " + GetHashCode().ToString());
             return Task.CompletedTask;
         }
