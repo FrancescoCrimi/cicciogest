@@ -1,5 +1,4 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -40,12 +39,6 @@ namespace CiccioGest.Presentation.AppForm.View
         private void SelectClienteView_FormClosed(object s, FormClosedEventArgs e)
         {
             CloseEvent?.Invoke(s, e);
-        }
-
-        public void ShowDialog(Object owner)
-        {
-            if (owner is IWin32Window window)
-                Show(window);
         }
     }
 }

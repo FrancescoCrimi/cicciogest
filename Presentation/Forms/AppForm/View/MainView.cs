@@ -1,5 +1,4 @@
-﻿using CiccioGest.Presentation.Mvp.View;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;
 
@@ -70,11 +69,5 @@ namespace CiccioGest.Presentation.AppForm.View
 
         private void CategorieToolStripMenuItem_Click(object sender, EventArgs e) =>
             CategorieEvent?.Invoke(this, e);
-
-        public void ShowDialog(Object owner)
-        {
-            if (owner is IWin32Window window)
-                Show(window);
-        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -41,12 +40,6 @@ namespace CiccioGest.Presentation.AppForm.View
                 SelectArticoloEvent?.Invoke(sender, art.Id);
                 Close();
             }
-        }
-
-        public void ShowDialog(Object owner)
-        {
-            if (owner is IWin32Window window)
-                Show(window);
         }
     }
 }
