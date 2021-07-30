@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "AppForm": {
+      "commandName": "Project"
+    },
+    "config": {
+      "commandName": "Project",
+      "commandLineArgs": "config"
+    }
+  }
+}

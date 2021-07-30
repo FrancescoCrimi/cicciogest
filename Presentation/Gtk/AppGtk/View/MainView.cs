@@ -1,12 +1,11 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Presentation.Mvp.View;
+﻿using CiccioGest.Presentation.Mvp.View;
 using Gtk;
 using Microsoft.Extensions.Logging;
 using System;
 using gtk = Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
 
-namespace CiccioGest.Presentation.Gtk.AppGtk.View
+namespace CiccioGest.Presentation.AppGtk.View
 {
     public class MainView : Window, IMainView
     {
@@ -44,7 +43,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             categorieMenuItem.Activated += (s, e) => CategorieEvent?.Invoke(s, e);
             DeleteEvent += (o, args) => gtk.Application.Quit();
 
-            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + GetHashCode().ToString());
         }
 
         private MainView(Builder builder)
@@ -53,9 +52,9 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             builder.Autoconnect(this);
         }
 
-        public void ShowDialog()
+        public void ShowDialog(object owner)
         {
-            throw new NotImplementedException();
+            ShowDialog(owner);
         }
     }
 }

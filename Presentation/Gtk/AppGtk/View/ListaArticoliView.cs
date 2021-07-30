@@ -2,10 +2,11 @@
 using CiccioGest.Presentation.Mvp.View;
 using Gtk;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using UI = Gtk.Builder.ObjectAttribute;
 
-namespace CiccioGest.Presentation.Gtk.AppGtk.View
+namespace CiccioGest.Presentation.AppGtk.View
 {
     public class ListaArticoliView : Window, IListaArticoliView
     {
@@ -13,9 +14,9 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         [UI] private readonly TreeView articoliTreeView = null;
         [UI] private readonly ListStore articoliListStore = null;
 
-        public event System.EventHandler<int> SelectArticoloEvent;
-        public event System.EventHandler LoadEvent;
-        public event System.EventHandler CloseEvent;
+        public event EventHandler<int> SelectArticoloEvent;
+        public event EventHandler LoadEvent;
+        public event EventHandler CloseEvent;
 
         public ListaArticoliView(ILogger<ListaArticoliView> logger)
             : this(new Builder("ListaArticoliView.glade"))
@@ -24,7 +25,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             Shown += (sender, args) => LoadEvent?.Invoke(sender, args);
             DeleteEvent += (o, args) => CloseEvent?.Invoke(o, args);
             articoliTreeView.RowActivated += ArticoliTreeView_RowActivated;
-            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + GetHashCode().ToString());
         }
 
         private ListaArticoliView(Builder builder)
@@ -42,9 +43,9 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             }
         }
 
-        public void ShowDialog()
+        public void ShowDialog(object owner)
         {
-            throw new System.NotImplementedException();
+            ShowDialog(owner);
         }
 
         private void ArticoliTreeView_RowActivated(object o, RowActivatedArgs args)

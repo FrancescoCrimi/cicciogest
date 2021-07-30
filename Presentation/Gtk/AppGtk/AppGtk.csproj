@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>AppGtk</AssemblyName>
-    <RootNamespace>CiccioGest.Presentation.Gtk.AppGtk</RootNamespace>
+    <RootNamespace>CiccioGest.Presentation.AppGtk</RootNamespace>
     <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
 
@@ -30,13 +30,11 @@
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.34" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\..\CiccioGest.Presentation.Mvp\Mvp.csproj" />
-    <ProjectReference Include="..\..\Client\Client.csproj" />
+    <ProjectReference Include="..\..\Mvp\Mvp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

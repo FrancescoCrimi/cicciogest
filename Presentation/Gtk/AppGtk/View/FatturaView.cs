@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using UI = Gtk.Builder.ObjectAttribute;
 
-namespace CiccioGest.Presentation.Gtk.AppGtk.View
+namespace CiccioGest.Presentation.AppGtk.View
 {
     class FatturaView : Dialog, IFatturaView
     {
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             nuovoDettaglioToolButton.Clicked += (sender, args) => NuovoDettaglioEvent?.Invoke(sender, args);
             addDettaglioToolButton.Clicked += AddDettaglioToolButton_Clicked;
             removeDettaglioToolButton.Clicked += RemoveDettaglioToolButton_Clicked;
-            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + GetHashCode().ToString());
         }
 
         private FatturaView(Builder builder)
@@ -95,9 +95,9 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             }
         }
 
-        public void ShowDialog()
+        public void ShowDialog(object owner)
         {
-            Show();
+            ShowDialog(owner);
         }
     }
 }

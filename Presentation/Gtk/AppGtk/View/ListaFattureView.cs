@@ -2,10 +2,11 @@
 using CiccioGest.Presentation.Mvp.View;
 using Gtk;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using UI = Gtk.Builder.ObjectAttribute;
 
-namespace CiccioGest.Presentation.Gtk.AppGtk.View
+namespace CiccioGest.Presentation.AppGtk.View
 {
     public class ListaFattureView : Window, IListaFattureView
     {
@@ -13,11 +14,11 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
         [UI] private readonly TreeView fattureTreeView = null;
         [UI] private readonly ListStore fattureListStore = null;
 
-        public event System.EventHandler<int> SelectFatturaEvent;
-        public event System.EventHandler NuovaEvent;
-        public event System.EventHandler ApriEvent;
-        public event System.EventHandler LoadEvent;
-        public event System.EventHandler CloseEvent;
+        public event EventHandler<int> SelectFatturaEvent;
+        public event EventHandler NuovaEvent;
+        public event EventHandler ApriEvent;
+        public event EventHandler LoadEvent;
+        public event EventHandler CloseEvent;
 
         public ListaFattureView(ILogger<ListaFattureView> logger)
             : this(new Builder("ListaFattureView.glade"))
@@ -26,7 +27,7 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             Shown += (sender, args) => LoadEvent?.Invoke(sender, args);
             DeleteEvent += (o, args) => CloseEvent?.Invoke(o, args);
             fattureTreeView.RowActivated += FattureTreeViewOnRowActivated;
-            logger.LogDebug("HashCode: " + this.GetHashCode().ToString());
+            logger.LogDebug("HashCode: " + GetHashCode().ToString());
         }
 
         private ListaFattureView(Builder builder)
@@ -52,9 +53,9 @@ namespace CiccioGest.Presentation.Gtk.AppGtk.View
             }
         }
 
-        public void ShowDialog()
+        public void ShowDialog(object owner)
         {
-            throw new System.NotImplementedException();
+            ShowDialog(owner);
         }
     }
 }
