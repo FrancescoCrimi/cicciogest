@@ -1,5 +1,6 @@
-﻿using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.Client;
+﻿using CiccioGest.Application.Impl;
+using CiccioGest.Infrastructure.Conf;
+//using CiccioGest.Presentation.Client;
 using CiccioGest.Presentation.WpfApp2.Contracts;
 using CiccioGest.Presentation.WpfApp2.Hosting;
 using CiccioGest.Presentation.WpfApp2.Service;
@@ -44,7 +45,7 @@ namespace CiccioGest.Presentation.WpfApp2
             CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
             serviceCollection
                 .AddSingleton(conf)
-                .ConfigureClient()
+                .ConfigureApplication()
                 .AddSingleton<INavigationService, NavigationService>()
                 .AddTransient<ShellView>()
                 .AddTransient<ShellViewModel>()

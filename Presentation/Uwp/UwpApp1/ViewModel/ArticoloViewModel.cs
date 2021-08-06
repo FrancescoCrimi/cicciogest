@@ -1,13 +1,13 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.Uwp.App1.ViewModel
+namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public sealed class ArticoloViewModel : ViewModelBase
+    public sealed class ArticoloViewModel : ObservableObject
     {
         public ArticoloViewModel()
         {

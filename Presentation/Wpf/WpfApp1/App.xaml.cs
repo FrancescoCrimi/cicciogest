@@ -1,5 +1,5 @@
-﻿using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.Client;
+﻿using CiccioGest.Application.Impl;
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.WpfApp1.View;
 using CiccioGest.Presentation.WpfApp1.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +37,7 @@ namespace CiccioGest.Presentation.WpfApp1
         {
             serviceCollection
                 .AddSingleton(CiccioGestConfMgr.GetCurrent())
-                .ConfigureClient()
+                .ConfigureApplication()
 
                 .AddTransient<MainViewModel>()
                 .AddTransient<ListaFattureViewModel>()

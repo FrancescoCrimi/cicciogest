@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CiccioGest.Presentation.UwpApp.ViewModel;
+using Microsoft.Extensions.Logging;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // Il modello di elemento Pagina vuota è documentato all'indirizzo https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace CiccioGest.Presentation.Uwp.App1.View
+namespace CiccioGest.Presentation.UwpApp.View
 {
     /// <summary>
     /// Pagina vuota che può essere usata autonomamente oppure per l'esplorazione all'interno di un frame.
@@ -25,6 +28,7 @@ namespace CiccioGest.Presentation.Uwp.App1.View
         public CategoriaPage()
         {
             this.InitializeComponent();
+            DataContext = Ioc.Default.GetService<CategoriaViewModel>();
         }
     }
 }

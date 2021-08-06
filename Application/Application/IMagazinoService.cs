@@ -1,33 +1,33 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Magazino;
 using System.Collections.Generic;
-using System.ServiceModel;
+//using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    [ServiceContract(ConfigurationName = "CiccioGest.Application.IMagazinoService")]
+    //[ServiceContract(ConfigurationName = "CiccioGest.Application.IMagazinoService")]
     public interface IMagazinoService
     {
-        [OperationContract]
+        //[OperationContract]
         Task<IList<ArticoloReadOnly>> GetArticoli();
-        [OperationContract]
+        //[OperationContract]
         Task<Articolo> GetArticolo(int id);
-        [OperationContract]
+        //[OperationContract]
         Task<Articolo> SaveArticolo(Articolo prodotto);
-        [OperationContract]
+        //[OperationContract]
         Task DeleteArticolo(int id);
 
-        [OperationContract]
+        //[OperationContract]
         Task<IList<Categoria>> GetCategorie();
-        [OperationContract]
+        //[OperationContract]
         Task<Categoria> GetCategoria(int id);
-        [OperationContract]
+        //[OperationContract]
         Task<Categoria> SaveCategoria(Categoria categoria);
-        [OperationContract]
+        //[OperationContract]
         Task DeleteCategoria(int id);
 
-        [OperationContract]
+        //[OperationContract]
         Task<Fornitore> GetFornitore(int id);
     }
 }

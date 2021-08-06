@@ -327,14 +327,6 @@
       <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Client\Client.csproj">
-      <Project>{cd5e37c0-b58e-4bbe-8886-7b4fa0294516}</Project>
-      <Name>Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Mvp\Mvp.csproj">
-      <Project>{bce85af3-13b4-4db7-81ba-37816eb03bea}</Project>
-      <Name>Mvp</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,9 +1,10 @@
+using CiccioGest.Application.Impl;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.AppForm.Hosting;
 using CiccioGest.Presentation.AppForm.Presenter;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
-using CiccioGest.Presentation.Client;
+//using CiccioGest.Presentation.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog.Extensions.Logging;
@@ -44,7 +45,7 @@ namespace CiccioGest.Presentation.AppForm
             var conf = CiccioGestConfMgr.GetCurrent();
             serviceCollection
                 .AddSingleton(conf)
-                .ConfigureClient()
+                .ConfigureApplication()
                 .AddTransient<WindowService>()
                 .AddTransient<DialogService>()
                 .AddTransient<MainPresenter>()

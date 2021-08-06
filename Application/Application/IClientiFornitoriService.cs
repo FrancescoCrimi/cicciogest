@@ -1,40 +1,40 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
 using System.Collections.Generic;
-using System.ServiceModel;
+//using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    [ServiceContract(ConfigurationName = "CiccioGest.Application.IClientiFornitoriService")]
+    //[ServiceContract(ConfigurationName = "CiccioGest.Application.IClientiFornitoriService")]
     public interface IClientiFornitoriService
     {
-        [OperationContract]
+        //[OperationContract]
         Task<IList<Cliente>> GetClienti();
-        [OperationContract]
+        //[OperationContract]
         Task<Cliente> GetCliente(int id);
-        [OperationContract]
+        //[OperationContract]
         Task<Cliente> SaveCliente(Cliente cliente);
-        [OperationContract]
+        //[OperationContract]
         Task DeleteCliente(int id);
 
 
-        [OperationContract]
+        //[OperationContract]
         Task<IList<Fornitore>> GetFornitori();
-        [OperationContract]
+        //[OperationContract]
         Task<Fornitore> GetFornitore(int id);
-        [OperationContract]
+        //[OperationContract]
         Task<Fornitore> SaveFornitore(Fornitore fornitore);
-        [OperationContract]
+        //[OperationContract]
         Task DeleteFornitore(int id);
 
 
-        [OperationContract]
+        //[OperationContract]
         Task<IList<Citta>> GetCittà();
-        [OperationContract]
+        //[OperationContract]
         Task<Citta> GetCittà(int id);
-        [OperationContract]
+        //[OperationContract]
         Task<Citta> SaveCittà(Citta città);
-        [OperationContract]
+        //[OperationContract]
         Task DeleteCittà(int id);
     }
 }

@@ -30,10 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj" />
     <ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
     <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Client\Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
