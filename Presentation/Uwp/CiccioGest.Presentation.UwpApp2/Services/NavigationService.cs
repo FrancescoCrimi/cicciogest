@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Navigation;
 
 namespace CiccioGest.Presentation.UwpApp.Services
 {
@@ -48,7 +49,7 @@ namespace CiccioGest.Presentation.UwpApp.Services
                               object parameter = null,
                               NavigationTransitionInfo infoOverride = null,
                               bool clearNavigation = false)
-        {   
+        {
             if (pageType == null || !pageType.IsSubclassOf(typeof(Page)))
             {
                 throw new ArgumentException($"Invalid pageType '{pageType}', please provide a valid pageType.", nameof(pageType));
@@ -88,7 +89,7 @@ namespace CiccioGest.Presentation.UwpApp.Services
             where T : Page
             => Navigate(typeof(T), parameter, infoOverride, clearNavigation);
 
-        private void OnNavigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        private void OnNavigated(object sender, NavigationEventArgs e)
         {
             if (sender is Frame frame)
             {
@@ -105,7 +106,7 @@ namespace CiccioGest.Presentation.UwpApp.Services
             }
         }
 
-        private void OnNavigationFailed(object sender, Windows.UI.Xaml.Navigation.NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
