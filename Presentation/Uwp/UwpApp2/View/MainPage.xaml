@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="CiccioGest.Presentation.UwpApp.View.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:views="using:CiccioGest.Presentation.UwpApp.View"
+    xmlns:helpers="using:CiccioGest.Presentation.UwpApp.Helpers"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <winui:NavigationView
+            x:Name="navigationView"
+            IsBackButtonVisible="Visible"
+            IsSettingsVisible="True">
+        <winui:NavigationView.MenuItems>
+            <winui:NavigationViewItem Content="Fattura" Icon="Document" helpers:NavHelper.NavigateTo="views:FatturaPage" />
+            <winui:NavigationViewItem Content="Articoli" Icon="Document" helpers:NavHelper.NavigateTo="views:ArticoloPage" />
+            <winui:NavigationViewItem Content="Categorie" Icon="Document" helpers:NavHelper.NavigateTo="views:CategoriaPage" />
+        </winui:NavigationView.MenuItems>
+        <i:Interaction.Behaviors>
+            <ic:EventTriggerBehavior EventName="ItemInvoked">
+                <ic:InvokeCommandAction Command="{Binding ItemInvokedCommand}" />
+            </ic:EventTriggerBehavior>
+        </i:Interaction.Behaviors>
+        <Grid>
+            <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"/>
+        </Grid>
+    </winui:NavigationView>
+
+</Page>

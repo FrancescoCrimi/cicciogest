@@ -1,6 +1,7 @@
 ﻿using CiccioGest.Application.Impl;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.UwpApp.Services;
+using CiccioGest.Presentation.UwpApp.View;
 using CiccioGest.Presentation.UwpApp.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
@@ -27,7 +28,7 @@ namespace CiccioGest.Presentation.UwpApp
                 .AddSingleton(CiccioGestConfMgr.GetCurrent())
                 .ConfigureApplication()
                 .AddSingleton<NavigationService>()
-                .AddTransient<ShellViewModel>()
+                .AddTransient<MainViewModel>()
                 .AddTransient<FatturaViewModel>()
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<CategoriaViewModel>()
