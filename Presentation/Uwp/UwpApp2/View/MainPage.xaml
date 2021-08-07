@@ -21,22 +21,36 @@
     </i:Interaction.Behaviors>
 
     <winui:NavigationView
-            x:Name="navigationView"
-            IsBackButtonVisible="Visible"
-            IsSettingsVisible="True">
+        x:Name="navigationView"
+        OpenPaneLength="160"
+        IsBackButtonVisible="Visible"
+        IsSettingsVisible="True">
         <winui:NavigationView.MenuItems>
-            <winui:NavigationViewItem Content="Fattura" Icon="Document" helpers:NavHelper.NavigateTo="views:FatturePage" />
-            <winui:NavigationViewItem Content="Articoli" Icon="Document" helpers:NavHelper.NavigateTo="views:ArticoloPage" />
-            <winui:NavigationViewItem Content="Categorie" Icon="Document" helpers:NavHelper.NavigateTo="views:CategoriaPage" />
+            <winui:NavigationViewItem
+                Content="Clienti"
+                Icon="ContactInfo"
+                helpers:NavHelper.NavigateTo="views:ClientiPage" />
+            <winui:NavigationViewItem
+                Content="Fatture"
+                Icon="Shop"
+                helpers:NavHelper.NavigateTo="views:FatturePage" />
+            <winui:NavigationViewItem
+                Content="Articoli"
+                Icon="Document"
+                helpers:NavHelper.NavigateTo="views:ArticoliPage" />
         </winui:NavigationView.MenuItems>
+
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">
                 <ic:InvokeCommandAction Command="{Binding ItemInvokedCommand}" />
             </ic:EventTriggerBehavior>
         </i:Interaction.Behaviors>
-        <Grid>
-            <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"/>
-        </Grid>
+            
+        <Frame
+            x:Name="ContentFrame"
+            Margin="20,0,0,0"
+            IsTabStop="True"/>
+        
     </winui:NavigationView>
 
 </Page>

@@ -136,6 +136,9 @@
     <Compile Include="View\CategoriaPage.xaml.cs">
       <DependentUpon>CategoriaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ClientePage.xaml.cs">
+      <DependentUpon>ClientePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ClientiPage.xaml.cs">
       <DependentUpon>ClientiPage.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
     <Page Include="View\CategoriaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ClientePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ClientiPage.xaml">
       <SubType>Designer</SubType>

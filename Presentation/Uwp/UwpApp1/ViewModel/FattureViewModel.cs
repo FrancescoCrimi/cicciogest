@@ -4,11 +4,10 @@ using CiccioGest.Presentation.UwpApp.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Windows.Input;
-using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
@@ -22,13 +21,15 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         private ICommand refreshCommand;
         private FatturaReadOnly fatturaSelezionata;
 
-        public FattureViewModel(ILogger<FattureViewModel> logger, IFatturaService service, NavigationService navigationService)
+        public FattureViewModel(ILogger<FattureViewModel> logger,
+                                IFatturaService service,
+                                NavigationService navigationService)
         {
             this.logger = logger;
             this.service = service;
             this.navigationService = navigationService;
             Fatture = new ObservableCollection<FatturaReadOnly>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
@@ -73,7 +74,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

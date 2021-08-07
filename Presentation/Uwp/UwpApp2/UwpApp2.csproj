@@ -132,12 +132,14 @@
     <Compile Include="ViewModel\ClientiViewModel.cs" />
     <Compile Include="ViewModel\FattureViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ArticoloPage.xaml.cs">
       <DependentUpon>ArticoloPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CategoriaPage.xaml.cs">
       <DependentUpon>CategoriaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientePage.xaml.cs">
+      <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FatturaPage.xaml.cs">
       <DependentUpon>FatturaPage.xaml</DependentUpon>
@@ -191,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ClientePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FatturaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -224,6 +230,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
       <Version>7.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.UI.Xaml">
+      <Version>2.6.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
