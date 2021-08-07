@@ -10,14 +10,14 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public class ListaFattureViewModel : ObservableObject
+    public class FattureViewModel : ObservableObject
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         private ICommand apriFatturaCommand;
         private ICommand loadedCommand;
 
-        public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger, IFatturaService fatturaService)
+        public FattureViewModel(ILogger<FattureViewModel> logger, IFatturaService fatturaService)
         {
             this.logger = logger;
             this.fatturaService = fatturaService;

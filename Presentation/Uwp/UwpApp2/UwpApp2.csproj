@@ -122,12 +122,15 @@
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="UserControls\CollapsibleSearchBox.xaml.cs">
+      <DependentUpon>CollapsibleSearchBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ArticoloViewModel.cs" />
     <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\FatturaViewModel.cs" />
-    <Compile Include="ViewModel\ListaArticoliViewModel.cs" />
-    <Compile Include="ViewModel\ListaClientiViewModel.cs" />
-    <Compile Include="ViewModel\ListaFattureViewModel.cs" />
+    <Compile Include="ViewModel\ArticoliViewModel.cs" />
+    <Compile Include="ViewModel\ClientiViewModel.cs" />
+    <Compile Include="ViewModel\FattureViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ArticoloPage.xaml.cs">
@@ -139,14 +142,14 @@
     <Compile Include="View\FatturaPage.xaml.cs">
       <DependentUpon>FatturaPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ListaArticoliPage.xaml.cs">
-      <DependentUpon>ListaArticoliPage.xaml</DependentUpon>
+    <Compile Include="View\ArticoliPage.xaml.cs">
+      <DependentUpon>ArticoliPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ListaClientiPage.xaml.cs">
-      <DependentUpon>ListaClientiPage.xaml</DependentUpon>
+    <Compile Include="View\ClientiPage.xaml.cs">
+      <DependentUpon>ClientiPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ListaFatturePage.xaml.cs">
-      <DependentUpon>ListaFatturePage.xaml</DependentUpon>
+    <Compile Include="View\FatturePage.xaml.cs">
+      <DependentUpon>FatturePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -172,6 +175,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Styles\NavStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CollapsibleSearchBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ArticoloPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -184,15 +195,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ListaArticoliPage.xaml">
+    <Page Include="View\ArticoliPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ListaClientiPage.xaml">
+    <Page Include="View\ClientiPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ListaFatturePage.xaml">
+    <Page Include="View\FatturePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -30,10 +30,10 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         }));
 
         public ICommand FattureCommand => fattureCommand ?? (fattureCommand = new RelayCommand(() =>
-            navigationService.Navigate<FatturaPage>()));
+            navigationService.Navigate<FatturePage>()));
 
         public ICommand ArticoliCommand => articoliCommand ?? (articoliCommand = new RelayCommand(() =>
-            navigationService.Navigate<ArticoloPage>()));
+            navigationService.Navigate<ArticoliPage>()));
 
         public ICommand CategorieCommand => categorieCommand ?? (categorieCommand = new RelayCommand(() =>
             navigationService.Navigate<CategoriaPage>()));

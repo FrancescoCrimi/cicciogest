@@ -76,10 +76,10 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         }));
 
         public ICommand ApriCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
-            navigationService.Navigate<ListaFatturePage>()));
+            navigationService.Navigate<FatturePage>()));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
-            navigationService.Navigate<ListaArticoliPage>()));
+            navigationService.Navigate<ArticoliPage>()));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(() =>
         {

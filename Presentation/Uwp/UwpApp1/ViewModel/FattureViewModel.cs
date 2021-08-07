@@ -12,7 +12,7 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public sealed class ListaFattureViewModel : ObservableRecipient, IDisposable
+    public sealed class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService service;
@@ -22,7 +22,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         private ICommand refreshCommand;
         private FatturaReadOnly fatturaSelezionata;
 
-        public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger, IFatturaService service, NavigationService navigationService)
+        public FattureViewModel(ILogger<FattureViewModel> logger, IFatturaService service, NavigationService navigationService)
         {
             this.logger = logger;
             this.service = service;

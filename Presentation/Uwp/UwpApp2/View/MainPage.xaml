@@ -9,15 +9,23 @@
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:views="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:helpers="using:CiccioGest.Presentation.UwpApp.Helpers"
+    xmlns:viewmodel="using:CiccioGest.Presentation.UwpApp.ViewModel"
+    d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <i:Interaction.Behaviors>
+        <ic:EventTriggerBehavior EventName="Loaded">
+            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </ic:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
 
     <winui:NavigationView
             x:Name="navigationView"
             IsBackButtonVisible="Visible"
             IsSettingsVisible="True">
         <winui:NavigationView.MenuItems>
-            <winui:NavigationViewItem Content="Fattura" Icon="Document" helpers:NavHelper.NavigateTo="views:FatturaPage" />
+            <winui:NavigationViewItem Content="Fattura" Icon="Document" helpers:NavHelper.NavigateTo="views:FatturePage" />
             <winui:NavigationViewItem Content="Articoli" Icon="Document" helpers:NavHelper.NavigateTo="views:ArticoloPage" />
             <winui:NavigationViewItem Content="Categorie" Icon="Document" helpers:NavHelper.NavigateTo="views:CategoriaPage" />
         </winui:NavigationView.MenuItems>

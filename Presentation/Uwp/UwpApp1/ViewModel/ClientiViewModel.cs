@@ -9,8 +9,11 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public class ArticoloViewModel : ObservableObject
+    public sealed class ClientiViewModel : ObservableObject
     {
+        public ClientiViewModel()
+        {
+        }
 
         private RelayCommand loadedCommand;
 

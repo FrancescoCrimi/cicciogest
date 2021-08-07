@@ -44,5 +44,24 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
                 ////NavView_Navigate(navItemTag, obj.RecommendedNavigationTransitionInfo);
             }
         }));
+
+        private RelayCommand loadedCommand;
+
+        public ICommand LoadedCommand
+        {
+            get
+            {
+                if (loadedCommand == null)
+                {
+                    loadedCommand = new RelayCommand(Loaded);
+                }
+
+                return loadedCommand;
+            }
+        }
+
+        private void Loaded()
+        {
+        }
     }
 }

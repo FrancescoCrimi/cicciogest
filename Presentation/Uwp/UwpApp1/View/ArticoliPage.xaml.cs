@@ -4,12 +4,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class ListaArticoliPage : Page
+    public sealed partial class ArticoliPage : Page
     {
-        public ListaArticoliPage()
+        public ArticoliPage()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetService<ListaArticoliViewModel>();
+            DataContext = Ioc.Default.GetService<ArticoliViewModel>();
         }
     }
 }

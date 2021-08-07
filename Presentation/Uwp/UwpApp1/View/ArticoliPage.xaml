@@ -1,15 +1,17 @@
 ﻿<Page
-    x:Class="CiccioGest.Presentation.UwpApp.View.ListaFatturePage"
+    x:Class="CiccioGest.Presentation.UwpApp.View.ArticoliPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:tollkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:uc="using:CiccioGest.Presentation.UwpApp.UserControls"
+    xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:viewmodel="using:CiccioGest.Presentation.UwpApp.ViewModel"
-    d:DataContext="{d:DesignInstance Type=viewmodel:ListaFattureViewModel}"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ArticoliViewModel}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,21 +20,27 @@
             <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </ic:EventTriggerBehavior>
     </i:Interaction.Behaviors>
-    
-    <Grid>
 
-        <RelativePanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0">
+
             <TextBlock
                 x:Name="PageTitle"
-                Text="Fatture"/>
+                Style="{StaticResource PageTitleTextBlockStyle}"
+                Text="Articoli"/>
 
             <CommandBar
                 x:Name="mainCommandBar"
+                DefaultLabelPosition="Right"
                 HorizontalAlignment="Stretch"
                 Background="Transparent"
-                RelativePanel.RightOf="PageTitle"
-                RelativePanel.AlignRightWithPanel="True"
-                DefaultLabelPosition="Right">
+                RelativePanel.LeftOf="OrderSearchBox"
+                RelativePanel.RightOf="PageTitle">
                 <AppBarButton
                     x:Name="CommandBarEditButton"
                     Icon="Edit"
@@ -44,11 +52,27 @@
                     Label="Delete"/>
                 <AppBarButton
                     Icon="Refresh"
-                    Label="Refresh"
-                    Command="{Binding RefreshCommand}"/>
+                    Label="Refresh"/>
             </CommandBar>
 
-            <controls:DataGrid
+            <uc:CollapsibleSearchBox
+                x:Name="OrderSearchBox"
+                Width="240"
+                Margin="12,8,12,0"
+                RelativePanel.AlignRightWithPanel="True" />
+
+        </RelativePanel>
+
+        <SplitView Grid.Row="1"
+            x:Name="listSplitView"
+            DisplayMode="Inline"
+            OpenPaneLength="260"
+            PanePlacement="Right">
+            <SplitView.Pane>
+                <StackPanel></StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <tollkit:DataGrid
                 BorderThickness="0"
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="False"
@@ -56,30 +80,26 @@
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
                 Margin="0,10,0,0"
-                ItemsSource="{Binding Fatture, Mode=OneWay}"
-                SelectedItem="{Binding FatturaSelezionata, Mode=TwoWay}"
-                RelativePanel.AlignBottomWithPanel="True"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.Below="mainCommandBar"
+                ItemsSource="{Binding Articoli, Mode=OneWay}"
+                SelectedItem="{Binding ArticoloSelezionato, Mode=TwoWay}"
                 SelectionMode="Single">
-                <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn
+                    <tollkit:DataGrid.Columns>
+                        <tollkit:DataGridTextColumn
                         Header="Invoice"
                         Tag="InvoiceNumber"
                         Binding="{Binding Id}"/>
-                    <controls:DataGridTextColumn
+                        <tollkit:DataGridTextColumn
                         Header="Customer"
                         Tag="CustomerName"
                         Binding="{Binding Nome}"/>
-                    <controls:DataGridTextColumn
+                        <!--<controls:DataGridTextColumn
                         Header="Totale"
                         Tag="TotaleName"
-                        Binding="{Binding Totale}"/>
-                </controls:DataGrid.Columns>
-            </controls:DataGrid>
-
-        </RelativePanel>
+                        Binding="{Binding Totale}"/>-->
+                    </tollkit:DataGrid.Columns>
+                </tollkit:DataGrid>
+            </SplitView.Content>
+        </SplitView>
 
     </Grid>
 </Page>

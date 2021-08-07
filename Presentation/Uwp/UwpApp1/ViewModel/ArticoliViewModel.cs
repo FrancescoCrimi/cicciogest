@@ -14,7 +14,7 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public sealed class ListaArticoliViewModel : ObservableRecipient, IDisposable
+    public sealed class ArticoliViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -22,7 +22,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         private ICommand loadedCommand;
         private ICommand selezionaArticoloCommand;
 
-        public ListaArticoliViewModel(ILogger<ListaArticoliViewModel> logger,
+        public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                       IMagazinoService service,
                                       NavigationService ns)
         {

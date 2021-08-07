@@ -9,14 +9,14 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public class ListaClientiViewModel : ObservableObject, IDisposable
+    public class ClientiViewModel : ObservableObject, IDisposable
     {
         private readonly ILogger logger;
         private readonly IClientiFornitoriService service;
         private ICommand loadCommand;
         private ICommand selezionaClienteCommand;
 
-        public ListaClientiViewModel(ILogger<ListaClientiViewModel> logger,
+        public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                      IClientiFornitoriService clientiFornitoriService)
         {
             this.logger = logger;

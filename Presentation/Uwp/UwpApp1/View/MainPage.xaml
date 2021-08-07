@@ -2,11 +2,12 @@
     x:Class="CiccioGest.Presentation.UwpApp.View.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:viewmodel="using:CiccioGest.Presentation.UwpApp.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
     mc:Ignorable="d"
@@ -25,22 +26,24 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <MenuBar>
-            <MenuBarItem Title="Documenti">
+        <winui:MenuBar>
+
+            <winui:MenuBarItem Title="Documenti">
                 <MenuFlyoutItem Text="Fatture" Command="{Binding FattureCommand, Mode=OneWay}"/>
-            </MenuBarItem>
-            <MenuBarItem Title="Magazino">
+            </winui:MenuBarItem>
+            <winui:MenuBarItem Title="Magazino">
                 <MenuFlyoutItem Text="Articoli" Command="{Binding ArticoliCommand, Mode=OneWay}"/>
                 <MenuFlyoutItem Text="Categorie" Command="{Binding CategorieCommand, Mode=OneWay}"/>
-            </MenuBarItem>
-            <MenuBarItem Title="Anagrafica">
+            </winui:MenuBarItem>
+            <winui:MenuBarItem Title="Anagrafica">
                 <MenuFlyoutItem Text="Clienti"/>
                 <MenuFlyoutItem Text="Fornitori"/>
-            </MenuBarItem>
-            <MenuBarItem Title="Help">
+            </winui:MenuBarItem>
+            <winui:MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About"/>
-            </MenuBarItem>
-        </MenuBar>
+            </winui:MenuBarItem>
+
+        </winui:MenuBar>
 
         <Grid Grid.Row="1">
             <Frame x:Name="shellFrame" />
