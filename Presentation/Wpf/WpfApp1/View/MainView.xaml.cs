@@ -1,6 +1,4 @@
-﻿using CiccioGest.Presentation.WpfApp1.Contracts;
-using CiccioGest.Presentation.WpfApp1.ViewModel;
-using System.ComponentModel;
+﻿using CiccioGest.Presentation.WpfApp1.ViewModel;
 using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp1.View
@@ -11,11 +9,6 @@ namespace CiccioGest.Presentation.WpfApp1.View
         {
             InitializeComponent();
             DataContext = mainViewModel;
-        }
-
-        private void Main_Closing(object sender, CancelEventArgs e)
-        {
-            //Messenger.Default.Unregister(this);
         }
     }
 }
