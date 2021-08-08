@@ -5,10 +5,10 @@ namespace CiccioGest.Presentation.WpfApp.View
 {
     public partial class FattureView : Window
     {
-        public FattureView(FattureViewModel listaFattureViewModel)
+        public FattureView(FattureViewModel fattureViewModel)
         {
             InitializeComponent();
-            DataContext = listaFattureViewModel;
+            DataContext = fattureViewModel;
         }
     }
 }

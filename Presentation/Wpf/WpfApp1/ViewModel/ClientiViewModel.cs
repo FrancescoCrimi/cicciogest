@@ -1,6 +1,5 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.WpfApp.Helpers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -21,7 +20,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private ICommand selezionaClienteCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
-                                     IClientiFornitoriService clientiFornitoriService)
+                                IClientiFornitoriService clientiFornitoriService)
         {
             this.logger = logger;
             service = clientiFornitoriService;
@@ -46,7 +45,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         {
             if (ClienteSelezionato != null)
             {
-                Messenger.Send(new NotificationMessage<int>(ClienteSelezionato.Id, "IdCliente"));
+                Messenger.Send(new ClienteIdMessage(ClienteSelezionato.Id));
                 wnd.Close();
             }
         });

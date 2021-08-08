@@ -1,13 +1,11 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.WpfApp.Helpers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -20,12 +18,13 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private ICommand selezionaArticoloCommand;
         private ICommand loadedCommand;
 
-        public ArticoliViewModel(ILogger<ArticoliViewModel> logger, IMagazinoService service)
+        public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
+                                 IMagazinoService service)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger;
             this.service = service;
             Articoli = new ObservableCollection<ArticoloReadOnly>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
@@ -36,7 +35,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         {
             if (ArticoloSelezionato != null)
             {
-                Messenger.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
+                Messenger.Send(new DettaglioIdMessage(ArticoloSelezionato.Id));
                 wnd.Close();
             }
         });
@@ -51,7 +50,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

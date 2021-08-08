@@ -1,7 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp.Contracts;
-using CiccioGest.Presentation.WpfApp.Helpers;
 using CiccioGest.Presentation.WpfApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -9,7 +8,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -43,7 +41,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             if (FatturaSelezionata != null)
             {
                 windowManagerService.OpenWindow(typeof(FatturaView));
-                Messenger.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
+                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
                 wnd.Close();
             }
         });

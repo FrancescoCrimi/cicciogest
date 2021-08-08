@@ -6,10 +6,10 @@ namespace CiccioGest.Presentation.WpfApp.View
 {
     public partial class ClientiView : Window
     {
-        public ClientiView(ClientiViewModel listaClientiViewModel)
+        public ClientiView(ClientiViewModel clientiViewModel)
         {
             InitializeComponent();
-            DataContext = listaClientiViewModel;
+            DataContext = clientiViewModel;
         }
     }
 }

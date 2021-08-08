@@ -55,10 +55,8 @@
                 </ToggleButton>
             </ToolBar>
         </DockPanel>
-
     
-        <DataGrid
-            Grid.Row="1"
+        <DataGrid Grid.Row="1"
             ItemsSource="{Binding Clienti, Mode=OneWay}"
             AutoGenerateColumns="False"
             SelectedItem="{Binding ClienteSelezionato}"

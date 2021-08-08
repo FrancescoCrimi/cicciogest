@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class ListaFattureViewModel : ObservableRecipient, IDisposable
+    public sealed class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
@@ -19,9 +19,9 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private ICommand loadedCommand;
         private ICommand apriFatturaCommand;
 
-        public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger,
-                                     IFatturaService fatturaService,
-                                     INavigationService navigationService)
+        public FattureViewModel(ILogger<FattureViewModel> logger,
+                                IFatturaService fatturaService,
+                                INavigationService navigationService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.fatturaService = fatturaService;

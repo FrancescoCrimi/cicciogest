@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class ListaArticoliViewModel : ObservableRecipient, IDisposable
+    public sealed class ArticoliViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
@@ -20,9 +20,9 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private ICommand loadedCommand;
         private ICommand selezionaArticoloCommand;
 
-        public ListaArticoliViewModel(ILogger<ListaArticoliViewModel> logger,
-                                      IMagazinoService magazinoService,
-                                      INavigationService navigationService)
+        public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
+                                 IMagazinoService magazinoService,
+                                 INavigationService navigationService)
         {
             this.logger = logger;
             this.magazinoService = magazinoService;

@@ -44,7 +44,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         public Dettaglio DettaglioSelezionato { private get; set; }
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
-            navigationService.NavigateTo(typeof(ListaClientiView)));
+            navigationService.NavigateTo(typeof(ClientiView)));
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
         {
@@ -71,10 +71,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() 
-            => navigationService.NavigateTo(typeof(ListaFattureView)));
+            => navigationService.NavigateTo(typeof(FattureView)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() 
-            => navigationService.NavigateTo(typeof(ListaArticoliView)));
+            => navigationService.NavigateTo(typeof(ArticoliView)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {

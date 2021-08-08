@@ -1,7 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp.Contracts;
-using CiccioGest.Presentation.WpfApp.Helpers;
 using CiccioGest.Presentation.WpfApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -35,8 +34,8 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
                                 IWindowManagerService windowManagerService,
                                 IWindowDialogService windowDialogService)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.logger = logger;
+            this.service = service;
             this.windowManagerService = windowManagerService;
             this.windowDialogService = windowDialogService;
             RegistraMessaggi();
@@ -110,26 +109,24 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         private void RegistraMessaggi()
         {
-            Messenger.Register<FatturaViewModel, NotificationMessage<int>>(this, async (r, ns) =>
+            Messenger.Register<FatturaIdMessage>(this, async (r, m) =>
             {
-                if (ns.Notification == "IdFattura")
+                if (m.Value != 0)
+                    MostraFattura(await service.GetFattura(m.Value));
+            });
+
+            Messenger.Register<DettaglioIdMessage>(this, async (r, m) =>
+            {
+                if (m.Value != 0)
                 {
-                    if (ns.Content != 0)
-                        MostraFattura(await service.GetFattura(ns.Content));
+                    Dettaglio = new Dettaglio(await service.GetArticolo(m.Value), 1);
+                    OnPropertyChanged(nameof(Dettaglio));
                 }
-                else if (ns.Notification == "IdProdotto")
-                {
-                    if (ns.Content != 0)
-                    {
-                        Dettaglio = new Dettaglio(await service.GetArticolo(ns.Content), 1);
-                        OnPropertyChanged(nameof(Dettaglio));
-                    }
-                }
-                else if (ns.Notification == "IdCliente")
-                {
-                    if (ns.Content != 0)
-                        MostraFattura(new Fattura(await service.GetCliente(ns.Content)));
-                }
+            });
+            Messenger.Register<DettaglioIdMessage>(this, async (r, m) =>
+            {
+                if (m.Value != 0)
+                    MostraFattura(new Fattura(await service.GetCliente(m.Value)));
             });
         }
 
