@@ -1,7 +1,7 @@
 ﻿using CiccioGest.Application.Impl;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.WpfApp1.View;
-using CiccioGest.Presentation.WpfApp1.ViewModel;
+using CiccioGest.Presentation.WpfApp.View;
+using CiccioGest.Presentation.WpfApp.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog.Extensions.Logging;
@@ -9,7 +9,7 @@ using System;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace CiccioGest.Presentation.WpfApp1
+namespace CiccioGest.Presentation.WpfApp
 {
     public partial class App : System.Windows.Application
     {
@@ -40,17 +40,17 @@ namespace CiccioGest.Presentation.WpfApp1
                 .ConfigureApplication()
 
                 .AddTransient<MainViewModel>()
-                .AddTransient<ListaFattureViewModel>()
-                .AddTransient<ListaArticoliViewModel>()
-                .AddTransient<ListaClientiViewModel>()
+                .AddTransient<FattureViewModel>()
+                .AddTransient<ArticoliViewModel>()
+                .AddTransient<ClientiViewModel>()
                 .AddTransient<CategoriaViewModel>()
                 .AddTransient<FatturaViewModel>()
                 .AddTransient<ArticoloViewModel>()
 
                 .AddTransient<MainView>()
-                .AddTransient<ListaFattureView>()
-                .AddTransient<ListaArticoliView>()
-                .AddTransient<ListaClientiView>()
+                .AddTransient<FattureView>()
+                .AddTransient<ArticoliView>()
+                .AddTransient<ClientiView>()
                 .AddTransient<CategoriaView>()
                 .AddTransient<FatturaView>()
                 .AddTransient<ArticoloView>();

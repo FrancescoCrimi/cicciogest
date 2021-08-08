@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp1.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public sealed class CategoriaViewModel : ObservableObject, IDisposable
     {

@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <RootNamespace>CiccioGest.Presentation.WpfApp1</RootNamespace>
+    <RootNamespace>CiccioGest.Presentation.WpfApp</RootNamespace>
     <AssemblyName>WpfApp1</AssemblyName>
     <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>

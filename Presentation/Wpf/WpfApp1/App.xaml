@@ -1,5 +1,5 @@
 ﻿<Application
-    x:Class="CiccioGest.Presentation.WpfApp1.App"    
+    x:Class="CiccioGest.Presentation.WpfApp.App"    
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"    
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     Startup="OnStartup"    

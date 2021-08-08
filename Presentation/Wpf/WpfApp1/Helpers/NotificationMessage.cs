@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.WpfApp1.Helpers
+namespace CiccioGest.Presentation.WpfApp.Helpers
 {
     public class MessageBase
     {

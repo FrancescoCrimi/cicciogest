@@ -4,12 +4,12 @@ using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    public partial class FatturaView : Window
+    public partial class ClientiView : Window
     {
-        public FatturaView(FatturaViewModel fatturaViewModel )
+        public ClientiView(ClientiViewModel listaClientiViewModel)
         {
             InitializeComponent();
-            DataContext = fatturaViewModel;
+            DataContext = listaClientiViewModel;
         }
     }
 }

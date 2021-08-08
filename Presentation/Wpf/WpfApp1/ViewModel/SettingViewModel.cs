@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
-namespace CiccioGest.Presentation.WpfApp1.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     sealed class SettingViewModel : ObservableObject, IDisposable
     {

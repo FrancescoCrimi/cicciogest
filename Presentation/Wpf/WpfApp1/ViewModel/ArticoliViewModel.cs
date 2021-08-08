@@ -1,6 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.WpfApp1.Helpers;
+using CiccioGest.Presentation.WpfApp.Helpers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -11,16 +11,16 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp1.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class ListaArticoliViewModel : ObservableRecipient, IDisposable
+    public sealed class ArticoliViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
         private ICommand selezionaArticoloCommand;
         private ICommand loadedCommand;
 
-        public ListaArticoliViewModel(ILogger<ListaArticoliViewModel> logger, IMagazinoService service)
+        public ArticoliViewModel(ILogger<ArticoliViewModel> logger, IMagazinoService service)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service;

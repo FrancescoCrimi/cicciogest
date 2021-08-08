@@ -1,6 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.WpfApp1.Helpers;
+using CiccioGest.Presentation.WpfApp.Helpers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -11,16 +11,16 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp1.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class ListaFattureViewModel : ObservableRecipient, IDisposable
+    public sealed class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         private ICommand loadedCommand;
         private ICommand apriFatturaCommand;
 
-        public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger, IFatturaService fatturaService)
+        public FattureViewModel(ILogger<FattureViewModel> logger, IFatturaService fatturaService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.fatturaService = fatturaService;

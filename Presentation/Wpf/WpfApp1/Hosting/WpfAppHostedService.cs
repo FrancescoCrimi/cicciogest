@@ -1,4 +1,4 @@
-﻿using CiccioGest.Presentation.WpfApp1.Contracts;
+﻿using CiccioGest.Presentation.WpfApp.Contracts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CiccioGest.Presentation.WpfApp1.Hosting
+namespace CiccioGest.Presentation.WpfApp.Hosting
 {
     public class WpfAppHostedService<TWindow> : IHostedService, IDisposable where TWindow : Window
     {

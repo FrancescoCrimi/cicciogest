@@ -3,12 +3,12 @@ using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    public partial class MainView : Window
+    public partial class FattureView : Window
     {
-        public MainView(MainViewModel mainViewModel)
+        public FattureView(FattureViewModel listaFattureViewModel)
         {
             InitializeComponent();
-            DataContext = mainViewModel;
+            DataContext = listaFattureViewModel;
         }
     }
 }

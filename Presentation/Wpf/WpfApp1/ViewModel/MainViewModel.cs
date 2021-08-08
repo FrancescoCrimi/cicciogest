@@ -1,5 +1,5 @@
-﻿using CiccioGest.Presentation.WpfApp1.Contracts;
-using CiccioGest.Presentation.WpfApp1.View;
+﻿using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
@@ -7,7 +7,7 @@ using System;
 using System.Globalization;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp1.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public sealed class MainViewModel : ObservableObject, IDisposable
     {

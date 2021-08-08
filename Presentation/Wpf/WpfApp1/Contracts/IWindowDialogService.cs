@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CiccioGest.Presentation.WpfApp1.Contracts
+namespace CiccioGest.Presentation.WpfApp.Contracts
 {
     public interface IWindowDialogService
     {

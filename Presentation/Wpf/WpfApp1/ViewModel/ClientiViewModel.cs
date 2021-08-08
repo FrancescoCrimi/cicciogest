@@ -1,6 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.WpfApp1.Helpers;
+using CiccioGest.Presentation.WpfApp.Helpers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -11,16 +11,16 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp1.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public class ListaClientiViewModel : ObservableRecipient, IDisposable
+    public class ClientiViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IClientiFornitoriService service;
         private ICommand loadCommand;
         private ICommand selezionaClienteCommand;
 
-        public ListaClientiViewModel(ILogger<ListaClientiViewModel> logger,
+        public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                      IClientiFornitoriService clientiFornitoriService)
         {
             this.logger = logger;

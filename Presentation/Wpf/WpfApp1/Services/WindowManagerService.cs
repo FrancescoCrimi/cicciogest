@@ -1,11 +1,11 @@
-﻿using CiccioGest.Presentation.WpfApp1.Contracts;
+﻿using CiccioGest.Presentation.WpfApp.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Windows;
 
 
-namespace CiccioGest.Presentation.WpfApp1.Services
+namespace CiccioGest.Presentation.WpfApp.Services
 {
     public class WindowManagerService : IWindowManagerService, IDisposable
     {

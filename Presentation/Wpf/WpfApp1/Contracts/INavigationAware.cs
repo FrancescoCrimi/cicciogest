@@ -1,4 +1,4 @@
-﻿namespace CiccioGest.Presentation.WpfApp1.Contracts
+﻿namespace CiccioGest.Presentation.WpfApp.Contracts
 {
     public interface INavigationAware
     {

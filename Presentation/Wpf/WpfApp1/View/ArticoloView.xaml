@@ -1,5 +1,5 @@
 ﻿<Window x:Name="Articolo"
-        x:Class="CiccioGest.Presentation.WpfApp1.View.ArticoloView"
+        x:Class="CiccioGest.Presentation.WpfApp.View.ArticoloView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

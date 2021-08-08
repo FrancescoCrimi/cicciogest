@@ -1,8 +1,8 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.WpfApp1.Contracts;
-using CiccioGest.Presentation.WpfApp1.Helpers;
-using CiccioGest.Presentation.WpfApp1.View;
+using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.Helpers;
+using CiccioGest.Presentation.WpfApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -12,7 +12,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp1.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public sealed class FatturaViewModel : ObservableRecipient, IDisposable
     {
@@ -49,7 +49,7 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
         {
-            windowDialogService.OpenDialog(typeof(ListaClientiView));
+            windowDialogService.OpenDialog(typeof(ClientiView));
         });
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
@@ -77,10 +77,10 @@ namespace CiccioGest.Presentation.WpfApp1.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
-                windowDialogService.OpenDialog(typeof(ListaFattureView)));
+                windowDialogService.OpenDialog(typeof(FattureView)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
-                windowDialogService.OpenDialog(typeof(ListaArticoliView)));
+                windowDialogService.OpenDialog(typeof(ArticoliView)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {

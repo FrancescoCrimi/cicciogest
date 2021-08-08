@@ -1,11 +1,11 @@
-﻿using CiccioGest.Presentation.WpfApp1.Contracts;
-using CiccioGest.Presentation.WpfApp1.Hosting;
-using CiccioGest.Presentation.WpfApp1.Services;
+﻿using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.Hosting;
+using CiccioGest.Presentation.WpfApp.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 
-namespace CiccioGest.Presentation.WpfApp1
+namespace CiccioGest.Presentation.WpfApp
 {
     public static class WpfHostBuilderExtensions
     {
