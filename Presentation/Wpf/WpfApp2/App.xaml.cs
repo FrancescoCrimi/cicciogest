@@ -1,17 +1,16 @@
 ﻿using CiccioGest.Application.Impl;
 using CiccioGest.Infrastructure.Conf;
-//using CiccioGest.Presentation.Client;
-using CiccioGest.Presentation.WpfApp2.Contracts;
-using CiccioGest.Presentation.WpfApp2.Hosting;
-using CiccioGest.Presentation.WpfApp2.Service;
-using CiccioGest.Presentation.WpfApp2.View;
-using CiccioGest.Presentation.WpfApp2.ViewModel;
+using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.Hosting;
+using CiccioGest.Presentation.WpfApp.Service;
+using CiccioGest.Presentation.WpfApp.View;
+using CiccioGest.Presentation.WpfApp.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog.Extensions.Logging;
 using System.Windows.Threading;
 
-namespace CiccioGest.Presentation.WpfApp2
+namespace CiccioGest.Presentation.WpfApp
 {
     public partial class App : System.Windows.Application
     {

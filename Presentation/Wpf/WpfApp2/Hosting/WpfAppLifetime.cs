@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Presentation.WpfApp2.Hosting
+namespace CiccioGest.Presentation.WpfApp.Hosting
 {
     public class WpfAppLifetime : IHostLifetime, IDisposable
     {

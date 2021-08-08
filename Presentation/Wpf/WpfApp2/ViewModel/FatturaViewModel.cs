@@ -1,8 +1,7 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.WpfApp2.Contracts;
-using CiccioGest.Presentation.WpfApp2.Helpers;
-using CiccioGest.Presentation.WpfApp2.View;
+using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
@@ -12,7 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-namespace CiccioGest.Presentation.WpfApp2.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public sealed class FatturaViewModel : ObservableRecipient, IDisposable
     {
@@ -106,23 +105,21 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
 
         private void RegistraMessaggi()
         {
-            Messenger.Register<FatturaViewModel, NotificationMessage<int>>(this, async (r, ns) =>
+            Messenger.Register<FatturaIdMessage>(this, async (r, m) =>
             {
-                if (ns.Notification == "IdFattura")
-                {
-                    MostraFattura(await fatturaService.GetFattura(ns.Content));
-                }
+                MostraFattura(await fatturaService.GetFattura(m.Value));
+            });
 
-                else if (ns.Notification == "IdProdotto")
-                {
-                    Dettaglio = new Dettaglio(await fatturaService.GetArticolo(ns.Content), 1);
-                    OnPropertyChanged(nameof(Dettaglio));
-                }
-                else if (ns.Notification == "IdCliente")
-                {
-                    if (ns.Content != 0)
-                        MostraFattura(new Fattura(await fatturaService.GetCliente(ns.Content)));
-                }
+            Messenger.Register<DettaglioIdMessage>(this, async (r, m) => 
+            {
+                Dettaglio = new Dettaglio(await fatturaService.GetArticolo(m.Value), 1);
+                OnPropertyChanged(nameof(Dettaglio));
+            });
+
+            Messenger.Register<ClienteIdMessage>(this, async (r, m) =>
+            {
+                if (m.Value != 0)
+                    MostraFattura(new Fattura(await fatturaService.GetCliente(m.Value)));
             });
         }
 

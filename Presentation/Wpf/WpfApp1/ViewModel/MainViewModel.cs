@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Globalization;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
@@ -22,12 +21,12 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.windowManagerService = windowManagerService;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(() =>
         {
-            windowManagerService.OpenWindow(typeof(FatturaView));
+            windowManagerService.OpenWindow(typeof(FattureView));
         });
 
         public ICommand ApriArticoliCommand => apriProdottiCommand ??= new RelayCommand(() =>
@@ -40,7 +39,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

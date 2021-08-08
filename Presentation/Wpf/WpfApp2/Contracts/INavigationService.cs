@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 
-namespace CiccioGest.Presentation.WpfApp2.Contracts
+namespace CiccioGest.Presentation.WpfApp.Contracts
 {
     public interface INavigationService
     {

@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfApp.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:ClientiViewModel}"
         mc:Ignorable="d"
         Title="Clienti"
         Height="450"
@@ -32,9 +34,25 @@
                 <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
             </Grid>
-            <ToolBar>
-                <ToggleButton Content="Edit"/>
-                <ToggleButton Content="Delete"/>
+            <ToolBar ToolBarTray.IsLocked="True">
+                <ToggleButton Command="{Binding SelezionaClienteCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Modifica" />
+                    </TextBlock>
+                </ToggleButton>
+                <ToggleButton>
+                    <TextBlock>        
+                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Cancella" />
+                    </TextBlock>
+                </ToggleButton>
+                <ToggleButton>
+                    <TextBlock>        
+                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Aggiorna" />
+                    </TextBlock>
+                </ToggleButton>
             </ToolBar>
         </DockPanel>
 

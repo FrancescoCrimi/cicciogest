@@ -126,6 +126,7 @@
     <Compile Include="ViewModel\ArticoloViewModel.cs" />
     <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\ClientiViewModel.cs" />
+    <Compile Include="ViewModel\Messages.cs" />
     <Compile Include="ViewModel\FatturaViewModel.cs" />
     <Compile Include="ViewModel\ArticoliViewModel.cs" />
     <Compile Include="ViewModel\FattureViewModel.cs" />

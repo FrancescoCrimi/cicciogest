@@ -1,16 +1,13 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.UwpApp.Services;
 using CiccioGest.Presentation.UwpApp.View;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.Toolkit.Mvvm.Messaging.Messages;
-using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
@@ -113,7 +110,6 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             {
                 if (m.Value != 0)
                     Mostra(await fatturaService.GetFattura(m.Value));
-
             });
 
             Messenger.Register<DettaglioIdMessage>(this, async (r, m) =>
@@ -123,7 +119,6 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
                     Dettaglio = new Dettaglio(await fatturaService.GetArticolo(m.Value), 1);
                     OnPropertyChanged(nameof(Dettaglio));
                 }
-
             });
         }
 
@@ -143,20 +138,6 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         public void Dispose()
         {
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
-        }
-    }
-
-    public class FatturaIdMessage : ValueChangedMessage<int>
-    {
-        public FatturaIdMessage(int value) : base(value)
-        {
-        }
-    }
-
-    public class DettaglioIdMessage : ValueChangedMessage<int>
-    {
-        public DettaglioIdMessage(int value) : base(value)
-        {
         }
     }
 }

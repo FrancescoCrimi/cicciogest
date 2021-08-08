@@ -7,7 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp2.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public class ListaClientiViewModel : ObservableRecipient, IDisposable
     {

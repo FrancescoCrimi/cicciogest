@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfApp.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:FattureViewModel}"
         mc:Ignorable="d"
         Title="Lista Fatture"
         Height="450"
@@ -33,8 +35,26 @@
                 <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" VerticalAlignment="Center" Text="Cerca Fattura"/>
             </Grid>
             <ToolBar>
-                <ToggleButton Content="Edit"/>
-                <ToggleButton Content="Delete"/>
+                <ToolBar ToolBarTray.IsLocked="True">
+                    <ToggleButton Command="{Binding ApriFatturaCommand}" CommandParameter="{Binding ElementName=ListaFatture}">
+                        <TextBlock>        
+                        <Run Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Modifica" />
+                        </TextBlock>
+                    </ToggleButton>
+                    <ToggleButton>
+                        <TextBlock>        
+                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Cancella" />
+                        </TextBlock>
+                    </ToggleButton>
+                    <ToggleButton>
+                        <TextBlock>        
+                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Aggiorna" />
+                        </TextBlock>
+                    </ToggleButton>
+                </ToolBar>
             </ToolBar>
         </DockPanel>
 

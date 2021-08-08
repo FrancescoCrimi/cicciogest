@@ -1,8 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.WpfApp2.Contracts;
-using CiccioGest.Presentation.WpfApp2.Helpers;
+using CiccioGest.Presentation.WpfApp.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -11,7 +9,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp2.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public sealed class ListaFattureViewModel : ObservableRecipient, IDisposable
     {
@@ -51,7 +49,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
             {
                 if (navigationService.CanGoBack)
                     navigationService.GoBack();
-                Messenger.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
+                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
             }
         });
 

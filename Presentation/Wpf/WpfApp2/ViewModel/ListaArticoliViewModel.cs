@@ -1,7 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.WpfApp2.Contracts;
-using CiccioGest.Presentation.WpfApp2.Helpers;
+using CiccioGest.Presentation.WpfApp.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -11,7 +10,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp2.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public sealed class ListaArticoliViewModel : ObservableRecipient, IDisposable
     {
@@ -40,7 +39,7 @@ namespace CiccioGest.Presentation.WpfApp2.ViewModel
         {
             if (ArticoloSelezionato != null)
             {
-                Messenger.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
+                Messenger.Send(new DettaglioIdMessage(ArticoloSelezionato.Id));
                 navigationService.GoBack();
             }
         });

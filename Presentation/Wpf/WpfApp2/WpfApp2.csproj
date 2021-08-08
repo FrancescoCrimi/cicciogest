@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <RootNamespace>CiccioGest.Presentation.WpfApp2</RootNamespace>
+    <RootNamespace>CiccioGest.Presentation.WpfApp</RootNamespace>
     <AssemblyName>WpfApp2</AssemblyName>
     <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
@@ -40,6 +40,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

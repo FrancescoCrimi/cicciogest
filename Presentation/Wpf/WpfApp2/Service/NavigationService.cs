@@ -1,4 +1,4 @@
-﻿using CiccioGest.Presentation.WpfApp2.Contracts;
+﻿using CiccioGest.Presentation.WpfApp.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace CiccioGest.Presentation.WpfApp2.Service
+namespace CiccioGest.Presentation.WpfApp.Service
 {
     public class NavigationService : INavigationService
     {

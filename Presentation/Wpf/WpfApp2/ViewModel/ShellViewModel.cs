@@ -1,24 +1,24 @@
-﻿using CiccioGest.Presentation.WpfApp2.Contracts;
-using CiccioGest.Presentation.WpfApp2.View;
+﻿using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Globalization;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp2.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     public sealed class ShellViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly INavigationService ns;
 
-        public ShellViewModel(ILogger<ShellViewModel> logger, INavigationService ns)
+        public ShellViewModel(ILogger<ShellViewModel> logger,
+                              INavigationService ns)
         {
             this.logger = logger;
             this.ns = ns;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ICommand NuovaFatturaCommand =>

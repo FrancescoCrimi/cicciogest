@@ -1,8 +1,8 @@
-﻿using CiccioGest.Presentation.WpfApp2.Contracts;
-using CiccioGest.Presentation.WpfApp2.ViewModel;
+﻿using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.ViewModel;
 using System.Windows;
 
-namespace CiccioGest.Presentation.WpfApp2.View
+namespace CiccioGest.Presentation.WpfApp.View
 {
     public partial class ShellView : Window
     {

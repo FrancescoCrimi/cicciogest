@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using CiccioGest.Infrastructure;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace CiccioGest.Presentation.WpfApp2.ViewModel
+namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
     sealed class SettingViewModel : ObservableRecipient, IDisposable
     {

@@ -28,9 +28,15 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() => { } /*MostraFattura(new Fattura())*/));
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() => 
+        {
+            //MostraFattura(new Fattura());
+        }));
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () => MostraFattura(await service.GetFattura(4))));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        {
+            MostraFattura(await service.GetFattura(4));
+        }));
 
         private void MostraFattura(Fattura fattura)
         {

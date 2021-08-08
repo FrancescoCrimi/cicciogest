@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CiccioGest.Presentation.WpfApp2.Hosting
+namespace CiccioGest.Presentation.WpfApp.Hosting
 {
     public class WpfAppHostedService<TWindow> : IHostedService, IDisposable where TWindow : Window
     {
