@@ -9,9 +9,9 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         }
     }
 
-    public class DettaglioIdMessage : ValueChangedMessage<int>
+    public class ArticoloIdMessage : ValueChangedMessage<int>
     {
-        public DettaglioIdMessage(int value) : base(value)
+        public ArticoloIdMessage(int value) : base(value)
         {
         }
     }

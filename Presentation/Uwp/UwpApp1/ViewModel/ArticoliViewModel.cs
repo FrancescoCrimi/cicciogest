@@ -42,7 +42,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             if (ArticoloSelezionato != null)
             {
                 //Messenger.Send(new NotificationMessage<int>(ArticoloSelezionato.Id, "IdProdotto"));
-                Messenger.Send(new DettaglioIdMessage(ArticoloSelezionato.Id));
+                Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
                 ns.GoBack();
             }
         }));

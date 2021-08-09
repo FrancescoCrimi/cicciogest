@@ -44,14 +44,16 @@
                 <AppBarButton
                     x:Name="CommandBarEditButton"
                     Icon="Edit"
-                    Label="Edit" />
+                    Label="Edit"
+                    Command="{Binding ApriFatturaCommand}" />
                 <AppBarButton
                     x:Name="CommandBarDeleteButton"
                     Icon="Delete"
                     Label="Delete" />
                 <AppBarButton
                     Icon="Refresh"
-                    Label="Refresh" />
+                    Label="Refresh"
+                    Command="{Binding RefreshCommand}" />
             </CommandBar>
 
             <uc:CollapsibleSearchBox
@@ -72,10 +74,13 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
-                    <tollkit:DataGrid
-                            AutoGenerateColumns="False"
-                            GridLinesVisibility="Horizontal"
-                            ItemsSource="{Binding Fatture, Mode=OneWay}">
+                    <tollkit:DataGrid                            
+                        AutoGenerateColumns="False"
+                        GridLinesVisibility="Horizontal"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding Fatture, Mode=OneWay}"
+                        SelectedItem="{Binding FatturaSelezionata, Mode=TwoWay}">
                         <tollkit:DataGrid.Columns>
                             <tollkit:DataGridTextColumn Binding="{Binding Id }" Header="OrderID" />
                             <tollkit:DataGridTextColumn Binding="{Binding Nome}" Header="OrderDate" />

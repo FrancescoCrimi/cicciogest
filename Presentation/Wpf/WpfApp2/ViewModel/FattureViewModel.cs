@@ -1,6 +1,7 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -16,8 +17,9 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         private readonly INavigationService navigationService;
+        private FatturaReadOnly fatturaSelezionata;
         private ICommand loadedCommand;
-        private ICommand apriFatturaCommand;
+        private RelayCommand apriFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
@@ -31,9 +33,20 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public string Title { get => "Suca Forte"; }
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
-        public FatturaReadOnly FatturaSelezionata { private get; set; }
+
+        public FatturaReadOnly FatturaSelezionata
+        {
+            private get => fatturaSelezionata;
+            set
+            {
+                if (value != fatturaSelezionata)
+                {
+                    fatturaSelezionata = value;
+                    apriFatturaCommand.NotifyCanExecuteChanged();
+                }
+            }
+        }
 
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
@@ -43,15 +56,16 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
         });
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
-        {
-            if (FatturaSelezionata != null)
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(
+            () =>
             {
-                if (navigationService.CanGoBack)
-                    navigationService.GoBack();
-                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
-            }
-        });
+                if (FatturaSelezionata != null)
+                {
+                    navigationService.NavigateTo(typeof(FatturaView));
+                    Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
+                }
+            },
+            () => FatturaSelezionata != null);
 
         public void Dispose()
         {

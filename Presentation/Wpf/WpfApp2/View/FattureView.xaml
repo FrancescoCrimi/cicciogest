@@ -35,7 +35,7 @@
             </Grid>
             <ToolBar>
                 <ToolBar ToolBarTray.IsLocked="True">
-                    <ToggleButton Command="{Binding ApriFatturaCommand}" CommandParameter="{Binding ElementName=ListaFatture}">
+                    <ToggleButton Command="{Binding ApriFatturaCommand}">
                         <TextBlock>        
                         <Run Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Modifica" />

@@ -132,6 +132,7 @@
     <Compile Include="ViewModel\ClientiViewModel.cs" />
     <Compile Include="ViewModel\FattureViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Messages.cs" />
     <Compile Include="View\ArticoloPage.xaml.cs">
       <DependentUpon>ArticoloPage.xaml</DependentUpon>
     </Compile>

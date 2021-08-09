@@ -112,7 +112,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
                     Mostra(await fatturaService.GetFattura(m.Value));
             });
 
-            Messenger.Register<DettaglioIdMessage>(this, async (r, m) =>
+            Messenger.Register<ArticoloIdMessage>(this, async (r, m) =>
             {
                 if (m.Value != 0)
                 {

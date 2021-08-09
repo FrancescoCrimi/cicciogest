@@ -80,10 +80,10 @@
                     GridLinesVisibility="None"
                     IsReadOnly="True"
                     AutoGenerateColumns="False"
+                    SelectionMode="Single"
                     Margin="0,10,0,0"
                     ItemsSource="{Binding Fatture, Mode=OneWay}"
-                    SelectedItem="{Binding FatturaSelezionata, Mode=TwoWay}"
-                    SelectionMode="Single">
+                    SelectedItem="{Binding FatturaSelezionata, Mode=TwoWay}">
                     <tollkit:DataGrid.Columns>
                         <tollkit:DataGridTextColumn Header="Invoice" Tag="InvoiceNumber" Binding="{Binding Id}"/>
                         <tollkit:DataGridTextColumn Header="Customer" Tag="CustomerName" Binding="{Binding Nome}"/>

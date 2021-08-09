@@ -1,6 +1,5 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -15,7 +14,8 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         private ICommand nuovaFatturaCommand;
         private ICommand loadedCommand;
 
-        public FatturaViewModel(ILogger<FatturaViewModel> logger, IFatturaService service)
+        public FatturaViewModel(ILogger<FatturaViewModel> logger,
+                                IFatturaService service)
         {
             this.logger = logger;
             this.service = service;

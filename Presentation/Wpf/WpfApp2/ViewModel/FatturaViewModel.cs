@@ -110,7 +110,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
                 MostraFattura(await fatturaService.GetFattura(m.Value));
             });
 
-            Messenger.Register<DettaglioIdMessage>(this, async (r, m) => 
+            Messenger.Register<ArticoloIdMessage>(this, async (r, m) => 
             {
                 Dettaglio = new Dettaglio(await fatturaService.GetArticolo(m.Value), 1);
                 OnPropertyChanged(nameof(Dettaglio));

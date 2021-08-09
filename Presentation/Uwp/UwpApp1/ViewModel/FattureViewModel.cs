@@ -1,6 +1,7 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.UwpApp.Services;
+using CiccioGest.Presentation.UwpApp.View;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -14,35 +15,23 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
     public sealed class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
-        private readonly IFatturaService service;
+        private readonly IFatturaService fatturaService;
         private readonly NavigationService navigationService;
-        private RelayCommand apriFatturaCommand;
-        private ICommand loadedCommand;
-        private ICommand refreshCommand;
         private FatturaReadOnly fatturaSelezionata;
+        private ICommand loadedCommand;
+        private RelayCommand apriFatturaCommand;
+        private ICommand refreshCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
-                                IFatturaService service,
+                                IFatturaService fatturaService,
                                 NavigationService navigationService)
         {
             this.logger = logger;
-            this.service = service;
+            this.fatturaService = fatturaService;
             this.navigationService = navigationService;
             Fatture = new ObservableCollection<FatturaReadOnly>();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
-
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
-        {
-            Fatture.Clear();
-            foreach (FatturaReadOnly fatt in await service.GetFatture())
-            {
-                Fatture.Add(fatt);
-            }
-        }));
-
-        public ICommand RefreshCommand => refreshCommand ?? (refreshCommand = new RelayCommand(() =>
-            logger.LogDebug("Refresh Button fire")));
 
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
 
@@ -59,18 +48,28 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             }
         }
 
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        {
+            Fatture.Clear();
+            foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
+            {
+                Fatture.Add(fatt);
+            }
+        }));
+
         public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(
             () =>
+            {
+                if (FatturaSelezionata != null)
                 {
-                    if (FatturaSelezionata != null)
-                    {
-                        navigationService.GoBack();
-                        //Messenger.Send(new NotificationMessage<int>(FatturaSelezionata.Id, "IdFattura"));
-                        Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
-                    }        
-                },
-            () =>
-                FatturaSelezionata != null));
+                    navigationService.Navigate(typeof(FatturaPage));
+                    Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
+                }
+            },
+            () => FatturaSelezionata != null));
+
+        public ICommand RefreshCommand => refreshCommand ?? (refreshCommand = new RelayCommand(() =>
+            logger.LogDebug("Refresh Button fire")));
 
         public void Dispose()
         {

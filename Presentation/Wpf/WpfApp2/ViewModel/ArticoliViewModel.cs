@@ -39,7 +39,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         {
             if (ArticoloSelezionato != null)
             {
-                Messenger.Send(new DettaglioIdMessage(ArticoloSelezionato.Id));
+                Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
                 navigationService.GoBack();
             }
         });

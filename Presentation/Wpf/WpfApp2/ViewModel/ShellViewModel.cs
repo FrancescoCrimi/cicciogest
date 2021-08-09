@@ -22,10 +22,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         }
 
         public ICommand NuovaFatturaCommand =>
-            new RelayCommand(() => ns.NavigateTo(typeof(FatturaView), true));
+            new RelayCommand(() => ns.NavigateTo(typeof(FattureView), true));
 
         public ICommand ApriArticoliCommand =>
-            new RelayCommand(() => ns.NavigateTo(typeof(ArticoloView), true));
+            new RelayCommand(() => ns.NavigateTo(typeof(ArticoliView), true));
 
         public ICommand ApriCategorieCommand =>
             new RelayCommand(() => ns.NavigateTo(typeof(CategoriaView), true));

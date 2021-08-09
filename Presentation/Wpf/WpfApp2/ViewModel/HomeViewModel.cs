@@ -1,8 +1,6 @@
-﻿using CiccioGest.Infrastructure;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Globalization;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
