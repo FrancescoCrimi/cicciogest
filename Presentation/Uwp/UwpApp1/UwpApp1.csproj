@@ -131,6 +131,9 @@
     <Compile Include="ViewModel\ArticoliViewModel.cs" />
     <Compile Include="ViewModel\FattureViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\ArticoliDialogPage.xaml.cs">
+      <DependentUpon>ArticoliDialogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ArticoloPage.xaml.cs">
       <DependentUpon>ArticoloPage.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
     <Page Include="UserControls\CollapsibleSearchBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ArticoliDialogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ArticoloPage.xaml">
       <Generator>MSBuild:Compile</Generator>

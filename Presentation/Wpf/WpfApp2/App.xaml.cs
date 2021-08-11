@@ -50,18 +50,30 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddTransient<ShellViewModel>()
                 .AddTransient<HomeViewModel>()
                 .AddTransient<HomeView>()
-                .AddTransient<FattureViewModel>()
-                .AddTransient<FattureView>()
-                .AddTransient<ArticoliViewModel>()
-                .AddTransient<ArticoliView>()
-                .AddTransient<ClientiViewModel>()
-                .AddTransient<ClientiView>()
-                .AddTransient<CategoriaViewModel>()
-                .AddTransient<CategoriaView>()
+
                 .AddTransient<FatturaViewModel>()
                 .AddTransient<FatturaView>()
+                .AddTransient<FattureViewModel>()
+                .AddTransient<FattureView>()
+                .AddTransient<FattureDialogViewModel>()
+                .AddTransient<FattureDialogView>()
+
+                .AddTransient<ArticoliViewModel>()
+                .AddTransient<ArticoliView>()
+                .AddTransient<ArticoliDialogViewModel>()
+                .AddTransient<ArticoliDialogView>()
                 .AddTransient<ArticoloViewModel>()
-                .AddTransient<ArticoloView>();
+                .AddTransient<ArticoloView>()
+
+                .AddTransient<ClienteViewModel>()
+                .AddTransient<ClienteView>()
+                .AddTransient<ClientiViewModel>()
+                .AddTransient<ClientiView>()
+                .AddTransient<ClientiDialogViewModel>()
+                .AddTransient<ClientiDialogView>()
+
+                .AddTransient<CategoriaViewModel>()
+                .AddTransient<CategoriaView>();
         }
     }
 }

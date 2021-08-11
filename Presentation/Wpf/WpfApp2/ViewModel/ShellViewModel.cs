@@ -12,6 +12,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
     {
         private readonly ILogger logger;
         private readonly INavigationService ns;
+        private RelayCommand apriClientiCommand;
+        private RelayCommand apriCategorieCommand;
+        private RelayCommand apriArticoliCommand;
+        private RelayCommand apriFattureCommand;
 
         public ShellViewModel(ILogger<ShellViewModel> logger,
                               INavigationService ns)
@@ -21,14 +25,17 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ICommand NuovaFatturaCommand =>
+        public ICommand ApriFattureCommand => apriFattureCommand ??=
             new RelayCommand(() => ns.NavigateTo(typeof(FattureView), true));
 
-        public ICommand ApriArticoliCommand =>
+        public ICommand ApriArticoliCommand => apriArticoliCommand ??=
             new RelayCommand(() => ns.NavigateTo(typeof(ArticoliView), true));
 
-        public ICommand ApriCategorieCommand =>
+        public ICommand ApriCategorieCommand => apriCategorieCommand ??=
             new RelayCommand(() => ns.NavigateTo(typeof(CategoriaView), true));
+
+        public ICommand ApriClientiCommand => apriClientiCommand ??=
+            new RelayCommand(() => ns.NavigateTo(typeof(ClientiView)));
 
         public void Dispose()
         {

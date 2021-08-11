@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Title="ArticoloView"
+    Title="Articolo"
     Background="White">
 
     <i:Interaction.Triggers>
@@ -18,7 +18,6 @@
     </i:Interaction.Triggers>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

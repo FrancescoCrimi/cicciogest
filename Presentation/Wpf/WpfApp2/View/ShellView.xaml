@@ -4,13 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfApp.ViewModel"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ShellViewModel}"
     mc:Ignorable="d"
     Title="CiccioGest"
     Height="450"
     Width="800">
 
     <Grid x:Name="LayoutRoot">
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -18,7 +19,7 @@
 
         <Menu>
             <MenuItem Header="Documenti">
-                <MenuItem Header="Fatture" Command="{Binding NuovaFatturaCommand, Mode=OneWay}"/>
+                <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
                 <!--<MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>-->
             </MenuItem>
             <MenuItem Header="Magazino">
@@ -26,7 +27,7 @@
                 <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Anagrafica">
-                <MenuItem Header="Clienti"/>
+                <MenuItem Header="Clienti" Command="{Binding ApriClientiCommand, Mode=OneWay}"/>
                 <MenuItem Header="Fornitori"/>
             </MenuItem>
             <MenuItem x:Name="aboutMenuItem" Header="?"/>

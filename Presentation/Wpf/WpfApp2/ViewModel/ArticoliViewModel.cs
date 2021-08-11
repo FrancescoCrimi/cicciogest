@@ -12,13 +12,14 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class ArticoliViewModel : ObservableRecipient, IDisposable
+    public class ArticoliViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
         private readonly INavigationService navigationService;
-        private ICommand loadedCommand;
-        private ICommand selezionaArticoloCommand;
+        private RelayCommand loadedCommand;
+        private RelayCommand apriArticoloCommand;
+        private ArticoloReadOnly articoloSelezionato;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService magazinoService,
@@ -33,24 +34,41 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
 
-        public ArticoloReadOnly ArticoloSelezionato { private get; set; }
+        public ArticoloReadOnly ArticoloSelezionato
+        {
+            private get => articoloSelezionato;
+            set
+            {
+                if(articoloSelezionato != value)
+                {
+                    articoloSelezionato = value;
+                    apriArticoloCommand.NotifyCanExecuteChanged();
+                }
+            }
+        }
 
-        public ICommand SelezionaArticoloCommand => selezionaArticoloCommand ??= new RelayCommand(() =>
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        {
+            Articoli.Clear();
+            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
+            {
+                Articoli.Add(pr);
+            }
+        });
+
+        public ICommand ApriArticoloCommand => apriArticoloCommand ??=
+            new RelayCommand(ApriArticolo, EnableApriArticolo);
+
+        protected virtual void ApriArticolo()
         {
             if (ArticoloSelezionato != null)
             {
                 Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
                 navigationService.GoBack();
             }
-        });
+        }
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
-        {
-            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
-            {
-                Articoli.Add(pr);
-            }
-        });
+        private bool EnableApriArticolo() => ArticoloSelezionato != null;
 
         public void Dispose()
         {

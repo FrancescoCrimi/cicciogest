@@ -12,13 +12,13 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class FattureViewModel : ObservableRecipient, IDisposable
+    public class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         private readonly INavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
-        private ICommand loadedCommand;
+        private RelayCommand loadedCommand;
         private RelayCommand apriFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
@@ -56,16 +56,20 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
         });
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(
-            () =>
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??=
+            new RelayCommand(ApriFattura, EnableApriFattura);
+
+
+        protected virtual void ApriFattura()
+        {
+            if (FatturaSelezionata != null)
             {
-                if (FatturaSelezionata != null)
-                {
-                    navigationService.NavigateTo(typeof(FatturaView));
-                    Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
-                }
-            },
-            () => FatturaSelezionata != null);
+                navigationService.NavigateTo(typeof(FatturaView));
+                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
+            }
+        }
+
+        private bool EnableApriFattura() => FatturaSelezionata != null;
 
         public void Dispose()
         {

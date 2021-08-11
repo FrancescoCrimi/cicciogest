@@ -7,7 +7,7 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="FatturaView"
+      Title="Fattura"
       Background="White">
 
     <i:Interaction.Triggers>
