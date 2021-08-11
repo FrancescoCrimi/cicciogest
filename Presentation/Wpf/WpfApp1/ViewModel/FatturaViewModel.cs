@@ -2,7 +2,6 @@
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp.Contracts;
 using CiccioGest.Presentation.WpfApp.View;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
@@ -12,7 +11,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class FatturaViewModel : ObservableRecipient, IDisposable
+    public sealed class FatturaViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService service;

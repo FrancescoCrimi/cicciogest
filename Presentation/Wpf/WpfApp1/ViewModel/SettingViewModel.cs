@@ -1,9 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
+﻿using System;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    sealed class SettingViewModel : ObservableObject, IDisposable
+    sealed class SettingViewModel : ViewModelBase, IDisposable
     {
         private void LoadSampleData()
         {

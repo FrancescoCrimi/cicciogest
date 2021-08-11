@@ -1,6 +1,5 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,7 +11,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class CategoriaViewModel : ObservableObject, IDisposable
+    public sealed class CategoriaViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -26,15 +25,6 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             Categorie = new ObservableCollection<Categoria>();
-
-            //if (IsInDesignMode)
-            //{
-            //    foreach (Categoria ca in service.GetCategorie().Result)
-            //    {
-            //        Categorie.Add(ca);
-            //    }
-            //    Categoria = service.GetCategoria(4).Result;
-            //}
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 

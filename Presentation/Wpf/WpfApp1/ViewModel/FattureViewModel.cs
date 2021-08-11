@@ -2,7 +2,6 @@
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfApp.Contracts;
 using CiccioGest.Presentation.WpfApp.View;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
@@ -12,7 +11,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public class FattureViewModel : ObservableRecipient, IDisposable
+    public class FattureViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
@@ -33,8 +32,6 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             Fatture = new ObservableCollection<FatturaReadOnly>();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
-
-        public event EventHandler OnRequestClose;
 
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
 
@@ -87,11 +84,6 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         private void AggiornaFattura()
         {
-        }
-
-        protected void CloseWindow()
-        {
-            OnRequestClose?.Invoke(this, new EventArgs());
         }
 
         public void Dispose()

@@ -1,6 +1,5 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,7 +11,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class ArticoloViewModel : ObservableObject, IDisposable
+    public sealed class ArticoloViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -30,6 +29,37 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             Categorie = new ObservableCollection<Categoria>();
             logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
+
+        public Articolo Articolo { get; private set; }
+
+        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
+
+        public ObservableCollection<Categoria> Categorie { get; private set; }
+
+        public ArticoloReadOnly ArticoloSelezionato
+        {
+            set
+            {
+                if (value != articoloSelezionato)
+                {
+                    Task.Run(async () =>
+                    {
+                        articoloSelezionato = value;
+                        Articolo = await service.GetArticolo(value.Id);
+                        OnPropertyChanged(nameof(Articolo));
+                    });
+                }
+            }
+        }
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        {
+            foreach (Categoria cat in await service.GetCategorie())
+            {
+                Categorie.Add(cat);
+            }
+            await Aggiorna();
+        });
 
         public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(Nuovo);
 
@@ -58,37 +88,6 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
                 MessageBox.Show("Errore: " + e.Message);
             }
         });
-
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
-        {
-            foreach (Categoria cat in await service.GetCategorie())
-            {
-                Categorie.Add(cat);
-            }
-            await Aggiorna();
-        });
-
-        public Articolo Articolo { get; private set; }
-
-        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
-
-        public ObservableCollection<Categoria> Categorie { get; private set; }
-
-        public ArticoloReadOnly ArticoloSelezionato
-        {
-            set
-            {
-                if (value != articoloSelezionato)
-                {
-                    Task.Run(async () =>
-                    {
-                        articoloSelezionato = value;
-                        Articolo = await service.GetArticolo(value.Id);
-                        OnPropertyChanged(nameof(Articolo));
-                    });
-                }
-            }
-        }
 
         private async Task Aggiorna()
         {

@@ -1,6 +1,5 @@
 ﻿using CiccioGest.Presentation.WpfApp.Contracts;
 using CiccioGest.Presentation.WpfApp.View;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +7,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class MainViewModel : ObservableObject, IDisposable
+    public sealed class MainViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IWindowManagerService windowManagerService;

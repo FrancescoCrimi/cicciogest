@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public class ArticoliViewModel : ObservableRecipient, IDisposable
+    public class ArticoliViewModel : ViewModelBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
@@ -33,8 +33,6 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             Articoli = new ObservableCollection<ArticoloReadOnly>();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
-
-        public event EventHandler OnRequestClose;
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
 
@@ -87,11 +85,6 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         private void AggiornaArticoli()
         {
-        }
-
-        protected void CloseWindow()
-        {
-            OnRequestClose?.Invoke(this, new EventArgs());
         }
 
         public void Dispose()
