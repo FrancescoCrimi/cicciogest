@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CiccioGest.Presentation.WpfApp.ViewModel;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    /// <summary>
-    /// Logica di interazione per ClienteView.xaml
-    /// </summary>
     public partial class ClienteView : Window
     {
-        public ClienteView()
+        private readonly ClienteViewModel clienteViewModel;
+
+        public ClienteView(ClienteViewModel clienteViewModel)
         {
             InitializeComponent();
+            this.clienteViewModel = clienteViewModel;
+            DataContext = clienteViewModel;
+            clienteViewModel.OnRequestClose += ClienteViewModel_OnRequestClose;
+        }
+
+        private void ClienteViewModel_OnRequestClose(object sender, EventArgs e)
+        {
+            clienteViewModel.OnRequestClose -= ClienteViewModel_OnRequestClose;
+            Close();
         }
     }
 }

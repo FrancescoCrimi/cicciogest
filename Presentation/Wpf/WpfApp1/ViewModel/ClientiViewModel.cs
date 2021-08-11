@@ -64,7 +64,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         {
             if (ClienteSelezionato != null)
             {
-                windowManagerService.OpenWindow(typeof(ClientiView));
+                windowManagerService.OpenWindow(typeof(ClienteView));
                 Messenger.Send(new ClienteIdMessage(ClienteSelezionato.Id));
                 CloseWindow();
             }
