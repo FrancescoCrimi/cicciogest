@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
@@ -18,10 +19,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly IMagazinoService service;
         private readonly IWindowManagerService windowManagerService;
         private ArticoloReadOnly articoloSelezionato;
+        private AsyncRelayCommand loadedCommand;
         private RelayCommand apriArticoloCommand;
-        private RelayCommand loadedCommand;
         private RelayCommand cancellaArticoloCommand;
-        private RelayCommand aggiornaArticoliCommand;
+        private AsyncRelayCommand aggiornaArticoliCommand;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService service,
@@ -50,16 +51,26 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadedCommand ??=
+            new AsyncRelayCommand(AggiornaArticoli);
+
+        public ICommand ApriArticoloCommand => apriArticoloCommand ??=
+            new RelayCommand(ApriArticolo, EnableApriArticolo);
+
+        public ICommand CancellaArticoloCommand => cancellaArticoloCommand ??=
+            new RelayCommand(CancellaArticolo, EnableCancellaArticolo);
+
+        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand ??=
+            new AsyncRelayCommand(AggiornaArticoli);
+
+        private async Task AggiornaArticoli()
         {
             Articoli.Clear();
             foreach (ArticoloReadOnly pr in await service.GetArticoli())
             {
                 Articoli.Add(pr);
             }
-        });
-
-        public ICommand ApriArticoloCommand => apriArticoloCommand ??= new RelayCommand(ApriArticolo, EnableApriArticolo);
+        }
 
         protected virtual void ApriArticolo()
         {
@@ -73,19 +84,11 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         private bool EnableApriArticolo() => ArticoloSelezionato != null;
 
-        public ICommand CancellaArticoloCommand => cancellaArticoloCommand ??= new RelayCommand(CancellaArticolo, EnableCancellaArticolo);
-
         private void CancellaArticolo()
         {
         }
 
         protected virtual bool EnableCancellaArticolo() => ArticoloSelezionato != null;
-
-        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand ??= new RelayCommand(AggiornaArticoli);
-
-        private void AggiornaArticoli()
-        {
-        }
 
         public void Dispose()
         {

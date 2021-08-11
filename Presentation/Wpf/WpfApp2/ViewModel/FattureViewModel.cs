@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
@@ -18,17 +19,18 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly IFatturaService fatturaService;
         private readonly INavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
-        private RelayCommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
         private RelayCommand apriFatturaCommand;
+        private AsyncRelayCommand aggiornaFattureCommand;
+        private RelayCommand cancellaFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
                                 INavigationService navigationService)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger;
             this.fatturaService = fatturaService;
             this.navigationService = navigationService;
-            if (fatturaService == null) throw new ArgumentNullException(nameof(fatturaService));
             Fatture = new ObservableCollection<FatturaReadOnly>();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
@@ -48,17 +50,25 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadedCommand ??=
+            new AsyncRelayCommand(AggiornaFatture);
+
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??=
+            new RelayCommand(ApriFattura, EnableApriFattura);
+
+        public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??=
+            new RelayCommand(CancellaFattura);
+
+        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??=
+            new AsyncRelayCommand(AggiornaFatture);
+
+        private async Task AggiornaFatture()
         {
             foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
             {
                 Fatture.Add(fatt);
             }
-        });
-
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??=
-            new RelayCommand(ApriFattura, EnableApriFattura);
-
+        }
 
         protected virtual void ApriFattura()
         {
@@ -70,6 +80,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         }
 
         private bool EnableApriFattura() => FatturaSelezionata != null;
+
+        private void CancellaFattura()
+        {
+        }
 
         public void Dispose()
         {

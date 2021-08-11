@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
@@ -17,10 +18,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly IClientiFornitoriService service;
         private readonly IWindowManagerService windowManagerService;
         private Cliente clienteSelezionato;
-        private RelayCommand loadCommand;
+        private AsyncRelayCommand loadCommand;
         private RelayCommand apriClienteCommand;
         private RelayCommand cancellaClienteCommand;
-        private RelayCommand aggiornaClienteCommand;
+        private AsyncRelayCommand aggiornaClientiCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IClientiFornitoriService clientiFornitoriService,
@@ -49,16 +50,26 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadCommand ??= new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadCommand ??=
+            new AsyncRelayCommand(AggiornaClienti);
+
+        public ICommand ApriClienteCommand => apriClienteCommand ??=
+            new RelayCommand(ApriCliente, EnableApriCliente);
+
+        public ICommand CancellaClienteCommand => cancellaClienteCommand ??=
+            new RelayCommand(CancellaCliente, EnableCancellaCliente);
+
+        public ICommand AggiornaClientiCommand => aggiornaClientiCommand ??=
+            new AsyncRelayCommand(AggiornaClienti);
+
+        private async Task AggiornaClienti()
         {
             Clienti.Clear();
             foreach (var item in await service.GetClienti())
             {
                 Clienti.Add(item);
             }
-        });
-
-        public ICommand ApriClienteCommand => apriClienteCommand ??= new RelayCommand(ApriCliente, EnableApriCliente);
+        }
 
         protected virtual void ApriCliente()
         {
@@ -72,19 +83,11 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         private bool EnableApriCliente() => ClienteSelezionato != null;
 
-        public ICommand CancellaClienteCommand => cancellaClienteCommand ??= new RelayCommand(CancellaCliente, EnableCancellaCliente);
-
         private void CancellaCliente()
         {
         }
 
         protected virtual bool EnableCancellaCliente() => ClienteSelezionato != null;
-
-        public ICommand AggiornaClienteCommand => aggiornaClienteCommand ??= new RelayCommand(AggiornaCliente);
-
-        private void AggiornaCliente()
-        {
-        }
 
         public void Dispose()
         {

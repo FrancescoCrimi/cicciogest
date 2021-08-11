@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
@@ -17,10 +18,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly IFatturaService fatturaService;
         private readonly IWindowManagerService windowManagerService;
         private FatturaReadOnly fatturaSelezionata;
-        private RelayCommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
         private RelayCommand apriFatturaCommand;
-        private RelayCommand aggiornaFatturaCommand;
         private RelayCommand cancellaFatturaCommand;
+        private AsyncRelayCommand aggiornaFattureCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
@@ -49,16 +50,26 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadedCommand ??=
+            new AsyncRelayCommand(AggiornaFatture);
+
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??=
+            new RelayCommand(ApriFattura, EnableApriFattura);
+
+        public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??=
+            new RelayCommand(CancellaFattura, EnableCancellaFattura);
+
+        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??=
+            new AsyncRelayCommand(AggiornaFatture);
+
+        private async Task AggiornaFatture()
         {
             Fatture.Clear();
             foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
             {
                 Fatture.Add(fatt);
             }
-        });
-
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(ApriFattura, EnableApriFattura);
+        }
 
         protected virtual void ApriFattura()
         {
@@ -72,19 +83,11 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         private bool EnableApriFattura() => fatturaSelezionata != null;
 
-        public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??= new RelayCommand(CancellaFattura, EnableCancellaFattura);
-
         private void CancellaFattura()
         {
         }
 
         protected virtual bool EnableCancellaFattura() => fatturaSelezionata != null;
-
-        public ICommand AggiornaFatturaCommand => aggiornaFatturaCommand ??= new RelayCommand(AggiornaFattura);
-
-        private void AggiornaFattura()
-        {
-        }
 
         public void Dispose()
         {

@@ -69,7 +69,7 @@
             <DataGrid.InputBindings>
                 <MouseBinding
                     MouseAction="LeftDoubleClick" 
-                    Command="{Binding SelezionaArticoloCommand}" />
+                    Command="{Binding ApriArticoloCommand}" />
             </DataGrid.InputBindings>
         </DataGrid>
 

@@ -40,13 +40,13 @@
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button>
+                <Button Command="{Binding CancellaFatturaCommand}">
                     <TextBlock>        
                         <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Cancella" />
                     </TextBlock>
                 </Button>
-                <Button>
+                <Button Command="{Binding AggiornaFattureCommand}">
                     <TextBlock>        
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />

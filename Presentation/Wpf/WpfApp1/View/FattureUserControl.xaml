@@ -45,7 +45,7 @@
                         <Run Text="Cancella" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding AggiornaFatturaCommand}">
+                <Button Command="{Binding AggiornaFattureCommand}">
                     <TextBlock>        
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />

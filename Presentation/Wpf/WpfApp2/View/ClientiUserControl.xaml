@@ -40,14 +40,14 @@
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button>
-                    <TextBlock>        
+                <Button Command="{Binding CancellaClienteCommand}">
+                    <TextBlock>
                         <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Cancella" />
                     </TextBlock>
                 </Button>
-                <Button>
-                    <TextBlock>        
+                <Button Command="{Binding AggiornaClientiCommand}">
+                    <TextBlock>
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />
                     </TextBlock>
@@ -72,7 +72,7 @@
             <DataGrid.InputBindings>
                 <MouseBinding 
                     MouseAction="LeftDoubleClick"
-                    Command="{Binding SelezionaClienteCommand, Mode=OneWay}">
+                    Command="{Binding ApriClienteCommand, Mode=OneWay}">
                 </MouseBinding>
             </DataGrid.InputBindings>
         </DataGrid>
