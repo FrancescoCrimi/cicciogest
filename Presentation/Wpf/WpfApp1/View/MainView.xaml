@@ -19,7 +19,6 @@
     </b:Interaction.Triggers>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -34,11 +33,12 @@
                 <MenuItem Header="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem Header="Anagrafica">
-                <MenuItem Header="Clienti"/>
+                <MenuItem Header="Clienti" Command="{Binding ApriClientiCommand, Mode=OneWay}"/>
                 <MenuItem Header="Fornitori"/>
             </MenuItem>
             <MenuItem x:Name="aboutMenuItem" Header="?"/>
         </Menu>
 
     </Grid>
+
 </Window>

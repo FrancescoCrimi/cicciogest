@@ -7,7 +7,6 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -39,17 +38,17 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             this.windowManagerService = windowManagerService;
             this.windowDialogService = windowDialogService;
             RegistraMessaggi();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public Fattura Fattura { get; private set; }
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
+
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
-        {
-            windowDialogService.OpenDialog(typeof(ClientiView));
-        });
+            windowDialogService.OpenDialog(typeof(ClientiDialogView)));
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
         {
@@ -76,10 +75,10 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
-                windowDialogService.OpenDialog(typeof(FattureView)));
+                windowDialogService.OpenDialog(typeof(FattureDialogView)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
-                windowDialogService.OpenDialog(typeof(ArticoliView)));
+                windowDialogService.OpenDialog(typeof(ArticoliDialogView)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {
@@ -104,8 +103,6 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
                 Dettaglio = DettaglioSelezionato;
             OnPropertyChanged(nameof(Dettaglio));
         });
-
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         private void RegistraMessaggi()
         {
@@ -145,7 +142,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

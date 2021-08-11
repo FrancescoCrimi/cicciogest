@@ -8,18 +8,20 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
 {
-    public sealed class FattureViewModel : ObservableRecipient, IDisposable
+    public class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         private readonly IWindowManagerService windowManagerService;
-        private ICommand loadedCommand;
-        private ICommand apriFatturaCommand;
+        private FatturaReadOnly fatturaSelezionata;
+        private RelayCommand loadedCommand;
+        private RelayCommand apriFatturaCommand;
+        private RelayCommand aggiornaFatturaCommand;
+        private RelayCommand cancellaFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
@@ -32,21 +34,25 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
+        public event EventHandler OnRequestClose;
+
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
 
-        public FatturaReadOnly FatturaSelezionata { private get; set; }
-
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand<Window>((wnd) =>
+        public FatturaReadOnly FatturaSelezionata
         {
-            if (FatturaSelezionata != null)
+            protected get => fatturaSelezionata;
+            set
             {
-                windowManagerService.OpenWindow(typeof(FatturaView));
-                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
-                wnd.Close();
+                if(fatturaSelezionata != value)
+                {
+                    fatturaSelezionata = value;
+                    apriFatturaCommand.NotifyCanExecuteChanged();
+                    cancellaFatturaCommand.NotifyCanExecuteChanged();
+                }
             }
-        });
+        }
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () => 
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
         {
             Fatture.Clear();
             foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
@@ -54,6 +60,39 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
                 Fatture.Add(fatt);
             }
         });
+
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(ApriFattura, EnableApriFattura);
+
+        protected virtual void ApriFattura()
+        {
+            if (FatturaSelezionata != null)
+            {
+                windowManagerService.OpenWindow(typeof(FatturaView));
+                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
+                CloseWindow();
+            }
+        }
+
+        private bool EnableApriFattura() => fatturaSelezionata != null;
+
+        public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??= new RelayCommand(CancellaFattura, EnableCancellaFattura);
+
+        private void CancellaFattura()
+        {
+        }
+
+        protected virtual bool EnableCancellaFattura() => fatturaSelezionata != null;
+
+        public ICommand AggiornaFatturaCommand => aggiornaFatturaCommand ??= new RelayCommand(AggiornaFattura);
+
+        private void AggiornaFattura()
+        {
+        }
+
+        protected void CloseWindow()
+        {
+            OnRequestClose?.Invoke(this, new EventArgs());
+        }
 
         public void Dispose()
         {

@@ -8,7 +8,7 @@
         xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfApp.ViewModel"
         d:DataContext="{d:DesignInstance Type=viewmodel:ArticoloViewModel}"
         mc:Ignorable="d"
-        Title="Prodotti"
+        Title="Articolo"
         Height="450"
         Width="800">
 
@@ -19,7 +19,6 @@
     </b:Interaction.Triggers>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -111,4 +110,5 @@
         </DataGrid>
 
     </Grid>
+
 </Window>

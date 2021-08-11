@@ -4,11 +4,11 @@ using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    public partial class ArticoliView : Window
+    public partial class ArticoliDialogView : Window
     {
-        private readonly ArticoliViewModel viewModel;
+        private readonly ArticoliDialogViewModel viewModel;
 
-        public ArticoliView(ArticoliViewModel viewModel)
+        public ArticoliDialogView(ArticoliDialogViewModel viewModel)
         {
             InitializeComponent();
             this.viewModel = viewModel;

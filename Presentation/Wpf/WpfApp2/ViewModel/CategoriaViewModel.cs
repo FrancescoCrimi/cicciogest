@@ -5,9 +5,8 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows; 
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfApp.ViewModel
@@ -26,7 +25,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             SalvaCommand = new RelayCommand(Salva);
             RimuoviCommand = new RelayCommand(Rimuovi);
             NuovoCommand = new RelayCommand(Nuova);
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ObservableCollection<Categoria> Categorie { get; private set; }
@@ -95,7 +94,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }
