@@ -5,6 +5,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
@@ -13,11 +14,14 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
     {
         private readonly ILogger logger;
         private readonly IClientiFornitoriService service;
-        private ICommand loadCommand;
-        private ICommand selezionaClienteCommand;
+        private Cliente clienteSelezionato;
+        private AsyncRelayCommand loadCommand;
+        private RelayCommand apriClienteCommand;
+        private RelayCommand cancellaClienteCommand;
+        private AsyncRelayCommand aggiornaClientiCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
-                                     IClientiFornitoriService clientiFornitoriService)
+                                IClientiFornitoriService clientiFornitoriService)
         {
             this.logger = logger;
             service = clientiFornitoriService;
@@ -27,24 +31,56 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public ObservableCollection<Cliente> Clienti { get; }
 
-        public Cliente ClienteSelezionato { get; set; }
+        public Cliente ClienteSelezionato
+        {
+            protected get => clienteSelezionato;
+            set
+            {
+                if(clienteSelezionato != value)
+                {
+                    clienteSelezionato = value;
+                    apriClienteCommand.NotifyCanExecuteChanged();
+                    cancellaClienteCommand.NotifyCanExecuteChanged();
+                }
+            }
+        }
 
-        public ICommand LoadedCommand => loadCommand ?? (loadCommand = new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadCommand ??
+            (loadCommand = new AsyncRelayCommand(AggiornaClienti));
+
+        public ICommand ApriClienteCommand => apriClienteCommand ??
+            (apriClienteCommand = new RelayCommand(ApriCliente, EnableApriCliente));
+
+        public ICommand CancellaClienteCommand => cancellaClienteCommand ??
+            (cancellaClienteCommand = new RelayCommand(CancellaCliente, EnableCancellaCliente));
+
+        public ICommand AggiornaClientiCommand => aggiornaClientiCommand ??
+            (aggiornaClientiCommand = new AsyncRelayCommand(AggiornaClienti));
+
+        private async Task AggiornaClienti()
         {
             Clienti.Clear();
             foreach (var item in await service.GetClienti())
             {
                 Clienti.Add(item);
             }
-        }));
+        }
 
-        public ICommand SelezionaClienteCommand => selezionaClienteCommand ?? ( selezionaClienteCommand = new RelayCommand(() => 
+        private void ApriCliente()
         {
             if (ClienteSelezionato != null)
             {
 
             }
-        }));
+        }
+
+        private bool EnableApriCliente() => ClienteSelezionato != null;
+
+        private void CancellaCliente()
+        {
+        }
+
+        private bool EnableCancellaCliente() => ClienteSelezionato != null;
 
         public void Dispose()
         {

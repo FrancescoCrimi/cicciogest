@@ -8,19 +8,21 @@ using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public sealed class FattureViewModel : ObservableRecipient, IDisposable
+    public class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         private readonly NavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
-        private ICommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
         private RelayCommand apriFatturaCommand;
-        private ICommand refreshCommand;
+        private AsyncRelayCommand aggiornaFattureCommand;
+        private RelayCommand cancellaFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
@@ -48,28 +50,41 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
+        public ICommand LoadedCommand => loadedCommand ??
+            (loadedCommand = new AsyncRelayCommand(AggiornaFatture));
+
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??
+            (apriFatturaCommand = new RelayCommand(ApriFattura, EnableApriFattura));
+
+        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??
+            (aggiornaFattureCommand = new AsyncRelayCommand(AggiornaFatture));
+
+        public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??
+            (cancellaFatturaCommand = new RelayCommand(CancellaFattura));
+
+        private async Task AggiornaFatture()
         {
             Fatture.Clear();
             foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
             {
                 Fatture.Add(fatt);
             }
-        }));
+        }
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(
-            () =>
+        protected void ApriFattura()
+        {
+            if (FatturaSelezionata != null)
             {
-                if (FatturaSelezionata != null)
-                {
-                    navigationService.Navigate(typeof(FatturaPage));
-                    Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
-                }
-            },
-            () => FatturaSelezionata != null));
+                navigationService.Navigate(typeof(FatturaPage));
+                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
+            }
+        }
 
-        public ICommand RefreshCommand => refreshCommand ?? (refreshCommand = new RelayCommand(() =>
-            logger.LogDebug("Refresh Button fire")));
+        private bool EnableApriFattura() => FatturaSelezionata != null;
+
+        private void CancellaFattura()
+        {
+        }
 
         public void Dispose()
         {

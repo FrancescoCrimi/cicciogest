@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public sealed class ClientiViewModel : ObservableObject
+    public sealed class ClientiViewModel : ObservableRecipient
     {
         public ClientiViewModel()
         {
@@ -31,6 +31,63 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         }
 
         private void Loaded()
+        {
+        }
+
+        private RelayCommand aggiornaClientiCommand;
+
+        public ICommand AggiornaClientiCommand
+        {
+            get
+            {
+                if (aggiornaClientiCommand == null)
+                {
+                    aggiornaClientiCommand = new RelayCommand(AggiornaClienti);
+                }
+
+                return aggiornaClientiCommand;
+            }
+        }
+
+        private void AggiornaClienti()
+        {
+        }
+
+        private RelayCommand apriClienteCommand;
+
+        public ICommand ApriClienteCommand
+        {
+            get
+            {
+                if (apriClienteCommand == null)
+                {
+                    apriClienteCommand = new RelayCommand(ApriCliente);
+                }
+
+                return apriClienteCommand;
+            }
+        }
+
+        private void ApriCliente()
+        {
+        }
+
+        private RelayCommand cancellaClienteCommand;
+
+        public ICommand CancellaClienteCommand
+        {
+            get
+            {
+                if (cancellaClienteCommand == null)
+                {
+                    cancellaClienteCommand = new RelayCommand(CancellaCliente);
+                }
+
+                return cancellaClienteCommand;
+            }
+        }
+
+        private void CancellaCliente()
         {
         }
     }

@@ -44,14 +44,17 @@
                 <AppBarButton
                     x:Name="CommandBarEditButton"
                     Icon="Edit"
-                    Label="Edit" />
+                    Label="Edit"
+                    Command="{Binding ApriClienteCommand}"/>
                 <AppBarButton
                     x:Name="CommandBarDeleteButton"
                     Icon="Delete"
-                    Label="Delete" />
+                    Label="Delete"
+                    Command="{Binding CancellaClienteCommand}"/>
                 <AppBarButton
                     Icon="Refresh"
-                    Label="Refresh" />
+                    Label="Refresh"
+                    Command="{Binding AggiornaClientiCommand}"/>
             </CommandBar>
 
             <uc:CollapsibleSearchBox

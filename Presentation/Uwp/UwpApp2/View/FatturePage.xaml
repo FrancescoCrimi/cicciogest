@@ -49,11 +49,12 @@
                 <AppBarButton
                     x:Name="CommandBarDeleteButton"
                     Icon="Delete"
-                    Label="Delete" />
+                    Label="Delete" 
+                    Command="{Binding CancellaFatturaCommand}"/>
                 <AppBarButton
                     Icon="Refresh"
                     Label="Refresh"
-                    Command="{Binding RefreshCommand}" />
+                    Command="{Binding AggiornaFattureCommand}" />
             </CommandBar>
 
             <uc:CollapsibleSearchBox
