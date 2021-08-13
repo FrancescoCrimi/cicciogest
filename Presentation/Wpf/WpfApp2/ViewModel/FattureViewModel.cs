@@ -20,8 +20,8 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly INavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
         private AsyncRelayCommand loadedCommand;
-        private RelayCommand apriFatturaCommand;
         private AsyncRelayCommand aggiornaFattureCommand;
+        private RelayCommand apriFatturaCommand;
         private RelayCommand cancellaFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
@@ -53,14 +53,14 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         public ICommand LoadedCommand => loadedCommand ??=
             new AsyncRelayCommand(AggiornaFatture);
 
+        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??=
+            new AsyncRelayCommand(AggiornaFatture);
+
         public ICommand ApriFatturaCommand => apriFatturaCommand ??=
             new RelayCommand(ApriFattura, EnableApriFattura);
 
         public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??=
-            new RelayCommand(CancellaFattura);
-
-        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??=
-            new AsyncRelayCommand(AggiornaFatture);
+            new RelayCommand(CancellaFattura, EnableCancellaFattura);
 
         private async Task AggiornaFatture()
         {
@@ -84,6 +84,8 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private void CancellaFattura()
         {
         }
+
+        protected virtual bool EnableCancellaFattura() => fatturaSelezionata != null;
 
         public void Dispose()
         {

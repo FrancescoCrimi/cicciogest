@@ -20,9 +20,9 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly IWindowManagerService windowManagerService;
         private ArticoloReadOnly articoloSelezionato;
         private AsyncRelayCommand loadedCommand;
+        private AsyncRelayCommand aggiornaArticoliCommand;
         private RelayCommand apriArticoloCommand;
         private RelayCommand cancellaArticoloCommand;
-        private AsyncRelayCommand aggiornaArticoliCommand;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService service,
@@ -54,14 +54,14 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         public ICommand LoadedCommand => loadedCommand ??=
             new AsyncRelayCommand(AggiornaArticoli);
 
+        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand ??=
+            new AsyncRelayCommand(AggiornaArticoli);
+
         public ICommand ApriArticoloCommand => apriArticoloCommand ??=
             new RelayCommand(ApriArticolo, EnableApriArticolo);
 
         public ICommand CancellaArticoloCommand => cancellaArticoloCommand ??=
             new RelayCommand(CancellaArticolo, EnableCancellaArticolo);
-
-        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand ??=
-            new AsyncRelayCommand(AggiornaArticoli);
 
         private async Task AggiornaArticoli()
         {

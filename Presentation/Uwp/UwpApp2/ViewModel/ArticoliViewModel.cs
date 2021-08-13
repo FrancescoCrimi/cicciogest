@@ -12,16 +12,16 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpApp.ViewModel
 {
-    public class ArticoliViewModel : ObservableRecipient
+    public class ArticoliViewModel : ObservableRecipient, IDisposable
     {
-        private AsyncRelayCommand loadedCommand;
-        private RelayCommand apriArticoloCommand;
-        private RelayCommand cancellaArticoloCommand;
-        private AsyncRelayCommand aggiornaArticoliCommand;
-        private ArticoloReadOnly articoloSelezionato;
         private readonly ILogger<ArticoliViewModel> logger;
         private readonly IMagazinoService magazinoService;
         private readonly NavigationService navigationService;
+        private ArticoloReadOnly articoloSelezionato;
+        private AsyncRelayCommand loadedCommand;
+        private AsyncRelayCommand aggiornaArticoliCommand;
+        private RelayCommand apriArticoloCommand;
+        private RelayCommand cancellaArticoloCommand;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService magazinoService,
@@ -30,6 +30,8 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             this.logger = logger;
             this.magazinoService = magazinoService;
             this.navigationService = navigationService;
+            Articoli = new ObservableCollection<ArticoloReadOnly>();
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
@@ -51,34 +53,14 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         public ICommand LoadedCommand => loadedCommand ??
             (loadedCommand = new AsyncRelayCommand(AggiornaArticoli));
 
+        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand ??
+            (aggiornaArticoliCommand = new AsyncRelayCommand(AggiornaArticoli));
+
         public ICommand ApriArticoloCommand => apriArticoloCommand ??
             (apriArticoloCommand = new RelayCommand(ApriArticolo, EnableApriArticolo));
 
         public ICommand CancellaArticoloCommand => cancellaArticoloCommand ??
             (cancellaArticoloCommand = new RelayCommand(CancellaArticolo, EnableCancellaArticolo));
-
-        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand ??
-            (aggiornaArticoliCommand = new AsyncRelayCommand(AggiornaArticoli));
-
-        private void ApriArticolo()
-        {
-            Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
-            navigationService.GoBack();
-        }
-
-        private bool EnableApriArticolo()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void CancellaArticolo()
-        {
-        }
-
-        private bool EnableCancellaArticolo()
-        {
-            throw new NotImplementedException();
-        }
 
         private async Task AggiornaArticoli()
         {
@@ -87,7 +69,25 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             {
                 Articoli.Add(pr);
             }
-            logger.LogDebug("Ciao Ciao");
+        }
+
+        private void ApriArticolo()
+        {
+            Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
+            navigationService.GoBack();
+        }
+
+        private bool EnableApriArticolo() => ArticoloSelezionato != null;
+
+        private void CancellaArticolo()
+        {
+        }
+
+        private bool EnableCancellaArticolo() => ArticoloSelezionato != null;
+
+        public void Dispose()
+        {
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

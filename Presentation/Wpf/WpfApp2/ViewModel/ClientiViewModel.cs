@@ -20,9 +20,9 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private readonly INavigationService navigationService;
         private Cliente clienteSelezionato;
         private AsyncRelayCommand loadCommand;
+        private AsyncRelayCommand aggiornaClientiCommand;
         private RelayCommand apriClienteCommand;
         private RelayCommand cancellaClienteCommand;
-        private AsyncRelayCommand aggiornaClientiCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IClientiFornitoriService clientiFornitoriService,
@@ -53,14 +53,14 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         public ICommand LoadedCommand => loadCommand ??=
             new AsyncRelayCommand(AggiornaClienti);
 
+        public ICommand AggiornaClientiCommand => aggiornaClientiCommand ??=
+            new AsyncRelayCommand(AggiornaClienti);
+
         public ICommand ApriClienteCommand => apriClienteCommand ??=
             new RelayCommand(ApriCliente, EnableApriCliente);
 
         public ICommand CancellaClienteCommand => cancellaClienteCommand ??=
-            new RelayCommand(CancellaCliente);
-
-        public ICommand AggiornaClientiCommand => aggiornaClientiCommand ??=
-            new AsyncRelayCommand(AggiornaClienti);
+            new RelayCommand(CancellaCliente, EnableCancellaCliente);
 
         private async Task AggiornaClienti()
         {
@@ -85,6 +85,8 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         private void CancellaCliente()
         {
         }
+
+        protected virtual bool EnableCancellaCliente() => ClienteSelezionato != null;
 
         public void Dispose()
         {
