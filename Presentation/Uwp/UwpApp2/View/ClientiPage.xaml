@@ -77,7 +77,7 @@
                 <tollkit:DataGrid
                     ItemsSource="{Binding Clienti, Mode=OneWay}"
                     AutoGenerateColumns="False"
-                    SelectedItem="{Binding ClienteSelezionato}"
+                    SelectedItem="{Binding ClienteSelezionato, Mode=TwoWay}"
                     IsReadOnly="True"
                     SelectionMode="Single">
                     <tollkit:DataGrid.Columns>

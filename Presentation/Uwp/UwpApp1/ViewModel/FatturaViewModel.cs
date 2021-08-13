@@ -27,8 +27,8 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         private ICommand loadedCommand;
 
         public FatturaViewModel(ILogger<FatturaViewModel> logger,
-                                NavigationService navigationService,
-                                IFatturaService fatturaService)
+                                IFatturaService fatturaService,
+                                NavigationService navigationService)
         {
             this.logger = logger;
             this.navigationService = navigationService;
@@ -41,16 +41,14 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(async () =>
-        {
-            Fattura fatt = await fatturaService.GetFattura(4);
-            Mostra(fatt);
-        }));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() =>
-             logger.LogDebug("Nuova Fattura Button fire")));
+        {
+            navigationService.Navigate<ClientiPage>();
+        }));
 
-        public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new RelayCommand(async () =>
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -72,7 +70,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             }
         }));
 
-        public ICommand ApriCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
+        public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
             navigationService.Navigate<FatturePage>()));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>

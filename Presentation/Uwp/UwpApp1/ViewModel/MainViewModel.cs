@@ -17,6 +17,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         private ICommand fattureCommand;
         private ICommand articoliCommand;
         private ICommand categorieCommand;
+        private RelayCommand clientiCommand;
 
         public MainViewModel(ILogger<MainViewModel> logger, NavigationService navigationService)
         {
@@ -25,7 +26,13 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => {
+        public void Initialization(Frame frame)
+        {
+            navigationService.Initialize(frame);
+        }
+
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() =>
+        {
             //navigationService.Navigate<MainPage>();
         }));
 
@@ -38,10 +45,10 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         public ICommand CategorieCommand => categorieCommand ?? (categorieCommand = new RelayCommand(() =>
             navigationService.Navigate<CategoriaPage>()));
 
-        public void Initialization(Frame frame)
+        public ICommand ClientiCommand => clientiCommand ?? (clientiCommand = new RelayCommand(() =>
         {
-            navigationService.Initialize(frame);
-        }
+            navigationService.Navigate<ClientiPage>();
+        }));
 
         public void Dispose()
         {

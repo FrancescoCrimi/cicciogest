@@ -21,14 +21,52 @@
     </i:Interaction.Behaviors>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!--<RowDefinition Height="Auto"/>-->
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+
+        <CommandBar Grid.Row="0"
+            x:Name="mainCommandBar"
+            HorizontalAlignment="Stretch"
+            Background="Transparent"
+            RelativePanel.RightOf="PageTitle"
+            RelativePanel.AlignRightWithPanel="True"
+            DefaultLabelPosition="Right">
+            <AppBarButton
+                Icon="Document"
+                Label="Nuova"
+                Command="{Binding NuovaFatturaCommand}"/>
+            <AppBarButton
+                Icon="OpenFile"
+                Label="Apri"
+                Command="{Binding ApriFatturaCommand}"/>
+            <AppBarButton
+                Icon="Save"
+                Label="Salva"
+                Command="{Binding SalvaFatturaCommand}"/>
+            <AppBarButton
+                Icon="Delete"
+                Label="Elimina"
+                Command="{Binding RimuoviFatturaCommand}"/>
+            <AppBarSeparator/>
+            <AppBarButton
+                Icon="Document"
+                Label="Dettaglio"
+                Command="{Binding NuovoDettaglioCommand}"/>
+            <AppBarButton
+                Icon="Add"
+                Label="Aggiungi"
+                Command="{Binding AggiungiDettaglioCommand}"/>
+            <AppBarButton
+                Icon="Remove"
+                Label="Rimuovi"
+                Command="{Binding RimuoviDettaglioCommand}"/>
+        </CommandBar>
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
@@ -123,9 +161,10 @@
                     </Grid>
                 </Grid>
             </Border>
+        
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Border BorderThickness="2 2 2 2" BorderBrush="Black" Margin="3 10 3 3" CornerRadius="5">
 
                 <tollkit:DataGrid x:Name="dettagliDataGrid" ItemsSource="{Binding Fattura.Dettagli}" SelectedItem="{Binding DettaglioSelezionato}" AutoGenerateColumns="False" GridLinesVisibility="Horizontal" IsReadOnly="True">

@@ -20,7 +20,6 @@
     </i:Interaction.Behaviors>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -36,7 +35,7 @@
                 <MenuFlyoutItem Text="Categorie" Command="{Binding CategorieCommand, Mode=OneWay}"/>
             </winui:MenuBarItem>
             <winui:MenuBarItem Title="Anagrafica">
-                <MenuFlyoutItem Text="Clienti"/>
+                <MenuFlyoutItem Text="Clienti" Command="{Binding ClientiCommand, Mode=OneWay}"/>
                 <MenuFlyoutItem Text="Fornitori"/>
             </winui:MenuBarItem>
             <winui:MenuBarItem Title="Help">

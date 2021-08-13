@@ -75,11 +75,11 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <tollkit:DataGrid
-                    ItemsSource="{Binding Clienti, Mode=OneWay}"
                     AutoGenerateColumns="False"
-                    SelectedItem="{Binding ClienteSelezionato}"
                     IsReadOnly="True"
-                    SelectionMode="Single">
+                    SelectionMode="Single"
+                    ItemsSource="{Binding Clienti, Mode=OneWay}"
+                    SelectedItem="{Binding ClienteSelezionato, Mode=TwoWay}">
                     <tollkit:DataGrid.Columns>
                         <tollkit:DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
                         <tollkit:DataGridTextColumn Binding="{Binding Nome}" Header="Nome"/>

@@ -32,7 +32,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="CiccioGest.Presentation.UwpApp2.App">
       <uap:VisualElements
-        DisplayName="CiccioGest.Presentation.UwpApp2"
+        DisplayName="CiccioGest UWP 2"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="CiccioGest.Presentation.UwpApp2"

@@ -33,7 +33,8 @@ namespace CiccioGest.Presentation.UwpApp
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<CategoriaViewModel>()
                 .AddTransient<FattureViewModel>()
-                .AddTransient<ArticoliViewModel>();
+                .AddTransient<ArticoliViewModel>()
+                .AddTransient<ClientiViewModel>();
             return services.BuildServiceProvider();
         }
 

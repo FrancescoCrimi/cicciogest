@@ -47,7 +47,7 @@
             <AppBarButton
                 Icon="OpenFile"
                 Label="Apri"
-                Command="{Binding ApriCommand}"/>
+                Command="{Binding ApriFatturaCommand}"/>
             <AppBarButton
                 Icon="Save"
                 Label="Salva"
