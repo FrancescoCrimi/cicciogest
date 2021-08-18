@@ -7,10 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.UwpApp.ViewModel
+namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
-    public class ArticoloViewModel : ObservableObject
+    public sealed class CategoriaViewModel : ObservableObject
     {
+        public CategoriaViewModel()
+        {
+        }
 
         private RelayCommand loadedCommand;
 

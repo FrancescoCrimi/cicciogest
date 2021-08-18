@@ -1,30 +1,33 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.UwpApp.Services;
+using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.UwpApp.ViewModel
+namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
-    public class ClientiViewModel : ObservableObject, IDisposable
+    public class ClientiViewModel : ObservableRecipient, IDisposable
     {
-        private readonly ILogger logger;
+        private readonly ILogger<ClientiViewModel> logger;
         private readonly IClientiFornitoriService clientiFornitoriService;
-        private readonly NavigationService navigationService;
+        private readonly INavigationService navigationService;
         private Cliente clienteSelezionato;
-        private AsyncRelayCommand loadCommand;
+        private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaClientiCommand;
         private RelayCommand apriClienteCommand;
         private RelayCommand cancellaClienteCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IClientiFornitoriService clientiFornitoriService,
-                                NavigationService navigationService)
+                                INavigationService navigationService)
         {
             this.logger = logger;
             this.clientiFornitoriService = clientiFornitoriService;
@@ -37,10 +40,10 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public Cliente ClienteSelezionato
         {
-            protected get => clienteSelezionato;
+            get => clienteSelezionato;
             set
             {
-                if(clienteSelezionato != value)
+                if (clienteSelezionato != value)
                 {
                     clienteSelezionato = value;
                     apriClienteCommand.NotifyCanExecuteChanged();
@@ -49,17 +52,17 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadCommand ??
-            (loadCommand = new AsyncRelayCommand(AggiornaClienti));
+        public ICommand LoadedCommand => loadedCommand
+            ?? (loadedCommand = new AsyncRelayCommand(AggiornaClienti));
 
-        public ICommand AggiornaClientiCommand => aggiornaClientiCommand ??
-            (aggiornaClientiCommand = new AsyncRelayCommand(AggiornaClienti));
+        public ICommand AggiornaClientiCommand => aggiornaClientiCommand
+            ?? (aggiornaClientiCommand = new AsyncRelayCommand(AggiornaClienti));
 
-        public ICommand ApriClienteCommand => apriClienteCommand ??
-            (apriClienteCommand = new RelayCommand(ApriCliente, EnableApriCliente));
+        public ICommand ApriClienteCommand => apriClienteCommand
+            ?? (apriClienteCommand = new RelayCommand(ApriCliente, EnableApriCliente));
 
-        public ICommand CancellaClienteCommand => cancellaClienteCommand ??
-            (cancellaClienteCommand = new RelayCommand(CancellaCliente, EnableCancellaCliente));
+        public ICommand CancellaClienteCommand => cancellaClienteCommand
+            ?? (cancellaClienteCommand = new RelayCommand(CancellaCliente, EnableCancellaCliente));
 
         private async Task AggiornaClienti()
         {
@@ -70,12 +73,8 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             }
         }
 
-        private void ApriCliente()
+        protected virtual void ApriCliente()
         {
-            if (ClienteSelezionato != null)
-            {
-
-            }
         }
 
         private bool EnableApriCliente() => ClienteSelezionato != null;

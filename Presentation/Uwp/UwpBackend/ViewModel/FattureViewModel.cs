@@ -1,7 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.UwpApp.Services;
-using CiccioGest.Presentation.UwpApp.View;
+using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -11,13 +10,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.UwpApp.ViewModel
+namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
     public class FattureViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
-        private readonly NavigationService navigationService;
+        private readonly INavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaFattureCommand;
@@ -26,7 +25,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
-                                NavigationService navigationService)
+                                INavigationService navigationService)
         {
             this.logger = logger;
             this.fatturaService = fatturaService;
@@ -39,7 +38,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public FatturaReadOnly FatturaSelezionata
         {
-            private get => fatturaSelezionata;
+            get => fatturaSelezionata;
             set
             {
                 if (value != fatturaSelezionata)
@@ -50,17 +49,17 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand ??
-            (loadedCommand = new AsyncRelayCommand(AggiornaFatture));
+        public ICommand LoadedCommand => loadedCommand
+            ?? (loadedCommand = new AsyncRelayCommand(AggiornaFatture));
 
-        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??
-            (aggiornaFattureCommand = new AsyncRelayCommand(AggiornaFatture));
+        public ICommand AggiornaFattureCommand => aggiornaFattureCommand
+            ?? (aggiornaFattureCommand = new AsyncRelayCommand(AggiornaFatture));
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??
-            (apriFatturaCommand = new RelayCommand(ApriFattura, EnableApriFattura));
+        public ICommand ApriFatturaCommand => apriFatturaCommand
+            ?? (apriFatturaCommand = new RelayCommand(ApriFattura, EnableApriFattura));
 
-        public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??
-            (cancellaFatturaCommand = new RelayCommand(CancellaFattura, EnableCancellaFattura));
+        public ICommand CancellaFatturaCommand => cancellaFatturaCommand
+            ?? (cancellaFatturaCommand = new RelayCommand(CancellaFattura, EnableCancellaFattura));
 
         private async Task AggiornaFatture()
         {
@@ -75,7 +74,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         {
             if (FatturaSelezionata != null)
             {
-                navigationService.Navigate(typeof(FatturaPage));
+                navigationService.Navigate("FatturaViewModel");
                 Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
             }
         }

@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.UwpApp.ViewModel
+namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
-    public sealed class CategoriaViewModel : ObservableObject
+    public sealed class ArticoloViewModel : ObservableObject
     {
-        public CategoriaViewModel()
+        public ArticoloViewModel()
         {
         }
 

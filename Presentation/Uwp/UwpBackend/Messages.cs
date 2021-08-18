@@ -1,6 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.Messaging.Messages;
 
-namespace CiccioGest.Presentation.UwpApp.ViewModel
+namespace CiccioGest.Presentation.UwpBackend
 {
     public class FatturaIdMessage : ValueChangedMessage<int>
     {

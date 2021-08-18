@@ -1,6 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.UwpApp.Services;
+using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -10,13 +10,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.UwpApp.ViewModel
+namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
     public class ArticoliViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
-        private readonly NavigationService navigationService;
+        private readonly INavigationService navigationService;
         private ArticoloReadOnly articoloSelezionato;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaArticoliCommand;
@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService magazinoService,
-                                 NavigationService navigationService)
+                                 INavigationService navigationService)
         {
             this.logger = logger;
             this.magazinoService = magazinoService;
@@ -38,7 +38,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public ArticoloReadOnly ArticoloSelezionato
         {
-            private get => articoloSelezionato;
+            get => articoloSelezionato;
             set
             {
                 if (articoloSelezionato != value)
@@ -50,17 +50,17 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand ??
-            (loadedCommand = new AsyncRelayCommand(AggiornaArticoli));
+        public ICommand LoadedCommand => loadedCommand
+            ?? (loadedCommand = new AsyncRelayCommand(AggiornaArticoli));
 
-        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand ??
-            (aggiornaArticoliCommand = new AsyncRelayCommand(AggiornaArticoli));
+        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand
+            ?? (aggiornaArticoliCommand = new AsyncRelayCommand(AggiornaArticoli));
 
-        public ICommand ApriArticoloCommand => apriArticoloCommand ??
-            (apriArticoloCommand = new RelayCommand(ApriArticolo, EnableApriArticolo));
+        public ICommand ApriArticoloCommand => apriArticoloCommand
+            ?? (apriArticoloCommand = new RelayCommand(ApriArticolo, EnableApriArticolo));
 
-        public ICommand CancellaArticoloCommand => cancellaArticoloCommand ??
-            (cancellaArticoloCommand = new RelayCommand(CancellaArticolo, EnableCancellaArticolo));
+        public ICommand CancellaArticoloCommand => cancellaArticoloCommand
+            ?? (cancellaArticoloCommand = new RelayCommand(CancellaArticolo, EnableCancellaArticolo));
 
         private async Task AggiornaArticoli()
         {

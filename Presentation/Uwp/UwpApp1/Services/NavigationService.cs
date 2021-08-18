@@ -1,29 +1,28 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CiccioGest.Presentation.UwpBackend.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace CiccioGest.Presentation.UwpApp.Services
 {
-    public class NavigationService : IDisposable
+    public class NavigationService : INavigationService, IDisposable
     {
         private readonly ILogger<NavigationService> logger;
         private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly PageService pageService;
         private Frame frame;
         private IServiceScope scope;
         private IServiceScope oldScope;
         private static object _lastParamUsed;
 
         public NavigationService(ILogger<NavigationService> logger,
-                                 IServiceScopeFactory serviceScopeFactory)
+                                 IServiceScopeFactory serviceScopeFactory,
+                                 PageService pageService)
         {
             this.logger = logger;
             this.serviceScopeFactory = serviceScopeFactory;
+            this.pageService = pageService;
         }
 
         public void Initialize(Frame shellFrame)
@@ -45,10 +44,9 @@ namespace CiccioGest.Presentation.UwpApp.Services
         public void GoForward() => frame.GoForward();
 
         public bool Navigate(Type pageType,
-                              object parameter = null,
-                              NavigationTransitionInfo infoOverride = null,
-                              bool clearNavigation = false)
-        {   
+                             object parameter = null,
+                             bool clearNavigation = false)
+        {
             if (pageType == null || !pageType.IsSubclassOf(typeof(Page)))
             {
                 throw new ArgumentException($"Invalid pageType '{pageType}', please provide a valid pageType.", nameof(pageType));
@@ -68,7 +66,7 @@ namespace CiccioGest.Presentation.UwpApp.Services
                     scope = serviceScopeFactory.CreateScope();
                 }
 
-                var navigationResult = frame.Navigate(pageType, parameter, infoOverride);
+                var navigationResult = frame.Navigate(pageType, parameter);
                 if (navigationResult)
                 {
                     _lastParamUsed = parameter;
@@ -82,11 +80,13 @@ namespace CiccioGest.Presentation.UwpApp.Services
             }
         }
 
-        public bool Navigate<T>(object parameter = null,
-                                       NavigationTransitionInfo infoOverride = null,
-                                       bool clearNavigation = false)
-            where T : Page
-            => Navigate(typeof(T), parameter, infoOverride, clearNavigation);
+        public bool Navigate(string key,
+                             object parameter = null,
+                             bool clearNavigation = false)
+        {
+            var pageType = pageService.GetPageType(key);
+            return Navigate(pageType, parameter, clearNavigation);
+        }
 
         private void OnNavigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {

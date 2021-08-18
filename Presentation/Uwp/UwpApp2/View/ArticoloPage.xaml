@@ -8,7 +8,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
-    xmlns:viewmodel="using:CiccioGest.Presentation.UwpApp.ViewModel"
+    xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:ArticoloViewModel}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

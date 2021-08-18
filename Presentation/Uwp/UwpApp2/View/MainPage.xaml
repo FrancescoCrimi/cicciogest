@@ -5,52 +5,57 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:views="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:helpers="using:CiccioGest.Presentation.UwpApp.Helpers"
-    xmlns:viewmodel="using:CiccioGest.Presentation.UwpApp.ViewModel"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <i:Interaction.Behaviors>
-        <ic:EventTriggerBehavior EventName="Loaded">
-            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
-        </ic:EventTriggerBehavior>
-    </i:Interaction.Behaviors>
+    <Page.Background>
+        <ThemeResource ResourceKey="ApplicationPageBackgroundThemeBrush"/>
+    </Page.Background>
 
     <winui:NavigationView
         x:Name="navigationView"
         OpenPaneLength="160"
         IsBackButtonVisible="Visible"
         IsSettingsVisible="True">
+
         <winui:NavigationView.MenuItems>
             <winui:NavigationViewItem
                 Content="Clienti"
                 Icon="ContactInfo"
-                helpers:NavHelper.NavigateTo="views:ClientiPage" />
+                helpers:NavHelper.NavigateTo="views:ClientiPage" >
+            </winui:NavigationViewItem>
             <winui:NavigationViewItem
                 Content="Fatture"
                 Icon="Shop"
-                helpers:NavHelper.NavigateTo="views:FatturePage" />
+                helpers:NavHelper.NavigateTo="views:FatturePage" >
+            </winui:NavigationViewItem>
             <winui:NavigationViewItem
                 Content="Articoli"
                 Icon="Document"
-                helpers:NavHelper.NavigateTo="views:ArticoliPage" />
+                helpers:NavHelper.NavigateTo="views:ArticoliPage" >
+            </winui:NavigationViewItem>
         </winui:NavigationView.MenuItems>
 
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">
-                <ic:InvokeCommandAction Command="{Binding ItemInvokedCommand}" />
+                <ic:InvokeCommandAction Command="{Binding ItemInvokedCommand}">
+                    <ic:InvokeCommandAction.InputConverter>
+                        <helpers:NavigationViewItemInvokedEventArgsToType/>
+                    </ic:InvokeCommandAction.InputConverter>
+                </ic:InvokeCommandAction>
             </ic:EventTriggerBehavior>
         </i:Interaction.Behaviors>
-            
+        
         <Frame
             x:Name="ContentFrame"
             Margin="20,0,0,0"
             IsTabStop="True"/>
-        
+
     </winui:NavigationView>
 
 </Page>

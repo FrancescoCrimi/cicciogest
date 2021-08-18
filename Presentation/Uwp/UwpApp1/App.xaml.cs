@@ -1,8 +1,8 @@
-﻿using CiccioGest.Application.Impl;
-using CiccioGest.Infrastructure.Conf;
+﻿using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.UwpApp.Services;
 using CiccioGest.Presentation.UwpApp.View;
-using CiccioGest.Presentation.UwpApp.ViewModel;
+using CiccioGest.Presentation.UwpBackend;
+using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
@@ -26,15 +26,10 @@ namespace CiccioGest.Presentation.UwpApp
             services
                 .AddLogging()
                 .AddSingleton(CiccioGestConfMgr.GetCurrent())
-                .ConfigureApplication()
+                .ConfigureUwpBackend()
                 .AddSingleton<NavigationService>()
-                .AddTransient<MainViewModel>()
-                .AddTransient<FatturaViewModel>()
-                .AddTransient<ArticoloViewModel>()
-                .AddTransient<CategoriaViewModel>()
-                .AddTransient<FattureViewModel>()
-                .AddTransient<ArticoliViewModel>()
-                .AddTransient<ClientiViewModel>();
+                .AddSingleton<INavigationService>((s) => s.GetService<NavigationService>())
+                .AddSingleton<PageService>();
             return services.BuildServiceProvider();
         }
 

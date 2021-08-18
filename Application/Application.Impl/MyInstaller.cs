@@ -1,7 +1,4 @@
-﻿//using Castle.MicroKernel.Registration;
-//using Castle.MicroKernel.SubSystems.Configuration;
-//using Castle.Windsor;
-using CiccioGest.Infrastructure;
+﻿using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 //using CiccioGest.Infrastructure.Persistence.LiteDB;
 //using CiccioGest.Infrastructure.Persistence.Memory;

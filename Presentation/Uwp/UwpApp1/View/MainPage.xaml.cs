@@ -1,4 +1,5 @@
-﻿using CiccioGest.Presentation.UwpApp.ViewModel;
+﻿using CiccioGest.Presentation.UwpApp.Services;
+using CiccioGest.Presentation.UwpBackend.ViewModel;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Windows.UI.Xaml.Controls;
 
@@ -9,9 +10,9 @@ namespace CiccioGest.Presentation.UwpApp.View
         public MainPage()
         {
             InitializeComponent();
-            MainViewModel viewModel = Ioc.Default.GetService<MainViewModel>();
-            viewModel.Initialization(shellFrame);
-            DataContext = viewModel;
+            var nav = Ioc.Default.GetService<NavigationService>();
+            nav.Initialize(shellFrame);
+            DataContext = Ioc.Default.GetService<MainViewModel>();
         }
     }
 }

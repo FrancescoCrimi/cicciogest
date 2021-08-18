@@ -120,17 +120,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\PageService.cs" />
     <Compile Include="UserControls\CollapsibleSearchBox.xaml.cs">
       <DependentUpon>CollapsibleSearchBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ArticoloViewModel.cs" />
-    <Compile Include="ViewModel\CategoriaViewModel.cs" />
-    <Compile Include="ViewModel\ClientiViewModel.cs" />
-    <Compile Include="ViewModel\Messages.cs" />
-    <Compile Include="ViewModel\FatturaViewModel.cs" />
-    <Compile Include="ViewModel\ArticoliViewModel.cs" />
-    <Compile Include="ViewModel\FattureViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\ArticoliDialogPage.xaml.cs">
       <DependentUpon>ArticoliDialogPage.xaml</DependentUpon>
     </Compile>
@@ -143,6 +136,9 @@
     <Compile Include="View\ClientePage.xaml.cs">
       <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ClientiDialogPage.xaml.cs">
+      <DependentUpon>ClientiDialogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ClientiPage.xaml.cs">
       <DependentUpon>ClientiPage.xaml</DependentUpon>
     </Compile>
@@ -151,6 +147,9 @@
     </Compile>
     <Compile Include="View\ArticoliPage.xaml.cs">
       <DependentUpon>ArticoliPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FattureDialogPage.xaml.cs">
+      <DependentUpon>FattureDialogPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FatturePage.xaml.cs">
       <DependentUpon>FatturePage.xaml</DependentUpon>
@@ -204,6 +203,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ClientiDialogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ClientiPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +218,10 @@
     <Page Include="View\ArticoliPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FattureDialogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FatturePage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -246,10 +253,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj">
-      <Project>{c8febefa-4f77-4001-b5b8-dbe758685eb3}</Project>
-      <Name>Application.Impl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
       <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
       <Name>Application</Name>
@@ -262,7 +265,12 @@
       <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UwpBackend\UwpBackend.csproj">
+      <Project>{bbdad978-c67d-4365-8843-02d02a92759a}</Project>
+      <Name>UwpBackend</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

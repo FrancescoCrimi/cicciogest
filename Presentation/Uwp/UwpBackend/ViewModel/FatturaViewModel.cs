@@ -1,7 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.UwpApp.Services;
-using CiccioGest.Presentation.UwpApp.View;
+using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -9,12 +8,12 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.UwpApp.ViewModel
+namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
     public sealed class FatturaViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
-        private readonly NavigationService navigationService;
+        private readonly INavigationService navigationService;
         private readonly IFatturaService fatturaService;
         private ICommand nuovaFatturaCommand;
         private ICommand salvaFatturaCommand;
@@ -28,7 +27,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public FatturaViewModel(ILogger<FatturaViewModel> logger,
                                 IFatturaService fatturaService,
-                                NavigationService navigationService)
+                                INavigationService navigationService)
         {
             this.logger = logger;
             this.navigationService = navigationService;
@@ -45,7 +44,7 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() =>
         {
-            navigationService.Navigate<ClientiPage>();
+            navigationService.Navigate("ClientiViewModel");
         }));
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new AsyncRelayCommand(async () =>
@@ -71,10 +70,10 @@ namespace CiccioGest.Presentation.UwpApp.ViewModel
         }));
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
-            navigationService.Navigate<FatturePage>()));
+            navigationService.Navigate("FattureViewModel")));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
-            navigationService.Navigate<ArticoliPage>()));
+            navigationService.Navigate("ArticoliPage")));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(() =>
         {

@@ -1,4 +1,4 @@
-﻿using CiccioGest.Presentation.UwpApp.ViewModel;
+﻿using CiccioGest.Presentation.UwpBackend.ViewModel;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Windows.UI.Xaml.Controls;
 
