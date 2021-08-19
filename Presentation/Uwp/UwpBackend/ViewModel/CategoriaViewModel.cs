@@ -1,11 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
@@ -15,23 +10,14 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
         }
 
-        private RelayCommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
 
-        public ICommand LoadedCommand
+        public IAsyncRelayCommand LoadedCommand => loadedCommand
+            ?? (loadedCommand = new AsyncRelayCommand(Loaded));
+
+        private async Task Loaded()
         {
-            get
-            {
-                if (loadedCommand == null)
-                {
-                    loadedCommand = new RelayCommand(Loaded);
-                }
-
-                return loadedCommand;
-            }
-        }
-
-        private void Loaded()
-        {
+            await Task.CompletedTask;
         }
     }
 }

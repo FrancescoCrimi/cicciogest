@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace CiccioGest.Presentation.WpfApp.ViewModel
+namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
     public sealed class HomeViewModel : ObservableRecipient, IDisposable
     {

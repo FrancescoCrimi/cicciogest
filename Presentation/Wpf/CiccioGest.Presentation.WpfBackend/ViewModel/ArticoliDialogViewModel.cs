@@ -1,9 +1,9 @@
 ﻿using CiccioGest.Application;
-using CiccioGest.Presentation.WpfApp.Contracts;
+using CiccioGest.Presentation.WpfBackend.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 
-namespace CiccioGest.Presentation.WpfApp.ViewModel
+namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
     public class ArticoliDialogViewModel : ArticoliViewModel
     {

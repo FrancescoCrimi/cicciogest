@@ -1,5 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Presentation.WpfBackend.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
@@ -9,18 +10,22 @@ using System.Threading.Tasks;
 using System.Windows; 
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp.ViewModel
+namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
     public sealed class CategoriaViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
+        private readonly IMessageBoxService messageBoxService;
         private ICommand loadedCommand;
 
-        public CategoriaViewModel(ILogger<CategoriaViewModel> logger, IMagazinoService service)
+        public CategoriaViewModel(ILogger<CategoriaViewModel> logger,
+                                  IMagazinoService service,
+                                  IMessageBoxService messageBoxService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.messageBoxService = messageBoxService;
             Categorie = new ObservableCollection<Categoria>();
             SalvaCommand = new RelayCommand(Salva);
             RimuoviCommand = new RelayCommand(Rimuovi);
@@ -50,7 +55,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
             catch (Exception e)
             {
-                MessageBox.Show("Errore: " + e.Message);
+                messageBoxService.Show("Errore: " + e.Message);
             }
         }
 
@@ -63,7 +68,7 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
             }
             catch (Exception e)
             {
-                MessageBox.Show("Errore: " + e.Message);
+                messageBoxService.Show("Errore: " + e.Message);
             }
         }
 

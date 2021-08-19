@@ -1,10 +1,9 @@
-﻿using CiccioGest.Application.Impl;
-using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.WpfApp.Contracts;
+﻿using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.WpfApp.Hosting;
-using CiccioGest.Presentation.WpfApp.Service;
+using CiccioGest.Presentation.WpfApp.Services;
 using CiccioGest.Presentation.WpfApp.View;
-using CiccioGest.Presentation.WpfApp.ViewModel;
+using CiccioGest.Presentation.WpfBackend;
+using CiccioGest.Presentation.WpfBackend.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog.Extensions.Logging;
@@ -44,35 +43,27 @@ namespace CiccioGest.Presentation.WpfApp
             CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
             serviceCollection
                 .AddSingleton(conf)
-                .ConfigureApplication()
-                .AddSingleton<INavigationService, NavigationService>()
+                .ConfigureWpfBackend()
+                .AddSingleton<NavigationService>()
+                .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
+                .AddSingleton<PageService>()
+                .AddSingleton<IMessageBoxService, MessageBoxService>()
                 .AddTransient<ShellView>()
-                .AddTransient<ShellViewModel>()
-                .AddTransient<HomeViewModel>()
                 .AddTransient<HomeView>()
 
-                .AddTransient<FatturaViewModel>()
+
                 .AddTransient<FatturaView>()
-                .AddTransient<FattureViewModel>()
                 .AddTransient<FattureView>()
-                .AddTransient<FattureDialogViewModel>()
                 .AddTransient<FattureDialogView>()
 
-                .AddTransient<ArticoliViewModel>()
                 .AddTransient<ArticoliView>()
-                .AddTransient<ArticoliDialogViewModel>()
                 .AddTransient<ArticoliDialogView>()
-                .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoloView>()
 
-                .AddTransient<ClienteViewModel>()
                 .AddTransient<ClienteView>()
-                .AddTransient<ClientiViewModel>()
                 .AddTransient<ClientiView>()
-                .AddTransient<ClientiDialogViewModel>()
                 .AddTransient<ClientiDialogView>()
 
-                .AddTransient<CategoriaViewModel>()
                 .AddTransient<CategoriaView>();
         }
     }

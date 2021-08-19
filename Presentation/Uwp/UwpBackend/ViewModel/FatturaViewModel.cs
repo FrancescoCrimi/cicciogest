@@ -6,6 +6,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
@@ -23,7 +24,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private ICommand selezionaDettaglioCommand;
         private ICommand apriFatturaCommand;
         private ICommand nuovoDettaglioCommand;
-        private ICommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
 
         public FatturaViewModel(ILogger<FatturaViewModel> logger,
                                 IFatturaService fatturaService,
@@ -40,7 +41,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+        public IAsyncRelayCommand LoadedCommand => loadedCommand 
+            ?? (loadedCommand = new AsyncRelayCommand(async () => await Task.CompletedTask));
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() =>
         {

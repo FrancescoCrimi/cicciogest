@@ -1,4 +1,4 @@
-﻿using CiccioGest.Presentation.WpfApp.ViewModel;
+﻿using CiccioGest.Presentation.WpfBackend.ViewModel;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.View

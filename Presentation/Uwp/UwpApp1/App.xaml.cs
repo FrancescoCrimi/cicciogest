@@ -28,7 +28,7 @@ namespace CiccioGest.Presentation.UwpApp
                 .AddSingleton(CiccioGestConfMgr.GetCurrent())
                 .ConfigureUwpBackend()
                 .AddSingleton<NavigationService>()
-                .AddSingleton<INavigationService>((s) => s.GetService<NavigationService>())
+                .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
                 .AddSingleton<PageService>();
             return services.BuildServiceProvider();
         }

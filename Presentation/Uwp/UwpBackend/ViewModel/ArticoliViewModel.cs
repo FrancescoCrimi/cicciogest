@@ -50,10 +50,10 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand
+        public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(AggiornaArticoli));
 
-        public ICommand AggiornaArticoliCommand => aggiornaArticoliCommand
+        public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand
             ?? (aggiornaArticoliCommand = new AsyncRelayCommand(AggiornaArticoli));
 
         public ICommand ApriArticoloCommand => apriArticoloCommand

@@ -1,12 +1,11 @@
-﻿using CiccioGest.Presentation.WpfApp.Contracts;
-using CiccioGest.Presentation.WpfApp.View;
+﻿using CiccioGest.Presentation.WpfBackend.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WpfApp.ViewModel
+namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
     public sealed class ShellViewModel : ObservableRecipient, IDisposable
     {
@@ -26,16 +25,16 @@ namespace CiccioGest.Presentation.WpfApp.ViewModel
         }
 
         public ICommand ApriFattureCommand => apriFattureCommand ??=
-            new RelayCommand(() => ns.NavigateTo(typeof(FattureView), true));
+            new RelayCommand(() => ns.NavigateTo(typeof(FattureViewModel).Name, true));
 
         public ICommand ApriArticoliCommand => apriArticoliCommand ??=
-            new RelayCommand(() => ns.NavigateTo(typeof(ArticoliView), true));
+            new RelayCommand(() => ns.NavigateTo(typeof(ArticoliViewModel).Name, true));
 
         public ICommand ApriCategorieCommand => apriCategorieCommand ??=
-            new RelayCommand(() => ns.NavigateTo(typeof(CategoriaView), true));
+            new RelayCommand(() => ns.NavigateTo(typeof(CategoriaViewModel).Name, true));
 
         public ICommand ApriClientiCommand => apriClientiCommand ??=
-            new RelayCommand(() => ns.NavigateTo(typeof(ClientiView)));
+            new RelayCommand(() => ns.NavigateTo(typeof(ClientiViewModel).Name));
 
         public void Dispose()
         {

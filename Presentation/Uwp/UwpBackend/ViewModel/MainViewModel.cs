@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
@@ -11,11 +12,12 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
     {
         private readonly ILogger logger;
         private readonly INavigationService navigationService;
-        private ICommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
         private ICommand fattureCommand;
         private ICommand articoliCommand;
         private ICommand categorieCommand;
         private RelayCommand clientiCommand;
+        private RelayCommand<Type> itemInvokedCommand;
 
         public MainViewModel(ILogger<MainViewModel> logger, INavigationService navigationService)
         {
@@ -24,10 +26,11 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() =>
-        {
-            //navigationService.Navigate<MainPage>();
-        }));
+        public IAsyncRelayCommand LoadedCommand => loadedCommand
+            ?? (loadedCommand = new AsyncRelayCommand(async () =>
+            {
+                await Task.CompletedTask;
+            }));
 
         public ICommand FattureCommand => fattureCommand ?? (fattureCommand = new RelayCommand(() =>
         {
@@ -45,20 +48,14 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             navigationService.Navigate("ClientiViewModel");
         }));
 
+        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<Type>((type) =>
+        {
+            navigationService.Navigate(type);
+        }));
+
         public void Dispose()
         {
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
-        }
-
-
-        private RelayCommand<Type> itemInvokedCommand;
-
-        public ICommand ItemInvokedCommand => itemInvokedCommand ??
-            (itemInvokedCommand = new RelayCommand<Type>(ItemInvoked));
-
-        private void ItemInvoked(Type type)
-        {
-            navigationService.Navigate(type);
         }
     }
 }

@@ -49,10 +49,10 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand
+        public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(AggiornaFatture));
 
-        public ICommand AggiornaFattureCommand => aggiornaFattureCommand
+        public IAsyncRelayCommand AggiornaFattureCommand => aggiornaFattureCommand
             ?? (aggiornaFattureCommand = new AsyncRelayCommand(AggiornaFatture));
 
         public ICommand ApriFatturaCommand => apriFatturaCommand

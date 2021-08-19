@@ -1,5 +1,5 @@
-﻿using CiccioGest.Presentation.WpfApp.Contracts;
-using CiccioGest.Presentation.WpfApp.Service;
+﻿using CiccioGest.Presentation.WpfApp.Services;
+using CiccioGest.Presentation.WpfBackend.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;

@@ -29,10 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj" />
     <ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
     <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\CiccioGest.Presentation.WpfBackend\WpfBackend.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,10 +40,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

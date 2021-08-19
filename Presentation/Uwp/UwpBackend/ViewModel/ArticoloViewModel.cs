@@ -15,23 +15,14 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
         }
 
-        private RelayCommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
 
-        public ICommand LoadedCommand
+        public IAsyncRelayCommand LoadedCommand => loadedCommand
+            ?? (loadedCommand = new AsyncRelayCommand(Loaded));
+
+        private async Task Loaded()
         {
-            get
-            {
-                if (loadedCommand == null)
-                {
-                    loadedCommand = new RelayCommand(Loaded);
-                }
-
-                return loadedCommand;
-            }
-        }
-
-        private void Loaded()
-        {
+            await Task.CompletedTask;
         }
     }
 }
