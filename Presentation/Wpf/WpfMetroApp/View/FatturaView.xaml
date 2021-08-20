@@ -1,0 +1,176 @@
+﻿<Page x:Class="CiccioGest.Presentation.WpfMetroApp.View.FatturaView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
+      d:DataContext="{d:DesignInstance Type=viewmodel:FatturaViewModel}"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="Fattura">
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Fattura">
+                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand}"/>
+                <MenuItem Header="Apri" Command="{Binding ApriFatturaCommand}"/>
+                <MenuItem Header="Salva" Command="{Binding SalvaFatturaCommand}"/>
+                <MenuItem Header="Elimina" Command="{Binding RimuoviFatturaCommand}"/>
+                <MenuItem Header="Esci"/>
+            </MenuItem>
+            <MenuItem Header="Dettagli">
+                <MenuItem Header="Nuovo" Command="{Binding NuovoDettaglioCommand}"/>
+                <MenuItem Header="Aggiungi" Command="{Binding AggiungiDettaglioCommand}"/>
+                <MenuItem Header="Rimuovi" Command="{Binding RimuoviDettaglioCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <ToolBar Grid.Row="1">
+            <Button Content="Nuova" Margin="2,0,2,0" Command="{Binding NuovaFatturaCommand}"/>
+            <Button Content="Apri" Margin="2,0,2,0" Command="{Binding ApriFatturaCommand}"/>
+            <Button Content="Salva" Margin="2,0,2,0" Command="{Binding SalvaFatturaCommand}"/>
+            <Button Content="Elimina" Margin="2,0,2,0" Command="{Binding RimuoviFatturaCommand}"/>
+            <Separator/>
+            <Button Content="Dettaglio" Margin="2,0,2,0" Command="{Binding NuovoDettaglioCommand}"/>
+            <Button Content="Aggiungi" Margin="2,0,2,0" Command="{Binding AggiungiDettaglioCommand}"/>
+            <Button Content="Rimuovi" Margin="2,0,2,0" Command="{Binding RimuoviDettaglioCommand}"/>
+        </ToolBar>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Fattura">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Nome:" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" 
+                                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                                 Text="{Binding Fattura.Nome, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Totale:" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Height="23" Width="120" Margin="3"
+                                 HorizontalAlignment="Left" VerticalAlignment="Center"                            
+                                 Text="{Binding Fattura.Totale, Mode=OneWay}"/>
+                    </Grid>
+
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Header="Dettaglio" Grid.Column="1">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Prodotto:" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60"/>
+                        <TextBox Height="23" Width="120" Margin="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"                                
+                                 Text="{Binding Dettaglio.NomeProdotto, Mode=OneWay}" IsReadOnly="True"/>
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Prezzo:" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60"/>
+                        <TextBox Height="23" Width="120" Margin="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"                            
+                                 Text="{Binding Dettaglio.PrezzoProdotto, Mode=OneWay}" IsReadOnly="True"/>
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Quantita:" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Width="60"/>
+                        <TextBox Height="23" Width="120" Margin="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"                            
+                                 Text="{Binding Dettaglio.Quantita, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Totale:" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60"/>
+                        <TextBox Height="23" Width="120" Margin="3" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center"                            
+                                 Text="{Binding Dettaglio.Totale, Mode=OneWay}" IsReadOnly="True"/>
+                    </Grid>
+
+                </Grid>
+
+            </GroupBox>
+
+        </Grid>
+
+        <GroupBox Header="Dettagli" Grid.Row="3">
+            <DataGrid
+                ItemsSource="{Binding Fattura.Dettagli}" 
+                SelectedItem="{Binding DettaglioSelezionato}" 
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                SelectionMode="Single">
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding SelezionaDettaglioCommand}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding NomeProdotto}" Header="Prodotto" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding PrezzoProdotto}" Header="Prezzo" Width="SizeToHeader"/>
+                    <DataGridTextColumn Binding="{Binding Quantita}" Header="Quantità" Width="SizeToHeader"/>
+                    <DataGridTextColumn Binding="{Binding Totale}" Header="Totale" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+    </Grid>
+</Page>

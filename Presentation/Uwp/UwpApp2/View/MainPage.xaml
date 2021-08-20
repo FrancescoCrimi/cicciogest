@@ -25,11 +25,6 @@
 
         <winui:NavigationView.MenuItems>
             <winui:NavigationViewItem
-                Content="Clienti"
-                Icon="ContactInfo"
-                helpers:NavHelper.NavigateTo="views:ClientiPage" >
-            </winui:NavigationViewItem>
-            <winui:NavigationViewItem
                 Content="Fatture"
                 Icon="Shop"
                 helpers:NavHelper.NavigateTo="views:FatturePage" >
@@ -38,6 +33,11 @@
                 Content="Articoli"
                 Icon="Document"
                 helpers:NavHelper.NavigateTo="views:ArticoliPage" >
+            </winui:NavigationViewItem>
+            <winui:NavigationViewItem
+                Content="Clienti"
+                Icon="ContactInfo"
+                helpers:NavHelper.NavigateTo="views:ClientiPage" >
             </winui:NavigationViewItem>
         </winui:NavigationView.MenuItems>
 
