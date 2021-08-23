@@ -16,46 +16,62 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="203*" />
         </Grid.RowDefinitions>
 
-        <ToolBar HorizontalAlignment="Stretch" x:Name="toolBar1" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
-            <Button Content="Nuovo" Command="{Binding NuovoCommand}"/>
-            <Button Content="Rimuovi" Command="{Binding RimuoviCommand}"/>
-            <Button Content="Salva" Command="{Binding SalvaCommand}"/>
-            <Button Content="?"/>
-        </ToolBar>
+        <DockPanel Grid.Row="0">
 
-        <Grid Grid.Row="1" x:Name="grid2">
-            <StackPanel Orientation="Horizontal">
-                <Grid x:Name="grid3"
+            <TextBlock
+                Text="Categoria"
+                DockPanel.Dock="Left"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+
+            <Grid
+                DockPanel.Dock="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Grid x:Name="grid3"
                       DataContext="{Binding Categoria}"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <TextBox x:Name="nomeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Nome, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" VerticalAlignment="Center" Width="120"/>
-                </Grid>
-            </StackPanel>
-        </Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="nomeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Nome, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" VerticalAlignment="Center" Width="120"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
 
-        <DataGrid
+            <ToolBar
+                x:Name="toolBar1"
+                ToolBarTray.IsLocked="True"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="Auto"
+                Height="Auto">
+                <Button Content="Nuovo" Command="{Binding NuovoCommand}"/>
+                <Button Content="Rimuovi" Command="{Binding RimuoviCommand}"/>
+                <Button Content="Salva" Command="{Binding SalvaCommand}"/>
+                <Button Content="?"/>
+            </ToolBar>
+
+        </DockPanel>
+
+        <DataGrid Grid.Row="1"
             ItemsSource="{Binding Categorie}"
             SelectedItem="{Binding CategoriaSelezionata, Mode=OneWayToSource}"
             SelectionMode="Single"
             AutoGenerateColumns="False"
-            IsReadOnly="True"
-            Grid.Row="2">
+            IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" />
                 <DataGridTextColumn x:Name="nomeColumn" Binding="{Binding Nome}" Header="Nome" Width="*" />

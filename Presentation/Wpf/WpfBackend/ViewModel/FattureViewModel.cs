@@ -49,20 +49,21 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand ??=
-            new AsyncRelayCommand(AggiornaFatture);
+        public ICommand LoadedCommand => loadedCommand
+            ??= new AsyncRelayCommand(AggiornaFatture);
 
-        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??=
-            new AsyncRelayCommand(AggiornaFatture);
+        public ICommand AggiornaFattureCommand => aggiornaFattureCommand
+            ??= new AsyncRelayCommand(AggiornaFatture);
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??=
-            new RelayCommand(ApriFattura, EnableApriFattura);
+        public ICommand ApriFatturaCommand => apriFatturaCommand
+            ??= new RelayCommand(ApriFattura, EnableApriFattura);
 
-        public ICommand CancellaFatturaCommand => cancellaFatturaCommand ??=
-            new RelayCommand(CancellaFattura, EnableCancellaFattura);
+        public ICommand CancellaFatturaCommand => cancellaFatturaCommand
+            ??= new RelayCommand(CancellaFattura, EnableCancellaFattura);
 
         private async Task AggiornaFatture()
         {
+            Fatture.Clear();
             foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
             {
                 Fatture.Add(fatt);
@@ -73,7 +74,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         {
             if (FatturaSelezionata != null)
             {
-                navigationService.NavigateTo(typeof(FatturaViewModel).Name);
+                navigationService.NavigateTo(nameof(FatturaViewModel));
                 Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
             }
         }

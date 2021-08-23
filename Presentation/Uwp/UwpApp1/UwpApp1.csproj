@@ -124,39 +124,39 @@
     <Compile Include="UserControls\CollapsibleSearchBox.xaml.cs">
       <DependentUpon>CollapsibleSearchBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ArticoliDialogPage.xaml.cs">
-      <DependentUpon>ArticoliDialogPage.xaml</DependentUpon>
+    <Compile Include="View\ArticoliDialogView.xaml.cs">
+      <DependentUpon>ArticoliDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ArticoloPage.xaml.cs">
-      <DependentUpon>ArticoloPage.xaml</DependentUpon>
+    <Compile Include="View\ArticoloView.xaml.cs">
+      <DependentUpon>ArticoloView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CategoriaPage.xaml.cs">
-      <DependentUpon>CategoriaPage.xaml</DependentUpon>
+    <Compile Include="View\CategoriaView.xaml.cs">
+      <DependentUpon>CategoriaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientePage.xaml.cs">
-      <DependentUpon>ClientePage.xaml</DependentUpon>
+    <Compile Include="View\ClienteView.xaml.cs">
+      <DependentUpon>ClienteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientiDialogPage.xaml.cs">
-      <DependentUpon>ClientiDialogPage.xaml</DependentUpon>
+    <Compile Include="View\ClientiDialogView.xaml.cs">
+      <DependentUpon>ClientiDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientiPage.xaml.cs">
-      <DependentUpon>ClientiPage.xaml</DependentUpon>
+    <Compile Include="View\ClientiView.xaml.cs">
+      <DependentUpon>ClientiView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FatturaPage.xaml.cs">
-      <DependentUpon>FatturaPage.xaml</DependentUpon>
+    <Compile Include="View\FatturaView.xaml.cs">
+      <DependentUpon>FatturaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ArticoliPage.xaml.cs">
-      <DependentUpon>ArticoliPage.xaml</DependentUpon>
+    <Compile Include="View\ArticoliView.xaml.cs">
+      <DependentUpon>ArticoliView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FattureDialogPage.xaml.cs">
-      <DependentUpon>FattureDialogPage.xaml</DependentUpon>
+    <Compile Include="View\FattureDialogView.xaml.cs">
+      <DependentUpon>FattureDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FatturePage.xaml.cs">
-      <DependentUpon>FatturePage.xaml</DependentUpon>
+    <Compile Include="View\FattureView.xaml.cs">
+      <DependentUpon>FattureView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -179,7 +179,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Styles\NavStyles.xaml">
+    <Page Include="Styles\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\_FontSizes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\_Thickness.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -187,47 +195,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ArticoliDialogPage.xaml">
+    <Page Include="View\ArticoliDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ArticoloPage.xaml">
+    <Page Include="View\ArticoloView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\CategoriaPage.xaml">
+    <Page Include="View\CategoriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ClientePage.xaml">
+    <Page Include="View\ClienteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClientiDialogPage.xaml">
+    <Page Include="View\ClientiDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClientiPage.xaml">
+    <Page Include="View\ClientiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FatturaPage.xaml">
+    <Page Include="View\FatturaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ArticoliPage.xaml">
+    <Page Include="View\ArticoliView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\FattureDialogPage.xaml">
+    <Page Include="View\FattureDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FatturePage.xaml">
+    <Page Include="View\FattureView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\MainPage.xaml">
+    <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

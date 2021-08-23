@@ -107,7 +107,7 @@
                     OptionsItemTemplate="{StaticResource OptionsMenuItemTemplate}"
                     OptionsItemCommand="{Binding MenuOptionsItemCommand}"
                     OptionsItemCommandParameter="{Binding ElementName=hamburgerMenu, Path=SelectedOptionsItem.TargetPageType}"
-                    OpenPaneLength="120">
+                    OpenPaneLength="150">
 
                     <mah:HamburgerMenu.ItemsSource>
                         <mah:HamburgerMenuItemCollection>

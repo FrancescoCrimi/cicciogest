@@ -9,7 +9,20 @@
       Title="Home"
       Background="White">
 
-    <Grid>
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <TextBlock
+                Text="Home"
+                DockPanel.Dock="Left"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+        </DockPanel>
 
     </Grid>
 </Page>

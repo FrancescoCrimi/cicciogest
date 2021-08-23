@@ -17,14 +17,19 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0">
-            <TextBlock Text="Clienti" FontSize="28" DockPanel.Dock="Left" Margin="5,0,5,0"/>
+            <TextBlock
+                Text="Clienti"
+                DockPanel.Dock="Left"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
             <Grid DockPanel.Dock="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

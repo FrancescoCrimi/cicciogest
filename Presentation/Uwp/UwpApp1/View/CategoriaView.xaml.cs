@@ -4,12 +4,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class FatturePage : Page
+    public sealed partial class CategoriaView : Page
     {
-        public FatturePage()
+        public CategoriaView()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetService<FattureViewModel>();
+            DataContext = Ioc.Default.GetService<CategoriaViewModel>();
         }
     }
 }

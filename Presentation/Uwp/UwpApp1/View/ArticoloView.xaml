@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="CiccioGest.Presentation.UwpApp.View.ArticoloPage"
+    x:Class="CiccioGest.Presentation.UwpApp.View.ArticoloView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,7 +18,30 @@
         </ic:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
-    <Grid>
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0">
+
+            <TextBlock
+                x:Name="PageTitle"
+                Text="Articolo"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+
+            <CommandBar
+                x:Name="mainCommandBar"
+                DefaultLabelPosition="Right"
+                HorizontalAlignment="Stretch"
+                Background="Transparent"
+                RelativePanel.RightOf="PageTitle">
+
+            </CommandBar>
+
+        </RelativePanel>
 
     </Grid>
 

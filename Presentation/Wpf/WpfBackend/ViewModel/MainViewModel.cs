@@ -15,6 +15,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private RelayCommand apriCategorieCommand;
         private RelayCommand apriArticoliCommand;
         private RelayCommand apriFattureCommand;
+        private RelayCommand<Type> menuItemCommand;
 
         public MainViewModel(ILogger<MainViewModel> logger,
                              INavigationService navigationService)
@@ -24,35 +25,29 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ICommand ApriFattureCommand => apriFattureCommand ??=
-            new RelayCommand(() => navigationService.NavigateTo(nameof(FattureViewModel), true));
+        public ICommand ApriFattureCommand => apriFattureCommand
+            ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(FattureViewModel)));
 
-        public ICommand ApriArticoliCommand => apriArticoliCommand ??=
-            new RelayCommand(() => navigationService.NavigateTo(nameof(ArticoliViewModel), true));
+        public ICommand ApriArticoliCommand => apriArticoliCommand
+            ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(ArticoliViewModel)));
 
-        public ICommand ApriCategorieCommand => apriCategorieCommand ??=
-            new RelayCommand(() => navigationService.NavigateTo(nameof(CategoriaViewModel), true));
+        public ICommand ApriCategorieCommand => apriCategorieCommand
+            ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(CategoriaViewModel)));
 
-        public ICommand ApriClientiCommand => apriClientiCommand ??=
-            new RelayCommand(() => navigationService.NavigateTo(nameof(ClientiViewModel)));
+        public ICommand ApriClientiCommand => apriClientiCommand
+            ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(ClientiViewModel)));
+
+        public ICommand MenuItemCommand => menuItemCommand
+            ??= new RelayCommand<Type>((type)
+                => navigationService.NavigateTo(type));
 
         public void Dispose()
         {
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
-        }
-
-        private RelayCommand<Type> menuItemCommand;
-        public ICommand MenuItemCommand
-        {
-            get
-            {
-                return menuItemCommand ??= new RelayCommand<Type>(MenuItem);
-            }
-        }
-
-        private void MenuItem(Type type)
-        {
-            navigationService.NavigateTo(type);
         }
     }
 }

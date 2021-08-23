@@ -10,10 +10,8 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         //void GoForward();
         //void Initialize(Frame shellFrame);
         void NavigateTo(Type pageType,
-                        object parameter = null,
                         bool clearNavigation = false);
         void NavigateTo(string key,
-                        object parameter = null,
                         bool clearNavigation = false);
     }
 }

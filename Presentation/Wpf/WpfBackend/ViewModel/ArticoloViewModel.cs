@@ -18,10 +18,10 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly ILogger logger;
         private readonly IMagazinoService service;
         private readonly IMessageBoxService messageBoxService;
-        private ICommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
         private ICommand nuovoCommand;
-        private ICommand salvaCommand;
-        private ICommand eliminaCommand;
+        private AsyncRelayCommand salvaCommand;
+        private AsyncRelayCommand eliminaCommand;
 
         public ArticoloViewModel(ILogger<ArticoloViewModel> logger,
                                  IMagazinoService service,
@@ -40,9 +40,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public Articolo Articolo { get; private set; }
 
         public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(Nuovo);
-        public ICommand EliminaCommand => eliminaCommand ??= new RelayCommand(Elimina);
-        public ICommand SalvaCommand => salvaCommand ??= new RelayCommand(Salva);
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(async () =>
+        public IAsyncRelayCommand EliminaCommand => eliminaCommand ??= new AsyncRelayCommand(Elimina);
+        public IAsyncRelayCommand SalvaCommand => salvaCommand ??= new AsyncRelayCommand(Salva);
+        public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(async () =>
         {
             foreach (Categoria cat in await service.GetCategorie())
             {

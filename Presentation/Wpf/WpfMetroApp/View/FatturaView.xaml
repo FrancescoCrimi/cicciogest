@@ -18,30 +18,14 @@
     </b:Interaction.Triggers>
 
     <Grid>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Menu>
-            <MenuItem Header="Fattura">
-                <MenuItem Header="Nuova" Command="{Binding NuovaFatturaCommand}"/>
-                <MenuItem Header="Apri" Command="{Binding ApriFatturaCommand}"/>
-                <MenuItem Header="Salva" Command="{Binding SalvaFatturaCommand}"/>
-                <MenuItem Header="Elimina" Command="{Binding RimuoviFatturaCommand}"/>
-                <MenuItem Header="Esci"/>
-            </MenuItem>
-            <MenuItem Header="Dettagli">
-                <MenuItem Header="Nuovo" Command="{Binding NuovoDettaglioCommand}"/>
-                <MenuItem Header="Aggiungi" Command="{Binding AggiungiDettaglioCommand}"/>
-                <MenuItem Header="Rimuovi" Command="{Binding RimuoviDettaglioCommand}"/>
-            </MenuItem>
-        </Menu>
-
-        <ToolBar Grid.Row="1">
+        <ToolBar Grid.Row="0"
+            ToolBarTray.IsLocked="True">
             <Button Content="Nuova" Margin="2,0,2,0" Command="{Binding NuovaFatturaCommand}"/>
             <Button Content="Apri" Margin="2,0,2,0" Command="{Binding ApriFatturaCommand}"/>
             <Button Content="Salva" Margin="2,0,2,0" Command="{Binding SalvaFatturaCommand}"/>
@@ -52,7 +36,7 @@
             <Button Content="Rimuovi" Margin="2,0,2,0" Command="{Binding RimuoviDettaglioCommand}"/>
         </ToolBar>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -153,7 +137,8 @@
 
         </Grid>
 
-        <GroupBox Header="Dettagli" Grid.Row="3">
+        <GroupBox Grid.Row="2"
+            Header="Dettagli">
             <DataGrid
                 ItemsSource="{Binding Fattura.Dettagli}" 
                 SelectedItem="{Binding DettaglioSelezionato}" 

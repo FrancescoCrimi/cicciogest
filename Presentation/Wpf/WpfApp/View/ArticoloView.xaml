@@ -17,20 +17,33 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ToolBar VerticalAlignment="Top">
-            <Button Content="Nuovo" Command="{Binding NuovoCommand, Mode=OneWay}"/>
-            <Button Content="Elimina" Command="{Binding EliminaCommand, Mode=OneWay}"/>
-            <Button Content="Salva" Command="{Binding SalvaCommand, Mode=OneWay}"/>
-        </ToolBar>
+        <DockPanel Grid.Row="0">
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock
+                Text="Articolo"
+                DockPanel.Dock="Left"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+
+            <ToolBar
+                ToolBarTray.IsLocked="True">
+                <Button Content="Nuovo" Command="{Binding NuovoCommand, Mode=OneWay}"/>
+                <Button Content="Elimina" Command="{Binding EliminaCommand, Mode=OneWay}"/>
+                <Button Content="Salva" Command="{Binding SalvaCommand, Mode=OneWay}"/>
+            </ToolBar>
+
+        </DockPanel>
+
+        <StackPanel Grid.Row="1"
+            Orientation="Horizontal">
 
             <Grid x:Name="gridNome" Margin="0">
                 <Grid.RowDefinitions>
@@ -67,13 +80,12 @@
 
         </StackPanel>
 
-        <DataGrid
+        <DataGrid Grid.Row="2"
             ItemsSource="{Binding Articoli}"
             SelectedItem="{Binding ArticoloSelezionato, Mode=OneWayToSource}"
             SelectionMode="Single"
             AutoGenerateColumns="False"
-            IsReadOnly="True"
-            Grid.Row="2">
+            IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Nome}" Header="Nome" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Prezzo}" Header="Prezzo" Width="SizeToHeader"/>

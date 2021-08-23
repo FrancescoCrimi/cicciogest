@@ -17,15 +17,23 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0">
-            <TextBlock Text="Articoli" FontSize="28" DockPanel.Dock="Left" Margin="5,0,5,0"/>
-            <Grid DockPanel.Dock="Right">
+
+            <TextBlock
+                Text="Articoli"
+                DockPanel.Dock="Left"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+
+            <Grid
+                DockPanel.Dock="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -33,7 +41,9 @@
                 <Label Content="Cerca Articoli:" Margin="3" VerticalAlignment="Center"/>
                 <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" VerticalAlignment="Center" Text="Cerca Articoli"/>
             </Grid>
-            <ToolBar ToolBarTray.IsLocked="True">
+
+            <ToolBar
+                ToolBarTray.IsLocked="True">
                 <Button Command="{Binding ApriArticoloCommand}">
                     <TextBlock>        
                         <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
@@ -53,6 +63,7 @@
                     </TextBlock>
                 </Button>
             </ToolBar>
+
         </DockPanel>
 
         <DataGrid Grid.Row="1"

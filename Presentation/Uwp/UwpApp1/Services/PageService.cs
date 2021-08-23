@@ -14,17 +14,17 @@ namespace CiccioGest.Presentation.UwpApp.Services
 
         public PageService()
         {
-            Configure<MainViewModel, MainPage>();
-            Configure<ArticoliViewModel, ArticoliPage>();
-            Configure<ArticoliDialogViewModel, ArticoliDialogPage>();
-            Configure<ArticoloViewModel, ArticoloPage>();
-            Configure<CategoriaViewModel, CategoriaPage>();
-            Configure<ClienteViewModel, ClientePage>();
-            Configure<ClientiViewModel, ClientiPage>();
-            Configure<ClientiDialogViewModel, ClientiDialogPage>();
-            Configure<FatturaViewModel, FatturaPage>();
-            Configure<FattureViewModel, FatturePage>();
-            Configure<FattureDialogViewModel, FattureDialogPage>();
+            Configure<MainViewModel, MainView>();
+            Configure<ArticoliViewModel, ArticoliView>();
+            Configure<ArticoliDialogViewModel, ArticoliDialogView>();
+            Configure<ArticoloViewModel, ArticoloView>();
+            Configure<CategoriaViewModel, CategoriaView>();
+            Configure<ClienteViewModel, ClienteView>();
+            Configure<ClientiViewModel, ClientiView>();
+            Configure<ClientiDialogViewModel, ClientiDialogView>();
+            Configure<FatturaViewModel, FatturaView>();
+            Configure<FattureViewModel, FattureView>();
+            Configure<FattureDialogViewModel, FattureDialogView>();
         }
 
         public Type GetPageType(string key)

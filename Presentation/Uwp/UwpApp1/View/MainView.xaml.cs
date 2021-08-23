@@ -5,9 +5,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainView : Page
     {
-        public MainPage()
+        public MainView()
         {
             InitializeComponent();
             var nav = Ioc.Default.GetService<NavigationService>();

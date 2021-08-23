@@ -49,17 +49,17 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadCommand ??=
-            new AsyncRelayCommand(AggiornaClienti);
+        public IAsyncRelayCommand LoadedCommand => loadCommand
+            ??= new AsyncRelayCommand(AggiornaClienti);
 
-        public ICommand AggiornaClientiCommand => aggiornaClientiCommand ??=
-            new AsyncRelayCommand(AggiornaClienti);
+        public IAsyncRelayCommand AggiornaClientiCommand => aggiornaClientiCommand
+            ??= new AsyncRelayCommand(AggiornaClienti);
 
-        public ICommand ApriClienteCommand => apriClienteCommand ??=
-            new RelayCommand(ApriCliente, EnableApriCliente);
+        public ICommand ApriClienteCommand => apriClienteCommand
+            ??= new RelayCommand(ApriCliente, EnableApriCliente);
 
-        public ICommand CancellaClienteCommand => cancellaClienteCommand ??=
-            new RelayCommand(CancellaCliente, EnableCancellaCliente);
+        public ICommand CancellaClienteCommand => cancellaClienteCommand
+            ??= new RelayCommand(CancellaCliente, EnableCancellaCliente);
 
         private async Task AggiornaClienti()
         {
@@ -74,7 +74,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         {
             if (ClienteSelezionato != null)
             {
-                navigationService.NavigateTo(typeof(ClienteViewModel).Name);
+                navigationService.NavigateTo(nameof(ClienteViewModel));
                 Messenger.Send(new ClienteIdMessage(ClienteSelezionato.Id));
             }
         }

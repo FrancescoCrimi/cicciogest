@@ -40,7 +40,6 @@ namespace CiccioGest.Presentation.WpfApp.Services
         public void GoBack() => frame.GoBack();
 
         public void NavigateTo(Type pageType,
-                               object parameter = null,
                                bool clearNavigation = false)
         {
             if (frame.Content?.GetType() != pageType)
@@ -63,11 +62,10 @@ namespace CiccioGest.Presentation.WpfApp.Services
         }
 
         public void NavigateTo(string key,
-                               object parameter = null,
                                bool clearNavigation = false)
         {
             var pageType = pageService.GetPageType(key);
-            NavigateTo(pageType, parameter, clearNavigation);
+            NavigateTo(pageType, clearNavigation);
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e)

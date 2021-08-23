@@ -17,15 +17,15 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly IFatturaService fatturaService;
         private readonly INavigationService navigationService;
         private readonly IMessageBoxService messageBoxService;
-        private ICommand nuovaFatturaCommand;
-        private ICommand salvaFatturaCommand;
-        private ICommand rimuoviFatturaCommand;
-        private ICommand apriFatturaCommand;
-        private ICommand nuovoDettaglioCommand;
-        private ICommand aggiungiDettaglioCommand;
-        private ICommand rimuoviDettaglioCommand;
-        private ICommand selezionaDettaglioCommand;
-        private ICommand loadedCommand;
+        private RelayCommand loadedCommand;
+        private RelayCommand nuovaFatturaCommand;
+        private AsyncRelayCommand salvaFatturaCommand;
+        private AsyncRelayCommand rimuoviFatturaCommand;
+        private RelayCommand apriFatturaCommand;
+        private RelayCommand nuovoDettaglioCommand;
+        private RelayCommand aggiungiDettaglioCommand;
+        private RelayCommand rimuoviDettaglioCommand;
+        private RelayCommand selezionaDettaglioCommand;
 
         public FatturaViewModel(ILogger<FatturaViewModel> logger,
                                 IFatturaService fatturaService,
@@ -45,9 +45,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public Dettaglio DettaglioSelezionato { private get; set; }
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
-            navigationService.NavigateTo(typeof(ClientiDialogViewModel).Name));
+            navigationService.NavigateTo(nameof(ClientiDialogViewModel)));
 
-        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new RelayCommand(async () =>
+        public IAsyncRelayCommand SalvaFatturaCommand => salvaFatturaCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -59,7 +59,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         });
 
-        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new RelayCommand(async () =>
+        public IAsyncRelayCommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -72,10 +72,10 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(typeof(FattureDialogViewModel).Name));
+            => navigationService.NavigateTo(nameof(FattureDialogViewModel)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(typeof(ArticoliDialogViewModel).Name));
+            => navigationService.NavigateTo(nameof(ArticoliDialogViewModel)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {
@@ -111,7 +111,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 MostraFattura(await fatturaService.GetFattura(m.Value));
             });
 
-            Messenger.Register<ArticoloIdMessage>(this, async (r, m) => 
+            Messenger.Register<ArticoloIdMessage>(this, async (r, m) =>
             {
                 Dettaglio = new Dettaglio(await fatturaService.GetArticolo(m.Value), 1);
                 OnPropertyChanged(nameof(Dettaglio));

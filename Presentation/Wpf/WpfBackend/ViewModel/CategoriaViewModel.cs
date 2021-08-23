@@ -17,7 +17,10 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly ILogger logger;
         private readonly IMagazinoService service;
         private readonly IMessageBoxService messageBoxService;
-        private ICommand loadedCommand;
+        private AsyncRelayCommand loadedCommand;
+        private AsyncRelayCommand salvaCommand;
+        private AsyncRelayCommand rimuoviCommand;
+        private RelayCommand nuovoCommand;
 
         public CategoriaViewModel(ILogger<CategoriaViewModel> logger,
                                   IMagazinoService service,
@@ -27,9 +30,6 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.service = service ?? throw new ArgumentNullException(nameof(service));
             this.messageBoxService = messageBoxService;
             Categorie = new ObservableCollection<Categoria>();
-            SalvaCommand = new RelayCommand(Salva);
-            RimuoviCommand = new RelayCommand(Rimuovi);
-            NuovoCommand = new RelayCommand(Nuova);
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
@@ -37,16 +37,12 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public Categoria Categoria { get; private set; }
         public Categoria CategoriaSelezionata { set { Mostra(value); } }
 
-        public ICommand SalvaCommand { get; private set; }
-        public ICommand RimuoviCommand { get; private set; }
-        public ICommand NuovoCommand { get; private set; }
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand( async () => 
-        {
-            await Aggiorna();
-        }));
+        public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(Aggiorna);
+        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(Nuova);
+        public IAsyncRelayCommand SalvaCommand => salvaCommand ??= new AsyncRelayCommand(Salva);
+        public IAsyncRelayCommand RimuoviCommand => rimuoviCommand ??= new AsyncRelayCommand(Rimuovi);
 
-
-        private async void Salva()
+        private async Task Salva()
         {
             try
             {
@@ -59,7 +55,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        private async void Rimuovi()
+        private async Task Rimuovi()
         {
             try
             {
@@ -95,7 +91,6 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 Categorie.Add(ca);
             }
         }
-
 
         public void Dispose()
         {
