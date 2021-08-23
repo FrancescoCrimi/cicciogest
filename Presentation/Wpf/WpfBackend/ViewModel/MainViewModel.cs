@@ -16,12 +16,14 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private RelayCommand apriArticoliCommand;
         private RelayCommand apriFattureCommand;
         private RelayCommand<Type> menuItemCommand;
+        private RelayCommand goBackCommand;
 
         public MainViewModel(ILogger<MainViewModel> logger,
                              INavigationService navigationService)
         {
             this.logger = logger;
             this.navigationService = navigationService;
+            this.navigationService.Navigated += OnNavigated;
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
@@ -45,8 +47,19 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             ??= new RelayCommand<Type>((type)
                 => navigationService.NavigateTo(type));
 
+        public ICommand GoBackCommand => goBackCommand ??= new RelayCommand(
+            () => navigationService.GoBack(),
+            () => navigationService.CanGoBack);
+
+        private void OnNavigated(object sender, EventArgs e)
+        {
+            if(goBackCommand != null)
+                goBackCommand.NotifyCanExecuteChanged();
+        }
+
         public void Dispose()
         {
+            navigationService.Navigated -= OnNavigated;
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }

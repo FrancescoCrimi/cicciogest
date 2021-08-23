@@ -68,38 +68,7 @@
 
         </RelativePanel>
 
-        <SplitView Grid.Row="1"
-            x:Name="listSplitView"
-            DisplayMode="Inline"
-            OpenPaneLength="260"
-            PanePlacement="Right">
-            <SplitView.Pane>
-                <StackPanel></StackPanel>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <tollkit:DataGrid
-                    ItemsSource="{Binding Clienti, Mode=OneWay}"
-                    AutoGenerateColumns="False"
-                    SelectedItem="{Binding ClienteSelezionato, Mode=TwoWay}"
-                    IsReadOnly="True"
-                    SelectionMode="Single">
-                    <tollkit:DataGrid.Columns>
-                        <tollkit:DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
-                        <tollkit:DataGridTextColumn Binding="{Binding Nome}" Header="Nome"/>
-                        <tollkit:DataGridTextColumn Binding="{Binding Societa}" Header="Societa"/>
-                        <tollkit:DataGridTextColumn Binding="{Binding Indirizzo}" Header="Indirizzo"/>
-                        <tollkit:DataGridTextColumn Binding="{Binding PartitaIva}" Header="Partita Iva"/>
-                        <tollkit:DataGridTextColumn Binding="{Binding CodiceFiscale}" Header="Codice Fiscale"/>
-                    </tollkit:DataGrid.Columns>
-                    <!--<DataGrid.InputBindings>
-                        <MouseBinding 
-                            MouseAction="LeftDoubleClick"
-                            Command="{Binding SelezionaClienteCommand, Mode=OneWay}">
-                        </MouseBinding>
-                    </DataGrid.InputBindings>-->
-                </tollkit:DataGrid>
-            </SplitView.Content>
-        </SplitView>
+        <uc:ClientiGrid Grid.Row="1"/>
 
     </Grid>
 </Page>

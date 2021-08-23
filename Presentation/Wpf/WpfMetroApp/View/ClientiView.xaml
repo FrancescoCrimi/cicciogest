@@ -5,10 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
+      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfMetroApp.UserControls"
       d:DataContext="{d:DesignInstance Type=viewmodel:ClientiViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
+      Background="White"
       Title="ClientiView">
 
     <i:Interaction.Triggers>
@@ -19,7 +21,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -59,27 +61,7 @@
 
         </DockPanel>
 
-        <DataGrid Grid.Row="1"
-            ItemsSource="{Binding Clienti, Mode=OneWay}"
-            SelectedItem="{Binding ClienteSelezionato}"
-            AutoGenerateColumns="False"
-            IsReadOnly="True"
-            SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
-                <DataGridTextColumn Binding="{Binding Nome}" Header="Nome"/>
-                <DataGridTextColumn Binding="{Binding Societa}" Header="Societa"/>
-                <DataGridTextColumn Binding="{Binding Indirizzo}" Header="Indirizzo"/>
-                <DataGridTextColumn Binding="{Binding PartitaIva}" Header="Partita Iva"/>
-                <DataGridTextColumn Binding="{Binding CodiceFiscale}" Header="Codice Fiscale"/>
-            </DataGrid.Columns>
-            <DataGrid.InputBindings>
-                <MouseBinding 
-                    MouseAction="LeftDoubleClick"
-                    Command="{Binding ApriClienteCommand, Mode=OneWay}">
-                </MouseBinding>
-            </DataGrid.InputBindings>
-        </DataGrid>
+        <usercontrols:ClientiGrid  Grid.Row="1"/>
 
     </Grid>
 

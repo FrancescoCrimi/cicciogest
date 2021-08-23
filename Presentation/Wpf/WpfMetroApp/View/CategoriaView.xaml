@@ -9,6 +9,7 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
+      Background="White"
       Title="Categorie">
 
     <b:Interaction.Triggers>
@@ -24,7 +25,13 @@
             <RowDefinition Height="203*" />
         </Grid.RowDefinitions>
 
-        <ToolBar HorizontalAlignment="Stretch" x:Name="toolBar1" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
+        <ToolBar
+            ToolBarTray.IsLocked="True"
+            HorizontalAlignment="Stretch"
+            x:Name="toolBar1"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto">
             <Button Content="Nuovo" Command="{Binding NuovoCommand}"/>
             <Button Content="Rimuovi" Command="{Binding RimuoviCommand}"/>
             <Button Content="Salva" Command="{Binding SalvaCommand}"/>

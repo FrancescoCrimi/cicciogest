@@ -68,32 +68,7 @@
 
         </RelativePanel>
 
-        <SplitView Grid.Row="1"
-            x:Name="listSplitView"
-            DisplayMode="Inline"
-            OpenPaneLength="260"
-            PanePlacement="Right">
-            <SplitView.Pane>
-                <StackPanel></StackPanel>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <Grid>
-                    <tollkit:DataGrid                            
-                        AutoGenerateColumns="False"
-                        GridLinesVisibility="Horizontal"
-                        IsReadOnly="True"
-                        SelectionMode="Single"
-                        ItemsSource="{Binding Fatture, Mode=OneWay}"
-                        SelectedItem="{Binding FatturaSelezionata, Mode=TwoWay}">
-                        <tollkit:DataGrid.Columns>
-                            <tollkit:DataGridTextColumn Binding="{Binding Id }" Header="OrderID" />
-                            <tollkit:DataGridTextColumn Binding="{Binding Nome}" Header="OrderDate" />
-                            <tollkit:DataGridTextColumn Binding="{Binding Totale}" Header="Company" />
-                        </tollkit:DataGrid.Columns>
-                    </tollkit:DataGrid>
-                </Grid>
-            </SplitView.Content>
-        </SplitView>
+        <uc:FattureGrid Grid.Row="1"/>
 
     </Grid>
 

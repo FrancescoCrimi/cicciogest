@@ -7,7 +7,7 @@ using System.Windows.Navigation;
 
 namespace CiccioGest.Presentation.WpfApp.Services
 {
-    public class NavigationService : INavigationService
+    public class NavigationService : INavigationService, IDisposable
     {
         private readonly ILogger logger;
         private readonly IServiceScopeFactory serviceScopeFactory;
@@ -27,6 +27,8 @@ namespace CiccioGest.Presentation.WpfApp.Services
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
+        public event EventHandler Navigated;
+
         public void Initialize(Frame shellFrame)
         {
             if (frame == null)
@@ -36,7 +38,17 @@ namespace CiccioGest.Presentation.WpfApp.Services
             }
         }
 
-        public bool CanGoBack => frame.CanGoBack;
+        public bool CanGoBack
+        {
+            get
+            {
+                if (frame != null)
+                    return frame.CanGoBack;
+                else
+                    return false;
+            }
+        }
+
         public void GoBack() => frame.GoBack();
 
         public void NavigateTo(Type pageType,
@@ -84,6 +96,7 @@ namespace CiccioGest.Presentation.WpfApp.Services
                         oldScope = null;
                     }
                 }
+                Navigated?.Invoke(sender, new EventArgs());
             }
         }
 

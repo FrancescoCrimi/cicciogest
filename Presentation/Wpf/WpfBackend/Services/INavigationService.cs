@@ -13,5 +13,6 @@ namespace CiccioGest.Presentation.WpfBackend.Services
                         bool clearNavigation = false);
         void NavigateTo(string key,
                         bool clearNavigation = false);
+        event EventHandler Navigated;
     }
 }

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CiccioGest.Presentation.WpfApp.View
+namespace CiccioGest.Presentation.WpfMetroApp.UserControls
 {
     /// <summary>
-    /// Logica di interazione per FattureUserControl.xaml
+    /// Logica di interazione per ArticoliGrid.xaml
     /// </summary>
-    public partial class FattureUserControl : UserControl
+    public partial class ArticoliGrid : UserControl
     {
-        public FattureUserControl()
+        public ArticoliGrid()
         {
             InitializeComponent();
         }

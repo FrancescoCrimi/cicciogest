@@ -7,15 +7,15 @@ using System.Windows.Navigation;
 
 namespace CiccioGest.Presentation.WpfMetroApp.Services
 {
-    public class NavigationService : INavigationService
+    public class NavigationService : INavigationService, IDisposable
     {
-        private readonly ILogger logger;
+        private readonly ILogger? logger;
         private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly PageService pageService;
-        private Frame frame;
+        private Frame? frame;
         private bool clearNavigation;
-        private IServiceScope scope;
-        private IServiceScope oldScope;
+        private IServiceScope? scope;
+        private IServiceScope? oldScope;
 
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceScopeFactory serviceScopeFactory,
@@ -27,6 +27,8 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
+        public event EventHandler? Navigated;
+
         public void Initialize(Frame shellFrame)
         {
             if (frame == null)
@@ -36,13 +38,23 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
             }
         }
 
-        public bool CanGoBack => frame.CanGoBack;
-        public void GoBack() => frame.GoBack();
+        public bool CanGoBack
+        {
+            get
+            {
+                if (frame != null)
+                    return frame.CanGoBack;
+                else
+                    return false;
+            }
+        }
+
+        public void GoBack() => frame?.GoBack();
 
         public void NavigateTo(Type pageType,
                                bool clearNavigation = false)
         {
-            if (frame.Content?.GetType() != pageType)
+            if (frame?.Content?.GetType() != pageType)
             {
                 if (clearNavigation)
                 {
@@ -57,7 +69,7 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
                 }
 
                 var page = scope.ServiceProvider.GetService(pageType);
-                frame.Navigate(page);
+                frame?.Navigate(page);
             }
         }
 
@@ -84,12 +96,14 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
                         oldScope = null;
                     }
                 }
+                Navigated?.Invoke(sender, new EventArgs());
             }
         }
 
         public void Dispose()
         {
-            frame.Navigated -= OnNavigated;
+            if (frame != null)
+                frame.Navigated -= OnNavigated;
             if (scope != null)
             {
                 scope.Dispose();

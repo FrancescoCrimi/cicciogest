@@ -68,43 +68,7 @@
 
         </RelativePanel>
 
-        <SplitView Grid.Row="1"
-            x:Name="listSplitView"
-            DisplayMode="Inline"
-            OpenPaneLength="260"
-            PanePlacement="Right">
-            <SplitView.Pane>
-                <StackPanel></StackPanel>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <tollkit:DataGrid
-                    BorderThickness="0"
-                    CanUserReorderColumns="False"
-                    CanUserResizeColumns="False"
-                    GridLinesVisibility="None"
-                    IsReadOnly="True"
-                    AutoGenerateColumns="False"
-                    Margin="0,10,0,0"
-                    ItemsSource="{Binding Articoli, Mode=OneWay}"
-                    SelectedItem="{Binding ArticoloSelezionato, Mode=TwoWay}"
-                    SelectionMode="Single">
-                    <tollkit:DataGrid.Columns>
-                        <tollkit:DataGridTextColumn
-                        Header="Invoice"
-                        Tag="InvoiceNumber"
-                        Binding="{Binding Id}"/>
-                        <tollkit:DataGridTextColumn
-                        Header="Customer"
-                        Tag="CustomerName"
-                        Binding="{Binding Nome}"/>
-                        <!--<controls:DataGridTextColumn
-                        Header="Totale"
-                        Tag="TotaleName"
-                        Binding="{Binding Totale}"/>-->
-                    </tollkit:DataGrid.Columns>
-                </tollkit:DataGrid>
-            </SplitView.Content>
-        </SplitView>
+        <uc:ArticoliGrid Grid.Row="1"/>
 
     </Grid>
 

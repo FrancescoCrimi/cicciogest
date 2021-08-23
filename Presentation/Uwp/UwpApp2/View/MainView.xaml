@@ -27,17 +27,17 @@
             <winui:NavigationViewItem
                 Content="Fatture"
                 Icon="Shop"
-                helpers:NavHelper.NavigateTo="views:FatturePage" >
+                helpers:NavHelper.NavigateTo="views:FattureView" >
             </winui:NavigationViewItem>
             <winui:NavigationViewItem
                 Content="Articoli"
                 Icon="Document"
-                helpers:NavHelper.NavigateTo="views:ArticoliPage" >
+                helpers:NavHelper.NavigateTo="views:ArticoliView" >
             </winui:NavigationViewItem>
             <winui:NavigationViewItem
                 Content="Clienti"
                 Icon="ContactInfo"
-                helpers:NavHelper.NavigateTo="views:ClientiPage" >
+                helpers:NavHelper.NavigateTo="views:ClientiView" >
             </winui:NavigationViewItem>
         </winui:NavigationView.MenuItems>
 

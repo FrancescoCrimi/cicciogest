@@ -3,12 +3,74 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.View"
+      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"
+      xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ArticoliDialogViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="ArticoliDialogView">
+      Background="White"
+      Title="ArticoliDialog">
 
-    <local:ArticoliUserControl/>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+
+            <TextBlock
+                Text="Articoli"
+                DockPanel.Dock="Left"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+
+            <Grid
+                DockPanel.Dock="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Cerca Articoli:" Margin="3" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" VerticalAlignment="Center" Text="Cerca Articoli"/>
+            </Grid>
+
+            <ToolBar
+                ToolBarTray.IsLocked="True">
+                <Button Command="{Binding ApriArticoloCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding CancellaArticoloCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Cancella" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding AggiornaArticoliCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Aggiorna" />
+                    </TextBlock>
+                </Button>
+            </ToolBar>
+
+        </DockPanel>
+
+        <usercontrols:ArticoliGrid Grid.Row="1"/>
+
+    </Grid>
 
 </Page>
