@@ -5,10 +5,12 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="using:CiccioGest.Presentation.UwpApp.UserControls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -27,9 +29,16 @@
                 DefaultLabelPosition="Right"
                 HorizontalAlignment="Stretch"
                 Background="Transparent"
+                RelativePanel.LeftOf="OrderSearchBox"
                 RelativePanel.RightOf="PageTitle">
-                
             </CommandBar>
+
+            <uc:CollapsibleSearchBox
+                x:Name="OrderSearchBox"
+                Width="240"
+                Margin="12,8,12,0"
+                CollapseWidth="{StaticResource MediumWindowSnapPoint}"
+                RelativePanel.AlignRightWithPanel="True" />
 
         </RelativePanel>
 

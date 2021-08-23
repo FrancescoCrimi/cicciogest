@@ -21,7 +21,8 @@
         </ic:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
-    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -33,8 +34,7 @@
                 x:Name="PageTitle"
                 Text="Clienti"
                 Margin="{StaticResource SmallLeftMargin}"
-                Style="{StaticResource PageTitleStyle}"
-                />
+                Style="{StaticResource PageTitleStyle}"/>
 
             <CommandBar
                 x:Name="mainCommandBar"
@@ -63,6 +63,7 @@
                 x:Name="OrderSearchBox"
                 Width="240"
                 Margin="12,8,12,0"
+                CollapseWidth="{StaticResource MediumWindowSnapPoint}"
                 RelativePanel.AlignRightWithPanel="True" />
 
         </RelativePanel>

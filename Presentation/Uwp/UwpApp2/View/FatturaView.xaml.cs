@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class FatturaPage : Page
+    public sealed partial class FatturaView : Page
     {
-        public FatturaPage()
+        public FatturaView()
         {
             InitializeComponent();
             DataContext = Ioc.Default.GetService<FatturaViewModel>();

@@ -5,10 +5,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainView : Page
     {
         private readonly NavigationService navigationService;
-        public MainPage()
+        public MainView()
         {
             InitializeComponent();
             navigationService = Ioc.Default.GetService<NavigationService>();

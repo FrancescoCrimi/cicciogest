@@ -60,7 +60,7 @@ namespace CiccioGest.Presentation.UwpApp
                     // Quando lo stack di esplorazione non viene ripristinato, passare alla prima pagina
                     // configurando la nuova pagina per passare le informazioni richieste come parametro di
                     // navigazione
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(MainView), e.Arguments);
                 }
                 // Assicurarsi che la finestra corrente sia attiva
                 Window.Current.Activate();

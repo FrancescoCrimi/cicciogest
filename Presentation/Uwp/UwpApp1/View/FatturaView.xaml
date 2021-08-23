@@ -26,7 +26,8 @@
         </ic:EventTriggerBehavior>
     </i:Interaction.Behaviors>-->
 
-    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="Auto"/>
@@ -37,7 +38,7 @@
 
             <TextBlock
                 x:Name="PageTitle"
-                Text="Fatture"
+                Text="Fattura"
                 Margin="{StaticResource SmallLeftMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
@@ -211,7 +212,6 @@
                 </tollkit:DataGrid>
             </Border>
         </Grid>
-
 
     </Grid>
 </Page>
