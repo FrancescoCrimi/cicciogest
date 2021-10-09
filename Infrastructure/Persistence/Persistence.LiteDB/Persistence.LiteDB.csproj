@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CiccioGest.Infrastructure.Persistence.LiteDB</RootNamespace>
-    <Platforms>AnyCPU;x86;x64</Platforms>
+	<AssemblyName>Persistence.LiteDB</AssemblyName>
+	<RootNamespace>CiccioGest.Infrastructure.Persistence.LiteDB</RootNamespace>
+	<Product>CiccioGest</Product>
+	<Authors>Francesco Crimi</Authors>
+	<Company>CiccioSoft</Company>
+ 	<Platforms>x86;x64</Platforms>
     <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

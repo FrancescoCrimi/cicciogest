@@ -4,12 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>CiccioGest.Infrastructure.Persistence.Nhb</RootNamespace>
     <AssemblyName>Persistence.Nhb</AssemblyName>
-    <Platforms>AnyCPU;x86;x64</Platforms>
+	<Product>CiccioGest</Product>
+	<Authors>Francesco Crimi</Authors>
+	<Company>CiccioSoft</Company>
+	<Platforms>x86;x64</Platforms>
     <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -53,6 +52,8 @@
   <ItemGroup>
     <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
     <PackageReference Include="CiccioSoft.NhbCollections" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.0" />
     <PackageReference Include="Npgsql" Version="5.0.7" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.114.3" />

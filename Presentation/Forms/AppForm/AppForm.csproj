@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>CiccioGest.Presentation.AppForm</RootNamespace>
     <AssemblyName>AppForm</AssemblyName>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

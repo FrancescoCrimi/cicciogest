@@ -6,11 +6,7 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>CiccioGest.Presentation.WpfApp</RootNamespace>
     <AssemblyName>WpfApp2</AssemblyName>
-    <Platforms>AnyCPU;x86;x64</Platforms>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Platforms>x86;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

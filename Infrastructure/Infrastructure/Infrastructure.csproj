@@ -5,15 +5,10 @@
     <RootNamespace>CiccioGest.Infrastructure</RootNamespace>
     <AssemblyName>Infrastructure</AssemblyName>
     <Product>CiccioGest</Product>
-    <PackageId>CiccioGest.Infrastructure</PackageId>
     <Authors>Francesco Crimi</Authors>
     <Company>CiccioSoft</Company>
-    <Platforms>AnyCPU;x86;x64</Platforms>
+    <Platforms>x86;x64</Platforms>
     <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -26,7 +21,6 @@
 
   <ItemGroup>
     <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
