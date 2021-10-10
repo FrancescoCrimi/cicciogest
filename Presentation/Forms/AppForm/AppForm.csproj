@@ -1,132 +1,135 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-    <RootNamespace>CiccioGest.Presentation.AppForm</RootNamespace>
-    <AssemblyName>AppForm</AssemblyName>
-    <Platforms>x64;x86</Platforms>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<RootNamespace>CiccioGest.Presentation.AppForm</RootNamespace>
+		<AssemblyName>AppForm</AssemblyName>
+		<Product>CiccioGest</Product>
+		<Authors>Francesco Crimi</Authors>
+		<Company>CiccioSoft</Company>
+		<Platforms>x64;x86</Platforms>
+		<OutputType>WinExe</OutputType>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="View\ArticoloView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\ArticoloView.Designer.cs">
-      <DependentUpon>ArticoloView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\CategoriaView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\CategoriaView.Designer.cs">
-      <DependentUpon>CategoriaView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\FatturaView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\FatturaView.Designer.cs">
-      <DependentUpon>FatturaView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\ListaArticoliView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\ListaArticoliView.Designer.cs">
-      <DependentUpon>ListaArticoliView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\ListaClientiView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\ListaClientiView.Designer.cs">
-      <DependentUpon>ListaClientiView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\ListaFattureView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\ListaFattureView.Designer.cs">
-      <DependentUpon>ListaFattureView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\ListaFornitoriView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\ListaFornitoriView.Designer.cs">
-      <DependentUpon>ListaFornitoriView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\MainView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\MainView.Designer.cs">
-      <DependentUpon>MainView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\SelectClienteView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\SelectClienteView.Designer.cs">
-      <DependentUpon>SelectClienteView.cs</DependentUpon>
-    </Compile>
-    <Compile Update="View\SettingView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\SettingView.Designer.cs">
-      <DependentUpon>SettingView.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="View\ArticoloView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ArticoloView.Designer.cs">
+			<DependentUpon>ArticoloView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\CategoriaView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\CategoriaView.Designer.cs">
+			<DependentUpon>CategoriaView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\FatturaView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\FatturaView.Designer.cs">
+			<DependentUpon>FatturaView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ListaArticoliView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ListaArticoliView.Designer.cs">
+			<DependentUpon>ListaArticoliView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ListaClientiView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ListaClientiView.Designer.cs">
+			<DependentUpon>ListaClientiView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ListaFattureView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ListaFattureView.Designer.cs">
+			<DependentUpon>ListaFattureView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ListaFornitoriView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ListaFornitoriView.Designer.cs">
+			<DependentUpon>ListaFornitoriView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\MainView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\MainView.Designer.cs">
+			<DependentUpon>MainView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\SelectClienteView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\SelectClienteView.Designer.cs">
+			<DependentUpon>SelectClienteView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\SettingView.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\SettingView.Designer.cs">
+			<DependentUpon>SettingView.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\ArticoloView.resx">
-      <DependentUpon>ArticoloView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\CategoriaView.resx">
-      <DependentUpon>CategoriaView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\FatturaView.resx">
-      <DependentUpon>FatturaView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\ListaArticoliView.resx">
-      <DependentUpon>ListaArticoliView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\ListaClientiView.resx">
-      <DependentUpon>ListaClientiView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\ListaFattureView.resx">
-      <DependentUpon>ListaFattureView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\ListaFornitoriView.resx">
-      <DependentUpon>ListaFornitoriView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\MainView.resx">
-      <DependentUpon>MainView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\SelectClienteView.resx">
-      <DependentUpon>SelectClienteView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\SettingView.resx">
-      <DependentUpon>SettingView.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ArticoloView.resx">
+			<DependentUpon>ArticoloView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\CategoriaView.resx">
+			<DependentUpon>CategoriaView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\FatturaView.resx">
+			<DependentUpon>FatturaView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ListaArticoliView.resx">
+			<DependentUpon>ListaArticoliView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ListaClientiView.resx">
+			<DependentUpon>ListaClientiView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ListaFattureView.resx">
+			<DependentUpon>ListaFattureView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ListaFornitoriView.resx">
+			<DependentUpon>ListaFornitoriView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\MainView.resx">
+			<DependentUpon>MainView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\SelectClienteView.resx">
+			<DependentUpon>SelectClienteView.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\SettingView.resx">
+			<DependentUpon>SettingView.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="NLog.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="NLog.config">
+			<SubType>Designer</SubType>
+		</None>
+	</ItemGroup>
 
 </Project>

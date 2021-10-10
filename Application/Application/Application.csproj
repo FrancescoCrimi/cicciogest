@@ -1,33 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CiccioGest.Application</RootNamespace>
-    <AssemblyName>Application</AssemblyName>
-	<Product>CiccioGest</Product>
-	<Authors>Francesco Crimi</Authors>
-	<Company>CiccioSoft</Company>
-	<Platforms>x86;x64</Platforms>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>CiccioGest.Application</RootNamespace>
+		<AssemblyName>Application</AssemblyName>
+		<Product>CiccioGest</Product>
+		<Authors>Francesco Crimi</Authors>
+		<Company>CiccioSoft</Company>
+		<Platforms>x86;x64</Platforms>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Impl\**" />
+		<EmbeddedResource Remove="Impl\**" />
+		<None Remove="Impl\**" />
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Impl\**" />
-    <EmbeddedResource Remove="Impl\**" />
-    <None Remove="Impl\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+	</ItemGroup>
 
 </Project>

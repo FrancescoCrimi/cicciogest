@@ -11,8 +11,6 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private readonly IMagazinoService service;
         private readonly IListaArticoliView view;
 
-        public event EventHandler CloseEvent;
-
         public int IdProdotto { get; private set; }
 
         public ListaArticoliPresenter(ILogger<ListaArticoliPresenter> logger,

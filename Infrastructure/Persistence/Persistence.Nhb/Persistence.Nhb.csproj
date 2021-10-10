@@ -1,67 +1,59 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CiccioGest.Infrastructure.Persistence.Nhb</RootNamespace>
-    <AssemblyName>Persistence.Nhb</AssemblyName>
-	<Product>CiccioGest</Product>
-	<Authors>Francesco Crimi</Authors>
-	<Company>CiccioSoft</Company>
-	<Platforms>x86;x64</Platforms>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>CiccioGest.Infrastructure.Persistence.Nhb</RootNamespace>
+		<AssemblyName>Persistence.Nhb</AssemblyName>
+		<Product>CiccioGest</Product>
+		<Authors>Francesco Crimi</Authors>
+		<Company>CiccioSoft</Company>
+		<Platforms>x86;x64</Platforms>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
+	<ItemGroup>
+		<None Remove="Mapping\Articolo.hbm.xml" />
+		<None Remove="Mapping\Categoria.hbm.xml" />
+		<None Remove="Mapping\Cliente.hbm.xml" />
+		<None Remove="Mapping\Dettaglio.hbm.xml" />
+		<None Remove="Mapping\Fattura.hbm.xml" />
+		<None Remove="Mapping\Fornitore.hbm.xml" />
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Mapping\Fornitore.hbm.xml">
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Mapping\Cliente.hbm.xml">
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Mapping\Categoria.hbm.xml">
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Mapping\Dettaglio.hbm.xml">
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Mapping\Fattura.hbm.xml">
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Mapping\Articolo.hbm.xml">
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Mapping\Articolo.hbm.xml" />
-    <None Remove="Mapping\Categoria.hbm.xml" />
-    <None Remove="Mapping\Cliente.hbm.xml" />
-    <None Remove="Mapping\Dettaglio.hbm.xml" />
-    <None Remove="Mapping\Fattura.hbm.xml" />
-    <None Remove="Mapping\Fornitore.hbm.xml" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
+		<PackageReference Include="CiccioSoft.NhbCollections" Version="2.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+		<PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.0" />
+		<PackageReference Include="Npgsql" Version="5.0.7" />
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.114.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Mapping\Fornitore.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Mapping\Cliente.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Mapping\Categoria.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Mapping\Dettaglio.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Mapping\Fattura.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Mapping\Articolo.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
-    <PackageReference Include="CiccioSoft.NhbCollections" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.0" />
-    <PackageReference Include="Npgsql" Version="5.0.7" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.114.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+	</ItemGroup>
 
 </Project>

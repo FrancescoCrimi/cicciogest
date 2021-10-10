@@ -11,8 +11,6 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private readonly IClientiFornitoriService service;
         private readonly ISelectClienteView view;
 
-        public event EventHandler CloseEvent;
-
         public int IdCliente { get; private set; }
 
         public SelectClientePresenter(ILogger<SelectClientePresenter> logger,
