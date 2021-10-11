@@ -11,36 +11,26 @@ namespace CiccioGest.Presentation.AppForm.Presenter
     {
         private readonly ILogger logger;
         private readonly IServiceProvider serviceProvider;
-        private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly IFatturaService service;
         private readonly IFatturaView view;
 
-        public event EventHandler CloseEvent;
-
         public FatturaPresenter(ILogger<FatturaPresenter> logger,
-                                IServiceProvider serviceProvider,
-                                IServiceScopeFactory serviceScopeFactory,
-                                IFatturaView fatturaView,
-                                IFatturaService fatturaService)
-            :base(fatturaView)
+                                IFatturaView view,
+                                IFatturaService fatturaService,
+                                IServiceProvider serviceProvider)
+            : base(view)
         {
             this.logger = logger;
-            this.serviceProvider = serviceProvider;
-            this.serviceScopeFactory = serviceScopeFactory;
-            view = fatturaView;
+            this.view = view;
             service = fatturaService;
+            this.serviceProvider = serviceProvider;
 
-            view.AggiungiDettaglioEvent += View_AggiungiDettaglioEvent;
-            view.ApriFatturaEvent += View_ApriFatturaEvent;
-            view.EliminaFatturaEvent += View_EliminaEvent;
-            view.CloseEvent += View_EsciEvent;
             view.LoadEvent += View_LoadEvent;
-            view.NuovoDettaglioEvent += View_NuovoDettaglioEvent;
-            view.RimuoviDettaglioEvent += View_RimuoviDettaglioEvent;
-            view.SalvaFatturaEvent += View_SalvaEvent;
-
-            this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            view.CloseEvent += View_CloseEvent;
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
+
+        #region public method
 
         public async void NuovaFattura(int idCliente = 0)
         {
@@ -63,15 +53,49 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-        private async void View_SalvaEvent(object sender, Fattura e)
+        #endregion
+
+
+        private void View_LoadEvent(object sender, EventArgs e)
         {
-            await service.SaveFattura(e);
+            view.AggiungiDettaglioEvent += View_AggiungiDettaglioEvent;
+            view.ApriFatturaEvent += View_ApriFatturaEvent;
+            view.EliminaFatturaEvent += View_EliminaEvent;
+            view.NuovoDettaglioEvent += View_NuovoDettaglioEvent;
+            view.RimuoviDettaglioEvent += View_RimuoviDettaglioEvent;
+            view.SalvaFatturaEvent += View_SalvaEvent;
         }
 
-        private void View_RimuoviDettaglioEvent(object sender, FatturaDettaglioEventArgs e)
+        private void View_CloseEvent(object sender, EventArgs e)
         {
-            e.Fattura.RemoveDettaglio(e.Dettaglio);
+            view.AggiungiDettaglioEvent -= View_AggiungiDettaglioEvent;
+            view.ApriFatturaEvent -= View_ApriFatturaEvent;
+            view.EliminaFatturaEvent -= View_EliminaEvent;
+            view.NuovoDettaglioEvent -= View_NuovoDettaglioEvent;
+            view.RimuoviDettaglioEvent -= View_RimuoviDettaglioEvent;
+            view.SalvaFatturaEvent -= View_SalvaEvent;
+        }
+
+
+        private void View_AggiungiDettaglioEvent(object sender, FatturaDettaglioEventArgs e)
+        {
+            if (e.Dettaglio.Id == 0)
+            {
+                e.Fattura.AddDettaglio(e.Dettaglio);
+            }
             view.SetDettaglio(new Dettaglio(null, 0));
+        }
+
+        private void View_ApriFatturaEvent(object sender, EventArgs e)
+        {
+            var sfv = serviceProvider.GetService<ListaFatturePresenter>();
+            //sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
+            sfv.Show();
+        }
+
+        private async void View_EliminaEvent(object sender, int e)
+        {
+            await service.DeleteFattura(e);
         }
 
         private async void View_NuovoDettaglioEvent(object sender, EventArgs e)
@@ -87,34 +111,17 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-        private void View_LoadEvent(object sender, EventArgs e)
+        private void View_RimuoviDettaglioEvent(object sender, FatturaDettaglioEventArgs e)
         {
-        }
-
-        private void View_EsciEvent(object sender, EventArgs e)
-        {
-        }
-
-        private async void View_EliminaEvent(object sender, int e)
-        {
-            await service.DeleteFattura(e);
-        }
-
-        private void View_ApriFatturaEvent(object sender, EventArgs e)
-        {
-            var sfv = serviceProvider.GetService<ListaFatturePresenter>();
-            //sfv.FormClosing += (s, a) => kernel.ReleaseComponent(s);
-            sfv.Show();
-        }
-
-        private void View_AggiungiDettaglioEvent(object sender, FatturaDettaglioEventArgs e)
-        {
-            if (e.Dettaglio.Id == 0)
-            {
-                e.Fattura.AddDettaglio(e.Dettaglio);
-            }
+            e.Fattura.RemoveDettaglio(e.Dettaglio);
             view.SetDettaglio(new Dettaglio(null, 0));
         }
+
+        private async void View_SalvaEvent(object sender, Fattura e)
+        {
+            await service.SaveFattura(e);
+        }
+
 
         public void Dispose()
         {

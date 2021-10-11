@@ -28,61 +28,33 @@ namespace CiccioGest.Presentation.AppForm.View
         }
 
         public void SetDettaglio(Dettaglio dettaglio)
-        {
-            dettaglioBindingSource.DataSource = dettaglio;
-        }
+            => dettaglioBindingSource.DataSource = dettaglio;
 
         public void SetFattura(Fattura fattura)
-        {
-            fatturaBindingSource.DataSource = fattura;
-        }
+            => fatturaBindingSource.DataSource = fattura;
+
 
         private void FatturaViewLoad(object sender, EventArgs e)
-        {
-            LoadEvent?.Invoke(this, e);
-        }
+            => LoadEvent?.Invoke(this, new EventArgs());
+
+        private void FatturaView_FormClosed(object s, FormClosedEventArgs e)
+            => CloseEvent?.Invoke(this, new EventArgs());
+
 
         private void ApriClick(object s, EventArgs e)
-        {
-            ApriFatturaEvent?.Invoke(this, e);
-        }
+            => ApriFatturaEvent?.Invoke(this, new EventArgs());
 
-        private void DettagliDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dettagliBindingSource.Current != null)
-                dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
-        }
-
-        private void EsciClick(object s, EventArgs e) => CloseEvent?.Invoke(s, e);
+        private void EsciClick(object s, EventArgs e)
+            => Close();
 
         private void SalvaClick(object s, EventArgs e)
-        {
-            try
-            {
-                SalvaFatturaEvent?.Invoke(s, (Fattura)fatturaBindingSource.DataSource);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+            => SalvaFatturaEvent?.Invoke(this, (Fattura)fatturaBindingSource.DataSource);
 
         private  void EliminaClick(object s, EventArgs e)
-        {
-            try
-            {
-                EliminaFatturaEvent?.Invoke(s, ((Fattura)fatturaBindingSource.DataSource).Id);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+            => EliminaFatturaEvent?.Invoke(this, ((Fattura)fatturaBindingSource.DataSource).Id);
 
         private void NuovoDettaglioClick(object s, EventArgs e)
-        {
-            NuovoDettaglioEvent?.Invoke(s, e);
-        }
+            => NuovoDettaglioEvent?.Invoke(this, new EventArgs());
 
         private void AggiungiDettaglioClick(object s, EventArgs e)
         {
@@ -98,14 +70,13 @@ namespace CiccioGest.Presentation.AppForm.View
             RimuoviDettaglioEvent?.Invoke(s, new FatturaDettaglioEventArgs(fattura, dettaglio));
         }
 
-        private void ToolStripButton_Click(object sender, EventArgs e)
+        private void DettagliDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            new AboutBox().ShowDialog();
+            if (dettagliBindingSource.Current != null)
+                dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
         }
 
-        private void FatturaView_FormClosed(object s, FormClosedEventArgs e)
-        {
-            CloseEvent?.Invoke(s, e);
-        }
+        private void AboutToolStripButton_Click(object sender, EventArgs e)
+            => new AboutBox().ShowDialog();
     }
 }

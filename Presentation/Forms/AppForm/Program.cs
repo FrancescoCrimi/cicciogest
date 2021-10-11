@@ -4,7 +4,6 @@ using CiccioGest.Presentation.AppForm.Hosting;
 using CiccioGest.Presentation.AppForm.Presenter;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
-//using CiccioGest.Presentation.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog.Extensions.Logging;
@@ -33,12 +32,12 @@ namespace CiccioGest.Presentation.AppForm
             {
                 host.ConfigureWinForms<MainPresenter>();
             }
-            host.ConfigureLogging((hostBuilderContext, loggingBuilder) =>
-                    loggingBuilder.AddNLog(hostBuilderContext.Configuration));
+            host.ConfigureLogging((hostBuilderContext, loggingBuilder)
+                => loggingBuilder.AddNLog(hostBuilderContext.Configuration));
             host.ConfigureServices(ConfigureServices);
             return host;
         }
-          
+
         private static void ConfigureServices(HostBuilderContext hostBuilderContext,
                                               IServiceCollection serviceCollection)
         {

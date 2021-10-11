@@ -12,10 +12,9 @@ namespace CiccioGest.Presentation.AppForm.View
         private readonly ILogger logger;
 
         public event EventHandler LoadEvent;
-        public event EventHandler<int> SelectFatturaEvent;
-        public event EventHandler NuovaEvent;
-        public event EventHandler ApriEvent;
         public event EventHandler CloseEvent;
+        public event EventHandler<int> SelectFatturaEvent;
+        public event EventHandler NuovaFatturaEvent;
 
         public ListaFattureView(ILogger<ListaFattureView> logger)
         {
@@ -30,38 +29,37 @@ namespace CiccioGest.Presentation.AppForm.View
             fattureDataGridView.ClearSelection();
         }
 
-        private void ListaFattureViewLoad(object s, EventArgs e)
-        {
-            LoadEvent?.Invoke(this, e);
-        }
+
+        private void ListaFattureView_Load(object sender, EventArgs e)
+            => LoadEvent?.Invoke(this, new EventArgs());
+
+        private void ListaFattureView_FormClosed(object s, FormClosedEventArgs e)
+            =>  CloseEvent?.Invoke(this, new EventArgs());
+
+
+        private void NuovaFatturaToolStripButton_Click(object sender, EventArgs e)
+            => NuovaFatturaEvent?.Invoke(this, new EventArgs());
+
+        private void ApriFatturaToolStripButton_Click(object sender, EventArgs e)
+            => SelectFattura();
+
+        private void EsciToolStripButton_Click(object sender, EventArgs e)
+            => Close();
+
+        private void AboutToolStripButton_Click(object sender, EventArgs e)
+            => new AboutBox().ShowDialog();
 
         private void FattureDataGridViewCellDoubleClick(object s, DataGridViewCellEventArgs e)
+            => SelectFattura();
+
+
+        private void SelectFattura()
         {
-            if (fattureBindingSource.Current != null)
+            if (fattureDataGridView.SelectedRows.Count != 0)
             {
                 int IdFattura = ((FatturaReadOnly)fattureBindingSource.Current).Id;
                 SelectFatturaEvent?.Invoke(this, IdFattura);
             }
-        }
-
-        private void NuovaClick(object s, EventArgs e)
-        {
-            NuovaEvent?.Invoke(s, e);
-        }
-
-        private void ApriClick(object s, EventArgs e)
-        {
-            ApriEvent?.Invoke(s, e);
-        }
-
-        private void EsciClick(object s, EventArgs e)
-        {
-            CloseEvent?.Invoke(s, e);
-        }
-
-        private void ListaFattureView_FormClosed(object s, FormClosedEventArgs e)
-        {
-            CloseEvent?.Invoke(s, e);
         }
     }
 }

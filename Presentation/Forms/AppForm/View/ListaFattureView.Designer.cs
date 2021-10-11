@@ -37,10 +37,10 @@
             this.fattureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.nuovaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.apriToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.nuovaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.apriFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.esciToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.ToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -69,7 +69,7 @@
             this.fattureDataGridView.RowHeadersVisible = false;
             this.fattureDataGridView.RowHeadersWidth = 51;
             this.fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.fattureDataGridView.Size = new System.Drawing.Size(614, 398);
+            this.fattureDataGridView.Size = new System.Drawing.Size(536, 371);
             this.fattureDataGridView.TabIndex = 6;
             this.fattureDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FattureDataGridViewCellDoubleClick);
             // 
@@ -81,7 +81,7 @@
             this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 48;
+            this.idDataGridViewTextBoxColumn.Width = 42;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -99,7 +99,7 @@
             this.totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
             this.totaleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totaleDataGridViewTextBoxColumn.Width = 77;
+            this.totaleDataGridViewTextBoxColumn.Width = 63;
             // 
             // fattureBindingSource
             // 
@@ -117,69 +117,71 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(622, 433);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(544, 406);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuovaToolStripButton,
-            this.apriToolStripButton,
+            this.nuovaFatturaToolStripButton,
+            this.apriFatturaToolStripButton,
             this.esciToolStripButton,
-            this.ToolStripButton});
+            this.aboutToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(622, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(544, 27);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // nuovaToolStripButton
+            // nuovaFatturaToolStripButton
             // 
-            this.nuovaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovaToolStripButton.Image")));
-            this.nuovaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovaToolStripButton.Name = "nuovaToolStripButton";
-            this.nuovaToolStripButton.Size = new System.Drawing.Size(76, 24);
-            this.nuovaToolStripButton.Text = "Nuova";
-            this.nuovaToolStripButton.Click += new System.EventHandler(this.NuovaClick);
+            this.nuovaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovaFatturaToolStripButton.Image")));
+            this.nuovaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuovaFatturaToolStripButton.Name = "nuovaFatturaToolStripButton";
+            this.nuovaFatturaToolStripButton.Size = new System.Drawing.Size(66, 24);
+            this.nuovaFatturaToolStripButton.Text = "Nuova";
+            this.nuovaFatturaToolStripButton.Click += new System.EventHandler(this.NuovaFatturaToolStripButton_Click);
             // 
-            // apriToolStripButton
+            // apriFatturaToolStripButton
             // 
-            this.apriToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("apriToolStripButton.Image")));
-            this.apriToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.apriToolStripButton.Name = "apriToolStripButton";
-            this.apriToolStripButton.Size = new System.Drawing.Size(61, 24);
-            this.apriToolStripButton.Text = "Apri";
-            this.apriToolStripButton.Click += new System.EventHandler(this.ApriClick);
+            this.apriFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("apriFatturaToolStripButton.Image")));
+            this.apriFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.apriFatturaToolStripButton.Name = "apriFatturaToolStripButton";
+            this.apriFatturaToolStripButton.Size = new System.Drawing.Size(53, 24);
+            this.apriFatturaToolStripButton.Text = "Apri";
+            this.apriFatturaToolStripButton.Click += new System.EventHandler(this.ApriFatturaToolStripButton_Click);
             // 
             // esciToolStripButton
             // 
             this.esciToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("esciToolStripButton.Image")));
             this.esciToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.esciToolStripButton.Name = "esciToolStripButton";
-            this.esciToolStripButton.Size = new System.Drawing.Size(58, 24);
+            this.esciToolStripButton.Size = new System.Drawing.Size(51, 24);
             this.esciToolStripButton.Text = "Esci";
+            this.esciToolStripButton.Click += new System.EventHandler(this.EsciToolStripButton_Click);
             // 
-            // ToolStripButton
+            // aboutToolStripButton
             // 
-            this.ToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton.Image")));
-            this.ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolStripButton.Name = "ToolStripButton";
-            this.ToolStripButton.Size = new System.Drawing.Size(29, 24);
-            this.ToolStripButton.Text = "&?";
+            this.aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.aboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripButton.Image")));
+            this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aboutToolStripButton.Name = "aboutToolStripButton";
+            this.aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.aboutToolStripButton.Text = "&?";
+            this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
             // 
             // ListaFattureView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 433);
+            this.ClientSize = new System.Drawing.Size(544, 406);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ListaFattureView";
             this.Text = "Fatture";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ListaFattureView_FormClosed);
-            this.Load += new System.EventHandler(this.ListaFattureViewLoad);
+            this.Load += new System.EventHandler(this.ListaFattureView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -198,9 +200,9 @@
         private System.Windows.Forms.BindingSource fattureBindingSource;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton nuovaToolStripButton;
-        private System.Windows.Forms.ToolStripButton apriToolStripButton;
+        private System.Windows.Forms.ToolStripButton nuovaFatturaToolStripButton;
+        private System.Windows.Forms.ToolStripButton apriFatturaToolStripButton;
         private System.Windows.Forms.ToolStripButton esciToolStripButton;
-        private System.Windows.Forms.ToolStripButton ToolStripButton;
+        private System.Windows.Forms.ToolStripButton aboutToolStripButton;
     }
 }

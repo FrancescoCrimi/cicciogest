@@ -10,123 +10,104 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private readonly ILogger<MainPresenter> logger;
         private readonly WindowService windowService;
         private readonly DialogService dialogService;
-        private readonly IMainView mainView;        
+        private readonly IMainView view;        
 
         public MainPresenter(ILogger<MainPresenter> logger,
+                             IMainView view,
                              WindowService windowService,
-                             DialogService dialogService,
-                             IMainView mainView)
-            :base(mainView)
+                             DialogService dialogService)
+            : base(view)
         {
             this.logger = logger;
-            this.windowService = windowService;
+            this.view = view;
+            this.windowService = windowService; 
             this.dialogService = dialogService;
-            this.mainView = mainView;
 
-            mainView.ApriFatturaEvent += View_ApriFatturaEvent;
-            mainView.NuovaFatturaEvent += View_NuovaFatturaEvent;
-            mainView.ApriClienteEvent += View_ApriClienteEvent;
-            mainView.NuovoClienteEvent += View_NuovoClienteEvent;
-            mainView.ApriFornitoreEvent += View_ApriFornitoreEvent;
-            mainView.NuovoFornitoreEvent += View_NuovoFornitoreEvent;
-            mainView.ApriArticoloEvent += View_ApriArticoloEvent;
-            mainView.NuovoArticoloEvent += View_NuovoArticoloEvent;
-            mainView.CategorieEvent += View_CategorieEvent;
-            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+            view.LoadEvent += View_LoadEvent;
+            view.CloseEvent += View_CloseEvent;
+            logger.LogDebug("HashCode: " + GetHashCode() + " Created");
         }
 
-        private void View_CategorieEvent(object sender, EventArgs e)
+        #region eventi iview
+
+        private void View_LoadEvent(object sender, EventArgs e)
         {
-            windowService.OpenWindow<CategoriaPresenter>();
-            //catePres.CloseEvent += CatePres_Close;
+            view.ApriFatturaEvent += View_ApriFatturaEvent;
+            view.NuovaFatturaEvent += View_NuovaFatturaEvent;
+            view.ApriClienteEvent += View_ApriClienteEvent;
+            view.NuovoClienteEvent += View_NuovoClienteEvent;
+            view.ApriFornitoreEvent += View_ApriFornitoreEvent;
+            view.NuovoFornitoreEvent += View_NuovoFornitoreEvent;
+            view.ApriArticoloEvent += View_ApriArticoloEvent;
+            view.NuovoArticoloEvent += View_NuovoArticoloEvent;
+            view.CategorieEvent += View_CategorieEvent;
         }
 
-        private void CatePres_Close(object sender, EventArgs e)
+        private void View_CloseEvent(object sender, EventArgs e)
         {
-            ((CategoriaPresenter)sender).CloseEvent -= CatePres_Close;
+            view.ApriFatturaEvent -= View_ApriFatturaEvent;
+            view.NuovaFatturaEvent -= View_NuovaFatturaEvent;
+            view.ApriClienteEvent -= View_ApriClienteEvent;
+            view.NuovoClienteEvent -= View_NuovoClienteEvent;
+            view.ApriFornitoreEvent -= View_ApriFornitoreEvent;
+            view.NuovoFornitoreEvent -= View_NuovoFornitoreEvent;
+            view.ApriArticoloEvent -= View_ApriArticoloEvent;
+            view.NuovoArticoloEvent -= View_NuovoArticoloEvent;
+            view.CategorieEvent -= View_CategorieEvent;
         }
 
-        private void View_NuovoArticoloEvent(object sender, EventArgs e)
-        {
-        }
+        #endregion
 
-        private void View_ApriArticoloEvent(object sender, EventArgs e)
-        {
-            windowService.OpenWindow<ArticoloPresenter>();
-            //artiPres.CloseEvent += ArtiPres_Close;
-        }
-
-        private void ArtiPres_Close(object sender, EventArgs e)
-        {
-            ((ArticoloPresenter)sender).CloseEvent -= ArtiPres_Close;
-        }
-
-        private void View_NuovoFornitoreEvent(object sender, EventArgs e)
-        {
-        }
-
-        private void View_ApriFornitoreEvent(object sender, EventArgs e)
-        {
-            windowService.OpenWindow<ListaFornitoriPresenter>();
-            //listFornPres.CloseEvent += ListFornPres_CloseEvent;
-        }
-
-        private void ListFornPres_CloseEvent(object sender, EventArgs e)
-        {
-            ((ListaFornitoriPresenter)sender).CloseEvent -= ListFornPres_CloseEvent;
-        }
-
-        private void View_NuovoClienteEvent(object sender, EventArgs e)
-        {
-        }
-
-        private void View_ApriClienteEvent(object sender, EventArgs e)
-        {
-            windowService.OpenWindow<ListaClientiPresenter>();
-            //listCliePres.CloseEvent += ListCliePres_CloseEvent;
-        }
-
-        private void ListCliePres_CloseEvent(object sender, IdEventArgs e)
-        {
-            ((ListaClientiPresenter)sender).CloseEvent -= ListCliePres_CloseEvent;
-            //kernel.ReleaseComponent(sender);
-            if (e.Id != 0)
-            {
-            }
-        }
-
-        private void View_NuovaFatturaEvent(object sender, EventArgs e)
-        {
-            windowService.OpenWindow<FatturaPresenter>();
-            //    fattPres.CloseEvent += FattPres_CloseEvent;
-            //    fattPres.NuovaFattura();
-        }
+        #region eventi MainView
 
         private void View_ApriFatturaEvent(object sender, EventArgs e)
         {
-            var pres = windowService.OpenWindow<ListaFatturePresenter>();
-            //var pres = dialogService.OpenDialog<ListaFatturePresenter>();
-            pres.CloseEvent += ListFattPres_CloseEvent;
+            ListaFatturePresenter listaFatturePresenter = windowService.OpenWindow<ListaFatturePresenter>();
+            //listaFatturePresenter.CloseEvent += ListaFatturePresenter_CloseEvent;
         }
 
-        private void ListFattPres_CloseEvent(object sender, IdEventArgs e)
-        {
-            ((ListaFatturePresenter)sender).CloseEvent -= ListFattPres_CloseEvent;
-            if (e.Id != 0)
-            {
-                var fattPres = windowService.OpenWindow<FatturaPresenter>();
-                fattPres.CloseEvent += FattPres_CloseEvent;
-                fattPres.MostraFattura(e.Id);
-            }
-        }
+        private void View_NuovaFatturaEvent(object sender, EventArgs e)
+            => windowService.OpenWindow<FatturaPresenter>();
 
-        private void FattPres_CloseEvent(object sender, EventArgs e)
-        {
-            ((FatturaPresenter)sender).CloseEvent -= FattPres_CloseEvent;
-        }
+        private void View_ApriClienteEvent(object sender, EventArgs e)
+            => windowService.OpenWindow<ListaClientiPresenter>();
+
+        private void View_NuovoClienteEvent(object sender, EventArgs e) { }
+
+        private void View_ApriFornitoreEvent(object sender, EventArgs e)
+            => windowService.OpenWindow<ListaFornitoriPresenter>();
+
+        private void View_NuovoFornitoreEvent(object sender, EventArgs e) { }
+
+        private void View_ApriArticoloEvent(object sender, EventArgs e)
+            => windowService.OpenWindow<ArticoloPresenter>();
+
+        private void View_NuovoArticoloEvent(object sender, EventArgs e) { }
+
+        private void View_CategorieEvent(object sender, EventArgs e)
+            => windowService.OpenWindow<CategoriaPresenter>();
+
+        #endregion
+
+
+        //private void ListaFatturePresenter_CloseEvent(object sender, IdEventArgs e)
+        //{
+        //    if(sender is ListaFatturePresenter listaFatturePresenter)
+        //    {
+        //        listaFatturePresenter.CloseEvent -= ListaFatturePresenter_CloseEvent;
+        //        if (e.Id != 0)
+        //        {
+        //            FatturaPresenter fatturaPresenter = windowService.OpenWindow<FatturaPresenter>();
+        //            fatturaPresenter.MostraFattura(e.Id);
+        //        }
+        //    }
+        //}
+
 
         public void Dispose()
         {
+            view.LoadEvent -= View_LoadEvent;
+            view.CloseEvent -= View_CloseEvent;
             logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

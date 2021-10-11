@@ -7,9 +7,7 @@ namespace CiccioGest.Presentation.AppForm.View
     public interface IListaFattureView : IView
     {
         event EventHandler<int> SelectFatturaEvent;
-        event EventHandler NuovaEvent;
-        event EventHandler ApriEvent;
-
+        event EventHandler NuovaFatturaEvent;
         void SetFatture(IList<FatturaReadOnly> listFatture);
     }
 }

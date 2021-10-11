@@ -1,5 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -11,77 +12,93 @@ namespace CiccioGest.Presentation.AppForm.Presenter
     public class ListaFatturePresenter : PresenterBase, IPresenter
     {
         private readonly ILogger logger;
-        private readonly IServiceScopeFactory serviceScopeFactory;
-        private readonly IFatturaService service;
         private readonly IListaFattureView view;
-        private int idFattura = 0;
+        private readonly WindowService windowService;
+        //private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly IFatturaService fatturaService;
+        //private int idFattura = 0;
 
-        public event IdEventHandler CloseEvent;
+        //public event IdEventHandler CloseEvent;
 
         public ListaFatturePresenter(ILogger<ListaFatturePresenter> logger,
-                                     IServiceScopeFactory serviceScopeFactory,
-                                     IListaFattureView listaFattureView,
+                                     IListaFattureView view,
+                                      WindowService windowService,
+                                     //IServiceScopeFactory serviceScopeFactory,
                                      IFatturaService fatturaService)
-            : base(listaFattureView)
+            : base(view)
         {
             this.logger = logger;
-            this.serviceScopeFactory = serviceScopeFactory;
-            view = listaFattureView;
-            service = fatturaService;
+            this.view = view;
+            this.windowService = windowService;
+            //this.serviceScopeFactory = serviceScopeFactory;
+            this.fatturaService = fatturaService;
 
-            view.LoadEvent += Load;
+            view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
-            view.SelectFatturaEvent += View_SelectFatturaEvent;
-            view.NuovaEvent += Nuova;
-            view.ApriEvent += Apri;
 
-            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+        }
+
+        #region eventi iview
+
+        private async void View_LoadEvent(object sender, EventArgs e)
+        {
+            view.SelectFatturaEvent += View_SelectFatturaEvent;
+            view.NuovaFatturaEvent += View_NuovaFatturaEvent;
+            IList<FatturaReadOnly> fatture = await fatturaService.GetFatture();
+            view.SetFatture(fatture);
         }
 
         private void View_CloseEvent(object sender, EventArgs e)
         {
-            CloseEvent?.Invoke(this, new IdEventArgs(idFattura));
+            if (sender is IListaFattureView listaFattureView)
+            {
+                listaFattureView.SelectFatturaEvent -= View_SelectFatturaEvent;
+                listaFattureView.NuovaFatturaEvent -= View_NuovaFatturaEvent;
+            }
+            //CloseEvent?.Invoke(this, new IdEventArgs(idFattura));
         }
+
+        #endregion
+
+
+        #region eventi IListaFattureView
 
         private void View_SelectFatturaEvent(object sender, int e)
         {
-            idFattura = e;
+            //idFattura = e;
+            FatturaPresenter fatturaPresenter = windowService.OpenWindow<FatturaPresenter>();
+            fatturaPresenter.MostraFattura(e);
             view.Close();
         }
 
-        private async void Load(object s, EventArgs e)
+        private void View_NuovaFatturaEvent(object sender, EventArgs e)
         {
-            IList<FatturaReadOnly> fatture = await service.GetFatture();
-            view.SetFatture(fatture);
+            //using (var scope = serviceScopeFactory.CreateScope())
+            //{
+            //    var lcd = scope.ServiceProvider.GetService<SelectClientePresenter>();
+            //    lcd.Show();
+            //    if (lcd.IdCliente != 0)
+            //    {
+            //        //var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
+            //        //asasa.ShowDialog();
+            //        var fp = scope.ServiceProvider.GetService<FatturaPresenter>();
+            //        fp.NuovaFattura(lcd.IdCliente);
+            //        fp.Show();
+            //    }
+            //}
+            ListaClientiPresenter listaClientiPresenter = windowService.OpenWindow<ListaClientiPresenter>();
+            listaClientiPresenter.Show();
+            view.Close();
         }
 
-        private void Nuova(object s, EventArgs e)
-        {
-            using (var scope = serviceScopeFactory.CreateScope())
-            {
-                var lcd = scope.ServiceProvider.GetService<SelectClientePresenter>();
-                lcd.Show();
-                if (lcd.IdCliente != 0)
-                {
-                    //var asasa = kernel.Resolve<FatturaView>(new Arguments().AddNamed("idCliente", lcd.Cliente.Id));
-                    //asasa.ShowDialog();
-                    var fp = scope.ServiceProvider.GetService<FatturaPresenter>();
-                    fp.NuovaFattura(lcd.IdCliente);
-                    fp.Show();
-                }
-            }
-        }
+        #endregion
 
-        private void Apri(object s, EventArgs e)
-        {
-        }
-
-        private void Esci(object s, EventArgs e)
-        {
-        }
 
         public void Dispose()
         {
+            view.LoadEvent -= View_LoadEvent;
+            view.CloseEvent -= View_CloseEvent;
             logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

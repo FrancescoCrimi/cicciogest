@@ -6,11 +6,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
     public class IdEventArgs : EventArgs
     {
-        public IdEventArgs(int id)
-        {
-            Id = id;
-        }
-
+        public IdEventArgs(int id) => Id = id;
+        public IdEventArgs() => Id = 0;
         public int Id { get; }
     }
 }
