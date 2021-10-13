@@ -10,10 +10,8 @@ namespace CiccioGest.Presentation.AppForm.View
         event EventHandler<Fattura> SalvaFatturaEvent;
         event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
         event EventHandler ApriFatturaEvent;
-        //event EventHandler<int> EliminaFatturaEvent;
         event EventHandler NuovoDettaglioEvent;
         event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
-
         void SetDettaglio(Dettaglio dettaglio);
         void SetFattura(Fattura fattura);
     }

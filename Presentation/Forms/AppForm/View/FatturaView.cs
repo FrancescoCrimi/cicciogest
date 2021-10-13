@@ -15,7 +15,6 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler NuovaFatturaEvent;
         public event EventHandler<Fattura> SalvaFatturaEvent;
         public event EventHandler ApriFatturaEvent;
-        //public event EventHandler<int> EliminaFatturaEvent;
         public event EventHandler NuovoDettaglioEvent;
         public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
         public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
