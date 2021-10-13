@@ -5,7 +5,7 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class MainPresenter : PresenterBase, IPresenter
+    public class MainPresenter : PresenterBase, IDisposable
     {
         private readonly ILogger<MainPresenter> logger;
         private readonly WindowService windowService;
@@ -62,7 +62,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_ApriFatturaEvent(object sender, EventArgs e)
         {
-            ListaFatturePresenter listaFatturePresenter = windowService.OpenWindow<ListaFatturePresenter>();
+            FatturePresenter listaFatturePresenter = windowService.OpenWindow<FatturePresenter>();
             //listaFatturePresenter.CloseEvent += ListaFatturePresenter_CloseEvent;
         }
 
@@ -70,12 +70,12 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             => windowService.OpenWindow<FatturaPresenter>();
 
         private void View_ApriClienteEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<ListaClientiPresenter>();
+            => windowService.OpenWindow<ClientiPresenter>();
 
         private void View_NuovoClienteEvent(object sender, EventArgs e) { }
 
         private void View_ApriFornitoreEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<ListaFornitoriPresenter>();
+            => windowService.OpenWindow<FornitoriPresenter>();
 
         private void View_NuovoFornitoreEvent(object sender, EventArgs e) { }
 

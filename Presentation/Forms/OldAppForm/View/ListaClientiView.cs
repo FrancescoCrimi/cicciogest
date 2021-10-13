@@ -1,5 +1,5 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.Mvp.View;
+//using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class ListaClientiView : Form, IListaClientiView
+    public partial class ListaClientiView : Form/*, IListaClientiView*/
     {
         private readonly ILogger<ListaClientiView> logger;
 
@@ -26,7 +26,7 @@ namespace CiccioGest.Presentation.AppForm.View
             clientiBindingSource.DataSource = clienti;
         }
 
-        void IView.ShowDialog() => ShowDialog();
+        //void IView.ShowDialog() => ShowDialog();
 
         private void AboutTSB_Click(object sender, EventArgs e)
         {

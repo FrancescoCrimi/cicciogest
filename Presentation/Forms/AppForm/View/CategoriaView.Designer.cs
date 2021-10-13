@@ -65,15 +65,15 @@
             this.nomeDataGridViewTextBoxColumn});
             this.categorieDataGridView.DataSource = this.categorieBindingSource;
             this.categorieDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categorieDataGridView.Location = new System.Drawing.Point(4, 69);
-            this.categorieDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.categorieDataGridView.Location = new System.Drawing.Point(4, 79);
+            this.categorieDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.categorieDataGridView.MultiSelect = false;
             this.categorieDataGridView.Name = "categorieDataGridView";
             this.categorieDataGridView.ReadOnly = true;
             this.categorieDataGridView.RowHeadersVisible = false;
             this.categorieDataGridView.RowHeadersWidth = 51;
             this.categorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.categorieDataGridView.Size = new System.Drawing.Size(334, 240);
+            this.categorieDataGridView.Size = new System.Drawing.Size(334, 307);
             this.categorieDataGridView.TabIndex = 1;
             this.categorieDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CategorieDataGridView_CellDoubleClick);
             // 
@@ -85,7 +85,7 @@
             this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 48;
+            this.idDataGridViewTextBoxColumn.Width = 51;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -103,20 +103,20 @@
             // 
             this.nomeLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nomeLabel.AutoSize = true;
-            this.nomeLabel.Location = new System.Drawing.Point(4, 6);
+            this.nomeLabel.Location = new System.Drawing.Point(4, 8);
             this.nomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nomeLabel.Name = "nomeLabel";
-            this.nomeLabel.Size = new System.Drawing.Size(49, 17);
+            this.nomeLabel.Size = new System.Drawing.Size(53, 20);
             this.nomeLabel.TabIndex = 3;
             this.nomeLabel.Text = "Nome:";
             // 
             // textBox1
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CategoriaBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox1.Location = new System.Drawing.Point(61, 4);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(65, 5);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(161, 22);
+            this.textBox1.Size = new System.Drawing.Size(161, 27);
             this.textBox1.TabIndex = 4;
             // 
             // CategoriaBindingSource
@@ -133,13 +133,13 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(342, 313);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(342, 391);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // toolStrip
@@ -185,6 +185,7 @@
             // 
             // aboutToolStripButton
             // 
+            this.aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.aboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripButton.Image")));
             this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -199,22 +200,22 @@
             this.flowLayoutPanel1.Controls.Add(this.nomeLabel);
             this.flowLayoutPanel1.Controls.Add(this.textBox1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 31);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 32);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(334, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(334, 37);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // CategoriaView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 313);
+            this.ClientSize = new System.Drawing.Size(342, 391);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "CategoriaView";
             this.Text = "Categorie";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CategoriaView_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CategoriaView_FormClosing);
             this.Load += new System.EventHandler(this.CategoriaView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.categorieDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).EndInit();

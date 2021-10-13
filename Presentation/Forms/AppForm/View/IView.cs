@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public interface IView
+    public interface IView : IWin32Window
     {
         event EventHandler LoadEvent;
         event EventHandler CloseEvent;

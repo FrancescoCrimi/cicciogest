@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class ArticoloPresenter : PresenterBase, IPresenter
+    public class ArticoloPresenter : PresenterBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;

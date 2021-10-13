@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class CategoriaPresenter : PresenterBase, IPresenter
+    public class CategoriaPresenter : PresenterBase, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;
         private readonly ICategoriaView view;
 
-        public object View => throw new NotImplementedException();
+        //public object View => throw new NotImplementedException();
 
         public event EventHandler CloseEvent;
 

@@ -1,5 +1,5 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.Mvp.View;
+//using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class SelectClienteView : Form, ISelectClienteView
+    public partial class SelectClienteView : Form/*, ISelectClienteView*/
     {
         private readonly ILogger<SelectClienteView> logger;
 
@@ -37,7 +37,7 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        void IView.ShowDialog() => ShowDialog();
+        //void IView.ShowDialog() => ShowDialog();
 
         private void SelectClienteView_FormClosed(object s, FormClosedEventArgs e)
         {

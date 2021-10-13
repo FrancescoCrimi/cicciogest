@@ -27,12 +27,15 @@ namespace CiccioGest.Presentation.AppForm.View
             this.logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        private void View_Load(object s, EventArgs e) => LoadEvent?.Invoke(s, e);
+        private void View_Load(object s, EventArgs e)
+            => LoadEvent?.Invoke(s, e);
+
+        private void ArticoloView_FormClosing(object sender, FormClosingEventArgs e)
+            => CloseEvent?.Invoke(sender, e);
+
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
-        {
-            articoloBindingSource.DataSource = new Articolo();
-        }
+            => articoloBindingSource.DataSource = new Articolo();
 
         private void SalvaToolStripButton_Click(object s, EventArgs e)
         {
@@ -66,12 +69,6 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void AboutToolStripButton_Click(object sender, EventArgs e)
-        {
-            var about = new AboutBox();
-            about.ShowDialog();
-        }
-
         private void ProdottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (articoliBindingSource.Current is ArticoloReadOnly art)
@@ -79,23 +76,15 @@ namespace CiccioGest.Presentation.AppForm.View
         }
 
         public void SetArticolo(Articolo articolo)
-        {
-            articoloBindingSource.DataSource = articolo;
-        }
+            => articoloBindingSource.DataSource = articolo;
 
         public void SetArticoli(IList<ArticoloReadOnly> list)
-        {
-            articoliBindingSource.DataSource = list;
-        }
+             => articoliBindingSource.DataSource = list;
 
         public void SetCategorie(IList<Categoria> list)
-        {
-            categorieBindingSource.DataSource = list;
-        }
+            => categorieBindingSource.DataSource = list;
 
-        private void ArticoloView_FormClosed(object s, FormClosedEventArgs e)
-        {
-            CloseEvent?.Invoke(s, e);
-        }
+        private void AboutToolStripButton_Click(object sender, EventArgs e)
+            => new AboutBox().ShowDialog();
     }
 }

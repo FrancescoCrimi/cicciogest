@@ -1,5 +1,5 @@
 ﻿using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.Mvp.View;
+//using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class ArticoloView : Form, IArticoloView
+    public partial class ArticoloView : Form
     {
         private readonly ILogger logger;
 
@@ -94,7 +94,7 @@ namespace CiccioGest.Presentation.AppForm.View
             categorieBindingSource.DataSource = list;
         }
 
-        void IView.ShowDialog() => ShowDialog();
+        //void IView.ShowDialog() => ShowDialog();
 
         private void ArticoloView_FormClosed(object s, FormClosedEventArgs e)
         {

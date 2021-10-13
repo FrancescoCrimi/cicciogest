@@ -196,13 +196,14 @@
             // 
             // MainView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 353);
+            this.ClientSize = new System.Drawing.Size(482, 441);
             this.Controls.Add(this.menuStrip);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainView";
             this.Text = "CiccioGest";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainView_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainView_FormClosing);
             this.Load += new System.EventHandler(this.MainView_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

@@ -86,9 +86,7 @@ namespace CiccioGest.Presentation.AppForm.View
                 CategoriaBindingSource.DataSource = categorieBindingSource.Current;
         }
 
-        private void CategoriaView_FormClosed(object s, FormClosedEventArgs e)
-        {
-            CloseEvent?.Invoke(s, e);
-        }
+        private void CategoriaView_FormClosing(object sender, FormClosingEventArgs e)
+            => CloseEvent?.Invoke(sender, e);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.Mvp.View;
+//using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace CiccioGest.Presentation.AppForm.View
 {
 
-    public partial class ListaFornitoriView : Form, IListaFornitoriView
+    public partial class ListaFornitoriView : Form/*, IListaFornitoriView*/
     {
         private readonly ILogger<ListaFornitoriView> logger;
 
@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.AppForm.View
         public void SetFornitori(IList<Fornitore> fornitori) =>
             fornitoriBindingSource.DataSource = fornitori;
 
-        void IView.ShowDialog() => ShowDialog();
+        //void IView.ShowDialog() => ShowDialog();
 
         private void ListaFornitoriView_Load(object sender, EventArgs e) =>
             LoadEvent?.Invoke(sender, e);

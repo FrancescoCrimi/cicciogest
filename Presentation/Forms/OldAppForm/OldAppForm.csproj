@@ -139,6 +139,18 @@
     <Compile Include="View\CategoriaView.Designer.cs">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ClienteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ClienteView.Designer.cs">
+      <DependentUpon>ClienteView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FornitoreView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FornitoreView.Designer.cs">
+      <DependentUpon>FornitoreView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SelectClienteView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +227,12 @@
     <EmbeddedResource Include="View\CategoriaView.resx">
       <DependentUpon>CategoriaView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ClienteView.resx">
+      <DependentUpon>ClienteView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FornitoreView.resx">
+      <DependentUpon>FornitoreView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SelectClienteView.resx">
       <DependentUpon>SelectClienteView.cs</DependentUpon>
     </EmbeddedResource>
@@ -258,6 +276,12 @@
     <None Include="Properties\DataSources\CiccioGest.Domain.ClientiFornitori.Indirizzo.datasource" />
     <None Include="Properties\DataSources\CiccioGest.Domain.ClientiFornitori.Persona.datasource" />
     <None Include="Properties\DataSources\CiccioGest.Domain.ClientiFornitori.Stato.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Common.DomainEntity.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Common.DomainValueObject.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Documenti.Dettaglio.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Documenti.Fattura.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Documenti.FatturaReadOnly.datasource" />
+    <None Include="Properties\DataSources\CiccioGest.Domain.Documenti.IFatturaRepository.datasource" />
     <None Include="Properties\DataSources\CiccioGest.Domain.Magazino.Articolo.datasource" />
     <None Include="Properties\DataSources\CiccioGest.Domain.Magazino.ArticoloReadOnly.datasource" />
     <None Include="Properties\DataSources\CiccioGest.Domain.Magazino.Categoria.datasource" />
@@ -314,21 +338,13 @@
   <ItemGroup>
     <None Include="Resources\Apri.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Application\Application\Application.csproj">
-      <Project>{fc486b81-d474-478e-9a77-0f912d7aa393}</Project>
-      <Name>Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj">
-      <Project>{87e08e73-2c4f-4f31-beab-55e08711144a}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
-      <Project>{a575d8a9-9460-4bc0-9898-ddef555195c1}</Project>
-      <Name>Infrastructure</Name>
+    <ProjectReference Include="..\..\..\ClassLibrary1\ClassLibrary1.csproj">
+      <Project>{3ee0249e-fc82-4cbc-b59f-b5fe4f24f338}</Project>
+      <Name>ClassLibrary1</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

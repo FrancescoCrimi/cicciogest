@@ -1,4 +1,4 @@
-﻿using CiccioGest.Application;
+﻿//using CiccioGest.Application;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 using Microsoft.Extensions.Logging;
@@ -61,8 +61,8 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             using (var scope = serviceProvider.CreateScope())
             {
-                var sett = scope.ServiceProvider.GetService<ISettingService>();
-                await sett.LoadSampleData();
+                //var sett = scope.ServiceProvider.GetService<ISettingService>();
+                //await sett.LoadSampleData();
                 MessageBox.Show("Eseguito con successo");
             }
         }

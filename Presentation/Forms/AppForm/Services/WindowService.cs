@@ -18,7 +18,7 @@ namespace CiccioGest.Presentation.AppForm.Services
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public TPresenter OpenWindow<TPresenter>() where TPresenter : IPresenter
+        public TPresenter OpenWindow<TPresenter>() where TPresenter : PresenterBase
         {
             var scope = serviceScopeFactory.CreateScope();
             var window = scope.ServiceProvider.GetService<TPresenter>();

@@ -1,5 +1,5 @@
 ﻿using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.Mvp.View;
+//using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class ListaFattureView : Form, IListaFattureView
+    public partial class ListaFattureView : Form/*, IListaFattureView*/
     {
         private readonly ILogger<ListaFattureView> logger;
 
@@ -60,7 +60,7 @@ namespace CiccioGest.Presentation.AppForm.View
             CloseEvent?.Invoke(s, e);
         }
 
-        void IView.ShowDialog() => ShowDialog();
+        //void IView.ShowDialog() => ShowDialog();
 
         private void ListaFattureView_FormClosed(object s, FormClosedEventArgs e)
         {

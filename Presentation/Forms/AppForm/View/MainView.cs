@@ -27,11 +27,11 @@ namespace CiccioGest.Presentation.AppForm.View
             this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        private void MainView_Load(object s, EventArgs e)
-            => LoadEvent?.Invoke(this, e);
+        private void MainView_Load(object sender, EventArgs e)
+            => LoadEvent?.Invoke(sender, e);
 
-        private void MainView_FormClosed(object s, FormClosedEventArgs e)
-            => CloseEvent?.Invoke(s, e);
+        private void MainView_FormClosing(object sender, FormClosingEventArgs e)
+            => CloseEvent?.Invoke(sender, e);
 
 
         private void ApriFatturaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace CiccioGest.Presentation.AppForm.View
             => NuovoArticoloEvent?.Invoke(sender, e);
 
         private void CategorieToolStripMenuItem_Click(object sender, EventArgs e)
-            => CategorieEvent?.Invoke(this, e);
+            => CategorieEvent?.Invoke(sender, e);
 
 
         private void OpzioniToolStripMenuItem_Click(object sender, EventArgs e)

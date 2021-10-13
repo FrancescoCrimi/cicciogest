@@ -1,14 +1,14 @@
 ﻿//using Castle.Core.Logging;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.Mvp.Presenter;
-using CiccioGest.Presentation.Mvp.View;
+//using CiccioGest.Presentation.Mvp.Presenter;
+//using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class FatturaView : Form, IFatturaView
+    public partial class FatturaView : Form
     {
         private readonly ILogger<FatturaView> logger;
 
@@ -18,8 +18,8 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler<Fattura> SalvaFatturaEvent;
         public event EventHandler<int> EliminaFatturaEvent;
         public event EventHandler NuovoDettaglioEvent;
-        public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
-        public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
+        //public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
+        //public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
         public event EventHandler NuovaFattura;
 
         public FatturaView(ILogger<FatturaView> logger)
@@ -90,14 +90,14 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
             Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
-            AggiungiDettaglioEvent?.Invoke(s, new FatturaDettaglioEventArgs(fattura, dettaglio));
+            //AggiungiDettaglioEvent?.Invoke(s, new FatturaDettaglioEventArgs(fattura, dettaglio));
         }
 
         private void RimuoviDettaglioClick(object s, EventArgs e)
         {
             Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
             Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
-            RimuoviDettaglioEvent?.Invoke(s, new FatturaDettaglioEventArgs(fattura, dettaglio));
+            //RimuoviDettaglioEvent?.Invoke(s, new FatturaDettaglioEventArgs(fattura, dettaglio));
         }
 
         private void ToolStripButton_Click(object sender, EventArgs e)
@@ -105,7 +105,7 @@ namespace CiccioGest.Presentation.AppForm.View
             new AboutBox().ShowDialog();
         }
 
-        void IView.ShowDialog() => ShowDialog();
+        //void IView.ShowDialog() => ShowDialog();
 
         private void FatturaView_FormClosed(object s, FormClosedEventArgs e)
         {

@@ -69,7 +69,7 @@
             nomeLabel.Location = new System.Drawing.Point(4, 0);
             nomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             nomeLabel.Name = "nomeLabel";
-            nomeLabel.Size = new System.Drawing.Size(49, 17);
+            nomeLabel.Size = new System.Drawing.Size(53, 20);
             nomeLabel.TabIndex = 2;
             nomeLabel.Text = "Nome:";
             // 
@@ -79,7 +79,7 @@
             categoriaLabel.Location = new System.Drawing.Point(196, 0);
             categoriaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             categoriaLabel.Name = "categoriaLabel";
-            categoriaLabel.Size = new System.Drawing.Size(73, 17);
+            categoriaLabel.Size = new System.Drawing.Size(77, 20);
             categoriaLabel.TabIndex = 10;
             categoriaLabel.Text = "Categoria:";
             // 
@@ -89,7 +89,7 @@
             prezzoLabel1.Location = new System.Drawing.Point(132, 0);
             prezzoLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             prezzoLabel1.Name = "prezzoLabel1";
-            prezzoLabel1.Size = new System.Drawing.Size(56, 17);
+            prezzoLabel1.Size = new System.Drawing.Size(56, 20);
             prezzoLabel1.TabIndex = 10;
             prezzoLabel1.Text = "Prezzo:";
             // 
@@ -108,15 +108,15 @@
             this.prezzoDataGridViewTextBoxColumn});
             this.articoliDataGridView.DataSource = this.articoliBindingSource;
             this.articoliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.articoliDataGridView.Location = new System.Drawing.Point(4, 88);
-            this.articoliDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.articoliDataGridView.Location = new System.Drawing.Point(4, 100);
+            this.articoliDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.articoliDataGridView.MultiSelect = false;
             this.articoliDataGridView.Name = "articoliDataGridView";
             this.articoliDataGridView.ReadOnly = true;
             this.articoliDataGridView.RowHeadersVisible = false;
             this.articoliDataGridView.RowHeadersWidth = 51;
             this.articoliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.articoliDataGridView.Size = new System.Drawing.Size(374, 261);
+            this.articoliDataGridView.Size = new System.Drawing.Size(374, 336);
             this.articoliDataGridView.TabIndex = 1;
             this.articoliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProdottiDataGridView_CellClick);
             // 
@@ -128,7 +128,7 @@
             this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 48;
+            this.dataGridViewTextBoxColumn1.Width = 51;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -154,7 +154,7 @@
             this.prezzoDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.prezzoDataGridViewTextBoxColumn.Name = "prezzoDataGridViewTextBoxColumn";
             this.prezzoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.prezzoDataGridViewTextBoxColumn.Width = 81;
+            this.prezzoDataGridViewTextBoxColumn.Width = 82;
             // 
             // articoliBindingSource
             // 
@@ -163,10 +163,10 @@
             // nomeTextBox
             // 
             this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.articoloBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nomeTextBox.Location = new System.Drawing.Point(4, 21);
-            this.nomeTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.nomeTextBox.Location = new System.Drawing.Point(4, 25);
+            this.nomeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nomeTextBox.Name = "nomeTextBox";
-            this.nomeTextBox.Size = new System.Drawing.Size(120, 22);
+            this.nomeTextBox.Size = new System.Drawing.Size(120, 27);
             this.nomeTextBox.TabIndex = 3;
             // 
             // articoloBindingSource
@@ -179,10 +179,10 @@
             this.categoriaComboBox.DataSource = this.categorieBindingSource;
             this.categoriaComboBox.DisplayMember = "Nome";
             this.categoriaComboBox.FormattingEnabled = true;
-            this.categoriaComboBox.Location = new System.Drawing.Point(196, 21);
-            this.categoriaComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.categoriaComboBox.Location = new System.Drawing.Point(196, 25);
+            this.categoriaComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.categoriaComboBox.Name = "categoriaComboBox";
-            this.categoriaComboBox.Size = new System.Drawing.Size(119, 24);
+            this.categoriaComboBox.Size = new System.Drawing.Size(119, 28);
             this.categoriaComboBox.TabIndex = 10;
             // 
             // categorieBindingSource
@@ -192,10 +192,10 @@
             // prezzoTextBox1
             // 
             this.prezzoTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.articoloBindingSource, "Prezzo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.prezzoTextBox1.Location = new System.Drawing.Point(132, 21);
-            this.prezzoTextBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.prezzoTextBox1.Location = new System.Drawing.Point(132, 25);
+            this.prezzoTextBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.prezzoTextBox1.Name = "prezzoTextBox1";
-            this.prezzoTextBox1.Size = new System.Drawing.Size(50, 22);
+            this.prezzoTextBox1.Size = new System.Drawing.Size(50, 27);
             this.prezzoTextBox1.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -208,14 +208,14 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(382, 353);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(382, 441);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // toolStrip
@@ -261,6 +261,7 @@
             // 
             // aboutToolStripButton
             // 
+            this.aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.aboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripButton.Image")));
             this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -283,25 +284,25 @@
             this.tableLayoutPanel2.Controls.Add(categoriaLabel, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.nomeTextBox, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 31);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 32);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(374, 49);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(374, 58);
             this.tableLayoutPanel2.TabIndex = 11;
             // 
             // ArticoloView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 353);
+            this.ClientSize = new System.Drawing.Size(382, 441);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ArticoloView";
             this.Text = "Articolo";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ArticoloView_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ArticoloView_FormClosing);
             this.Load += new System.EventHandler(this.View_Load);
             ((System.ComponentModel.ISupportInitialize)(this.articoliDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).EndInit();

@@ -63,6 +63,16 @@ namespace CiccioGest.Presentation.AppForm.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap About {
+            get {
+                object obj = ResourceManager.GetObject("About", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddNew {
             get {
                 object obj = ResourceManager.GetObject("AddNew", resourceCulture);
@@ -116,6 +126,16 @@ namespace CiccioGest.Presentation.AppForm.Properties {
         internal static System.Drawing.Bitmap Salva {
             get {
                 object obj = ResourceManager.GetObject("Salva", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stampa {
+            get {
+                object obj = ResourceManager.GetObject("stampa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

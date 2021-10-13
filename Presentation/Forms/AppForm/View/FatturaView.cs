@@ -11,21 +11,23 @@ namespace CiccioGest.Presentation.AppForm.View
         private readonly ILogger logger;
 
         public event EventHandler LoadEvent;
-        public event EventHandler ApriFatturaEvent;
         public event EventHandler CloseEvent;
+        public event EventHandler NuovaFatturaEvent;
         public event EventHandler<Fattura> SalvaFatturaEvent;
-        public event EventHandler<int> EliminaFatturaEvent;
+        public event EventHandler ApriFatturaEvent;
+        //public event EventHandler<int> EliminaFatturaEvent;
         public event EventHandler NuovoDettaglioEvent;
         public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
         public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
-        public event EventHandler NuovaFattura;
 
         public FatturaView(ILogger<FatturaView> logger)
         {
-            this.logger = logger;
             InitializeComponent();
+            this.logger = logger;
             this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
+
+        #region Metodi Pubblici
 
         public void SetDettaglio(Dettaglio dettaglio)
             => dettaglioBindingSource.DataSource = dettaglio;
@@ -33,42 +35,46 @@ namespace CiccioGest.Presentation.AppForm.View
         public void SetFattura(Fattura fattura)
             => fatturaBindingSource.DataSource = fattura;
 
-
-        private void FatturaViewLoad(object sender, EventArgs e)
-            => LoadEvent?.Invoke(this, new EventArgs());
-
-        private void FatturaView_FormClosed(object s, FormClosedEventArgs e)
-            => CloseEvent?.Invoke(this, new EventArgs());
+        #endregion
 
 
-        private void ApriClick(object s, EventArgs e)
-            => ApriFatturaEvent?.Invoke(this, new EventArgs());
+        #region Gestione eventi
 
-        private void EsciClick(object s, EventArgs e)
-            => Close();
+        private void FatturaView_Load(object sender, EventArgs e)
+            => LoadEvent?.Invoke(sender, e);
 
-        private void SalvaClick(object s, EventArgs e)
+        private void FatturaView_FormClosing(object sender, FormClosingEventArgs e)
+            => CloseEvent?.Invoke(sender, e);
+
+
+        private void NuovaToolStripButton_Click(object sender, EventArgs e)
+            => NuovaFatturaEvent?.Invoke(sender, e);
+
+        private void SalvaToolStripButton_Click(object sender, EventArgs e)
             => SalvaFatturaEvent?.Invoke(this, (Fattura)fatturaBindingSource.DataSource);
 
-        private  void EliminaClick(object s, EventArgs e)
-            => EliminaFatturaEvent?.Invoke(this, ((Fattura)fatturaBindingSource.DataSource).Id);
+        private void ApriToolStripButton_Click(object sender, EventArgs e)
+            => ApriFatturaEvent?.Invoke(sender, e);
 
-        private void NuovoDettaglioClick(object s, EventArgs e)
-            => NuovoDettaglioEvent?.Invoke(this, new EventArgs());
+        private void NuovoDettaglioToolStripButton_Click(object sender, EventArgs e)
+            => NuovoDettaglioEvent?.Invoke(sender, e);
 
-        private void AggiungiDettaglioClick(object s, EventArgs e)
+        private void AggiungiDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
             Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
             Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
-            AggiungiDettaglioEvent?.Invoke(s, new FatturaDettaglioEventArgs(fattura, dettaglio));
+            AggiungiDettaglioEvent?.Invoke(sender, new FatturaDettaglioEventArgs(fattura, dettaglio));
         }
 
-        private void RimuoviDettaglioClick(object s, EventArgs e)
+        private void RimuoviDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
             Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
             Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
-            RimuoviDettaglioEvent?.Invoke(s, new FatturaDettaglioEventArgs(fattura, dettaglio));
+            RimuoviDettaglioEvent?.Invoke(sender, new FatturaDettaglioEventArgs(fattura, dettaglio));
         }
+
+        private void AboutToolStripButton_Click(object sender, EventArgs e)
+            => new AboutBox().ShowDialog();
 
         private void DettagliDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -76,7 +82,6 @@ namespace CiccioGest.Presentation.AppForm.View
                 dettaglioBindingSource.DataSource = dettagliBindingSource.Current;
         }
 
-        private void AboutToolStripButton_Click(object sender, EventArgs e)
-            => new AboutBox().ShowDialog();
+        #endregion
     }
 }

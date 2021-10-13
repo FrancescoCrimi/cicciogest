@@ -1,4 +1,4 @@
-﻿using CiccioGest.Presentation.Mvp.View;
+﻿//using CiccioGest.Presentation.Mvp.View;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class MainView : Form, IMainView
+    public partial class MainView : Form/*, IMainView*/
     {
         private readonly ILogger<MainView> logger;
         private readonly IServiceProvider serviceProvider;
@@ -34,7 +34,7 @@ namespace CiccioGest.Presentation.AppForm.View
             this.logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
-        void IView.ShowDialog() { }
+        //void IView.ShowDialog() { }
 
         private void MainView_Load(object s, EventArgs e) => LoadEvent?.Invoke(this, e);
 

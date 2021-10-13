@@ -19,7 +19,7 @@ namespace CiccioGest.Presentation.AppForm.Services
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public TPresenter OpenDialog<TPresenter>(IWin32Window owner) where TPresenter : IPresenter
+        public TPresenter OpenDialog<TPresenter>(IWin32Window owner) where TPresenter : PresenterBase
         {
             TPresenter presenter = serviceProvider.GetService<TPresenter>();
             presenter.ShowDialog(owner);

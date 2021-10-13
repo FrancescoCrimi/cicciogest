@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Hosting
 {
-    public class FormHostedService<TForm> : IHostedService, IDisposable where TForm : IPresenter
+    public class FormHostedService<TForm> : IHostedService, IDisposable where TForm : PresenterBase
     {
         private readonly ILogger logger;
         private readonly WindowService windowService;
