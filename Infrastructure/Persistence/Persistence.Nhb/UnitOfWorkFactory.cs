@@ -1,7 +1,7 @@
 ﻿//using Castle.Core.Logging;
 using CiccioGest.Infrastructure.Conf;
 using Microsoft.Extensions.Logging;
-//using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 //using MySqlConnector;
 using NHibernate;
 using NHibernate.Cfg;
@@ -88,31 +88,20 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             return configuration;
         }
 
-        //private MySqlConnection conn;
-        //private MySqlCommand cmd;
-        //private bool InitMySql()
-        //{
-        //    try
-        //    {
-        //        conn = new MySqlConnection(conf.CS);
-        //        conn.Open();
-        //        cmd = conn.CreateCommand();
-        //        cmd.CommandText = "create database if not exists CiccioGestNhb";
-        //        cmd.ExecuteNonQuery();
-        //        return true;
-        //    }
-        //    catch (MySqlException ex)
-        //    {
-        //        //return false;
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        cmd.Dispose();
-        //        conn.Close();
-        //        conn.Dispose();
-        //    }
-        //}
+        private bool InitMySql()
+        {
+            MySqlConnection conn = new MySqlConnection(conf.CS);
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "drop database CiccioGestNhb";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "create database if not exists CiccioGestNhb";
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            conn.Close();
+            conn.Dispose();
+            return true;
+        }
 
         private bool InitSQLite()
         {
@@ -142,7 +131,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             switch (conf.Database)
             {
                 case Databases.MySql:
-                    //InitMySql();
+                    InitMySql();
                     break;
                 case Databases.SQLite:
                     InitSQLite();

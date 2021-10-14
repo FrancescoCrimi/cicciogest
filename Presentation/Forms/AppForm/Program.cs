@@ -26,7 +26,7 @@ namespace CiccioGest.Presentation.AppForm
             var host = Host.CreateDefaultBuilder(args);
             if (args.Contains("config"))
             {
-                //host.ConfigureWinForms<SettingView>();
+                host.ConfigureWinForms<SettingPresenter>();
             }
             else
             {
@@ -49,6 +49,8 @@ namespace CiccioGest.Presentation.AppForm
                 .AddTransient<DialogService>()
 
                 .AddTransient<MainPresenter>()
+                .AddTransient<SettingPresenter>()
+
                 .AddTransient<ArticoloPresenter>()
                 .AddTransient<CategoriaPresenter>()
                 .AddTransient<ClientePresenter>()
@@ -65,6 +67,7 @@ namespace CiccioGest.Presentation.AppForm
 
                 .AddSingleton<MainView>()
                 .AddSingleton<IMainView>(sp => sp.GetService<MainView>())
+                .AddTransient<ISettingView, SettingView>()
 
                 .AddTransient<IArticoloView, ArticoloView>()
                 .AddTransient<ICategoriaView, CategoriaView>()

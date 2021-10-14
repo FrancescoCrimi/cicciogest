@@ -8,72 +8,57 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class SettingView : Form
+    public partial class SettingView : Form, ISettingView
     {
         private readonly ILogger logger;
         private readonly IServiceProvider serviceProvider;
         private readonly IServiceScopeFactory serviceScopeFactory;
 
-        //private readonly IKernel kernel;
-        //private readonly IUnitOfWorkFactory unitOfWorkFactory;
-        //private CiccioGestConfMgr confmgr;
+        public event EventHandler LoadEvent;
+        public event EventHandler CloseEvent;
+        public event EventHandler VerificaDatabaseEvent;
+        public event EventHandler CreaDatabaseEvent;
+        public event EventHandler PopolaDatabaseEvent;
 
         public SettingView(ILogger<SettingView> logger,
-            IServiceProvider serviceProvider,
-            IServiceScopeFactory serviceScopeFactory
-                           //IKernel kernel
-                           //IUnitOfWorkFactory unitOfWorkFactory
-            )
+                           IServiceProvider serviceProvider,
+                           IServiceScopeFactory serviceScopeFactory)
         {
             InitializeComponent();
             this.logger = logger;
             this.serviceProvider = serviceProvider;
             this.serviceScopeFactory = serviceScopeFactory;
-            //this.kernel = kernel;
-            //this.unitOfWorkFactory = unitOfWorkFactory;
+
             dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
             databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
-            //confmgr = new CiccioGestConfMgr();
+
             CaricaConf();
         }
 
-        private void VerificaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
-                uowf.VerifyDataAccess();
-                MessageBox.Show("Eseguito con successo");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        private void SettingView_FormClosing(object sender, FormClosingEventArgs e)
+            => LoadEvent?.Invoke(sender, e);
 
-        private void CreaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
-                uowf.CreateDataAccess();
-                MessageBox.Show("Eseguito con successo");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        private void SettingView_Load(object sender, EventArgs e)
+            => CloseEvent?.Invoke(sender, e);
 
-        private async void PopolaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var scope = serviceScopeFactory.CreateScope())
-            {
-                var sett = scope.ServiceProvider.GetService<ISettingService>();
-                await sett.LoadSampleData();
-                MessageBox.Show("Eseguito con successo");
-            }
-        }
+        private void VerificaDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+            => VerificaDatabaseEvent?.Invoke(sender, e);
+
+        private void CreaDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+            => CreaDatabaseEvent?.Invoke(sender, e);
+
+        private void PopolaDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+            => PopolaDatabaseEvent?.Invoke(sender, e);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -85,6 +70,9 @@ namespace CiccioGest.Presentation.AppForm.View
             appConfBindingSource.DataSource = assa;
         }
 
+
+
+
         private void AppConfDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (appConfsBindingSource.Current != null)
@@ -93,6 +81,8 @@ namespace CiccioGest.Presentation.AppForm.View
                 appConfBindingSource.DataSource = cnf;
             }
         }
+
+
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
         {
@@ -155,12 +145,6 @@ namespace CiccioGest.Presentation.AppForm.View
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        public void ShowDialog(Object owner)
-        {
-            if (owner is IWin32Window window)
-                Show(window);
         }
     }
 }

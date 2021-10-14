@@ -57,9 +57,9 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.esciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.creaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.popolaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verificaDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.creaDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.popolaDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informazionisuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -344,33 +344,33 @@
             // databaseToolStripMenuItem
             // 
             this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.verificaToolStripMenuItem,
-            this.creaToolStripMenuItem,
-            this.popolaToolStripMenuItem});
+            this.verificaDatabaseToolStripMenuItem,
+            this.creaDatabaseToolStripMenuItem,
+            this.popolaDatabaseToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
             this.databaseToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
             this.databaseToolStripMenuItem.Text = "Database";
             // 
-            // verificaToolStripMenuItem
+            // verificaDatabaseToolStripMenuItem
             // 
-            this.verificaToolStripMenuItem.Name = "verificaToolStripMenuItem";
-            this.verificaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.verificaToolStripMenuItem.Text = "Verifica";
-            this.verificaToolStripMenuItem.Click += new System.EventHandler(this.VerificaToolStripMenuItem_Click);
+            this.verificaDatabaseToolStripMenuItem.Name = "verificaDatabaseToolStripMenuItem";
+            this.verificaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.verificaDatabaseToolStripMenuItem.Text = "Verifica";
+            this.verificaDatabaseToolStripMenuItem.Click += new System.EventHandler(this.VerificaDatabaseToolStripMenuItem_Click);
             // 
-            // creaToolStripMenuItem
+            // creaDatabaseToolStripMenuItem
             // 
-            this.creaToolStripMenuItem.Name = "creaToolStripMenuItem";
-            this.creaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.creaToolStripMenuItem.Text = "Crea";
-            this.creaToolStripMenuItem.Click += new System.EventHandler(this.CreaToolStripMenuItem_Click);
+            this.creaDatabaseToolStripMenuItem.Name = "creaDatabaseToolStripMenuItem";
+            this.creaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.creaDatabaseToolStripMenuItem.Text = "Crea";
+            this.creaDatabaseToolStripMenuItem.Click += new System.EventHandler(this.CreaDatabaseToolStripMenuItem_Click);
             // 
-            // popolaToolStripMenuItem
+            // popolaDatabaseToolStripMenuItem
             // 
-            this.popolaToolStripMenuItem.Name = "popolaToolStripMenuItem";
-            this.popolaToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
-            this.popolaToolStripMenuItem.Text = "Popola";
-            this.popolaToolStripMenuItem.Click += new System.EventHandler(this.PopolaToolStripMenuItem_Click);
+            this.popolaDatabaseToolStripMenuItem.Name = "popolaDatabaseToolStripMenuItem";
+            this.popolaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.popolaDatabaseToolStripMenuItem.Text = "Popola";
+            this.popolaDatabaseToolStripMenuItem.Click += new System.EventHandler(this.PopolaDatabaseToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem
             // 
@@ -413,6 +413,8 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "SettingView";
             this.Text = "Impostazioni";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingView_FormClosing);
+            this.Load += new System.EventHandler(this.SettingView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.appConfDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.appConfsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.appConfBindingSource)).EndInit();
@@ -448,9 +450,9 @@
         private System.Windows.Forms.ToolStripMenuItem informazionisuToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verificaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem creaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem popolaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verificaDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creaDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem popolaDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton nuovoToolStripButton;
         private System.Windows.Forms.ToolStripButton aggiungiToolStripButton;
