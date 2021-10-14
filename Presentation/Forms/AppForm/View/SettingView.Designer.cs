@@ -135,7 +135,7 @@
             this.appConfDataGridView.RowHeadersWidth = 51;
             this.appConfDataGridView.RowTemplate.Height = 24;
             this.appConfDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.appConfDataGridView.Size = new System.Drawing.Size(696, 390);
+            this.appConfDataGridView.Size = new System.Drawing.Size(876, 402);
             this.appConfDataGridView.TabIndex = 29;
             this.appConfDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AppConfDataGridView_CellDoubleClick);
             // 
@@ -188,7 +188,7 @@
             this.cSTextBox.Location = new System.Drawing.Point(45, 49);
             this.cSTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cSTextBox.Name = "cSTextBox";
-            this.cSTextBox.Size = new System.Drawing.Size(645, 27);
+            this.cSTextBox.Size = new System.Drawing.Size(822, 27);
             this.cSTextBox.TabIndex = 30;
             // 
             // appConfBindingSource
@@ -241,7 +241,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(702, 541);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(882, 553);
             this.tableLayoutPanel1.TabIndex = 40;
             // 
             // toolStrip1
@@ -256,7 +256,7 @@
             this.caricaDefaultToolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(702, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(882, 27);
             this.toolStrip1.TabIndex = 32;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -323,7 +323,7 @@
             this.ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(702, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(882, 28);
             this.menuStrip1.TabIndex = 30;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -354,21 +354,21 @@
             // verificaDatabaseToolStripMenuItem
             // 
             this.verificaDatabaseToolStripMenuItem.Name = "verificaDatabaseToolStripMenuItem";
-            this.verificaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.verificaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.verificaDatabaseToolStripMenuItem.Text = "Verifica";
             this.verificaDatabaseToolStripMenuItem.Click += new System.EventHandler(this.VerificaDatabaseToolStripMenuItem_Click);
             // 
             // creaDatabaseToolStripMenuItem
             // 
             this.creaDatabaseToolStripMenuItem.Name = "creaDatabaseToolStripMenuItem";
-            this.creaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.creaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.creaDatabaseToolStripMenuItem.Text = "Crea";
             this.creaDatabaseToolStripMenuItem.Click += new System.EventHandler(this.CreaDatabaseToolStripMenuItem_Click);
             // 
             // popolaDatabaseToolStripMenuItem
             // 
             this.popolaDatabaseToolStripMenuItem.Name = "popolaDatabaseToolStripMenuItem";
-            this.popolaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.popolaDatabaseToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.popolaDatabaseToolStripMenuItem.Text = "Popola";
             this.popolaDatabaseToolStripMenuItem.Click += new System.EventHandler(this.PopolaDatabaseToolStripMenuItem_Click);
             // 
@@ -401,14 +401,14 @@
             this.panel1.Location = new System.Drawing.Point(3, 59);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(696, 80);
+            this.panel1.Size = new System.Drawing.Size(876, 80);
             this.panel1.TabIndex = 31;
             // 
             // SettingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 541);
+            this.ClientSize = new System.Drawing.Size(882, 553);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "SettingView";

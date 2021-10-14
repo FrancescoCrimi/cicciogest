@@ -6,25 +6,16 @@ namespace CiccioGest.Infrastructure
     {
         NHibernate = 1,
         EF,
-        Db4o,
         LiteDb,
         WCF,
         Memory,
-    }
-
-    public enum UI
-    {
-        Form = 1,
-        WPF,
-        WCF,
-        SCRIPT
     }
 
     public enum Databases
     {
         MySql = 1,
         SQLite,
-        SSEE,
+        SqlSrv,
         PgSql
     }
 

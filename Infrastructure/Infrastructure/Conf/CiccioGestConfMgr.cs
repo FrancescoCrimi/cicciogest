@@ -91,10 +91,9 @@ namespace CiccioGest.Infrastructure.Conf
 
             var mysql = new CiccioGestConf()
             {
-                CS = "server=localhost;User Id=CiccioGestNhb;password=CiccioGestNhb;database=CiccioGestNhb",
+                CS = "server=localhost;User Id=CiccioGestNhb;password=CiccioGestNhb;database=CiccioGestNhb;SslMode=none",
                 DataAccess = Storage.NHibernate,
                 Database = Databases.MySql,
-                UserInterface = UI.WPF,
                 Name = "mysql"
             };
             privateAppConfs.Available.Add(mysql.Name, mysql);
@@ -104,37 +103,33 @@ namespace CiccioGest.Infrastructure.Conf
                 CS = "User Id=cicciogestnhb;Password=CiccioGestNhb;Host=localhost;Database=cicciogestnhb",
                 DataAccess = Storage.NHibernate,
                 Database = Databases.PgSql,
-                UserInterface = UI.WPF,
                 Name = "pgsql"
             };
             privateAppConfs.Available.Add(pgsql.Name, pgsql);
 
-            var ssee1 = new CiccioGestConf()
+            var sqlsrv1 = new CiccioGestConf()
             {
                 CS = @"Data Source=CICCIOBOOK\SQLEXPRESS;Initial Catalog=CiccioGestNhb;Integrated Security=True",
                 DataAccess = Storage.NHibernate,
-                Database = Databases.SSEE,
-                UserInterface = UI.WPF,
-                Name = "ssee1"
+                Database = Databases.SqlSrv,
+                Name = "sqlsrv1"
             };
-            privateAppConfs.Available.Add(ssee1.Name, ssee1);
+            privateAppConfs.Available.Add(sqlsrv1.Name, sqlsrv1);
 
-            var ssee2 = new CiccioGestConf()
+            var sqlsvr2 = new CiccioGestConf()
             {
                 CS = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\CiccioGestNhb.mdf;Integrated Security=True",
                 DataAccess = Storage.NHibernate,
-                Database = Databases.SSEE,
-                UserInterface = UI.WPF,
-                Name = "ssee2"
+                Database = Databases.SqlSrv,
+                Name = "sqlsvr2"
             };
-            privateAppConfs.Available.Add(ssee2.Name, ssee2);
+            privateAppConfs.Available.Add(sqlsvr2.Name, sqlsvr2);
 
             var sqlite1 = new CiccioGestConf()
             {
                 CS = "Data Source=CiccioGestNhb.db;Version=3;BinaryGuid=False",
                 DataAccess = Storage.NHibernate,
                 Database = Databases.SQLite,
-                UserInterface = UI.WPF,
                 Name = "sqlite1"
             };
             privateAppConfs.Available.Add(sqlite1.Name, sqlite1);
@@ -144,7 +139,6 @@ namespace CiccioGest.Infrastructure.Conf
                 CS = "Data Source=CiccioGestNhb.db;Version=3;Default IsolationLevel=ReadCommitted;BinaryGuid=False",
                 DataAccess = Storage.NHibernate,
                 Database = Databases.SQLite,
-                UserInterface = UI.WPF,
                 Name = "sqlite2"
             };
             privateAppConfs.Available.Add(sqlite2.Name, sqlite2);
@@ -154,7 +148,6 @@ namespace CiccioGest.Infrastructure.Conf
                 CS = "http://localhost:8000",
                 DataAccess = Storage.WCF,
                 Database = Databases.MySql,
-                UserInterface = UI.WPF,
                 Name = "wcf1"
             };
             privateAppConfs.Available.Add(wcf1.Name, wcf1);
@@ -164,38 +157,28 @@ namespace CiccioGest.Infrastructure.Conf
                 CS = "http://localhost:8100",
                 DataAccess = Storage.WCF,
                 Database = Databases.MySql,
-                UserInterface = UI.WPF,
                 Name = "wcf2"
             };
             privateAppConfs.Available.Add(wcf2.Name, wcf2);
 
-            var db4o = new CiccioGestConf()
-            {
-                CS = "CiccioGest.db4o",
-                DataAccess = Storage.Db4o,
-                Database = Databases.MySql,
-                UserInterface = UI.WPF,
-                Name = "db4o"
-            };
-            privateAppConfs.Available.Add(db4o.Name, db4o);
             var memory = new CiccioGestConf()
             {
                 CS = "",
                 DataAccess = Storage.LiteDb,
                 Database = Databases.MySql,
-                UserInterface = UI.WPF,
                 Name = "memory"
             };
             privateAppConfs.Available.Add(memory.Name, memory);
+
             var litedb = new CiccioGestConf()
             {
                 CS = "CiccioGest.db",
                 DataAccess = Storage.LiteDb,
                 Database = Databases.MySql,
-                UserInterface = UI.WPF,
                 Name = "litedb"
             };
             privateAppConfs.Available.Add(litedb.Name, litedb);
+
             privateAppConfs.Current = mysql.Name;
             Save();
         }

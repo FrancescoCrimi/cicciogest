@@ -61,7 +61,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.SQLiteDialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
-                case Databases.SSEE:
+                case Databases.SqlSrv:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
@@ -136,7 +136,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 case Databases.SQLite:
                     InitSQLite();
                     break;
-                case Databases.SSEE:
+                case Databases.SqlSrv:
                     break;
                 default:
                     break;
