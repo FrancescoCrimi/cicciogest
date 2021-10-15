@@ -13,10 +13,12 @@ namespace CiccioGest.Infrastructure
 
     public enum Databases
     {
-        MySql = 1,
-        SQLite,
-        SqlSrv,
-        PgSql
+        MySql = 1,  // Mysql.data
+        MyCon,      // Mysql Connector
+        SQLite,     // Sqlite
+        SqlSrv,     // System.Data.Sqlclient
+        MsSql,      // Microsoft.Data.Sqlclient
+        PgSql       // PostgreSql
     }
 
     [Serializable]

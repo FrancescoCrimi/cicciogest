@@ -46,9 +46,14 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             switch (conf.Database)
             {
                 case Databases.MySql:
-                    //configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
+                    //configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlConnector.MySqlConnectorDriver, NHibernate.Driver.MySqlConnector");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL57Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                    break;
+                case Databases.MyCon:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlConnector.MySqlConnectorDriver, NHibernate.Driver.MySqlConnector");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL55Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL57Dialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
                 case Databases.PgSql:
@@ -66,20 +71,14 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
+                case Databases.MsSql:
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MicrosoftDataSqlClientDriver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                    break;
             }
-            //switch (conf.UserInterface)
-            //{
-            //    case UI.Form:
-            //        configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListCore.DomainCollectionTypeFactory, NhbListCore");
-            //        //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListePlus.DomainCollectionTypeFactory, CiccioUtils.NhbListePlus");
-            //        break;
-            //    case UI.WPF:
-            //        configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListCore.DomainCollectionTypeFactory, NhbListCore");
-            //        //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListePlus.DomainCollectionTypeFactory, CiccioUtils.NhbListePlus");
-            //        break;
-            //    case UI.WCF:
-            //        break;
-            //}
+
+
             //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListCore.DomainCollectionTypeFactory, NhbListCore");
             configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioSoft.NhbCollections.CollectionCiccioTypeFactory, CiccioSoft.NhbCollections");
             configuration.SetProperty(NHibernate.Cfg.Environment.FormatSql, "true");
