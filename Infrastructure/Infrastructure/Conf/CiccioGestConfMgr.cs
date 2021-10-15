@@ -102,7 +102,7 @@ namespace CiccioGest.Infrastructure.Conf
             {
                 CS = "server=localhost;User Id=CiccioGestNhb;password=CiccioGestNhb;database=CiccioGestNhb;SslMode=none",
                 DataAccess = Storage.NHibernate,
-                Database = Databases.MyCon,
+                Database = Databases.MySql,
                 Name = "mycon"
             };
             privateAppConfs.Available.Add(mycon.Name, mycon);
@@ -120,7 +120,7 @@ namespace CiccioGest.Infrastructure.Conf
             {
                 CS = @"Data Source=CICCIOBOOK\SQLEXPRESS;Initial Catalog=CiccioGestNhb;Integrated Security=True",
                 DataAccess = Storage.NHibernate,
-                Database = Databases.SqlSrv,
+                Database = Databases.MsSql,
                 Name = "sqlsrv"
             };
             privateAppConfs.Available.Add(sqlsrv.Name, sqlsrv);

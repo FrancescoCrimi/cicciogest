@@ -1,8 +1,6 @@
-﻿//using Castle.Core.Logging;
-using CiccioGest.Infrastructure.Conf;
+﻿using CiccioGest.Infrastructure.Conf;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
-//using MySqlConnector;
+using MySqlConnector;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -45,13 +43,12 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
             switch (conf.Database)
             {
+                //case Databases.MySql:
+                //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
+                //    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL57Dialect");
+                //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                //    break;
                 case Databases.MySql:
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
-                    //configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlConnector.MySqlConnectorDriver, NHibernate.Driver.MySqlConnector");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL57Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
-                    break;
-                case Databases.MyCon:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlConnector.MySqlConnectorDriver, NHibernate.Driver.MySqlConnector");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL57Dialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
@@ -66,11 +63,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.SQLiteDialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
-                case Databases.SqlSrv:
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
-                    break;
+                //case Databases.SqlSrv:
+                //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
+                //    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
+                //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                //    break;
                 case Databases.MsSql:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MicrosoftDataSqlClientDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
@@ -135,7 +132,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 case Databases.SQLite:
                     InitSQLite();
                     break;
-                case Databases.SqlSrv:
+                case Databases.MsSql:
                     break;
                 default:
                     break;
