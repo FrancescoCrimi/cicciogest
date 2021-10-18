@@ -44,12 +44,9 @@
             this.cancellaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.apriToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.categorieDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.fornitoreLabel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.descrizioneLabel = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -86,6 +83,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.articoloBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -120,7 +118,7 @@
             this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.articoloBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nomeTextBox.Location = new System.Drawing.Point(97, 15);
             this.nomeTextBox.Name = "nomeTextBox";
-            this.nomeTextBox.Size = new System.Drawing.Size(125, 27);
+            this.nomeTextBox.Size = new System.Drawing.Size(206, 27);
             this.nomeTextBox.TabIndex = 3;
             // 
             // articoloBindingSource
@@ -136,7 +134,7 @@
             this.prezzoTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.articoloBindingSource, "Prezzo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.prezzoTextBox1.Location = new System.Drawing.Point(97, 48);
             this.prezzoTextBox1.Name = "prezzoTextBox1";
-            this.prezzoTextBox1.Size = new System.Drawing.Size(125, 27);
+            this.prezzoTextBox1.Size = new System.Drawing.Size(206, 27);
             this.prezzoTextBox1.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -153,15 +151,15 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(700, 441);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(590, 441);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.AutoSize = true;
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.47126F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.52874F));
             this.tableLayoutPanel2.Controls.Add(this.toolStrip, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.categorieDataGridView, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 1);
@@ -173,7 +171,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(692, 403);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(582, 403);
             this.tableLayoutPanel2.TabIndex = 11;
             // 
             // toolStrip
@@ -186,7 +184,7 @@
             this.apriToolStripButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(346, 27);
+            this.toolStrip.Size = new System.Drawing.Size(334, 27);
             this.toolStrip.TabIndex = 15;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -235,12 +233,10 @@
             this.categorieDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.categorieDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.categorieDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.nomeDataGridViewTextBoxColumn,
-            this.NomeCategoria});
+            this.nomeDataGridViewTextBoxColumn});
             this.categorieDataGridView.DataSource = this.categorieBindingSource;
             this.categorieDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categorieDataGridView.Location = new System.Drawing.Point(350, 32);
+            this.categorieDataGridView.Location = new System.Drawing.Point(338, 32);
             this.categorieDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.categorieDataGridView.MultiSelect = false;
             this.categorieDataGridView.Name = "categorieDataGridView";
@@ -248,38 +244,14 @@
             this.categorieDataGridView.RowHeadersVisible = false;
             this.categorieDataGridView.RowHeadersWidth = 51;
             this.categorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.categorieDataGridView.Size = new System.Drawing.Size(338, 366);
+            this.categorieDataGridView.Size = new System.Drawing.Size(240, 366);
             this.categorieDataGridView.TabIndex = 14;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 51;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // NomeCategoria
-            // 
-            this.NomeCategoria.MinimumWidth = 6;
-            this.NomeCategoria.Name = "NomeCategoria";
-            this.NomeCategoria.ReadOnly = true;
             // 
             // panel1
             // 
             this.panel1.AutoSize = true;
             this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.fornitoreLabel);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.descrizioneLabel);
             this.panel1.Controls.Add(this.prezzoTextBox1);
@@ -289,31 +261,34 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 30);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(340, 370);
+            this.panel1.Size = new System.Drawing.Size(328, 370);
             this.panel1.TabIndex = 13;
             // 
             // textBox2
             // 
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.articoloBindingSource, "Fornitore.Nome", true));
             this.textBox2.Location = new System.Drawing.Point(97, 114);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(125, 27);
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(206, 27);
             this.textBox2.TabIndex = 15;
+            this.textBox2.DoubleClick += new System.EventHandler(this.textBox2_DoubleClick);
             // 
-            // label1
+            // fornitoreLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 117);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "label1";
+            this.fornitoreLabel.AutoSize = true;
+            this.fornitoreLabel.Location = new System.Drawing.Point(5, 117);
+            this.fornitoreLabel.Name = "fornitoreLabel";
+            this.fornitoreLabel.Size = new System.Drawing.Size(69, 20);
+            this.fornitoreLabel.TabIndex = 14;
+            this.fornitoreLabel.Text = "Fornitore";
             // 
             // textBox1
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.articoloBindingSource, "Descrizione", true));
             this.textBox1.Location = new System.Drawing.Point(97, 81);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
+            this.textBox1.Size = new System.Drawing.Size(206, 27);
             this.textBox1.TabIndex = 13;
             // 
             // descrizioneLabel
@@ -331,9 +306,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aggiungiCategoriaToolStripButton,
             this.rimuovCategoriaToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(346, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(334, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(346, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(248, 27);
             this.toolStrip1.TabIndex = 16;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -366,7 +341,7 @@
             this.aboutToolStripButton});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(700, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(590, 31);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -603,11 +578,19 @@
             this.aboutToolStripButton.Text = "&?";
             this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
             // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // ArticoloView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 441);
+            this.ClientSize = new System.Drawing.Size(590, 441);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -647,9 +630,6 @@
         private System.Windows.Forms.ToolStripButton cancellaToolStripButton;
         private System.Windows.Forms.ToolStripButton salvaToolStripButton;
         private System.Windows.Forms.DataGridView categorieDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomeCategoria;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton aggiungiCategoriaToolStripButton;
@@ -689,8 +669,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label descrizioneLabel;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label fornitoreLabel;
         private System.Windows.Forms.ToolStripButton apriToolStripButton;
         private System.Windows.Forms.ToolStripButton aboutToolStripButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
     }
 }

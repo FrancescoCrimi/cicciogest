@@ -12,6 +12,7 @@ namespace CiccioGest.Presentation.AppForm.View
         event EventHandler ApriArticoloEvent;
         event EventHandler AggiungiCategoriaEvent;
         event EventHandler<Categoria> RimuoviCategoriaEvent;
+        event EventHandler SelezionaFornitore;
         void SetArticolo(Articolo articolo);
         void SetCategorie(ICollection<Categoria> list);
     }

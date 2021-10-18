@@ -11,6 +11,7 @@ namespace CiccioGest.Domain.Magazino
         private string nome;
         private int prezzo;
         private Fornitore fornitore;
+        private string descrizione;
 
         public Articolo() { }
         public Articolo(int id, string nome, int prezzo)
@@ -51,14 +52,32 @@ namespace CiccioGest.Domain.Magazino
             }
         }
 
-        public virtual string Descrizione { get; set; }
+        public virtual string Descrizione
+        {
+            get => descrizione;
+            set
+            {
+                if (value != descrizione)
+                {
+                    descrizione = value;
+                    NotifyPropertyChanged(nameof(Descrizione));
+                }
+            }
+        }
 
         public virtual ISet<Categoria> Categorie { get; protected set; }
 
         public virtual Fornitore Fornitore
         {
             get => fornitore;
-            set => fornitore = value;
+            set
+            {
+                if (value != fornitore)
+                {
+                    fornitore = value;
+                    NotifyPropertyChanged(nameof(Fornitore));
+                }
+            }
         }
 
 

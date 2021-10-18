@@ -1,4 +1,5 @@
 ﻿using CiccioGest.Application;
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
@@ -56,6 +57,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.ApriArticoloEvent += View_ApriArticoloEvent;
             view.AggiungiCategoriaEvent += View_AggiungiCategoriaEvent;
             view.RimuoviCategoriaEvent += View_RimuoviCategoriaEvent;
+            view.SelezionaFornitore += View_SelezionaFornitore;
         }
 
         private void View_CloseEvent(object sender, EventArgs e)
@@ -66,6 +68,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.ApriArticoloEvent -= View_ApriArticoloEvent;
             view.AggiungiCategoriaEvent -= View_AggiungiCategoriaEvent;
             view.RimuoviCategoriaEvent -= View_RimuoviCategoriaEvent;
+            view.SelezionaFornitore -= View_SelezionaFornitore;
         }
 
 
@@ -112,6 +115,16 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             view.SetArticolo(articolo);
             view.SetCategorie(articolo.Categorie);
+        }
+
+        private async void View_SelezionaFornitore(object sender, EventArgs e)
+        {
+            var sfp = dialogService.OpenDialog<SelezionaFornitorePresenter>(view);
+            if(sfp.IdFornitore != 0)
+            {
+                Fornitore fornitore = await magazinoService.GetFornitore(sfp.IdFornitore);
+                articolo.Fornitore = fornitore;
+            }
         }
 
 

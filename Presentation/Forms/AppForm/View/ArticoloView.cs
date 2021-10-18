@@ -19,6 +19,7 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler ApriArticoloEvent;
         public event EventHandler AggiungiCategoriaEvent;
         public event EventHandler<Categoria> RimuoviCategoriaEvent;
+        public event EventHandler SelezionaFornitore;
 
         public ArticoloView(ILogger<ArticoloView> logger)
         {
@@ -35,6 +36,7 @@ namespace CiccioGest.Presentation.AppForm.View
         public void SetCategorie(ICollection<Categoria> list)
         {
             categorieBindingSource.DataSource = list;
+            categorieDataGridView.ClearSelection();
         }
 
 
@@ -97,6 +99,9 @@ namespace CiccioGest.Presentation.AppForm.View
                 }
             }
         }
+
+        private void textBox2_DoubleClick(object sender, EventArgs e)
+            => SelezionaFornitore?.Invoke(sender, e);
 
         private void AboutToolStripButton_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();
