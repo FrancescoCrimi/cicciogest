@@ -12,15 +12,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="Mapping\Articolo.hbm.xml" />
-		<None Remove="Mapping\Categoria.hbm.xml" />
-		<None Remove="Mapping\Cliente.hbm.xml" />
-		<None Remove="Mapping\Dettaglio.hbm.xml" />
-		<None Remove="Mapping\Fattura.hbm.xml" />
-		<None Remove="Mapping\Fornitore.hbm.xml" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<EmbeddedResource Include="Mapping\Fornitore.hbm.xml">
 			<SubType>Designer</SubType>
 		</EmbeddedResource>

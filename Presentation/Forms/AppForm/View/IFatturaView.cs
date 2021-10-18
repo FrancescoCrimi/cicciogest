@@ -1,5 +1,4 @@
 ﻿using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppForm.Presenter;
 using System;
 
 namespace CiccioGest.Presentation.AppForm.View
