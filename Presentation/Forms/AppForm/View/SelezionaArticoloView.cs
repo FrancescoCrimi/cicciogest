@@ -14,11 +14,11 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler CloseEvent;
         public event EventHandler<int> ArticoloSelezionatoEvent;
 
-        public SelezionaArticoloView(ILogger<ArticoliView> logger)
+        public SelezionaArticoloView(ILogger<SelezionaArticoloView> logger)
         {
             InitializeComponent();
             this.logger = logger;
-            this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void CaricaArticoli(IList<ArticoloReadOnly> articoli)

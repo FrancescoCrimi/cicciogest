@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace CiccioGest.Domain.Magazino
 {
-    [Serializable]
-    [DataContract(Namespace = "http://cicciogest.it")]
     public class ArticoloReadOnly
     {
-        public ArticoloReadOnly(int Id, string Nome, int Prezzo, string NomeCategoria)
+        public ArticoloReadOnly(int id, string nome, int prezzo, IEnumerable<Categoria> categorie)
         {
-            this.Id = Id;
-            this.Nome = Nome;
-            this.Prezzo = Prezzo;
-            this.NomeCategoria = NomeCategoria;
+            Id = id;
+            Nome = nome;
+            Prezzo = prezzo;
+            Categorie = categorie;
         }
-        [DataMember]
         public int Id { get; private set; }
-        [DataMember]
         public string Nome { get; private set; }
-        [DataMember]
         public int Prezzo { get; private set; }
-        [DataMember]
-        public string NomeCategoria { get; private set; }
+        public IEnumerable<Categoria> Categorie { get; private set; }
     }
 }

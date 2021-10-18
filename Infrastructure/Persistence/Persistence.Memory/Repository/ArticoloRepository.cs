@@ -17,7 +17,7 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
                 IList<ArticoloReadOnly> list = new List<ArticoloReadOnly>();
                 foreach (Articolo item in entities)
                 {
-                    list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.NomeCategoria));
+                    list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.Categorie));
                 }
                 return list;
             });

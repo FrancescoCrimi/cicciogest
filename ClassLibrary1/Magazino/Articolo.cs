@@ -1,6 +1,8 @@
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Common;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.Magazino
@@ -51,6 +53,8 @@ namespace CiccioGest.Domain.Magazino
                 }
             }
         }
+
+        public virtual BindingList<Categoria> Categorie { get; protected set; }
 
         public virtual Categoria Categoria
         {

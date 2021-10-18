@@ -1,33 +1,30 @@
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Common;
+using CiccioSoft.Collections.Generic;
 using System;
-using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace CiccioGest.Domain.Magazino
 {
-    [Serializable]
-    [DataContract(Name = "Articolo", Namespace = "http://gest.cicciosoft.tk")]
     public class Articolo : DomainEntity, IEquatable<Articolo>
     {
-        [NonSerialized]
         private string nome;
         private int prezzo;
-        private Categoria categoria;
         private Fornitore fornitore;
 
         public Articolo() { }
-        public Articolo(string nome, int prezzo)
-        {
-            this.nome = nome;
-            this.prezzo = prezzo;
-        }
         public Articolo(int id, string nome, int prezzo)
             : this(nome, prezzo)
         {
             Id = id;
         }
+        public Articolo(string nome, int prezzo)
+        {
+            this.nome = nome;
+            this.prezzo = prezzo;
+            Categorie = new CiccioSet<Categoria>();
+        }
 
-        [DataMember]
         public virtual string Nome
         {
             get { return nome; }
@@ -41,7 +38,6 @@ namespace CiccioGest.Domain.Magazino
             }
         }
 
-        [DataMember]
         public virtual int Prezzo
         {
             get { return prezzo; }
@@ -55,30 +51,29 @@ namespace CiccioGest.Domain.Magazino
             }
         }
 
-        [DataMember]
-        public virtual Categoria Categoria
-        {
-            get { return categoria; }
-            set
-            {
-                if (value != categoria)
-                {
-                    categoria = value;
-                    NomeCategoria = categoria.Nome;
-                    NotifyPropertyChanged(nameof(NomeCategoria));
-                }
-            }
-        }
+        public virtual string Descrizione { get; set; }
 
-        [DataMember]
-        public virtual string NomeCategoria { get; protected set; }
+        public virtual ISet<Categoria> Categorie { get; protected set; }
 
-        [DataMember]
         public virtual Fornitore Fornitore
         {
             get => fornitore;
             set => fornitore = value;
         }
+
+
+        public virtual void AddCategoria(Categoria categoria)
+        {
+            Categorie.Add(categoria);
+        }
+
+        public virtual void RemoveCategoria(Categoria categoria)
+        {
+            Categorie.Remove(categoria);
+        }
+
+
+
 
         public override bool Equals(object obj)
         {

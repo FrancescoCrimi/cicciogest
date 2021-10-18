@@ -34,15 +34,11 @@
             System.Windows.Forms.Label prezzoLabel1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ArticoloView));
             this.articoliDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prezzoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categorieBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.articoloBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.articoliBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nomeTextBox = new System.Windows.Forms.TextBox();
-            this.articoloBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.categoriaComboBox = new System.Windows.Forms.ComboBox();
-            this.categorieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.prezzoTextBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -51,13 +47,15 @@
             this.salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             nomeLabel = new System.Windows.Forms.Label();
             categoriaLabel = new System.Windows.Forms.Label();
             prezzoLabel1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.articoliDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.articoloBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.articoloBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -102,11 +100,9 @@
             this.articoliDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.articoliDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.articoliDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.nomeDataGridViewTextBoxColumn,
-            this.NomeCategoria,
-            this.prezzoDataGridViewTextBoxColumn});
-            this.articoliDataGridView.DataSource = this.articoliBindingSource;
+            this.idDataGridViewTextBoxColumn,
+            this.nomeDataGridViewTextBoxColumn});
+            this.articoliDataGridView.DataSource = this.categorieBindingSource;
             this.articoliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.articoliDataGridView.Location = new System.Drawing.Point(4, 88);
             this.articoliDataGridView.Margin = new System.Windows.Forms.Padding(4);
@@ -116,45 +112,18 @@
             this.articoliDataGridView.RowHeadersVisible = false;
             this.articoliDataGridView.RowHeadersWidth = 51;
             this.articoliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.articoliDataGridView.Size = new System.Drawing.Size(374, 261);
+            this.articoliDataGridView.Size = new System.Drawing.Size(815, 261);
             this.articoliDataGridView.TabIndex = 1;
             this.articoliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProdottiDataGridView_CellClick);
             // 
-            // dataGridViewTextBoxColumn1
+            // categorieBindingSource
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 48;
+            this.categorieBindingSource.DataMember = "Categorie";
+            this.categorieBindingSource.DataSource = this.articoloBindingSource;
             // 
-            // nomeDataGridViewTextBoxColumn
+            // articoloBindingSource
             // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // NomeCategoria
-            // 
-            this.NomeCategoria.DataPropertyName = "NomeCategoria";
-            this.NomeCategoria.HeaderText = "Categoria";
-            this.NomeCategoria.MinimumWidth = 6;
-            this.NomeCategoria.Name = "NomeCategoria";
-            this.NomeCategoria.ReadOnly = true;
-            // 
-            // prezzoDataGridViewTextBoxColumn
-            // 
-            this.prezzoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.prezzoDataGridViewTextBoxColumn.DataPropertyName = "Prezzo";
-            this.prezzoDataGridViewTextBoxColumn.HeaderText = "Prezzo";
-            this.prezzoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.prezzoDataGridViewTextBoxColumn.Name = "prezzoDataGridViewTextBoxColumn";
-            this.prezzoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.prezzoDataGridViewTextBoxColumn.Width = 81;
+            this.articoloBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Articolo);
             // 
             // articoliBindingSource
             // 
@@ -169,10 +138,6 @@
             this.nomeTextBox.Size = new System.Drawing.Size(120, 22);
             this.nomeTextBox.TabIndex = 3;
             // 
-            // articoloBindingSource
-            // 
-            this.articoloBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Articolo);
-            // 
             // categoriaComboBox
             // 
             this.categoriaComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.articoloBindingSource, "Categoria", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -184,10 +149,6 @@
             this.categoriaComboBox.Name = "categoriaComboBox";
             this.categoriaComboBox.Size = new System.Drawing.Size(119, 24);
             this.categoriaComboBox.TabIndex = 10;
-            // 
-            // categorieBindingSource
-            // 
-            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Categoria);
             // 
             // prezzoTextBox1
             // 
@@ -215,7 +176,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(382, 353);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(823, 353);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // toolStrip
@@ -228,7 +189,7 @@
             this.aboutToolStripButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(382, 27);
+            this.toolStrip.Size = new System.Drawing.Size(823, 27);
             this.toolStrip.TabIndex = 10;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -289,14 +250,30 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(374, 49);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(815, 49);
             this.tableLayoutPanel2.TabIndex = 11;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ArticoloView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 353);
+            this.ClientSize = new System.Drawing.Size(823, 353);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ArticoloView";
@@ -304,9 +281,9 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ArticoloView_FormClosed);
             this.Load += new System.EventHandler(this.View_Load);
             ((System.ComponentModel.ISupportInitialize)(this.articoliDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.articoloBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categorieBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.articoloBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -333,9 +310,16 @@
         private System.Windows.Forms.BindingSource articoliBindingSource;
         private System.Windows.Forms.BindingSource articoloBindingSource;
         private System.Windows.Forms.BindingSource categorieBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn allowNewDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn allowEditDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn allowRemoveDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn supportsChangeNotificationDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn supportsSearchingDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn supportsSortingDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isSortedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sortPropertyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sortDirectionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomeCategoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn prezzoDataGridViewTextBoxColumn;
     }
 }

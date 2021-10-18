@@ -20,7 +20,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             IList<Articolo> prodotti = await unitOfWork.ISession.CreateCriteria<Articolo>().ListAsync<Articolo>();
             foreach (Articolo item in prodotti)
             {
-                list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.NomeCategoria));
+                list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.Categorie));
             }
             return list;
         }

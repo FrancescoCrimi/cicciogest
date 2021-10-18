@@ -70,11 +70,13 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int p = 1; p < 11; p++)
             {
-                Articolo prod = new Articolo("Articolo " + p.ToString(), 10 + p);
-                prod.Categoria = Categorie[p - 1];
-                Articoli.Add(prod);
-                ArticoloReadOnly pro = new ArticoloReadOnly(prod.Id, prod.Nome, prod.Prezzo, prod.NomeCategoria);
-                ArticoliRO.Add(pro);
+                
+                Articolo articolo = new Articolo("Articolo " + p.ToString(), 10 + p);
+                //articolo.AddCategoria(Categorie[p - 1]);
+                articolo.Descrizione = "Articolo " + p.ToString() + " Bla bla bla";
+                Articoli.Add(articolo);
+                ArticoloReadOnly articoloRO = new ArticoloReadOnly(articolo.Id, articolo.Nome, articolo.Prezzo, articolo.Categorie);
+                ArticoliRO.Add(articoloRO);
             }
         }
 

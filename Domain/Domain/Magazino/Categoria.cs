@@ -1,11 +1,8 @@
 ﻿using CiccioGest.Domain.Common;
 using System;
-using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.Magazino
 {
-    [Serializable]
-    [DataContract(Name = "Categoria", Namespace = "http://gest.cicciosoft.tk")]
     public class Categoria : DomainEntity, IEquatable<Categoria>
     {
         private string nome;
@@ -21,7 +18,6 @@ namespace CiccioGest.Domain.Magazino
             Id = id;
         }
 
-        [DataMember]
         public virtual string Nome
         {
             get { return nome; }

@@ -8,9 +8,19 @@
 		<id name="Id" generator="native" unsaved-value="0"/>
 		<property name="Nome" not-null="true"/>
 		<property name="Prezzo" not-null="true"/>
-		<property name="NomeCategoria" not-null="true"/>
+		<property name="Descrizione" not-null="true"/>
+
 		<many-to-one name="Fornitore" column="IdFornitore" foreign-key="FkArticoliFornitoreId" not-null="true"/>
-		<many-to-one name="Categoria" column="IdCategoria" foreign-key="FkArticoliCategoriaId" access="field.camelcase" not-null="true"/>
+		
+<!--		<many-to-one name="Categoria" column="IdCategoria" foreign-key="FkArticoliCategoriaId" access="field.camelcase" not-null="true"/> -->
+
+		<set name="Categorie" table="Prodotti_Categorie" generic="true">
+			<key column="IdProdotto" not-null="true"/>
+			<many-to-many class="Categoria" fetch="join">
+				<column name="IdCategoria" not-null="true" />
+			</many-to-many>
+		</set>
+	
 	</class>
 
 </hibernate-mapping>

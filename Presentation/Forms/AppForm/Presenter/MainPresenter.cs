@@ -80,7 +80,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private void View_NuovoFornitoreEvent(object sender, EventArgs e) { }
 
         private void View_ApriArticoloEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<ArticoloPresenter>();
+            => windowService.OpenWindow<ArticoliPresenter>();
 
         private void View_NuovoArticoloEvent(object sender, EventArgs e) { }
 

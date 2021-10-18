@@ -2,13 +2,9 @@
 using CiccioGest.Domain.Magazino;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.Documenti
 {
-    [Serializable]
-    [DataContract(Name = "Dettaglio", Namespace = "http://gest.cicciosoft.tk")]
-    [KnownType(typeof(Categoria))]
     public class Dettaglio : DomainValueObject, IEquatable<Dettaglio>
     {
         private int quantita;
@@ -28,7 +24,6 @@ namespace CiccioGest.Domain.Documenti
             this.Id = id;
         }
 
-        [DataMember]
         public virtual int Quantita
         {
             get { return quantita; }
@@ -39,7 +34,6 @@ namespace CiccioGest.Domain.Documenti
             }
         }
 
-        [DataMember]
         public virtual Articolo Articolo
         {
             get { return articolo; }
@@ -50,13 +44,10 @@ namespace CiccioGest.Domain.Documenti
             }
         }
 
-        [DataMember]
         public virtual int Totale { get; protected set; }
 
-        [DataMember]
         public virtual string NomeProdotto { get; protected set; }
 
-        [DataMember]
         public virtual int PrezzoProdotto { get; protected set; }
 
         //internal protected virtual Fattura Fattura { get; set; }

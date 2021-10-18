@@ -52,34 +52,40 @@ namespace CiccioGest.Presentation.AppForm
                 .AddTransient<SettingPresenter>()
 
                 .AddTransient<ArticoloPresenter>()
+                .AddTransient<ArticoliPresenter>()
                 .AddTransient<CategoriaPresenter>()
                 .AddTransient<ClientePresenter>()
-                .AddTransient<FatturaPresenter>()
-                .AddTransient<FornitorePresenter>()
-
-                .AddTransient<ArticoliPresenter>()
                 .AddTransient<ClientiPresenter>()
+                .AddTransient<FatturaPresenter>()
                 .AddTransient<FatturePresenter>()
+                .AddTransient<FornitorePresenter>()
                 .AddTransient<FornitoriPresenter>()
 
                 .AddTransient<SelezionaArticoloPresenter>()
+                .AddTransient<SelezionaCategoriaPresenter>()
                 .AddTransient<SelezionaClientePresenter>()
+                .AddTransient<SelezionaFatturaPresenter>()
+                .AddTransient<SelezionaFornitorePresenter>()
 
                 .AddSingleton<MainView>()
                 .AddSingleton<IMainView>(sp => sp.GetService<MainView>())
                 .AddTransient<ISettingView, SettingView>()
 
                 .AddTransient<IArticoloView, ArticoloView>()
+                .AddTransient<IArticoliView, ArticoliView>()
                 .AddTransient<ICategoriaView, CategoriaView>()
                 .AddTransient<IClienteView, ClienteView>()
-                .AddTransient<IFatturaView, FatturaView>()
-                .AddTransient<IFornitoreView, FornitoreView>()
-                .AddTransient<IArticoliView, ArticoliView>()
                 .AddTransient<IClientiView, ClientiView>()
+                .AddTransient<IFatturaView, FatturaView>()
                 .AddTransient<IFattureView, FattureView>()
+                .AddTransient<IFornitoreView, FornitoreView>()
                 .AddTransient<IFornitoriView, FornitoriView>()
+
                 .AddTransient<ISelezionaArticoloView, SelezionaArticoloView>()
+                .AddTransient<ISelezionaCategoriaView, SelezionaCategoriaView>()
                 .AddTransient<ISelezionaClienteView, SelezionaClienteView>()
+                .AddTransient<ISelezionaFatturaView, SelezionaFatturaView>()
+                .AddTransient<ISelezionaFornitoreView, SelezionaFornitoreView>()
 
                 .AddTransient<SettingView>();
         }

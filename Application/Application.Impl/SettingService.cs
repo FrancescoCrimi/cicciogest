@@ -82,7 +82,8 @@ namespace CiccioGest.Application.Impl
             for (int p = 1; p <= FakeSampleData.Articoli.Count; p++)
             {
                 Articolo articolo = FakeSampleData.Articoli[p -1];
-                articolo.Categoria = await magazinoService.GetCategoria(p);
+                Categoria categoria = await magazinoService.GetCategoria(p);
+                articolo.AddCategoria(categoria);
                 articolo.Fornitore = await magazinoService.GetFornitore(p);
                 await magazinoService.SaveArticolo(articolo);
             }

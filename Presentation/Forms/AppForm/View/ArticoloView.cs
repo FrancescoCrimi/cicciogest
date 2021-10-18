@@ -11,14 +11,14 @@ namespace CiccioGest.Presentation.AppForm.View
     {
         private readonly ILogger<ArticoloView> logger;
 
-        public event EventHandler AggiungiCategoriaEvent;
-        public event EventHandler ApriArticoloEvent;
-        public event EventHandler<int> EliminaArticoloEvent;
-        public event EventHandler RimuoviCategoriaEvent;
-        public event EventHandler<Articolo> SalvaArticoloEvent;
         public event EventHandler LoadEvent;
         public event EventHandler CloseEvent;
-        public event EventHandler<int> SelezionaArticoloEvent;
+        public event EventHandler NuovoArticoloEvent;
+        public event EventHandler SalvaArticoloEvent;
+        public event EventHandler<int> EliminaArticoloEvent;
+        public event EventHandler ApriArticoloEvent;
+        public event EventHandler AggiungiCategoriaEvent;
+        public event EventHandler<Categoria> RimuoviCategoriaEvent;
 
         public ArticoloView(ILogger<ArticoloView> logger)
         {
@@ -27,24 +27,36 @@ namespace CiccioGest.Presentation.AppForm.View
             this.logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
         }
 
+        public void SetArticolo(Articolo articolo)
+        {
+            articoloBindingSource.DataSource = articolo;
+        }
+
+        public void SetCategorie(ICollection<Categoria> list)
+        {
+            categorieBindingSource.DataSource = list;
+        }
+
+
+        #region Gestione eventi
+
         private void View_Load(object s, EventArgs e)
             => LoadEvent?.Invoke(s, e);
 
         private void ArticoloView_FormClosing(object sender, FormClosingEventArgs e)
             => CloseEvent?.Invoke(sender, e);
 
-
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
-            => articoloBindingSource.DataSource = new Articolo();
+            => NuovoArticoloEvent?.Invoke(sender, e);
 
-        private void SalvaToolStripButton_Click(object s, EventArgs e)
+        private void SalvaToolStripButton_Click(object sender, EventArgs e)
         {
             articoloBindingSource.EndEdit();
-            if (articoloBindingSource.Current is Articolo p)
+            if (articoloBindingSource.Current is Articolo)
             {
                 try
                 {
-                    SalvaArticoloEvent?.Invoke(s, p);
+                    SalvaArticoloEvent?.Invoke(sender, e);
                 }
                 catch (Exception ex)
                 {
@@ -53,14 +65,14 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void CancellaToolStripButton_Click(object s, EventArgs e)
+        private void CancellaToolStripButton_Click(object sender, EventArgs e)
         {
             articoloBindingSource.EndEdit();
             if (articoloBindingSource.Current is Articolo p)
             {
                 try
                 {
-                    EliminaArticoloEvent?.Invoke(s, p.Id);
+                    EliminaArticoloEvent?.Invoke(sender, p.Id);
                 }
                 catch (Exception ex)
                 {
@@ -69,22 +81,26 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void ProdottiDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ApriToolStripButton_Click(object sender, EventArgs e)
+            => ApriArticoloEvent?.Invoke(sender, e);
+
+        private void AggiungiCategoriaToolStripButton_Click(object sender, EventArgs e)
+            => AggiungiCategoriaEvent?.Invoke(sender, e);
+
+        private void RimuovCategoriaToolStripButton_Click(object sender, EventArgs e)
         {
-            if (articoliBindingSource.Current is ArticoloReadOnly art)
-                SelezionaArticoloEvent?.Invoke(sender, art.Id);
+            if (categorieDataGridView.SelectedRows.Count != 0)
+            {
+                if (categorieBindingSource.Current is Categoria categoria)
+                {
+                    RimuoviCategoriaEvent?.Invoke(sender, categoria);
+                }
+            }
         }
-
-        public void SetArticolo(Articolo articolo)
-            => articoloBindingSource.DataSource = articolo;
-
-        public void SetArticoli(IList<ArticoloReadOnly> list)
-             => articoliBindingSource.DataSource = list;
-
-        public void SetCategorie(IList<Categoria> list)
-            => categorieBindingSource.DataSource = list;
 
         private void AboutToolStripButton_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();
+
+        #endregion
     }
 }

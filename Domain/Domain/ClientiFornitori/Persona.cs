@@ -1,11 +1,8 @@
 ﻿using CiccioGest.Domain.Common;
 using System;
-using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.ClientiFornitori
 {
-    [Serializable]
-    [DataContract(Namespace = "http://cicciogest.it")]
     public abstract class Persona : DomainEntity
     {
         private string nome;
@@ -16,7 +13,6 @@ namespace CiccioGest.Domain.ClientiFornitori
         private string partitaIva;
         private string codiceFiscale;
 
-        [DataMember]
         public virtual string Nome
         {
             get => nome;
@@ -31,7 +27,6 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        [DataMember]
         public virtual string Cognome
         {
             get => cognome;
@@ -48,7 +43,6 @@ namespace CiccioGest.Domain.ClientiFornitori
 
         public virtual string NomeCompleto => Nome + " " + Cognome;
 
-        [DataMember]
         public virtual string Email
         {
             get => email;
@@ -62,7 +56,6 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        [DataMember]
         public virtual string Telefono
         {
             get => telefono;
@@ -76,7 +69,6 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        [DataMember]
         public virtual string Indirizzo
         {
             get => indirizzo;
@@ -90,7 +82,6 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        [DataMember]
         public virtual string PartitaIva
         {
             get => partitaIva;
@@ -104,7 +95,6 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        [DataMember]
         public virtual string CodiceFiscale
         {
             get => codiceFiscale;

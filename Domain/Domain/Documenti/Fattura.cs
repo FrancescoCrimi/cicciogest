@@ -3,22 +3,19 @@ using CiccioGest.Domain.Common;
 using CiccioSoft.Collections.Generic;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.Documenti
 {
-    [Serializable]
-    [DataContract(Name = "Fattura", Namespace = "http://gest.cicciosoft.tk")]
     public class Fattura : DomainEntity, IEquatable<Fattura>
     {
-        [NonSerialized]
         //private string nome;
         private IList<Dettaglio> dettagli;
         private Cliente cliente;
 
+        // usato da nhibernate
         protected Fattura()
         {
-            Initialize();
+            //dettagli = new CiccioList<Dettaglio>();
         }
 
         public Fattura(int id, Cliente cliente)
@@ -30,27 +27,18 @@ namespace CiccioGest.Domain.Documenti
         public Fattura(Cliente cliente)
         {
             Cliente = cliente;
-            Initialize();
+            dettagli = new CiccioList<Dettaglio>();
         }
 
 
-        [OnDeserializing]
-        void OnDeserializing(StreamingContext c)
-        {
-            Initialize();
-        }
-
-        [DataMember]
         public virtual Cliente Cliente
         {
             get => cliente;
             protected set => cliente = value;
         }
 
-        //[DataMember]
         public virtual string Nome => cliente.NomeCompleto;
 
-        [DataMember]
         public virtual IList<Dettaglio> Dettagli
         {
             get => dettagli;
@@ -64,7 +52,6 @@ namespace CiccioGest.Domain.Documenti
             }
         }
 
-        [DataMember]
         public virtual int Totale { get; protected set; }
 
 
@@ -98,11 +85,6 @@ namespace CiccioGest.Domain.Documenti
                 AddDettaglio(dettaglio);
         }
 
-
-        private void Initialize()
-        {
-            dettagli = new CiccioList<Dettaglio>();
-        }
 
         private void CalcolaTotale()
         {

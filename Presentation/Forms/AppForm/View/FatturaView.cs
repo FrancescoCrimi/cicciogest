@@ -13,11 +13,11 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler LoadEvent;
         public event EventHandler CloseEvent;
         public event EventHandler NuovaFatturaEvent;
-        public event EventHandler<Fattura> SalvaFatturaEvent;
+        public event EventHandler SalvaFatturaEvent;
         public event EventHandler ApriFatturaEvent;
         public event EventHandler NuovoDettaglioEvent;
-        public event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
-        public event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
+        public event EventHandler<Dettaglio> AggiungiDettaglioEvent;
+        public event EventHandler<Dettaglio> RimuoviDettaglioEvent;
 
         public FatturaView(ILogger<FatturaView> logger)
         {
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.AppForm.View
             => NuovaFatturaEvent?.Invoke(sender, e);
 
         private void SalvaToolStripButton_Click(object sender, EventArgs e)
-            => SalvaFatturaEvent?.Invoke(this, (Fattura)fatturaBindingSource.DataSource);
+            => SalvaFatturaEvent?.Invoke(sender, e);
 
         private void ApriToolStripButton_Click(object sender, EventArgs e)
             => ApriFatturaEvent?.Invoke(sender, e);
@@ -60,16 +60,14 @@ namespace CiccioGest.Presentation.AppForm.View
 
         private void AggiungiDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
-            Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
-            Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
-            AggiungiDettaglioEvent?.Invoke(sender, new FatturaDettaglioEventArgs(fattura, dettaglio));
+            if(dettaglioBindingSource.Current is Dettaglio dettaglio)
+                AggiungiDettaglioEvent?.Invoke(sender, dettaglio);
         }
 
         private void RimuoviDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
-            Fattura fattura = (Fattura)fatturaBindingSource.DataSource;
-            Dettaglio dettaglio = (Dettaglio)dettaglioBindingSource.Current;
-            RimuoviDettaglioEvent?.Invoke(sender, new FatturaDettaglioEventArgs(fattura, dettaglio));
+            if(dettaglioBindingSource.Current is Dettaglio dettaglio)
+                RimuoviDettaglioEvent?.Invoke(sender, dettaglio);
         }
 
         private void AboutToolStripButton_Click(object sender, EventArgs e)

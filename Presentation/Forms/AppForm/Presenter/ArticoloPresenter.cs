@@ -1,5 +1,6 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
+using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,80 +13,108 @@ namespace CiccioGest.Presentation.AppForm.Presenter
     public class ArticoloPresenter : PresenterBase, IDisposable
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService service;
+        private readonly IMagazinoService magazinoService;
+        private readonly WindowService windowService;
+        private readonly DialogService dialogService;
         private readonly IArticoloView view;
-
-        public event EventHandler CloseEvent;
+        private Articolo articolo;
 
         public ArticoloPresenter(ILogger<ArticoloPresenter> logger,
+                                 IArticoloView view,
                                  IMagazinoService magazinoService,
-                                 IArticoloView articoloView)
-            :base(articoloView)
+                                 WindowService windowService,
+                                 DialogService dialogService)
+            : base(view)
         {
             this.logger = logger;
-            service = magazinoService;
-            view = articoloView;
+            this.magazinoService = magazinoService;
+            this.windowService = windowService;
+            this.dialogService = dialogService;
+            this.view = view;
             view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
-            view.AggiungiCategoriaEvent += View_AggiungiCategoriaEvent;
-            view.ApriArticoloEvent += View_ApriArticoloEvent;
-            view.EliminaArticoloEvent += View_EliminaArticoloEvent;
-            view.RimuoviCategoriaEvent += View_RimuoviCategoriaEvent;
+            logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+        }
+
+        public void NuovoArticolo()
+        {
+            articolo = new Articolo();
+            MostraArticolo(articolo);
+        }
+
+        public async Task MostraArticolo(int id)
+        {
+            articolo = await magazinoService.GetArticolo(id);
+            MostraArticolo(articolo);
+        }
+
+        private void View_LoadEvent(object sender, EventArgs e)
+        {
+            view.NuovoArticoloEvent += View_NuovoArticoloEvent;
             view.SalvaArticoloEvent += View_SalvaArticoloEvent;
-            view.SelezionaArticoloEvent += View_SelezionaArticoloEvent;
-            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
-        }
-
-        private void View_AggiungiCategoriaEvent(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void View_ApriArticoloEvent(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
+            view.EliminaArticoloEvent += View_EliminaArticoloEvent;
+            view.ApriArticoloEvent += View_ApriArticoloEvent;
+            view.AggiungiCategoriaEvent += View_AggiungiCategoriaEvent;
+            view.RimuoviCategoriaEvent += View_RimuoviCategoriaEvent;
         }
 
         private void View_CloseEvent(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            view.NuovoArticoloEvent -= View_NuovoArticoloEvent;
+            view.SalvaArticoloEvent -= View_SalvaArticoloEvent;
+            view.EliminaArticoloEvent -= View_EliminaArticoloEvent;
+            view.ApriArticoloEvent -= View_ApriArticoloEvent;
+            view.AggiungiCategoriaEvent -= View_AggiungiCategoriaEvent;
+            view.RimuoviCategoriaEvent -= View_RimuoviCategoriaEvent;
+        }
+
+
+        private void View_NuovoArticoloEvent(object sender, EventArgs e)
+            => NuovoArticolo();
+
+        private async void View_SalvaArticoloEvent(object sender, EventArgs e)
+        {
+            await magazinoService.SaveArticolo(articolo);
         }
 
         private async void View_EliminaArticoloEvent(object sender, int e)
         {
-            await service.DeleteArticolo(e);
-            await VisualizzaProdotti();
+            await magazinoService.DeleteArticolo(e);
+            NuovoArticolo();
         }
 
-        private async void View_LoadEvent(object sender, EventArgs e)
+        private async void View_ApriArticoloEvent(object sender, EventArgs e)
         {
-            await VisualizzaProdotti();
+            var sav = dialogService.OpenDialog<SelezionaArticoloPresenter>(view);
+            if(sav.IdArticolo != 0)
+            {
+                await MostraArticolo(sav.IdArticolo);
+            }
         }
 
-        private void View_RimuoviCategoriaEvent(object sender, EventArgs e)
+        private async void View_AggiungiCategoriaEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var scp = dialogService.OpenDialog<SelezionaCategoriaPresenter>(view);
+            if(scp.IdCategoria != 0)
+            {
+                Categoria categoria = await magazinoService.GetCategoria(scp.IdCategoria);
+                articolo.AddCategoria(categoria);
+            }
         }
 
-        private async void View_SalvaArticoloEvent(object sender, Articolo e)
+        private void View_RimuoviCategoriaEvent(object sender, Categoria e)
         {
-            await service.SaveArticolo(e);
-            await VisualizzaProdotti();
+            articolo.RemoveCategoria(e);
         }
 
-        private async void View_SelezionaArticoloEvent(object sender, int e)
+
+        private void MostraArticolo(Articolo articolo)
         {
-            view.SetArticolo(await service.GetArticolo(e));
+            view.SetArticolo(articolo);
+            view.SetCategorie(articolo.Categorie);
         }
 
 
-
-        private async Task VisualizzaProdotti()
-        {
-            view.SetCategorie(await service.GetCategorie());
-            view.SetArticoli(await service.GetArticoli());
-            view.SetArticolo(new Articolo());
-        }
 
         public void Dispose()
         {

@@ -35,8 +35,8 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
                 .Id(forn => forn.Id);
             mapper.Entity<Articolo>()
                 .Id(art => art.Id)
-                .DbRef(x => x.Fornitore, "Fornitore")
-                .DbRef(x => x.Categoria, "Categoria");
+                .DbRef(x => x.Fornitore, "Fornitore");
+                //.DbRef(x => x.Categoria, "Categoria")
             mapper.Entity<Dettaglio>()
                 .Id(det => det.Id)
                 .DbRef(x => x.Articolo, "Articolo");

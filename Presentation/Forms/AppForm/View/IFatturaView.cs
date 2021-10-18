@@ -7,11 +7,11 @@ namespace CiccioGest.Presentation.AppForm.View
     public interface IFatturaView : IView
     {
         event EventHandler NuovaFatturaEvent;
-        event EventHandler<Fattura> SalvaFatturaEvent;
-        event FatturaDettaglioEventHandler AggiungiDettaglioEvent;
+        event EventHandler SalvaFatturaEvent;
         event EventHandler ApriFatturaEvent;
         event EventHandler NuovoDettaglioEvent;
-        event FatturaDettaglioEventHandler RimuoviDettaglioEvent;
+        event EventHandler<Dettaglio> AggiungiDettaglioEvent;
+        event EventHandler<Dettaglio> RimuoviDettaglioEvent;
         void SetDettaglio(Dettaglio dettaglio);
         void SetFattura(Fattura fattura);
     }

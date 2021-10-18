@@ -23,7 +23,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
             IList<ArticoloReadOnly> lst = new List<ArticoloReadOnly>();
             foreach (var item in lstArt)
             {
-                lst.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.NomeCategoria));
+                lst.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.Categorie));
             }
             return lst;
         });

@@ -5,16 +5,16 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class SelezionaArticoloPresenter : PresenterBase, IDisposable
+    public class SelezionaCategoriaPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger<SelezionaArticoloPresenter> logger;
-        private readonly ISelezionaArticoloView view;
+        private readonly ILogger<SelezionaCategoriaPresenter> logger;
+        private readonly ISelezionaCategoriaView view;
         private readonly IMagazinoService magazinoService;
-        public int IdArticolo { get; private set; }
+        public int IdCategoria { get; private set; }
 
-        public SelezionaArticoloPresenter(ILogger<SelezionaArticoloPresenter> logger,
-                                          ISelezionaArticoloView view,
-                                          IMagazinoService magazinoService)
+        public SelezionaCategoriaPresenter(ILogger<SelezionaCategoriaPresenter> logger,
+                                           ISelezionaCategoriaView view,
+                                           IMagazinoService magazinoService)
             : base(view)
         {
             this.logger = logger;
@@ -27,18 +27,18 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_LoadEvent(object sender, EventArgs e)
         {
-            view.CaricaArticoli(await magazinoService.GetArticoli());
-            view.ArticoloSelezionatoEvent += View_ArticoloSelezionatoEvent;
+            view.CategoriaSelezionataEvent += View_CategoriaSelezionataEvent;
+            view.CaricaCategorie(await magazinoService.GetCategorie());
         }
 
         private void View_CloseEvent(object sender, EventArgs e)
         {
-            view.ArticoloSelezionatoEvent -= View_ArticoloSelezionatoEvent;
+            view.CategoriaSelezionataEvent -= View_CategoriaSelezionataEvent;
         }
 
-        private void View_ArticoloSelezionatoEvent(object sender, int e)
+        private void View_CategoriaSelezionataEvent(object sender, int e)
         {
-            IdArticolo = e;
+            IdCategoria = e;
             view.Close();
         }
 

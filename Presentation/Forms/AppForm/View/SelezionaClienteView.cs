@@ -17,6 +17,7 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             InitializeComponent();
             this.logger = logger;
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void CaricaClienti(IList<Cliente> clienti)

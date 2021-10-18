@@ -1,11 +1,8 @@
 ﻿using CiccioGest.Domain.Common;
 using System;
-using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.ClientiFornitori
 {
-    [Serializable]
-    [DataContract(Name = "Cliente", Namespace = "http://gest.cicciosoft.tk")]
     public class Cliente : Persona, IEquatable<Cliente>
     {
         private string societa;
@@ -13,7 +10,6 @@ namespace CiccioGest.Domain.ClientiFornitori
         public Cliente() { }
 
 
-        [DataMember]
         public virtual string Societa
         {
             get => societa;

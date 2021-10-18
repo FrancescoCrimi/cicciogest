@@ -6,15 +6,13 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public interface IArticoloView : IView
     {
-        event EventHandler AggiungiCategoriaEvent;
-        event EventHandler ApriArticoloEvent;
+        event EventHandler NuovoArticoloEvent;
+        event EventHandler SalvaArticoloEvent;
         event EventHandler<int> EliminaArticoloEvent;
-        event EventHandler RimuoviCategoriaEvent;
-        event EventHandler<Articolo> SalvaArticoloEvent;
-        event EventHandler<int> SelezionaArticoloEvent;
-
-        void SetArticoli(IList<ArticoloReadOnly> list);
+        event EventHandler ApriArticoloEvent;
+        event EventHandler AggiungiCategoriaEvent;
+        event EventHandler<Categoria> RimuoviCategoriaEvent;
         void SetArticolo(Articolo articolo);
-        void SetCategorie(IList<Categoria> list);
+        void SetCategorie(ICollection<Categoria> list);
     }
 }

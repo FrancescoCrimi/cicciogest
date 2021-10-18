@@ -49,13 +49,18 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.Close();
         }
 
-        private void View_ArticoloSelezionatoEvent(object sender, int e)
+        private async void View_ArticoloSelezionatoEvent(object sender, int e)
         {
             IdProdotto = e;
+            var ap = windowService.OpenWindow<ArticoloPresenter>();
+            await ap.MostraArticolo(e);
+            view.Close();
         }
 
         public void Dispose()
         {
+            view.LoadEvent -= View_LoadEvent;
+            view.CloseEvent -= View_CloseEvent;
             logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

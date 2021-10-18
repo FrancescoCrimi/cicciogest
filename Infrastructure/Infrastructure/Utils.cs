@@ -7,13 +7,12 @@ namespace CiccioGest.Infrastructure
         NHibernate = 1,
         EF,
         LiteDb,
-        WCF,
         Memory,
     }
 
     public enum Databases
     {
-        MySql = 1,      // Mysql Connector
+        MySql = 1,  // Mysql Connector
         SQLite,     // Sqlite
         MsSql,      // Microsoft.Data.Sqlclient
         PgSql       // PostgreSql
