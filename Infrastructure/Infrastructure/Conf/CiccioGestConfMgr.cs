@@ -98,15 +98,6 @@ namespace CiccioGest.Infrastructure.Conf
             };
             privateAppConfs.Available.Add(mysql.Name, mysql);
 
-            var mycon = new CiccioGestConf()
-            {
-                CS = "server=localhost;User Id=CiccioGestNhb;password=CiccioGestNhb;database=CiccioGestNhb;SslMode=none",
-                DataAccess = Storage.NHibernate,
-                Database = Databases.MySql,
-                Name = "mycon"
-            };
-            privateAppConfs.Available.Add(mycon.Name, mycon);
-
             var pgsql = new CiccioGestConf()
             {
                 CS = "User Id=cicciogestnhb;Password=CiccioGestNhb;Host=localhost;Database=cicciogestnhb",
@@ -116,23 +107,23 @@ namespace CiccioGest.Infrastructure.Conf
             };
             privateAppConfs.Available.Add(pgsql.Name, pgsql);
 
-            var sqlsrv = new CiccioGestConf()
+            var mssql1 = new CiccioGestConf()
             {
                 CS = @"Data Source=CICCIOBOOK\SQLEXPRESS;Initial Catalog=CiccioGestNhb;Integrated Security=True",
                 DataAccess = Storage.NHibernate,
                 Database = Databases.MsSql,
-                Name = "sqlsrv"
+                Name = "mssql1"
             };
-            privateAppConfs.Available.Add(sqlsrv.Name, sqlsrv);
+            privateAppConfs.Available.Add(mssql1.Name, mssql1);
 
-            var mssql = new CiccioGestConf()
+            var mssql2 = new CiccioGestConf()
             {
                 CS = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\CiccioGestNhb.mdf;Integrated Security=True",
                 DataAccess = Storage.NHibernate,
                 Database = Databases.MsSql,
-                Name = "mssql"
+                Name = "mssql2"
             };
-            privateAppConfs.Available.Add(mssql.Name, mssql);
+            privateAppConfs.Available.Add(mssql2.Name, mssql2);
 
             var sqlite1 = new CiccioGestConf()
             {
