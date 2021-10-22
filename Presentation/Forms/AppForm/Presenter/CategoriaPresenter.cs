@@ -10,26 +10,27 @@ namespace CiccioGest.Presentation.AppForm.Presenter
     public class CategoriaPresenter : PresenterBase, IDisposable
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService service;
         private readonly ICategoriaView view;
-
-        //public object View => throw new NotImplementedException();
-
-        public event EventHandler CloseEvent;
+        private readonly IMagazinoService magazinoService;
 
         public CategoriaPresenter(ILogger<CategoriaPresenter> logger,
-                                  IMagazinoService magazinoService,
-                                  ICategoriaView categoriaView)
-            :base(categoriaView)
+                                  ICategoriaView view,
+                                  IMagazinoService magazinoService)
+            : base(view)
         {
             this.logger = logger;
-            this.service = magazinoService;
-            view = categoriaView;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
-            view.CancellaCategoriaEvent += View_CancellaCategoriaEvent;
+            this.view = view;
+            this.magazinoService = magazinoService;
+            this.view.LoadEvent += View_LoadEvent;
+            this.view.CloseEvent += View_CloseEvent;
+            this.view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
+            this.view.CancellaCategoriaEvent += View_CancellaCategoriaEvent;
             this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+        }
+
+        private async void View_LoadEvent(object sender, EventArgs e)
+        {
+            await Refresh();
         }
 
         private void View_CloseEvent(object sender, EventArgs e)
@@ -39,24 +40,19 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_CancellaCategoriaEvent(object sender, int e)
         {
-            await service.DeleteCategoria(e);
-            await Refresh();
-        }
-
-        private async void View_LoadEvent(object sender, EventArgs e)
-        {
+            await magazinoService.DeleteCategoria(e);
             await Refresh();
         }
 
         private async void View_SalvaCategoriaEvent(object s, Categoria e)
         {
-            await service.SaveCategoria(e);
+            await magazinoService.SaveCategoria(e);
             await Refresh();
         }
 
         private async Task Refresh()
         {
-            var list = await service.GetCategorie();
+            var list = await magazinoService.GetCategorie();
             view.SetCategorie(list);
             view.SetCategoria(new Categoria());
         }

@@ -18,7 +18,10 @@ namespace CiccioGest.Presentation.AppForm.View
         public event EventHandler ApriFornitore;
 
         public void MostraFornitore(Fornitore fornitore)
-            => fornitoreBindingSource.DataSource = fornitore;
+        {
+            fornitoreBindingSource.DataSource = fornitore;
+            indirizzoUserControl1.indirizzoBindingSource.DataSource = fornitore.IndirizzoNew;
+        }
 
 
         #region Gestione eventi

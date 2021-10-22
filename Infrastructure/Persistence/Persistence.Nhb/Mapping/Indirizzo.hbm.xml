@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+  assembly="Domain"
+  namespace="CiccioGest.Domain.ClientiFornitori"
+  xmlns="urn:nhibernate-mapping-2.2">
+
+	<class name="Indirizzo" table="Indirizzi">
+		<id name="Id" generator="native" unsaved-value="0"/>
+
+		<property name="Via" not-null="true"/>
+		<property name="Civico" not-null="true"/>
+		<property name="CAP" not-null="true"/>
+		<property name="Citta" not-null="true"/>
+		<property name="Stato"/>
+
+	</class>
+
+	</hibernate-mapping>

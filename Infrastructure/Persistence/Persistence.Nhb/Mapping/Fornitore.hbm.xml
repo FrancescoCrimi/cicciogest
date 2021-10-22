@@ -10,9 +10,14 @@
 		<property name="Cognome" not-null="true"/>
 		<property name="Email" not-null="true"/>
 		<property name="Telefono" not-null="true"/>
+		<property name="Mobile" not-null="true"/>
 		<property name="Indirizzo" not-null="true"/>
 		<property name="PartitaIva"/>
 		<property name="CodiceFiscale"/>
+
+		<many-to-one name="IndirizzoNew" class="Indirizzo" cascade="all">
+			<column name="IdIndirizzo" not-null="true" />
+		</many-to-one>
 	</class>
 
 </hibernate-mapping>

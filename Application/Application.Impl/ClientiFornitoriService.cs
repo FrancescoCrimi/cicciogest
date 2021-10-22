@@ -27,11 +27,6 @@ namespace CiccioGest.Application.Impl
             logger.LogDebug("HashCode: " + GetHashCode() + " (uow: " + unitOfWork.GetHashCode() + " Created");
         }
 
-        public Task DeleteCittà(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task DeleteCliente(int id)
         {
             try
@@ -60,16 +55,6 @@ namespace CiccioGest.Application.Impl
             }
         }
 
-        public Task<IList<Citta>> GetCittà()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Citta> GetCittà(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Cliente> GetCliente(int id)
         {
             return await clienteRepository.GetById(id);
@@ -88,11 +73,6 @@ namespace CiccioGest.Application.Impl
         public async Task<IList<Fornitore>> GetFornitori()
         {
             return await fornitoreRepository.GetAll();
-        }
-
-        public Task<Citta> SaveCittà(Citta città)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Cliente> SaveCliente(Cliente cliente)

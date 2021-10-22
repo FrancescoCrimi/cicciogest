@@ -171,11 +171,6 @@ namespace CiccioGest.Presentation.AppForm.View
         private System.Windows.Forms.DataGridView categorieDataGridView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox nomeCompletoTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomeCompleto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn societaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indirizzoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn partitaIvaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codiceFiscaleDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource categorieBindingSource;
 
         #endregion

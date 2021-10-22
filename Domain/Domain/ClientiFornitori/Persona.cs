@@ -9,9 +9,16 @@ namespace CiccioGest.Domain.ClientiFornitori
         private string cognome;
         private string email;
         private string telefono;
+        private string mobile;
         private string indirizzo;
         private string partitaIva;
         private string codiceFiscale;
+        private Indirizzo indirizzoNew;
+
+        protected Persona()
+        {
+            IndirizzoNew = new Indirizzo();
+        }
 
         public virtual string Nome
         {
@@ -69,6 +76,19 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
+        public virtual string Mobile
+        {
+            get => mobile;
+            set
+            {
+                if (value != mobile)
+                {
+                    mobile = value;
+                    NotifyPropertyChanged(nameof(Mobile));
+                }
+            }
+        }
+
         public virtual string Indirizzo
         {
             get => indirizzo;
@@ -105,6 +125,15 @@ namespace CiccioGest.Domain.ClientiFornitori
                     codiceFiscale = value;
                     NotifyPropertyChanged(nameof(CodiceFiscale));
                 }
+            }
+        }
+
+        public virtual Indirizzo IndirizzoNew
+        {
+            get => indirizzoNew;
+            set
+            {
+                indirizzoNew = value;
             }
         }
     }

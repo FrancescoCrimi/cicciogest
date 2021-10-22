@@ -52,7 +52,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_ClienteSelezionatoEvent(object sender, int e)
         {
-            windowService.OpenWindow<FornitorePresenter>().ApriFornitore(e);
+            windowService.OpenWindow<ClientePresenter>().ApriCliente(e);
             view.Close();
         }
 

@@ -43,9 +43,14 @@ namespace CiccioGest.Application.FakeImpl
                     Cognome = "Cognome " + i.ToString(),
                     Nome = "Nome " + i.ToString(),
                     Email = "cliente" + i.ToString() + "@pippo.com",
-                    Telefono = "123456789" + i.ToString(),
-                    Indirizzo = "Casa sua n° " + i + 1
+                    Telefono = "091123456" + i.ToString(),
+                    Mobile = "338123456" + i.ToString(),
+                    Indirizzo = "Casa sua n° " + i + 1,
                 };
+                cli.IndirizzoNew.Via = "via Casa sua";
+                cli.IndirizzoNew.Civico = (i + 1).ToString();
+                cli.IndirizzoNew.Citta = "Palermo";
+                cli.IndirizzoNew.CAP = "90100";
                 Clienti.Add(cli);
             }
         }
@@ -60,8 +65,13 @@ namespace CiccioGest.Application.FakeImpl
                     Nome = "Nome " + i.ToString(),
                     Email = "cliente" + i.ToString() + "@pippo.com",
                     Telefono = "123456789" + i.ToString(),
+                    Mobile = "123456789" + i.ToString(),
                     Indirizzo = "Casa sua n° " + i + 1
                 };
+                forn.IndirizzoNew.Via = "via Casa sua";
+                forn.IndirizzoNew.Civico = (i + 1).ToString();
+                forn.IndirizzoNew.Citta = "Palermo";
+                forn.IndirizzoNew.CAP = "90100";
                 Fornitori.Add(forn);
             }
         }

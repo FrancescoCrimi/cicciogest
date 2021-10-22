@@ -12,6 +12,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Mapping\Indirizzo.hbm.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<EmbeddedResource Include="Mapping\Fornitore.hbm.xml">
 			<SubType>Designer</SubType>
 		</EmbeddedResource>
@@ -30,6 +34,7 @@
 		<EmbeddedResource Include="Mapping\Articolo.hbm.xml">
 			<SubType>Designer</SubType>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Mapping\Indirizzo.hbm.xml" />
 	</ItemGroup>
 
 	<ItemGroup>

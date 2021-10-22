@@ -2,7 +2,6 @@
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

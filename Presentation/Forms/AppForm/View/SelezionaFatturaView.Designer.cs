@@ -180,18 +180,11 @@ namespace CiccioGest.Presentation.AppForm.View
         private System.Windows.Forms.DataGridView fattureDataGridView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox nomeCompletoTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomeCompleto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn societaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indirizzoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn partitaIvaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codiceFiscaleDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource fattureBindingSource;
 
         #endregion
 
         private System.Windows.Forms.Label nomeCompletoLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clienteDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dettagliDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totaleDataGridViewTextBoxColumn;

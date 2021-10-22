@@ -15,11 +15,5 @@ namespace CiccioGest.Application
         Task<Fornitore> GetFornitore(int id);
         Task<Fornitore> SaveFornitore(Fornitore fornitore);
         Task DeleteFornitore(int id);
-
-
-        Task<IList<Citta>> GetCittà();
-        Task<Citta> GetCittà(int id);
-        Task<Citta> SaveCittà(Citta città);
-        Task DeleteCittà(int id);
     }
 }
