@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CiccioGest.Presentation.WpfMetroApp.UserControls
 {
     /// <summary>
-    /// Logica di interazione per ClientiGrid.xaml
+    /// Logica di interazione per IndirizzoControl.xaml
     /// </summary>
-    public partial class ClientiGrid : UserControl
+    public partial class IndirizzoControl : UserControl
     {
-        public ClientiGrid()
+        public IndirizzoControl()
         {
             InitializeComponent();
         }

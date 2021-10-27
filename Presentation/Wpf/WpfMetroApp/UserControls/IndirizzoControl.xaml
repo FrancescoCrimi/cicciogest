@@ -1,16 +1,15 @@
-﻿<UserControl x:Class="CiccioGest.Presentation.WpfApp.UserControls.IndirizzoControl"
+﻿<UserControl x:Class="CiccioGest.Presentation.WpfMetroApp.UserControls.IndirizzoControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"
+             xmlns:local="clr-namespace:CiccioGest.Presentation.WpfMetroApp.UserControls"
              xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
              d:DataContext="{d:DesignInstance Type=viewmodel:ClienteViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
-
     <Grid
         DataContext="{Binding Indirizzo, Mode=OneWay}">
         <Grid.ColumnDefinitions>
@@ -52,5 +51,4 @@
             <TextBox Grid.Column="1" Height="23" Margin="3" Grid.Row="2" Text="{Binding Stato, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Width="120"/>
         </Grid>
     </Grid>
-
 </UserControl>

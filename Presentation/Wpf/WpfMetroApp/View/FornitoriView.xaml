@@ -4,11 +4,65 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CiccioGest.Presentation.WpfMetroApp.View"
+      xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfMetroApp.UserControls"
+      d:DataContext="{d:DesignInstance Type=viewmodel:FornitoriViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Background="White"
       Title="FornitoriView">
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+
+            <TextBlock Text="Fornitori" FontSize="28" DockPanel.Dock="Left" Margin="5,0,5,0"/>
+
+            <Grid DockPanel.Dock="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Cerca Fornitore" VerticalAlignment="Center" FontSize="14"/>
+                <TextBox Grid.Column="1" Text="Cerca Fornitore" VerticalAlignment="Center" Width="140" FontSize="14"/>
+            </Grid>
+
+            <ToolBar ToolBarTray.IsLocked="True">
+                <Button Command="{Binding NuovoFornitoreCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuovo" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding ApriFornitoreCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding AggiornaFornitoriCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Aggiorna" />
+                    </TextBlock>
+                </Button>
+            </ToolBar>
+
+        </DockPanel>
+
+        <usercontrols:ListaFornitoriControl  Grid.Row="1"/>
+
     </Grid>
 </Page>

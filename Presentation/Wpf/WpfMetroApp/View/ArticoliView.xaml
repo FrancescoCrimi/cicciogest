@@ -29,16 +29,19 @@
 
             <TextBlock Text="Articoli" FontSize="28" DockPanel.Dock="Left" Margin="5,0,5,0"/>
 
-            <Grid DockPanel.Dock="Right">
+            <Grid
+                
+                DockPanel.Dock="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Cerca Articoli:" Margin="3" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" VerticalAlignment="Center" Text="Cerca Articoli"/>
+                <Label Content="Cerca Articoli:" Margin="3" VerticalAlignment="Center" FontSize="14"/>
+                <TextBox Grid.Column="1" Width="140" Margin="3" VerticalAlignment="Center" Text="Cerca Articoli" FontSize="14"/>
             </Grid>
 
             <ToolBar
+                
                 ToolBarTray.IsLocked="True">
                 <Button Command="{Binding NuovoArticoloCommand}">
                     <TextBlock>        
@@ -52,7 +55,7 @@
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding AggiornaArticoliCommand}">
+                <Button Command="{Binding AggiornaArticoliCommand}" FontSize="14">
                     <TextBlock>        
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />
@@ -62,7 +65,7 @@
 
         </DockPanel>
 
-        <usercontrols:ArticoliGrid Grid.Row="1"/>
+        <usercontrols:ListaArticoliControl Grid.Row="1"/>
 
     </Grid>
 
