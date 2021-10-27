@@ -1,4 +1,4 @@
-﻿<Page x:Class="CiccioGest.Presentation.WpfApp.View.ClienteView"
+﻿<Page x:Class="CiccioGest.Presentation.WpfApp.View.FornitoreView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,20 +6,22 @@
       xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.View"
       xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      xmlns:UserControls="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"     
-      d:DataContext="{d:DesignInstance Type={x:Type viewmodel:ClienteViewModel}}"
+      xmlns:UserControls="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"
+      d:DataContext="{d:DesignInstance Type=viewmodel:FornitoreViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
       Background="White"
-      Title="Cliente">
+      Title="Fornitore">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}"/>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
-
 
     <Grid Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
@@ -29,31 +31,31 @@
 
         <DockPanel Grid.Row="0">
             <TextBlock
-                Text="Cliente"
+                Text="Fornitore"
                 DockPanel.Dock="Left"
                 Margin="{StaticResource SmallLeftMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoClienteCommand}">
+                <Button Command="{Binding NuovoFornitoreCommand}">
                     <TextBlock>
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Nuova" />
+                        <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding SalvaClienteCommand}">
+                <Button Command="{Binding SalvaFornitoreCommand}">
                     <TextBlock>
                         <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviClienteCommand}">
+                <Button Command="{Binding RimuoviFornitoreCommand}">
                     <TextBlock>
                         <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriClienteCommand}">
+                <Button Command="{Binding ApriFornitoreCommand}">
                     <TextBlock>
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
@@ -62,13 +64,14 @@
             </ToolBar>
         </DockPanel>
 
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"/>
                 <RowDefinition Height="50*"/>
             </Grid.RowDefinitions>
 
-            <Grid DataContext="{Binding Cliente, BindsDirectlyToSource=False, IsAsync=False, Mode=OneWay, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, NotifyOnSourceUpdated=False, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=False, ValidatesOnDataErrors=False}">
+            <Grid DataContext="{Binding Fornitore, Mode=OneWay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="50*"/>
@@ -88,7 +91,7 @@
                     <Label Content="Nome:" Grid.Row="0" Margin="3" Grid.Column="0"/>
                     <TextBox Grid.Column="1" Height="23" Margin="3" Grid.Row="0" Text="{Binding Nome, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"/>
                     <Label Content="Societa:" Grid.Column="0" Margin="3" Grid.Row="1"/>
-                    <TextBox Grid.Column="1" Height="23" Margin="3" Grid.Row="1" Text="{Binding Societa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"/>
+                    <TextBox Grid.Column="1" Height="23" Margin="3" Grid.Row="1" Width="120"/>
                     <Label Content="Partita Iva:" Grid.Column="0" Margin="3" Grid.Row="2"/>
                     <TextBox Grid.Column="1" Height="23" Margin="3" Grid.Row="2" Text="{Binding PartitaIva, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"/>
                     <Label Content="Telefono:" Grid.Row="3" Margin="3" Grid.Column="0"/>
@@ -120,6 +123,7 @@
             <UserControls:IndirizzoControl HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch"/>
 
         </Grid>
+
 
     </Grid>
 </Page>

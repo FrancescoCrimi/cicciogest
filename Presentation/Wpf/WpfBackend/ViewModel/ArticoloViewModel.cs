@@ -1,14 +1,13 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.WpfBackend.Services;
+using CiccioSoft.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
@@ -16,78 +15,86 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
     public sealed class ArticoloViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService service;
+        private readonly IMagazinoService magazinoService;
         private readonly IMessageBoxService messageBoxService;
-        private AsyncRelayCommand loadedCommand;
-        private ICommand nuovoCommand;
+        private RelayCommand loadedCommand;
+        private RelayCommand unloadedCommand;
+        private RelayCommand nuovoCommand;
         private AsyncRelayCommand salvaCommand;
         private AsyncRelayCommand eliminaCommand;
+        private RelayCommand aggiungiCategoriaCommand;
+        private RelayCommand rimuoviCategoriaCommand;
 
         public ArticoloViewModel(ILogger<ArticoloViewModel> logger,
-                                 IMagazinoService service,
-                                 IMessageBoxService messageBoxService)
+                                 IMessageBoxService messageBoxService,
+                                 IMagazinoService magazinoService)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.logger = logger;
+            this.magazinoService = magazinoService;
             this.messageBoxService = messageBoxService;
-            Articoli = new ObservableCollection<ArticoloReadOnly>();
-            Categorie = new ObservableCollection<Categoria>();
+            RegistraMessaggi();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
-        public ObservableCollection<Categoria> Categorie { get; private set; }
         public Articolo Articolo { get; private set; }
 
-        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(Nuovo);
-        public IAsyncRelayCommand EliminaCommand => eliminaCommand ??= new AsyncRelayCommand(Elimina);
-        public IAsyncRelayCommand SalvaCommand => salvaCommand ??= new AsyncRelayCommand(Salva);
-        public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(async () =>
+        public ObservableList<Categoria> Categorie { get; private set; }
+
+        public Categoria CategoriaSelezionata { private get; set; }
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
+
+        public ICommand UnloadedCommand => unloadedCommand ??= new RelayCommand(() =>
         {
-            foreach (Categoria cat in await service.GetCategorie())
-            {
-                Categorie.Add(cat);
-            }
-            await Aggiorna();
+            Messenger.Unregister<ArticoloIdMessage>(this);
         });
 
-        public ArticoloReadOnly ArticoloSelezionato
+        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(() 
+            => MostraArticolo(new Articolo()));
+        public IAsyncRelayCommand EliminaCommand => eliminaCommand ??= new AsyncRelayCommand(Elimina);
+        public IAsyncRelayCommand SalvaCommand => salvaCommand ??= new AsyncRelayCommand(Salva);
+
+
+
+        private void RegistraMessaggi()
         {
-            set
+            Messenger.Register<ArticoloIdMessage>(this, async (r, m) =>
             {
-                if (value != null && value.Id != 0)
+                if (m.Value != 0)
                 {
-                    Task.Run(async () =>
-                    {
-                        Articolo = await service.GetArticolo(value.Id);
-                        OnPropertyChanged(nameof(Articolo));
-                    });
+                    Articolo articolo = await magazinoService.GetArticolo(m.Value);
+                    MostraArticolo(articolo);
                 }
-            }
-        }
-
-        private async Task Aggiorna()
-        {
-            Articoli.Clear();
-            foreach (ArticoloReadOnly pr in await service.GetArticoli())
+                else
+                {
+                    MostraArticolo(new Articolo());
+                }
+            });
+            Messenger.Register<CategoriaIdMessage>(this, async(r, m) =>
             {
-                Articoli.Add(pr);
-            }
-            Nuovo();
+                if(m.Value != 0)
+                {
+                    Categoria categoria = await magazinoService.GetCategoria(m.Value);
+                    Articolo.AddCategoria(categoria);
+                    OnPropertyChanged(nameof(Categorie));
+                }
+            });
         }
 
-        private void Nuovo()
+        private void MostraArticolo(Articolo articolo)
         {
-            Articolo = new Articolo();
+            Articolo = articolo;
             OnPropertyChanged(nameof(Articolo));
+            Categorie = new ObservableList<Categoria>(articolo.Categorie);
+            OnPropertyChanged(nameof(Categorie));
         }
 
         private async Task Elimina()
         {
             try
             {
-                await service.DeleteArticolo(Articolo.Id);
-                await Aggiorna();
+                await magazinoService.DeleteArticolo(Articolo.Id);
+                MostraArticolo(new Articolo());
             }
             catch (Exception e)
             {
@@ -99,8 +106,8 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         {
             try
             {
-                await service.SaveArticolo(Articolo);
-                await Aggiorna();
+                await magazinoService.SaveArticolo(Articolo);
+                MostraArticolo(new Articolo());
             }
             catch (Exception e)
             {
@@ -108,10 +115,32 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        public void Dispose()
+
+
+        public ICommand AggiungiCategoriaCommand => aggiungiCategoriaCommand ??= new RelayCommand(AggiungiCategoria);
+
+        private void AggiungiCategoria()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
         }
 
+        public ICommand RimuoviCategoriaCommand => rimuoviCategoriaCommand ??= new RelayCommand(RimuoviCategoria);
+
+        private void RimuoviCategoria()
+        {
+        }
+
+
+
+        public void Dispose()
+        {
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+        }
+
+        private RelayCommand apriClienteCommand;
+        public ICommand ApriClienteCommand => apriClienteCommand ??= new RelayCommand(ApriCliente);
+
+        private void ApriCliente()
+        {
+        }
     }
 }

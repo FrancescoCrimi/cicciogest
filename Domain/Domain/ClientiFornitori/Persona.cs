@@ -7,6 +7,7 @@ namespace CiccioGest.Domain.ClientiFornitori
     {
         private string nome;
         private string cognome;
+        private string societa;
         private string email;
         private string telefono;
         private string mobile;
@@ -44,6 +45,19 @@ namespace CiccioGest.Domain.ClientiFornitori
                     cognome = value;
                     NotifyPropertyChanged(nameof(Cognome));
                     NotifyPropertyChanged(nameof(NomeCompleto));
+                }
+            }
+        }
+
+        public virtual string Societa
+        {
+            get => societa;
+            set
+            {
+                if (value != societa)
+                {
+                    societa = value;
+                    NotifyPropertyChanged(nameof(Societa));
                 }
             }
         }

@@ -43,14 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="ClientiFornitori\Citta.cs" />
     <Compile Include="ClientiFornitori\Cliente.cs" />
     <Compile Include="ClientiFornitori\Fornitore.cs" />
     <Compile Include="ClientiFornitori\IClienteRepository.cs" />
     <Compile Include="ClientiFornitori\IFornitoreRepository.cs" />
     <Compile Include="ClientiFornitori\Indirizzo.cs" />
     <Compile Include="ClientiFornitori\Persona.cs" />
-    <Compile Include="ClientiFornitori\Stato.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Conf\AppProperties.cs" />
     <Compile Include="Conf\AppSettings.cs" />

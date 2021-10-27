@@ -7,7 +7,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -20,9 +19,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly INavigationService navigationService;
         private ArticoloReadOnly articoloSelezionato;
         private AsyncRelayCommand loadedCommand;
-        private AsyncRelayCommand aggiornaArticoliCommand;
+        private RelayCommand nuovoArticoloCommand;
         private RelayCommand apriArticoloCommand;
-        private RelayCommand cancellaArticoloCommand;
+        private AsyncRelayCommand aggiornaArticoliCommand;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService magazinoService,
@@ -35,14 +34,14 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
+        public ObservableCollection<ArticoloReadOnly> Articoli { get; }
 
         public ArticoloReadOnly ArticoloSelezionato
         {
             protected get => articoloSelezionato;
             set
             {
-                if(articoloSelezionato != value)
+                if (articoloSelezionato != value)
                 {
                     articoloSelezionato = value;
                     apriArticoloCommand.NotifyCanExecuteChanged();
@@ -50,17 +49,19 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand
-            ??= new AsyncRelayCommand(AggiornaArticoli);
+        public IAsyncRelayCommand LoadedCommand => loadedCommand ??=
+            new AsyncRelayCommand(AggiornaArticoli);
 
-        public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand
-            ??= new AsyncRelayCommand(AggiornaArticoli);
+        public ICommand NuovoArticoloCommand => nuovoArticoloCommand ??= new RelayCommand(()
+            => navigationService.NavigateTo(nameof(ArticoloViewModel)));
 
-        public ICommand ApriArticoloCommand => apriArticoloCommand
-            ??= new RelayCommand(ApriArticolo, EnableApriArticolo);
+        public ICommand ApriArticoloCommand => apriArticoloCommand ??=
+            new RelayCommand(ApriArticolo, () => ArticoloSelezionato != null);
 
-        public ICommand CancellaArticoloCommand => cancellaArticoloCommand
-            ??= new RelayCommand(CancellaArticolo, EnableCancellaArticolo);
+        public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand ??=
+            new AsyncRelayCommand(AggiornaArticoli);
+
+
 
         private async Task AggiornaArticoli()
         {
@@ -80,17 +81,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        private bool EnableApriArticolo() => ArticoloSelezionato != null;
 
-        private void CancellaArticolo()
-        {
-        }
-
-        protected virtual bool EnableCancellaArticolo() => ArticoloSelezionato != null;
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

@@ -1,17 +1,18 @@
-﻿<Page x:Class="CiccioGest.Presentation.WpfMetroApp.View.ArticoliDialogView"
+﻿<Page x:Class="CiccioGest.Presentation.WpfApp.View.ArticoliListView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.View"
+      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"
       xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
-      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfMetroApp.UserControls"
-      d:DataContext="{d:DesignInstance Type=viewmodel:ArticoliDialogViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ArticoliListViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
       Background="White"
-      Title="ArticoliDialog">
+      Title="Lista Articoli">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -19,7 +20,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -29,31 +30,25 @@
 
             <TextBlock
                 Text="Articoli"
-                FontSize="28"
                 DockPanel.Dock="Left"
-                Margin="5,0,5,0"/>
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
 
-            <Grid DockPanel.Dock="Right">
+            <Grid
+                DockPanel.Dock="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Cerca Articoli:" Margin="3" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" VerticalAlignment="Center" Text="Cerca Articoli"/>
+                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" Text="Cerca Articoli" VerticalContentAlignment="Center"/>
             </Grid>
 
-            <ToolBar
-                ToolBarTray.IsLocked="True">
+            <ToolBar ToolBarTray.IsLocked="True">
                 <Button Command="{Binding ApriArticoloCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
-                    </TextBlock>
-                </Button>
-                <Button Command="{Binding CancellaArticoloCommand}">
-                    <TextBlock>        
-                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Cancella" />
                     </TextBlock>
                 </Button>
                 <Button Command="{Binding AggiornaArticoliCommand}">
@@ -66,7 +61,7 @@
 
         </DockPanel>
 
-        <usercontrols:ArticoliGrid Grid.Row="1"/>
+        <usercontrols:ListaArticoliControl Grid.Row="1"/>
 
     </Grid>
 

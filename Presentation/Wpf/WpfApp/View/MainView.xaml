@@ -20,7 +20,6 @@
         <Menu>
             <MenuItem Header="Documenti">
                 <MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
-                <!--<MenuItem Header="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>-->
             </MenuItem>
             <MenuItem Header="Magazino">
                 <MenuItem Header="Articoli" Command="{Binding ApriArticoliCommand, Mode=OneWay}"/>
@@ -28,7 +27,7 @@
             </MenuItem>
             <MenuItem Header="Anagrafica">
                 <MenuItem Header="Clienti" Command="{Binding ApriClientiCommand, Mode=OneWay}"/>
-                <MenuItem Header="Fornitori"/>
+                <MenuItem Header="Fornitori" Command="{Binding ApriFornitoriCommand, Mode=OneWay}"/>
             </MenuItem>
             <MenuItem x:Name="aboutMenuItem" Header="?"/>
         </Menu>

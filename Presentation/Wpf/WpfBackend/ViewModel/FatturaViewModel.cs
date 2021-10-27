@@ -6,7 +6,6 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Globalization;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
@@ -44,8 +43,12 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { private get; set; }
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
-            navigationService.NavigateTo(nameof(ClientiDialogViewModel)));
+
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
+
+
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(()
+            => navigationService.NavigateTo(nameof(ClientiListViewModel)));
 
         public IAsyncRelayCommand SalvaFatturaCommand => salvaFatturaCommand ??= new AsyncRelayCommand(async () =>
         {
@@ -72,10 +75,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(FattureDialogViewModel)));
+            => navigationService.NavigateTo(nameof(FattureListViewModel)));
+
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ArticoliDialogViewModel)));
+            => navigationService.NavigateTo(nameof(ArticoliListViewModel)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {
@@ -101,7 +105,6 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             OnPropertyChanged(nameof(Dettaglio));
         });
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
 
         private void RegistraMessaggi()
@@ -138,9 +141,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             OnPropertyChanged(nameof(Dettaglio));
         }
 
+
+
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

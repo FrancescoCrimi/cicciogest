@@ -1,10 +1,7 @@
 ﻿using CiccioGest.Domain.Common;
-using System;
-using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.ClientiFornitori
 {
-    [Serializable]
     public abstract class Persona : DomainEntity
     {
         private string nome;
@@ -14,6 +11,7 @@ namespace CiccioGest.Domain.ClientiFornitori
         private string indirizzo;
         private string partitaIva;
         private string codiceFiscale;
+        private Indirizzo indirizzoNew;
 
         public virtual string Nome
         {
@@ -107,6 +105,15 @@ namespace CiccioGest.Domain.ClientiFornitori
                     codiceFiscale = value;
                     NotifyPropertyChanged(nameof(CodiceFiscale));
                 }
+            }
+        }
+
+        public virtual Indirizzo IndirizzoNew
+        {
+            get => indirizzoNew;
+            set
+            {
+                indirizzoNew = value;
             }
         }
     }

@@ -2,9 +2,9 @@
 
 namespace CiccioGest.Presentation.WpfApp.UserControls
 {
-    public partial class ClientiGrid : UserControl
+    public partial class ListaFornitoriControl : UserControl
     {
-        public ClientiGrid()
+        public ListaFornitoriControl()
         {
             InitializeComponent();
         }

@@ -1,68 +1,64 @@
-﻿<Page x:Class="CiccioGest.Presentation.WpfMetroApp.View.FattureDialogView"
+﻿<Page x:Class="CiccioGest.Presentation.WpfApp.View.ClientiListView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.View"
+      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"
       xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
-      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfMetroApp.UserControls"
-      d:DataContext="{d:DesignInstance Type=viewmodel:FattureDialogViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ClientiListViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
       Background="White"
-      Title="FattureDialog">
+      Title="Lista Clienti">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0">
-
-            <TextBlock Text="Fatture" FontSize="28" DockPanel.Dock="Left" Margin="5,0,5,0"/>
-
+            <TextBlock
+                Text="Clienti"
+                DockPanel.Dock="Left"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+            
             <Grid DockPanel.Dock="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Cerca Fattura:" Margin="3" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" VerticalAlignment="Center" Text="Cerca Fattura"/>
+                <Label Content="Cerca Cliente:" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="Cerca Cliente" Width="120" Height="23" VerticalContentAlignment="Center"/>
             </Grid>
 
-            <ToolBar
-                ToolBarTray.IsLocked="True">
-                <Button Command="{Binding ApriFatturaCommand}">
+            <ToolBar ToolBarTray.IsLocked="True">
+                <Button Command="{Binding ApriClienteCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding CancellaFatturaCommand}">
-                    <TextBlock>        
-                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Cancella" />
-                    </TextBlock>
-                </Button>
-                <Button Command="{Binding AggiornaFattureCommand}">
-                    <TextBlock>        
+                <Button Command="{Binding AggiornaClientiCommand}">
+                    <TextBlock>
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />
                     </TextBlock>
                 </Button>
             </ToolBar>
-
         </DockPanel>
 
-        <usercontrols:FattureGrid Grid.Row="1"/>
+        <usercontrols:ListaClientiControl Grid.Row="1"/>
 
     </Grid>
 

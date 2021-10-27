@@ -54,7 +54,7 @@
                 </Button>
                 <Button Command="{Binding ApriFatturaCommand}">
                     <TextBlock>        
-                    <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
+                    <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Apri" />
                     </TextBlock>
                 </Button>

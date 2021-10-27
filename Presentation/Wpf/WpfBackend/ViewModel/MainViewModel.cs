@@ -15,6 +15,8 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private RelayCommand apriCategorieCommand;
         private RelayCommand apriArticoliCommand;
         private RelayCommand apriFattureCommand;
+        private RelayCommand apriFornitoriCommand;
+
         private RelayCommand<Type> menuItemCommand;
         private RelayCommand goBackCommand;
 
@@ -27,21 +29,22 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ICommand ApriFattureCommand => apriFattureCommand
-            ??= new RelayCommand(()
+        public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(FattureViewModel)));
 
-        public ICommand ApriArticoliCommand => apriArticoliCommand
-            ??= new RelayCommand(()
+        public ICommand ApriArticoliCommand => apriArticoliCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(ArticoliViewModel)));
 
-        public ICommand ApriCategorieCommand => apriCategorieCommand
-            ??= new RelayCommand(()
+        public ICommand ApriCategorieCommand => apriCategorieCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(CategoriaViewModel)));
 
-        public ICommand ApriClientiCommand => apriClientiCommand
-            ??= new RelayCommand(()
+        public ICommand ApriClientiCommand => apriClientiCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(ClientiViewModel)));
+
+        public ICommand ApriFornitoriCommand => apriFornitoriCommand ??= new RelayCommand(()
+            => navigationService.NavigateTo(nameof(FornitoriViewModel)));
+
+
 
         public ICommand MenuItemCommand => menuItemCommand
             ??= new RelayCommand<Type>((type)
@@ -56,6 +59,8 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             if(goBackCommand != null)
                 goBackCommand.NotifyCanExecuteChanged();
         }
+
+
 
         public void Dispose()
         {

@@ -19,9 +19,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly INavigationService navigationService;
         private Cliente clienteSelezionato;
         private AsyncRelayCommand loadCommand;
-        private AsyncRelayCommand aggiornaClientiCommand;
+        private RelayCommand nuovoClientiCommand;
         private RelayCommand apriClienteCommand;
-        private RelayCommand cancellaClienteCommand;
+        private AsyncRelayCommand aggiornaClientiCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IClientiFornitoriService clientiFornitoriService,
@@ -49,17 +49,21 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        public IAsyncRelayCommand LoadedCommand => loadCommand
-            ??= new AsyncRelayCommand(AggiornaClienti);
+        public IAsyncRelayCommand LoadedCommand => loadCommand ??=
+            new AsyncRelayCommand(AggiornaClienti);
 
-        public IAsyncRelayCommand AggiornaClientiCommand => aggiornaClientiCommand
-            ??= new AsyncRelayCommand(AggiornaClienti);
+        public ICommand NuovoClientiCommand => nuovoClientiCommand ??= new RelayCommand(() =>
+        {
+        });
 
-        public ICommand ApriClienteCommand => apriClienteCommand
-            ??= new RelayCommand(ApriCliente, EnableApriCliente);
+        public ICommand ApriClienteCommand => apriClienteCommand ??=
+            new RelayCommand(ApriCliente, () => ClienteSelezionato != null);
 
-        public ICommand CancellaClienteCommand => cancellaClienteCommand
-            ??= new RelayCommand(CancellaCliente, EnableCancellaCliente);
+        public IAsyncRelayCommand AggiornaClientiCommand => aggiornaClientiCommand ??=
+            new AsyncRelayCommand(AggiornaClienti);
+
+
+
 
         private async Task AggiornaClienti()
         {
@@ -79,13 +83,6 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        private bool EnableApriCliente() => ClienteSelezionato != null;
-
-        private void CancellaCliente()
-        {
-        }
-
-        protected virtual bool EnableCancellaCliente() => ClienteSelezionato != null;
 
         public void Dispose()
         {

@@ -5,16 +5,19 @@ using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public class ArticoliDialogViewModel : ArticoliViewModel
+    public class ArticoliListViewModel : ArticoliViewModel
     {
         private readonly INavigationService navigationService;
 
-        public ArticoliDialogViewModel(ILogger<ArticoliViewModel> logger,
-                                       IMagazinoService magazinoService,
-                                       INavigationService navigationService)
-            : base(logger, magazinoService, navigationService)
+        public ArticoliListViewModel(ILogger<ArticoliViewModel> logger,
+                                     IMagazinoService magazinoService,
+                                     INavigationService navigationService)
+            : base(logger,
+                   magazinoService,
+                   navigationService)
         {
             this.navigationService = navigationService;
+            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         protected override void ApriArticolo()

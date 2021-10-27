@@ -34,21 +34,21 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                <Label Content="Cerca Cliente" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Text="Cerca Cliente" TextWrapping="Wrap" VerticalAlignment="Center"/>
             </Grid>
 
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Command="{Binding ApriClienteCommand}">
+                <Button Command="{Binding NuovoClientiCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Apri" />
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding CancellaClienteCommand}">
+                <Button Command="{Binding ApriClienteCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Cancella" />
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Apri" />
                     </TextBlock>
                 </Button>
                 <Button Command="{Binding AggiornaClientiCommand}">

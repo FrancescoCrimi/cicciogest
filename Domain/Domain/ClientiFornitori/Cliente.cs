@@ -5,24 +5,8 @@ namespace CiccioGest.Domain.ClientiFornitori
 {
     public class Cliente : Persona, IEquatable<Cliente>
     {
-        private string societa;
 
         public Cliente() { }
-
-
-        public virtual string Societa
-        {
-            get => societa;
-            set
-            {
-                if (value != societa)
-                {
-                    societa = value;
-                    NotifyPropertyChanged(nameof(Societa));
-                }
-            }
-        }
-
 
         public override string ToString() => $"{Nome} {Cognome}";
 

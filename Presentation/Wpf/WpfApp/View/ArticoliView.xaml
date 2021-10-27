@@ -15,15 +15,13 @@
     Background="White"
     Title="Articoli">
 
-
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid
-        Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -44,21 +42,20 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Cerca Articoli:" Margin="3" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" VerticalAlignment="Center" Text="Cerca Articoli"/>
+                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" Text="Cerca Articoli" VerticalContentAlignment="Center"/>
             </Grid>
 
-            <ToolBar
-                ToolBarTray.IsLocked="True">
-                <Button Command="{Binding ApriArticoloCommand}">
+            <ToolBar ToolBarTray.IsLocked="True">
+                <Button Command="{Binding NuovoArticoloCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Apri" />
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding CancellaArticoloCommand}">
+                <Button Command="{Binding ApriArticoloCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Cancella" />
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Apri" />
                     </TextBlock>
                 </Button>
                 <Button Command="{Binding AggiornaArticoliCommand}">
@@ -71,7 +68,7 @@
 
         </DockPanel>
 
-        <usercontrols:ArticoliGrid Grid.Row="1"/>
+        <usercontrols:ListaArticoliControl Grid.Row="1"/>
 
     </Grid>
 

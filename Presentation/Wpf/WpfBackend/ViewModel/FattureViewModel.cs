@@ -19,9 +19,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly INavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
         private AsyncRelayCommand loadedCommand;
-        private AsyncRelayCommand aggiornaFattureCommand;
+        private RelayCommand nuovaFatturaCommand;
         private RelayCommand apriFatturaCommand;
-        private RelayCommand cancellaFatturaCommand;
+        private AsyncRelayCommand aggiornaFattureCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
@@ -34,11 +34,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
+        public ObservableCollection<FatturaReadOnly> Fatture { get; }
 
         public FatturaReadOnly FatturaSelezionata
         {
-            private get => fatturaSelezionata;
+            protected get => fatturaSelezionata;
             set
             {
                 if (value != fatturaSelezionata)
@@ -49,17 +49,19 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        public ICommand LoadedCommand => loadedCommand
-            ??= new AsyncRelayCommand(AggiornaFatture);
+        public ICommand LoadedCommand => loadedCommand ??=
+            new AsyncRelayCommand(AggiornaFatture);
 
-        public ICommand AggiornaFattureCommand => aggiornaFattureCommand
-            ??= new AsyncRelayCommand(AggiornaFatture);
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
+        {
+        });
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand
-            ??= new RelayCommand(ApriFattura, EnableApriFattura);
+        public ICommand AggiornaFattureCommand => aggiornaFattureCommand ??=
+            new AsyncRelayCommand(AggiornaFatture);
 
-        public ICommand CancellaFatturaCommand => cancellaFatturaCommand
-            ??= new RelayCommand(CancellaFattura, EnableCancellaFattura);
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??=
+            new RelayCommand(ApriFattura, () => FatturaSelezionata != null);
+
 
         private async Task AggiornaFatture()
         {
@@ -79,13 +81,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         }
 
-        private bool EnableApriFattura() => FatturaSelezionata != null;
 
-        private void CancellaFattura()
-        {
-        }
-
-        protected virtual bool EnableCancellaFattura() => fatturaSelezionata != null;
 
         public void Dispose()
         {

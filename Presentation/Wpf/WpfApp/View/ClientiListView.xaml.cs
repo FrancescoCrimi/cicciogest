@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    public partial class ClientiDialogView : Page
+    public partial class ClientiListView : Page
     {
-        public ClientiDialogView(ClientiDialogViewModel clientiDialogViewModel)
+        public ClientiListView(ClientiListViewModel clientiDialogViewModel)
         {
             InitializeComponent();
             DataContext = clientiDialogViewModel;

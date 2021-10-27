@@ -4,15 +4,75 @@ using System.Runtime.Serialization;
 
 namespace CiccioGest.Domain.ClientiFornitori
 {
-    [Serializable]
     public class Indirizzo : DomainValueObject
     {
-        protected Indirizzo() { }
+        private string via;
+        private string civico;
+        private string cap;
+        private string citta;
+        private string stato;
 
-        public string Via { get; private set; }
-        public string Civico { get; private set; }
-        public string CAP { get; private set; }
-        public Citta Citta { get; private set; }
-        public Stato Stato { get; private set; }
+        public Indirizzo() { }
+
+        public virtual string Via
+        {
+            get => via;
+            set
+            {
+                if (value != via)
+                {
+                    via = value;
+                    NotifyPropertyChanged(nameof(Via));
+                }
+            }
+        }
+        public virtual string Civico
+        {
+            get => civico;
+            set
+            {
+                if (value != civico)
+                {
+                    civico = value;
+                    NotifyPropertyChanged(nameof(Civico));
+                }
+            }
+        }
+        public virtual string CAP
+        {
+            get => cap;
+            set
+            {
+                if (value != cap)
+                {
+                    cap = value;
+                    NotifyPropertyChanged(nameof(CAP));
+                }
+            }
+        }
+        public virtual string Citta
+        {
+            get => citta;
+            set
+            {
+                if (value != citta)
+                {
+                    citta = value;
+                    NotifyPropertyChanged(nameof(Citta));
+                }
+            }
+        }
+        public virtual string Stato
+        {
+            get => stato;
+            set
+            {
+                if (value != stato)
+                {
+                    stato = value;
+                    NotifyPropertyChanged(nameof(Stato));
+                }
+            }
+        }
     }
 }

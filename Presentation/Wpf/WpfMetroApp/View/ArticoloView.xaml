@@ -20,20 +20,54 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ToolBar
-            ToolBarTray.IsLocked="True"
-            VerticalAlignment="Top">
-            <Button Content="Nuovo" Command="{Binding NuovoCommand, Mode=OneWay}"/>
-            <Button Content="Elimina" Command="{Binding EliminaCommand, Mode=OneWay}"/>
-            <Button Content="Salva" Command="{Binding SalvaCommand, Mode=OneWay}"/>
-        </ToolBar>
+        <DockPanel Grid.Row="0">
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="Articolo" FontSize="28" DockPanel.Dock="Left" Margin="5,0,5,0"/>
+
+            <ToolBar
+                ToolBarTray.IsLocked="True">
+                <Button Command="{Binding NuovoCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuovo" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding SalvaCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Salva" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding EliminaCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Elimina" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding ApriClienteCommand}">
+                    <TextBlock>
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+            </ToolBar>
+
+        </DockPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+
+
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="1">
 
             <Grid Margin="0">
                 <Grid.RowDefinitions>
@@ -84,9 +118,7 @@
                     VerticalAlignment="Center" 
                     Width="100" 
                     ItemsSource="{Binding Categorie}" 
-                    DisplayMemberPath="Nome"
-                    SelectedValue="{Binding Articolo.Categoria, Mode=TwoWay}" 
-                    SelectedItem="{Binding Articolo.Categoria, Mode=TwoWay}">
+                    DisplayMemberPath="Nome">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel/>
@@ -95,21 +127,9 @@
                 </ComboBox>
             </Grid>
 
-        </StackPanel>
+        </StackPanel>-->
 
-        <DataGrid
-            Grid.Row="2"
-            ItemsSource="{Binding Articoli}"
-            SelectedItem="{Binding ArticoloSelezionato, Mode=OneWayToSource}" 
-            IsReadOnly="True"
-            AutoGenerateColumns="False"
-            SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Nome}" Header="Nome" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Prezzo}" Header="Prezzo" Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding NomeCategoria}" Header="Categoria" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+
 
     </Grid>
 

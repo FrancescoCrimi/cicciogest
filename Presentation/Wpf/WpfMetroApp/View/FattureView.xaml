@@ -21,7 +21,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -40,16 +40,16 @@
 
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding ApriFatturaCommand}">
+                <Button Command="{Binding NuovaFatturaCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE8E5;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Apri" />
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuova" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding CancellaFatturaCommand}">
+                <Button Command="{Binding ApriFatturaCommand}">
                     <TextBlock>        
-                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Cancella" />
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Apri" />
                     </TextBlock>
                 </Button>
                 <Button Command="{Binding AggiornaFattureCommand}">

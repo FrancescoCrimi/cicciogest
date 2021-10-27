@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ArticoloViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -15,13 +17,15 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}"/>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid
         Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -35,63 +39,99 @@
 
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Content="Nuovo" Command="{Binding NuovoCommand, Mode=OneWay}"/>
-                <Button Content="Elimina" Command="{Binding EliminaCommand, Mode=OneWay}"/>
-                <Button Content="Salva" Command="{Binding SalvaCommand, Mode=OneWay}"/>
+                <Button Command="{Binding NuovoCommand, Mode=OneWay}">
+                    <TextBlock>        
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuovo" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding SalvaCommand, Mode=OneWay}">
+                    <TextBlock>        
+                        <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Salva" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding EliminaCommand, Mode=OneWay}">
+                    <TextBlock>        
+                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Elimina" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding ApriClienteCommand}">
+                    <TextBlock>
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding AggiungiCategoriaCommand, Mode=OneWay}">
+                    <TextBlock>        
+                        <Run Text="&#xE710;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Aggiungi Categoria" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding RimuoviCategoriaCommand, Mode=OneWay}">
+                    <TextBlock>        
+                        <Run Text="&#xE738;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Rimuovi Categoria" />
+                    </TextBlock>
+                </Button>
             </ToolBar>
 
         </DockPanel>
 
-        <StackPanel Grid.Row="1"
-            Orientation="Horizontal">
 
-            <Grid x:Name="gridNome" Margin="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="nomeTextBox" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Articolo.Nome}" VerticalAlignment="Center" Width="100"/>
+
+        <GroupBox x:Name="groupBox" Grid.Row="1" Header="Articolo">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*"/>
+                    <ColumnDefinition Width="45*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="grid1" Grid.Column="0" DataContext="{Binding Articolo, BindsDirectlyToSource=False, IsAsync=False, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, NotifyOnSourceUpdated=False, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=False, ValidatesOnDataErrors=False}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="nomeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Text="{Binding Nome, NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Center" Width="197"/>
+
+                    <Label Content="Descrizione:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBox x:Name="descrizioneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="1" Text="{Binding Descrizione, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="197"/>
+
+                    <Label Content="Prezzo:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox x:Name="prezzoTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="2" Text="{Binding Prezzo, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="197"/>
+
+                    <Label Content="Fornitore:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="fornitoreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="3" Text="" VerticalAlignment="Center" Width="197"/>
+                </Grid>
+
+                <GroupBox Header="Categorie" Grid.Column="1">
+                    <ListView Grid.Column="1" x:Name="categorieListView" SelectionMode="Single" ItemsSource="{Binding Categorie, BindsDirectlyToSource=False, IsAsync=False, Mode=OneWay, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, NotifyOnSourceUpdated=False, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=False, ValidatesOnDataErrors=False}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Nome}"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </GroupBox>
+
             </Grid>
 
-            <Grid x:Name="gridPrezzo" Margin="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Content="Prezzo:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="prezzoTextBox" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Articolo.Prezzo}" VerticalAlignment="Center" Width="60"/>
-            </Grid>
 
-            <Grid x:Name="gridTipoProdotto" Margin="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Content="Categoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <ComboBox x:Name="idProdottoComboBox" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="100" ItemsSource="{Binding Categorie}" DisplayMemberPath="Nome"  SelectedValue="{Binding Articolo.Categoria, Mode=TwoWay}" SelectedItem="{Binding Articolo.Categoria, Mode=TwoWay}">
-                    <ComboBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel/>
-                        </ItemsPanelTemplate>
-                    </ComboBox.ItemsPanel>
-                </ComboBox>
-            </Grid>
 
-        </StackPanel>
-
-        <DataGrid Grid.Row="2"
-            ItemsSource="{Binding Articoli}"
-            SelectedItem="{Binding ArticoloSelezionato, Mode=OneWayToSource}"
-            SelectionMode="Single"
-            AutoGenerateColumns="False"
-            IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Nome}" Header="Nome" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Prezzo}" Header="Prezzo" Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding NomeCategoria}" Header="Categoria" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        </GroupBox>
 
     </Grid>
 </Page>

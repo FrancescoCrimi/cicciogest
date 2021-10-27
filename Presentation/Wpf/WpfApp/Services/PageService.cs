@@ -17,15 +17,19 @@ namespace CiccioGest.Presentation.WpfApp.Services
         {
             //Configure<MainViewModel, MainPage>();
             Configure<ArticoliViewModel, ArticoliView>();
-            Configure<ArticoliDialogViewModel, ArticoliDialogView>();
+            Configure<ArticoliListViewModel, ArticoliListView>();
             Configure<ArticoloViewModel, ArticoloView>();
             Configure<CategoriaViewModel, CategoriaView>();
             Configure<ClienteViewModel, ClienteView>();
             Configure<ClientiViewModel, ClientiView>();
-            Configure<ClientiDialogViewModel, ClientiDialogView>();
+            Configure<ClientiListViewModel, ClientiListView>();
             Configure<FatturaViewModel, FatturaView>();
             Configure<FattureViewModel, FattureView>();
-            Configure<FattureDialogViewModel, FattureDialogView>();
+            Configure<FattureListViewModel, FattureListView>();
+            Configure<FornitoreViewModel, FornitoreView>();
+            Configure<FornitoriViewModel, FornitoriView>();
+            Configure<FornitoriListViewModel, FornitoriListView>();
+
         }
 
         public Type GetPageType(string key)

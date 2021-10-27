@@ -13,16 +13,19 @@ namespace CiccioGest.Domain.Magazino
         private Fornitore fornitore;
         private string descrizione;
 
-        public Articolo() { }
         public Articolo(int id, string nome, int prezzo)
             : this(nome, prezzo)
         {
             Id = id;
         }
         public Articolo(string nome, int prezzo)
+            : this()
         {
             this.nome = nome;
             this.prezzo = prezzo;
+        }
+        public Articolo()
+        {
             Categorie = new CiccioSet<Categoria>();
         }
 

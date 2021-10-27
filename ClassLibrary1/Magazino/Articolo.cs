@@ -13,8 +13,9 @@ namespace CiccioGest.Domain.Magazino
         [NonSerialized]
         private string nome;
         private int prezzo;
-        private Categoria categoria;
+        //private Categoria categoria;
         private Fornitore fornitore;
+        private string descrizione;
 
         public Articolo() { }
         public Articolo(string nome, int prezzo)
@@ -54,29 +55,29 @@ namespace CiccioGest.Domain.Magazino
             }
         }
 
-        public virtual BindingList<Categoria> Categorie { get; protected set; }
-
-        public virtual Categoria Categoria
+        public virtual string Descrizione
         {
-            get { return categoria; }
+            get => descrizione;
             set
             {
-                if (value != categoria)
+                if (value != descrizione)
                 {
-                    categoria = value;
-                    NomeCategoria = categoria.Nome;
-                    NotifyPropertyChanged(nameof(NomeCategoria));
+                    descrizione = value;
+                    NotifyPropertyChanged(nameof(Descrizione));
                 }
             }
         }
 
-        public virtual string NomeCategoria { get; protected set; }
+        public virtual BindingList<Categoria> Categorie { get; protected set; }
 
         public virtual Fornitore Fornitore
         {
             get => fornitore;
             set => fornitore = value;
         }
+
+
+
 
         public override bool Equals(object obj)
         {
