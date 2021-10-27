@@ -22,7 +22,7 @@
     </i:Interaction.Triggers>
 
     <Grid
-        Margin="{StaticResource SmallLeftRightMargin}">
+        Margin="{StaticResource XSmallLeftRightBottomMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -33,9 +33,8 @@
             <TextBlock
                 Text="Fatture"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
-                Style="{StaticResource PageTitleStyle}"
-                />
+                Margin="{StaticResource SmallLeftRightMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
 
             <Grid
                 DockPanel.Dock="Right">
@@ -49,19 +48,19 @@
 
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding CancellaFatturaCommand}" Padding="8,2,8,2">
+                <Button Command="{Binding NuovaFatturaCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Nuova" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriFatturaCommand}" OverridesDefaultStyle="True" Padding="8,4,8,4">
+                <Button Command="{Binding ApriFatturaCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding AggiornaFattureCommand}" Padding="8,2,8,2">
+                <Button Command="{Binding AggiornaFattureCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />

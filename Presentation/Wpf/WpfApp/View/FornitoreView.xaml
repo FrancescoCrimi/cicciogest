@@ -18,12 +18,9 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </i:EventTrigger>
-        <i:EventTrigger EventName="Unloaded">
-            <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}"/>
-        </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -33,35 +30,37 @@
             <TextBlock
                 Text="Fornitore"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
+                Margin="{StaticResource SmallLeftRightMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
+
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoFornitoreCommand}">
+                <Button Command="{Binding NuovoFornitoreCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding SalvaFornitoreCommand}">
+                <Button Command="{Binding SalvaFornitoreCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviFornitoreCommand}">
+                <Button Command="{Binding RimuoviFornitoreCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriFornitoreCommand}">
+                <Button Command="{Binding ApriFornitoreCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
             </ToolBar>
+
         </DockPanel>
 
 
@@ -123,7 +122,6 @@
             <UserControls:IndirizzoControl HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch"/>
 
         </Grid>
-
 
     </Grid>
 </Page>

@@ -18,7 +18,6 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly IMessageBoxService messageBoxService;
         private readonly IClientiFornitoriService clientiFornitoriService;
         private RelayCommand loadedCommand;
-        private RelayCommand unloadedCommand;
         private RelayCommand nuovoClienteCommand;
         private RelayCommand salvaClienteCommand;
         private RelayCommand rimuoviClienteCommand;

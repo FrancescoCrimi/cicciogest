@@ -17,13 +17,9 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </i:EventTrigger>
-        <i:EventTrigger EventName="Unloaded">
-            <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}"/>
-        </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid
-        Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -34,45 +30,45 @@
             <TextBlock
                 Text="Articolo"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
+                Margin="{StaticResource SmallLeftRightMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoCommand, Mode=OneWay}">
+                <Button Command="{Binding NuovoCommand, Mode=OneWay}" Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding SalvaCommand, Mode=OneWay}">
+                <Button Command="{Binding SalvaCommand, Mode=OneWay}" Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding EliminaCommand, Mode=OneWay}">
+                <Button Command="{Binding EliminaCommand, Mode=OneWay}" Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriClienteCommand}">
+                <Button Command="{Binding ApriClienteCommand}" Margin="8,0,8,0">
                     <TextBlock>
-                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
                 <Separator/>
-                <Button Command="{Binding AggiungiCategoriaCommand, Mode=OneWay}">
+                <Button Command="{Binding AggiungiCategoriaCommand, Mode=OneWay}" Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE710;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xE710;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Aggiungi Categoria" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviCategoriaCommand, Mode=OneWay}">
+                <Button Command="{Binding RimuoviCategoriaCommand, Mode=OneWay}" Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE738;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="&#xE738;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Rimuovi Categoria" />
                     </TextBlock>
                 </Button>

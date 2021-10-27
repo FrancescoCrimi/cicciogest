@@ -21,7 +21,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid Margin="{StaticResource XSmallLeftRightBottomMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -32,7 +32,7 @@
             <TextBlock
                 Text="Articoli"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
+                Margin="{StaticResource SmallLeftRightMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
             <Grid
@@ -46,19 +46,19 @@
             </Grid>
 
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoArticoloCommand}">
+                <Button Command="{Binding NuovoArticoloCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriArticoloCommand}">
+                <Button Command="{Binding ApriArticoloCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding AggiornaArticoliCommand}">
+                <Button Command="{Binding AggiornaArticoliCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />

@@ -21,7 +21,7 @@
     </i:Interaction.Triggers>
 
 
-    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -31,35 +31,37 @@
             <TextBlock
                 Text="Cliente"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
+                Margin="{StaticResource SmallLeftRightMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
+
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoClienteCommand}">
+                <Button Command="{Binding NuovoClienteCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Nuova" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding SalvaClienteCommand}">
+                <Button Command="{Binding SalvaClienteCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviClienteCommand}">
+                <Button Command="{Binding RimuoviClienteCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriClienteCommand}">
+                <Button Command="{Binding ApriClienteCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
             </ToolBar>
+
         </DockPanel>
 
         <Grid Grid.Row="1">

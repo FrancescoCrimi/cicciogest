@@ -44,7 +44,6 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 {
                     fornitoreSelezionato = value;
                     apriFornitoreCommand.NotifyCanExecuteChanged();
-                    cancellaFornitoreCommand.NotifyCanExecuteChanged();
                 }
             }
         }

@@ -20,7 +20,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid Margin="{StaticResource XSmallLeftRightBottomMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -30,7 +30,7 @@
             <TextBlock
                 Text="Clienti"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
+                Margin="{StaticResource SmallLeftRightMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
             
             <Grid DockPanel.Dock="Right">
@@ -43,13 +43,13 @@
             </Grid>
 
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Command="{Binding ApriClienteCommand}">
+                <Button Command="{Binding ApriClienteCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding AggiornaClientiCommand}">
+                <Button Command="{Binding AggiornaClientiCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />

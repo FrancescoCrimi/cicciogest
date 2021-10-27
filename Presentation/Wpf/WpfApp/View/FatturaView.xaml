@@ -18,8 +18,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid
-        Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="Auto"/>
@@ -30,48 +29,48 @@
             <TextBlock
                 Text="Fattura"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
+                Margin="{StaticResource SmallLeftRightMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovaFatturaCommand}">
+                <Button Command="{Binding NuovaFatturaCommand}" Margin="8,0,8,0">
                     <TextBlock>        
-                    <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
-                    <Run Text="Nuova" />
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuova" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding SalvaFatturaCommand}">
+                <Button Command="{Binding SalvaFatturaCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                     <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviFatturaCommand}">
+                <Button Command="{Binding RimuoviFatturaCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                     <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriFatturaCommand}">
+                <Button Command="{Binding ApriFatturaCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                     <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Apri" />
                     </TextBlock>
                 </Button>
                 <Separator/>
-                <Button Command="{Binding NuovoDettaglioCommand}">
+                <Button Command="{Binding NuovoDettaglioCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                     <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding AggiungiDettaglioCommand}">
+                <Button Command="{Binding AggiungiDettaglioCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                     <Run Text="&#xE710;" FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Aggiungi" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviDettaglioCommand}">
+                <Button Command="{Binding RimuoviDettaglioCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                     <Run Text="&#xE738;" FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Rimuovi" />
