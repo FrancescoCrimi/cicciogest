@@ -4,6 +4,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
+      d:DataContext="{d:DesignInstance Type=viewmodel:CategoriaViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
@@ -17,10 +19,10 @@
     </i:Interaction.Triggers>
 
     <Grid
-        Margin="{StaticResource SmallLeftRightMargin}">
+        Margin="{StaticResource XSmallLeftRightBottomMargin}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
-            <RowDefinition Height="68" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -29,7 +31,7 @@
             <TextBlock
                 Text="Categoria"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftMargin}"
+                Margin="{StaticResource XSmallLeftTopRightBottomMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
             <Grid
@@ -43,19 +45,19 @@
             </Grid>
 
             <ToolBar
-                x:Name="toolBar1"
-                ToolBarTray.IsLocked="True"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Width="Auto"
-                Height="Auto">
-                <Button>
+                ToolBarTray.IsLocked="True">
+                <Button Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xe8fb;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Seleziona Categoria"/>
                     </TextBlock>
                 </Button>
-                <Button Content="?"/>
+                <Button Margin="8,0,8,0">
+                    <TextBlock>
+                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="Aggiorna"/>
+                    </TextBlock>
+                </Button>
             </ToolBar>
 
         </DockPanel>
@@ -63,33 +65,33 @@
 
         <GroupBox Grid.Row="1" Header="Modifica Categoria">
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button>
+                <Button Margin="8,0,8,0" Command="{Binding NuovoCommand, Mode=OneWay}">
                     <TextBlock>
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Nuova"/>
                     </TextBlock>
                 </Button>
-                <Button>
+                <Button Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Modifica"/>
                     </TextBlock>
                 </Button>
-                <Button>
+                <Button Margin="8,0,8,0" Command="{Binding SalvaCommand, Mode=OneWay}">
                     <TextBlock>
                         <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Salva"/>
                     </TextBlock>
                 </Button>
-                <Button>
-                    <TextBlock>
-                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets"/>
-                        <Run Text="Aggiorna"/>
+                <Button Margin="8,0,8,0" Command="{Binding RimuoviCommand, Mode=OneWay}">
+                    <TextBlock>        
+                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
 
-                <Label Content="Label" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-                <TextBox HorizontalAlignment="Left" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" VerticalContentAlignment="Center"/>
+                <Label Content="Nome Categoria:" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                <TextBox Text="Nome Categoria" Width="120" Margin="0,0,8,0"/>
             </ToolBar>
         </GroupBox>
 

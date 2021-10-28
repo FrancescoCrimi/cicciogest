@@ -21,7 +21,8 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Margin="{StaticResource XSmallLeftRightBottomMargin}">
+    <Grid
+        Margin="{StaticResource XSmallLeftRightBottomMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -45,7 +46,8 @@
                 <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" Text="Cerca Articoli" VerticalContentAlignment="Center"/>
             </Grid>
 
-            <ToolBar ToolBarTray.IsLocked="True">
+            <ToolBar
+                ToolBarTray.IsLocked="True">
                 <Button Command="{Binding NuovoArticoloCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
