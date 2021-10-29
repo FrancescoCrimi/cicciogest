@@ -10,5 +10,15 @@ namespace CiccioGest.Presentation.WpfApp.View
             InitializeComponent();
             DataContext = categoriaViewModel;
         }
+
+        private void ListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ListView_MouseDoubleClick_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

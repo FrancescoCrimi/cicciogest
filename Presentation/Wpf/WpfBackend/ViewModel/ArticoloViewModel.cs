@@ -16,6 +16,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
+        private readonly INavigationService navigationService;
         private readonly IMessageBoxService messageBoxService;
         private RelayCommand loadedCommand;
         private RelayCommand unloadedCommand;
@@ -26,11 +27,13 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private RelayCommand rimuoviCategoriaCommand;
 
         public ArticoloViewModel(ILogger<ArticoloViewModel> logger,
-                                 IMessageBoxService messageBoxService,
-                                 IMagazinoService magazinoService)
+                                 IMagazinoService magazinoService,
+                                 INavigationService navigationService,
+                                 IMessageBoxService messageBoxService)
         {
             this.logger = logger;
             this.magazinoService = magazinoService;
+            this.navigationService = navigationService;
             this.messageBoxService = messageBoxService;
             RegistraMessaggi();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
@@ -117,11 +120,10 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
 
 
-        public ICommand AggiungiCategoriaCommand => aggiungiCategoriaCommand ??= new RelayCommand(AggiungiCategoria);
-
-        private void AggiungiCategoria()
+        public ICommand AggiungiCategoriaCommand => aggiungiCategoriaCommand ??= new RelayCommand(() =>
         {
-        }
+            navigationService.NavigateTo(nameof(CategoriaViewModel));
+        });
 
         public ICommand RimuoviCategoriaCommand => rimuoviCategoriaCommand ??= new RelayCommand(RimuoviCategoria);
 

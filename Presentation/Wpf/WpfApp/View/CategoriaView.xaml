@@ -22,7 +22,6 @@
         Margin="{StaticResource XSmallLeftRightBottomMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -34,44 +33,15 @@
                 Margin="{StaticResource XSmallLeftTopRightBottomMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
-            <Grid
-                DockPanel.Dock="Right">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Cerca Categoria:" Margin="3" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Height="23" Margin="3" VerticalAlignment="Center" Width="120"/>
-            </Grid>
-
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Margin="8,0,8,0">
-                    <TextBlock>
-                        <Run Text="&#xe8fb;" FontFamily="Segoe MDL2 Assets"/>
-                        <Run Text="Seleziona Categoria"/>
-                    </TextBlock>
-                </Button>
-                <Button Margin="8,0,8,0">
-                    <TextBlock>
-                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets"/>
-                        <Run Text="Aggiorna"/>
-                    </TextBlock>
-                </Button>
-            </ToolBar>
-
-        </DockPanel>
-
-
-        <GroupBox Grid.Row="1" Header="Modifica Categoria">
-            <ToolBar ToolBarTray.IsLocked="True">
                 <Button Margin="8,0,8,0" Command="{Binding NuovoCommand, Mode=OneWay}">
                     <TextBlock>
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Nuova"/>
                     </TextBlock>
                 </Button>
-                <Button Margin="8,0,8,0">
+                <Button Margin="8,0,8,0" Command="{Binding ModificaCategoriaCommand}">
                     <TextBlock>
                         <Run Text="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Modifica"/>
@@ -90,24 +60,34 @@
                     </TextBlock>
                 </Button>
 
-                <Label Content="Nome Categoria:" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                <TextBox Text="Nome Categoria" Width="120" Margin="0,0,8,0"/>
+                <Label Content="Categoria:" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                <TextBox Text="Categoria" Width="140" Margin="0,0,8,0"/>
+                <Button Margin="8,0,8,0">
+                    <TextBlock>
+                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets"/>
+                        <!--<Run Text="Aggiorna"/>-->
+                    </TextBlock>
+                </Button>
             </ToolBar>
-        </GroupBox>
 
+        </DockPanel>
 
-        <GroupBox Grid.Row="2" Header="Categorie">
-            <DataGrid
-                ItemsSource="{Binding Categorie}"
-                SelectedItem="{Binding CategoriaSelezionata, Mode=OneWayToSource}"
+        <GroupBox Grid.Row="1" Header="Categorie">
+            <ListView
+                ItemsSource="{Binding Categorie, Mode=OneWay}"
                 SelectionMode="Single"
-                AutoGenerateColumns="False"
-                IsReadOnly="True"
-                VerticalContentAlignment="Top">
-                <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="nomeColumn" Binding="{Binding Nome}" Header="Nome" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+                SelectedItem="{Binding CategoriaSelezionata, Mode=OneWayToSource}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Nome}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding SelezionaCategoriaCommand, Mode=OneWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
         </GroupBox>
 
     </Grid>

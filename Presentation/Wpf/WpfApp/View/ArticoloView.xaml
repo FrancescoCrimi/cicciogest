@@ -86,7 +86,9 @@
                     <ColumnDefinition Width="45*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="grid1" Grid.Column="0" DataContext="{Binding Articolo, BindsDirectlyToSource=False, IsAsync=False, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, NotifyOnSourceUpdated=False, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=False, ValidatesOnDataErrors=False}">
+                <Grid
+                    Grid.Column="0"
+                    DataContext="{Binding Articolo, Mode=OneWay}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -112,7 +114,10 @@
                 </Grid>
 
                 <GroupBox Header="Categorie" Grid.Column="1">
-                    <ListView Grid.Column="1" x:Name="categorieListView" SelectionMode="Single" ItemsSource="{Binding Categorie, BindsDirectlyToSource=False, IsAsync=False, Mode=OneWay, NotifyOnTargetUpdated=False, NotifyOnValidationError=False, NotifyOnSourceUpdated=False, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=False, ValidatesOnDataErrors=False}">
+                    <ListView
+                        Grid.Column="1"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding Categorie, Mode=OneWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
@@ -124,8 +129,6 @@
                 </GroupBox>
 
             </Grid>
-
-
 
         </GroupBox>
 
