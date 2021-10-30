@@ -1,13 +1,12 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.WpfBackend.Services;
-using CiccioSoft.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
@@ -23,6 +22,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private RelayCommand nuovoCommand;
         private AsyncRelayCommand salvaCommand;
         private AsyncRelayCommand eliminaCommand;
+        private RelayCommand apriArticoloCommand;
         private RelayCommand aggiungiCategoriaCommand;
         private RelayCommand rimuoviCategoriaCommand;
 
@@ -41,21 +41,62 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public Articolo Articolo { get; private set; }
 
-        public ObservableList<Categoria> Categorie { get; private set; }
+        public ICollection<Categoria> Categorie { get; private set; }
 
-        public Categoria CategoriaSelezionata { private get; set; }
+        public Categoria CategoriaSelezionata { get; set; }
+
 
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         public ICommand UnloadedCommand => unloadedCommand ??= new RelayCommand(() =>
         {
             Messenger.Unregister<ArticoloIdMessage>(this);
+            Messenger.Unregister<CategoriaIdMessage>(this);
         });
 
-        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(() 
+        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(()
             => MostraArticolo(new Articolo()));
-        public IAsyncRelayCommand EliminaCommand => eliminaCommand ??= new AsyncRelayCommand(Elimina);
-        public IAsyncRelayCommand SalvaCommand => salvaCommand ??= new AsyncRelayCommand(Salva);
+
+        public IAsyncRelayCommand EliminaCommand => eliminaCommand ??= new AsyncRelayCommand(async () =>
+        {
+            try
+            {
+                await magazinoService.DeleteArticolo(Articolo.Id);
+                MostraArticolo(new Articolo());
+            }
+            catch (Exception e)
+            {
+                messageBoxService.Show("Errore: " + e.Message);
+            }
+        });
+
+        public IAsyncRelayCommand SalvaCommand => salvaCommand ??= new AsyncRelayCommand(async () =>
+        {
+            try
+            {
+                await magazinoService.SaveArticolo(Articolo);
+                MostraArticolo(new Articolo());
+            }
+            catch (Exception e)
+            {
+                messageBoxService.Show("Errore: " + e.Message);
+            }
+        });
+
+        public ICommand ApriArticoloCommand => apriArticoloCommand ??= new RelayCommand(()
+            => navigationService.NavigateTo(nameof(ArticoliListViewModel)));
+
+        public ICommand AggiungiCategoriaCommand => aggiungiCategoriaCommand ??= new RelayCommand(()
+            => navigationService.NavigateTo(nameof(CategoriaViewModel)));
+
+        public ICommand RimuoviCategoriaCommand => rimuoviCategoriaCommand ??= new RelayCommand(() =>
+        {
+            if (CategoriaSelezionata != null)
+            {
+                Articolo.RemoveCategoria(CategoriaSelezionata);
+                OnPropertyChanged(nameof(Categorie));
+            }
+        });
 
 
 
@@ -73,9 +114,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                     MostraArticolo(new Articolo());
                 }
             });
-            Messenger.Register<CategoriaIdMessage>(this, async(r, m) =>
+            Messenger.Register<CategoriaIdMessage>(this, async (r, m) =>
             {
-                if(m.Value != 0)
+                if (m.Value != 0)
                 {
                     Categoria categoria = await magazinoService.GetCategoria(m.Value);
                     Articolo.AddCategoria(categoria);
@@ -88,61 +129,15 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         {
             Articolo = articolo;
             OnPropertyChanged(nameof(Articolo));
-            Categorie = new ObservableList<Categoria>(articolo.Categorie);
+            //Categorie = new ObservableList<Categoria>(articolo.Categorie);
+            Categorie = articolo.Categorie;
             OnPropertyChanged(nameof(Categorie));
         }
-
-        private async Task Elimina()
-        {
-            try
-            {
-                await magazinoService.DeleteArticolo(Articolo.Id);
-                MostraArticolo(new Articolo());
-            }
-            catch (Exception e)
-            {
-                messageBoxService.Show("Errore: " + e.Message);
-            }
-        }
-
-        private async Task Salva()
-        {
-            try
-            {
-                await magazinoService.SaveArticolo(Articolo);
-                MostraArticolo(new Articolo());
-            }
-            catch (Exception e)
-            {
-                messageBoxService.Show("Errore: " + e.Message);
-            }
-        }
-
-
-
-        public ICommand AggiungiCategoriaCommand => aggiungiCategoriaCommand ??= new RelayCommand(() =>
-        {
-            navigationService.NavigateTo(nameof(CategoriaViewModel));
-        });
-
-        public ICommand RimuoviCategoriaCommand => rimuoviCategoriaCommand ??= new RelayCommand(RimuoviCategoria);
-
-        private void RimuoviCategoria()
-        {
-        }
-
 
 
         public void Dispose()
         {
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
-        }
-
-        private RelayCommand apriClienteCommand;
-        public ICommand ApriClienteCommand => apriClienteCommand ??= new RelayCommand(ApriCliente);
-
-        private void ApriCliente()
-        {
         }
     }
 }

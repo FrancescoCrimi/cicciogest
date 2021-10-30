@@ -76,8 +76,8 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             }
 
 
-            //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioUtils.NhbListCore.DomainCollectionTypeFactory, NhbListCore");
-            configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioSoft.NhbCollections.CollectionCiccioTypeFactory, CiccioSoft.NhbCollections");
+            configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioSoft.NhbCollections.CollectionObservableTypeFactory, CiccioSoft.NhbCollections");
+            //configuration.SetProperty(NHibernate.Cfg.Environment.CollectionTypeFactoryClass, "CiccioSoft.NhbCollections.CollectionCiccioTypeFactory, CiccioSoft.NhbCollections");
             configuration.SetProperty(NHibernate.Cfg.Environment.FormatSql, "true");
             configuration.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");
             configuration.AddAssembly("Persistence.Nhb");

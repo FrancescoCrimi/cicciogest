@@ -17,6 +17,9 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="UnLoaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}" />
+        </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid>
@@ -53,7 +56,7 @@
                         <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriClienteCommand}" Margin="8,0,8,0">
+                <Button Command="{Binding ApriArticoloCommand}" Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Apri" />
@@ -117,7 +120,8 @@
                     <ListView
                         Grid.Column="1"
                         SelectionMode="Single"
-                        ItemsSource="{Binding Categorie, Mode=OneWay}">
+                        ItemsSource="{Binding Categorie, Mode=OneWay}"
+                        SelectedItem="{Binding CategoriaSelezionata}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>

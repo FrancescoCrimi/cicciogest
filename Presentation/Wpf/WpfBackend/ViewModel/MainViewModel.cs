@@ -30,19 +30,19 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         }
 
         public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(()
-                => navigationService.NavigateTo(nameof(FattureViewModel)));
+                => navigationService.NavigateTo(nameof(FattureViewModel), true));
 
         public ICommand ApriArticoliCommand => apriArticoliCommand ??= new RelayCommand(()
-                => navigationService.NavigateTo(nameof(ArticoliViewModel)));
+                => navigationService.NavigateTo(nameof(ArticoliViewModel), true));
 
         public ICommand ApriCategorieCommand => apriCategorieCommand ??= new RelayCommand(()
-                => navigationService.NavigateTo(nameof(CategoriaViewModel)));
+                => navigationService.NavigateTo(nameof(CategoriaViewModel), true));
 
         public ICommand ApriClientiCommand => apriClientiCommand ??= new RelayCommand(()
-                => navigationService.NavigateTo(nameof(ClientiViewModel)));
+                => navigationService.NavigateTo(nameof(ClientiViewModel), true));
 
         public ICommand ApriFornitoriCommand => apriFornitoriCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(FornitoriViewModel)));
+            => navigationService.NavigateTo(nameof(FornitoriViewModel), true));
 
 
 
@@ -56,7 +56,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         private void OnNavigated(object sender, EventArgs e)
         {
-            if(goBackCommand != null)
+            if (goBackCommand != null)
                 goBackCommand.NotifyCanExecuteChanged();
         }
 
