@@ -59,15 +59,15 @@
                         <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-
-                <Label Content="Categoria:" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                <TextBox Text="Categoria" Width="140" Margin="0,0,8,0"/>
-                <Button Margin="8,0,8,0">
+                <Button Margin="8,0,8,0" Command="{Binding AnnullaModificheCategoriaCommand}">
                     <TextBlock>
-                        <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets"/>
-                        <!--<Run Text="Aggiorna"/>-->
+                        <Run Text="&#xE711;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="Annulla"/>
                     </TextBlock>
                 </Button>
+
+                <Label Content="Categoria:" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                <TextBox Text="{Binding Categoria.Nome}" Width="140" Margin="0,0,8,0"/>
             </ToolBar>
 
         </DockPanel>

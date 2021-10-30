@@ -25,6 +25,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private RelayCommand nuovoCommand;
         private RelayCommand selezionaCategoriaCommand;
         private RelayCommand modificaCategoriaCommand;
+        private RelayCommand annullaModificheCategoriaCommand;
 
         public CategoriaViewModel(ILogger<CategoriaViewModel> logger,
                                   IMagazinoService service,
@@ -69,6 +70,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 Categoria = CategoriaSelezionata;
                 OnPropertyChanged(nameof(Categoria));
             }
+        });
+
+        public ICommand AnnullaModificheCategoriaCommand => annullaModificheCategoriaCommand ??= new RelayCommand(() =>
+        {
+            Nuova();
         });
 
         private async Task Salva()
