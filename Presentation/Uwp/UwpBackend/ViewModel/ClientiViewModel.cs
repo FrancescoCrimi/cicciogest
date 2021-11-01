@@ -36,6 +36,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
+
+
         public ObservableCollection<Cliente> Clienti { get; }
 
         public Cliente ClienteSelezionato
@@ -52,6 +54,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             }
         }
 
+
+
         public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(AggiornaClienti));
 
@@ -63,6 +67,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         public ICommand CancellaClienteCommand => cancellaClienteCommand
             ?? (cancellaClienteCommand = new RelayCommand(CancellaCliente, EnableCancellaCliente));
+
+
 
         private async Task AggiornaClienti()
         {

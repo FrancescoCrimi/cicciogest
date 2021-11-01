@@ -136,8 +136,8 @@
     <Compile Include="UserControls\FattureGrid.xaml.cs">
       <DependentUpon>FattureGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ArticoliDialogView.xaml.cs">
-      <DependentUpon>ArticoliDialogView.xaml</DependentUpon>
+    <Compile Include="View\ArticoliListView.xaml.cs">
+      <DependentUpon>ArticoliListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ArticoloView.xaml.cs">
       <DependentUpon>ArticoloView.xaml</DependentUpon>
@@ -148,8 +148,8 @@
     <Compile Include="View\ClienteView.xaml.cs">
       <DependentUpon>ClienteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientiDialogView.xaml.cs">
-      <DependentUpon>ClientiDialogView.xaml</DependentUpon>
+    <Compile Include="View\ClientiListView.xaml.cs">
+      <DependentUpon>ClientiListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FatturaView.xaml.cs">
       <DependentUpon>FatturaView.xaml</DependentUpon>
@@ -160,11 +160,20 @@
     <Compile Include="View\ClientiView.xaml.cs">
       <DependentUpon>ClientiView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FattureDialogView.xaml.cs">
-      <DependentUpon>FattureDialogView.xaml</DependentUpon>
+    <Compile Include="View\FattureListView.xaml.cs">
+      <DependentUpon>FattureListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FattureView.xaml.cs">
       <DependentUpon>FattureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FornitoreView.xaml.cs">
+      <DependentUpon>FornitoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FornitoriListView.xaml.cs">
+      <DependentUpon>FornitoriListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FornitoriView.xaml.cs">
+      <DependentUpon>FornitoriView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -222,7 +231,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ArticoliDialogView.xaml">
+    <Page Include="View\ArticoliListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,7 +247,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClientiDialogView.xaml">
+    <Page Include="View\ClientiListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,13 +263,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\FattureDialogView.xaml">
+    <Page Include="View\FattureListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FattureView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FornitoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FornitoriListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FornitoriView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>

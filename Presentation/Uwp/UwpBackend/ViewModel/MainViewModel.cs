@@ -13,45 +13,46 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private readonly ILogger logger;
         private readonly INavigationService navigationService;
         private AsyncRelayCommand loadedCommand;
-        private ICommand fattureCommand;
-        private ICommand articoliCommand;
-        private ICommand categorieCommand;
-        private RelayCommand clientiCommand;
+        private RelayCommand apriFattureCommand;
+        private RelayCommand apriArticoliCommand;
+        private RelayCommand apriCategorieCommand;
+        private RelayCommand apriClientiCommand;
+        private RelayCommand apriFornitoriCommand;
         private RelayCommand<Type> itemInvokedCommand;
 
-        public MainViewModel(ILogger<MainViewModel> logger, INavigationService navigationService)
+
+
+        public MainViewModel(ILogger<MainViewModel> logger,
+                             INavigationService navigationService)
         {
             this.logger = logger;
             this.navigationService = navigationService;
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand
-            ?? (loadedCommand = new AsyncRelayCommand(async () =>
-            {
-                await Task.CompletedTask;
-            }));
-
-        public ICommand FattureCommand => fattureCommand ?? (fattureCommand = new RelayCommand(() =>
+        public IAsyncRelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new AsyncRelayCommand(async () =>
         {
-            navigationService.Navigate("FattureViewModel");
+            await Task.CompletedTask;
         }));
 
-        public ICommand ArticoliCommand => articoliCommand ?? (articoliCommand = new RelayCommand(() =>
-            navigationService.Navigate("ArticoliViewModel")));
+        public ICommand ApriFattureCommand => apriFattureCommand ?? (apriFattureCommand = new RelayCommand(()
+            => navigationService.Navigate("FattureViewModel")));
 
-        public ICommand CategorieCommand => categorieCommand ?? (categorieCommand = new RelayCommand(() =>
-            navigationService.Navigate("CategoriaViewModel")));
+        public ICommand ApriArticoliCommand => apriArticoliCommand ?? (apriArticoliCommand = new RelayCommand(()
+            => navigationService.Navigate("ArticoliViewModel")));
 
-        public ICommand ClientiCommand => clientiCommand ?? (clientiCommand = new RelayCommand(() =>
-        {
-            navigationService.Navigate("ClientiViewModel");
-        }));
+        public ICommand ApriCategorieCommand => apriCategorieCommand ?? (apriCategorieCommand = new RelayCommand(()
+            => navigationService.Navigate("CategoriaViewModel")));
 
-        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<Type>((type) =>
-        {
-            navigationService.Navigate(type);
-        }));
+        public ICommand ApriClientiCommand => apriClientiCommand ?? (apriClientiCommand = new RelayCommand(()
+            => navigationService.Navigate("ClientiViewModel")));
+
+        public ICommand ApriFornitoriCommand => apriFornitoriCommand ?? (apriFornitoriCommand = new RelayCommand(()
+            => navigationService.Navigate(nameof(FornitoriViewModel))));
+
+
+        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<Type>((type)
+            => navigationService.Navigate(type)));
 
         public void Dispose()
         {

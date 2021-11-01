@@ -28,15 +28,15 @@
         <winui:MenuBar>
 
             <winui:MenuBarItem Title="Documenti">
-                <MenuFlyoutItem Text="Fatture" Command="{Binding FattureCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Fatture" Command="{Binding ApriFattureCommand, Mode=OneWay}"/>
             </winui:MenuBarItem>
             <winui:MenuBarItem Title="Magazino">
-                <MenuFlyoutItem Text="Articoli" Command="{Binding ArticoliCommand, Mode=OneWay}"/>
-                <MenuFlyoutItem Text="Categorie" Command="{Binding CategorieCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Articoli" Command="{Binding ApriArticoliCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Categorie" Command="{Binding ApriCategorieCommand, Mode=OneWay}"/>
             </winui:MenuBarItem>
             <winui:MenuBarItem Title="Anagrafica">
-                <MenuFlyoutItem Text="Clienti" Command="{Binding ClientiCommand, Mode=OneWay}"/>
-                <MenuFlyoutItem Text="Fornitori"/>
+                <MenuFlyoutItem Text="Clienti" Command="{Binding ApriClientiCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Fornitori" Command="{Binding ApriFornitoriCommand, Mode=OneWay}"/>
             </winui:MenuBarItem>
             <winui:MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About"/>

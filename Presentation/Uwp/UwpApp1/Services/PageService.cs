@@ -16,15 +16,15 @@ namespace CiccioGest.Presentation.UwpApp.Services
         {
             Configure<MainViewModel, MainView>();
             Configure<ArticoliViewModel, ArticoliView>();
-            Configure<ArticoliDialogViewModel, ArticoliDialogView>();
+            Configure<ArticoliListViewModel, ArticoliDialogView>();
             Configure<ArticoloViewModel, ArticoloView>();
             Configure<CategoriaViewModel, CategoriaView>();
             Configure<ClienteViewModel, ClienteView>();
             Configure<ClientiViewModel, ClientiView>();
-            Configure<ClientiDialogViewModel, ClientiDialogView>();
+            Configure<ClientiListViewModel, ClientiDialogView>();
             Configure<FatturaViewModel, FatturaView>();
             Configure<FattureViewModel, FattureView>();
-            Configure<FattureDialogViewModel, FattureDialogView>();
+            Configure<FattureListViewModel, FattureDialogView>();
         }
 
         public Type GetPageType(string key)

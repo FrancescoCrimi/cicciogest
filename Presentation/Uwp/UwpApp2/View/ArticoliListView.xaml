@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="CiccioGest.Presentation.UwpApp.View.ArticoliDialogView"
+    x:Class="CiccioGest.Presentation.UwpApp.View.ArticoliListView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
@@ -47,5 +47,4 @@
         <uc:ArticoliGrid Grid.Row="1"/>
 
     </Grid>
-
 </Page>

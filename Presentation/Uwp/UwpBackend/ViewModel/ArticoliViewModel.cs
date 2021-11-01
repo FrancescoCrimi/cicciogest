@@ -75,8 +75,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
             if (ArticoloSelezionato != null)
             {
+                navigationService.Navigate("ArticoloViewModel");
                 Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
-                navigationService.GoBack();
             }
         }
 

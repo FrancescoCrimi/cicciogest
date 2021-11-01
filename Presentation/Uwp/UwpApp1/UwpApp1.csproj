@@ -133,6 +133,9 @@
     <Compile Include="UserControls\FattureGrid.xaml.cs">
       <DependentUpon>FattureGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ListaFornitoriControl.xaml.cs">
+      <DependentUpon>ListaFornitoriControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ArticoliDialogView.xaml.cs">
       <DependentUpon>ArticoliDialogView.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,15 @@
       <DependentUpon>FattureView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\FornitoreView.xaml.cs">
+      <DependentUpon>FornitoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FornitoriListView.xaml.cs">
+      <DependentUpon>FornitoriListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FornitoriView.xaml.cs">
+      <DependentUpon>FornitoriView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -220,6 +232,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\ListaFornitoriControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ArticoliDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,6 +275,18 @@
     <Page Include="View\FattureView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FornitoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FornitoriListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FornitoriView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>

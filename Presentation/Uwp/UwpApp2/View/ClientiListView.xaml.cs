@@ -7,9 +7,9 @@ namespace CiccioGest.Presentation.UwpApp.View
     /// <summary>
     /// Pagina vuota che può essere usata autonomamente oppure per l'esplorazione all'interno di un frame.
     /// </summary>
-    public sealed partial class FattureDialogView : Page
+    public sealed partial class ClientiListView : Page
     {
-        public FattureDialogView()
+        public ClientiListView()
         {
             InitializeComponent();
         }

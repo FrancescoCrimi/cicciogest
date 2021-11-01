@@ -34,6 +34,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
+
+
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
 
         public FatturaReadOnly FatturaSelezionata
@@ -49,6 +51,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             }
         }
 
+
+
         public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(AggiornaFatture));
 
@@ -61,6 +65,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         public ICommand CancellaFatturaCommand => cancellaFatturaCommand
             ?? (cancellaFatturaCommand = new RelayCommand(CancellaFattura, EnableCancellaFattura));
 
+
+
         private async Task AggiornaFatture()
         {
             Fatture.Clear();
@@ -70,7 +76,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             }
         }
 
-        protected void ApriFattura()
+        protected virtual void ApriFattura()
         {
             if (FatturaSelezionata != null)
             {
@@ -86,6 +92,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         }
 
         private bool EnableCancellaFattura() => FatturaSelezionata != null;
+
+
 
         public void Dispose()
         {
