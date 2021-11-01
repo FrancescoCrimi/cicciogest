@@ -22,15 +22,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0">
+        <DockPanel>
+            
             <TextBlock
                 Text="Fornitore"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftRightMargin}"
+                Margin="{StaticResource SmallLeftTopRightBottomMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
             <ToolBar
@@ -63,8 +64,9 @@
 
         </DockPanel>
 
-
-        <Grid Grid.Row="1">
+        <Grid
+            Margin="{StaticResource XSmallLeftRightBottomMargin}"
+            Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"/>
                 <RowDefinition Height="50*"/>
@@ -124,4 +126,5 @@
         </Grid>
 
     </Grid>
+
 </Page>

@@ -11,22 +11,21 @@
              d:DesignWidth="800"
              Background="White">
 
-        <DataGrid
-            ItemsSource="{Binding Articoli}" 
-            SelectedItem="{Binding ArticoloSelezionato}"
-            AutoGenerateColumns="False"
-            IsReadOnly="True"
-            SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Nome" Binding="{Binding Nome}"/>
-                <DataGridTextColumn Width="SizeToHeader" Header="Prezzo" Binding="{Binding Prezzo}"/>
-                <!--<DataGridTextColumn Width="*" Header="Categoria" Binding="{Binding NomeCategoria}"/>-->
-            </DataGrid.Columns>
-            <DataGrid.InputBindings>
-                <MouseBinding
-                    MouseAction="LeftDoubleClick" 
-                    Command="{Binding ApriArticoloCommand}" />
-            </DataGrid.InputBindings>
-        </DataGrid>
+    <DataGrid
+        ItemsSource="{Binding Articoli}" 
+        SelectedItem="{Binding ArticoloSelezionato}"
+        AutoGenerateColumns="False"
+        IsReadOnly="True"
+        SelectionMode="Single">
+        <DataGrid.Columns>
+            <DataGridTextColumn Width="*" Header="Nome" Binding="{Binding Nome}"/>
+            <DataGridTextColumn Width="SizeToHeader" Header="Prezzo" Binding="{Binding Prezzo}"/>
+        </DataGrid.Columns>
+        <DataGrid.InputBindings>
+            <MouseBinding
+                MouseAction="LeftDoubleClick" 
+                Command="{Binding ApriArticoloCommand}" />
+        </DataGrid.InputBindings>
+    </DataGrid>
 
 </UserControl>

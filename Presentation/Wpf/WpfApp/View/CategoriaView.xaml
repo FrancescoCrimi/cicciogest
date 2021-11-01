@@ -30,8 +30,25 @@
             <TextBlock
                 Text="Categoria"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource XSmallLeftTopRightBottomMargin}"
+                Margin="{StaticResource SmallLeftTopRightBottomMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
+
+            <Grid
+                DockPanel.Dock="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Content="Categoria:"
+                    VerticalAlignment="Center"/>
+                <TextBox
+                    Grid.Column="1"
+                    Text="{Binding Categoria.Nome}"
+                    Width="140"
+                    VerticalAlignment="Center"
+                    Height="23"/>
+            </Grid>
 
             <ToolBar
                 ToolBarTray.IsLocked="True">
@@ -54,7 +71,7 @@
                     </TextBlock>
                 </Button>
                 <Button Margin="8,0,8,0" Command="{Binding RimuoviCommand, Mode=OneWay}">
-                    <TextBlock>        
+                    <TextBlock>
                         <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Elimina" />
                     </TextBlock>
@@ -65,14 +82,13 @@
                         <Run Text="Annulla"/>
                     </TextBlock>
                 </Button>
-
-                <Label Content="Categoria:" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                <TextBox Text="{Binding Categoria.Nome}" Width="140" Margin="0,0,8,0"/>
             </ToolBar>
 
         </DockPanel>
 
-        <GroupBox Grid.Row="1" Header="Categorie">
+        <GroupBox
+            Grid.Row="1"
+            Header="Categorie">
             <ListView
                 ItemsSource="{Binding Categorie, Mode=OneWay}"
                 SelectionMode="Single"

@@ -20,13 +20,11 @@
         <DataGrid.Columns>
             <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*"/>
             <DataGridTextColumn Header="Prezzo" Binding="{Binding Prezzo}" Width="SizeToHeader"/>
-            <DataGridTextColumn Header="Categoria" Binding="{Binding NomeCategoria}" Width="*"/>
         </DataGrid.Columns>
         <DataGrid.InputBindings>
             <MouseBinding
                 MouseAction="LeftDoubleClick"
-                Command="{Binding ApriArticoloCommand}">
-            </MouseBinding>
+                Command="{Binding ApriArticoloCommand}"/>
         </DataGrid.InputBindings>
     </DataGrid>
 

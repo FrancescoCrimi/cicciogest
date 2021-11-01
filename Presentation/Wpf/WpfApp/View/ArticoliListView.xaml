@@ -20,18 +20,19 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Margin="{StaticResource XSmallLeftRightBottomMargin}">
+    <Grid
+        Margin="{StaticResource XSmallLeftRightBottomMargin}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0">
+        <DockPanel>
 
             <TextBlock
                 Text="Articoli"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftRightMargin}"
+                Margin="{StaticResource SmallLeftTopRightBottomMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
             <Grid
@@ -40,8 +41,8 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Cerca Articoli:" Margin="3" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Height="23" Width="120" Margin="3" Text="Cerca Articoli" VerticalContentAlignment="Center"/>
+                <Label Content="Cerca Articoli:" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Height="23" Width="140" Text="Cerca Articoli" VerticalContentAlignment="Center"/>
             </Grid>
 
             <ToolBar ToolBarTray.IsLocked="True">

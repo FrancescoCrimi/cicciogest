@@ -24,16 +24,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0">
+        <DockPanel>
 
             <TextBlock
                 Text="Articolo"
                 DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftRightMargin}"
+                Margin="{StaticResource SmallLeftTopRightBottomMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
 
             <ToolBar
@@ -81,12 +81,15 @@
 
 
 
-        <GroupBox x:Name="groupBox" Grid.Row="1" Header="Articolo">
+        <GroupBox
+            Margin="{StaticResource XSmallLeftRightBottomMargin}"
+            Grid.Row="1"
+            Header="Articolo">
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="55*"/>
-                    <ColumnDefinition Width="45*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid
