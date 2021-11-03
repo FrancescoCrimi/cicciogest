@@ -23,7 +23,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaClientiCommand;
         private RelayCommand apriClienteCommand;
-        private RelayCommand cancellaClienteCommand;
+        private RelayCommand nuovoClienteCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IClientiFornitoriService clientiFornitoriService,
@@ -49,7 +49,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
                 {
                     clienteSelezionato = value;
                     apriClienteCommand.NotifyCanExecuteChanged();
-                    cancellaClienteCommand.NotifyCanExecuteChanged();
+                    nuovoClienteCommand.NotifyCanExecuteChanged();
                 }
             }
         }
@@ -59,14 +59,14 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(AggiornaClienti));
 
-        public IAsyncRelayCommand AggiornaClientiCommand => aggiornaClientiCommand
-            ?? (aggiornaClientiCommand = new AsyncRelayCommand(AggiornaClienti));
+        public ICommand NuovoClienteCommand => nuovoClienteCommand
+            ?? (nuovoClienteCommand = new RelayCommand(NuovoCliente));
 
         public ICommand ApriClienteCommand => apriClienteCommand
-            ?? (apriClienteCommand = new RelayCommand(ApriCliente, EnableApriCliente));
+            ?? (apriClienteCommand = new RelayCommand(ApriCliente, () => ClienteSelezionato != null));
 
-        public ICommand CancellaClienteCommand => cancellaClienteCommand
-            ?? (cancellaClienteCommand = new RelayCommand(CancellaCliente, EnableCancellaCliente));
+        public IAsyncRelayCommand AggiornaClientiCommand => aggiornaClientiCommand
+            ?? (aggiornaClientiCommand = new AsyncRelayCommand(AggiornaClienti));
 
 
 
@@ -83,13 +83,11 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
         }
 
-        private bool EnableApriCliente() => ClienteSelezionato != null;
-
-        private void CancellaCliente()
+        private void NuovoCliente()
         {
         }
 
-        private bool EnableCancellaCliente() => ClienteSelezionato != null;
+
 
         public void Dispose()
         {

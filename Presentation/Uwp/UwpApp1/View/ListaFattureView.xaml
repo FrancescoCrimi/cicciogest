@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uc="using:CiccioGest.Presentation.UwpApp.UserControls"
     xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
-    d:DataContext="{d:DesignInstance Type=viewmodel:FattureDialogViewModel}"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ListaFattureViewModel}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -33,6 +33,14 @@
                 Background="Transparent"
                 RelativePanel.LeftOf="OrderSearchBox"
                 RelativePanel.RightOf="PageTitle">
+                <AppBarButton
+                    Icon="Edit"
+                    Label="Edit"
+                    Command="{Binding ApriFatturaCommand}"/>
+                <AppBarButton
+                    Icon="Refresh"
+                    Label="Refresh"
+                    Command="{Binding AggiornaFattureCommand}"/>
             </CommandBar>
 
             <uc:CollapsibleSearchBox

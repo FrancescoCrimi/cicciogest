@@ -33,6 +33,14 @@
                 Background="Transparent"
                 RelativePanel.LeftOf="OrderSearchBox"
                 RelativePanel.RightOf="PageTitle">
+                <AppBarButton
+                    Icon="Edit"
+                    Label="Edit"
+                    Command="{Binding ApriClienteCommand}"/>
+                <AppBarButton
+                    Icon="Refresh"
+                    Label="Refresh"
+                    Command="{Binding AggiornaClientiCommand}"/>
             </CommandBar>
 
             <uc:CollapsibleSearchBox

@@ -44,15 +44,13 @@
                 RelativePanel.LeftOf="OrderSearchBox"
                 RelativePanel.RightOf="PageTitle">
                 <AppBarButton
-                    x:Name="CommandBarEditButton"
+                    Icon="Document"
+                    Label="Nuovo"
+                    Command="{Binding NuovoClienteCommand}"/>
+                <AppBarButton
                     Icon="Edit"
                     Label="Edit"
                     Command="{Binding ApriClienteCommand}"/>
-                <AppBarButton
-                    x:Name="CommandBarDeleteButton"
-                    Icon="Delete"
-                    Label="Delete"
-                    Command="{Binding CancellaClienteCommand}"/>
                 <AppBarButton
                     Icon="Refresh"
                     Label="Refresh"

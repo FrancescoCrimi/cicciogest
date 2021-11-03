@@ -21,7 +21,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaArticoliCommand;
         private RelayCommand apriArticoloCommand;
-        private RelayCommand cancellaArticoloCommand;
+        private RelayCommand nuovoArticoloCommand;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService magazinoService,
@@ -45,30 +45,29 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
                 {
                     articoloSelezionato = value;
                     apriArticoloCommand.NotifyCanExecuteChanged();
-                    cancellaArticoloCommand.NotifyCanExecuteChanged();
+                    nuovoArticoloCommand.NotifyCanExecuteChanged();
                 }
             }
         }
 
+
+
         public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(AggiornaArticoli));
+
+        public ICommand NuovoArticoloCommand => nuovoArticoloCommand
+            ?? (nuovoArticoloCommand = new RelayCommand(NuovoArticolo));
+
+        public ICommand ApriArticoloCommand => apriArticoloCommand
+            ?? (apriArticoloCommand = new RelayCommand(ApriArticolo, () => ArticoloSelezionato != null));
 
         public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand
             ?? (aggiornaArticoliCommand = new AsyncRelayCommand(AggiornaArticoli));
 
-        public ICommand ApriArticoloCommand => apriArticoloCommand
-            ?? (apriArticoloCommand = new RelayCommand(ApriArticolo, EnableApriArticolo));
 
-        public ICommand CancellaArticoloCommand => cancellaArticoloCommand
-            ?? (cancellaArticoloCommand = new RelayCommand(CancellaArticolo, EnableCancellaArticolo));
 
-        private async Task AggiornaArticoli()
+        private void NuovoArticolo()
         {
-            Articoli.Clear();
-            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
-            {
-                Articoli.Add(pr);
-            }
         }
 
         protected virtual void ApriArticolo()
@@ -80,13 +79,16 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             }
         }
 
-        private bool EnableApriArticolo() => ArticoloSelezionato != null;
-
-        private void CancellaArticolo()
+        private async Task AggiornaArticoli()
         {
+            Articoli.Clear();
+            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
+            {
+                Articoli.Add(pr);
+            }
         }
 
-        private bool EnableCancellaArticolo() => ArticoloSelezionato != null;
+
 
         public void Dispose()
         {

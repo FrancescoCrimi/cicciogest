@@ -21,7 +21,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaFattureCommand;
         private RelayCommand apriFatturaCommand;
-        private RelayCommand cancellaFatturaCommand;
+        private RelayCommand nuovaFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
@@ -56,24 +56,19 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(AggiornaFatture));
 
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand
+            ?? (nuovaFatturaCommand = new RelayCommand(NuovaFattura));
+
         public IAsyncRelayCommand AggiornaFattureCommand => aggiornaFattureCommand
             ?? (aggiornaFattureCommand = new AsyncRelayCommand(AggiornaFatture));
 
         public ICommand ApriFatturaCommand => apriFatturaCommand
-            ?? (apriFatturaCommand = new RelayCommand(ApriFattura, EnableApriFattura));
-
-        public ICommand CancellaFatturaCommand => cancellaFatturaCommand
-            ?? (cancellaFatturaCommand = new RelayCommand(CancellaFattura, EnableCancellaFattura));
+            ?? (apriFatturaCommand = new RelayCommand(ApriFattura, () => FatturaSelezionata != null));
 
 
 
-        private async Task AggiornaFatture()
+        private void NuovaFattura()
         {
-            Fatture.Clear();
-            foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
-            {
-                Fatture.Add(fatt);
-            }
         }
 
         protected virtual void ApriFattura()
@@ -85,13 +80,14 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             }
         }
 
-        private bool EnableApriFattura() => FatturaSelezionata != null;
-
-        private void CancellaFattura()
+        private async Task AggiornaFatture()
         {
+            Fatture.Clear();
+            foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
+            {
+                Fatture.Add(fatt);
+            }
         }
-
-        private bool EnableCancellaFattura() => FatturaSelezionata != null;
 
 
 

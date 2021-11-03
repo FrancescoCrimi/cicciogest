@@ -44,19 +44,17 @@
                 RelativePanel.LeftOf="OrderSearchBox"
                 RelativePanel.RightOf="PageTitle">
                 <AppBarButton
-                    x:Name="CommandBarEditButton"
+                    Icon="Document"
+                    Label="Nuovo"
+                    Command="{Binding NuovaFatturaCommand}"/>
+                <AppBarButton
                     Icon="Edit"
                     Label="Edit"
-                    Command="{Binding ApriFatturaCommand}" />
-                <AppBarButton
-                    x:Name="CommandBarDeleteButton"
-                    Icon="Delete"
-                    Label="Delete" 
-                    Command="{Binding CancellaFatturaCommand}"/>
+                    Command="{Binding ApriFatturaCommand}"/>
                 <AppBarButton
                     Icon="Refresh"
                     Label="Refresh"
-                    Command="{Binding AggiornaFattureCommand}" />
+                    Command="{Binding AggiornaFattureCommand}"/>
             </CommandBar>
 
             <uc:CollapsibleSearchBox
