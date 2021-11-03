@@ -2,9 +2,9 @@
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class FornitoreView : Page
+    public sealed partial class ListaFornitoriView : Page
     {
-        public FornitoreView()
+        public ListaFornitoriView()
         {
             this.InitializeComponent();
         }

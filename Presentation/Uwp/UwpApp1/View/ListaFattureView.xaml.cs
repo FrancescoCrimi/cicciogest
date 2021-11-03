@@ -2,9 +2,9 @@
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class ClienteView : Page
+    public sealed partial class ListaFattureView : Page
     {
-        public ClienteView()
+        public ListaFattureView()
         {
             InitializeComponent();
         }

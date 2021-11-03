@@ -5,6 +5,7 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:my="using:CiccioGest.Presentation.UwpApp.UserControls" 
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -12,7 +13,7 @@
         Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <RelativePanel Grid.Row="0">
@@ -32,6 +33,38 @@
             </CommandBar>
 
         </RelativePanel>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBox Header="Nome:" Width="140"></TextBox>
+                    <TextBox Header="Societa:" Width="140"></TextBox>
+                    <TextBox Header="Partita Iva:" Width="140"></TextBox>
+                    <TextBox Header="Telefono:" Width="140"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox Header="Cognome:" Width="140"></TextBox>
+                    <TextBox Header="Email:" Width="140"></TextBox>
+                    <TextBox Header="Codice Fiscale:" Width="140"></TextBox>
+                    <TextBox Header="Mobile:" Width="140"></TextBox>
+                </StackPanel>
+
+            </Grid>
+
+            <my:IndirizzoControl Grid.Row="1" />
+
+        </Grid>
 
     </Grid>
 

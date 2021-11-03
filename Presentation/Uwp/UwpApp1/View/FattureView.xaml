@@ -69,7 +69,7 @@
 
         </RelativePanel>
 
-        <uc:FattureGrid Grid.Row="1"/>
+        <uc:ListaFattureControl Grid.Row="1"/>
 
     </Grid>
 

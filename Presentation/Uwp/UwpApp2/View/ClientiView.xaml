@@ -68,7 +68,7 @@
 
         </RelativePanel>
 
-        <uc:ClientiGrid Grid.Row="1"/>
+        <uc:ListaClientiControl Grid.Row="1"/>
 
     </Grid>
 </Page>

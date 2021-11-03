@@ -121,23 +121,26 @@
     </Compile>
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PageService.cs" />
-    <Compile Include="UserControls\ArticoliGrid.xaml.cs">
-      <DependentUpon>ArticoliGrid.xaml</DependentUpon>
+    <Compile Include="UserControls\ListaArticoliControl.xaml.cs">
+      <DependentUpon>ListaArticoliControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ClientiGrid.xaml.cs">
-      <DependentUpon>ClientiGrid.xaml</DependentUpon>
+    <Compile Include="UserControls\ListaClientiControl.xaml.cs">
+      <DependentUpon>ListaClientiControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CollapsibleSearchBox.xaml.cs">
       <DependentUpon>CollapsibleSearchBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FattureGrid.xaml.cs">
-      <DependentUpon>FattureGrid.xaml</DependentUpon>
+    <Compile Include="UserControls\ListaFattureControl.xaml.cs">
+      <DependentUpon>ListaFattureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\IndirizzoControl.xaml.cs">
+      <DependentUpon>IndirizzoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ListaFornitoriControl.xaml.cs">
       <DependentUpon>ListaFornitoriControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ArticoliDialogView.xaml.cs">
-      <DependentUpon>ArticoliDialogView.xaml</DependentUpon>
+    <Compile Include="View\ListaArticoliView.xaml.cs">
+      <DependentUpon>ListaArticoliView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ArticoloView.xaml.cs">
       <DependentUpon>ArticoloView.xaml</DependentUpon>
@@ -148,8 +151,8 @@
     <Compile Include="View\ClienteView.xaml.cs">
       <DependentUpon>ClienteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientiDialogView.xaml.cs">
-      <DependentUpon>ClientiDialogView.xaml</DependentUpon>
+    <Compile Include="View\ListaClientiView.xaml.cs">
+      <DependentUpon>ListaClientiView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ClientiView.xaml.cs">
       <DependentUpon>ClientiView.xaml</DependentUpon>
@@ -160,8 +163,8 @@
     <Compile Include="View\ArticoliView.xaml.cs">
       <DependentUpon>ArticoliView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FattureDialogView.xaml.cs">
-      <DependentUpon>FattureDialogView.xaml</DependentUpon>
+    <Compile Include="View\ListaFattureView.xaml.cs">
+      <DependentUpon>ListaFattureView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FattureView.xaml.cs">
       <DependentUpon>FattureView.xaml</DependentUpon>
@@ -170,8 +173,8 @@
     <Compile Include="View\FornitoreView.xaml.cs">
       <DependentUpon>FornitoreView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FornitoriListView.xaml.cs">
-      <DependentUpon>FornitoriListView.xaml</DependentUpon>
+    <Compile Include="View\ListaFornitoriView.xaml.cs">
+      <DependentUpon>ListaFornitoriView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FornitoriView.xaml.cs">
       <DependentUpon>FornitoriView.xaml</DependentUpon>
@@ -216,11 +219,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\ArticoliGrid.xaml">
+    <Page Include="UserControls\ListaArticoliControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ClientiGrid.xaml">
+    <Page Include="UserControls\ListaClientiControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,7 +231,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\FattureGrid.xaml">
+    <Page Include="UserControls\ListaFattureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\IndirizzoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,7 +243,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ArticoliDialogView.xaml">
+    <Page Include="View\ListaArticoliView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClientiDialogView.xaml">
+    <Page Include="View\ListaClientiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -268,7 +275,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\FattureDialogView.xaml">
+    <Page Include="View\ListaFattureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -280,7 +287,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FornitoriListView.xaml">
+    <Page Include="View\ListaFornitoriView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -295,16 +302,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.12</Version>
+      <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Mvvm">
-      <Version>7.1.0</Version>
+      <Version>7.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>7.1.0</Version>
+      <Version>7.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
-      <Version>7.1.0</Version>
+      <Version>7.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.7.0</Version>

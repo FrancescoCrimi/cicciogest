@@ -2,9 +2,9 @@
 
 namespace CiccioGest.Presentation.UwpApp.UserControls
 {
-    public sealed partial class ListaFornitoriControl : UserControl
+    public sealed partial class ListaArticoliControl : UserControl
     {
-        public ListaFornitoriControl()
+        public ListaArticoliControl()
         {
             this.InitializeComponent();
         }

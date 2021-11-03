@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="CiccioGest.Presentation.UwpApp.UserControls.ArticoliGrid"
+    x:Class="CiccioGest.Presentation.UwpApp.UserControls.ListaArticoliControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CiccioGest.Presentation.UwpApp.UserControls"
@@ -13,15 +13,17 @@
     d:DesignWidth="400">
 
     <SplitView
-        x:Name="listSplitView"
-        DisplayMode="Inline"
-        OpenPaneLength="260"
-        PanePlacement="Right">
+            x:Name="listSplitView"
+            DisplayMode="Inline"
+            OpenPaneLength="260"
+            PanePlacement="Right">
         <SplitView.Pane>
             <StackPanel></StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
-            <tollkit:DataGrid
+            <StackPanel></StackPanel>
+
+            <!--<tollkit:DataGrid
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="False"
                 AutoGenerateColumns="False"
@@ -39,12 +41,13 @@
                         Header="Customer"
                         Tag="CustomerName"
                         Binding="{Binding Nome}"/>
-                    <!--<controls:DataGridTextColumn
+                    <controls:DataGridTextColumn
                         Header="Totale"
                         Tag="TotaleName"
-                        Binding="{Binding Totale}"/>-->
+                        Binding="{Binding Totale}"/>
                 </tollkit:DataGrid.Columns>
-            </tollkit:DataGrid>
+            </tollkit:DataGrid>-->
+            
         </SplitView.Content>
     </SplitView>
 

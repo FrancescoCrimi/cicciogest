@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace CiccioGest.Presentation.UwpApp.UserControls
 {
-    public sealed partial class ArticoliGrid : UserControl
+    public sealed partial class ListaFornitoriControl : UserControl
     {
-        public ArticoliGrid()
+        public ListaFornitoriControl()
         {
             this.InitializeComponent();
         }

@@ -67,7 +67,7 @@
 
         </RelativePanel>
 
-        <uc:ArticoliGrid Grid.Row="1"/>
+        <uc:ListaArticoliControl Grid.Row="1"/>
 
     </Grid>
 </Page>
