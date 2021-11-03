@@ -1,7 +1,6 @@
 ﻿using CiccioGest.Presentation.WpfBackend.ViewModel;
 using CiccioGest.Presentation.WpfMetroApp.View;
-using CommunityToolkit.Mvvm.ComponentModel;
-//using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +16,15 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
         {
             //Configure<MainViewModel, MainPage>();
             Configure<ArticoliViewModel, ArticoliView>();
-            Configure<ArticoliListViewModel, ArticoliListView>();
+            Configure<ListaArticoliViewModel, ListaArticoliView>();
             Configure<ArticoloViewModel, ArticoloView>();
             Configure<CategoriaViewModel, CategoriaView>();
             Configure<ClienteViewModel, ClienteView>();
             Configure<ClientiViewModel, ClientiView>();
-            Configure<ClientiListViewModel, ClientiListView>();
+            Configure<ListaClientiViewModel, ListaClientiView>();
             Configure<FatturaViewModel, FatturaView>();
             Configure<FattureViewModel, FattureView>();
-            Configure<FattureListViewModel, FattureListView>();
+            Configure<ListaFattureViewModel, ListaFattureView>();
         }
 
         public Type GetPageType(string key)

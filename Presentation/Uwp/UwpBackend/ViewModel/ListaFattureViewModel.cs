@@ -6,11 +6,11 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
-    public class FattureListViewModel : FattureViewModel
+    public class ListaFattureViewModel : FattureViewModel
     {
         private readonly INavigationService navigationService;
 
-        public FattureListViewModel(ILogger<FattureViewModel> logger,
+        public ListaFattureViewModel(ILogger<FattureViewModel> logger,
                                     IFatturaService fatturaService,
                                     INavigationService navigationService)
             : base(logger,

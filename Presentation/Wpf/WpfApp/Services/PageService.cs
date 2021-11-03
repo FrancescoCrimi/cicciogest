@@ -1,7 +1,6 @@
 ﻿using CiccioGest.Presentation.WpfApp.View;
 using CiccioGest.Presentation.WpfBackend.ViewModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-//using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +16,18 @@ namespace CiccioGest.Presentation.WpfApp.Services
         {
             //Configure<MainViewModel, MainPage>();
             Configure<ArticoliViewModel, ArticoliView>();
-            Configure<ArticoliListViewModel, ArticoliListView>();
+            Configure<ListaArticoliViewModel, ListaArticoliView>();
             Configure<ArticoloViewModel, ArticoloView>();
             Configure<CategoriaViewModel, CategoriaView>();
             Configure<ClienteViewModel, ClienteView>();
             Configure<ClientiViewModel, ClientiView>();
-            Configure<ClientiListViewModel, ClientiListView>();
+            Configure<ListaClientiViewModel, ListaClientiView>();
             Configure<FatturaViewModel, FatturaView>();
             Configure<FattureViewModel, FattureView>();
-            Configure<FattureListViewModel, FattureListView>();
+            Configure<ListaFattureViewModel, ListaFattureView>();
             Configure<FornitoreViewModel, FornitoreView>();
             Configure<FornitoriViewModel, FornitoriView>();
-            Configure<FornitoriListViewModel, FornitoriListView>();
+            Configure<ListaFornitoriViewModel, ListaFornitoriView>();
 
         }
 

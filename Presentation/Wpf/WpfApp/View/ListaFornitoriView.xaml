@@ -1,22 +1,22 @@
-﻿<Page x:Class="CiccioGest.Presentation.WpfApp.View.FattureListView"
+﻿<Page x:Class="CiccioGest.Presentation.WpfApp.View.ListaFornitoriView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.View"
-      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"
       xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
-      d:DataContext="{d:DesignInstance Type=viewmodel:FattureListViewModel}"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfApp.UserControls"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ListaFornitoriViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
       Background="White"
-      Title="Lista Fatture">
+      Title="ListaFornitori">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -30,7 +30,7 @@
         <DockPanel>
 
             <TextBlock
-                Text="Fatture"
+                Text="Fornitori"
                 DockPanel.Dock="Left"
                 Margin="{StaticResource SmallLeftTopRightBottomMargin}"
                 Style="{StaticResource PageTitleStyle}"/>
@@ -41,19 +41,19 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Cerca Fattura:" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Height="23" Width="140" Text="Cerca Fattura" VerticalContentAlignment="Center"/>
+                <Label Content="Cerca Fornitore:" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Height="23" Width="140" Text="Cerca Fornitore" VerticalContentAlignment="Center"/>
             </Grid>
 
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding ApriFatturaCommand}" Margin="8,0,8,0">
+                <Button Command="{Binding ApriFornitoreCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding AggiornaFattureCommand}" Margin="8,0,8,0">
+                <Button Command="{Binding AggiornaFornitoriCommand}" Margin="8,0,8,0">
                     <TextBlock>        
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />
@@ -63,8 +63,7 @@
 
         </DockPanel>
 
-        <usercontrols:ListaFattureControl Grid.Row="1"/>
+        <usercontrols:ListaFornitoriControl Grid.Row="1"/>
 
     </Grid>
-
 </Page>

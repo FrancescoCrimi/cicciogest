@@ -16,18 +16,18 @@ namespace CiccioGest.Presentation.WpfBackend
 
                 .AddTransient<FatturaViewModel>()
                 .AddTransient<FattureViewModel>()
-                .AddTransient<FattureListViewModel>()
+                .AddTransient<ListaFattureViewModel>()
 
                 .AddTransient<ArticoliViewModel>()
-                .AddTransient<ArticoliListViewModel>()
+                .AddTransient<ListaArticoliViewModel>()
                 .AddTransient<ArticoloViewModel>()
 
                 .AddTransient<ClienteViewModel>()
                 .AddTransient<ClientiViewModel>()
-                .AddTransient<ClientiListViewModel>()
+                .AddTransient<ListaClientiViewModel>()
 
                 .AddTransient<FornitoreViewModel>()
-                .AddTransient<FornitoriListViewModel>()
+                .AddTransient<ListaFornitoriViewModel>()
                 .AddTransient<FornitoriViewModel>()
 
                 .AddTransient<CategoriaViewModel>();

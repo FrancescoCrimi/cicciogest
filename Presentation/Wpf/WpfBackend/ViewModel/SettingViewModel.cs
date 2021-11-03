@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using CiccioGest.Infrastructure;
-using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {

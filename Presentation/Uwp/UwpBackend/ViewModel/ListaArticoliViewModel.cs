@@ -1,16 +1,15 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
-    public class ArticoliListViewModel : ArticoliViewModel
+    public class ListaArticoliViewModel : ArticoliViewModel
     {
         private readonly INavigationService navigationService;
 
-        public ArticoliListViewModel(ILogger<ArticoliViewModel> logger,
+        public ListaArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                      IMagazinoService magazinoService,
                                      INavigationService navigationService)
             : base(logger,
@@ -22,8 +21,11 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         protected override void ApriArticolo()
         {
-            Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
-            navigationService.GoBack();
+            if(ArticoloSelezionato != null)
+            {
+                Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
+                navigationService.GoBack();
+            }
         }
     }
 }

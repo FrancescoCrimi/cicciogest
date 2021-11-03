@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfMetroApp.View
 {
-    public partial class ClientiListView : Page
+    public partial class ListaFattureView : Page
     {
-        public ClientiListView(ClientiListViewModel viewModel)
+        public ListaFattureView(ListaFattureViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

@@ -1,30 +1,30 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Presentation.WpfBackend.Services;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public class ArticoliListViewModel : ArticoliViewModel
+    public class ListaFattureViewModel : FattureViewModel
     {
         private readonly INavigationService navigationService;
 
-        public ArticoliListViewModel(ILogger<ArticoliViewModel> logger,
-                                     IMagazinoService magazinoService,
-                                     INavigationService navigationService)
+        public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger,
+                                    IFatturaService fatturaService,
+                                    INavigationService navigationService)
             : base(logger,
-                   magazinoService,
+                   fatturaService,
                    navigationService)
         {
             this.navigationService = navigationService;
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        protected override void ApriArticolo()
+        protected override void ApriFattura()
         {
-            if (ArticoloSelezionato != null)
+            if(FatturaSelezionata != null)
             {
-                Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
+                Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
                 navigationService.GoBack();
             }
         }

@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    public partial class FornitoriListView : Page
+    public partial class ListaFornitoriView : Page
     {
-        public FornitoriListView(FornitoriListViewModel fornitoriListViewModel)
+        public ListaFornitoriView(ListaFornitoriViewModel fornitoriListViewModel)
         {
             InitializeComponent();
             DataContext = fornitoriListViewModel;

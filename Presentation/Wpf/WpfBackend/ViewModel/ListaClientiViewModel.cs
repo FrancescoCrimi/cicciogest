@@ -1,15 +1,15 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Presentation.WpfBackend.Services;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public class ClientiListViewModel : ClientiViewModel
+    public class ListaClientiViewModel : ClientiViewModel
     {
         private readonly INavigationService navigationService;
 
-        public ClientiListViewModel(ILogger<ClientiViewModel> logger,
+        public ListaClientiViewModel(ILogger<ClientiViewModel> logger,
                                     IClientiFornitoriService clientiFornitoriService,
                                     INavigationService navigationService)
             : base(logger,

@@ -51,17 +51,17 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddTransient<MainView>()
                 .AddTransient<HomeView>()
                 .AddTransient<ArticoliView>()
-                .AddTransient<ArticoliListView>()
+                .AddTransient<ListaArticoliView>()
                 .AddTransient<ArticoloView>()
                 .AddTransient<CategoriaView>()
                 .AddTransient<ClienteView>()
                 .AddTransient<ClientiView>()
-                .AddTransient<ClientiListView>()
+                .AddTransient<ListaClientiView>()
                 .AddTransient<FatturaView>()
                 .AddTransient<FattureView>()
-                .AddTransient<FattureListView>()
+                .AddTransient<ListaFattureView>()
                 .AddTransient<FornitoreView>()
-                .AddTransient<FornitoriListView>()
+                .AddTransient<ListaFornitoriView>()
                 .AddTransient<FornitoriView>();
         }
     }

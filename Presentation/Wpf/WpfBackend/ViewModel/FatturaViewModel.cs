@@ -1,10 +1,10 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Presentation.WpfBackend.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Windows.Input;
 
@@ -48,7 +48,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ClientiListViewModel)));
+            => navigationService.NavigateTo(nameof(ListaClientiViewModel)));
 
         public IAsyncRelayCommand SalvaFatturaCommand => salvaFatturaCommand ??= new AsyncRelayCommand(async () =>
         {
@@ -75,11 +75,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(FattureListViewModel)));
+            => navigationService.NavigateTo(nameof(ListaFattureViewModel)));
 
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ArticoliListViewModel)));
+            => navigationService.NavigateTo(nameof(ListaArticoliViewModel)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {

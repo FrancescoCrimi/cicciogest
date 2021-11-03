@@ -5,12 +5,14 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
-    public class ClientiListViewModel : ClientiViewModel
+    public class ListaClientiViewModel : ClientiViewModel
     {
-        public ClientiListViewModel(ILogger<ClientiViewModel> logger,
+        public ListaClientiViewModel(ILogger<ClientiViewModel> logger,
                                     IClientiFornitoriService clientiFornitoriService,
                                     INavigationService navigationService)
-            : base(logger, clientiFornitoriService, navigationService)
+            : base(logger,
+                   clientiFornitoriService,
+                   navigationService)
         {
         }
 

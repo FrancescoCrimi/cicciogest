@@ -1,9 +1,9 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.WpfBackend.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -84,7 +84,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         });
 
         public ICommand ApriArticoloCommand => apriArticoloCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ArticoliListViewModel)));
+            => navigationService.NavigateTo(nameof(ListaArticoliViewModel)));
 
         public ICommand AggiungiCategoriaCommand => aggiungiCategoriaCommand ??= new RelayCommand(()
             => navigationService.NavigateTo(nameof(CategoriaViewModel)));
