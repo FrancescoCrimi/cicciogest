@@ -47,11 +47,11 @@
                     Command="{Binding NuovoFornitoreCommand}"/>
                 <AppBarButton
                     Icon="Edit"
-                    Label="Edit"
+                    Label="Apri"
                     Command="{Binding ApriFornitoreCommand}"/>
                 <AppBarButton
                     Icon="Refresh"
-                    Label="Refresh"
+                    Label="Aggiorna"
                     Command="{Binding AggiornaFornitoriCommand}"/>
             </CommandBar>
 

@@ -32,6 +32,22 @@
                 HorizontalAlignment="Stretch"
                 Background="Transparent"
                 RelativePanel.RightOf="PageTitle">
+                <AppBarButton
+                    Icon="Document"
+                    Label="Nuovo"
+                    Command="{Binding NuovoClienteCommand}"/>
+                <AppBarButton
+                    Icon="Save"
+                    Label="Salva"
+                    Command="{Binding SalvaClienteCommand}"/>
+                <AppBarButton
+                    Icon="Delete"
+                    Label="Elimina"
+                    Command="{Binding EliminaClienteCommand}"/>
+                <AppBarButton
+                    Icon="OpenFile"
+                    Label="Apri"
+                    Command="{Binding ApriClienteCommand}"/>
             </CommandBar>
 
         </RelativePanel>

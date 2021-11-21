@@ -44,6 +44,7 @@
             this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.nomeTextBox = new System.Windows.Forms.TextBox();
+            this.aggiornaToolStripButton = new System.Windows.Forms.ToolStripButton();
             nomeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.articoliBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.articoliDataGridView)).BeginInit();
@@ -154,7 +155,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuovoToolStripButton,
             this.apriToolStripButton,
-            this.aboutToolStripButton});
+            this.aboutToolStripButton,
+            this.aggiornaToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(622, 27);
@@ -217,14 +219,22 @@
             this.nomeTextBox.Size = new System.Drawing.Size(555, 27);
             this.nomeTextBox.TabIndex = 1;
             // 
-            // ListaArticoliView
+            // aggiornaToolStripButton
+            // 
+            this.aggiornaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiornaToolStripButton.Image")));
+            this.aggiornaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aggiornaToolStripButton.Name = "aggiornaToolStripButton";
+            this.aggiornaToolStripButton.Size = new System.Drawing.Size(95, 24);
+            this.aggiornaToolStripButton.Text = "Aggiorna";
+            // 
+            // ArticoliView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 541);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "ListaArticoliView";
+            this.Name = "ArticoliView";
             this.Text = "Articoli";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListaArticoliView_FormClosing);
             this.Load += new System.EventHandler(this.ListaArticoliView_Load);
@@ -254,5 +264,6 @@
         private System.Windows.Forms.ToolStripButton aboutToolStripButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox nomeTextBox;
+        private System.Windows.Forms.ToolStripButton aggiornaToolStripButton;
     }
 }

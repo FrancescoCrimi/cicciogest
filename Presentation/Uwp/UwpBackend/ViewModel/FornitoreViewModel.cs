@@ -1,16 +1,12 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
-//using CiccioGest.Presentation.WpfBackend.Services;
-//using CommunityToolkit.Mvvm.ComponentModel;
-//using CommunityToolkit.Mvvm.Input;
-//using CommunityToolkit.Mvvm.Messaging;
+using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using CiccioGest.Presentation.UwpBackend.Services;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Windows.Input;
 
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
@@ -24,8 +20,8 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private RelayCommand loadedCommand;
         private RelayCommand nuovoFornitoreCommand;
         private AsyncRelayCommand salvaFornitoreCommand;
-        private AsyncRelayCommand rimuoviFornitoreCommand;
         private RelayCommand apriFornitoreCommand;
+        private AsyncRelayCommand eliminaFornitoreCommand;
 
         public FornitoreViewModel(ILogger<FornitoreViewModel> logger,
                                   INavigationService navigationService,
@@ -36,7 +32,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             this.navigationService = navigationService;
             //this.messageBoxService = messageBoxService;
             this.clientiFornitoriService = clientiFornitoriService;
-            //RegistraMessaggi();
+            RegistraMessaggi();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
@@ -45,17 +41,52 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         public Indirizzo Indirizzo { get; private set; }
 
 
-        //private void RegistraMessaggi()
-        //{
-        //    Messenger.Register<FornitoreIdMessage>(this, async (r, m) =>
-        //    {
-        //        if (m.Value != 0)
-        //        {
-        //            Fornitore fornitore = await clientiFornitoriService.GetFornitore(m.Value);
-        //            MostraFornitore(fornitore);
-        //        }
-        //    });
-        //}
+
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+
+        public ICommand NuovoFornitoreCommand => nuovoFornitoreCommand ?? (nuovoFornitoreCommand = new RelayCommand(()
+            => MostraFornitore(new Fornitore())));
+
+        public IAsyncRelayCommand SalvaFornitoreCommand => salvaFornitoreCommand ?? (salvaFornitoreCommand = new AsyncRelayCommand(async () =>
+        {
+            try
+            {
+                await clientiFornitoriService.SaveFornitore(Fornitore);
+            }
+            catch (Exception)
+            {
+                //messageBoxService.Show("Errore: " + ex.Message);
+            }
+        }));
+
+        public IAsyncRelayCommand EliminaFornitoreCommand => eliminaFornitoreCommand ?? (eliminaFornitoreCommand = new AsyncRelayCommand(async () =>
+        {
+            try
+            {
+                await clientiFornitoriService.DeleteFornitore(Fornitore.Id);
+            }
+            catch (Exception)
+            {
+                //messageBoxService.Show("Errore: " + ex.Message);
+            }
+        }));
+
+        public ICommand ApriFornitoreCommand => apriFornitoreCommand ?? (apriFornitoreCommand = new RelayCommand(()
+            => navigationService.Navigate(nameof(ListaFornitoriViewModel))));
+
+
+
+        private void RegistraMessaggi()
+        {
+            Messenger.Register<FornitoreIdMessage>(this, async (r, m) =>
+            {
+                if (m.Value != 0)
+                {
+                    Fornitore fornitore = await clientiFornitoriService.GetFornitore(m.Value);
+                    MostraFornitore(fornitore);
+                }
+            });
+        }
 
         private void MostraFornitore(Fornitore fornitore)
         {
@@ -64,49 +95,6 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             Indirizzo = fornitore.IndirizzoNew;
             OnPropertyChanged(nameof(Indirizzo));
         }
-
-
-
-
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
-
-
-        public ICommand NuovoFornitoreCommand => nuovoFornitoreCommand ?? (nuovoFornitoreCommand = new RelayCommand(() =>
-        {
-            MostraFornitore(new Fornitore());
-        }));
-
-        public IAsyncRelayCommand SalvaFornitoreCommand => salvaFornitoreCommand ?? (salvaFornitoreCommand = new AsyncRelayCommand(SalvaFornitore));
-
-        private async Task SalvaFornitore()
-        {
-            try
-            {
-                await clientiFornitoriService.SaveFornitore(Fornitore);
-            }
-            catch (Exception ex)
-            {
-                //messageBoxService.Show("Errore: " + ex.Message);
-            }
-        }
-
-        public IAsyncRelayCommand RimuoviFornitoreCommand => rimuoviFornitoreCommand ?? (rimuoviFornitoreCommand = new AsyncRelayCommand(RimuoviFornitore));
-
-        private async Task RimuoviFornitore()
-        {
-            try
-            {
-                await clientiFornitoriService.DeleteFornitore(Fornitore.Id);
-            }
-            catch (Exception ex)
-            {
-                //messageBoxService.Show("Errore: " + ex.Message);
-            }
-        }
-
-        public ICommand ApriFornitoreCommand => apriFornitoreCommand ?? (apriFornitoreCommand = new RelayCommand(
-            () => navigationService.Navigate(nameof(ListaFornitoriViewModel))));
-
 
         public void Dispose()
         {

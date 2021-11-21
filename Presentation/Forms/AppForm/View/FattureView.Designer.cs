@@ -40,6 +40,7 @@
             this.nuovaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.apriFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aggiornaToolStripButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -126,7 +127,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuovaFatturaToolStripButton,
             this.apriFatturaToolStripButton,
-            this.aboutToolStripButton});
+            this.aboutToolStripButton,
+            this.aggiornaToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(622, 27);
@@ -162,14 +164,22 @@
             this.aboutToolStripButton.Text = "&?";
             this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
             // 
-            // ListaFattureView
+            // aggiornaToolStripButton
+            // 
+            this.aggiornaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiornaToolStripButton.Image")));
+            this.aggiornaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aggiornaToolStripButton.Name = "aggiornaToolStripButton";
+            this.aggiornaToolStripButton.Size = new System.Drawing.Size(95, 24);
+            this.aggiornaToolStripButton.Text = "Aggiorna";
+            // 
+            // FattureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 541);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ListaFattureView";
+            this.Name = "FattureView";
             this.Text = "Fatture";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListaFattureView_FormClosing);
             this.Load += new System.EventHandler(this.ListaFattureView_Load);
@@ -194,5 +204,6 @@
         private System.Windows.Forms.ToolStripButton nuovaFatturaToolStripButton;
         private System.Windows.Forms.ToolStripButton apriFatturaToolStripButton;
         private System.Windows.Forms.ToolStripButton aboutToolStripButton;
+        private System.Windows.Forms.ToolStripButton aggiornaToolStripButton;
     }
 }

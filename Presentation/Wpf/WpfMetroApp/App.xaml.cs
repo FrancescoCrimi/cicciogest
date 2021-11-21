@@ -52,15 +52,18 @@ namespace CiccioGest.Presentation.WpfMetroApp
                 .AddSingleton<IMessageBoxService, MessageBoxService>()
                 .AddTransient<MainView>()
                 .AddTransient<ArticoliView>()
-                .AddTransient<ListaArticoliView>()
                 .AddTransient<ArticoloView>()
                 .AddTransient<CategoriaView>()
                 .AddTransient<ClienteView>()
                 .AddTransient<ClientiView>()
-                .AddTransient<ListaClientiView>()
                 .AddTransient<FatturaView>()
                 .AddTransient<FattureView>()
-                .AddTransient<ListaFattureView>();
+                .AddTransient<FornitoreView>()
+                .AddTransient<FornitoriView>()
+                .AddTransient<ListaArticoliView>()
+                .AddTransient<ListaClientiView>()
+                .AddTransient<ListaFattureView>()
+                .AddTransient<ListaFornitoriView>();
         }
     }
 }

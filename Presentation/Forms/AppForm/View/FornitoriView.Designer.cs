@@ -49,6 +49,7 @@
             this.fornitoriBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.nomeCompletoTextBox = new System.Windows.Forms.TextBox();
+            this.aggiornaToolStripButton = new System.Windows.Forms.ToolStripButton();
             nomeCompletoLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -91,7 +92,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuovoToolStripButton,
             this.apriToolStripButton,
-            this.aboutToolStripButton});
+            this.aboutToolStripButton,
+            this.aggiornaToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(782, 27);
@@ -270,6 +272,14 @@
             this.nomeCompletoTextBox.Size = new System.Drawing.Size(715, 27);
             this.nomeCompletoTextBox.TabIndex = 1;
             // 
+            // aggiornaToolStripButton
+            // 
+            this.aggiornaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiornaToolStripButton.Image")));
+            this.aggiornaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aggiornaToolStripButton.Name = "aggiornaToolStripButton";
+            this.aggiornaToolStripButton.Size = new System.Drawing.Size(95, 24);
+            this.aggiornaToolStripButton.Text = "Aggiorna";
+            // 
             // FornitoriView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -313,5 +323,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn partitaIvaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codiceFiscaleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripButton aggiornaToolStripButton;
     }
 }

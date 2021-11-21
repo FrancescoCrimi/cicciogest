@@ -49,11 +49,14 @@
                     Command="{Binding NuovoClienteCommand}"/>
                 <AppBarButton
                     Icon="Edit"
-                    Label="Edit"
+                    Label="Apri"
                     Command="{Binding ApriClienteCommand}"/>
                 <AppBarButton
+                    Icon="Document"
+                    Label="Crea Fattura"/>
+                <AppBarButton
                     Icon="Refresh"
-                    Label="Refresh"
+                    Label="Aggiorna"
                     Command="{Binding AggiornaClientiCommand}"/>
             </CommandBar>
 

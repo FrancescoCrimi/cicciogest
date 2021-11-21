@@ -32,27 +32,19 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_LoadEvent(object sender, EventArgs e)
         {
-            view.ApriFatturaEvent += View_ApriFatturaEvent;
-            view.NuovaFatturaEvent += View_NuovaFatturaEvent;
-            view.ApriClienteEvent += View_ApriClienteEvent;
-            view.NuovoClienteEvent += View_NuovoClienteEvent;
-            view.ApriFornitoreEvent += View_ApriFornitoreEvent;
-            view.NuovoFornitoreEvent += View_NuovoFornitoreEvent;
-            view.ApriArticoloEvent += View_ApriArticoloEvent;
-            view.NuovoArticoloEvent += View_NuovoArticoloEvent;
+            view.FattureEvent += View_FattureEvent;
+            view.ClientiEvent += View_ClientiEvent;
+            view.FornitoriEvent += View_FornitoriEvent;
+            view.ArticoliEvent += View_ArticoliEvent;
             view.CategorieEvent += View_CategorieEvent;
         }
 
         private void View_CloseEvent(object sender, EventArgs e)
         {
-            view.ApriFatturaEvent -= View_ApriFatturaEvent;
-            view.NuovaFatturaEvent -= View_NuovaFatturaEvent;
-            view.ApriClienteEvent -= View_ApriClienteEvent;
-            view.NuovoClienteEvent -= View_NuovoClienteEvent;
-            view.ApriFornitoreEvent -= View_ApriFornitoreEvent;
-            view.NuovoFornitoreEvent -= View_NuovoFornitoreEvent;
-            view.ApriArticoloEvent -= View_ApriArticoloEvent;
-            view.NuovoArticoloEvent -= View_NuovoArticoloEvent;
+            view.FattureEvent -= View_FattureEvent;
+            view.ClientiEvent -= View_ClientiEvent;
+            view.FornitoriEvent -= View_FornitoriEvent;
+            view.ArticoliEvent -= View_ArticoliEvent;
             view.CategorieEvent -= View_CategorieEvent;
         }
 
@@ -60,48 +52,32 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #region eventi MainView
 
-        private void View_ApriFatturaEvent(object sender, EventArgs e)
+        private void View_FattureEvent(object sender, EventArgs e)
         {
-            FatturePresenter listaFatturePresenter = windowService.OpenWindow<FatturePresenter>();
-            //listaFatturePresenter.CloseEvent += ListaFatturePresenter_CloseEvent;
+            windowService.OpenWindow<FatturePresenter>();
         }
 
-        private void View_NuovaFatturaEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<FatturaPresenter>();
+        private void View_ClientiEvent(object sender, EventArgs e)
+        {
+            windowService.OpenWindow<ClientiPresenter>();
+        }
 
-        private void View_ApriClienteEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<ClientiPresenter>();
+        private void View_FornitoriEvent(object sender, EventArgs e)
+        {
+            windowService.OpenWindow<FornitoriPresenter>();
+        }
 
-        private void View_NuovoClienteEvent(object sender, EventArgs e) { }
-
-        private void View_ApriFornitoreEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<FornitoriPresenter>();
-
-        private void View_NuovoFornitoreEvent(object sender, EventArgs e) { }
-
-        private void View_ApriArticoloEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<ArticoliPresenter>();
-
-        private void View_NuovoArticoloEvent(object sender, EventArgs e) { }
+        private void View_ArticoliEvent(object sender, EventArgs e)
+        {
+            windowService.OpenWindow<ArticoliPresenter>();
+        }
 
         private void View_CategorieEvent(object sender, EventArgs e)
-            => windowService.OpenWindow<CategoriaPresenter>();
+        {
+            windowService.OpenWindow<CategoriaPresenter>();
+        }
 
         #endregion
-
-
-        //private void ListaFatturePresenter_CloseEvent(object sender, IdEventArgs e)
-        //{
-        //    if(sender is ListaFatturePresenter listaFatturePresenter)
-        //    {
-        //        listaFatturePresenter.CloseEvent -= ListaFatturePresenter_CloseEvent;
-        //        if (e.Id != 0)
-        //        {
-        //            FatturaPresenter fatturaPresenter = windowService.OpenWindow<FatturaPresenter>();
-        //            fatturaPresenter.MostraFattura(e.Id);
-        //        }
-        //    }
-        //}
 
 
         public void Dispose()

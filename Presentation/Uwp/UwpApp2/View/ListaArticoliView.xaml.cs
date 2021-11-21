@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using CiccioGest.Presentation.UwpBackend.ViewModel;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
@@ -7,6 +9,7 @@ namespace CiccioGest.Presentation.UwpApp.View
         public ListaArticoliView()
         {
             InitializeComponent();
+            DataContext = Ioc.Default.GetService<ListaArticoliViewModel>();
         }
     }
 }

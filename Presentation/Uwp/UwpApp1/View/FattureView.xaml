@@ -46,15 +46,15 @@
                 RelativePanel.RightOf="PageTitle">
                 <AppBarButton
                     Icon="Document"
-                    Label="Nuovo"
+                    Label="Nuova"
                     Command="{Binding NuovaFatturaCommand}"/>
                 <AppBarButton
                     Icon="Edit"
-                    Label="Edit"
+                    Label="Apri"
                     Command="{Binding ApriFatturaCommand}"/>
                 <AppBarButton
                     Icon="Refresh"
-                    Label="Refresh"
+                    Label="Aggiorna"
                     Command="{Binding AggiornaFattureCommand}"/>
             </CommandBar>
 

@@ -66,6 +66,12 @@
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
+                <Button>
+                    <TextBlock>        
+                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Crea Fattura" />
+                    </TextBlock>
+                </Button>
                 <Button Command="{Binding AggiornaClientiCommand}">
                     <TextBlock>        
                         <Run Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" />

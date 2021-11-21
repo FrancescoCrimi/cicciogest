@@ -7,7 +7,7 @@
       xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfMetroApp.UserControls"
-      d:DataContext="{d:DesignInstance Type=viewmodel:FornitoriListViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ListaFornitoriViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"

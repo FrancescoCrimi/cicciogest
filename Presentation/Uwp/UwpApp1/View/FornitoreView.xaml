@@ -5,7 +5,9 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:my="using:CiccioGest.Presentation.UwpApp.UserControls" 
+    xmlns:my="using:CiccioGest.Presentation.UwpApp.UserControls"
+    xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
+    d:DataContext="{d:DesignInstance Type=viewmodel:FornitoreViewModel}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -30,6 +32,22 @@
                 HorizontalAlignment="Stretch"
                 Background="Transparent"
                 RelativePanel.RightOf="PageTitle">
+                <AppBarButton
+                    Icon="Document"
+                    Label="Nuovo"
+                    Command="{Binding NuovoFornitoreCommand}"/>
+                <AppBarButton
+                    Icon="Save"
+                    Label="Salva"
+                    Command="{Binding SalvaFornitoreCommand}"/>
+                <AppBarButton
+                    Icon="Delete"
+                    Label="Elimina"
+                    Command="{Binding EliminaFornitoreCommand}"/>
+                <AppBarButton
+                    Icon="OpenFile"
+                    Label="Apri"
+                    Command="{Binding ApriFornitoreCommand}"/>
             </CommandBar>
 
         </RelativePanel>

@@ -27,18 +27,37 @@
             <winui:NavigationViewItem
                 Content="Fatture"
                 Icon="Shop"
-                helpers:NavHelper.NavigateTo="views:FattureView" >
-            </winui:NavigationViewItem>
+                helpers:NavHelper.NavigateTo="views:FattureView"/>
+
             <winui:NavigationViewItem
-                Content="Articoli"
-                Icon="Document"
-                helpers:NavHelper.NavigateTo="views:ArticoliView" >
+                Content="Magazino"
+                Icon="Document" >
+                <winui:NavigationViewItem.MenuItems>
+                    <winui:NavigationViewItem
+                        Content="Articoli"
+                        Icon="Document"
+                        helpers:NavHelper.NavigateTo="views:ArticoliView"/>
+                    <winui:NavigationViewItem
+                        Content="Categorie"
+                        Icon="Document"/>
+                </winui:NavigationViewItem.MenuItems>
             </winui:NavigationViewItem>
+
             <winui:NavigationViewItem
-                Content="Clienti"
-                Icon="ContactInfo"
-                helpers:NavHelper.NavigateTo="views:ClientiView" >
+                Content="Anagrafica"
+                Icon="ContactInfo">
+                <winui:NavigationViewItem.MenuItems>
+                    <winui:NavigationViewItem
+                        Content="Clienti"
+                        Icon="ContactInfo"
+                        helpers:NavHelper.NavigateTo="views:ClientiView"/>
+                    <winui:NavigationViewItem
+                        Content="Fornitori"
+                        Icon="ContactInfo"
+                        helpers:NavHelper.NavigateTo="views:FornitoriView"/>
+                </winui:NavigationViewItem.MenuItems>
             </winui:NavigationViewItem>
+
         </winui:NavigationView.MenuItems>
 
         <i:Interaction.Behaviors>

@@ -12,12 +12,19 @@ namespace CiccioGest.Presentation.UwpBackend
             serviceCollection
                 .ConfigureApplication()
                 .AddTransient<MainViewModel>()
-                .AddTransient<FatturaViewModel>()
                 .AddTransient<ArticoloViewModel>()
-                .AddTransient<CategoriaViewModel>()
-                .AddTransient<FattureViewModel>()
                 .AddTransient<ArticoliViewModel>()
-                .AddTransient<ClientiViewModel>();
+                .AddTransient<CategoriaViewModel>()
+                .AddTransient<ClienteViewModel>()
+                .AddTransient<ClientiViewModel>()
+                .AddTransient<FatturaViewModel>()
+                .AddTransient<FattureViewModel>()
+                .AddTransient<FornitoreViewModel>()
+                .AddTransient<FornitoriViewModel>()
+                .AddTransient<ListaArticoliViewModel>()
+                .AddTransient<ListaClientiViewModel>()
+                .AddTransient<ListaFattureViewModel>()
+                .AddTransient<ListaFornitoriViewModel>();
             return serviceCollection;
         }
     }

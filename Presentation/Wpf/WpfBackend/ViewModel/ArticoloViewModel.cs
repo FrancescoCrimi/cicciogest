@@ -19,9 +19,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly IMessageBoxService messageBoxService;
         private RelayCommand loadedCommand;
         private RelayCommand unloadedCommand;
-        private RelayCommand nuovoCommand;
-        private AsyncRelayCommand salvaCommand;
-        private AsyncRelayCommand eliminaCommand;
+        private AsyncRelayCommand salvaArticoloCommand;
+        private AsyncRelayCommand eliminaArticoloCommand;
+        private RelayCommand nuovoArticoloCommand;
         private RelayCommand apriArticoloCommand;
         private RelayCommand aggiungiCategoriaCommand;
         private RelayCommand rimuoviCategoriaCommand;
@@ -41,7 +41,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public Articolo Articolo { get; private set; }
 
-        public ICollection<Categoria> Categorie { get; private set; }
+        //public ICollection<Categoria> Categorie { get; private set; }
 
         public Categoria CategoriaSelezionata { get; set; }
 
@@ -54,10 +54,10 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             Messenger.Unregister<CategoriaIdMessage>(this);
         });
 
-        public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(()
+        public ICommand NuovoArticoloCommand => nuovoArticoloCommand ??= new RelayCommand(()
             => MostraArticolo(new Articolo()));
 
-        public IAsyncRelayCommand EliminaCommand => eliminaCommand ??= new AsyncRelayCommand(async () =>
+        public IAsyncRelayCommand EliminaArticoloCommand => eliminaArticoloCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -70,7 +70,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         });
 
-        public IAsyncRelayCommand SalvaCommand => salvaCommand ??= new AsyncRelayCommand(async () =>
+        public IAsyncRelayCommand SalvaArticoloCommand => salvaArticoloCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -94,7 +94,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             if (CategoriaSelezionata != null)
             {
                 Articolo.RemoveCategoria(CategoriaSelezionata);
-                OnPropertyChanged(nameof(Categorie));
+                //OnPropertyChanged(nameof(Categorie));
             }
         });
 
@@ -120,7 +120,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 {
                     Categoria categoria = await magazinoService.GetCategoria(m.Value);
                     Articolo.AddCategoria(categoria);
-                    OnPropertyChanged(nameof(Categorie));
+                    //OnPropertyChanged(nameof(Categorie));
                 }
             });
         }
@@ -130,8 +130,8 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             Articolo = articolo;
             OnPropertyChanged(nameof(Articolo));
             //Categorie = new ObservableList<Categoria>(articolo.Categorie);
-            Categorie = articolo.Categorie;
-            OnPropertyChanged(nameof(Categorie));
+            //Categorie = articolo.Categorie;
+            //OnPropertyChanged(nameof(Categorie));
         }
 
 

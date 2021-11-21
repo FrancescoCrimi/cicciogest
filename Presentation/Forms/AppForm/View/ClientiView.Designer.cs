@@ -42,11 +42,12 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.nuovoClienteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.apriClienteToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.nuovaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.creaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.nomeCompletoTextBox = new System.Windows.Forms.TextBox();
+            this.aggiornaToolStripButton = new System.Windows.Forms.ToolStripButton();
             nomeCompletoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.clientiDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientiBindingSource)).BeginInit();
@@ -159,8 +160,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuovoClienteToolStripButton,
             this.apriClienteToolStripButton,
-            this.nuovaFatturaToolStripButton,
-            this.aboutToolStripButton});
+            this.creaFatturaToolStripButton,
+            this.aboutToolStripButton,
+            this.aggiornaToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(782, 27);
@@ -185,14 +187,14 @@
             this.apriClienteToolStripButton.Text = "&Apri";
             this.apriClienteToolStripButton.Click += new System.EventHandler(this.ApriClienteToolStripButton_Click);
             // 
-            // nuovaFatturaToolStripButton
+            // creaFatturaToolStripButton
             // 
-            this.nuovaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovaFatturaToolStripButton.Image")));
-            this.nuovaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovaFatturaToolStripButton.Name = "nuovaFatturaToolStripButton";
-            this.nuovaFatturaToolStripButton.Size = new System.Drawing.Size(125, 24);
-            this.nuovaFatturaToolStripButton.Text = "Nuova Fattura";
-            this.nuovaFatturaToolStripButton.Click += new System.EventHandler(this.NuovaFatturaToolStripButton_Click);
+            this.creaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("creaFatturaToolStripButton.Image")));
+            this.creaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.creaFatturaToolStripButton.Name = "creaFatturaToolStripButton";
+            this.creaFatturaToolStripButton.Size = new System.Drawing.Size(112, 24);
+            this.creaFatturaToolStripButton.Text = "Crea Fattura";
+            this.creaFatturaToolStripButton.Click += new System.EventHandler(this.NuovaFatturaToolStripButton_Click);
             // 
             // aboutToolStripButton
             // 
@@ -250,14 +252,22 @@
             this.nomeCompletoTextBox.Size = new System.Drawing.Size(715, 27);
             this.nomeCompletoTextBox.TabIndex = 1;
             // 
-            // ListaClientiView
+            // aggiornaToolStripButton
+            // 
+            this.aggiornaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiornaToolStripButton.Image")));
+            this.aggiornaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aggiornaToolStripButton.Name = "aggiornaToolStripButton";
+            this.aggiornaToolStripButton.Size = new System.Drawing.Size(95, 24);
+            this.aggiornaToolStripButton.Text = "Aggiorna";
+            // 
+            // ClientiView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 553);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ListaClientiView";
+            this.Name = "ClientiView";
             this.Text = "Clienti";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListaClientiView_FormClosing);
             this.Load += new System.EventHandler(this.ListaClientiView_Load);
@@ -290,6 +300,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn indirizzoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodiceFiscale;
         private System.Windows.Forms.DataGridViewTextBoxColumn PartitaIva;
-        private System.Windows.Forms.ToolStripButton nuovaFatturaToolStripButton;
+        private System.Windows.Forms.ToolStripButton creaFatturaToolStripButton;
+        private System.Windows.Forms.ToolStripButton aggiornaToolStripButton;
     }
 }
