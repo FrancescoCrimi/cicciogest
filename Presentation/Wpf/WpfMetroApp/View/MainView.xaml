@@ -114,17 +114,23 @@
                             <mah:HamburgerMenuGlyphItem
                                 Glyph="&#xE719;"
                                 Label="Fatture"
-                                TargetPageType="view:FattureView">
-                                
-                            </mah:HamburgerMenuGlyphItem>
+                                TargetPageType="view:FattureView"/>
                             <mah:HamburgerMenuGlyphItem
                                 Glyph="&#xE8A5;"
                                 Label="Articoli"
                                 TargetPageType="view:ArticoliView"/>
                             <mah:HamburgerMenuGlyphItem
+                                Glyph="&#xE8A5;"
+                                Label="Categorie"
+                                TargetPageType="view:CategoriaView"/>
+                            <mah:HamburgerMenuGlyphItem
                                 Glyph="&#xE779;"
                                 Label="Clienti"
                                 TargetPageType="view:ClientiView"/>
+                            <mah:HamburgerMenuGlyphItem
+                                Glyph="&#xE779;"
+                                Label="Fornitori"
+                                TargetPageType="view:FornitoriView"/>
                         </mah:HamburgerMenuItemCollection>
                     </mah:HamburgerMenu.ItemsSource>
 

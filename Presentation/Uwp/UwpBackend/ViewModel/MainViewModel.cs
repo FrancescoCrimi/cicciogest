@@ -20,8 +20,6 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private RelayCommand apriFornitoriCommand;
         private RelayCommand<Type> itemInvokedCommand;
 
-
-
         public MainViewModel(ILogger<MainViewModel> logger,
                              INavigationService navigationService)
         {
@@ -51,8 +49,13 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             => navigationService.Navigate(nameof(FornitoriViewModel))));
 
 
-        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<Type>((type)
-            => navigationService.Navigate(type)));
+        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<Type>((type) =>
+        {
+            if(type != null)
+            {
+                navigationService.Navigate(type);
+            }
+        }));
 
         public void Dispose()
         {

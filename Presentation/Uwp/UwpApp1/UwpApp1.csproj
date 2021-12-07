@@ -305,13 +305,13 @@
       <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Mvvm">
-      <Version>7.1.1</Version>
+      <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>7.1.1</Version>
+      <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
-      <Version>7.1.1</Version>
+      <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.7.0</Version>
@@ -321,6 +321,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj">
+      <Project>{0984aacf-7481-4370-a4fc-e8bf6311d50d}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
       <Project>{c1e57ee6-322d-42bf-b999-82781e8380dd}</Project>
       <Name>Infrastructure</Name>
