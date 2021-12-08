@@ -5,6 +5,8 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:tollkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:uc="using:CiccioGest.Presentation.UwpApp.UserControls"
     xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:ListaFattureViewModel}"

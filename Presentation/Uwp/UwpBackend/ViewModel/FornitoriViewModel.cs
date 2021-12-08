@@ -39,7 +39,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         public Fornitore FornitoreSelezionato
         {
-            protected get => fornitoreSelezionato;
+            get => fornitoreSelezionato;
             set
             {
                 if (value != fornitoreSelezionato)

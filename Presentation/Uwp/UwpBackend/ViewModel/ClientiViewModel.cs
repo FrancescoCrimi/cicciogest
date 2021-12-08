@@ -4,11 +4,9 @@ using CiccioGest.Presentation.UwpBackend.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -81,12 +79,16 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         protected virtual void ApriCliente()
         {
+            if (ClienteSelezionato != null)
+            {
+                navigationService.Navigate(nameof(ClienteViewModel));
+                Messenger.Send(new ClienteIdMessage(ClienteSelezionato.Id));
+            }
         }
 
         private void NuovoCliente()
         {
         }
-
 
 
         public void Dispose()

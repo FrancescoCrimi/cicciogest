@@ -1,10 +1,9 @@
 ﻿using CiccioGest.Application;
+using CiccioGest.Domain.ClientiFornitori;
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
@@ -16,13 +15,28 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private RelayCommand apriClienteCommand;
         private RelayCommand salvaClienteCommand;
         private readonly ILogger<ClienteViewModel> logger;
-        private readonly IMagazinoService magazinoService;
+        private readonly IClientiFornitoriService clientiFornitoriService;
 
         public ClienteViewModel(ILogger<ClienteViewModel> logger,
-                                IMagazinoService magazinoService)
+                                IClientiFornitoriService clientiFornitoriService)
         {
             this.logger = logger;
-            this.magazinoService = magazinoService;
+            this.clientiFornitoriService = clientiFornitoriService;
+            RegistraMessaggi();
+        }
+
+        public Cliente Cliente { get; set; }
+
+        private void RegistraMessaggi()
+        {
+            Messenger.Register<ClienteIdMessage>(this, async (r, m) =>
+            {
+                if (m.Value != 0)
+                {
+                    Cliente = await clientiFornitoriService.GetCliente(m.Value);
+                    OnPropertyChanged(nameof(Cliente));
+                }
+            });
         }
 
         public ICommand NuovoClienteCommand => nuovoClienteCommand
@@ -51,5 +65,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         private void SalvaCliente()
         {
         }
+
+
     }
 }

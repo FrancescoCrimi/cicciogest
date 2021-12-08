@@ -5,6 +5,7 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:ClientiViewModel}"
     mc:Ignorable="d"

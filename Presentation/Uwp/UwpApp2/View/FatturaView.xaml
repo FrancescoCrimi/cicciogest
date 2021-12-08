@@ -28,7 +28,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <RelativePanel Grid.Row="0">
+        <RelativePanel
+            Grid.Row="0">
 
             <TextBlock
                 x:Name="PageTitle"
@@ -82,13 +83,21 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Border x:Name="fatturaGroupBox" BorderThickness="2 2 2 2" BorderBrush="Black" Margin="3 10 3 3" CornerRadius="5">
+            <Border
+                x:Name="fatturaGroupBox"
+                BorderThickness="1"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                Margin="3 10 3 3"
+                CornerRadius="5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="Grid1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid
+                        x:Name="Grid1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -97,10 +106,25 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Nome:" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center"/>
-                        <TextBox x:Name="nomeTextBox" HorizontalAlignment="Left" Margin="3" Text="{Binding Fattura.Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="1" Width="150"/>
+                        <TextBlock
+                            Text="Nome:"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            VerticalAlignment="Center"/>
+                        <TextBox
+                            x:Name="nomeTextBox"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Text="{Binding Fattura.Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalAlignment="Center"
+                            Grid.Column="1"
+                            Width="150"/>
                     </Grid>
-                    <Grid x:Name="grid2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                    <Grid 
+                        x:Name="grid2"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -109,13 +133,32 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Totale:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                        <TextBox x:Name="totaleTextBox" HorizontalAlignment="Left" Margin="3" Text="{Binding Fattura.Totale, Mode=OneWay}" VerticalAlignment="Center" Width="150" Grid.Column="1"/>
+                        <TextBlock
+                            Text="Totale:"
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"/>
+                        <TextBox
+                            x:Name="totaleTextBox"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Text="{Binding Fattura.Totale, Mode=OneWay}"
+                            VerticalAlignment="Center"
+                            Width="150"
+                            Grid.Column="1"/>
                     </Grid>
                 </Grid>
             </Border>
 
-            <Border x:Name="dettaglioGroupBox" BorderThickness="2 2 2 2" BorderBrush="Black" Margin="3 10 3 3" CornerRadius="5" Grid.Column="1">
+            <Border
+                x:Name="dettaglioGroupBox"
+                BorderThickness="1"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                Margin="3 10 3 3"
+                CornerRadius="5"
+                Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -125,7 +168,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Grid x:Name="grid3" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
+                    <Grid
+                        x:Name="grid3"
+                        HorizontalAlignment="Left"
+                        Margin="0"
+                        VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -133,10 +180,31 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Prodotto:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="60"/>
-                        <TextBox x:Name="nomeProdottoTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding Dettaglio.NomeProdotto, Mode=OneWay}" VerticalAlignment="Center" Width="120" IsReadOnly="True"/>
+                        <TextBlock
+                            Text="Prodotto:"
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Width="60"/>
+                        <TextBox
+                            x:Name="nomeProdottoTextBox"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            Text="{Binding Dettaglio.NomeProdotto, Mode=OneWay}"
+                            VerticalAlignment="Center"
+                            Width="120"
+                            IsReadOnly="True"/>
                     </Grid>
-                    <Grid x:Name="grid4" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Grid.Column="1">
+                    <Grid
+                        x:Name="grid4"
+                        HorizontalAlignment="Left"
+                        Margin="0"
+                        VerticalAlignment="Top"
+                        Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -144,10 +212,31 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Prezzo:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="60"/>
-                        <TextBox x:Name="prezzoProdottoTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding Dettaglio.PrezzoProdotto, Mode=OneWay}" VerticalAlignment="Center" Width="120" IsReadOnly="True"/>
+                        <TextBlock
+                            Text="Prezzo:"
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Width="60"/>
+                        <TextBox
+                            x:Name="prezzoProdottoTextBox"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            Text="{Binding Dettaglio.PrezzoProdotto, Mode=OneWay}"
+                            VerticalAlignment="Center"
+                            Width="120"
+                            IsReadOnly="True"/>
                     </Grid>
-                    <Grid x:Name="grid5" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Grid.Row="1">
+                    <Grid
+                        x:Name="grid5"
+                        HorizontalAlignment="Left"
+                        Margin="0"
+                        VerticalAlignment="Top"
+                        Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -155,10 +244,31 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Quantita:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="60"/>
-                        <TextBox x:Name="quantitaTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding Dettaglio.Quantita, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="120"/>
+                        <TextBlock
+                            Text="Quantita:"
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Width="60"/>
+                        <TextBox
+                            x:Name="quantitaTextBox"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            Text="{Binding Dettaglio.Quantita, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalAlignment="Center"
+                            Width="120"/>
                     </Grid>
-                    <Grid x:Name="grid6" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1">
+                    <Grid
+                        x:Name="grid6"
+                        HorizontalAlignment="Left"
+                        Margin="0"
+                        VerticalAlignment="Top"
+                        Grid.Row="1"
+                        Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -166,8 +276,24 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Totale:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="60"/>
-                        <TextBox x:Name="totaleTextBox1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding Dettaglio.Totale, Mode=OneWay}" VerticalAlignment="Center" Width="120" IsReadOnly="True"/>
+                        <TextBlock
+                            Text="Totale:"
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Width="60"/>
+                        <TextBox
+                            x:Name="totaleTextBox1"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            Grid.Row="0"
+                            Text="{Binding Dettaglio.Totale, Mode=OneWay}"
+                            VerticalAlignment="Center"
+                            Width="120"
+                            IsReadOnly="True"/>
                     </Grid>
                 </Grid>
             </Border>
@@ -175,9 +301,18 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <Border BorderThickness="2 2 2 2" BorderBrush="Black" Margin="3 10 3 3" CornerRadius="5">
-
-                <tollkit:DataGrid x:Name="dettagliDataGrid" ItemsSource="{Binding Fattura.Dettagli}" SelectedItem="{Binding DettaglioSelezionato}" AutoGenerateColumns="False" GridLinesVisibility="Horizontal" IsReadOnly="True">
+            <Border
+                BorderThickness="1"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                Margin="3 10 3 3"
+                CornerRadius="5">
+                <tollkit:DataGrid
+                    x:Name="dettagliDataGrid"
+                    ItemsSource="{Binding Fattura.Dettagli}"
+                    SelectedItem="{Binding DettaglioSelezionato}"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    IsReadOnly="True">
                     <tollkit:DataGrid.Columns>
                         <tollkit:DataGridTextColumn Binding="{Binding Id}" Header="OrderID" />
                         <tollkit:DataGridTextColumn Binding="{Binding NomeProdotto}" Header="Prodotto" />
@@ -186,7 +321,6 @@
                         <tollkit:DataGridTextColumn Binding="{Binding Totale}" Header="Totale" />
                     </tollkit:DataGrid.Columns>
                 </tollkit:DataGrid>
-
             </Border>
         </Grid>
 
