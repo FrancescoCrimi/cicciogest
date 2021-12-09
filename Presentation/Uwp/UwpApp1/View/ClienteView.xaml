@@ -20,7 +20,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <RelativePanel Grid.Row="0">
+        <RelativePanel
+            Grid.Row="0">
 
             <TextBlock
                 x:Name="PageTitle"

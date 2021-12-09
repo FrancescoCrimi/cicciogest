@@ -8,8 +8,6 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.Windows.Input;
 
-
-
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
     public class ClienteViewModel : ObservableRecipient, IDisposable
@@ -38,17 +36,14 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         }
 
         public Cliente Cliente { get; private set; }
+
         public Indirizzo Indirizzo { get; private set; }
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
+        public ICommand LoadedCommand
+            => loadedCommand ??= new RelayCommand(() => { });
 
-
-        public ICommand NuovoClienteCommand => nuovoClienteCommand ??= new RelayCommand(NuovoCliente);
-
-        private void NuovoCliente()
-        {
-            MostraCliente(new Cliente());
-        }
+        public ICommand NuovoClienteCommand
+            => nuovoClienteCommand ??= new RelayCommand(NuovoCliente);
 
         public ICommand SalvaClienteCommand => salvaClienteCommand ??= new RelayCommand(() =>
         {
@@ -62,23 +57,30 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             }
         });
 
-        public ICommand RimuoviClienteCommand => rimuoviClienteCommand ??= new RelayCommand(() =>
+        public ICommand RimuoviClienteCommand
+            => rimuoviClienteCommand ??= new RelayCommand(() =>
+            {
+                try
+                {
+                    clientiFornitoriService.DeleteCliente(Cliente.Id);
+                }
+                catch (Exception ex)
+                {
+                    messageBoxService.Show("Errore: " + ex.Message);
+                }
+            });
+
+        public ICommand ApriClienteCommand
+            => apriClienteCommand ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(ListaClientiViewModel)));
+
+
+
+
+        private void NuovoCliente()
         {
-            try
-            {
-                clientiFornitoriService.DeleteCliente(Cliente.Id);
-            }
-            catch (Exception ex)
-            {
-                messageBoxService.Show("Errore: " + ex.Message);
-            }
-        });
-
-        public ICommand ApriClienteCommand => apriClienteCommand ??= new RelayCommand(() 
-            => navigationService.NavigateTo(nameof(ListaClientiViewModel)));
-
-
-
+            MostraCliente(new Cliente());
+        }
 
         private void RegistraMessaggi()
         {

@@ -27,45 +27,53 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         public Cliente Cliente { get; set; }
 
+        public Indirizzo Indirizzo { get; set; }
+
+        public ICommand NuovoClienteCommand
+            => nuovoClienteCommand ?? (nuovoClienteCommand = new RelayCommand(NuovoCliente));
+
+        public ICommand EliminaClienteCommand
+            => eliminaClienteCommand ?? (eliminaClienteCommand = new RelayCommand(EliminaCliente));
+
+        public ICommand ApriClienteCommand
+            => apriClienteCommand ?? (apriClienteCommand = new RelayCommand(() => 
+            {
+
+            }));
+
+        public ICommand SalvaClienteCommand
+            => salvaClienteCommand ?? (salvaClienteCommand = new RelayCommand(SalvaCliente));
+
+
         private void RegistraMessaggi()
         {
             Messenger.Register<ClienteIdMessage>(this, async (r, m) =>
             {
                 if (m.Value != 0)
                 {
-                    Cliente = await clientiFornitoriService.GetCliente(m.Value);
-                    OnPropertyChanged(nameof(Cliente));
+                    ApriCliente(await clientiFornitoriService.GetCliente(m.Value));
                 }
             });
         }
-
-        public ICommand NuovoClienteCommand => nuovoClienteCommand
-            ?? (nuovoClienteCommand = new RelayCommand(NuovoCliente));
 
         private void NuovoCliente()
         {
         }
 
-        public ICommand EliminaClienteCommand => eliminaClienteCommand
-            ?? (eliminaClienteCommand = new RelayCommand(EliminaCliente));
-
         private void EliminaCliente()
         {
         }
 
-        public ICommand ApriClienteCommand => apriClienteCommand
-            ?? (apriClienteCommand = new RelayCommand(ApriCliente));
-
-        private void ApriCliente()
+        private void ApriCliente(Cliente cliente)
         {
+            Cliente = cliente;
+            OnPropertyChanged(nameof(Cliente));
+            Indirizzo = cliente.IndirizzoNew;
+            OnPropertyChanged(nameof(this.Indirizzo));
         }
-
-        public ICommand SalvaClienteCommand => salvaClienteCommand ?? (salvaClienteCommand = new RelayCommand(SalvaCliente));
 
         private void SalvaCliente()
         {
         }
-
-
     }
 }
