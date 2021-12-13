@@ -5,11 +5,37 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:tollkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
+    d:DataContext="{d:DesignInstance Type=viewmodel:FornitoriViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
+    <SplitView>
+        <SplitView.Pane>
+            <StackPanel></StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <tollkit:DataGrid
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="False"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                SelectionMode="Single"
+                ItemsSource="{Binding Fornitori, Mode=OneWay}"
+                SelectedItem="{Binding FornitoreSelezionato, Mode=TwoWay}">
+                <tollkit:DataGrid.Columns>
+                    <tollkit:DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    <tollkit:DataGridTextColumn Binding="{Binding Nome}" Header="Nome"/>
+                    <tollkit:DataGridTextColumn Binding="{Binding Societa}" Header="Societa"/>
+                    <tollkit:DataGridTextColumn Binding="{Binding Indirizzo}" Header="Indirizzo"/>
+                    <tollkit:DataGridTextColumn Binding="{Binding PartitaIva}" Header="Partita Iva"/>
+                    <tollkit:DataGridTextColumn Binding="{Binding CodiceFiscale}" Header="Codice Fiscale"/>
+                </tollkit:DataGrid.Columns>
+            </tollkit:DataGrid>
+        </SplitView.Content>
+    </SplitView>
 
-    </Grid>
 </UserControl>

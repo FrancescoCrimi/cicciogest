@@ -5,10 +5,89 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:tollkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:uc="using:CiccioGest.Presentation.UwpApp.UserControls"
+    xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
+    d:DataContext="{d:DesignInstance Type=viewmodel:FornitoreViewModel}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid
+        Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0">
+
+            <TextBlock
+                x:Name="PageTitle"
+                Text="Fornitore"
+                Margin="{StaticResource SmallLeftMargin}"
+                Style="{StaticResource PageTitleStyle}"/>
+
+            <CommandBar
+                x:Name="mainCommandBar"
+                DefaultLabelPosition="Right"
+                HorizontalAlignment="Stretch"
+                Background="Transparent"
+                RelativePanel.RightOf="PageTitle">
+                <AppBarButton
+                    Icon="Document"
+                    Label="Nuovo"
+                    Command="{Binding NuovoFornitoreCommand}"/>
+                <AppBarButton
+                    Icon="Save"
+                    Label="Salva"
+                    Command="{Binding SalvaFornitoreCommand}"/>
+                <AppBarButton
+                    Icon="Delete"
+                    Label="Elimina"
+                    Command="{Binding EliminaFornitoreCommand}"/>
+                <AppBarButton
+                    Icon="OpenFile"
+                    Label="Apri"
+                    Command="{Binding ApriFornitoreCommand}"/>
+            </CommandBar>
+
+        </RelativePanel>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                DataContext="{Binding Fornitore, Mode=OneWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBox Header="Nome:" Width="140" Text="{Binding Nome, Mode=TwoWay}"/>
+                    <TextBox Header="Societa:" Width="140" Text="{Binding Societa, Mode=TwoWay}"/>
+                    <TextBox Header="Partita Iva:" Width="140" Text="{Binding PartitaIva, Mode=TwoWay}"/>
+                    <TextBox Header="Telefono:" Width="140" Text="{Binding Telefono, Mode=TwoWay}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox Header="Cognome:" Width="140" Text="{Binding Cognome, Mode=TwoWay}"/>
+                    <TextBox Header="Email:" Width="140" Text="{Binding Email, Mode=TwoWay}"/>
+                    <TextBox Header="Codice Fiscale:" Width="140" Text="{Binding CodiceFiscale, Mode=TwoWay}"/>
+                    <TextBox Header="Mobile:" Width="140" Text="{Binding Mobile, Mode=TwoWay}"/>
+                </StackPanel>
+
+            </Grid>
+
+            <uc:IndirizzoControl
+                Grid.Row="1" />
+
+        </Grid>
 
     </Grid>
 </Page>

@@ -64,6 +64,8 @@
 
         </RelativePanel>
 
+        <uc:ListaFornitoriControl Grid.Row="1"/>
+
     </Grid>
 
 </Page>

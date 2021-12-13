@@ -5,6 +5,7 @@
     xmlns:local="using:CiccioGest.Presentation.UwpApp.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:tollkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:ArticoliViewModel}"
@@ -13,17 +14,15 @@
     d:DesignWidth="400">
 
     <SplitView
-            x:Name="listSplitView"
-            DisplayMode="Inline"
-            OpenPaneLength="260"
-            PanePlacement="Right">
+        x:Name="listSplitView"
+        DisplayMode="Inline"
+        OpenPaneLength="260"
+        PanePlacement="Right">
         <SplitView.Pane>
             <StackPanel></StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
-            <StackPanel></StackPanel>
-
-            <!--<tollkit:DataGrid
+            <tollkit:DataGrid
                 CanUserReorderColumns="False"
                 CanUserResizeColumns="False"
                 AutoGenerateColumns="False"
@@ -41,12 +40,12 @@
                         Header="Customer"
                         Tag="CustomerName"
                         Binding="{Binding Nome}"/>
-                    <controls:DataGridTextColumn
+                    <!--<controls:DataGridTextColumn
                         Header="Totale"
                         Tag="TotaleName"
-                        Binding="{Binding Totale}"/>
+                        Binding="{Binding Totale}"/>-->
                 </tollkit:DataGrid.Columns>
-            </tollkit:DataGrid>-->
+            </tollkit:DataGrid>
             
         </SplitView.Content>
     </SplitView>

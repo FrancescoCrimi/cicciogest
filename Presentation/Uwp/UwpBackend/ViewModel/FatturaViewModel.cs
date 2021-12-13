@@ -39,7 +39,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         public Fattura Fattura { get; private set; }
         public Dettaglio Dettaglio { get; private set; }
-        public Dettaglio DettaglioSelezionato { private get; set; }
+        public Dettaglio DettaglioSelezionato { get; set; }
 
         public IAsyncRelayCommand LoadedCommand => loadedCommand 
             ?? (loadedCommand = new AsyncRelayCommand(async () => await Task.CompletedTask));
