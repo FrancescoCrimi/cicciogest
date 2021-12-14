@@ -13,11 +13,10 @@
 
     <DataGrid
         ItemsSource="{Binding Fornitori, Mode=OneWay}"
-        AutoGenerateColumns="False"
         SelectedItem="{Binding FornitoreSelezionato}"
+        AutoGenerateColumns="False"
         IsReadOnly="True"
         SelectionMode="Single">
-
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
             <DataGridTextColumn Binding="{Binding Nome}" Header="Nome"/>
@@ -26,14 +25,12 @@
             <DataGridTextColumn Binding="{Binding PartitaIva}" Header="Partita Iva"/>
             <DataGridTextColumn Binding="{Binding CodiceFiscale}" Header="Codice Fiscale"/>
         </DataGrid.Columns>
-
         <DataGrid.InputBindings>
             <MouseBinding 
                 MouseAction="LeftDoubleClick"
                 Command="{Binding ApriFornitoreCommand, Mode=OneWay}">
             </MouseBinding>
         </DataGrid.InputBindings>
-
     </DataGrid>
 
 </UserControl>

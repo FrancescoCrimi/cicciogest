@@ -19,6 +19,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         private RelayCommand<Type> menuItemCommand;
         private RelayCommand goBackCommand;
+        private RelayCommand menuOptionsItemCommand;
 
         public MainViewModel(ILogger<MainViewModel> logger,
                              INavigationService navigationService)
@@ -49,6 +50,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public ICommand MenuItemCommand => menuItemCommand
             ??= new RelayCommand<Type>((type)
                 => navigationService.NavigateTo(type));
+
+        public ICommand MenuOptionsItemCommand => menuOptionsItemCommand
+            ??= new RelayCommand(() => { }, () => false);
 
         public ICommand GoBackCommand => goBackCommand ??= new RelayCommand(
             () => navigationService.GoBack(),

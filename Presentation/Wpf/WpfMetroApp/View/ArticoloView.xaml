@@ -35,19 +35,19 @@
 
             <ToolBar
                 ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoCommand}">
+                <Button Command="{Binding NuovoArticoloCommand}">
                     <TextBlock>        
                         <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding SalvaCommand}">
+                <Button Command="{Binding SalvaArticoloCommand}">
                     <TextBlock>        
                         <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding EliminaCommand}">
+                <Button Command="{Binding EliminaArticoloCommand}">
                     <TextBlock>        
                         <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Elimina" />
@@ -124,7 +124,7 @@
                     <ListView
                         Grid.Column="1"
                         SelectionMode="Single"
-                        ItemsSource="{Binding Categorie, Mode=OneWay}"
+                        ItemsSource="{Binding Articolo.Categorie, Mode=OneWay}"
                         SelectedItem="{Binding CategoriaSelezionata}">
                         <ListView.ItemTemplate>
                             <DataTemplate>

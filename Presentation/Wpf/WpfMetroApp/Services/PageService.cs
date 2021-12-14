@@ -16,15 +16,18 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
         {
             //Configure<MainViewModel, MainPage>();
             Configure<ArticoliViewModel, ArticoliView>();
-            Configure<ListaArticoliViewModel, ListaArticoliView>();
             Configure<ArticoloViewModel, ArticoloView>();
             Configure<CategoriaViewModel, CategoriaView>();
             Configure<ClienteViewModel, ClienteView>();
             Configure<ClientiViewModel, ClientiView>();
-            Configure<ListaClientiViewModel, ListaClientiView>();
             Configure<FatturaViewModel, FatturaView>();
             Configure<FattureViewModel, FattureView>();
+            Configure<FornitoreViewModel, FornitoreView>();
+            Configure<FornitoriViewModel, FornitoriView>();
+            Configure<ListaArticoliViewModel, ListaArticoliView>();
+            Configure<ListaClientiViewModel, ListaClientiView>();
             Configure<ListaFattureViewModel, ListaFattureView>();
+            Configure<ListaFornitoriViewModel, ListaFornitoriView>();
         }
 
         public Type GetPageType(string key)
