@@ -1,0 +1,155 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>CiccioGest.Presentation.Ui3App1</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;arm64</Platforms>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Styles\NavStyles.xaml" />
+    <None Remove="Styles\TextBlock.xaml" />
+    <None Remove="Styles\_FontSizes.xaml" />
+    <None Remove="Styles\_Thickness.xaml" />
+    <None Remove="UserControls\CollapsibleSearchBox.xaml" />
+    <None Remove="UserControls\IndirizzoControl.xaml" />
+    <None Remove="UserControls\ListaArticoliControl.xaml" />
+    <None Remove="UserControls\ListaClientiControl.xaml" />
+    <None Remove="UserControls\ListaFattureControl.xaml" />
+    <None Remove="UserControls\ListaFornitoriControl.xaml" />
+    <None Remove="UserControls\UserControl1.xaml" />
+    <None Remove="View\ArticoliView.xaml" />
+    <None Remove="View\ArticoloView.xaml" />
+    <None Remove="View\BlankPage1.xaml" />
+    <None Remove="View\BlankWindow1.xaml" />
+    <None Remove="View\CategoriaView.xaml" />
+    <None Remove="View\ClienteView.xaml" />
+    <None Remove="View\ClientiView.xaml" />
+    <None Remove="View\FatturaView.xaml" />
+    <None Remove="View\FattureView.xaml" />
+    <None Remove="View\FornitoreView.xaml" />
+    <None Remove="View\FornitoriView.xaml" />
+    <None Remove="View\ListaArticoliView.xaml" />
+    <None Remove="View\ListaClientiView.xaml" />
+    <None Remove="View\ListaFattureView.xaml" />
+    <None Remove="View\ListaFornitoriView.xaml" />
+    <None Remove="View\MainView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.196" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Application.Impl\Application.Impl.csproj" />
+    <ProjectReference Include="..\..\Application\Application\Application.csproj" />
+    <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\BlankWindow1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\BlankPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UserControls\UserControl1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles\NavStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\TextBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\_FontSizes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\_Thickness.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\CollapsibleSearchBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\IndirizzoControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ListaArticoliControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ListaClientiControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ListaFattureControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ListaFornitoriControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\ArticoliView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ArticoloView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CategoriaView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ClienteView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ClientiView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\FatturaView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\FattureView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\FornitoreView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\FornitoriView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ListaArticoliView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ListaClientiView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ListaFattureView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ListaFornitoriView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
