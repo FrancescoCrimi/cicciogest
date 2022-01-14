@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
             this.clientiFornitoriService = clientiFornitoriService;
             this.navigationService = navigationService;
             Clienti = new ObservableCollection<Cliente>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
 
@@ -93,7 +93,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

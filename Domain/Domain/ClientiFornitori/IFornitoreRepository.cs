@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Domain.ClientiFornitori
 {
-    public interface IFornitoreRepository : IDomainRepository<Fornitore>
+    public interface IFornitoreRepository : IDomainRepository<Fornitore>, IDisposable
     {
         Task<IList<Fornitore>> GetAll();
     }

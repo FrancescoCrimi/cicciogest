@@ -7,17 +7,13 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
     public class ListaFornitoriViewModel : FornitoriViewModel
     {
-        private readonly INavigationService navigationService;
-
         public ListaFornitoriViewModel(ILogger<FornitoriViewModel> logger,
-                                      INavigationService navigationService,
-                                      IClientiFornitoriService clientiFornitoriService)
+                                       INavigationService navigationService,
+                                       IClientiFornitoriService clientiFornitoriService)
             : base(logger,
                    navigationService,
                    clientiFornitoriService)
         {
-            this.navigationService = navigationService;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         protected override void ApriFornitore()

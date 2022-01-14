@@ -33,7 +33,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.messageBoxService = messageBoxService;
             this.clientiFornitoriService = clientiFornitoriService;
             RegistraMessaggi();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public Fornitore Fornitore { get; private set; }
@@ -106,7 +106,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public void Dispose()
         {
-            //throw new NotImplementedException();
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

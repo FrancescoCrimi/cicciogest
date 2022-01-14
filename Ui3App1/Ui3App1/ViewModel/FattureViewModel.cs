@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
-        private readonly INavigationService navigationService;
+        protected readonly INavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaFattureCommand;
@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
             this.fatturaService = fatturaService;
             this.navigationService = navigationService;
             Fatture = new ObservableCollection<FatturaReadOnly>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
 

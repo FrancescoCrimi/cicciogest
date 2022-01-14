@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
-        private readonly INavigationService navigationService;
+        protected readonly INavigationService navigationService;
         private ArticoloReadOnly articoloSelezionato;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaArticoliCommand;
@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
             this.magazinoService = magazinoService;
             this.navigationService = navigationService;
             Articoli = new ObservableCollection<ArticoloReadOnly>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
@@ -92,7 +92,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

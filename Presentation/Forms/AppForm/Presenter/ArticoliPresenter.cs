@@ -27,7 +27,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.windowService = windowService;
             view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private async void View_LoadEvent(object sender, EventArgs e)

@@ -36,7 +36,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.navigationService = navigationService;
             this.messageBoxService = messageBoxService;
             RegistraMessaggi();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public Articolo Articolo { get; private set; }
@@ -137,7 +137,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

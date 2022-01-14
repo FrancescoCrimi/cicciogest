@@ -4,7 +4,6 @@ using CiccioGest.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
@@ -28,7 +27,7 @@ namespace CiccioGest.Application.Impl
             this.prodottoRepository = prodottoRepository;
             this.categoriaRepository = categoriaRepository;
             this.fornitoreRepository = fornitoreRepository;
-            logger.LogDebug("HashCode: " + GetHashCode() + " (uow: " + unitOfWork.GetHashCode() + ") Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
 
 
@@ -123,7 +122,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
     }
 }

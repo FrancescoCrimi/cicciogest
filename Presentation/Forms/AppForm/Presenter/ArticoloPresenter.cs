@@ -34,7 +34,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.view = view;
             view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public void NuovoArticolo()

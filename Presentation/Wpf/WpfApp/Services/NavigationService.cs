@@ -24,7 +24,7 @@ namespace CiccioGest.Presentation.WpfApp.Services
             this.logger = logger;
             this.serviceScopeFactory = serviceScopeFactory;
             this.pageService = pageService;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public event EventHandler Navigated;

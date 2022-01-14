@@ -9,11 +9,14 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 {
     internal class ClienteRepository : DomainRepository<Cliente>, IClienteRepository
     {
-        private readonly ILogger logger;
-
-        public ClienteRepository(ILogger<ClienteRepository> logger, UnitOfWork unitOfWork) : base(unitOfWork)
+        public ClienteRepository(ILogger<ClienteRepository> logger, UnitOfWork unitOfWork)
+            : base(logger, unitOfWork)
         {
-            this.logger = logger;
+        }
+
+        public void Dispose()
+        {
+            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
 
         public Task<IList<Cliente>> GetAll() => Task.Run(() =>

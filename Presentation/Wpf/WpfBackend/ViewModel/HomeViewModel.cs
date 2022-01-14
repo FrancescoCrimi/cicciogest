@@ -11,12 +11,12 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public HomeViewModel(ILogger<HomeViewModel> logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

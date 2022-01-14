@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
     {
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
-        private readonly INavigationService navigationService;
+        protected readonly INavigationService navigationService;
         private FatturaReadOnly fatturaSelezionata;
         private AsyncRelayCommand loadedCommand;
         private RelayCommand nuovaFatturaCommand;
@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.fatturaService = fatturaService;
             this.navigationService = navigationService;
             Fatture = new ObservableCollection<FatturaReadOnly>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public ObservableCollection<FatturaReadOnly> Fatture { get; }
@@ -85,7 +85,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

@@ -13,20 +13,28 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+	  <None Remove="appsettings.json" />
+	  <None Remove="NLog.config" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="NLog.config">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <SubType>Designer</SubType>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\WpfBackend\WpfBackend.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="NLog.config">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-			<SubType>Designer</SubType>
-		</None>
 	</ItemGroup>
 
 </Project>

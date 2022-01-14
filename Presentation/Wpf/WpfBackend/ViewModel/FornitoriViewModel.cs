@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
     {
         private readonly ILogger<FornitoriViewModel> logger;
         private readonly IClientiFornitoriService clientiFornitoriService;
-        private readonly INavigationService navigationService;
+        protected readonly INavigationService navigationService;
         private Fornitore fornitoreSelezionato;
         private AsyncRelayCommand loadedCommand;
         private RelayCommand nuovoFornitoreCommand;
@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.navigationService = navigationService;
             this.clientiFornitoriService = clientiFornitoriService;
             Fornitori = new ObservableCollection<Fornitore>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public ObservableCollection<Fornitore> Fornitori { get; private set; }
@@ -85,7 +85,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

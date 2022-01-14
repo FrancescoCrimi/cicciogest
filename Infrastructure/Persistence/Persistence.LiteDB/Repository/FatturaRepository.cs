@@ -7,14 +7,14 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 {
     internal class FatturaRepository : DomainRepository<Fattura>, IFatturaRepository
     {
-        private readonly ILogger logger;
-        private readonly UnitOfWork unitOfWork;
-
         public FatturaRepository(ILogger<FatturaRepository> logger, UnitOfWork unitOfWork)
-            : base(unitOfWork)
+            : base(logger, unitOfWork)
         {
-            this.logger = logger;
-            this.unitOfWork = unitOfWork;
+        }
+
+        public void Dispose()
+        {
+            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
 
         public Task<IList<FatturaReadOnly>> GetAll() => Task.Run(() =>

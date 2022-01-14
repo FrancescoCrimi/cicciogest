@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
             this.logger = logger;
             this.navigationService = navigationService;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public IAsyncRelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new AsyncRelayCommand(async () =>
@@ -59,7 +59,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

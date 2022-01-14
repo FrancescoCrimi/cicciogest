@@ -5,7 +5,6 @@ using CiccioGest.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
@@ -29,7 +28,7 @@ namespace CiccioGest.Application.Impl
             this.fatturaRepository = fatturaRepository;
             this.articoloRepository = articoloRepository;
             this.clienteRepository = clienteRepository;
-            logger.LogDebug("HashCode: " + GetHashCode() + " (uow: " + unitOfWork.GetHashCode() + ") Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
 
         public async Task DeleteFattura(int id)
@@ -90,7 +89,7 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + this.GetHashCode().ToString(CultureInfo.InvariantCulture) + " (uow:" + unitOfWork.GetHashCode().ToString(CultureInfo.InvariantCulture) + " ) Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
     }
 }

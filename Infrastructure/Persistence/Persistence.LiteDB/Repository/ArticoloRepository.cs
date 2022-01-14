@@ -7,14 +7,14 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 {
     internal class ArticoloRepository : DomainRepository<Articolo>, IArticoloRepository
     {
-        private readonly ILogger logger;
-        private readonly UnitOfWork unitOfWork;
-
         public ArticoloRepository(ILogger<ArticoloRepository> logger, UnitOfWork unitOfWork)
-            : base(unitOfWork)
+            : base(logger, unitOfWork)
         {
-            this.logger = logger;
-            this.unitOfWork = unitOfWork;
+        }
+
+        public void Dispose()
+        {
+            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
 
         public Task<IList<ArticoloReadOnly>> GetAll() => Task.Run(() =>

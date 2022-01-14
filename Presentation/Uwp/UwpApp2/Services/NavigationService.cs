@@ -24,7 +24,7 @@ namespace CiccioGest.Presentation.UwpApp.Services
             this.logger = logger;
             this.serviceScopeFactory = serviceScopeFactory;
             this.pageService = pageService;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public void Initialize(Frame shellFrame)

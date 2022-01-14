@@ -13,6 +13,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
         {
         }
 
+        public void Dispose()
+        {
+            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
+        }
+
         public async Task<IList<Fornitore>> GetAll()
         {
             IList<Fornitore> fornitori = await unitOfWork.ISession.CreateCriteria<Fornitore>().ListAsync<Fornitore>();

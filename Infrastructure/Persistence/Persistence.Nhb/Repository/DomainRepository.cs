@@ -7,7 +7,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
     internal abstract class DomainRepository<TEntity>
         : IDomainRepository<TEntity> where TEntity : DomainEntity
     {
-        private readonly ILogger logger;
+        protected readonly ILogger logger;
         protected readonly UnitOfWork unitOfWork;
 
         protected DomainRepository(ILogger logger,
@@ -40,5 +40,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
         {
             await unitOfWork.ISession.UpdateAsync(entity);
         }
+
+        //public abstract void Dispose();
     }
 }

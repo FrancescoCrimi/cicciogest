@@ -23,6 +23,7 @@ namespace CiccioGest.Presentation.UwpApp.Services
             this.logger = logger;
             this.serviceScopeFactory = serviceScopeFactory;
             this.pageService = pageService;
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public void Initialize(Frame shellFrame)
@@ -114,6 +115,7 @@ namespace CiccioGest.Presentation.UwpApp.Services
         {
             frame.Navigated -= OnNavigated;
             frame.NavigationFailed -= OnNavigationFailed;
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

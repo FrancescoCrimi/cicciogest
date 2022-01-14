@@ -41,11 +41,11 @@
 		<PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
 		<PackageReference Include="CiccioSoft.NhbCollections" Version="2.0.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
 		<PackageReference Include="NHibernate" Version="5.3.10" />
 		<PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.0" />
-		<PackageReference Include="Npgsql" Version="6.0.1" />
+		<PackageReference Include="Npgsql" Version="6.0.2" />
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
 	</ItemGroup>
 

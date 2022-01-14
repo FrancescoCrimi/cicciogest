@@ -7,17 +7,13 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
     public class ListaFattureViewModel : FattureViewModel
     {
-        private readonly INavigationService navigationService;
-
         public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger,
-                                    IFatturaService fatturaService,
-                                    INavigationService navigationService)
+                                     IFatturaService fatturaService,
+                                     INavigationService navigationService)
             : base(logger,
                    fatturaService,
                    navigationService)
         {
-            this.navigationService = navigationService;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         protected override void ApriFattura()

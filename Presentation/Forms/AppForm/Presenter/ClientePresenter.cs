@@ -26,6 +26,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.windowService = windowService;
             view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         #region Metodi Pubblici

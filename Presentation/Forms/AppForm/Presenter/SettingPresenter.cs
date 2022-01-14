@@ -34,6 +34,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.CreaDatabaseEvent += View_CreaDatabaseEvent;
             view.VerificaDatabaseEvent += View_VerificaDatabaseEvent;
             view.PopolaDatabaseEvent += View_PopolaDatabaseEvent;
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private void View_LoadEvent(object sender, EventArgs e)

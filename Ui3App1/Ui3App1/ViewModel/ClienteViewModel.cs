@@ -4,11 +4,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Ui3App1.ViewModel
 {
-    public class ClienteViewModel : ObservableRecipient
+    public class ClienteViewModel : ObservableRecipient, IDisposable
     {
         private RelayCommand nuovoClienteCommand;
         private RelayCommand eliminaClienteCommand;
@@ -23,6 +24,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
             this.logger = logger;
             this.clientiFornitoriService = clientiFornitoriService;
             RegistraMessaggi();
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public Cliente Cliente { get; set; }
@@ -74,6 +76,11 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
 
         private void SalvaCliente()
         {
+        }
+
+        public void Dispose()
+        {
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

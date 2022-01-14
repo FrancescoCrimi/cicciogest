@@ -30,8 +30,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.dialogService = dialogService;
             view.LoadEvent += View_LoadEvent;
             view.CloseEvent += View_CloseEvent;
-
-            logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         #region eventi iview

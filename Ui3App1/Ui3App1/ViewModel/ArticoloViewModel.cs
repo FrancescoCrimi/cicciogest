@@ -4,12 +4,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.Ui3App1.ViewModel
 {
-    public sealed class ArticoloViewModel : ObservableRecipient
+    public sealed class ArticoloViewModel : ObservableRecipient, IDisposable
     {
         private AsyncRelayCommand loadedCommand;
         private readonly ILogger<ArticoloViewModel> logger;
@@ -25,6 +26,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
             this.logger = logger;
             this.magazinoService = magazinoService;
             RegistraMessaggi();
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
 
@@ -85,6 +87,11 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
         {
             Articolo = articolo;
             OnPropertyChanged(nameof(Articolo));
+        }
+
+        public void Dispose()
+        {
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

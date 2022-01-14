@@ -2,17 +2,21 @@
 using System;
 using System.Threading.Tasks;
 using LiteDB;
+using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
 {
     internal abstract class DomainRepository<TEntity>
         : IDomainRepository<TEntity> where TEntity : DomainEntity
     {
-        private readonly UnitOfWork unitOfWork;
+        protected readonly ILogger logger;
+        protected readonly UnitOfWork unitOfWork;
         protected readonly ILiteCollection<TEntity> coll;
 
-        public DomainRepository(UnitOfWork unitOfWork)
+        public DomainRepository(ILogger logger, 
+                                UnitOfWork unitOfWork)
         {
+            this.logger = logger;
             this.unitOfWork = unitOfWork;
             coll = unitOfWork.LiteDB.GetCollection<TEntity>();
         }

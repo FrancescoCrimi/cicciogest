@@ -5,7 +5,6 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using System.Data.SQLite;
-using System.Globalization;
 using System.IO;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
@@ -30,7 +29,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 }
                 sessionFactory = GetNhbConfiguration().BuildSessionFactory();
             }
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
 
@@ -149,7 +148,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

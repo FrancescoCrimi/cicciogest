@@ -34,7 +34,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
             this.navigationService = navigationService;
             this.fatturaService = fatturaService;
             RegistraMessaggi();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public Fattura Fattura { get; private set; }
@@ -136,7 +136,7 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

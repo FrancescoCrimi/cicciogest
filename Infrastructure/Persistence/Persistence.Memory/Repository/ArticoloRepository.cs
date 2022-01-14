@@ -10,6 +10,11 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
         {
         }
 
+        public void Dispose()
+        {
+            //throw new System.NotImplementedException();
+        }
+
         public Task<IList<ArticoloReadOnly>> GetAll()
         {
             return Task.Run(() =>

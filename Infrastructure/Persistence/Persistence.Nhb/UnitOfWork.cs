@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using NHibernate;
 using System;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
@@ -17,7 +16,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
         {
             this.logger = logger;
             this.sessionFactory = ((UnitOfWorkFactory)unitOfWorkFactory).SessionFactory();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         internal ISession ISession
@@ -96,7 +95,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             //    session.Close();
             //    session.Dispose();
             //    session = null;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString(CultureInfo.InvariantCulture) + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

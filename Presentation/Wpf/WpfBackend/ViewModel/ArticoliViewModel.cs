@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
-        private readonly INavigationService navigationService;
+        protected readonly INavigationService navigationService;
         private ArticoloReadOnly articoloSelezionato;
         private AsyncRelayCommand loadedCommand;
         private RelayCommand nuovoArticoloCommand;
@@ -31,7 +31,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.magazinoService = magazinoService;
             this.navigationService = navigationService;
             Articoli = new ObservableCollection<ArticoloReadOnly>();
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; }
@@ -85,7 +85,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

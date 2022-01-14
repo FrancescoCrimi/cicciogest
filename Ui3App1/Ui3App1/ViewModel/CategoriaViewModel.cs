@@ -1,10 +1,11 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using System;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Ui3App1.ViewModel
 {
-    public sealed class CategoriaViewModel : ObservableObject
+    public sealed class CategoriaViewModel : ObservableObject, IDisposable
     {
         public CategoriaViewModel()
         {
@@ -18,6 +19,11 @@ namespace CiccioGest.Presentation.Ui3App1.ViewModel
         private async Task Loaded()
         {
             await Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
+            //logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

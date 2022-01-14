@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             this.view.CloseEvent += View_CloseEvent;
             this.view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
             this.view.CancellaCategoriaEvent += View_CancellaCategoriaEvent;
-            this.logger.LogDebug("HashCode: " + GetHashCode() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private async void View_LoadEvent(object sender, EventArgs e)

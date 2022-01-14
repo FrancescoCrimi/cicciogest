@@ -27,7 +27,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.logger = logger;
             this.navigationService = navigationService;
             this.navigationService.Navigated += OnNavigated;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(()
@@ -69,7 +69,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public void Dispose()
         {
             navigationService.Navigated -= OnNavigated;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }
