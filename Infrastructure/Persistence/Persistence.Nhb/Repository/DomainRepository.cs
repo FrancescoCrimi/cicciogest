@@ -41,6 +41,5 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
             await unitOfWork.ISession.UpdateAsync(entity);
         }
 
-        //public abstract void Dispose();
     }
 }

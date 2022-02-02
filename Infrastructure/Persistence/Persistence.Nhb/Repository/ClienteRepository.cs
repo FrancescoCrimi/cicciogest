@@ -11,6 +11,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
                                  IUnitOfWork unitOfWork)
             : base(logger, unitOfWork)
         {
+            logger.LogDebug("Created: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
 
         public void Dispose()

@@ -23,6 +23,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using NLog.Extensions.Logging;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -76,7 +77,8 @@ namespace CiccioGest.Presentation.Ui3App1
         {
             var services = new ServiceCollection();
             services
-                .AddLogging()
+                .AddLogging(loggingBuilder => 
+                    loggingBuilder.AddNLog())
                 .AddSingleton(CiccioGestConfMgr.GetCurrent())
                 .ConfigureApplication()
                 .AddTransient<MainViewModel>()
