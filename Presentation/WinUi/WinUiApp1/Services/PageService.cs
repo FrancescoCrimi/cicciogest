@@ -1,10 +1,10 @@
 ﻿using CiccioGest.Presentation.WinUiApp1.View;
 using CiccioGest.Presentation.WinUiApp1.ViewModel;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiApp1.Services
 {

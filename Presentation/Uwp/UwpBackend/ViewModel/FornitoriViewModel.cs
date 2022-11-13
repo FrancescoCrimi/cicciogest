@@ -1,15 +1,14 @@
 ﻿using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Presentation.UwpBackend.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
-using CiccioGest.Presentation.UwpBackend.Services;
-using Microsoft.Toolkit.Mvvm.Messaging;
-
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {

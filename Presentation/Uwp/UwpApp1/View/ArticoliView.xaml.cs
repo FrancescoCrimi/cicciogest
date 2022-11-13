@@ -1,5 +1,5 @@
 ﻿using CiccioGest.Presentation.UwpBackend.ViewModel;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
