@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>CiccioGest.Presentation.WpfBackend</RootNamespace>
 		<AssemblyName>WpfBackend</AssemblyName>
 		<Product>CiccioGest</Product>
