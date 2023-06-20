@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿// Copyright (c) 2023 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CiccioGest.Presentation.WpfMetroApp.UserControls
 {
-    /// <summary>
-    /// Logica di interazione per IndirizzoControl.xaml
-    /// </summary>
     public partial class IndirizzoControl : UserControl
     {
         public IndirizzoControl()
