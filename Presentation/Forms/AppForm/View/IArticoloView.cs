@@ -1,4 +1,10 @@
-﻿using CiccioGest.Domain.Magazino;
+﻿// Copyright (c) 2023 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.Magazino;
 using System;
 using System.Collections.Generic;
 
