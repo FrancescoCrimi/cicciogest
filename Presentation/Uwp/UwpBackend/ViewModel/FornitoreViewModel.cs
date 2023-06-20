@@ -72,7 +72,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         }));
 
         public ICommand ApriFornitoreCommand => apriFornitoreCommand ?? (apriFornitoreCommand = new RelayCommand(()
-            => navigationService.Navigate(nameof(ListaFornitoriViewModel))));
+            => navigationService.Navigate(Views.ListaFornitori)));
 
 
 

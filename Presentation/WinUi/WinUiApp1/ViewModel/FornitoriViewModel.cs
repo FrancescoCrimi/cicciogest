@@ -79,7 +79,7 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
         {
             if (FornitoreSelezionato != null)
             {
-                navigationService.Navigate(nameof(FornitoreViewModel));
+                navigationService.Navigate(Views.Fornitore);
                 Messenger.Send(new FornitoreIdMessage(FornitoreSelezionato.Id));
             }
         }

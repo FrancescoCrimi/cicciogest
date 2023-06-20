@@ -1,5 +1,4 @@
-﻿//using CiccioGest.Presentation.UwpBackend.Services;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using Microsoft.UI.Xaml.Controls;
@@ -8,40 +7,40 @@ namespace CiccioGest.Presentation.WinUiApp1.Services
 {
     public class NavigationService : INavigationService, IDisposable
     {
-        private readonly ILogger<NavigationService> logger;
-        private readonly IServiceScopeFactory serviceScopeFactory;
-        private readonly PageService pageService;
-        private Frame frame;
-        private IServiceScope scope;
-        private IServiceScope oldScope;
+        private readonly ILogger<NavigationService> _logger;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+        private readonly PageService _pageService;
+        private Frame _frame;
+        private IServiceScope _scope;
+        private IServiceScope _oldScope;
         private static object _lastParamUsed;
 
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceScopeFactory serviceScopeFactory,
                                  PageService pageService)
         {
-            this.logger = logger;
-            this.serviceScopeFactory = serviceScopeFactory;
-            this.pageService = pageService;
+            _logger = logger;
+            _serviceScopeFactory = serviceScopeFactory;
+            _pageService = pageService;
         }
 
         public void Initialize(Frame shellFrame)
         {
-            if (frame == null)
+            if (_frame == null)
             {
-                frame = shellFrame;
-                frame.Navigated += OnNavigated;
-                frame.NavigationFailed += OnNavigationFailed;
+                _frame = shellFrame;
+                _frame.Navigated += OnNavigated;
+                _frame.NavigationFailed += OnNavigationFailed;
             }
         }
 
-        public bool CanGoBack => frame.CanGoBack;
+        public bool CanGoBack => _frame.CanGoBack;
 
-        public bool CanGoForward => frame.CanGoForward;
+        public bool CanGoForward => _frame.CanGoForward;
 
-        public void GoBack() => frame.GoBack();
+        public void GoBack() => _frame.GoBack();
 
-        public void GoForward() => frame.GoForward();
+        public void GoForward() => _frame.GoForward();
 
         public bool Navigate(Type pageType,
                              object parameter = null,
@@ -53,20 +52,20 @@ namespace CiccioGest.Presentation.WinUiApp1.Services
             }
 
             // Don't open the same page multiple times
-            if (frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParamUsed)))
+            if (_frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParamUsed)))
             {
                 if (clearNavigation)
                 {
-                    oldScope = scope;
-                    scope = serviceScopeFactory.CreateScope();
+                    _oldScope = _scope;
+                    _scope = _serviceScopeFactory.CreateScope();
                 }
-                frame.Tag = clearNavigation;
-                if (scope == null)
+                _frame.Tag = clearNavigation;
+                if (_scope == null)
                 {
-                    scope = serviceScopeFactory.CreateScope();
+                    _scope = _serviceScopeFactory.CreateScope();
                 }
 
-                var navigationResult = frame.Navigate(pageType, parameter);
+                var navigationResult = _frame.Navigate(pageType, parameter);
                 if (navigationResult)
                 {
                     _lastParamUsed = parameter;
@@ -80,13 +79,15 @@ namespace CiccioGest.Presentation.WinUiApp1.Services
             }
         }
 
-        public bool Navigate(string key,
+        public bool Navigate(Views key,
                              object parameter = null,
                              bool clearNavigation = false)
         {
-            var pageType = pageService.GetPageType(key);
+            var pageType = _pageService.GetPageType(key);
             return Navigate(pageType, parameter, clearNavigation);
         }
+
+        public bool FrameContentIsNull => _frame.Content == null;
 
         private void OnNavigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
         {
@@ -97,10 +98,10 @@ namespace CiccioGest.Presentation.WinUiApp1.Services
                 {
                     frame.BackStack.Clear();
                 }
-                if (oldScope != null)
+                if (_oldScope != null)
                 {
-                    oldScope.Dispose();
-                    oldScope = null;
+                    _oldScope.Dispose();
+                    _oldScope = null;
                 }
             }
         }
@@ -112,8 +113,8 @@ namespace CiccioGest.Presentation.WinUiApp1.Services
 
         public void Dispose()
         {
-            frame.Navigated -= OnNavigated;
-            frame.NavigationFailed -= OnNavigationFailed;
+            _frame.Navigated -= OnNavigated;
+            _frame.NavigationFailed -= OnNavigationFailed;
         }
     }
 }

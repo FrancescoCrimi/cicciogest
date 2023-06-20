@@ -70,7 +70,7 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
         {
             if (ArticoloSelezionato != null)
             {
-                navigationService.Navigate("ArticoloViewModel");
+                navigationService.Navigate(Views.Articolo);
                 Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
             }
         }

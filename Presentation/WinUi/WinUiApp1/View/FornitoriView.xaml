@@ -1,18 +1,17 @@
-﻿<Page
-    x:Class="CiccioGest.Presentation.WinUiApp1.View.FornitoriView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CiccioGest.Presentation.WinUiApp1.View"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tollkit="using:CommunityToolkit.WinUI.UI.Controls"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:uc="using:CiccioGest.Presentation.WinUiApp1.UserControls"
-    xmlns:viewmodel="using:CiccioGest.Presentation.WinUiApp1.ViewModel"
-    d:DataContext="{d:DesignInstance Type=viewmodel:FornitoriViewModel}"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<Page x:Class="CiccioGest.Presentation.WinUiApp1.View.FornitoriView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:CiccioGest.Presentation.WinUiApp1.View"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:tollkit="using:CommunityToolkit.WinUI.UI.Controls"
+      xmlns:i="using:Microsoft.Xaml.Interactivity"
+      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:uc="using:CiccioGest.Presentation.WinUiApp1.UserControls"
+      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiApp1.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:FornitoriViewModel}"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <i:Interaction.Behaviors>
         <ic:EventTriggerBehavior EventName="Loaded">
@@ -20,52 +19,45 @@
         </ic:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
-    <Grid
-        Margin="{StaticResource SmallLeftRightMargin}">
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition/>
+            <RowDefinition Height="48" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <RelativePanel Grid.Row="0">
 
-            <TextBlock
-                x:Name="PageTitle"
-                Text="Fornitori"
-                Margin="{StaticResource SmallLeftMargin}"
-                Style="{StaticResource PageTitleStyle}"/>
+            <TextBlock x:Name="PageTitle"
+                       Text="Fornitori"
+                       Margin="{StaticResource SmallLeftMargin}"
+                       Style="{StaticResource PageTitleStyle}" />
 
-            <CommandBar
-                x:Name="mainCommandBar"
-                DefaultLabelPosition="Right"
-                HorizontalAlignment="Stretch"
-                Background="Transparent"
-                RelativePanel.LeftOf="OrderSearchBox"
-                RelativePanel.RightOf="PageTitle">
-                <AppBarButton
-                    Icon="Document"
-                    Label="Nuovo"
-                    Command="{Binding NuovoFornitoreCommand}"/>
-                <AppBarButton
-                    Icon="Edit"
-                    Label="Apri"
-                    Command="{Binding ApriFornitoreCommand}"/>
-                <AppBarButton
-                    Icon="Refresh"
-                    Label="Aggiorna"
-                    Command="{Binding AggiornaFornitoriCommand}"/>
+            <CommandBar x:Name="mainCommandBar"
+                        DefaultLabelPosition="Right"
+                        HorizontalAlignment="Stretch"
+                        Background="Transparent"
+                        RelativePanel.LeftOf="OrderSearchBox"
+                        RelativePanel.RightOf="PageTitle">
+                <AppBarButton Icon="Document"
+                              Label="Nuovo"
+                              Command="{Binding NuovoFornitoreCommand}" />
+                <AppBarButton Icon="Edit"
+                              Label="Apri"
+                              Command="{Binding ApriFornitoreCommand}" />
+                <AppBarButton Icon="Refresh"
+                              Label="Aggiorna"
+                              Command="{Binding AggiornaFornitoriCommand}" />
             </CommandBar>
 
-            <uc:CollapsibleSearchBox
-                x:Name="OrderSearchBox"
-                Width="240"
-                Margin="12,8,12,0"
-                CollapseWidth="{StaticResource MediumWindowSnapPoint}"
-                RelativePanel.AlignRightWithPanel="True" />
+            <uc:CollapsibleSearchBox x:Name="OrderSearchBox"
+                                     Width="240"
+                                     Margin="12,8,12,0"
+                                     CollapseWidth="{StaticResource MediumWindowSnapPoint}"
+                                     RelativePanel.AlignRightWithPanel="True" />
 
         </RelativePanel>
 
-        <uc:ListaFornitoriControl Grid.Row="1"/>
+        <uc:ListaFornitoriControl Grid.Row="1" />
 
     </Grid>
 </Page>

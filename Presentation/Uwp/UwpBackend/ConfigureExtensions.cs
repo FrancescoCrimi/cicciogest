@@ -11,7 +11,7 @@ namespace CiccioGest.Presentation.UwpBackend
         {
             serviceCollection
                 .ConfigureApplication()
-                .AddTransient<MainViewModel>()
+                .AddTransient<ShellViewModel>()
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoliViewModel>()
                 .AddTransient<CategoriaViewModel>()

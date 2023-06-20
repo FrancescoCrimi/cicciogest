@@ -1,4 +1,4 @@
-﻿using CiccioGest.Presentation.WinUiApp1.Services;
+﻿using CiccioGest.Presentation.UwpBackend.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
@@ -6,9 +6,9 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CiccioGest.Presentation.WinUiApp1.ViewModel
+namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
-    public sealed class MainViewModel : ObservableObject, IDisposable
+    public sealed class ShellViewModel : ObservableObject, IDisposable
     {
         private readonly ILogger logger;
         private readonly INavigationService navigationService;
@@ -20,8 +20,8 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
         private RelayCommand apriFornitoriCommand;
         private RelayCommand<Type> itemInvokedCommand;
 
-        public MainViewModel(ILogger<MainViewModel> logger,
-                             INavigationService navigationService)
+        public ShellViewModel(ILogger<ShellViewModel> logger,
+                              INavigationService navigationService)
         {
             this.logger = logger;
             this.navigationService = navigationService;
@@ -34,24 +34,24 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
         }));
 
         public ICommand ApriFattureCommand => apriFattureCommand ?? (apriFattureCommand = new RelayCommand(()
-            => navigationService.Navigate("FattureViewModel")));
+            => navigationService.Navigate(Views.Fatture)));
 
         public ICommand ApriArticoliCommand => apriArticoliCommand ?? (apriArticoliCommand = new RelayCommand(()
-            => navigationService.Navigate("ArticoliViewModel")));
+            => navigationService.Navigate(Views.Articoli)));
 
         public ICommand ApriCategorieCommand => apriCategorieCommand ?? (apriCategorieCommand = new RelayCommand(()
-            => navigationService.Navigate("CategoriaViewModel")));
+            => navigationService.Navigate(Views.Categoria)));
 
         public ICommand ApriClientiCommand => apriClientiCommand ?? (apriClientiCommand = new RelayCommand(()
-            => navigationService.Navigate("ClientiViewModel")));
+            => navigationService.Navigate(Views.Clienti)));
 
         public ICommand ApriFornitoriCommand => apriFornitoriCommand ?? (apriFornitoriCommand = new RelayCommand(()
-            => navigationService.Navigate(nameof(FornitoriViewModel))));
+            => navigationService.Navigate(Views.Fornitori)));
 
 
         public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<Type>((type) =>
         {
-            if(type != null)
+            if (type != null)
             {
                 navigationService.Navigate(type);
             }

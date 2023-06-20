@@ -75,7 +75,7 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
         {
             if (FatturaSelezionata != null)
             {
-                navigationService.Navigate("FatturaViewModel");
+                navigationService.Navigate(Views.Fattura);
                 Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
             }
         }

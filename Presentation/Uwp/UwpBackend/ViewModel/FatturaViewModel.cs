@@ -41,12 +41,12 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { get; set; }
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand 
+        public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(async () => await Task.CompletedTask));
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() =>
         {
-            navigationService.Navigate("ClientiViewModel");
+            navigationService.Navigate(Views.Clienti);
         }));
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new AsyncRelayCommand(async () =>
@@ -72,10 +72,10 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         }));
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
-            navigationService.Navigate("FattureViewModel")));
+            navigationService.Navigate(Views.Fatture)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
-            navigationService.Navigate("ArticoliPage")));
+            navigationService.Navigate(Views.Articoli)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(() =>
         {

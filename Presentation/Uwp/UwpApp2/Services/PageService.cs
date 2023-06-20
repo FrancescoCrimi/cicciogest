@@ -1,6 +1,5 @@
 ﻿using CiccioGest.Presentation.UwpApp.View;
-using CiccioGest.Presentation.UwpBackend.ViewModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+using CiccioGest.Presentation.UwpBackend.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +9,27 @@ namespace CiccioGest.Presentation.UwpApp.Services
 {
     public class PageService
     {
-        private readonly Dictionary<string, Type> _pages = new Dictionary<string, Type>();
+        private readonly Dictionary<Views, Type> _pages = new Dictionary<Views, Type>();
 
         public PageService()
         {
-            Configure<MainViewModel, MainView>();
-            Configure<ArticoliViewModel, ArticoliView>();
-            Configure<ArticoloViewModel, ArticoloView>();
-            Configure<CategoriaViewModel, CategoriaView>();
-            Configure<ClienteViewModel, ClienteView>();
-            Configure<ClientiViewModel, ClientiView>();
-            Configure<FatturaViewModel, FatturaView>();
-            Configure<FattureViewModel, FattureView>();
-            Configure<FornitoreViewModel, FornitoreView>();
-            Configure<FornitoriViewModel, FornitoriView>();
-            Configure<ListaArticoliViewModel, ListaArticoliView>();
-            Configure<ListaClientiViewModel, ListaClientiView>();
-            Configure<ListaFattureViewModel, ListaFattureView>();
-            Configure<ListaFornitoriViewModel, ListaFornitoriView>();
+            Configure<DashboardView>(Views.Dashboard);
+            Configure<ArticoliView>(Views.Articoli);
+            Configure<ArticoloView>(Views.Articolo);
+            Configure<CategoriaView>(Views.Categoria);
+            Configure<ClienteView>(Views.Cliente);
+            Configure<ClientiView>(Views.Clienti);
+            Configure<FatturaView>(Views.Fattura);
+            Configure<FattureView>(Views.Fatture);
+            Configure<FornitoreView>(Views.Fornitore);
+            Configure<FornitoriView>(Views.Fornitori);
+            Configure<ListaArticoliView>(Views.ListaArticoli);
+            Configure<ListaClientiView>(Views.ListaClienti);
+            Configure<ListaFattureView>(Views.ListaFatture);
+            Configure<ListaFornitoriView>(Views.ListaFornitori);
         }
 
-        public Type GetPageType(string key)
+        public Type GetPageType(Views key)
         {
             Type pageType;
             lock (_pages)
@@ -43,13 +42,11 @@ namespace CiccioGest.Presentation.UwpApp.Services
             return pageType;
         }
 
-        private void Configure<VM, V>()
-            where VM : ObservableObject
+        private void Configure<V>(Views key)
             where V : Page
         {
             lock (_pages)
             {
-                var key = typeof(VM).Name;
                 if (_pages.ContainsKey(key))
                 {
                     throw new ArgumentException($"The key {key} is already configured in PageService");

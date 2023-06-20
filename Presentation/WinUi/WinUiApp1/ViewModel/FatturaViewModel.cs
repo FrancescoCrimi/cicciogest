@@ -46,7 +46,7 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() =>
         {
-            navigationService.Navigate("ClientiViewModel");
+            navigationService.Navigate(Views.Clienti);
         }));
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new AsyncRelayCommand(async () =>
@@ -72,10 +72,10 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
         }));
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
-            navigationService.Navigate("FattureViewModel")));
+            navigationService.Navigate(Views.Fatture)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
-            navigationService.Navigate("ArticoliPage")));
+            navigationService.Navigate(Views.Articoli)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(() =>
         {

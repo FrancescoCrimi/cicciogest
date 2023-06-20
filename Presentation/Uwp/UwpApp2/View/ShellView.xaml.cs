@@ -5,15 +5,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.View
 {
-    public sealed partial class MainView : Page
+    public sealed partial class ShellView : Page
     {
         private readonly NavigationService navigationService;
-        public MainView()
+        public ShellView()
         {
             InitializeComponent();
             navigationService = Ioc.Default.GetService<NavigationService>();
             navigationService.Initialize(ContentFrame);
-            DataContext = Ioc.Default.GetService<MainViewModel>();
+            DataContext = Ioc.Default.GetService<ShellViewModel>();
         }
     }
 }

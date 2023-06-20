@@ -44,10 +44,10 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
 
         public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
 
-        public ICommand NuovoFornitoreCommand => nuovoFornitoreCommand ?? (nuovoFornitoreCommand = new RelayCommand(()
-            => MostraFornitore(new Fornitore())));
+        public ICommand NuovoFornitoreCommand => nuovoFornitoreCommand ??= new RelayCommand(()
+            => MostraFornitore(new Fornitore()));
 
-        public IAsyncRelayCommand SalvaFornitoreCommand => salvaFornitoreCommand ?? (salvaFornitoreCommand = new AsyncRelayCommand(async () =>
+        public IAsyncRelayCommand SalvaFornitoreCommand => salvaFornitoreCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -57,9 +57,9 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
             {
                 //messageBoxService.Show("Errore: " + ex.Message);
             }
-        }));
+        });
 
-        public IAsyncRelayCommand EliminaFornitoreCommand => eliminaFornitoreCommand ?? (eliminaFornitoreCommand = new AsyncRelayCommand(async () =>
+        public IAsyncRelayCommand EliminaFornitoreCommand => eliminaFornitoreCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -69,10 +69,10 @@ namespace CiccioGest.Presentation.WinUiApp1.ViewModel
             {
                 //messageBoxService.Show("Errore: " + ex.Message);
             }
-        }));
+        });
 
-        public ICommand ApriFornitoreCommand => apriFornitoreCommand ?? (apriFornitoreCommand = new RelayCommand(()
-            => navigationService.Navigate(nameof(ListaFornitoriViewModel))));
+        public ICommand ApriFornitoreCommand => apriFornitoreCommand ??= new RelayCommand(()
+            => navigationService.Navigate(Views.ListaFornitori));
 
 
 

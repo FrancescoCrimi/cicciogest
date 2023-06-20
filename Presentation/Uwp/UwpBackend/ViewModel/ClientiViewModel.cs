@@ -81,7 +81,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
             if (ClienteSelezionato != null)
             {
-                navigationService.Navigate(nameof(ClienteViewModel));
+                navigationService.Navigate(Views.Cliente);
                 Messenger.Send(new ClienteIdMessage(ClienteSelezionato.Id));
             }
         }
