@@ -7,6 +7,7 @@
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.UwpApp.Activation;
 using CiccioGest.Presentation.UwpApp.Services;
+using CiccioGest.Presentation.UwpApp.View;
 using CiccioGest.Presentation.UwpBackend;
 using CiccioGest.Presentation.UwpBackend.Services;
 using CommunityToolkit.Mvvm.DependencyInjection;
@@ -16,7 +17,7 @@ using Windows.ApplicationModel.Activation;
 
 namespace CiccioGest.Presentation.UwpApp
 {
-    sealed partial class App : Windows.UI.Xaml.Application
+    public sealed partial class App : Windows.UI.Xaml.Application
     {
         public App()
         {
@@ -30,6 +31,11 @@ namespace CiccioGest.Presentation.UwpApp
             {
                 await Ioc.Default.GetService<ActivationService>().ActivateAsync(e);
             }
+        }
+
+        protected async override void OnActivated(IActivatedEventArgs args)
+        {
+            await Ioc.Default.GetService<ActivationService>().ActivateAsync(args);
         }
 
         private IServiceProvider ConfigureServices() => new ServiceCollection()
@@ -47,6 +53,9 @@ namespace CiccioGest.Presentation.UwpApp
             .AddSingleton<PageService>()
             .AddSingleton<NavigationService>()
             .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
+
+            //View
+            .AddTransient<ShellView>()
 
             .BuildServiceProvider();
     }

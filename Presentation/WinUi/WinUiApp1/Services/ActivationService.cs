@@ -19,7 +19,6 @@ public class ActivationService
 {
     private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
     private readonly IEnumerable<IActivationHandler> _activationHandlers;
-    private UIElement? _shell = null;
 
     public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler,
                              IEnumerable<IActivationHandler> activationHandlers)
@@ -36,7 +35,7 @@ public class ActivationService
         // Set the MainWindow Content.
         if (App.MainWindow.Content == null)
         {
-            _shell = Ioc.Default.GetService<ShellView>();
+            UIElement _shell = Ioc.Default.GetService<ShellView>();
             App.MainWindow.Content = _shell ?? new Frame();
         }
 

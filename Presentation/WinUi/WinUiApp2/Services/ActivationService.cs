@@ -4,14 +4,14 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using CiccioGest.Presentation.WinUiApp2.Activation;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using CiccioGest.Presentation.WinUiApp2.View;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.WinUiApp2.Services;
 
@@ -19,11 +19,9 @@ public class ActivationService
 {
     private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
     private readonly IEnumerable<IActivationHandler> _activationHandlers;
-    private UIElement? _shell = null;
 
     public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler,
-                             IEnumerable<IActivationHandler> activationHandlers
-        )
+                             IEnumerable<IActivationHandler> activationHandlers)
     {
         _defaultHandler = defaultHandler;
         _activationHandlers = activationHandlers;
@@ -37,8 +35,8 @@ public class ActivationService
         // Set the MainWindow Content.
         if (App.MainWindow.Content == null)
         {
-            _shell = Ioc.Default.GetService<ShellView>();
-            App.MainWindow.Content = _shell ?? new Frame();
+            UIElement shell = Ioc.Default.GetService<ShellView>();
+            App.MainWindow.Content = shell ?? new Frame();
         }
 
         // Handle activation via ActivationHandlers.

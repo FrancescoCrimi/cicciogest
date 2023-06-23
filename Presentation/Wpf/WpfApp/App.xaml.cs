@@ -13,12 +13,10 @@ namespace CiccioGest.Presentation.WpfApp
 {
     public partial class App : System.Windows.Application
     {
-
         private async void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
             await CreateHostBuilder(e.Args).Build().RunAsync();
         }
-
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {

@@ -1,16 +1,16 @@
 ﻿using CiccioGest.Presentation.UwpApp.Activation;
 using CiccioGest.Presentation.UwpApp.View;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpApp.Services
 {
-    // For more information on understanding and extending activation flow see
-    // https://github.com/microsoft/TemplateStudio/blob/main/docs/UWP/activation.md
     internal class ActivationService
     {
         private readonly ActivationHandler<IActivatedEventArgs> _defaultHandler;
@@ -37,7 +37,8 @@ namespace CiccioGest.Presentation.UwpApp.Services
                 if (Window.Current.Content == null)
                 {
                     // Create a Shell or Frame to act as the navigation context
-                    Window.Current.Content = new ShellView();
+                    UIElement shell = Ioc.Default.GetService<ShellView>();
+                    Window.Current.Content = shell ?? new Frame();
                 }
             }
 

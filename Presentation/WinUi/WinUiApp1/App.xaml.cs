@@ -29,7 +29,7 @@ namespace CiccioGest.Presentation.WinUiApp1
             Ioc.Default.ConfigureServices(ConfigureServices());
         }
 
-        protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
             await Ioc.Default.GetService<ActivationService>().ActivateAsync(args);
         }
@@ -41,7 +41,7 @@ namespace CiccioGest.Presentation.WinUiApp1
             .ConfigureApplication()
 
             // Default Activation Handler
-            .AddTransient<ActivationHandler<Microsoft.UI.Xaml.LaunchActivatedEventArgs>, DefaultActivationHandler>()
+            .AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>()
 
             // Other Activation Handlers
 

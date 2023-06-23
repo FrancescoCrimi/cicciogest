@@ -4,6 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.WinUiApp2.ViewModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiApp2.View
@@ -13,6 +15,7 @@ namespace CiccioGest.Presentation.WinUiApp2.View
         public DashboardView()
         {
             InitializeComponent();
+            DataContext = Ioc.Default.GetService<DashboardViewModel>();
         }
     }
 }

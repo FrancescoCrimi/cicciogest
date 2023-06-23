@@ -5,10 +5,39 @@
       xmlns:local="using:CiccioGest.Presentation.WinUiApp2.View"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiApp2.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ShellViewModel}"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
 
+        <NavigationView Grid.Row="1">
+            <NavigationView.MenuItems>
+
+                <NavigationViewItem Icon="Home">
+    
+                </NavigationViewItem>
+                
+                <NavigationViewItem Icon="People">
+             
+                </NavigationViewItem>
+
+                <NavigationViewItem Icon="PreviewLink">
+         
+                </NavigationViewItem>
+
+                <NavigationViewItem>
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                  Glyph="&#xE781;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+            </NavigationView.MenuItems>
+            <Frame x:Name="shellFrame" />
+        </NavigationView>
+
     </Grid>
+
 </Page>

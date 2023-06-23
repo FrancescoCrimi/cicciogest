@@ -8,14 +8,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CiccioGest.Presentation.WinUiApp2.ViewModel
 {
-    public class ShellViewModel : ObservableObject
+    public class DashboardViewModel : ObservableObject
     {
 
         private string text;
 
-        public ShellViewModel()
+        public DashboardViewModel()
         {
-            text = "Shell Page";
+            text = "Dashboard";
         }
 
         public string Text
