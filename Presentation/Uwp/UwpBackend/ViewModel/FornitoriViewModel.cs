@@ -6,7 +6,8 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Presentation.UwpBackend.Services;
+using CiccioGest.Presentation.UwpBackend.Contracts;
+using CiccioGest.Presentation.UwpBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -85,7 +86,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
             if (FornitoreSelezionato != null)
             {
-                navigationService.Navigate(Views.Fornitore);
+                navigationService.Navigate(ViewEnum.Fornitore);
                 Messenger.Send(new FornitoreIdMessage(FornitoreSelezionato.Id));
             }
         }

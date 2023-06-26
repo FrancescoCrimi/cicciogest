@@ -6,7 +6,8 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.UwpBackend.Services;
+using CiccioGest.Presentation.UwpBackend.Contracts;
+using CiccioGest.Presentation.UwpBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -81,7 +82,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
             if (FatturaSelezionata != null)
             {
-                navigationService.Navigate(Views.Fattura);
+                navigationService.Navigate(ViewEnum.Fattura);
                 Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
             }
         }

@@ -1,0 +1,118 @@
+﻿<Page x:Class="CiccioGest.Presentation.UwpNav.View.ArticoloView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:CiccioGest.Presentation.UwpNav.View"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+      xmlns:tollkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      xmlns:i="using:Microsoft.Xaml.Interactivity"
+      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ArticoloViewModel}"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <i:Interaction.Behaviors>
+        <ic:EventTriggerBehavior EventName="Loaded">
+            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </ic:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0">
+
+            <TextBlock x:Name="PageTitle"
+                       Text="Articolo"
+                       Margin="{StaticResource SmallLeftMargin}"
+                       Style="{StaticResource PageTitleStyle}" />
+
+            <CommandBar x:Name="mainCommandBar"
+                        DefaultLabelPosition="Right"
+                        HorizontalAlignment="Stretch"
+                        Background="Transparent"
+                        RelativePanel.RightOf="PageTitle">
+            </CommandBar>
+
+        </RelativePanel>
+
+        <Border Grid.Row="1"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                BorderThickness="1">
+
+            <Grid Grid.Row="1"
+                  Padding="12,12,12,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                            DataContext="{Binding Articolo}">
+                    <TextBox Header="Nome:"
+                             Width="200"
+                             Text="{Binding Nome, Mode=TwoWay}" />
+                    <TextBox Header="Descrizione:"
+                             Width="200"
+                             Text="{Binding Descrizione, Mode=TwoWay}" />
+                    <TextBox Header="Prezzo:"
+                             Width="200"
+                             Text="{Binding Prezzo, Mode=TwoWay}" />
+                    <TextBox Header="Fornitore:"
+                             Width="200" />
+                </StackPanel>
+
+                <Border Grid.Column="1"
+                        BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                        BorderThickness="1">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <RelativePanel>
+                            <TextBlock x:Name="Suca"
+                                       Style="{StaticResource PageTitleStyle}"
+                                       Margin="{StaticResource SmallLeftTopRightBottomMargin}"
+                                       Text="Categorie" />
+                            <CommandBar Background="Transparent"
+                                        DefaultLabelPosition="Right"
+                                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                                        RelativePanel.RightOf="Suca">
+                                <AppBarButton Icon="Add"
+                                              Label="Aggiungi Categoria" />
+                                <AppBarButton Icon="Edit"
+                                              Label="Rimuovi Categoria" />
+                            </CommandBar>
+                        </RelativePanel>
+
+                        <!--BorderThickness="1"
+                            BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"-->
+                        <ListView Grid.Row="1"
+                                  ItemsSource="{Binding Articolo.Categorie}"
+                                  SelectedItem="{Binding CategoriaSelezionata}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Nome}"
+                                               Margin="0,5,0,5" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                </Border>
+
+
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</Page>

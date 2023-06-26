@@ -1,0 +1,62 @@
+﻿// Copyright (c) 2023 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.UwpMenu.Activation;
+using CiccioGest.Presentation.UwpMenu.Services;
+using CiccioGest.Presentation.UwpMenu.View;
+using CiccioGest.Presentation.UwpBackend;
+using CiccioGest.Presentation.UwpBackend.Contracts.Services;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using Windows.ApplicationModel.Activation;
+
+namespace CiccioGest.Presentation.UwpMenu
+{
+    public sealed partial class App : Windows.UI.Xaml.Application
+    {
+        public App()
+        {
+            InitializeComponent();
+            Ioc.Default.ConfigureServices(ConfigureServices());
+        }
+
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
+        {
+            if (e.PrelaunchActivated == false)
+            {
+                await Ioc.Default.GetService<ActivationService>().ActivateAsync(e);
+            }
+        }
+
+        protected async override void OnActivated(IActivatedEventArgs args)
+        {
+            await Ioc.Default.GetService<ActivationService>().ActivateAsync(args);
+        }
+
+        private IServiceProvider ConfigureServices() => new ServiceCollection()
+            .AddLogging()
+            .AddSingleton(CiccioGestConfMgr.GetCurrent())
+            .ConfigureUwpBackend()
+
+            // Default Activation Handler
+            .AddTransient<ActivationHandler<IActivatedEventArgs>, DefaultActivationHandler>()
+
+            // Other Activation Handlers
+
+            // Services
+            .AddSingleton<ActivationService>()
+            .AddSingleton<PageService>()
+            .AddSingleton<NavigationService>()
+            .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
+
+            //View
+            .AddTransient<ShellView>()
+
+            .BuildServiceProvider();
+    }
+}

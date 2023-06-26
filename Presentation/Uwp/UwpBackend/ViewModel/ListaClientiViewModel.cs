@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Presentation.UwpBackend.Services;
+using CiccioGest.Presentation.UwpBackend.Contracts.Services;
 using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Presentation.UwpBackend.ViewModel

@@ -7,7 +7,7 @@
 		<Product>CiccioGest</Product>
 		<Authors>Francesco Crimi</Authors>
 		<Company>CiccioSoft</Company>
-		<Platforms>x64;x86;ARM32</Platforms>
+		<Platforms>x64;x86</Platforms>
 		<OutputType>WinExe</OutputType>
 		<UseWindowsForms>true</UseWindowsForms>
 	</PropertyGroup>

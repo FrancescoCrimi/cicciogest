@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="CiccioGest.Presentation.WinUiNav.View.ShellView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:CiccioGest.Presentation.WinUiNav.View"
+      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiNav.ViewModel"
+      xmlns:Helper="using:CiccioGest.Presentation.WinUiNav.Helpers"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ShellViewModel}"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <NavigationView Grid.Row="1">
+            <NavigationView.MenuItems>
+
+                <NavigationViewItem Icon="Home">
+    
+                </NavigationViewItem>
+                
+                <NavigationViewItem Icon="People">
+             
+                </NavigationViewItem>
+
+                <NavigationViewItem Icon="PreviewLink">
+         
+                </NavigationViewItem>
+
+                <NavigationViewItem>
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                  Glyph="&#xE781;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+            </NavigationView.MenuItems>
+            <Frame x:Name="shellFrame" />
+        </NavigationView>
+
+    </Grid>
+
+</Page>

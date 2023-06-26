@@ -4,7 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.UwpBackend.Services;
+using CiccioGest.Presentation.UwpBackend.Contracts;
+using CiccioGest.Presentation.UwpBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
@@ -16,56 +17,54 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
     public sealed class ShellViewModel : ObservableObject, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly INavigationService navigationService;
-        private AsyncRelayCommand loadedCommand;
-        private RelayCommand apriFattureCommand;
-        private RelayCommand apriArticoliCommand;
-        private RelayCommand apriCategorieCommand;
-        private RelayCommand apriClientiCommand;
-        private RelayCommand apriFornitoriCommand;
-        private RelayCommand<Type> itemInvokedCommand;
+        private readonly ILogger _logger;
+        private readonly INavigationService _navigationService;
+        private bool _isBackEnabled;
+        private AsyncRelayCommand _loadedCommand;
+        private RelayCommand _backRequestedCommand;
+        private RelayCommand<ViewEnum> _navigateToCommand;
+
+        public bool IsBackEnabled
+        {
+            get => _isBackEnabled;
+            set => SetProperty(ref _isBackEnabled, value);
+        }
+
+        public IAsyncRelayCommand LoadedCommand => _loadedCommand
+            ?? (_loadedCommand = new AsyncRelayCommand(OnLoaded));
+
+        public ICommand BackRequestedCommand => _backRequestedCommand
+            ?? (_backRequestedCommand = new RelayCommand(OnBackRequested));
+
+        public ICommand NavigateToCommand => _navigateToCommand
+            ?? (_navigateToCommand = new RelayCommand<ViewEnum>(OnNavigateTo));
 
         public ShellViewModel(ILogger<ShellViewModel> logger,
                               INavigationService navigationService)
         {
-            this.logger = logger;
-            this.navigationService = navigationService;
+            _logger = logger;
+            _navigationService = navigationService;
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new AsyncRelayCommand(async () =>
+        private async Task OnLoaded()
         {
             await Task.CompletedTask;
-        }));
+        }
 
-        public ICommand ApriFattureCommand => apriFattureCommand ?? (apriFattureCommand = new RelayCommand(()
-            => navigationService.Navigate(Views.Fatture)));
-
-        public ICommand ApriArticoliCommand => apriArticoliCommand ?? (apriArticoliCommand = new RelayCommand(()
-            => navigationService.Navigate(Views.Articoli)));
-
-        public ICommand ApriCategorieCommand => apriCategorieCommand ?? (apriCategorieCommand = new RelayCommand(()
-            => navigationService.Navigate(Views.Categoria)));
-
-        public ICommand ApriClientiCommand => apriClientiCommand ?? (apriClientiCommand = new RelayCommand(()
-            => navigationService.Navigate(Views.Clienti)));
-
-        public ICommand ApriFornitoriCommand => apriFornitoriCommand ?? (apriFornitoriCommand = new RelayCommand(()
-            => navigationService.Navigate(Views.Fornitori)));
-
-
-        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<Type>((type) =>
+        private void OnBackRequested()
         {
-            if (type != null)
-            {
-                navigationService.Navigate(type);
-            }
-        }));
+            _navigationService.GoBack();
+        }
+
+        private void OnNavigateTo(ViewEnum view)
+        {
+            _navigationService.Navigate(view);
+        }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

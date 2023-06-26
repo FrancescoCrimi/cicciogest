@@ -6,7 +6,8 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazino;
-using CiccioGest.Presentation.UwpBackend.Services;
+using CiccioGest.Presentation.UwpBackend.Contracts;
+using CiccioGest.Presentation.UwpBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -80,7 +81,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
             if (ArticoloSelezionato != null)
             {
-                navigationService.Navigate(Views.Articolo);
+                navigationService.Navigate(ViewEnum.Articolo);
                 Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
             }
         }

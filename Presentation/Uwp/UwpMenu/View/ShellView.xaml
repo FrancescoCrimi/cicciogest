@@ -1,0 +1,66 @@
+﻿<Page x:Class="CiccioGest.Presentation.UwpMenu.View.ShellView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:CiccioGest.Presentation.UwpMenu.View"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+      xmlns:tollkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      xmlns:i="using:Microsoft.Xaml.Interactivity"
+      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
+      xmlns:contracts="using:CiccioGest.Presentation.UwpBackend.Contracts"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ShellViewModel}"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <i:Interaction.Behaviors>
+        <ic:EventTriggerBehavior EventName="Loaded">
+            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </ic:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <winui:MenuBar>
+
+            <winui:MenuBarItem Title="Documenti">
+
+                <MenuFlyoutItem x:Name="menuFatture"
+                                Text="Fatture"
+                                Command="{Binding NavigateToCommand, Mode=OneWay}"
+                                CommandParameter="{x:Bind contracts:ViewEnum.Fatture}">
+                </MenuFlyoutItem>
+            </winui:MenuBarItem>
+            <winui:MenuBarItem Title="Magazino">
+                <MenuFlyoutItem Text="Articoli"
+                                Command="{Binding NavigateToCommand, Mode=OneWay}"
+                                CommandParameter="{x:Bind contracts:ViewEnum.Articoli}" />
+                <MenuFlyoutItem Text="Categorie"
+                                Command="{Binding NavigateToCommand, Mode=OneWay}"
+                                CommandParameter="{x:Bind contracts:ViewEnum.Categoria}" />
+            </winui:MenuBarItem>
+            <winui:MenuBarItem Title="Anagrafica">
+                <MenuFlyoutItem Text="Clienti"
+                                Command="{Binding NavigateToCommand, Mode=OneWay}"
+                                CommandParameter="{x:Bind contracts:ViewEnum.Clienti}"/>
+                <MenuFlyoutItem Text="Fornitori"
+                                Command="{Binding NavigateToCommand, Mode=OneWay}"
+                                CommandParameter="{x:Bind contracts:ViewEnum.Fornitori}"/>
+            </winui:MenuBarItem>
+            <winui:MenuBarItem Title="Help">
+                <MenuFlyoutItem Text="About" />
+            </winui:MenuBarItem>
+
+        </winui:MenuBar>
+
+        <Grid Grid.Row="1">
+            <Frame x:Name="shellFrame" />
+        </Grid>
+
+    </Grid>
+</Page>

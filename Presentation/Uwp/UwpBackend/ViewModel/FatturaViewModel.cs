@@ -6,7 +6,8 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.UwpBackend.Services;
+using CiccioGest.Presentation.UwpBackend.Contracts;
+using CiccioGest.Presentation.UwpBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -52,7 +53,7 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() =>
         {
-            navigationService.Navigate(Views.Clienti);
+            navigationService.Navigate(ViewEnum.Clienti);
         }));
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new AsyncRelayCommand(async () =>
@@ -78,10 +79,10 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         }));
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
-            navigationService.Navigate(Views.Fatture)));
+            navigationService.Navigate(ViewEnum.Fatture)));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
-            navigationService.Navigate(Views.Articoli)));
+            navigationService.Navigate(ViewEnum.Articoli)));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(() =>
         {
