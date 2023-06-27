@@ -4,12 +4,12 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.WinUiBackend.Contracts;
+using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 using Microsoft.UI.Xaml.Controls;
-using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
-using CiccioGest.Presentation.WinUiBackend.Contracts;
+using System;
 
 namespace CiccioGest.Presentation.WinUiMenu.Services
 {
@@ -41,6 +41,8 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
                 _frame.NavigationFailed += OnNavigationFailed;
             }
         }
+
+        public bool FrameContentIsNull => _frame.Content == null;
 
         public bool CanGoBack => _frame.CanGoBack;
 
@@ -94,8 +96,6 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
             var pageType = _pageService.GetPageType(key);
             return Navigate(pageType, parameter, clearNavigation);
         }
-
-        public bool FrameContentIsNull => _frame.Content == null;
 
         private void OnNavigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
         {

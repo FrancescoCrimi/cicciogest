@@ -4,8 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.WinUiBackend.ViewModel;
 using CiccioGest.Presentation.WinUiNav.Services;
-using CiccioGest.Presentation.WinUiNav.ViewModel;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiNav.View

@@ -1,4 +1,5 @@
-﻿<Page x:Class="CiccioGest.Presentation.WinUiMenu.View.FattureView"
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="CiccioGest.Presentation.WinUiMenu.View.FattureView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:CiccioGest.Presentation.WinUiMenu.View"

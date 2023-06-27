@@ -10,18 +10,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public sealed class ShellViewModel : ObservableObject, IDisposable
+    public sealed partial class ShellViewModel : ObservableObject, IDisposable
     {
         private readonly ILogger _logger;
         private readonly INavigationService _navigationService;
-        private AsyncRelayCommand _loadedCommand;
-        private RelayCommand<Type> itemInvokedCommand;
-        private RelayCommand<ViewEnum> _navigateToCommand;
 
         public ShellViewModel(ILogger<ShellViewModel> logger,
                               INavigationService navigationService)
@@ -31,27 +29,23 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public ICommand NavigateToCommand => _navigateToCommand ??= new RelayCommand<ViewEnum>(OnNavigateTo);
-
-        public IAsyncRelayCommand LoadedCommand => _loadedCommand ??= new AsyncRelayCommand(OnLoaded);
-
-        private void OnNavigateTo(ViewEnum key)
-        {
-            _navigationService.Navigate(key);
-        }
-
+        [RelayCommand]
         private async Task OnLoaded()
         {
             await Task.CompletedTask;
         }
 
-        public ICommand ItemInvokedCommand => itemInvokedCommand ??= new RelayCommand<Type>((type) =>
+        [RelayCommand]
+        private void OnNavigateTo(ViewEnum key)
         {
-            if(type != null)
-            {
-                _navigationService.Navigate(type);
-            }
-        });
+            _navigationService.Navigate(key);
+        }
+
+        [RelayCommand]
+        private void OnBackRequested()
+        {
+            _navigationService.GoBack();
+        }
 
         public void Dispose()
         {

@@ -4,7 +4,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-      xmlns:helpers="using:CiccioGest.Presentation.UwpNav.Helpers"
+      xmlns:helpers="using:CiccioGest.Presentation.UwpBackend.Helpers"
+      xmlns:converters="using:CiccioGest.Presentation.UwpBackend.Converters"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
       xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
       xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
@@ -21,24 +22,13 @@
                           IsSettingsVisible="True">
 
         <winui:NavigationView.MenuItems>
-            <winui:NavigationViewItem Content="Fatture"
-                                      Icon="Shop"
-                                      helpers:NavEnumHelper.NavigateTo="Fatture"/>
 
-            <winui:NavigationViewItem Content="Magazino"
-                                      Icon="Document">
-                <winui:NavigationViewItem.MenuItems>
-                    <winui:NavigationViewItem Content="Articoli"
-                                              Icon="Document"
-                                              helpers:NavEnumHelper.NavigateTo="Articoli" />
-                    <winui:NavigationViewItem Content="Categorie"
-                                              Icon="Document"
-                                              helpers:NavEnumHelper.NavigateTo="Categoria"/>
-                </winui:NavigationViewItem.MenuItems>
-            </winui:NavigationViewItem>
+            <winui:NavigationViewItem Content="Dashboard"
+                                      Icon="Home"
+                                      helpers:NavEnumHelper.NavigateTo="Dashboard" />
 
             <winui:NavigationViewItem Content="Anagrafica"
-                                      Icon="ContactInfo">
+                                      Icon="People">
                 <winui:NavigationViewItem.MenuItems>
                     <winui:NavigationViewItem Content="Clienti"
                                               Icon="ContactInfo"
@@ -49,26 +39,44 @@
                 </winui:NavigationViewItem.MenuItems>
             </winui:NavigationViewItem>
 
+            <winui:NavigationViewItem Content="Fatture"
+                                      Icon="Shop"
+                                      helpers:NavEnumHelper.NavigateTo="Fatture" />
+
+            <winui:NavigationViewItem Content="Magazino">
+                <winui:NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE781;" />
+                </winui:NavigationViewItem.Icon>
+                <winui:NavigationViewItem.MenuItems>
+                    <winui:NavigationViewItem Content="Articoli"
+                                              Icon="Document"
+                                              helpers:NavEnumHelper.NavigateTo="Articoli" />
+                    <winui:NavigationViewItem Content="Categorie"
+                                              Icon="Document"
+                                              helpers:NavEnumHelper.NavigateTo="Categoria" />
+                </winui:NavigationViewItem.MenuItems>
+            </winui:NavigationViewItem>
+
         </winui:NavigationView.MenuItems>
+
+        <Frame x:Name="ContentFrame"
+               IsTabStop="True" />
 
         <i:Interaction.Behaviors>
 
             <ic:EventTriggerBehavior EventName="ItemInvoked">
                 <ic:InvokeCommandAction Command="{Binding NavigateToCommand}">
                     <ic:InvokeCommandAction.InputConverter>
-                        <helpers:NavigationViewItemInvokedEventArgsToViewEnum />
+                        <converters:NavigationViewItemInvokedEventArgsToEnum />
                     </ic:InvokeCommandAction.InputConverter>
                 </ic:InvokeCommandAction>
             </ic:EventTriggerBehavior>
-            
+
             <ic:EventTriggerBehavior EventName="BackRequested">
                 <ic:InvokeCommandAction Command="{Binding BackRequestedCommand}" />
             </ic:EventTriggerBehavior>
-        
-        </i:Interaction.Behaviors>
 
-        <Frame x:Name="ContentFrame"
-               IsTabStop="True" />
+        </i:Interaction.Behaviors>
 
     </winui:NavigationView>
 

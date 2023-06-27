@@ -7,9 +7,9 @@
 using System;
 using Windows.UI.Xaml.Markup;
 
-namespace CiccioGest.Presentation.UwpMenu.Helpers
+namespace CiccioGest.Presentation.UwpBackend.Helpers
 {
-    // This helper class allows to specify the page that will be shown via CommandParameter
+    // This helper class allows to send an Type Object via CommandParameter
     //
     // Usage:
     // CommandParameter="{helpers:Type Type=local:CategoriaView}"

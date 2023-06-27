@@ -36,7 +36,8 @@ namespace CiccioGest.Presentation.WinUiMenu
 
         private IServiceProvider ConfigureServices() => new ServiceCollection()
 
-            .AddLogging(loggingBuilder => loggingBuilder.AddNLog())
+            //.AddLogging(loggingBuilder => loggingBuilder.AddNLog())
+            .AddLogging()
             .AddSingleton(CiccioGestConfMgr.GetCurrent())
             .ConfigureWinUiBackend()
 

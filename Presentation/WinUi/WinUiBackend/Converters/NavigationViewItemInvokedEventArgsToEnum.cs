@@ -4,14 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.UwpBackend.Contracts;
+using CiccioGest.Presentation.WinUiBackend.Contracts;
+using CiccioGest.Presentation.WinUiBackend.Helpers;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using System;
-using Windows.UI.Xaml.Data;
 
-namespace CiccioGest.Presentation.UwpNav.Helpers
+namespace CiccioGest.Presentation.WinUiBackend.Converters
 {
-    internal class NavigationViewItemInvokedEventArgsToViewEnum : IValueConverter
+    public class NavigationViewItemInvokedEventArgsToEnum : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

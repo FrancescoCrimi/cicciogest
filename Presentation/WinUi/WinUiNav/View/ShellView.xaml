@@ -3,8 +3,11 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:CiccioGest.Presentation.WinUiNav.View"
-      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiNav.ViewModel"
-      xmlns:Helper="using:CiccioGest.Presentation.WinUiNav.Helpers"
+      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiBackend.ViewModel"
+      xmlns:i="using:Microsoft.Xaml.Interactivity"
+      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:helpers="using:CiccioGest.Presentation.WinUiBackend.Helpers"
+      xmlns:converters="using:CiccioGest.Presentation.WinUiBackend.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       d:DataContext="{d:DesignInstance Type=viewmodel:ShellViewModel}"
@@ -14,29 +17,63 @@
     <Grid>
 
         <NavigationView Grid.Row="1">
+
             <NavigationView.MenuItems>
 
-                <NavigationViewItem Icon="Home">
-    
-                </NavigationViewItem>
-                
-                <NavigationViewItem Icon="People">
-             
+                <NavigationViewItem Content="Dashboard"
+                                    Icon="Home"
+                                    helpers:NavEnumHelper.NavigateTo="Dashboard" />
+
+                <NavigationViewItem Content="Anagrafica"
+                                    Icon="People">
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Clienti"
+                                            Icon="ContactInfo"
+                                            helpers:NavEnumHelper.NavigateTo="Clienti"/>
+                        <NavigationViewItem Content="Fornitori"
+                                            Icon="ContactInfo"
+                                            helpers:NavEnumHelper.NavigateTo="Fornitori"/>
+                    </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
 
-                <NavigationViewItem Icon="PreviewLink">
-         
-                </NavigationViewItem>
+                <NavigationViewItem Content="Fatture"
+                                    Icon="PreviewLink"
+                                    helpers:NavEnumHelper.NavigateTo="Fatture" />
 
-                <NavigationViewItem>
+                <NavigationViewItem Content="Magazino">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
                                   Glyph="&#xE781;" />
                     </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Articoli"
+                                            Icon="Document"
+                                            helpers:NavEnumHelper.NavigateTo="Articoli" />
+                        <NavigationViewItem Content="Categorie"
+                                            Icon="Document"
+                                            helpers:NavEnumHelper.NavigateTo="Categoria" />
+                    </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
 
             </NavigationView.MenuItems>
+
             <Frame x:Name="shellFrame" />
+
+            <i:Interaction.Behaviors>
+
+                <ic:EventTriggerBehavior EventName="ItemInvoked">
+                    <ic:InvokeCommandAction Command="{Binding NavigateToCommand}">
+                        <ic:InvokeCommandAction.InputConverter>
+                            <converters:NavigationViewItemInvokedEventArgsToEnum />
+                        </ic:InvokeCommandAction.InputConverter>
+                    </ic:InvokeCommandAction>
+                </ic:EventTriggerBehavior>
+
+                <ic:EventTriggerBehavior EventName="BackRequested">
+                    <ic:InvokeCommandAction Command="{Binding BackRequestedCommand}" />
+                </ic:EventTriggerBehavior>
+
+            </i:Interaction.Behaviors>
         </NavigationView>
 
     </Grid>

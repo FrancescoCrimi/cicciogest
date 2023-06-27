@@ -7,34 +7,30 @@
 using System;
 using Windows.UI.Xaml;
 
-namespace CiccioGest.Presentation.UwpNav.Helpers
+namespace CiccioGest.Presentation.UwpBackend.Helpers
 {
     /// <summary>
-    /// attached property - proprietà associata
+    /// Attached Property for attach Type object
     /// </summary>
-    public class NavHelper
+    public class NavTypeHelper
     {
-        // This helper class allows to specify the page that will be shown when you click on a UIElement
+        // Helper class to attach an Type object on UIElement
         //
         // Usage in xaml:
-        // <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Document" helpers:NavHelper.NavigateTo="views:MainPage" />
+        // <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:MainPage" />
         //
         // Usage in code:
         // NavHelper.SetNavigateTo(navigationViewItem, typeof(MainPage));
         public static Type GetNavigateTo(UIElement item)
-        {
-            return (Type)item.GetValue(NavigateToProperty);
-        }
+            => (Type)item.GetValue(NavigateToProperty);
 
         public static void SetNavigateTo(UIElement item, Type value)
-        {
-            item.SetValue(NavigateToProperty, value);
-        }
+            => item.SetValue(NavigateToProperty, value);
 
         public static readonly DependencyProperty NavigateToProperty =
             DependencyProperty.RegisterAttached("NavigateTo",
                                                 typeof(Type),
-                                                typeof(NavHelper),
+                                                typeof(NavTypeHelper),
                                                 new PropertyMetadata(null));
     }
 }

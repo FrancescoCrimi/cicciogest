@@ -4,11 +4,12 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.UwpBackend.Helpers;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using Windows.UI.Xaml.Data;
 
-namespace CiccioGest.Presentation.UwpNav.Helpers
+namespace CiccioGest.Presentation.UwpBackend.Converters
 {
     public class NavigationViewItemInvokedEventArgsToType : IValueConverter
     {
@@ -17,7 +18,7 @@ namespace CiccioGest.Presentation.UwpNav.Helpers
             if (value is NavigationViewItemInvokedEventArgs args)
             {
                 var selectedItem = args.InvokedItemContainer as NavigationViewItem;
-                Type pageType = selectedItem?.GetValue(NavHelper.NavigateToProperty) as Type;
+                Type pageType = selectedItem?.GetValue(NavTypeHelper.NavigateToProperty) as Type;
                 return pageType;
             }
             return null;
@@ -25,7 +26,7 @@ namespace CiccioGest.Presentation.UwpNav.Helpers
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return value;
+            throw new NotImplementedException();
         }
     }
 }

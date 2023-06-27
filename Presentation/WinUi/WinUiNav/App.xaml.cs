@@ -4,11 +4,11 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.WinUiBackend;
+using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CiccioGest.Presentation.WinUiNav.Activation;
 using CiccioGest.Presentation.WinUiNav.Services;
 using CiccioGest.Presentation.WinUiNav.View;
-using CiccioGest.Presentation.WinUiNav.ViewModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -38,7 +38,7 @@ namespace CiccioGest.Presentation.WinUiNav
             //.AddLogging(loggingBuilder => loggingBuilder.AddNLog())
             .AddLogging()
             //.AddSingleton(CiccioGestConfMgr.GetCurrent())
-            //.ConfigureApplication()
+            .ConfigureWinUiBackend()
 
             // Default Activation Handler
             .AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>()
@@ -49,13 +49,10 @@ namespace CiccioGest.Presentation.WinUiNav
             .AddSingleton<ActivationService>()
             .AddSingleton<PageService>()
             .AddSingleton<NavigationService>()
+            .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
 
             // View
             .AddTransient<ShellView>()
-
-            // ViewModel
-            .AddTransient<ShellViewModel>()
-            .AddTransient<DashboardViewModel>()
 
             .BuildServiceProvider();
         }

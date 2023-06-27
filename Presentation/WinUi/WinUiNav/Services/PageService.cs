@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.WinUiBackend.Contracts;
 using CiccioGest.Presentation.WinUiNav.View;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -12,31 +13,13 @@ using System.Linq;
 
 namespace CiccioGest.Presentation.WinUiNav.Services
 {
-    public enum Views
-    {
-        Dashboard,
-        Articoli,
-        Articolo,
-        Categoria,
-        Cliente,
-        Clienti,
-        Fattura,
-        Fatture,
-        Fornitore,
-        Fornitori,
-        ListaArticoli,
-        ListaClienti,
-        ListaFatture,
-        ListaFornitori
-    }
-
     public class PageService
     {
-        private readonly Dictionary<Views, Type> _pages = new Dictionary<Views, Type>();
+        private readonly Dictionary<ViewEnum, Type> _pages = new Dictionary<ViewEnum, Type>();
 
         public PageService()
         {
-            Configure<DashboardView>(Views.Dashboard);
+            Configure<DashboardView>(ViewEnum.Dashboard);
             //Configure<ArticoliView>(Views.Articoli);
             //Configure<ArticoloView>(Views.Articolo);
             //Configure<CategoriaView>(Views.Categoria);
@@ -52,7 +35,7 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             //Configure<ListaFornitoriView>(Views.ListaFornitori);
         }
 
-        public Type GetPageType(Views key)
+        public Type GetPageType(ViewEnum key)
         {
             Type pageType;
             lock (_pages)
@@ -65,7 +48,7 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             return pageType;
         }
 
-        private void Configure< V>(Views key)
+        private void Configure< V>(ViewEnum key)
             where V : Page
         {
             lock (_pages)

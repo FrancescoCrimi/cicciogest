@@ -1,27 +1,31 @@
-﻿using CiccioGest.Presentation.UwpBackend.Contracts;
+﻿// Copyright (c) 2023 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Presentation.UwpBackend.Contracts;
 using Windows.UI.Xaml;
 
-namespace CiccioGest.Presentation.UwpNav.Helpers
+namespace CiccioGest.Presentation.UwpBackend.Helpers
 {
+    /// <summary>
+    /// Attached Property for attach Enum object
+    /// </summary>
     public class NavEnumHelper
     {
-        // This helper class allows to specify the page from an enum named Views on a UIElement
+        // Helper class to attach an enum value on UIElement
         //
         // Usage in xaml:
         // <winui:NavigationViewItem helpers:NavEnumHelper.NavigateTo="Fatture" />
-        // Fatture is enum value
         //
         // Usage in code:
         // NavEnumHelper.SetNavigateTo(UIElement, Views.Fatture);
         public static ViewEnum GetNavigateTo(UIElement item)
-        {
-            return (ViewEnum)item.GetValue(NavigateToProperty);
-        }
+            => (ViewEnum)item.GetValue(NavigateToProperty);
 
         public static void SetNavigateTo(UIElement item, ViewEnum value)
-        {
-            item.SetValue(NavigateToProperty, value);
-        }
+            => item.SetValue(NavigateToProperty, value);
 
         public static readonly DependencyProperty NavigateToProperty =
             DependencyProperty.RegisterAttached("NavigateTo",

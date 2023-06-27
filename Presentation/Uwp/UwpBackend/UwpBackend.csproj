@@ -11,7 +11,7 @@
     <AssemblyName>UwpBackend</AssemblyName>
     <DefaultLanguage>it-IT</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22000.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.20348.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -61,6 +61,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Converters\NavigationViewItemInvokedEventArgsToEnum.cs" />
+    <Compile Include="Converters\NavigationViewItemInvokedEventArgsToType.cs" />
+    <Compile Include="Helpers\NavEnumHelper.cs" />
+    <Compile Include="Helpers\NavTypeHelper.cs" />
+    <Compile Include="Helpers\TypeExtension.cs" />
     <Compile Include="UwpBackendExtensions.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +93,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.UI.Xaml">
+      <Version>2.7.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

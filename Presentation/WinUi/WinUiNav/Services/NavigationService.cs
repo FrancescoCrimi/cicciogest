@@ -4,14 +4,16 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.WinUiBackend.Contracts;
+using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 using Microsoft.UI.Xaml.Controls;
+using System;
 
 namespace CiccioGest.Presentation.WinUiNav.Services
 {
-    public class NavigationService : IDisposable
+    public class NavigationService : INavigationService, IDisposable
     {
         private readonly ILogger<NavigationService> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
@@ -39,6 +41,8 @@ namespace CiccioGest.Presentation.WinUiNav.Services
                 _frame.NavigationFailed += OnNavigationFailed;
             }
         }
+
+        public bool FrameContentIsNull => _frame.Content == null;
 
         public bool CanGoBack => _frame.CanGoBack;
 
@@ -85,9 +89,7 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             }
         }
 
-        public bool FrameContentIsNull => _frame.Content == null;
-
-        public bool Navigate(Views key,
+        public bool Navigate(ViewEnum key,
                              object parameter = null,
                              bool clearNavigation = false)
         {
