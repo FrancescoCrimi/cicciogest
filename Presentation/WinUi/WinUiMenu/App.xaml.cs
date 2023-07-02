@@ -20,8 +20,7 @@ namespace CiccioGest.Presentation.WinUiMenu
 {
     public partial class App : Microsoft.UI.Xaml.Application
     {
-        //public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName".GetLocalized() };
-        public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName" };
+        public static Window MainWindow { get; set; } = new Window();
 
         public App()
         {
@@ -58,4 +57,3 @@ namespace CiccioGest.Presentation.WinUiMenu
             .BuildServiceProvider();
     }
 }
-

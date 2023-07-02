@@ -4,12 +4,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.UwpNav.View
 {
-    public sealed partial class DashboardView : Page
+    public sealed partial class SettingsView : Page
     {
-        public DashboardView()
+        public SettingsView()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetService<DashboardViewModel>();
+            DataContext = Ioc.Default.GetService<SettingsViewModel>();
         }
     }
 }

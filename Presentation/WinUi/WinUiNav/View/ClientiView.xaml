@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Page x:Class="CiccioGest.Presentation.WinUiNav.View.FattureView"
+<Page x:Class="CiccioGest.Presentation.WinUiNav.View.ClientiView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:CiccioGest.Presentation.WinUiNav.View"
@@ -9,7 +9,7 @@
       xmlns:i="using:Microsoft.Xaml.Interactivity"
       xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
       xmlns:uc="using:CiccioGest.Presentation.WinUiNav.UserControls"
-      d:DataContext="{d:DesignInstance Type=viewmodel:FattureViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ListaClientiViewModel}"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -28,7 +28,7 @@
         <RelativePanel Grid.Row="0">
 
             <TextBlock x:Name="PageTitle"
-                       Text="Fatture" />
+                       Text="Clienti" />
 
             <CommandBar x:Name="mainCommandBar"
                         DefaultLabelPosition="Right"
@@ -37,14 +37,16 @@
                         RelativePanel.LeftOf="OrderSearchBox"
                         RelativePanel.RightOf="PageTitle">
                 <AppBarButton Icon="Document"
-                              Label="Nuova"
-                              Command="{Binding NuovaFatturaCommand}" />
+                              Label="Nuovo"
+                              Command="{Binding NuovoClienteCommand}" />
                 <AppBarButton Icon="Edit"
                               Label="Apri"
-                              Command="{Binding ApriFatturaCommand}" />
+                              Command="{Binding ApriClienteCommand}" />
+                <AppBarButton Icon="Document"
+                              Label="Crea Fattura" />
                 <AppBarButton Icon="Refresh"
                               Label="Aggiorna"
-                              Command="{Binding AggiornaFattureCommand}" />
+                              Command="{Binding AggiornaClientiCommand}" />
             </CommandBar>
 
             <uc:CollapsibleSearchBox x:Name="OrderSearchBox"
@@ -54,7 +56,8 @@
 
         </RelativePanel>
 
-        <uc:ListaFattureControl Grid.Row="1" />
+        <uc:ListaClientiControl Grid.Row="1" />
 
     </Grid>
+
 </Page>

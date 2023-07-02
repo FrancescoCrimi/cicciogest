@@ -16,6 +16,9 @@ namespace CiccioGest.Presentation.UwpNav.Services
 {
     public class NavigationService : INavigationService, IDisposable
     {
+        public event NavigatedEventHandler Navigated;
+        public event NavigationFailedEventHandler NavigationFailed;
+
         private readonly ILogger<NavigationService> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly PageService _pageService;
@@ -102,6 +105,8 @@ namespace CiccioGest.Presentation.UwpNav.Services
 
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
+            Navigated?.Invoke(this, e);
+
             if (sender is Frame frame)
             {
                 bool clearNavigation = (bool)frame.Tag;
@@ -119,14 +124,15 @@ namespace CiccioGest.Presentation.UwpNav.Services
 
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            NavigationFailed?.Invoke(this, e);
+            //throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         public void Dispose()
         {
             _frame.Navigated -= OnNavigated;
             _frame.NavigationFailed -= OnNavigationFailed;
-            _logger.LogDebug("Disposed " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

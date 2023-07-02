@@ -62,10 +62,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Converters\NavigationViewItemInvokedEventArgsToEnum.cs" />
-    <Compile Include="Converters\NavigationViewItemInvokedEventArgsToType.cs" />
     <Compile Include="Helpers\NavEnumHelper.cs" />
-    <Compile Include="Helpers\NavTypeHelper.cs" />
-    <Compile Include="Helpers\TypeExtension.cs" />
     <Compile Include="UwpBackendExtensions.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +72,7 @@
     <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\ClienteViewModel.cs" />
     <Compile Include="ViewModel\ClientiViewModel.cs" />
+    <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\FatturaViewModel.cs" />
     <Compile Include="ViewModel\FattureViewModel.cs" />
     <Compile Include="ViewModel\FornitoreViewModel.cs" />
@@ -83,6 +81,7 @@
     <Compile Include="ViewModel\ListaClientiViewModel.cs" />
     <Compile Include="ViewModel\ListaFattureViewModel.cs" />
     <Compile Include="ViewModel\ListaFornitoriViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ShellViewModel.cs" />
     <Compile Include="Contracts\ViewEnum.cs" />
     <EmbeddedResource Include="Properties\UwpBackend2.rd.xml" />

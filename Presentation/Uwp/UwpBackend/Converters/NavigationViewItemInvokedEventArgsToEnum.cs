@@ -19,6 +19,11 @@ namespace CiccioGest.Presentation.UwpBackend.Converters
             if (value is NavigationViewItemInvokedEventArgs args)
             {
                 var selectedItem = args.InvokedItemContainer as NavigationViewItem;
+
+                if (args.IsSettingsInvoked)
+                    if(selectedItem?.GetValue(NavEnumHelper.NavigateToProperty) == null)
+                        NavEnumHelper.SetNavigateTo(selectedItem, ViewEnum.Settings);
+
                 var enumvalue = selectedItem?.GetValue(NavEnumHelper.NavigateToProperty);
                 if (enumvalue != null)
                     return (ViewEnum)enumvalue;

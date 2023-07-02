@@ -44,7 +44,13 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
         {
             _logger = logger;
             _navigationService = navigationService;
+            _navigationService.Navigated += _navigationService_Navigated;
             logger.LogDebug("Created: " + GetHashCode().ToString());
+        }
+
+        private void _navigationService_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            IsBackEnabled = _navigationService.CanGoBack;
         }
 
         private async Task OnLoaded()

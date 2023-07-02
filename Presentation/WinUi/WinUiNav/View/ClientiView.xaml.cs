@@ -10,12 +10,12 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiNav.View
 {
-    public sealed partial class ArticoliView : Page
+    public sealed partial class ClientiView : Page
     {
-        public ArticoliView()
+        public ClientiView()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetService<ArticoliViewModel>();
+            DataContext = Ioc.Default.GetService<ClientiViewModel>();
         }
     }
 }

@@ -5,11 +5,15 @@
 // https://opensource.org/licenses/MIT.
 
 using System;
+using Windows.UI.Xaml.Navigation;
 
 namespace CiccioGest.Presentation.UwpBackend.Contracts.Services
 {
     public interface INavigationService
     {
+        event NavigatedEventHandler Navigated;
+        event NavigationFailedEventHandler NavigationFailed;
+
         bool CanGoBack { get; }
         bool CanGoForward { get; }
         void GoBack();

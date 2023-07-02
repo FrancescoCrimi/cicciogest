@@ -5,11 +5,10 @@
       xmlns:local="using:CiccioGest.Presentation.WinUiMenu.View"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:tollkit="using:CommunityToolkit.WinUI.UI.Controls"
+      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiBackend.ViewModel"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
       xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
       xmlns:uc="using:CiccioGest.Presentation.WinUiMenu.UserControls"
-      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiBackend.ViewModel"
       d:DataContext="{d:DesignInstance Type=viewmodel:ClientiViewModel}"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -63,4 +62,5 @@
         <uc:ListaClientiControl Grid.Row="1" />
 
     </Grid>
+
 </Page>

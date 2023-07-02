@@ -12,7 +12,7 @@ namespace CiccioGest.Presentation.WinUiMenu.UserControls
     {
         public ListaArticoliControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

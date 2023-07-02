@@ -33,6 +33,7 @@ namespace CiccioGest.Presentation.UwpMenu.Services
             Configure<ListaClientiView>(ViewEnum.ListaClienti);
             Configure<ListaFattureView>(ViewEnum.ListaFatture);
             Configure<ListaFornitoriView>(ViewEnum.ListaFornitori);
+            Configure<SettingsView>(ViewEnum.Settings);
         }
 
         public Type GetPageType(ViewEnum key)

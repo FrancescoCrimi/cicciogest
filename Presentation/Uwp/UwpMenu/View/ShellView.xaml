@@ -29,13 +29,13 @@
         <winui:MenuBar>
 
             <winui:MenuBarItem Title="Documenti">
-
                 <MenuFlyoutItem x:Name="menuFatture"
                                 Text="Fatture"
                                 Command="{Binding NavigateToCommand, Mode=OneWay}"
                                 CommandParameter="{x:Bind contracts:ViewEnum.Fatture}">
                 </MenuFlyoutItem>
             </winui:MenuBarItem>
+
             <winui:MenuBarItem Title="Magazino">
                 <MenuFlyoutItem Text="Articoli"
                                 Command="{Binding NavigateToCommand, Mode=OneWay}"
@@ -44,6 +44,7 @@
                                 Command="{Binding NavigateToCommand, Mode=OneWay}"
                                 CommandParameter="{x:Bind contracts:ViewEnum.Categoria}" />
             </winui:MenuBarItem>
+
             <winui:MenuBarItem Title="Anagrafica">
                 <MenuFlyoutItem Text="Clienti"
                                 Command="{Binding NavigateToCommand, Mode=OneWay}"
@@ -52,6 +53,7 @@
                                 Command="{Binding NavigateToCommand, Mode=OneWay}"
                                 CommandParameter="{x:Bind contracts:ViewEnum.Fornitori}"/>
             </winui:MenuBarItem>
+
             <winui:MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About" />
             </winui:MenuBarItem>

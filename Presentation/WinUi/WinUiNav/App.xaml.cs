@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.WinUiBackend;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CiccioGest.Presentation.WinUiNav.Activation;
@@ -31,13 +32,11 @@ namespace CiccioGest.Presentation.WinUiNav
             await Ioc.Default.GetService<ActivationService>().ActivateAsync(args);
         }
 
-        private IServiceProvider ConfigureServices()
-        {
-            return new ServiceCollection()
+        private IServiceProvider ConfigureServices() => new ServiceCollection()
 
             //.AddLogging(loggingBuilder => loggingBuilder.AddNLog())
             .AddLogging()
-            //.AddSingleton(CiccioGestConfMgr.GetCurrent())
+            .AddSingleton(CiccioGestConfMgr.GetCurrent())
             .ConfigureWinUiBackend()
 
             // Default Activation Handler
@@ -54,7 +53,6 @@ namespace CiccioGest.Presentation.WinUiNav
             // View
             .AddTransient<ShellView>()
 
-            .BuildServiceProvider();
-        }
+            .BuildServiceProvider();     
     }
 }

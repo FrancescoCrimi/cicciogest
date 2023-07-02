@@ -21,6 +21,7 @@ namespace CiccioGest.Presentation.UwpBackend.Contracts
         ListaArticoli,
         ListaClienti,
         ListaFatture,
-        ListaFornitori
+        ListaFornitori,
+        Settings
     }
 }

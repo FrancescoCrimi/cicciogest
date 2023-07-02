@@ -4,13 +4,12 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.UwpBackend.Contracts;
 using CiccioGest.Presentation.UwpNav.View;
-using CiccioGest.Presentation.UwpBackend.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
-using CiccioGest.Presentation.UwpBackend.Contracts;
 
 namespace CiccioGest.Presentation.UwpNav.Services
 {
@@ -34,6 +33,7 @@ namespace CiccioGest.Presentation.UwpNav.Services
             Configure<ListaClientiView>(ViewEnum.ListaClienti);
             Configure<ListaFattureView>(ViewEnum.ListaFatture);
             Configure<ListaFornitoriView>(ViewEnum.ListaFornitori);
+            Configure<SettingsView>(ViewEnum.Settings);
         }
 
         public Type GetPageType(ViewEnum key)

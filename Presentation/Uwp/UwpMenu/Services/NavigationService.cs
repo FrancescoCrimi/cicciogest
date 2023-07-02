@@ -10,11 +10,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace CiccioGest.Presentation.UwpMenu.Services
 {
     public class NavigationService : INavigationService, IDisposable
     {
+        public event NavigatedEventHandler Navigated;
+        public event NavigationFailedEventHandler NavigationFailed;
+
         private readonly ILogger<NavigationService> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly PageService _pageService;
@@ -98,8 +102,11 @@ namespace CiccioGest.Presentation.UwpMenu.Services
 
         public bool FrameContentIsNull => _frame.Content == null;
 
-        private void OnNavigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+
+        private void OnNavigated(object sender, NavigationEventArgs e)
         {
+            Navigated?.Invoke(this, e);
+
             if (sender is Frame frame)
             {
                 bool clearNavigation = (bool)frame.Tag;
@@ -115,9 +122,10 @@ namespace CiccioGest.Presentation.UwpMenu.Services
             }
         }
 
-        private void OnNavigationFailed(object sender, Windows.UI.Xaml.Navigation.NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            NavigationFailed?.Invoke(this, e);
+            //throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         public void Dispose()

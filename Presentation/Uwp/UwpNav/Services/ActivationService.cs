@@ -1,7 +1,12 @@
-﻿using CiccioGest.Presentation.UwpNav.Activation;
+﻿// Copyright (c) 2023 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Presentation.UwpNav.Activation;
 using CiccioGest.Presentation.UwpNav.View;
 using CommunityToolkit.Mvvm.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -67,7 +72,7 @@ namespace CiccioGest.Presentation.UwpNav.Services
         private async Task HandleActivationAsync(object activationArgs)
         {
             var activationHandler = _activationHandlers
-                                                .FirstOrDefault(h => h.CanHandle(activationArgs));
+                .FirstOrDefault(h => h.CanHandle(activationArgs));
 
             if (activationHandler != null)
             {

@@ -21,6 +21,9 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private readonly ILogger _logger;
         private readonly INavigationService _navigationService;
 
+        [ObservableProperty]
+        private bool isBackEnabled;
+
         public ShellViewModel(ILogger<ShellViewModel> logger,
                               INavigationService navigationService)
         {

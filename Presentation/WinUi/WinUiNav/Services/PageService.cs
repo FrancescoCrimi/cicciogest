@@ -20,13 +20,13 @@ namespace CiccioGest.Presentation.WinUiNav.Services
         public PageService()
         {
             Configure<DashboardView>(ViewEnum.Dashboard);
-            //Configure<ArticoliView>(Views.Articoli);
+            Configure<ArticoliView>(ViewEnum.Articoli);
             //Configure<ArticoloView>(Views.Articolo);
             //Configure<CategoriaView>(Views.Categoria);
             //Configure<ClienteView>(Views.Cliente);
-            //Configure<ClientiView>(Views.Clienti);
+            Configure<ClientiView>(ViewEnum.Clienti);
             //Configure<FatturaView>(Views.Fattura);
-            //Configure<FattureView>(Views.Fatture);
+            Configure<FattureView>(ViewEnum.Fatture);
             //Configure<FornitoreView>(Views.Fornitore);
             //Configure<FornitoriView>(Views.Fornitori);
             //Configure<ListaArticoliView>(Views.ListaArticoli);

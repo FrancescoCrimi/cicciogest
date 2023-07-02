@@ -19,6 +19,7 @@
     <winui:NavigationView x:Name="navigationView"
                           OpenPaneLength="160"
                           IsBackButtonVisible="Visible"
+                          IsBackEnabled="{Binding IsBackEnabled, Mode=OneWay}"
                           IsSettingsVisible="True">
 
         <winui:NavigationView.MenuItems>
@@ -58,8 +59,10 @@
             </winui:NavigationViewItem>
 
         </winui:NavigationView.MenuItems>
+        
+        
 
-        <Frame x:Name="ContentFrame"
+        <Frame x:Name="shellFrame"
                IsTabStop="True" />
 
         <i:Interaction.Behaviors>

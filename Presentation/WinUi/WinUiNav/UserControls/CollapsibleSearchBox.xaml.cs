@@ -1,4 +1,4 @@
-﻿//  ---------------------------------------------------------------------------------
+//  ---------------------------------------------------------------------------------
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 // 
 //  The MIT License (MIT)
@@ -22,10 +22,22 @@
 //  THE SOFTWARE.
 //  ---------------------------------------------------------------------------------
 
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 
-namespace CiccioGest.Presentation.WinUiMenu.UserControls
+namespace CiccioGest.Presentation.WinUiNav.UserControls
 {
     public sealed partial class CollapsibleSearchBox : UserControl
     {
@@ -33,7 +45,7 @@ namespace CiccioGest.Presentation.WinUiMenu.UserControls
 
         public CollapsibleSearchBox()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             //Loaded += CollapsableSearchBox_Loaded;
             //Window.Current.SizeChanged += Current_SizeChanged;
             myAutoSuggestBox = searchBox;

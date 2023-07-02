@@ -14,68 +14,65 @@
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <NavigationView IsBackButtonVisible="Visible">
 
-        <NavigationView Grid.Row="1">
+        <NavigationView.MenuItems>
 
-            <NavigationView.MenuItems>
+            <NavigationViewItem Content="Dashboard"
+                                Icon="Home"
+                                helpers:NavEnumHelper.NavigateTo="Dashboard" />
 
-                <NavigationViewItem Content="Dashboard"
-                                    Icon="Home"
-                                    helpers:NavEnumHelper.NavigateTo="Dashboard" />
+            <NavigationViewItem Content="Anagrafica"
+                                Icon="People">
+                <NavigationViewItem.MenuItems>
+                    <NavigationViewItem Content="Clienti"
+                                        Icon="ContactInfo"
+                                        helpers:NavEnumHelper.NavigateTo="Clienti" />
+                    <NavigationViewItem Content="Fornitori"
+                                        Icon="ContactInfo"
+                                        helpers:NavEnumHelper.NavigateTo="Fornitori" />
+                </NavigationViewItem.MenuItems>
+            </NavigationViewItem>
 
-                <NavigationViewItem Content="Anagrafica"
-                                    Icon="People">
-                    <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Content="Clienti"
-                                            Icon="ContactInfo"
-                                            helpers:NavEnumHelper.NavigateTo="Clienti"/>
-                        <NavigationViewItem Content="Fornitori"
-                                            Icon="ContactInfo"
-                                            helpers:NavEnumHelper.NavigateTo="Fornitori"/>
-                    </NavigationViewItem.MenuItems>
-                </NavigationViewItem>
+            <NavigationViewItem Content="Fatture"
+                                Icon="PreviewLink"
+                                helpers:NavEnumHelper.NavigateTo="Fatture" />
 
-                <NavigationViewItem Content="Fatture"
-                                    Icon="PreviewLink"
-                                    helpers:NavEnumHelper.NavigateTo="Fatture" />
+            <NavigationViewItem Content="Magazino">
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                              Glyph="&#xE781;" />
+                </NavigationViewItem.Icon>
+                <NavigationViewItem.MenuItems>
+                    <NavigationViewItem Content="Articoli"
+                                        Icon="Document"
+                                        helpers:NavEnumHelper.NavigateTo="Articoli" />
+                    <NavigationViewItem Content="Categorie"
+                                        Icon="Document"
+                                        helpers:NavEnumHelper.NavigateTo="Categoria" />
+                </NavigationViewItem.MenuItems>
+            </NavigationViewItem>
 
-                <NavigationViewItem Content="Magazino">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                  Glyph="&#xE781;" />
-                    </NavigationViewItem.Icon>
-                    <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Content="Articoli"
-                                            Icon="Document"
-                                            helpers:NavEnumHelper.NavigateTo="Articoli" />
-                        <NavigationViewItem Content="Categorie"
-                                            Icon="Document"
-                                            helpers:NavEnumHelper.NavigateTo="Categoria" />
-                    </NavigationViewItem.MenuItems>
-                </NavigationViewItem>
+        </NavigationView.MenuItems>
 
-            </NavigationView.MenuItems>
+        <Frame x:Name="shellFrame" />
 
-            <Frame x:Name="shellFrame" />
+        <i:Interaction.Behaviors>
 
-            <i:Interaction.Behaviors>
+            <ic:EventTriggerBehavior EventName="ItemInvoked">
+                <ic:InvokeCommandAction Command="{Binding NavigateToCommand}">
+                    <ic:InvokeCommandAction.InputConverter>
+                        <converters:NavigationViewItemInvokedEventArgsToEnum />
+                    </ic:InvokeCommandAction.InputConverter>
+                </ic:InvokeCommandAction>
+            </ic:EventTriggerBehavior>
 
-                <ic:EventTriggerBehavior EventName="ItemInvoked">
-                    <ic:InvokeCommandAction Command="{Binding NavigateToCommand}">
-                        <ic:InvokeCommandAction.InputConverter>
-                            <converters:NavigationViewItemInvokedEventArgsToEnum />
-                        </ic:InvokeCommandAction.InputConverter>
-                    </ic:InvokeCommandAction>
-                </ic:EventTriggerBehavior>
+            <ic:EventTriggerBehavior EventName="BackRequested">
+                <ic:InvokeCommandAction Command="{Binding BackRequestedCommand}" />
+            </ic:EventTriggerBehavior>
 
-                <ic:EventTriggerBehavior EventName="BackRequested">
-                    <ic:InvokeCommandAction Command="{Binding BackRequestedCommand}" />
-                </ic:EventTriggerBehavior>
+        </i:Interaction.Behaviors>
 
-            </i:Interaction.Behaviors>
-        </NavigationView>
-
-    </Grid>
+    </NavigationView>
 
 </Page>

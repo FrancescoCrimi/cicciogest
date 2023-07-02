@@ -29,7 +29,9 @@ namespace CiccioGest.Presentation.UwpBackend
                 .AddTransient<ListaArticoliViewModel>()
                 .AddTransient<ListaClientiViewModel>()
                 .AddTransient<ListaFattureViewModel>()
-                .AddTransient<ListaFornitoriViewModel>();
+                .AddTransient<ListaFornitoriViewModel>()
+                .AddTransient<DashboardViewModel>()
+                .AddTransient<SettingsViewModel>();
         }
     }
 }

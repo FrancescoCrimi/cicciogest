@@ -5,7 +5,6 @@
       xmlns:local="using:CiccioGest.Presentation.WinUiMenu.View"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:tollkit="using:CommunityToolkit.WinUI.UI.Controls"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
       xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
       xmlns:uc="using:CiccioGest.Presentation.WinUiMenu.UserControls"
@@ -61,4 +60,5 @@
         <uc:ListaArticoliControl Grid.Row="1" />
 
     </Grid>
+
 </Page>
