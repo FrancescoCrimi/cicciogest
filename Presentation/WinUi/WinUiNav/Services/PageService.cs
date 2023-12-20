@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Presentation.WinUiBackend.Contracts;
-using CiccioGest.Presentation.WinUiNav.View;
+using CiccioGest.Presentation.WinUiBackend.View;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
@@ -21,18 +21,18 @@ namespace CiccioGest.Presentation.WinUiNav.Services
         {
             Configure<DashboardView>(ViewEnum.Dashboard);
             Configure<ArticoliView>(ViewEnum.Articoli);
-            //Configure<ArticoloView>(Views.Articolo);
-            //Configure<CategoriaView>(Views.Categoria);
-            //Configure<ClienteView>(Views.Cliente);
+            Configure<ArticoloView>(ViewEnum.Articolo);
+            Configure<CategoriaView>(ViewEnum.Categoria);
+            Configure<ClienteView>(ViewEnum.Cliente);
             Configure<ClientiView>(ViewEnum.Clienti);
-            //Configure<FatturaView>(Views.Fattura);
+            Configure<FatturaView>(ViewEnum.Fattura);
             Configure<FattureView>(ViewEnum.Fatture);
-            //Configure<FornitoreView>(Views.Fornitore);
-            //Configure<FornitoriView>(Views.Fornitori);
-            //Configure<ListaArticoliView>(Views.ListaArticoli);
-            //Configure<ListaClientiView>(Views.ListaClienti);
-            //Configure<ListaFattureView>(Views.ListaFatture);
-            //Configure<ListaFornitoriView>(Views.ListaFornitori);
+            Configure<FornitoreView>(ViewEnum.Fornitore);
+            Configure<FornitoriView>(ViewEnum.Fornitori);
+            Configure<ListaArticoliView>(ViewEnum.ListaArticoli);
+            Configure<ListaClientiView>(ViewEnum.ListaClienti);
+            Configure<ListaFattureView>(ViewEnum.ListaFatture);
+            Configure<ListaFornitoriView>(ViewEnum.ListaFornitori);
         }
 
         public Type GetPageType(ViewEnum key)

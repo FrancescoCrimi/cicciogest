@@ -1,0 +1,52 @@
+﻿<Page x:Class="CiccioGest.Presentation.UwpBackend.View.CategoriaView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:CiccioGest.Presentation.UwpBackend.View"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+      xmlns:i="using:Microsoft.Xaml.Interactivity"
+      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:uc="using:CiccioGest.Presentation.UwpBackend.UserControls"
+      xmlns:viewmodel="using:CiccioGest.Presentation.UwpBackend.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:CategoriaViewModel}"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <i:Interaction.Behaviors>
+        <ic:EventTriggerBehavior EventName="Loaded">
+            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </ic:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0">
+
+            <TextBlock x:Name="PageTitle"
+                       Text="Categoria"
+                       Margin="{StaticResource SmallLeftMargin}"
+                       Style="{StaticResource PageTitleStyle}" />
+
+            <CommandBar x:Name="mainCommandBar"
+                        DefaultLabelPosition="Right"
+                        HorizontalAlignment="Stretch"
+                        Background="Transparent"
+                        RelativePanel.LeftOf="OrderSearchBox"
+                        RelativePanel.RightOf="PageTitle">
+            </CommandBar>
+
+            <uc:CollapsibleSearchBox x:Name="OrderSearchBox"
+                                     Width="240"
+                                     Margin="12,8,12,0"
+                                     CollapseWidth="{StaticResource MediumWindowSnapPoint}"
+                                     RelativePanel.AlignRightWithPanel="True" />
+
+        </RelativePanel>
+
+    </Grid>
+</Page>

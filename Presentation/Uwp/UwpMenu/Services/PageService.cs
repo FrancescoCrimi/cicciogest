@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Presentation.UwpBackend.Contracts;
-using CiccioGest.Presentation.UwpMenu.View;
+using CiccioGest.Presentation.UwpBackend.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;

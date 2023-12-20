@@ -4,8 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.UwpBackend.View;
 using CiccioGest.Presentation.UwpMenu.Services;
-using CiccioGest.Presentation.UwpMenu.View;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;

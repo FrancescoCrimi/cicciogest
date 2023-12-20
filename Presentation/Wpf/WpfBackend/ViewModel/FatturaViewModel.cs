@@ -50,66 +50,77 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         public Dettaglio DettaglioSelezionato { private get; set; }
 
 
-        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
-
-
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ListaClientiViewModel)));
-
-        public IAsyncRelayCommand SalvaFatturaCommand => salvaFatturaCommand ??= new AsyncRelayCommand(async () =>
-        {
-            try
+        public ICommand LoadedCommand
+            => loadedCommand ??= new RelayCommand(() =>
             {
-                await fatturaService.SaveFattura(Fattura);
-            }
-            catch (Exception e)
+            });
+
+
+        public ICommand NuovaFatturaCommand
+            => nuovaFatturaCommand ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(ListaClientiViewModel)));
+
+        public IAsyncRelayCommand SalvaFatturaCommand
+            => salvaFatturaCommand ??= new AsyncRelayCommand(async () =>
             {
-                messageBoxService.Show("Errore: " + e.Message);
-            }
-        });
+                try
+                {
+                    await fatturaService.SaveFattura(Fattura);
+                }
+                catch (Exception e)
+                {
+                    messageBoxService.Show("Errore: " + e.Message);
+                }
+            });
 
-        public IAsyncRelayCommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new AsyncRelayCommand(async () =>
-        {
-            try
+        public IAsyncRelayCommand RimuoviFatturaCommand
+            => rimuoviFatturaCommand ??= new AsyncRelayCommand(async () =>
             {
-                await fatturaService.DeleteFattura(Fattura.Id);
-            }
-            catch (Exception e)
+                try
+                {
+                    await fatturaService.DeleteFattura(Fattura.Id);
+                }
+                catch (Exception e)
+                {
+                    messageBoxService.Show("Errore: " + e.Message);
+                }
+            });
+
+        public ICommand ApriFatturaCommand
+            => apriFatturaCommand ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(ListaFattureViewModel)));
+
+
+        public ICommand NuovoDettaglioCommand
+            => nuovoDettaglioCommand ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(ListaArticoliViewModel)));
+
+        public ICommand AggiungiDettaglioCommand
+            => aggiungiDettaglioCommand ??= new RelayCommand(() =>
             {
-                messageBoxService.Show("Errore: " + e.Message);
-            }
-        });
+                if (Dettaglio.Quantita != 0)
+                {
+                    Fattura.AddDettaglio(Dettaglio);
+                    OnPropertyChanged(nameof(Fattura));
+                    NuovoDettaglio();
+                }
+            });
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ListaFattureViewModel)));
-
-
-        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ListaArticoliViewModel)));
-
-        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
-        {
-            if (Dettaglio.Quantita != 0)
+        public ICommand RimuoviDettaglioCommand
+            => rimuoviDettaglioCommand ??= new RelayCommand(() =>
             {
-                Fattura.AddDettaglio(Dettaglio);
+                Fattura.RemoveDettaglio(Dettaglio);
                 OnPropertyChanged(nameof(Fattura));
                 NuovoDettaglio();
-            }
-        });
+            });
 
-        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(() =>
-        {
-            Fattura.RemoveDettaglio(Dettaglio);
-            OnPropertyChanged(nameof(Fattura));
-            NuovoDettaglio();
-        });
-
-        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??= new RelayCommand(() =>
-        {
-            if (DettaglioSelezionato != null)
-                Dettaglio = DettaglioSelezionato;
-            OnPropertyChanged(nameof(Dettaglio));
-        });
+        public ICommand SelezionaDettaglioCommand
+            => selezionaDettaglioCommand ??= new RelayCommand(() =>
+            {
+                if (DettaglioSelezionato != null)
+                    Dettaglio = DettaglioSelezionato;
+                OnPropertyChanged(nameof(Dettaglio));
+            });
 
 
 

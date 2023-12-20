@@ -13,6 +13,7 @@ namespace CiccioGest.Presentation.WinUiBackend
 
                 // ViewModel
                 .AddTransient<ShellViewModel>()
+                .AddTransient<DashboardViewModel>()
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoliViewModel>()
                 .AddTransient<CategoriaViewModel>()

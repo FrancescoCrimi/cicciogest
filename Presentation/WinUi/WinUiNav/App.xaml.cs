@@ -19,7 +19,7 @@ namespace CiccioGest.Presentation.WinUiNav
 {
     public partial class App : Microsoft.UI.Xaml.Application
     {
-        public static Window MainWindow { get; } = new MainWindow();
+        public static Window MainWindow { get; } = new Window();
 
         public App()
         {

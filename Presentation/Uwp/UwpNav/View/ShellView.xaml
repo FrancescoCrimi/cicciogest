@@ -59,8 +59,8 @@
             </winui:NavigationViewItem>
 
         </winui:NavigationView.MenuItems>
-        
-        
+
+
 
         <Frame x:Name="shellFrame"
                IsTabStop="True" />

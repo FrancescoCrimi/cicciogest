@@ -1,0 +1,15 @@
+﻿using CiccioGest.Presentation.UwpBackend.ViewModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Windows.UI.Xaml.Controls;
+
+namespace CiccioGest.Presentation.UwpBackend.View
+{
+    public sealed partial class ClienteView : Page
+    {
+        public ClienteView()
+        {
+            InitializeComponent();
+            DataContext = Ioc.Default.GetService<ClienteViewModel>();
+        }
+    }
+}

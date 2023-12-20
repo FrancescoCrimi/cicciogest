@@ -48,10 +48,10 @@
             <winui:MenuBarItem Title="Anagrafica">
                 <MenuFlyoutItem Text="Clienti"
                                 Command="{Binding NavigateToCommand, Mode=OneWay}"
-                                CommandParameter="{x:Bind contracts:ViewEnum.Clienti}"/>
+                                CommandParameter="{x:Bind contracts:ViewEnum.Clienti}" />
                 <MenuFlyoutItem Text="Fornitori"
                                 Command="{Binding NavigateToCommand, Mode=OneWay}"
-                                CommandParameter="{x:Bind contracts:ViewEnum.Fornitori}"/>
+                                CommandParameter="{x:Bind contracts:ViewEnum.Fornitori}" />
             </winui:MenuBarItem>
 
             <winui:MenuBarItem Title="Help">

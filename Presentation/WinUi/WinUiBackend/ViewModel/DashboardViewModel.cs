@@ -15,13 +15,7 @@ public partial class DashboardViewModel : ObservableObject
 
     public DashboardViewModel()
     {
-        _text = "Dashboard";
+        Text = "Dashboard";
     }
-
-    //public string Text
-    //{
-    //    get => _text;
-    //    set => SetProperty(ref _text, value);
-    //}
 }
 

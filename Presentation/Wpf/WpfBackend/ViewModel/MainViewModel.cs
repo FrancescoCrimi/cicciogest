@@ -36,33 +36,41 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public ICommand ApriFattureCommand => apriFattureCommand ??= new RelayCommand(()
+        public ICommand ApriFattureCommand
+            => apriFattureCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(FattureViewModel), true));
 
-        public ICommand ApriArticoliCommand => apriArticoliCommand ??= new RelayCommand(()
+        public ICommand ApriArticoliCommand
+            => apriArticoliCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(ArticoliViewModel), true));
 
-        public ICommand ApriCategorieCommand => apriCategorieCommand ??= new RelayCommand(()
+        public ICommand ApriCategorieCommand
+            => apriCategorieCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(CategoriaViewModel), true));
 
-        public ICommand ApriClientiCommand => apriClientiCommand ??= new RelayCommand(()
+        public ICommand ApriClientiCommand
+            => apriClientiCommand ??= new RelayCommand(()
                 => navigationService.NavigateTo(nameof(ClientiViewModel), true));
 
-        public ICommand ApriFornitoriCommand => apriFornitoriCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(FornitoriViewModel), true));
+        public ICommand ApriFornitoriCommand
+            => apriFornitoriCommand ??= new RelayCommand(()
+                => navigationService.NavigateTo(nameof(FornitoriViewModel), true));
 
 
 
-        public ICommand MenuItemCommand => menuItemCommand
-            ??= new RelayCommand<Type>((type)
+        public ICommand MenuItemCommand
+            => menuItemCommand ??= new RelayCommand<Type>((type)
                 => navigationService.NavigateTo(type));
 
-        public ICommand MenuOptionsItemCommand => menuOptionsItemCommand
-            ??= new RelayCommand(() => { }, () => false);
+        public ICommand MenuOptionsItemCommand
+            => menuOptionsItemCommand ??= new RelayCommand(
+                () => { },
+                () => false);
 
-        public ICommand GoBackCommand => goBackCommand ??= new RelayCommand(
-            () => navigationService.GoBack(),
-            () => navigationService.CanGoBack);
+        public ICommand GoBackCommand
+            => goBackCommand ??= new RelayCommand(
+                () => navigationService.GoBack(),
+                () => navigationService.CanGoBack);
 
         private void OnNavigated(object sender, EventArgs e)
         {
