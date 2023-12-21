@@ -41,8 +41,6 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-
-
         public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
 
         public FatturaReadOnly FatturaSelezionata

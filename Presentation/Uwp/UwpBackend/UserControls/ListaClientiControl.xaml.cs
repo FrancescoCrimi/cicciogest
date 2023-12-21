@@ -6,7 +6,7 @@ namespace CiccioGest.Presentation.UwpBackend.UserControls
     {
         public ListaClientiControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

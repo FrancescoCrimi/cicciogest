@@ -9,13 +9,17 @@ using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 
 namespace CiccioGest.Presentation.WinUiNav.Services
 {
     public class NavigationService : INavigationService, IDisposable
     {
-        private readonly ILogger<NavigationService> _logger;
+        public event NavigatedEventHandler Navigated;
+        public event NavigationFailedEventHandler NavigationFailed;
+
+        private readonly ILogger _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly PageService _pageService;
         private Frame _frame;
@@ -30,6 +34,7 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             _logger = logger;
             _serviceScopeFactory = serviceScopeFactory;
             _pageService = pageService;
+            logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public void Initialize(Frame shellFrame)
@@ -99,6 +104,8 @@ namespace CiccioGest.Presentation.WinUiNav.Services
 
         private void OnNavigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
         {
+            Navigated?.Invoke(this, e);
+
             if (sender is Frame frame)
             {
                 bool clearNavigation = (bool)frame.Tag;
@@ -116,13 +123,14 @@ namespace CiccioGest.Presentation.WinUiNav.Services
 
         private void OnNavigationFailed(object sender, Microsoft.UI.Xaml.Navigation.NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            NavigationFailed?.Invoke(this, e);
         }
 
         public void Dispose()
         {
             _frame.Navigated -= OnNavigated;
             _frame.NavigationFailed -= OnNavigationFailed;
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

@@ -40,7 +40,8 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public Categoria CategoriaSelezionata { get; set; }
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(Loaded);
+        public IAsyncRelayCommand LoadedCommand => loadedCommand 
+            ??= new AsyncRelayCommand(Loaded);
 
         private async Task Loaded()
         {
@@ -48,28 +49,32 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         }
 
 
-        public ICommand NuovoArticoloCommand => nuovoArticoloCommand ??= new RelayCommand(NuovoArticolo);
+        public ICommand NuovoArticoloCommand => nuovoArticoloCommand 
+            ??= new RelayCommand(NuovoArticolo);
 
         private void NuovoArticolo()
         {
         }
 
 
-        public ICommand SalvaArticoloCommand => salvaArticoloCommand ??= new RelayCommand(SalvaArticolo);
+        public ICommand SalvaArticoloCommand => salvaArticoloCommand 
+            ??= new RelayCommand(SalvaArticolo);
 
         private void SalvaArticolo()
         {
         }
 
 
-        public ICommand EliminaArticoloCommand => eliminaArticoloCommand ??= new RelayCommand(EliminaArticolo);
+        public ICommand EliminaArticoloCommand => eliminaArticoloCommand 
+            ??= new RelayCommand(EliminaArticolo);
 
         private void EliminaArticolo()
         {
         }
 
 
-        public ICommand ApriArticoloCommand => apriArticoloCommand ??= new RelayCommand(ApriArticolo);
+        public ICommand ApriArticoloCommand => apriArticoloCommand 
+            ??= new RelayCommand(ApriArticolo);
 
         private void ApriArticolo()
         {

@@ -11,11 +11,11 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel;
 public partial class DashboardViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string _text;
+    private string _title;
 
     public DashboardViewModel()
     {
-        Text = "Dashboard";
+        Title = "Dashboard";
     }
 }
 

@@ -59,13 +59,17 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
 
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(AggiornaArticoli);
+        public IAsyncRelayCommand LoadedCommand => loadedCommand
+            ??= new AsyncRelayCommand(AggiornaArticoli);
 
-        public ICommand NuovoArticoloCommand => nuovoArticoloCommand ??= new RelayCommand(NuovoArticolo);
+        public ICommand NuovoArticoloCommand => nuovoArticoloCommand
+            ??= new RelayCommand(NuovoArticolo);
 
-        public ICommand ApriArticoloCommand => apriArticoloCommand ??= new RelayCommand(ApriArticolo, () => ArticoloSelezionato != null);
+        public ICommand ApriArticoloCommand => apriArticoloCommand
+            ??= new RelayCommand(ApriArticolo, () => ArticoloSelezionato != null);
 
-        public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand ??= new AsyncRelayCommand(AggiornaArticoli);
+        public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand 
+            ??= new AsyncRelayCommand(AggiornaArticoli);
 
 
 

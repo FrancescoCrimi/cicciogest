@@ -47,7 +47,10 @@ namespace CiccioGest.Presentation.UwpBackend.UserControls
 
         // Using a DependencyProperty as the backing store for CollapseWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CollapseWidthProperty =
-            DependencyProperty.Register("CollapseWidth", typeof(double), typeof(CollapsibleSearchBox), new PropertyMetadata(0.0));
+            DependencyProperty.Register("CollapseWidth",
+                                        typeof(double),
+                                        typeof(CollapsibleSearchBox),
+                                        new PropertyMetadata(0.0));
 
         private AutoSuggestBox myAutoSuggestBox;
         public AutoSuggestBox AutoSuggestBox

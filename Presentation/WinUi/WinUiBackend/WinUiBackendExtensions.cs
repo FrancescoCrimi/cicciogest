@@ -1,4 +1,10 @@
-﻿using CiccioGest.Application.Impl;
+﻿// Copyright (c) 2023 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Application.Impl;
 using CiccioGest.Presentation.WinUiBackend.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,10 +16,7 @@ namespace CiccioGest.Presentation.WinUiBackend
         {
             return serviceCollection
                 .ConfigureApplication()
-
-                // ViewModel
                 .AddTransient<ShellViewModel>()
-                .AddTransient<DashboardViewModel>()
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoliViewModel>()
                 .AddTransient<CategoriaViewModel>()
@@ -26,7 +29,9 @@ namespace CiccioGest.Presentation.WinUiBackend
                 .AddTransient<ListaArticoliViewModel>()
                 .AddTransient<ListaClientiViewModel>()
                 .AddTransient<ListaFattureViewModel>()
-                .AddTransient<ListaFornitoriViewModel>();
+                .AddTransient<ListaFornitoriViewModel>()
+                .AddTransient<DashboardViewModel>()
+                .AddTransient<SettingsViewModel>();
         }
     }
 }

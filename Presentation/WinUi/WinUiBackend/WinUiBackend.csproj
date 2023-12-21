@@ -7,6 +7,9 @@
     <UseWinUI>true</UseWinUI>
     <Platforms>x64;x86</Platforms>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="View\SettingsView.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
@@ -18,6 +21,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj" />
     <ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 </Project>

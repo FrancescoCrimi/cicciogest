@@ -12,7 +12,7 @@ namespace CiccioGest.Presentation.WinUiBackend.UserControls
     {
         public ListaClientiControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

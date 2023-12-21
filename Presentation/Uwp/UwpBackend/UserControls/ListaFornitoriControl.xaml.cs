@@ -6,7 +6,7 @@ namespace CiccioGest.Presentation.UwpBackend.UserControls
     {
         public ListaFornitoriControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

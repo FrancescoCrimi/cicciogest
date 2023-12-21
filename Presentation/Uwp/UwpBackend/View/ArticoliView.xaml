@@ -61,4 +61,5 @@
         <uc:ListaArticoliControl Grid.Row="1" />
 
     </Grid>
+
 </Page>

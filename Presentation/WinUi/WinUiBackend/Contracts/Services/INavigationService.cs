@@ -4,12 +4,16 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using Microsoft.UI.Xaml.Navigation;
 using System;
 
 namespace CiccioGest.Presentation.WinUiBackend.Contracts.Services
 {
     public interface INavigationService
     {
+        event NavigatedEventHandler Navigated;
+        event NavigationFailedEventHandler NavigationFailed;
+
         bool CanGoBack { get; }
         bool CanGoForward { get; }
         void GoBack();

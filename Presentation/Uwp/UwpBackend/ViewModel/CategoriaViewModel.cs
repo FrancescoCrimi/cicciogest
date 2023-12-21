@@ -16,6 +16,11 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
 {
     public sealed class CategoriaViewModel : ObservableObject, IDisposable
     {
+        private AsyncRelayCommand loadedCommand;
+        private readonly ILogger<ArticoliViewModel> logger;
+        private readonly IMagazinoService magazinoService;
+        private readonly INavigationService navigationService;
+
         public CategoriaViewModel(ILogger<ArticoliViewModel> logger,
                                   IMagazinoService magazinoService,
                                   INavigationService navigationService)
@@ -25,11 +30,6 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             this.navigationService = navigationService;
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
-
-        private AsyncRelayCommand loadedCommand;
-        private readonly ILogger<ArticoliViewModel> logger;
-        private readonly IMagazinoService magazinoService;
-        private readonly INavigationService navigationService;
 
         public IAsyncRelayCommand LoadedCommand => loadedCommand
             ?? (loadedCommand = new AsyncRelayCommand(Loaded));

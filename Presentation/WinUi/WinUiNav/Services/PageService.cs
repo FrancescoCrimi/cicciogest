@@ -33,6 +33,7 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             Configure<ListaClientiView>(ViewEnum.ListaClienti);
             Configure<ListaFattureView>(ViewEnum.ListaFatture);
             Configure<ListaFornitoriView>(ViewEnum.ListaFornitori);
+            Configure<SettingsView>(ViewEnum.Settings);
         }
 
         public Type GetPageType(ViewEnum key)
@@ -48,7 +49,7 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             return pageType;
         }
 
-        private void Configure< V>(ViewEnum key)
+        private void Configure<V>(ViewEnum key)
             where V : Page
         {
             lock (_pages)

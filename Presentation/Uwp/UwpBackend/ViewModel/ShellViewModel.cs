@@ -63,9 +63,9 @@ namespace CiccioGest.Presentation.UwpBackend.ViewModel
             _navigationService.GoBack();
         }
 
-        private void OnNavigateTo(ViewEnum view)
+        private void OnNavigateTo(ViewEnum key)
         {
-            _navigationService.Navigate(view);
+            _navigationService.Navigate(key);
         }
 
         public void Dispose()

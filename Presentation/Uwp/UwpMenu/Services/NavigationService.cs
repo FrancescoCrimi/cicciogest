@@ -19,7 +19,7 @@ namespace CiccioGest.Presentation.UwpMenu.Services
         public event NavigatedEventHandler Navigated;
         public event NavigationFailedEventHandler NavigationFailed;
 
-        private readonly ILogger<NavigationService> _logger;
+        private readonly ILogger _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly PageService _pageService;
         private Frame _frame;
@@ -125,7 +125,6 @@ namespace CiccioGest.Presentation.UwpMenu.Services
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             NavigationFailed?.Invoke(this, e);
-            //throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         public void Dispose()

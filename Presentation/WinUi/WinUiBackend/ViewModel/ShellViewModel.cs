@@ -10,9 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
@@ -29,7 +27,13 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             _logger = logger;
             _navigationService = navigationService;
+            _navigationService.Navigated += _navigationService_Navigated;
             _logger.LogDebug("Created: " + GetHashCode().ToString());
+        }
+
+        private void _navigationService_Navigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            IsBackEnabled = _navigationService.CanGoBack;
         }
 
         [RelayCommand]
@@ -39,15 +43,15 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         }
 
         [RelayCommand]
-        private void OnNavigateTo(ViewEnum key)
-        {
-            _navigationService.Navigate(key);
-        }
-
-        [RelayCommand]
         private void OnBackRequested()
         {
             _navigationService.GoBack();
+        }
+
+        [RelayCommand]
+        private void OnNavigateTo(ViewEnum key)
+        {
+            _navigationService.Navigate(key);
         }
 
         public void Dispose()
