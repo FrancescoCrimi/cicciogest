@@ -23,7 +23,7 @@ namespace CiccioGest.Infrastructure.DomainBase
             }
         }
 
-        public virtual event PropertyChangedEventHandler PropertyChanged;
+        public virtual event PropertyChangedEventHandler? PropertyChanged;
 
         public override string ToString()
         {

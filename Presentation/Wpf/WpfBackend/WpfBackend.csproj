@@ -1,17 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<Platforms>x86;x64</Platforms>
 		<RootNamespace>CiccioGest.Presentation.WpfBackend</RootNamespace>
 		<AssemblyName>WpfBackend</AssemblyName>
 		<Product>CiccioGest</Product>
 		<Authors>Francesco Crimi</Authors>
 		<Company>CiccioSoft</Company>
-		<Platforms>x86;x64</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

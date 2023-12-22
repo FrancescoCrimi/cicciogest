@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public class ListaFornitoriViewModel : FornitoriViewModel
+    public partial class ListaFornitoriViewModel : FornitoriViewModel
     {
         public ListaFornitoriViewModel(ILogger<FornitoriViewModel> logger,
                                        INavigationService navigationService,

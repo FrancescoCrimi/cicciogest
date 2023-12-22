@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public class ListaFattureViewModel : FattureViewModel
+    public partial class ListaFattureViewModel : FattureViewModel
     {
         public ListaFattureViewModel(ILogger<ListaFattureViewModel> logger,
                                      IFatturaService fatturaService,

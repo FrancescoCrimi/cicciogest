@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public sealed class CategoriaViewModel : ObservableObject, IDisposable
+    public sealed partial class CategoriaViewModel : ObservableObject, IDisposable
     {
         private AsyncRelayCommand loadedCommand;
         private readonly ILogger<ArticoliViewModel> logger;

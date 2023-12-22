@@ -20,11 +20,11 @@ namespace CiccioGest.Presentation.AppForm.View
         private readonly IServiceProvider serviceProvider;
         private readonly IServiceScopeFactory serviceScopeFactory;
 
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler VerificaDatabaseEvent;
-        public event EventHandler CreaDatabaseEvent;
-        public event EventHandler PopolaDatabaseEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? VerificaDatabaseEvent;
+        public event EventHandler? CreaDatabaseEvent;
+        public event EventHandler? PopolaDatabaseEvent;
 
         public SettingView(ILogger<SettingView> logger,
                            IServiceProvider serviceProvider,

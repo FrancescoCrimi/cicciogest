@@ -1,14 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<!--<TargetFramework>netstandard2.0</TargetFramework>-->
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+
 		<RootNamespace>CiccioGest.Application.Impl</RootNamespace>
 		<AssemblyName>Application.Impl</AssemblyName>
+
+		<Platforms>x86;x64</Platforms>
+		<!--<LangVersion>8.0</LangVersion>-->
+
 		<Product>CiccioGest</Product>
 		<Authors>Francesco Crimi</Authors>
 		<Company>CiccioSoft</Company>
-		<Platforms>x86;x64</Platforms>
-		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

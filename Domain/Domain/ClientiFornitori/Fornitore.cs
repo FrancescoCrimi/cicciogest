@@ -8,12 +8,12 @@ namespace CiccioGest.Domain.ClientiFornitori
         public Fornitore() { }
 
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as Fornitore);
         }
 
-        public virtual bool Equals(Fornitore other)
+        public virtual bool Equals(Fornitore? other)
         {
             return other != null &&
                    Id == other.Id;
@@ -21,7 +21,7 @@ namespace CiccioGest.Domain.ClientiFornitori
 
         public override int GetHashCode()
         {
-            return 2108858624 + Id.GetHashCode();
+            return HashCode.Combine(Id);
         }
     }
 }

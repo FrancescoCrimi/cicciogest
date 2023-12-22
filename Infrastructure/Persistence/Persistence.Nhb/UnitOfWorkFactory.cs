@@ -53,8 +53,8 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
                 case Databases.PgSql:
-                    configuration.SetProperty(Environment.ConnectionDriver, "NHibernate.Driver.NpgsqlDriver");
-                    configuration.SetProperty(Environment.Dialect, "NHibernate.Dialect.PostgreSQL83Dialect");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.NpgsqlDriver");
+                    configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.PostgreSQL83Dialect");
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
                     break;
                 case Databases.SQLite:

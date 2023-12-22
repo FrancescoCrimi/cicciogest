@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public sealed class ArticoloViewModel : ObservableRecipient, IDisposable
+    public sealed partial class ArticoloViewModel : ObservableRecipient, IDisposable
     {
         private AsyncRelayCommand loadedCommand;
         private readonly ILogger<ArticoloViewModel> logger;

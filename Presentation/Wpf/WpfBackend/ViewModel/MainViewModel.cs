@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public sealed class MainViewModel : ObservableRecipient, IDisposable
+    public sealed partial class MainViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly INavigationService navigationService;
@@ -72,7 +72,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 () => navigationService.GoBack(),
                 () => navigationService.CanGoBack);
 
-        private void OnNavigated(object sender, EventArgs e)
+        private void OnNavigated(object? sender, EventArgs e)
         {
             if (goBackCommand != null)
                 goBackCommand.NotifyCanExecuteChanged();

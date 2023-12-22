@@ -97,12 +97,12 @@ namespace CiccioGest.Domain.Magazino
 
 
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as Articolo);
         }
 
-        public virtual bool Equals(Articolo other)
+        public virtual bool Equals(Articolo? other)
         {
             return other != null &&
                    Id == other.Id;
@@ -110,7 +110,7 @@ namespace CiccioGest.Domain.Magazino
 
         public override int GetHashCode()
         {
-            return 2108858624 + Id.GetHashCode();
+            return HashCode.Combine(Id);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        private async void View_LoadEvent(object sender, EventArgs e)
+        private async void View_LoadEvent(object? sender, EventArgs e)
         {
             view.NuovoClienteEvent += View_NuovoClienteEvent;
             view.ClienteSelezionatoEvent += View_ClienteSelezionatoEvent;
@@ -43,26 +43,26 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.CaricaClienti(clienti);
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
             view.NuovoClienteEvent -= View_NuovoClienteEvent;
             view.ClienteSelezionatoEvent -= View_ClienteSelezionatoEvent;
             view.CreaFatturaEvent -= View_CreaFatturaEvent;
         }
 
-        private void View_NuovoClienteEvent(object sender, EventArgs e)
+        private void View_NuovoClienteEvent(object? sender, EventArgs e)
         {
             windowService.OpenWindow<ClientePresenter>().NuovoCliente();
             view.Close();
         }
 
-        private void View_ClienteSelezionatoEvent(object sender, int e)
+        private void View_ClienteSelezionatoEvent(object? sender, int e)
         {
             windowService.OpenWindow<ClientePresenter>().ApriCliente(e);
             view.Close();
         }
 
-        private void View_CreaFatturaEvent(object sender, int e)
+        private void View_CreaFatturaEvent(object? sender, int e)
         {
             windowService.OpenWindow<FatturaPresenter>().NuovaFattura(e);
             view.Close();

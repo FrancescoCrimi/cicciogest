@@ -2,7 +2,7 @@
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public class SettingsViewModel : ObservableObject
+    public partial class SettingsViewModel : ObservableObject
     {
         public string Title => "Setting View";
     }

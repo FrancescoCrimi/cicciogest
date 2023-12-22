@@ -34,23 +34,23 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        private async void View_LoadEvent(object sender, EventArgs e)
+        private async void View_LoadEvent(object? sender, EventArgs e)
         {
             await Refresh();
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
             //throw new NotImplementedException();
         }
 
-        private async void View_CancellaCategoriaEvent(object sender, int e)
+        private async void View_CancellaCategoriaEvent(object? sender, int e)
         {
             await magazinoService.DeleteCategoria(e);
             await Refresh();
         }
 
-        private async void View_SalvaCategoriaEvent(object s, Categoria e)
+        private async void View_SalvaCategoriaEvent(object? s, Categoria e)
         {
             await magazinoService.SaveCategoria(e);
             await Refresh();

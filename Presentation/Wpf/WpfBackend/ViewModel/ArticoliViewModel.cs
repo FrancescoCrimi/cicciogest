@@ -18,7 +18,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public class ArticoliViewModel : ObservableRecipient, IDisposable
+    public partial class ArticoliViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;

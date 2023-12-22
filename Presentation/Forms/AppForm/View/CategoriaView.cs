@@ -14,17 +14,17 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class CategoriaView : Form, ICategoriaView
     {
-        private readonly ILogger<CategoriaView> logger;
+        private readonly ILogger _logger;
 
-        public event EventHandler LoadEvent;
-        public event EventHandler<Categoria> SalvaCategoriaEvent;
-        public event EventHandler<int> CancellaCategoriaEvent;
-        public event EventHandler CloseEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler<Categoria>? SalvaCategoriaEvent;
+        public event EventHandler<int>? CancellaCategoriaEvent;
+        public event EventHandler? CloseEvent;
 
         public CategoriaView(ILogger<CategoriaView> logger)
         {
             InitializeComponent();
-            this.logger = logger;
+            _logger = logger;
         }
 
         public void SetCategoria(Categoria categoria)

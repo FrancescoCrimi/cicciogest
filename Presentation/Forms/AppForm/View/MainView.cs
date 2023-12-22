@@ -12,15 +12,15 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class MainView : Form, IMainView
     {
-        private readonly ILogger<MainView> logger;
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler FattureEvent;
-        public event EventHandler ClientiEvent;
-        public event EventHandler FornitoriEvent;
-        public event EventHandler ArticoliEvent;
-        public event EventHandler CategorieEvent;
-        public event EventHandler OpzioniEvent;
+        private readonly ILogger logger;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? FattureEvent;
+        public event EventHandler? ClientiEvent;
+        public event EventHandler? FornitoriEvent;
+        public event EventHandler? ArticoliEvent;
+        public event EventHandler? CategorieEvent;
+        public event EventHandler? OpzioniEvent;
 
         public MainView(ILogger<MainView> logger)
         {

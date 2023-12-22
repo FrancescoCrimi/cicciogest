@@ -35,7 +35,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #region eventi iview
 
-        private void View_LoadEvent(object sender, EventArgs e)
+        private void View_LoadEvent(object? sender, EventArgs e)
         {
             view.FattureEvent += View_FattureEvent;
             view.ClientiEvent += View_ClientiEvent;
@@ -44,7 +44,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.CategorieEvent += View_CategorieEvent;
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
             view.FattureEvent -= View_FattureEvent;
             view.ClientiEvent -= View_ClientiEvent;
@@ -57,27 +57,27 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #region eventi MainView
 
-        private void View_FattureEvent(object sender, EventArgs e)
+        private void View_FattureEvent(object? sender, EventArgs e)
         {
             windowService.OpenWindow<FatturePresenter>();
         }
 
-        private void View_ClientiEvent(object sender, EventArgs e)
+        private void View_ClientiEvent(object? sender, EventArgs e)
         {
             windowService.OpenWindow<ClientiPresenter>();
         }
 
-        private void View_FornitoriEvent(object sender, EventArgs e)
+        private void View_FornitoriEvent(object? sender, EventArgs e)
         {
             windowService.OpenWindow<FornitoriPresenter>();
         }
 
-        private void View_ArticoliEvent(object sender, EventArgs e)
+        private void View_ArticoliEvent(object? sender, EventArgs e)
         {
             windowService.OpenWindow<ArticoliPresenter>();
         }
 
-        private void View_CategorieEvent(object sender, EventArgs e)
+        private void View_CategorieEvent(object? sender, EventArgs e)
         {
             windowService.OpenWindow<CategoriaPresenter>();
         }

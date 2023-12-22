@@ -42,7 +42,7 @@ namespace CiccioGest.Presentation.AppForm.Hosting
             return Task.CompletedTask;
         }
 
-        private void Application_ApplicationExit(object sender, EventArgs e)
+        private void Application_ApplicationExit(object? sender, EventArgs e)
         {
             System.Windows.Forms.Application.ApplicationExit -= Application_ApplicationExit;
             hostApplicationLifetime.StopApplication();

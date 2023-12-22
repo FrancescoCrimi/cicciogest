@@ -16,9 +16,9 @@ namespace CiccioGest.Presentation.AppForm.View
     {
         private readonly ILogger logger;
 
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler<int> ArticoloSelezionatoEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler<int>? ArticoloSelezionatoEvent;
 
         public SelezionaArticoloView(ILogger<SelezionaArticoloView> logger)
         {

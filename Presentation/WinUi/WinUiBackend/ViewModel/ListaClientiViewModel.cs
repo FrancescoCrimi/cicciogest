@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public class ListaClientiViewModel : ClientiViewModel
+    public partial class ListaClientiViewModel : ClientiViewModel
     {
         public ListaClientiViewModel(ILogger<ClientiViewModel> logger,
                                      IClientiFornitoriService clientiFornitoriService,

@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public sealed class CategoriaViewModel : ObservableRecipient, IDisposable
+    public sealed partial class CategoriaViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly IMagazinoService service;

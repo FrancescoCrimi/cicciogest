@@ -15,11 +15,11 @@ namespace CiccioGest.Presentation.AppForm.View
     public partial class ClientiView : Form, IClientiView
     {
         private readonly ILogger logger;
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler NuovoClienteEvent;
-        public event EventHandler<int> ClienteSelezionatoEvent;
-        public event EventHandler<int> CreaFatturaEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? NuovoClienteEvent;
+        public event EventHandler<int>? ClienteSelezionatoEvent;
+        public event EventHandler<int>? CreaFatturaEvent;
 
         public ClientiView(ILogger<ClientiView> logger)
         {

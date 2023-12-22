@@ -18,7 +18,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public sealed class FatturaViewModel : ObservableRecipient, IDisposable
+    public sealed partial class FatturaViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
         private readonly INavigationService navigationService;

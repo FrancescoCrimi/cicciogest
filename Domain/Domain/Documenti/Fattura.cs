@@ -103,12 +103,12 @@ namespace CiccioGest.Domain.Documenti
         }
 
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as Fattura);
         }
 
-        public virtual bool Equals(Fattura other)
+        public virtual bool Equals(Fattura? other)
         {
             return other != null &&
                    Id == other.Id;
@@ -116,7 +116,7 @@ namespace CiccioGest.Domain.Documenti
 
         public override int GetHashCode()
         {
-            return 2108858624 + Id.GetHashCode();
+            return HashCode.Combine(Id);
         }
     }
 }

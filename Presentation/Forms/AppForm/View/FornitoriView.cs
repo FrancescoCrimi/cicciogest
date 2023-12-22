@@ -15,10 +15,10 @@ namespace CiccioGest.Presentation.AppForm.View
     public partial class FornitoriView : Form, IFornitoriView
     {
         private readonly ILogger logger;
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler NuovoFornitoreEvent;
-        public event EventHandler<int> FornitoreSelezionatoEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? NuovoFornitoreEvent;
+        public event EventHandler<int>? FornitoreSelezionatoEvent;
 
         public FornitoriView(ILogger<FornitoriView> logger)
         {

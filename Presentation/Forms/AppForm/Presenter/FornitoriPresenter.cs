@@ -34,26 +34,26 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        private async void View_LoadEvent(object sender, EventArgs e)
+        private async void View_LoadEvent(object? sender, EventArgs e)
         {
             view.FornitoreSelezionatoEvent += View_FornitoreSelezionatoEvent;
             view.NuovoFornitoreEvent += View_NuovoFornitoreEvent;
             view.CaricaFornitori(await clientiFornitoriService.GetFornitori());
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
             view.FornitoreSelezionatoEvent -= View_FornitoreSelezionatoEvent;
             view.NuovoFornitoreEvent -= View_NuovoFornitoreEvent;
         }
 
-        private void View_FornitoreSelezionatoEvent(object sender, int e)
+        private void View_FornitoreSelezionatoEvent(object? sender, int e)
         {
             windowService.OpenWindow<FornitorePresenter>().ApriFornitore(e);
             view.Close();
         }
 
-        private void View_NuovoFornitoreEvent(object sender, EventArgs e)
+        private void View_NuovoFornitoreEvent(object? sender, EventArgs e)
         {
             windowService.OpenWindow<FornitorePresenter>().NuovoFornitore();
             view.Close();

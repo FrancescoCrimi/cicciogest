@@ -12,16 +12,16 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ClienteView : Form, IClienteView
     {
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? NuovoCliente;
+        public event EventHandler? SalvaCliente;
+        public event EventHandler? ApriCliente;
+
         public ClienteView()
         {
             InitializeComponent();
         }
-
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler NuovoCliente;
-        public event EventHandler SalvaCliente;
-        public event EventHandler ApriCliente;
 
         public void MostraCliente(Cliente cliente)
         {

@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Platforms>x64;x86</Platforms>
 		<RootNamespace>CiccioGest.Presentation.AppForm</RootNamespace>
 		<AssemblyName>AppForm</AssemblyName>
 		<Product>CiccioGest</Product>
 		<Authors>Francesco Crimi</Authors>
 		<Company>CiccioSoft</Company>
-		<Platforms>x64;x86</Platforms>
-		<OutputType>WinExe</OutputType>
-		<UseWindowsForms>true</UseWindowsForms>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -28,7 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.5" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -5,23 +5,23 @@ namespace CiccioGest.Domain.ClientiFornitori
 {
     public abstract class Persona : DomainEntity
     {
-        private string nome;
-        private string cognome;
-        private string societa;
-        private string email;
-        private string telefono;
-        private string mobile;
-        private string indirizzo;
-        private string partitaIva;
-        private string codiceFiscale;
-        private Indirizzo indirizzoNew;
+        private string? nome;
+        private string? cognome;
+        private string? societa;
+        private string? email;
+        private string? telefono;
+        private string? mobile;
+        private string? indirizzo;
+        private string? partitaIva;
+        private string? codiceFiscale;
+        private Indirizzo? indirizzoNew;
 
         protected Persona()
         {
             IndirizzoNew = new Indirizzo();
         }
 
-        public virtual string Nome
+        public virtual string? Nome
         {
             get => nome;
             set
@@ -35,7 +35,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string Cognome
+        public virtual string? Cognome
         {
             get => cognome;
             set
@@ -49,7 +49,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string Societa
+        public virtual string? Societa
         {
             get => societa;
             set
@@ -62,9 +62,9 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string NomeCompleto => Nome + " " + Cognome;
+        public virtual string? NomeCompleto => Nome + " " + Cognome;
 
-        public virtual string Email
+        public virtual string? Email
         {
             get => email;
             set
@@ -77,7 +77,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string Telefono
+        public virtual string? Telefono
         {
             get => telefono;
             set
@@ -90,7 +90,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string Mobile
+        public virtual string? Mobile
         {
             get => mobile;
             set
@@ -103,7 +103,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string Indirizzo
+        public virtual string? Indirizzo
         {
             get => indirizzo;
             set
@@ -116,7 +116,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string PartitaIva
+        public virtual string? PartitaIva
         {
             get => partitaIva;
             set
@@ -129,7 +129,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual string CodiceFiscale
+        public virtual string? CodiceFiscale
         {
             get => codiceFiscale;
             set
@@ -142,7 +142,7 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public virtual Indirizzo IndirizzoNew
+        public virtual Indirizzo? IndirizzoNew
         {
             get => indirizzoNew;
             set

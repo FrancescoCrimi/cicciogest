@@ -38,10 +38,10 @@ namespace CiccioGest.Application.Impl
                 await prodottoRepository.Delete(id);
                 unitOfWork.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -66,10 +66,10 @@ namespace CiccioGest.Application.Impl
                 unitOfWork.Commit();
                 return articolo;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -94,10 +94,10 @@ namespace CiccioGest.Application.Impl
                 unitOfWork.Commit();
                 return categoria;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -108,10 +108,10 @@ namespace CiccioGest.Application.Impl
                 await categoriaRepository.Delete(id);
                 unitOfWork.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 

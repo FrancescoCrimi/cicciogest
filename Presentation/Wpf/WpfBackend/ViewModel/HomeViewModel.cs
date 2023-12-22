@@ -10,7 +10,7 @@ using System;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    public sealed class HomeViewModel : ObservableRecipient, IDisposable
+    public sealed partial class HomeViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
 

@@ -14,7 +14,11 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class SelezionaCategoriaView : Form, ISelezionaCategoriaView
     {
-        private readonly ILogger<SelezionaCategoriaView> logger;
+        private readonly ILogger logger;
+
+        public event EventHandler<int>? CategoriaSelezionataEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
 
         public SelezionaCategoriaView(ILogger<SelezionaCategoriaView> logger)
         {
@@ -22,10 +26,6 @@ namespace CiccioGest.Presentation.AppForm.View
             this.logger = logger;
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
-
-        public event EventHandler<int> CategoriaSelezionataEvent;
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
 
         public void CaricaCategorie(IList<Categoria> categorie)
         {

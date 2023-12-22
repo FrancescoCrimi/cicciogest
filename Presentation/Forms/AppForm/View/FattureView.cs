@@ -15,10 +15,10 @@ namespace CiccioGest.Presentation.AppForm.View
     public partial class FattureView : Form, IFattureView
     {
         private readonly ILogger logger;
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler<int> FatturaSelezionataEvent;
-        public event EventHandler NuovaFatturaEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler<int>? FatturaSelezionataEvent;
+        public event EventHandler? NuovaFatturaEvent;
 
         public FattureView(ILogger<FattureView> logger)
         {

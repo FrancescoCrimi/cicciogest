@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public class ClientiViewModel : ObservableRecipient, IDisposable
+    public partial class ClientiViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger<ClientiViewModel> logger;
         private readonly IClientiFornitoriService clientiFornitoriService;

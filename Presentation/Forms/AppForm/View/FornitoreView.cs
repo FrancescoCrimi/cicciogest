@@ -12,16 +12,16 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class FornitoreView : Form, IFornitoreView
     {
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? NuovoFornitore;
+        public event EventHandler? SalvaFornitore;
+        public event EventHandler? ApriFornitore;
+
         public FornitoreView()
         {
             InitializeComponent();
         }
-
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler NuovoFornitore;
-        public event EventHandler SalvaFornitore;
-        public event EventHandler ApriFornitore;
 
         public void MostraFornitore(Fornitore fornitore)
         {

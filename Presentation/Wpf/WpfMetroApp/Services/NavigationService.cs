@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
 {
     public class NavigationService : INavigationService, IDisposable
     {
-        private readonly ILogger? logger;
+        private readonly ILogger logger;
         private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly PageService pageService;
         private Frame? frame;

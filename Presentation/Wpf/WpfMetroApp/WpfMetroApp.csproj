@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<Platforms>x64;x86</Platforms>
 		<RootNamespace>CiccioGest.Presentation.WpfMetroApp</RootNamespace>
 		<AssemblyName>WpfMetroApp</AssemblyName>
 		<Product>CiccioGest</Product>
 		<Authors>Francesco Crimi</Authors>
 		<Company>CiccioSoft</Company>
-		<Platforms>x64;x86</Platforms>
-		<OutputType>WinExe</OutputType>
-		<UseWPF>true</UseWPF>
-		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,8 +29,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
-		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+		<PackageReference Include="MahApps.Metro" Version="2.4.10" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
 	</ItemGroup>
 
 	<ItemGroup>

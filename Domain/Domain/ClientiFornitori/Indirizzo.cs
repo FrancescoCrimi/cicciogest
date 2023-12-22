@@ -1,20 +1,19 @@
 ﻿using CiccioGest.Domain.Common;
 using System;
-using System.Collections.Generic;
 
 namespace CiccioGest.Domain.ClientiFornitori
 {
     public class Indirizzo : DomainValueObject, IEquatable<Indirizzo>
     {
-        private string via;
-        private string civico;
-        private string cap;
-        private string citta;
-        private string stato;
+        private string? via;
+        private string? civico;
+        private string? cap;
+        private string? citta;
+        private string? stato;
 
         public Indirizzo() { }
 
-        public virtual string Via
+        public virtual string? Via
         {
             get => via;
             set
@@ -26,7 +25,7 @@ namespace CiccioGest.Domain.ClientiFornitori
                 }
             }
         }
-        public virtual string Civico
+        public virtual string? Civico
         {
             get => civico;
             set
@@ -38,7 +37,7 @@ namespace CiccioGest.Domain.ClientiFornitori
                 }
             }
         }
-        public virtual string CAP
+        public virtual string? CAP
         {
             get => cap;
             set
@@ -50,7 +49,7 @@ namespace CiccioGest.Domain.ClientiFornitori
                 }
             }
         }
-        public virtual string Citta
+        public virtual string? Citta
         {
             get => citta;
             set
@@ -62,7 +61,7 @@ namespace CiccioGest.Domain.ClientiFornitori
                 }
             }
         }
-        public virtual string Stato
+        public virtual string? Stato
         {
             get => stato;
             set
@@ -75,12 +74,12 @@ namespace CiccioGest.Domain.ClientiFornitori
             }
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as Indirizzo);
         }
 
-        public virtual bool Equals(Indirizzo other)
+        public virtual bool Equals(Indirizzo? other)
         {
             return other != null &&
                    Id == other.Id &&
@@ -93,14 +92,7 @@ namespace CiccioGest.Domain.ClientiFornitori
 
         public override int GetHashCode()
         {
-            int hashCode = 805346116;
-            hashCode = hashCode * -1521134295 + Id.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Via);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Civico);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CAP);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Citta);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Stato);
-            return hashCode;
+            return HashCode.Combine(Id, Via, Civico, CAP, Citta, Stato);
         }
     }
 }

@@ -33,10 +33,10 @@ namespace CiccioGest.Application.Impl
                 await clienteRepository.Delete(id);
                 unitOfWork.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -47,10 +47,10 @@ namespace CiccioGest.Application.Impl
                 await fornitoreRepository.Delete(id);
                 unitOfWork.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -85,10 +85,10 @@ namespace CiccioGest.Application.Impl
                 unitOfWork.Commit();
                 return cliente;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -103,10 +103,10 @@ namespace CiccioGest.Application.Impl
                 unitOfWork.Commit();
                 return fornitore;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 

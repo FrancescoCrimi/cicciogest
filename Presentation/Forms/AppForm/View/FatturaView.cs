@@ -16,14 +16,14 @@ namespace CiccioGest.Presentation.AppForm.View
     {
         private readonly ILogger logger;
 
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler NuovaFatturaEvent;
-        public event EventHandler SalvaFatturaEvent;
-        public event EventHandler ApriFatturaEvent;
-        public event EventHandler NuovoDettaglioEvent;
-        public event EventHandler<Dettaglio> AggiungiDettaglioEvent;
-        public event EventHandler<Dettaglio> RimuoviDettaglioEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? NuovaFatturaEvent;
+        public event EventHandler? SalvaFatturaEvent;
+        public event EventHandler? ApriFatturaEvent;
+        public event EventHandler? NuovoDettaglioEvent;
+        public event EventHandler<Dettaglio>? AggiungiDettaglioEvent;
+        public event EventHandler<Dettaglio>? RimuoviDettaglioEvent;
 
         public FatturaView(ILogger<FatturaView> logger)
         {

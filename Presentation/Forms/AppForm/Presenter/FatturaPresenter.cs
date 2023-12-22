@@ -67,7 +67,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #region Gestione eventi
 
-        private void View_LoadEvent(object sender, EventArgs e)
+        private void View_LoadEvent(object? sender, EventArgs e)
         {
             view.NuovaFatturaEvent += View_NuovaFatturaEvent;
             view.SalvaFatturaEvent += View_SalvaFatturaEvent;
@@ -77,7 +77,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.RimuoviDettaglioEvent += View_RimuoviDettaglioEvent;
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
             view.NuovaFatturaEvent -= View_NuovaFatturaEvent;
             view.SalvaFatturaEvent -= View_SalvaFatturaEvent;
@@ -87,27 +87,27 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.RimuoviDettaglioEvent -= View_RimuoviDettaglioEvent;
         }
 
-        private void View_NuovaFatturaEvent(object sender, EventArgs e)
+        private void View_NuovaFatturaEvent(object? sender, EventArgs e)
         {
             var scp = dialogService.OpenDialog<SelezionaClientePresenter>(view);
             if (scp.IdCliente != 0)
                 NuovaFattura(scp.IdCliente);
         }
 
-        private async void View_SalvaFatturaEvent(object sender, EventArgs e)
+        private async void View_SalvaFatturaEvent(object? sender, EventArgs e)
         {
             await fatturaService.SaveFattura(fattura);
         }
 
 
-        private void View_ApriFatturaEvent(object sender, EventArgs e)
+        private void View_ApriFatturaEvent(object? sender, EventArgs e)
         {
             var sfp = dialogService.OpenDialog<SelezionaFatturaPresenter>(view);
             if (sfp.IdFattura != 0)
                 MostraFattura(sfp.IdFattura);
         }
 
-        private async void View_NuovoDettaglioEvent(object sender, EventArgs e)
+        private async void View_NuovoDettaglioEvent(object? sender, EventArgs e)
         {
             var spv = dialogService.OpenDialog<SelezionaArticoloPresenter>(view);
             if (spv.IdArticolo != 0)
@@ -117,7 +117,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-        private void View_AggiungiDettaglioEvent(object sender, Dettaglio dettaglio)
+        private void View_AggiungiDettaglioEvent(object? sender, Dettaglio dettaglio)
         {
             if (dettaglio.Id == 0)
             {
@@ -126,7 +126,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.SetDettaglio(new Dettaglio(null, 0));
         }
 
-        private void View_RimuoviDettaglioEvent(object sender, Dettaglio dettaglio)
+        private void View_RimuoviDettaglioEvent(object? sender, Dettaglio dettaglio)
         {
             fattura.RemoveDettaglio(dettaglio);
             view.SetDettaglio(new Dettaglio(null, 0));

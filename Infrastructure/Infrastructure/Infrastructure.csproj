@@ -1,19 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<!--<TargetFramework>netstandard2.0</TargetFramework>-->
+		<TargetFramework>net6.0</TargetFramework>
+		<!--<ImplicitUsings>enable</ImplicitUsings>-->
+		<Nullable>enable</Nullable>
+
 		<RootNamespace>CiccioGest.Infrastructure</RootNamespace>
 		<AssemblyName>Infrastructure</AssemblyName>
 		<Product>CiccioGest</Product>
 		<Authors>Francesco Crimi</Authors>
 		<Company>CiccioSoft</Company>
 		<Platforms>x86;x64</Platforms>
-		<LangVersion>8.0</LangVersion>
+		<!--<LangVersion>8.0</LangVersion>-->
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.32" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 

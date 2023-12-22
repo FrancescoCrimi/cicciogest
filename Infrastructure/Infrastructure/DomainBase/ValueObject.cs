@@ -12,7 +12,7 @@ namespace CiccioGest.Infrastructure.DomainBase
         [DataMember]
         public virtual TId Id { get { return id; } protected set { id = value; } }
 
-        public virtual event PropertyChangedEventHandler PropertyChanged;
+        public virtual event PropertyChangedEventHandler? PropertyChanged;
 
         protected void NotifyPropertyChanged(string propertyName)
         {

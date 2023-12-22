@@ -41,7 +41,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #region eventi iview
 
-        private async void View_LoadEvent(object sender, EventArgs e)
+        private async void View_LoadEvent(object? sender, EventArgs e)
         {
             view.FatturaSelezionataEvent += View_SelectFatturaEvent;
             view.NuovaFatturaEvent += View_NuovaFatturaEvent;
@@ -49,7 +49,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             view.CaricaFatture(fatture);
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
             if (sender is IFattureView listaFattureView)
             {
@@ -63,13 +63,13 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #region eventi IFattureView
 
-        private void View_SelectFatturaEvent(object sender, int e)
+        private void View_SelectFatturaEvent(object? sender, int e)
         {
             windowService.OpenWindow<FatturaPresenter>().MostraFattura(e);
             view.Close();
         }
 
-        private void View_NuovaFatturaEvent(object sender, EventArgs e)
+        private void View_NuovaFatturaEvent(object? sender, EventArgs e)
         {
             var lcd = dialogService.OpenDialog<SelezionaClientePresenter>(view);
             if (lcd.IdCliente != 0)

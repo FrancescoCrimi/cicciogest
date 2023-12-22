@@ -38,10 +38,10 @@ namespace CiccioGest.Application.Impl
                 await fatturaRepository.Delete(id);
                 unitOfWork.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -70,10 +70,10 @@ namespace CiccioGest.Application.Impl
                 unitOfWork.Commit();
                 return fattura;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
-                throw ex;
+                throw;
             }
         }
 

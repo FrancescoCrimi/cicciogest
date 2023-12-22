@@ -31,11 +31,11 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
             {
                 LiteDB.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 LiteDB.Rollback();
                 LiteDB.BeginTrans();
-                throw ex;
+                throw;
             }
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Commit");
         }

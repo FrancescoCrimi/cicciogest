@@ -16,16 +16,16 @@ namespace CiccioGest.Presentation.AppForm.View
     {
         private readonly ILogger<SelezionaFornitoreView> logger;
 
+        public event EventHandler<int>? FornitoreSelezionatoEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+
         public SelezionaFornitoreView(ILogger<SelezionaFornitoreView> logger)
         {
             InitializeComponent();
             this.logger = logger;
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
-
-        public event EventHandler<int> FornitoreSelezionatoEvent;
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
 
         public void CaricaFornitori(IList<Fornitore> articoli)
         {

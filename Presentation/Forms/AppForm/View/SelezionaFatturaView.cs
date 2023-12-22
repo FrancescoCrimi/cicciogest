@@ -14,7 +14,11 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class SelezionaFatturaView : Form, ISelezionaFatturaView
     {
-        private readonly ILogger<SelezionaFatturaView> logger;
+        private readonly ILogger logger;
+
+        public event EventHandler<int>? FatturaSelezionataEvent;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
 
         public SelezionaFatturaView(ILogger<SelezionaFatturaView> logger)
         {
@@ -22,10 +26,6 @@ namespace CiccioGest.Presentation.AppForm.View
             this.logger = logger;
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
-
-        public event EventHandler<int> FatturaSelezionataEvent;
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
 
         public void CaricaFatture(IList<FatturaReadOnly> fatture)
         {

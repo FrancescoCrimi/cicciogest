@@ -10,10 +10,6 @@ using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
@@ -43,15 +39,15 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        private void View_LoadEvent(object sender, EventArgs e)
+        private void View_LoadEvent(object? sender, EventArgs e)
         {
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
         }
 
-        private void View_CreaDatabaseEvent(object sender, EventArgs e)
+        private void View_CreaDatabaseEvent(object? sender, EventArgs e)
         {
             try
             {
@@ -65,7 +61,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-        private void View_VerificaDatabaseEvent(object sender, EventArgs e)
+        private void View_VerificaDatabaseEvent(object? sender, EventArgs e)
         {
             try
             {
@@ -79,7 +75,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-        private async void View_PopolaDatabaseEvent(object sender, EventArgs e)
+        private async void View_PopolaDatabaseEvent(object? sender, EventArgs e)
         {
             using (var scope = serviceScopeFactory.CreateScope())
             {

@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public class ClienteViewModel : ObservableRecipient, IDisposable
+    public partial class ClienteViewModel : ObservableRecipient, IDisposable
     {
         private RelayCommand nuovoClienteCommand;
         private RelayCommand eliminaClienteCommand;

@@ -9,7 +9,7 @@ using System;
 
 namespace CiccioGest.Presentation.WpfBackend.ViewModel
 {
-    sealed class SettingViewModel : ObservableRecipient, IDisposable
+    public sealed partial class SettingViewModel : ObservableRecipient, IDisposable
     {
         private void LoadSampleData()
         {

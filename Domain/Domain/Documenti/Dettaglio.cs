@@ -81,12 +81,12 @@ namespace CiccioGest.Domain.Documenti
             //    Fattura.CalcolaTotale();
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as Dettaglio);
         }
 
-        public virtual bool Equals(Dettaglio other)
+        public virtual bool Equals(Dettaglio? other)
         {
             return other != null &&
                    EqualityComparer<Articolo>.Default.Equals(Articolo, other.Articolo);

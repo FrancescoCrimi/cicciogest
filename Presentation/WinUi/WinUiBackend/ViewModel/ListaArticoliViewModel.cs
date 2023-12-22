@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public class ListaArticoliViewModel : ArticoliViewModel
+    public partial class ListaArticoliViewModel : ArticoliViewModel
     {
         public ListaArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                       IMagazinoService magazinoService,

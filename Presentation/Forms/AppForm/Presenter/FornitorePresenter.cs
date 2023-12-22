@@ -47,14 +47,14 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #region Gestione eventi
 
-        private void View_LoadEvent(object sender, EventArgs e)
+        private void View_LoadEvent(object? sender, EventArgs e)
         {
             view.ApriFornitore += View_ApriFornitore;
             view.NuovoFornitore += View_NuovoFornitore;
             view.SalvaFornitore += View_SalvaFornitore;
         }
 
-        private void View_CloseEvent(object sender, EventArgs e)
+        private void View_CloseEvent(object? sender, EventArgs e)
         {
             view.ApriFornitore -= View_ApriFornitore;
             view.NuovoFornitore -= View_NuovoFornitore;
@@ -62,17 +62,17 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         }
 
 
-        private void View_SalvaFornitore(object sender, EventArgs e)
+        private void View_SalvaFornitore(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        private void View_NuovoFornitore(object sender, EventArgs e)
+        private void View_NuovoFornitore(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        private void View_ApriFornitore(object sender, EventArgs e)
+        private void View_ApriFornitore(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
         }

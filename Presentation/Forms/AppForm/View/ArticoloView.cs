@@ -17,15 +17,15 @@ namespace CiccioGest.Presentation.AppForm.View
     {
         private readonly ILogger<ArticoloView> logger;
 
-        public event EventHandler LoadEvent;
-        public event EventHandler CloseEvent;
-        public event EventHandler NuovoArticoloEvent;
-        public event EventHandler SalvaArticoloEvent;
-        public event EventHandler<int> EliminaArticoloEvent;
-        public event EventHandler ApriArticoloEvent;
-        public event EventHandler AggiungiCategoriaEvent;
-        public event EventHandler<Categoria> RimuoviCategoriaEvent;
-        public event EventHandler SelezionaFornitore;
+        public event EventHandler? LoadEvent;
+        public event EventHandler? CloseEvent;
+        public event EventHandler? NuovoArticoloEvent;
+        public event EventHandler? SalvaArticoloEvent;
+        public event EventHandler<int>? EliminaArticoloEvent;
+        public event EventHandler? ApriArticoloEvent;
+        public event EventHandler? AggiungiCategoriaEvent;
+        public event EventHandler<Categoria>? RimuoviCategoriaEvent;
+        public event EventHandler? SelezionaFornitore;
 
         public ArticoloView(ILogger<ArticoloView> logger)
         {
