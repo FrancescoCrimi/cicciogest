@@ -48,15 +48,14 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         public Dettaglio Dettaglio { get; private set; }
         public Dettaglio DettaglioSelezionato { get; set; }
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand 
-            ?? (loadedCommand = new AsyncRelayCommand(async () => await Task.CompletedTask));
+        public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(async () => await Task.CompletedTask);
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ?? (nuovaFatturaCommand = new RelayCommand(() =>
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
         {
             navigationService.Navigate(ViewEnum.Clienti);
-        }));
+        });
 
-        public ICommand SalvaFatturaCommand => salvaFatturaCommand ?? (salvaFatturaCommand = new AsyncRelayCommand(async () =>
+        public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
@@ -65,9 +64,9 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             catch (Exception)
             {
             }
-        }));
+        });
 
-        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ?? (rimuoviFatturaCommand = new RelayCommand(async () =>
+        public ICommand RimuoviFatturaCommand => rimuoviFatturaCommand ??= new RelayCommand(async () =>
         {
             try
             {
@@ -76,15 +75,15 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             catch (Exception)
             {
             }
-        }));
+        });
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand ?? (apriFatturaCommand = new RelayCommand(() =>
-            navigationService.Navigate(ViewEnum.Fatture)));
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
+            navigationService.Navigate(ViewEnum.Fatture));
 
-        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ?? (nuovoDettaglioCommand = new RelayCommand(() =>
-            navigationService.Navigate(ViewEnum.Articoli)));
+        public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
+            navigationService.Navigate(ViewEnum.Articoli));
 
-        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ?? (aggiungiDettaglioCommand = new RelayCommand(() =>
+        public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {
             if (Dettaglio.Quantita != 0)
             {
@@ -92,21 +91,21 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
                 OnPropertyChanged(nameof(Fattura));
                 NuovoDettaglio();
             }
-        }));
+        });
 
-        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ?? (rimuoviDettaglioCommand = new RelayCommand(() =>
+        public ICommand RimuoviDettaglioCommand => rimuoviDettaglioCommand ??= new RelayCommand(() =>
         {
             Fattura.RemoveDettaglio(Dettaglio);
             OnPropertyChanged(nameof(Fattura));
             NuovoDettaglio();
-        }));
+        });
 
-        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ?? (selezionaDettaglioCommand = new RelayCommand(() =>
+        public ICommand SelezionaDettaglioCommand => selezionaDettaglioCommand ??= new RelayCommand(() =>
         {
             if (DettaglioSelezionato != null)
                 Dettaglio = DettaglioSelezionato;
             OnPropertyChanged(nameof(Dettaglio));
-        }));
+        });
 
 
         private void RegistraMessaggi()

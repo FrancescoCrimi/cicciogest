@@ -52,19 +52,19 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_NuovoClienteEvent(object? sender, EventArgs e)
         {
-            windowService.OpenWindow<ClientePresenter>().NuovoCliente();
+            windowService?.OpenWindow<ClientePresenter>()?.NuovoCliente();
             view.Close();
         }
 
         private void View_ClienteSelezionatoEvent(object? sender, int e)
         {
-            windowService.OpenWindow<ClientePresenter>().ApriCliente(e);
+            windowService?.OpenWindow<ClientePresenter>()?.ApriCliente(e);
             view.Close();
         }
 
         private void View_CreaFatturaEvent(object? sender, int e)
         {
-            windowService.OpenWindow<FatturaPresenter>().NuovaFattura(e);
+            windowService?.OpenWindow<FatturaPresenter>()?.NuovaFattura(e);
             view.Close();
         }
 

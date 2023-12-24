@@ -18,10 +18,12 @@ namespace CiccioGest.Presentation.WpfApp.Services
         private readonly ILogger logger;
         private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly PageService pageService;
-        private Frame frame;
+        private Frame? frame;
         private bool clearNavigation;
-        private IServiceScope scope;
-        private IServiceScope oldScope;
+        private IServiceScope? scope;
+        private IServiceScope? oldScope;
+
+        public event EventHandler? Navigated;
 
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceScopeFactory serviceScopeFactory,
@@ -32,8 +34,6 @@ namespace CiccioGest.Presentation.WpfApp.Services
             this.pageService = pageService;
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
-
-        public event EventHandler Navigated;
 
         public void Initialize(Frame shellFrame)
         {
@@ -55,12 +55,12 @@ namespace CiccioGest.Presentation.WpfApp.Services
             }
         }
 
-        public void GoBack() => frame.GoBack();
+        public void GoBack() => frame?.GoBack();
 
         public void NavigateTo(Type pageType,
                                bool clearNavigation = false)
         {
-            if (frame.Content?.GetType() != pageType)
+            if (frame?.Content?.GetType() != pageType)
             {
                 if (clearNavigation)
                 {
@@ -75,7 +75,7 @@ namespace CiccioGest.Presentation.WpfApp.Services
                 }
 
                 var page = scope.ServiceProvider.GetService(pageType);
-                frame.Navigate(page);
+                frame?.Navigate(page);
             }
         }
 
@@ -108,7 +108,8 @@ namespace CiccioGest.Presentation.WpfApp.Services
 
         public void Dispose()
         {
-            frame.Navigated -= OnNavigated;
+            if (frame != null)
+                frame.Navigated -= OnNavigated;
             if (scope != null)
             {
                 scope.Dispose();

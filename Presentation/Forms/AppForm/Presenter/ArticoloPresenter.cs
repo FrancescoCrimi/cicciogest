@@ -5,14 +5,11 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Magazino;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
@@ -24,7 +21,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private readonly WindowService windowService;
         private readonly DialogService dialogService;
         private readonly IArticoloView view;
-        private Articolo articolo;
+        private Articolo? articolo;
 
         public ArticoloPresenter(ILogger<ArticoloPresenter> logger,
                                  IArticoloView view,
@@ -83,7 +80,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_SalvaArticoloEvent(object? sender, EventArgs e)
         {
-            await magazinoService.SaveArticolo(articolo);
+            if (articolo != null)
+                await magazinoService.SaveArticolo(articolo);
         }
 
         private async void View_EliminaArticoloEvent(object? sender, int e)
@@ -95,25 +93,25 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private async void View_ApriArticoloEvent(object? sender, EventArgs e)
         {
             var sav = dialogService.OpenDialog<SelezionaArticoloPresenter>(view);
-            if(sav.IdArticolo != 0)
+            if (sav?.IdArticolo != 0)
             {
-                await MostraArticolo(sav.IdArticolo);
+                await MostraArticolo(sav!.IdArticolo);
             }
         }
 
         private async void View_AggiungiCategoriaEvent(object? sender, EventArgs e)
         {
             var scp = dialogService.OpenDialog<SelezionaCategoriaPresenter>(view);
-            if(scp.IdCategoria != 0)
+            if (scp?.IdCategoria != 0)
             {
-                Categoria categoria = await magazinoService.GetCategoria(scp.IdCategoria);
-                articolo.AddCategoria(categoria);
+                Categoria categoria = await magazinoService.GetCategoria(scp!.IdCategoria);
+                articolo?.AddCategoria(categoria);
             }
         }
 
         private void View_RimuoviCategoriaEvent(object? sender, Categoria e)
         {
-            articolo.RemoveCategoria(e);
+            articolo?.RemoveCategoria(e);
         }
 
 
@@ -125,11 +123,14 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_SelezionaFornitore(object? sender, EventArgs e)
         {
-            var sfp = dialogService.OpenDialog<SelezionaFornitorePresenter>(view);
-            if(sfp.IdFornitore != 0)
+            if (articolo != null)
             {
-                Fornitore fornitore = await magazinoService.GetFornitore(sfp.IdFornitore);
-                articolo.Fornitore = fornitore;
+                var sfp = dialogService.OpenDialog<SelezionaFornitorePresenter>(view);
+                if (sfp?.IdFornitore != 0)
+                {
+                    var fornitore = await magazinoService.GetFornitore(sfp!.IdFornitore);
+                    articolo.Fornitore = fornitore;
+                } 
             }
         }
 

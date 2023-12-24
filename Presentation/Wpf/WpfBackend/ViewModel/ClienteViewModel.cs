@@ -21,12 +21,12 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly ILogger<ClienteViewModel> logger;
         private readonly INavigationService navigationService;
         private readonly IMessageBoxService messageBoxService;
-        private readonly IClientiFornitoriService clientiFornitoriService;
-        private RelayCommand loadedCommand;
-        private RelayCommand nuovoClienteCommand;
-        private RelayCommand salvaClienteCommand;
-        private RelayCommand rimuoviClienteCommand;
-        private RelayCommand apriClienteCommand;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private RelayCommand? loadedCommand;
+        private RelayCommand? nuovoClienteCommand;
+        private RelayCommand? salvaClienteCommand;
+        private RelayCommand? rimuoviClienteCommand;
+        private RelayCommand? apriClienteCommand;
 
         public ClienteViewModel(ILogger<ClienteViewModel> logger,
                                 INavigationService navigationService,
@@ -36,14 +36,14 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             this.logger = logger;
             this.navigationService = navigationService;
             this.messageBoxService = messageBoxService;
-            this.clientiFornitoriService = clientiFornitoriService;
+            _clientiFornitoriService = clientiFornitoriService;
             RegistraMessaggi();
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public Cliente Cliente { get; private set; }
+        public Cliente? Cliente { get; private set; }
 
-        public Indirizzo Indirizzo { get; private set; }
+        public Indirizzo? Indirizzo { get; private set; }
 
         public ICommand LoadedCommand
             => loadedCommand ??= new RelayCommand(() => { });
@@ -53,26 +53,32 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public ICommand SalvaClienteCommand => salvaClienteCommand ??= new RelayCommand(() =>
         {
-            try
+            if (Cliente != null)
             {
-                clientiFornitoriService.SaveCliente(Cliente);
-            }
-            catch (Exception ex)
-            {
-                messageBoxService.Show("Errore: " + ex.Message);
+                try
+                {
+                    _clientiFornitoriService.SaveCliente(Cliente);
+                }
+                catch (Exception ex)
+                {
+                    messageBoxService.Show("Errore: " + ex.Message);
+                }
             }
         });
 
         public ICommand RimuoviClienteCommand
             => rimuoviClienteCommand ??= new RelayCommand(() =>
             {
-                try
+                if (Cliente != null)
                 {
-                    clientiFornitoriService.DeleteCliente(Cliente.Id);
-                }
-                catch (Exception ex)
-                {
-                    messageBoxService.Show("Errore: " + ex.Message);
+                    try
+                    {
+                        _clientiFornitoriService.DeleteCliente(Cliente.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        messageBoxService.Show("Errore: " + ex.Message);
+                    }
                 }
             });
 
@@ -94,7 +100,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             {
                 if (m.Value != 0)
                 {
-                    Cliente cliente = await clientiFornitoriService.GetCliente(m.Value);
+                    Cliente cliente = await _clientiFornitoriService.GetCliente(m.Value);
                     MostraCliente(cliente);
                 }
             });

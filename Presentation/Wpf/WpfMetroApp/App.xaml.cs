@@ -7,53 +7,47 @@
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.WpfBackend;
 using CiccioGest.Presentation.WpfBackend.Services;
-using CiccioGest.Presentation.WpfMetroApp.Hosting;
 using CiccioGest.Presentation.WpfMetroApp.Services;
 using CiccioGest.Presentation.WpfMetroApp.View;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace CiccioGest.Presentation.WpfMetroApp
 {
     public partial class App : System.Windows.Application
     {
-        private async void Application_Startup(object sender, StartupEventArgs e)
+        private void OnStartup(object sender, StartupEventArgs e)
+            => ConfigureServices().GetRequiredService<MainView>().Show();
+
+        private static IServiceProvider ConfigureServices()
         {
-            await CreateHostBuilder(e.Args).Build().RunAsync();
-        }
+            var gestConf = CiccioGestConfMgr.GetCurrent();
 
-        private void Application_Exit(object sender, ExitEventArgs e)
-        {
+            var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(appLocation!)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                .Build();
 
-        }
+            return new ServiceCollection()
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
+                    loggingBuilder.AddNLog();
+                    loggingBuilder.AddDebug();
+                })
 
-        private void Application_DispatcherUnhandledException(object sender,
-                                                              DispatcherUnhandledExceptionEventArgs e)
-        {
-
-        }
-
-        private IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWPF<MainView>()
-                //.ConfigureLogging((hostBuilderContext, loggingBuilder) =>
-                //    loggingBuilder.AddNLog(hostBuilderContext.Configuration))
-                .ConfigureServices(ConfigureServices);
-        }
-
-        private void ConfigureServices(HostBuilderContext hostBuilderContext,
-                                       IServiceCollection serviceCollection)
-        {
-            CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
-            serviceCollection
-                .AddSingleton(conf)
+                .AddSingleton(gestConf)
                 .ConfigureWpfBackend()
+
                 .AddSingleton<NavigationService>()
-                .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
+                .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
                 .AddSingleton<PageService>()
                 .AddSingleton<IMessageBoxService, MessageBoxService>()
                 .AddTransient<MainView>()
@@ -69,7 +63,8 @@ namespace CiccioGest.Presentation.WpfMetroApp
                 .AddTransient<ListaArticoliView>()
                 .AddTransient<ListaClientiView>()
                 .AddTransient<ListaFattureView>()
-                .AddTransient<ListaFornitoriView>();
+                .AddTransient<ListaFornitoriView>()
+                .BuildServiceProvider();
         }
     }
 }

@@ -49,13 +49,13 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_FornitoreSelezionatoEvent(object? sender, int e)
         {
-            windowService.OpenWindow<FornitorePresenter>().ApriFornitore(e);
+            windowService?.OpenWindow<FornitorePresenter>()?.ApriFornitore(e);
             view.Close();
         }
 
         private void View_NuovoFornitoreEvent(object? sender, EventArgs e)
         {
-            windowService.OpenWindow<FornitorePresenter>().NuovoFornitore();
+            windowService?.OpenWindow<FornitorePresenter>()?.NuovoFornitore();
             view.Close();
         }
 

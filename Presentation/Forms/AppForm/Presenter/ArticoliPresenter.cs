@@ -59,7 +59,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             IdProdotto = e;
             var ap = windowService.OpenWindow<ArticoloPresenter>();
-            await ap.MostraArticolo(e);
+            if (ap != null)
+                await ap.MostraArticolo(e);
             view.Close();
         }
 

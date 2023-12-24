@@ -14,27 +14,27 @@ namespace CiccioGest.Presentation.AppForm.Services
 {
     public class DialogService : IDisposable
     {
-        private readonly ILogger<DialogService> logger;
-        private readonly IServiceProvider serviceProvider;
+        private readonly ILogger _logger;
+        private readonly IServiceProvider _serviceProvider;
 
         public DialogService(ILogger<DialogService> logger,
                              IServiceProvider serviceProvider)
         {
-            this.logger = logger;
-            this.serviceProvider = serviceProvider;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _serviceProvider = serviceProvider;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public TPresenter OpenDialog<TPresenter>(IWin32Window owner) where TPresenter : PresenterBase
+        public TPresenter? OpenDialog<TPresenter>(IWin32Window owner) where TPresenter : PresenterBase
         {
-            TPresenter presenter = serviceProvider.GetService<TPresenter>();
-            presenter.ShowDialog(owner);
+            var presenter = _serviceProvider.GetService<TPresenter>();
+            presenter?.ShowDialog(owner);
             return presenter;
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

@@ -6,51 +6,60 @@
 
 using CiccioGest.Application.Impl;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.AppForm.Hosting;
 using CiccioGest.Presentation.AppForm.Presenter;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm
 {
     public static class Program
     {
         [STAThread]
-        public static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            await CreateHostBuilder(args).Build().RunAsync();
-        }
-
-        private static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            var host = Host.CreateDefaultBuilder(args);
+            ApplicationConfiguration.Initialize();
             if (args.Contains("config"))
             {
-                host.ConfigureWinForms<SettingPresenter>();
+                var win = ConfigureServices().GetRequiredService<SettingPresenter>();
+                System.Windows.Forms.Application.Run((Form)win.View);
             }
             else
             {
-                host.ConfigureWinForms<MainPresenter>();
+                var win = ConfigureServices().GetRequiredService<MainPresenter>();
+                System.Windows.Forms.Application.Run((Form)win.View);
             }
-            host.ConfigureLogging((hostBuilderContext, loggingBuilder)
-                => loggingBuilder.AddNLog(hostBuilderContext.Configuration));
-            host.ConfigureServices(ConfigureServices);
-            return host;
         }
 
-        private static void ConfigureServices(HostBuilderContext hostBuilderContext,
-                                              IServiceCollection serviceCollection)
+        private static IServiceProvider ConfigureServices()
         {
-            var conf = CiccioGestConfMgr.GetCurrent();
-            serviceCollection
-                .AddSingleton(conf)
+            var gestConf = CiccioGestConfMgr.GetCurrent();
+
+            var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(appLocation!)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                .Build();
+
+            return new ServiceCollection()
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
+                    loggingBuilder.AddNLog();
+                    loggingBuilder.AddDebug();
+                })
+
+                .AddSingleton(gestConf)
                 .ConfigureApplication()
+
                 .AddTransient<WindowService>()
                 .AddTransient<DialogService>()
 
@@ -74,7 +83,7 @@ namespace CiccioGest.Presentation.AppForm
                 .AddTransient<SelezionaFornitorePresenter>()
 
                 .AddSingleton<MainView>()
-                .AddSingleton<IMainView>(sp => sp.GetService<MainView>())
+                .AddSingleton<IMainView>(sp => sp.GetRequiredService<MainView>())
                 .AddTransient<ISettingView, SettingView>()
 
                 .AddTransient<IArticoloView, ArticoloView>()
@@ -93,7 +102,8 @@ namespace CiccioGest.Presentation.AppForm
                 .AddTransient<ISelezionaFatturaView, SelezionaFatturaView>()
                 .AddTransient<ISelezionaFornitoreView, SelezionaFornitoreView>()
 
-                .AddTransient<SettingView>();
+                .AddTransient<SettingView>()
+                .BuildServiceProvider();
         }
     }
 }

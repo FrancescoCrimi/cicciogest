@@ -38,19 +38,19 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         public Indirizzo Indirizzo { get; set; }
 
         public ICommand NuovoClienteCommand
-            => nuovoClienteCommand ?? (nuovoClienteCommand = new RelayCommand(NuovoCliente));
+            => nuovoClienteCommand ??= new RelayCommand(NuovoCliente);
 
         public ICommand EliminaClienteCommand
-            => eliminaClienteCommand ?? (eliminaClienteCommand = new RelayCommand(EliminaCliente));
+            => eliminaClienteCommand ??= new RelayCommand(EliminaCliente);
 
         public ICommand ApriClienteCommand
-            => apriClienteCommand ?? (apriClienteCommand = new RelayCommand(() => 
+            => apriClienteCommand ??= new RelayCommand(() =>
             {
 
-            }));
+            });
 
         public ICommand SalvaClienteCommand
-            => salvaClienteCommand ?? (salvaClienteCommand = new RelayCommand(SalvaCliente));
+            => salvaClienteCommand ??= new RelayCommand(SalvaCliente);
 
 
         private void RegistraMessaggi()

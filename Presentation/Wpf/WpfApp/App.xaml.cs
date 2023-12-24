@@ -1,49 +1,46 @@
 ﻿using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.WpfApp.Hosting;
 using CiccioGest.Presentation.WpfApp.Services;
 using CiccioGest.Presentation.WpfApp.View;
 using CiccioGest.Presentation.WpfBackend;
 using CiccioGest.Presentation.WpfBackend.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
-using System.Windows.Threading;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace CiccioGest.Presentation.WpfApp
 {
     public partial class App : System.Windows.Application
     {
-        private async void OnStartup(object sender, System.Windows.StartupEventArgs e)
-        {
-            await CreateHostBuilder(e.Args).Build().RunAsync();
-        }
+        private void OnStartup(object sender, System.Windows.StartupEventArgs e)
+            => ConfigureServices().GetRequiredService<MainView>().Show();
 
-        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private static IServiceProvider ConfigureServices()
         {
-        }
+            var gestConf = CiccioGestConfMgr.GetCurrent();
 
-        private void OnExit(object sender, System.Windows.ExitEventArgs e)
-        {
-        } 
+            var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(appLocation!)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                .Build();
 
-        private IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWPF<MainView>()
-                .ConfigureLogging((hostBuilderContext, loggingBuilder) =>
-                    loggingBuilder.AddNLog(hostBuilderContext.Configuration))
-                .ConfigureServices(ConfigureServices);
-        }
+            return new ServiceCollection()
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
+                    loggingBuilder.AddNLog();
+                    loggingBuilder.AddDebug();
+                })
 
-        private void ConfigureServices(HostBuilderContext hostBuilderContext,
-                                       IServiceCollection serviceCollection)
-        {
-            CiccioGestConf conf = CiccioGestConfMgr.GetCurrent();
-            serviceCollection
-                .AddSingleton(conf)
+                .AddSingleton(gestConf)
                 .ConfigureWpfBackend()
+
                 .AddSingleton<NavigationService>()
-                .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
+                .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
                 .AddSingleton<PageService>()
                 .AddSingleton<IMessageBoxService, MessageBoxService>()
                 .AddTransient<MainView>()
@@ -60,7 +57,8 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddTransient<ListaArticoliView>()
                 .AddTransient<ListaClientiView>()
                 .AddTransient<ListaFattureView>()
-                .AddTransient<ListaFornitoriView>();
+                .AddTransient<ListaFornitoriView>()
+                .BuildServiceProvider();
         }
     }
 }

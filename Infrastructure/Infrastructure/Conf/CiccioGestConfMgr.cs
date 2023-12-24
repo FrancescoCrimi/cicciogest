@@ -76,8 +76,8 @@ namespace CiccioGest.Infrastructure.Conf
 
         public static CiccioGestConf GetCurrent()
         {
-            AppConfs.Available.TryGetValue(AppConfs.Current, out CiccioGestConf value);
-            return value;
+            AppConfs.Available.TryGetValue(AppConfs.Current, out CiccioGestConf? value);
+            return value!;
         }
 
         public static ICollection<CiccioGestConf> GetAll()

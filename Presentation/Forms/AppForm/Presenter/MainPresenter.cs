@@ -13,7 +13,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 {
     public class MainPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger<MainPresenter> logger;
+        private readonly ILogger logger;
         private readonly WindowService windowService;
         private readonly DialogService dialogService;
         private readonly IMainView view;        

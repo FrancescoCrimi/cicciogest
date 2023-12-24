@@ -11,8 +11,8 @@ namespace CiccioGest.Application.Impl
     {
         public static IServiceCollection ConfigureApplication(this IServiceCollection serviceCollection)
         {
-            CiccioGestConf conf = serviceCollection.BuildServiceProvider().GetService<CiccioGestConf>();
-            switch (conf.DataAccess)
+            var conf = serviceCollection.BuildServiceProvider().GetService<CiccioGestConf>();
+            switch (conf?.DataAccess)
             {
                 case Storage.NHibernate:
                     serviceCollection.ConfigurePersistenceNhb();

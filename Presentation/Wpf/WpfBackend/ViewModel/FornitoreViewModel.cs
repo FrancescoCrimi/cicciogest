@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly INavigationService navigationService;
         private readonly IMessageBoxService messageBoxService;
         private readonly IClientiFornitoriService clientiFornitoriService;
-        private RelayCommand loadedCommand;
-        private RelayCommand nuovoFornitoreCommand;
-        private AsyncRelayCommand salvaFornitoreCommand;
-        private AsyncRelayCommand rimuoviFornitoreCommand;
-        private RelayCommand apriFornitoreCommand;
+        private RelayCommand? loadedCommand;
+        private RelayCommand? nuovoFornitoreCommand;
+        private AsyncRelayCommand? salvaFornitoreCommand;
+        private AsyncRelayCommand? rimuoviFornitoreCommand;
+        private RelayCommand? apriFornitoreCommand;
 
         public FornitoreViewModel(ILogger<FornitoreViewModel> logger,
                                   INavigationService navigationService,
@@ -42,9 +42,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public Fornitore Fornitore { get; private set; }
+        public Fornitore? Fornitore { get; private set; }
 
-        public Indirizzo Indirizzo { get; private set; }
+        public Indirizzo? Indirizzo { get; private set; }
 
 
         private void RegistraMessaggi()
@@ -53,7 +53,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             {
                 if (m.Value != 0)
                 {
-                    Fornitore fornitore = await clientiFornitoriService.GetFornitore(m.Value);
+                    Fornitore? fornitore = await clientiFornitoriService.GetFornitore(m.Value);
                     MostraFornitore(fornitore);
                 }
             });
@@ -82,13 +82,16 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         private async Task SalvaFornitore()
         {
-            try
+            if (Fornitore != null)
             {
-                await clientiFornitoriService.SaveFornitore(Fornitore);
-            }
-            catch (Exception ex)
-            {
-                messageBoxService.Show("Errore: " + ex.Message);
+                try
+                {
+                    await clientiFornitoriService.SaveFornitore(Fornitore);
+                }
+                catch (Exception ex)
+                {
+                    messageBoxService.Show("Errore: " + ex.Message);
+                }
             }
         }
 
@@ -96,13 +99,16 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         private async Task RimuoviFornitore()
         {
-            try
+            if (Fornitore != null)
             {
-                await clientiFornitoriService.DeleteFornitore(Fornitore.Id);
-            }
-            catch (Exception ex)
-            {
-                messageBoxService.Show("Errore: " + ex.Message);
+                try
+                {
+                    await clientiFornitoriService.DeleteFornitore(Fornitore.Id);
+                }
+                catch (Exception ex)
+                {
+                    messageBoxService.Show("Errore: " + ex.Message);
+                }
             }
         }
 

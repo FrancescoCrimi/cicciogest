@@ -58,17 +58,13 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
 
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand
-            ?? (loadedCommand = new AsyncRelayCommand(AggiornaFatture));
+        public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(AggiornaFatture);
 
-        public ICommand NuovaFatturaCommand => nuovaFatturaCommand
-            ?? (nuovaFatturaCommand = new RelayCommand(NuovaFattura));
+        public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(NuovaFattura);
 
-        public IAsyncRelayCommand AggiornaFattureCommand => aggiornaFattureCommand
-            ?? (aggiornaFattureCommand = new AsyncRelayCommand(AggiornaFatture));
+        public IAsyncRelayCommand AggiornaFattureCommand => aggiornaFattureCommand ??= new AsyncRelayCommand(AggiornaFatture);
 
-        public ICommand ApriFatturaCommand => apriFatturaCommand
-            ?? (apriFatturaCommand = new RelayCommand(ApriFattura, () => FatturaSelezionata != null));
+        public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(ApriFattura, () => FatturaSelezionata != null);
 
 
 

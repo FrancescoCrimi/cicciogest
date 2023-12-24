@@ -5,7 +5,7 @@ namespace CiccioGest.Domain.Magazino
 {
     public class Categoria : DomainEntity, IEquatable<Categoria>
     {
-        private string nome;
+        private string? nome;
 
         public Categoria() { }
         public Categoria(string nome)
@@ -18,7 +18,7 @@ namespace CiccioGest.Domain.Magazino
             Id = id;
         }
 
-        public virtual string Nome
+        public virtual string? Nome
         {
             get { return nome; }
             set

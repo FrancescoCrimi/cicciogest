@@ -13,7 +13,7 @@ namespace CiccioGest.Presentation.AppForm.Services
 {
     public class WindowService : IDisposable
     {
-        private readonly ILogger<WindowService> logger;
+        private readonly ILogger logger;
         private readonly IServiceScopeFactory serviceScopeFactory;
 
         public WindowService(ILogger<WindowService> logger,
@@ -24,7 +24,7 @@ namespace CiccioGest.Presentation.AppForm.Services
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public TPresenter OpenWindow<TPresenter>() where TPresenter : PresenterBase
+        public TPresenter? OpenWindow<TPresenter>() where TPresenter : PresenterBase
         {
             var scope = serviceScopeFactory.CreateScope();
             var window = scope.ServiceProvider.GetService<TPresenter>();
@@ -36,7 +36,7 @@ namespace CiccioGest.Presentation.AppForm.Services
             //window.Disposed += WindowDisposed;
             try
             {
-                window.Show();
+                window?.Show();
             }
             catch (Exception ex)
             {

@@ -5,48 +5,48 @@ using System.Collections.Generic;
 
 namespace CiccioGest.Domain.Documenti
 {
-    public class Dettaglio : DomainValueObject, IEquatable<Dettaglio>
+    public class Dettaglio : DomainValueObject, IEquatable<Dettaglio?>
     {
-        private int quantita;
-        private Articolo articolo;
+        private int _quantita;
+        private Articolo? _articolo;
 
         public Dettaglio() { }
 
-        public Dettaglio(Articolo prodotto, int quantita)
+        public Dettaglio(Articolo articolo, int quantita)
         {
             ModificaQuantita(quantita);
-            ModificaProdotto(prodotto);
+            ModificaProdotto(articolo);
         }
 
-        public Dettaglio(int id, Articolo prodotto, int quantita)
-            : this(prodotto, quantita)
+        public Dettaglio(int id, Articolo articolo, int quantita)
+            : this(articolo, quantita)
         {
             this.Id = id;
         }
 
         public virtual int Quantita
         {
-            get { return quantita; }
+            get { return _quantita; }
             set
             {
-                if (value != quantita)
+                if (value != _quantita)
                     ModificaQuantita(value);
             }
         }
 
-        public virtual Articolo Articolo
+        public virtual Articolo? Articolo
         {
-            get { return articolo; }
+            get { return _articolo; }
             set
             {
-                if (value != articolo)
+                if (value != _articolo)
                     ModificaProdotto(value);
             }
         }
 
         public virtual int Totale { get; protected set; }
 
-        public virtual string NomeProdotto { get; protected set; }
+        public virtual string? NomeProdotto { get; protected set; }
 
         public virtual int PrezzoProdotto { get; protected set; }
 
@@ -55,18 +55,18 @@ namespace CiccioGest.Domain.Documenti
 
         private void ModificaQuantita(int quantita)
         {
-            this.quantita = quantita;
+            this._quantita = quantita;
             NotifyPropertyChanged(nameof(Quantita));
             CalcolaTotale();
         }
 
-        private void ModificaProdotto(Articolo prodotto)
+        private void ModificaProdotto(Articolo? articolo)
         {
-            if (prodotto != null)
+            if (articolo != null)
             {
-                this.articolo = prodotto;
-                NomeProdotto = prodotto.Nome;
-                PrezzoProdotto = prodotto.Prezzo;
+                _articolo = articolo;
+                NomeProdotto = articolo.Nome;
+                PrezzoProdotto = articolo.Prezzo;
                 NotifyPropertyChanged(nameof(NomeProdotto));
                 NotifyPropertyChanged(nameof(PrezzoProdotto));
                 CalcolaTotale();
@@ -88,13 +88,13 @@ namespace CiccioGest.Domain.Documenti
 
         public virtual bool Equals(Dettaglio? other)
         {
-            return other != null &&
-                   EqualityComparer<Articolo>.Default.Equals(Articolo, other.Articolo);
+            return other is not null &&
+                   EqualityComparer<Articolo?>.Default.Equals(Articolo, other.Articolo);
         }
 
         public override int GetHashCode()
         {
-            return -209438310 + EqualityComparer<Articolo>.Default.GetHashCode(Articolo);
+            return HashCode.Combine(Articolo);
         }
     }
 }

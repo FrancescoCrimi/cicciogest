@@ -41,10 +41,10 @@ namespace CiccioGest.Presentation.AppForm.View
             => NuovoCliente?.Invoke(sender, e);
 
         private void ApriToolStripButton_Click(object sender, EventArgs e)
-            => SalvaCliente?.Invoke(sender, e);
+            => ApriCliente?.Invoke(sender, e);
 
         private void SalvaToolStripButton_Click(object sender, EventArgs e)
-            => ApriCliente?.Invoke(sender, e);
+            => SalvaCliente?.Invoke(sender, e);
 
         private void ToolStripButton_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();

@@ -28,169 +28,160 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FattureView));
-            this.fattureDataGridView = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fattureBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.nuovaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.apriFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.aggiornaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            fattureDataGridView = new System.Windows.Forms.DataGridView();
+            idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            fattureBindingSource = new System.Windows.Forms.BindingSource(components);
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            nuovaFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            apriFatturaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            aggiornaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)fattureDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fattureBindingSource).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            toolStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // fattureDataGridView
             // 
-            this.fattureDataGridView.AllowUserToAddRows = false;
-            this.fattureDataGridView.AllowUserToDeleteRows = false;
-            this.fattureDataGridView.AllowUserToResizeRows = false;
-            this.fattureDataGridView.AutoGenerateColumns = false;
-            this.fattureDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.fattureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.fattureDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.nomeDataGridViewTextBoxColumn,
-            this.totaleDataGridViewTextBoxColumn});
-            this.fattureDataGridView.DataSource = this.fattureBindingSource;
-            this.fattureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fattureDataGridView.Location = new System.Drawing.Point(5, 32);
-            this.fattureDataGridView.Margin = new System.Windows.Forms.Padding(5);
-            this.fattureDataGridView.MultiSelect = false;
-            this.fattureDataGridView.Name = "fattureDataGridView";
-            this.fattureDataGridView.ReadOnly = true;
-            this.fattureDataGridView.RowHeadersVisible = false;
-            this.fattureDataGridView.RowHeadersWidth = 51;
-            this.fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.fattureDataGridView.Size = new System.Drawing.Size(612, 504);
-            this.fattureDataGridView.TabIndex = 6;
-            this.fattureDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FattureDataGridViewCellDoubleClick);
+            fattureDataGridView.AllowUserToAddRows = false;
+            fattureDataGridView.AllowUserToDeleteRows = false;
+            fattureDataGridView.AllowUserToResizeRows = false;
+            fattureDataGridView.AutoGenerateColumns = false;
+            fattureDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            fattureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            fattureDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, totaleDataGridViewTextBoxColumn });
+            fattureDataGridView.DataSource = fattureBindingSource;
+            fattureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            fattureDataGridView.Location = new System.Drawing.Point(3, 30);
+            fattureDataGridView.MultiSelect = false;
+            fattureDataGridView.Name = "fattureDataGridView";
+            fattureDataGridView.ReadOnly = true;
+            fattureDataGridView.RowHeadersVisible = false;
+            fattureDataGridView.RowHeadersWidth = 51;
+            fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            fattureDataGridView.Size = new System.Drawing.Size(616, 508);
+            fattureDataGridView.TabIndex = 6;
+            fattureDataGridView.CellDoubleClick += FattureDataGridViewCellDoubleClick;
             // 
             // idDataGridViewTextBoxColumn
             // 
-            this.idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 51;
+            idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 51;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
+            nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            nomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // totaleDataGridViewTextBoxColumn
             // 
-            this.totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
-            this.totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
-            this.totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
-            this.totaleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totaleDataGridViewTextBoxColumn.Width = 79;
+            totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
+            totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
+            totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
+            totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
+            totaleDataGridViewTextBoxColumn.ReadOnly = true;
+            totaleDataGridViewTextBoxColumn.Width = 79;
             // 
             // fattureBindingSource
             // 
-            this.fattureBindingSource.DataSource = typeof(CiccioGest.Domain.Documenti.FatturaReadOnly);
+            fattureBindingSource.DataSource = typeof(Domain.Documenti.FatturaReadOnly);
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.fattureDataGridView, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(622, 541);
-            this.tableLayoutPanel1.TabIndex = 7;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(fattureDataGridView, 0, 1);
+            tableLayoutPanel1.Controls.Add(toolStrip1, 0, 0);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(622, 541);
+            tableLayoutPanel1.TabIndex = 7;
             // 
             // toolStrip1
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuovaFatturaToolStripButton,
-            this.apriFatturaToolStripButton,
-            this.aboutToolStripButton,
-            this.aggiornaToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(622, 27);
-            this.toolStrip1.TabIndex = 7;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { nuovaFatturaToolStripButton, apriFatturaToolStripButton, aboutToolStripButton, aggiornaToolStripButton });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new System.Drawing.Size(622, 27);
+            toolStrip1.TabIndex = 7;
+            toolStrip1.Text = "toolStrip1";
             // 
             // nuovaFatturaToolStripButton
             // 
-            this.nuovaFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovaFatturaToolStripButton.Image")));
-            this.nuovaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovaFatturaToolStripButton.Name = "nuovaFatturaToolStripButton";
-            this.nuovaFatturaToolStripButton.Size = new System.Drawing.Size(76, 24);
-            this.nuovaFatturaToolStripButton.Text = "Nuova";
-            this.nuovaFatturaToolStripButton.Click += new System.EventHandler(this.NuovaFatturaToolStripButton_Click);
+            nuovaFatturaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("nuovaFatturaToolStripButton.Image");
+            nuovaFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            nuovaFatturaToolStripButton.Name = "nuovaFatturaToolStripButton";
+            nuovaFatturaToolStripButton.Size = new System.Drawing.Size(76, 24);
+            nuovaFatturaToolStripButton.Text = "Nuova";
+            nuovaFatturaToolStripButton.Click += NuovaFatturaToolStripButton_Click;
             // 
             // apriFatturaToolStripButton
             // 
-            this.apriFatturaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("apriFatturaToolStripButton.Image")));
-            this.apriFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.apriFatturaToolStripButton.Name = "apriFatturaToolStripButton";
-            this.apriFatturaToolStripButton.Size = new System.Drawing.Size(61, 24);
-            this.apriFatturaToolStripButton.Text = "Apri";
-            this.apriFatturaToolStripButton.Click += new System.EventHandler(this.ApriFatturaToolStripButton_Click);
+            apriFatturaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("apriFatturaToolStripButton.Image");
+            apriFatturaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            apriFatturaToolStripButton.Name = "apriFatturaToolStripButton";
+            apriFatturaToolStripButton.Size = new System.Drawing.Size(61, 24);
+            apriFatturaToolStripButton.Text = "Apri";
+            apriFatturaToolStripButton.Click += ApriFatturaToolStripButton_Click;
             // 
             // aboutToolStripButton
             // 
-            this.aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.aboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripButton.Image")));
-            this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aboutToolStripButton.Name = "aboutToolStripButton";
-            this.aboutToolStripButton.Size = new System.Drawing.Size(29, 24);
-            this.aboutToolStripButton.Text = "&?";
-            this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
+            aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            aboutToolStripButton.Image = (System.Drawing.Image)resources.GetObject("aboutToolStripButton.Image");
+            aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            aboutToolStripButton.Name = "aboutToolStripButton";
+            aboutToolStripButton.Size = new System.Drawing.Size(29, 24);
+            aboutToolStripButton.Text = "&?";
+            aboutToolStripButton.Click += AboutToolStripButton_Click;
             // 
             // aggiornaToolStripButton
             // 
-            this.aggiornaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aggiornaToolStripButton.Image")));
-            this.aggiornaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aggiornaToolStripButton.Name = "aggiornaToolStripButton";
-            this.aggiornaToolStripButton.Size = new System.Drawing.Size(95, 24);
-            this.aggiornaToolStripButton.Text = "Aggiorna";
+            aggiornaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("aggiornaToolStripButton.Image");
+            aggiornaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            aggiornaToolStripButton.Name = "aggiornaToolStripButton";
+            aggiornaToolStripButton.Size = new System.Drawing.Size(95, 24);
+            aggiornaToolStripButton.Text = "Aggiorna";
             // 
             // FattureView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 541);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "FattureView";
-            this.Text = "Fatture";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListaFattureView_FormClosing);
-            this.Load += new System.EventHandler(this.ListaFattureView_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fattureDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fattureBindingSource)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(622, 541);
+            Controls.Add(tableLayoutPanel1);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "FattureView";
+            Text = "Fatture";
+            FormClosing += ListaFattureView_FormClosing;
+            Load += ListaFattureView_Load;
+            ((System.ComponentModel.ISupportInitialize)fattureDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fattureBindingSource).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion

@@ -5,7 +5,6 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Presentation.AppForm.Presenter;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;

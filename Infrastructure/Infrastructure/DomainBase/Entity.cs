@@ -27,7 +27,7 @@ namespace CiccioGest.Infrastructure.DomainBase
 
         public override string ToString()
         {
-            return this.GetType().Name + " [Id=" + Id.ToString() + "]";
+            return this.GetType().Name + " [Id=" + Id?.ToString() + "]";
         }
 
         protected void NotifyPropertyChanged(string propertyName)

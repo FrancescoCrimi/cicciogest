@@ -7,13 +7,17 @@
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.WinUiBackend;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
-using CiccioGest.Presentation.WinUiNav.Activation;
+using CiccioGest.Presentation.WinUiBackend.View;
 using CiccioGest.Presentation.WinUiNav.Services;
 using CiccioGest.Presentation.WinUiNav.View;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace CiccioGest.Presentation.WinUiNav
 {
@@ -27,32 +31,43 @@ namespace CiccioGest.Presentation.WinUiNav
             Ioc.Default.ConfigureServices(ConfigureServices());
         }
 
-        protected async override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            await Ioc.Default.GetService<ActivationService>().ActivateAsync(args);
+            App.MainWindow.Content = Ioc.Default.GetService<ShellView>();
+            App.MainWindow.Activate();
+            Ioc.Default.GetService<INavigationService>().Navigate(typeof(DashboardView), args.Arguments);
         }
 
-        private IServiceProvider ConfigureServices() => new ServiceCollection()
+        private static IServiceProvider ConfigureServices()
+        {
+            var gestConf = CiccioGestConfMgr.GetCurrent();
 
-            //.AddLogging(loggingBuilder => loggingBuilder.AddNLog())
-            .AddLogging()
-            .AddSingleton(CiccioGestConfMgr.GetCurrent())
-            .ConfigureWinUiBackend()
+            var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(appLocation!)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                .Build();
 
-            // Default Activation Handler
-            .AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>()
+            return new ServiceCollection()
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
+                    //loggingBuilder.AddNLog();
+                    loggingBuilder.AddDebug();
+                })
 
-            // Other Activation Handlers
+                .AddSingleton(gestConf)
+                .ConfigureWinUiBackend()
 
-            // Services
-            .AddSingleton<ActivationService>()
-            .AddSingleton<PageService>()
-            .AddSingleton<NavigationService>()
-            .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
+                // Services
+                .AddSingleton<PageService>()
+                .AddSingleton<NavigationService>()
+                .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
 
-            // View
-            .AddTransient<ShellView>()
+                // View
+                .AddTransient<ShellView>()
 
-            .BuildServiceProvider();     
+                .BuildServiceProvider();
+        }
     }
 }

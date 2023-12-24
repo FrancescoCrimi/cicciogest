@@ -17,15 +17,15 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
     {
         private readonly ILogger logger;
         private readonly INavigationService navigationService;
-        private RelayCommand apriClientiCommand;
-        private RelayCommand apriCategorieCommand;
-        private RelayCommand apriArticoliCommand;
-        private RelayCommand apriFattureCommand;
-        private RelayCommand apriFornitoriCommand;
+        private RelayCommand? apriClientiCommand;
+        private RelayCommand? apriCategorieCommand;
+        private RelayCommand? apriArticoliCommand;
+        private RelayCommand? apriFattureCommand;
+        private RelayCommand? apriFornitoriCommand;
 
-        private RelayCommand<Type> menuItemCommand;
-        private RelayCommand goBackCommand;
-        private RelayCommand menuOptionsItemCommand;
+        private RelayCommand<Type>? menuItemCommand;
+        private RelayCommand? goBackCommand;
+        private RelayCommand? menuOptionsItemCommand;
 
         public MainViewModel(ILogger<MainViewModel> logger,
                              INavigationService navigationService)
@@ -59,8 +59,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
 
         public ICommand MenuItemCommand
-            => menuItemCommand ??= new RelayCommand<Type>((type)
-                => navigationService.NavigateTo(type));
+            => menuItemCommand ??= new RelayCommand<Type>((type) =>
+            {
+                if (type != null)
+                    navigationService.NavigateTo(type);
+            });
 
         public ICommand MenuOptionsItemCommand
             => menuOptionsItemCommand ??= new RelayCommand(
@@ -74,8 +77,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         private void OnNavigated(object? sender, EventArgs e)
         {
-            if (goBackCommand != null)
-                goBackCommand.NotifyCanExecuteChanged();
+            goBackCommand?.NotifyCanExecuteChanged();
         }
 
 

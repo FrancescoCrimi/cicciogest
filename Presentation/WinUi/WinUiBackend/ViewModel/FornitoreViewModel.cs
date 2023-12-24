@@ -49,7 +49,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
 
 
-        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(() => { }));
+        public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
 
         public ICommand NuovoFornitoreCommand => nuovoFornitoreCommand ??= new RelayCommand(()
             => MostraFornitore(new Fornitore()));

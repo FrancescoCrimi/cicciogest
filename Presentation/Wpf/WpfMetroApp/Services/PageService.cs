@@ -38,7 +38,7 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
 
         public Type GetPageType(string key)
         {
-            Type pageType;
+            Type? pageType;
             lock (pages)
             {
                 if (!pages.TryGetValue(key, out pageType))

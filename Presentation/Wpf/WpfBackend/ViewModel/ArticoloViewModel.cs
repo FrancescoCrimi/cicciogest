@@ -22,14 +22,14 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly IMagazinoService magazinoService;
         private readonly INavigationService navigationService;
         private readonly IMessageBoxService messageBoxService;
-        private RelayCommand loadedCommand;
-        private RelayCommand unloadedCommand;
-        private AsyncRelayCommand salvaArticoloCommand;
-        private AsyncRelayCommand eliminaArticoloCommand;
-        private RelayCommand nuovoArticoloCommand;
-        private RelayCommand apriArticoloCommand;
-        private RelayCommand aggiungiCategoriaCommand;
-        private RelayCommand rimuoviCategoriaCommand;
+        private RelayCommand? loadedCommand;
+        private RelayCommand? unloadedCommand;
+        private AsyncRelayCommand? salvaArticoloCommand;
+        private AsyncRelayCommand? eliminaArticoloCommand;
+        private RelayCommand? nuovoArticoloCommand;
+        private RelayCommand? apriArticoloCommand;
+        private RelayCommand? aggiungiCategoriaCommand;
+        private RelayCommand? rimuoviCategoriaCommand;
 
         public ArticoloViewModel(ILogger<ArticoloViewModel> logger,
                                  IMagazinoService magazinoService,
@@ -44,11 +44,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public Articolo Articolo { get; private set; }
+        public Articolo? Articolo { get; private set; }
 
         //public ICollection<Categoria> Categorie { get; private set; }
 
-        public Categoria CategoriaSelezionata { get; set; }
+        public Categoria? CategoriaSelezionata { get; set; }
 
 
         public ICommand LoadedCommand => loadedCommand ??= new RelayCommand(() => { });
@@ -64,27 +64,33 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public IAsyncRelayCommand EliminaArticoloCommand => eliminaArticoloCommand ??= new AsyncRelayCommand(async () =>
         {
-            try
+            if (Articolo != null)
             {
-                await magazinoService.DeleteArticolo(Articolo.Id);
-                MostraArticolo(new Articolo());
-            }
-            catch (Exception e)
-            {
-                messageBoxService.Show("Errore: " + e.Message);
+                try
+                {
+                    await magazinoService.DeleteArticolo(Articolo.Id);
+                    MostraArticolo(new Articolo());
+                }
+                catch (Exception e)
+                {
+                    messageBoxService.Show("Errore: " + e.Message);
+                } 
             }
         });
 
         public IAsyncRelayCommand SalvaArticoloCommand => salvaArticoloCommand ??= new AsyncRelayCommand(async () =>
         {
-            try
+            if (Articolo != null)
             {
-                await magazinoService.SaveArticolo(Articolo);
-                MostraArticolo(new Articolo());
-            }
-            catch (Exception e)
-            {
-                messageBoxService.Show("Errore: " + e.Message);
+                try
+                {
+                    await magazinoService.SaveArticolo(Articolo);
+                    MostraArticolo(new Articolo());
+                }
+                catch (Exception e)
+                {
+                    messageBoxService.Show("Errore: " + e.Message);
+                } 
             }
         });
 
@@ -98,7 +104,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         {
             if (CategoriaSelezionata != null)
             {
-                Articolo.RemoveCategoria(CategoriaSelezionata);
+                Articolo?.RemoveCategoria(CategoriaSelezionata);
                 //OnPropertyChanged(nameof(Categorie));
             }
         });
@@ -124,7 +130,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 if (m.Value != 0)
                 {
                     Categoria categoria = await magazinoService.GetCategoria(m.Value);
-                    Articolo.AddCategoria(categoria);
+                    Articolo?.AddCategoria(categoria);
                     //OnPropertyChanged(nameof(Categorie));
                 }
             });

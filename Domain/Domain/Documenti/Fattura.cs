@@ -9,8 +9,8 @@ namespace CiccioGest.Domain.Documenti
     public class Fattura : DomainEntity, IEquatable<Fattura>
     {
         //private string nome;
-        private IList<Dettaglio> dettagli;
-        private Cliente cliente;
+        private IList<Dettaglio>? _dettagli;
+        private Cliente? _cliente;
 
         // usato da nhibernate
         protected Fattura()
@@ -27,26 +27,26 @@ namespace CiccioGest.Domain.Documenti
         public Fattura(Cliente cliente)
         {
             Cliente = cliente;
-            dettagli = new CiccioList<Dettaglio>();
+            _dettagli = new CiccioList<Dettaglio>();
         }
 
 
-        public virtual Cliente Cliente
+        public virtual Cliente? Cliente
         {
-            get => cliente;
-            protected set => cliente = value;
+            get => _cliente;
+            protected set => _cliente = value;
         }
 
-        public virtual string Nome => cliente.NomeCompleto;
+        public virtual string? Nome => _cliente?.NomeCompleto;
 
-        public virtual IList<Dettaglio> Dettagli
+        public virtual IList<Dettaglio>? Dettagli
         {
-            get => dettagli;
+            get => _dettagli;
             protected set
             {
-                if (value != dettagli)
+                if (value != _dettagli)
                 {
-                    dettagli = value;
+                    _dettagli = value;
                     NotifyPropertyChanged(nameof(Dettagli));
                 }
             }
@@ -57,25 +57,31 @@ namespace CiccioGest.Domain.Documenti
 
         public virtual void AddDettaglio(Dettaglio dettaglio)
         {
-            if (!dettagli.Contains(dettaglio))
+            if (_dettagli != null)
             {
-                dettagli.Add(dettaglio);
-                CalcolaTotale();
-            }
-            else
-            {
-                Dettaglio d = dettagli[dettagli.IndexOf(dettaglio)];
-                d.Quantita = (d.Quantita + dettaglio.Quantita);
-                CalcolaTotale();
+                if (!_dettagli.Contains(dettaglio))
+                {
+                    _dettagli.Add(dettaglio);
+                    CalcolaTotale();
+                }
+                else
+                {
+                    Dettaglio d = _dettagli[_dettagli.IndexOf(dettaglio)];
+                    d.Quantita += dettaglio.Quantita;
+                    CalcolaTotale();
+                }
             }
         }
 
         public virtual void RemoveDettaglio(Dettaglio dettaglio)
         {
-            if (dettagli.Contains(dettaglio))
+            if (_dettagli != null)
             {
-                dettagli.Remove(dettaglio);
-                CalcolaTotale();
+                if (_dettagli.Contains(dettaglio))
+                {
+                    _dettagli.Remove(dettaglio);
+                    CalcolaTotale();
+                }
             }
         }
 
@@ -89,11 +95,11 @@ namespace CiccioGest.Domain.Documenti
         private void CalcolaTotale()
         {
             Totale = 0;
-            if (Dettagli != null)
+            if (_dettagli != null)
             {
-                if (dettagli.Count > 0)
+                if (_dettagli.Count > 0)
                 {
-                    foreach (Dettaglio prodItem in Dettagli)
+                    foreach (Dettaglio prodItem in _dettagli)
                     {
                         Totale += prodItem.Totale;
                     }

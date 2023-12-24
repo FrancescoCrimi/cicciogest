@@ -20,7 +20,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private readonly DialogService dialogService;
         private readonly IFatturaService fatturaService;
         private readonly IFatturaView view;
-        private Fattura fattura;
+        private Fattura? fattura;
 
         public FatturaPresenter(ILogger<FatturaPresenter> logger,
                                 IFatturaView view,
@@ -90,29 +90,30 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         private void View_NuovaFatturaEvent(object? sender, EventArgs e)
         {
             var scp = dialogService.OpenDialog<SelezionaClientePresenter>(view);
-            if (scp.IdCliente != 0)
-                NuovaFattura(scp.IdCliente);
+            if (scp?.IdCliente != 0)
+                NuovaFattura(scp!.IdCliente);
         }
 
         private async void View_SalvaFatturaEvent(object? sender, EventArgs e)
         {
-            await fatturaService.SaveFattura(fattura);
+            if (fattura != null)
+                await fatturaService.SaveFattura(fattura);
         }
 
 
         private void View_ApriFatturaEvent(object? sender, EventArgs e)
         {
             var sfp = dialogService.OpenDialog<SelezionaFatturaPresenter>(view);
-            if (sfp.IdFattura != 0)
-                MostraFattura(sfp.IdFattura);
+            if (sfp?.IdFattura != 0)
+                MostraFattura(sfp!.IdFattura);
         }
 
         private async void View_NuovoDettaglioEvent(object? sender, EventArgs e)
         {
             var spv = dialogService.OpenDialog<SelezionaArticoloPresenter>(view);
-            if (spv.IdArticolo != 0)
+            if (spv?.IdArticolo != 0)
             {
-                var articolo = await fatturaService.GetArticolo(spv.IdArticolo);
+                var articolo = await fatturaService.GetArticolo(spv!.IdArticolo);
                 view.SetDettaglio(new Dettaglio { Articolo = articolo, Quantita = 1 });
             }
         }
@@ -121,14 +122,14 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             if (dettaglio.Id == 0)
             {
-                fattura.AddDettaglio(dettaglio);
+                fattura?.AddDettaglio(dettaglio);
             }
             view.SetDettaglio(new Dettaglio(null, 0));
         }
 
         private void View_RimuoviDettaglioEvent(object? sender, Dettaglio dettaglio)
         {
-            fattura.RemoveDettaglio(dettaglio);
+            fattura?.RemoveDettaglio(dettaglio);
             view.SetDettaglio(new Dettaglio(null, 0));
         }
 

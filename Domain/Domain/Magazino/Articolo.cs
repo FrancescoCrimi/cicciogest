@@ -8,10 +8,10 @@ namespace CiccioGest.Domain.Magazino
 {
     public class Articolo : DomainEntity, IEquatable<Articolo>
     {
-        private string nome;
+        private string? nome;
         private int prezzo;
-        private Fornitore fornitore;
-        private string descrizione;
+        private Fornitore? fornitore;
+        private string? descrizione;
 
         public Articolo(int id, string nome, int prezzo)
             : this(nome, prezzo)
@@ -29,7 +29,7 @@ namespace CiccioGest.Domain.Magazino
             Categorie = new CiccioSet<Categoria>();
         }
 
-        public virtual string Nome
+        public virtual string? Nome
         {
             get { return nome; }
             set
@@ -55,7 +55,7 @@ namespace CiccioGest.Domain.Magazino
             }
         }
 
-        public virtual string Descrizione
+        public virtual string? Descrizione
         {
             get => descrizione;
             set
@@ -70,7 +70,7 @@ namespace CiccioGest.Domain.Magazino
 
         public virtual ISet<Categoria> Categorie { get; protected set; }
 
-        public virtual Fornitore Fornitore
+        public virtual Fornitore? Fornitore
         {
             get => fornitore;
             set

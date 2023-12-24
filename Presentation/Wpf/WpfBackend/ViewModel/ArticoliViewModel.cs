@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly ILogger logger;
         private readonly IMagazinoService magazinoService;
         protected readonly INavigationService navigationService;
-        private ArticoloReadOnly articoloSelezionato;
-        private AsyncRelayCommand loadedCommand;
-        private RelayCommand nuovoArticoloCommand;
-        private RelayCommand apriArticoloCommand;
-        private AsyncRelayCommand aggiornaArticoliCommand;
+        private ArticoloReadOnly? articoloSelezionato;
+        //private AsyncRelayCommand loadedCommand;
+        //private RelayCommand nuovoArticoloCommand;
+        //private RelayCommand apriArticoloCommand;
+        //private AsyncRelayCommand aggiornaArticoliCommand;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazinoService magazinoService,
@@ -42,7 +42,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public ObservableCollection<ArticoloReadOnly> Articoli { get; }
 
-        public ArticoloReadOnly ArticoloSelezionato
+        public ArticoloReadOnly? ArticoloSelezionato
         {
             protected get => articoloSelezionato;
             set
@@ -50,40 +50,58 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 if (articoloSelezionato != value)
                 {
                     articoloSelezionato = value;
-                    apriArticoloCommand.NotifyCanExecuteChanged();
+                    ApriArticoloCommand.NotifyCanExecuteChanged();
                 }
             }
         }
 
-        public IAsyncRelayCommand LoadedCommand => loadedCommand ??=
-            new AsyncRelayCommand(AggiornaArticoli);
-
-        public ICommand NuovoArticoloCommand => nuovoArticoloCommand ??= new RelayCommand(()
-            => navigationService.NavigateTo(nameof(ArticoloViewModel)));
-
-        public ICommand ApriArticoloCommand => apriArticoloCommand ??=
-            new RelayCommand(ApriArticolo, () => ArticoloSelezionato != null);
-
-        public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand ??=
-            new AsyncRelayCommand(AggiornaArticoli);
-
+        //public IAsyncRelayCommand LoadedCommand
+        //{
+        //    get
+        //    {
+        //        return loadedCommand ??=
+        //    new AsyncRelayCommand(AggiornaArticoli);
+        //    }
+        //}
+        [RelayCommand]
+        public Task OnLoaded() => OnAggiornaArticoli();
 
 
-        private async Task AggiornaArticoli()
-        {
-            Articoli.Clear();
-            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
-            {
-                Articoli.Add(pr);
-            }
-        }
+        //public ICommand NuovoArticoloCommand => nuovoArticoloCommand ??= new RelayCommand(()
+        //    => navigationService.NavigateTo(nameof(ArticoloViewModel)));
+        [RelayCommand]
+        public void OnNuovoArticolo()
+             => navigationService.NavigateTo(nameof(ArticoloViewModel));
 
+
+
+        //public ICommand ApriArticoloCommand => apriArticoloCommand ??=
+        //    new RelayCommand(ApriArticolo, CanApriArticolo);
+        [RelayCommand(CanExecute = nameof(CanApriArticolo))]
+        private void OnApriArticolo()
+            => ApriArticolo();
         protected virtual void ApriArticolo()
         {
             if (ArticoloSelezionato != null)
             {
                 navigationService.NavigateTo(nameof(ArticoloViewModel));
                 Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
+            }
+        }
+        private bool CanApriArticolo()
+            => ArticoloSelezionato != null;
+
+
+
+        //public IAsyncRelayCommand AggiornaArticoliCommand => aggiornaArticoliCommand ??=
+        //    new AsyncRelayCommand(AggiornaArticoli);
+        [RelayCommand]
+        private async Task OnAggiornaArticoli()
+        {
+            Articoli.Clear();
+            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
+            {
+                Articoli.Add(pr);
             }
         }
 

@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ArticoloView : Form, IArticoloView
     {
-        private readonly ILogger<ArticoloView> logger;
+        private readonly ILogger logger;
 
         public event EventHandler? LoadEvent;
         public event EventHandler? CloseEvent;
@@ -106,7 +106,7 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        private void textBox2_DoubleClick(object sender, EventArgs e)
+        private void TextBox2_DoubleClick(object sender, EventArgs e)
             => SelezionaFornitore?.Invoke(sender, e);
 
         private void AboutToolStripButton_Click(object sender, EventArgs e)

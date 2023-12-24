@@ -47,11 +47,11 @@ namespace CiccioGest.Presentation.AppForm.View
             }
         }
 
-        public string AssemblyVersion
+        public string? AssemblyVersion
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return Assembly.GetExecutingAssembly().GetName().Version?.ToString();
             }
         }
 

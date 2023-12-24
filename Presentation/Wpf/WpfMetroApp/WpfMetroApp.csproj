@@ -14,14 +14,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="appsettings.json" />
 	  <None Remove="NLog.config" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="appsettings.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
 	  <Content Include="NLog.config">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <SubType>Designer</SubType>
@@ -30,7 +26,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="MahApps.Metro" Version="2.4.10" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="5.3.7" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -38,6 +38,12 @@
 		<ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
 		<ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
 		<ProjectReference Include="..\WpfBackend\WpfBackend.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

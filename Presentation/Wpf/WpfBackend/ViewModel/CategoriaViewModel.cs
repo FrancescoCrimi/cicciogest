@@ -25,13 +25,13 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly IMagazinoService service;
         private readonly INavigationService navigationService;
         private readonly IMessageBoxService messageBoxService;
-        private AsyncRelayCommand loadedCommand;
-        private AsyncRelayCommand salvaCommand;
-        private AsyncRelayCommand rimuoviCommand;
-        private RelayCommand nuovoCommand;
-        private RelayCommand selezionaCategoriaCommand;
-        private RelayCommand modificaCategoriaCommand;
-        private RelayCommand annullaModificheCategoriaCommand;
+        private AsyncRelayCommand? loadedCommand;
+        private AsyncRelayCommand? salvaCommand;
+        private AsyncRelayCommand? rimuoviCommand;
+        private RelayCommand? nuovoCommand;
+        private RelayCommand? selezionaCategoriaCommand;
+        private RelayCommand? modificaCategoriaCommand;
+        private RelayCommand? annullaModificheCategoriaCommand;
 
         public CategoriaViewModel(ILogger<CategoriaViewModel> logger,
                                   IMagazinoService service,
@@ -47,9 +47,9 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         }
 
         public ObservableCollection<Categoria> Categorie { get; private set; }
-        public Categoria Categoria { get; private set; }
+        public Categoria? Categoria { get; private set; }
         //public Categoria CategoriaSelezionata { set { Mostra(value); } }
-        public Categoria CategoriaSelezionata { get; set; }
+        public Categoria? CategoriaSelezionata { get; set; }
 
         public IAsyncRelayCommand LoadedCommand => loadedCommand ??= new AsyncRelayCommand(Aggiorna);
         public ICommand NuovoCommand => nuovoCommand ??= new RelayCommand(Nuova);
@@ -85,27 +85,33 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         private async Task Salva()
         {
-            try
+            if (Categoria != null)
             {
-                await service.SaveCategoria(Categoria);
-                await Aggiorna();
-            }
-            catch (Exception e)
-            {
-                messageBoxService.Show("Errore: " + e.Message);
+                try
+                {
+                    await service.SaveCategoria(Categoria);
+                    await Aggiorna();
+                }
+                catch (Exception e)
+                {
+                    messageBoxService.Show("Errore: " + e.Message);
+                } 
             }
         }
 
         private async Task Rimuovi()
         {
-            try
+            if (Categoria != null)
             {
-                await service.DeleteCategoria(Categoria.Id);
-                await Aggiorna();
-            }
-            catch (Exception e)
-            {
-                messageBoxService.Show("Errore: " + e.Message);
+                try
+                {
+                    await service.DeleteCategoria(Categoria.Id);
+                    await Aggiorna();
+                }
+                catch (Exception e)
+                {
+                    messageBoxService.Show("Errore: " + e.Message);
+                } 
             }
         }
 

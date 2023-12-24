@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly ILogger<FornitoriViewModel> logger;
         private readonly IClientiFornitoriService clientiFornitoriService;
         protected readonly INavigationService navigationService;
-        private Fornitore fornitoreSelezionato;
-        private AsyncRelayCommand loadedCommand;
-        private RelayCommand nuovoFornitoreCommand;
-        private RelayCommand apriFornitoreCommand;
-        private AsyncRelayCommand aggiornaFornitoriCommand;
+        private Fornitore? fornitoreSelezionato;
+        private AsyncRelayCommand? loadedCommand;
+        private RelayCommand? nuovoFornitoreCommand;
+        private RelayCommand? apriFornitoreCommand;
+        private AsyncRelayCommand? aggiornaFornitoriCommand;
 
         public FornitoriViewModel(ILogger<FornitoriViewModel> logger,
                                   INavigationService navigationService,
@@ -41,7 +41,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         }
 
         public ObservableCollection<Fornitore> Fornitori { get; private set; }
-        public Fornitore FornitoreSelezionato
+        public Fornitore? FornitoreSelezionato
         {
             protected get => fornitoreSelezionato;
             set
@@ -49,7 +49,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 if (value != fornitoreSelezionato)
                 {
                     fornitoreSelezionato = value;
-                    apriFornitoreCommand.NotifyCanExecuteChanged();
+                    apriFornitoreCommand?.NotifyCanExecuteChanged();
                 }
             }
         }

@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly ILogger logger;
         private readonly IFatturaService fatturaService;
         protected readonly INavigationService navigationService;
-        private FatturaReadOnly fatturaSelezionata;
-        private AsyncRelayCommand loadedCommand;
-        private RelayCommand nuovaFatturaCommand;
-        private RelayCommand apriFatturaCommand;
-        private AsyncRelayCommand aggiornaFattureCommand;
+        private FatturaReadOnly? fatturaSelezionata;
+        private AsyncRelayCommand? loadedCommand;
+        private RelayCommand? nuovaFatturaCommand;
+        private RelayCommand? apriFatturaCommand;
+        private AsyncRelayCommand? aggiornaFattureCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IFatturaService fatturaService,
@@ -42,7 +42,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public ObservableCollection<FatturaReadOnly> Fatture { get; }
 
-        public FatturaReadOnly FatturaSelezionata
+        public FatturaReadOnly? FatturaSelezionata
         {
             protected get => fatturaSelezionata;
             set
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 if (value != fatturaSelezionata)
                 {
                     fatturaSelezionata = value;
-                    apriFatturaCommand.NotifyCanExecuteChanged();
+                    apriFatturaCommand?.NotifyCanExecuteChanged();
                 }
             }
         }

@@ -14,7 +14,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class SelezionaFornitoreView : Form, ISelezionaFornitoreView
     {
-        private readonly ILogger<SelezionaFornitoreView> logger;
+        private readonly ILogger logger;
 
         public event EventHandler<int>? FornitoreSelezionatoEvent;
         public event EventHandler? LoadEvent;

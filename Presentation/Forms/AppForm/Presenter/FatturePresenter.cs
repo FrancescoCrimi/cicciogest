@@ -65,17 +65,17 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_SelectFatturaEvent(object? sender, int e)
         {
-            windowService.OpenWindow<FatturaPresenter>().MostraFattura(e);
+            windowService?.OpenWindow<FatturaPresenter>()?.MostraFattura(e);
             view.Close();
         }
 
         private void View_NuovaFatturaEvent(object? sender, EventArgs e)
         {
             var lcd = dialogService.OpenDialog<SelezionaClientePresenter>(view);
-            if (lcd.IdCliente != 0)
+            if (lcd?.IdCliente != 0)
             {
                 var fp = windowService.OpenWindow<FatturaPresenter>();
-                fp.NuovaFattura(lcd.IdCliente);
+                fp?.NuovaFattura(lcd!.IdCliente);
                 view.Close();
             }
         }

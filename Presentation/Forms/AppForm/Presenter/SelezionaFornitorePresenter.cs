@@ -13,7 +13,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 {
     public class SelezionaFornitorePresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger<SelezionaFornitorePresenter> logger;
+        private readonly ILogger logger;
         private readonly ISelezionaFornitoreView view;
         private readonly IClientiFornitoriService clientiFornitoriService;
         public int IdFornitore { get; private set; }

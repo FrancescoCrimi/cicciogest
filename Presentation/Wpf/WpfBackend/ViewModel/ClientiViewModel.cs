@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
         private readonly ILogger logger;
         private readonly IClientiFornitoriService clientiFornitoriService;
         protected readonly INavigationService navigationService;
-        private Cliente clienteSelezionato;
-        private AsyncRelayCommand loadCommand;
-        private RelayCommand nuovoClientiCommand;
-        private RelayCommand apriClienteCommand;
-        private AsyncRelayCommand aggiornaClientiCommand;
+        private Cliente? clienteSelezionato;
+        private AsyncRelayCommand? loadCommand;
+        private RelayCommand? nuovoClientiCommand;
+        private RelayCommand? apriClienteCommand;
+        private AsyncRelayCommand? aggiornaClientiCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IClientiFornitoriService clientiFornitoriService,
@@ -42,7 +42,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
 
         public ObservableCollection<Cliente> Clienti { get; }
 
-        public Cliente ClienteSelezionato
+        public Cliente? ClienteSelezionato
         {
             protected get => clienteSelezionato;
             set
@@ -50,7 +50,7 @@ namespace CiccioGest.Presentation.WpfBackend.ViewModel
                 if (clienteSelezionato != value)
                 {
                     clienteSelezionato = value;
-                    apriClienteCommand.NotifyCanExecuteChanged();
+                    apriClienteCommand?.NotifyCanExecuteChanged();
                 }
             }
         }

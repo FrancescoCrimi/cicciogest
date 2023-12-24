@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 {
     public class SettingPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger<SettingPresenter> logger;
+        private readonly ILogger logger;
         private readonly ISettingView view;
         private readonly IServiceProvider serviceProvider;
         private readonly IServiceScopeFactory serviceScopeFactory;
@@ -52,7 +52,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             try
             {
                 var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
-                uowf.CreateDataAccess();
+                uowf?.CreateDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             try
             {
                 var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
-                uowf.VerifyDataAccess();
+                uowf?.VerifyDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             using (var scope = serviceScopeFactory.CreateScope())
             {
-                var sett = scope.ServiceProvider.GetService<ISettingService>();
+                var sett = scope.ServiceProvider.GetRequiredService<ISettingService>();
                 await sett.LoadSampleData();
                 MessageBox.Show("Eseguito con successo");
             }

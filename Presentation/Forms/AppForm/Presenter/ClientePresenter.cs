@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 {
     public class ClientePresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger<ClientePresenter> logger;
+        private readonly ILogger logger;
         private readonly IClienteView view;
         private readonly IClientiFornitoriService clientiFornitoriService;
         private readonly WindowService windowService;
