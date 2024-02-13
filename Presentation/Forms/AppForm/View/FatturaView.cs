@@ -65,13 +65,13 @@ namespace CiccioGest.Presentation.AppForm.View
 
         private void AggiungiDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
-            if(dettaglioBindingSource.Current is Dettaglio dettaglio)
+            if (dettaglioBindingSource.Current is Dettaglio dettaglio)
                 AggiungiDettaglioEvent?.Invoke(sender, dettaglio);
         }
 
         private void RimuoviDettaglioToolStripButton_Click(object sender, EventArgs e)
         {
-            if(dettaglioBindingSource.Current is Dettaglio dettaglio)
+            if (dettaglioBindingSource.Current is Dettaglio dettaglio)
                 RimuoviDettaglioEvent?.Invoke(sender, dettaglio);
         }
 

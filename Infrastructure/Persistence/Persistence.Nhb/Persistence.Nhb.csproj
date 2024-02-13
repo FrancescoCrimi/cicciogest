@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
-
 		<RootNamespace>CiccioGest.Infrastructure.Persistence.Nhb</RootNamespace>
 		<AssemblyName>Persistence.Nhb</AssemblyName>
 		<Product>CiccioGest</Product>
@@ -13,38 +12,22 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Mapping\Indirizzo.hbm.xml" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Mapping\Fornitore.hbm.xml">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Mapping\Cliente.hbm.xml">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Mapping\Categoria.hbm.xml">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Mapping\Dettaglio.hbm.xml">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Mapping\Fattura.hbm.xml">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Mapping\Articolo.hbm.xml">
-			<SubType>Designer</SubType>
-		</EmbeddedResource>
+		<EmbeddedResource Include="Mapping\Fornitore.hbm.xml" />
+		<EmbeddedResource Include="Mapping\Cliente.hbm.xml" />
+		<EmbeddedResource Include="Mapping\Categoria.hbm.xml" />
+		<EmbeddedResource Include="Mapping\Dettaglio.hbm.xml" />
+		<EmbeddedResource Include="Mapping\Fattura.hbm.xml" />
+		<EmbeddedResource Include="Mapping\Articolo.hbm.xml" />
 		<EmbeddedResource Include="Mapping\Indirizzo.hbm.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
 		<PackageReference Include="CiccioSoft.NhbCollections" Version="2.0.0" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
 		<PackageReference Include="NHibernate" Version="5.3.20" />
 		<PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.4" />
-		<PackageReference Include="Npgsql" Version="8.0.1" />
+		<PackageReference Include="Npgsql" Version="8.0.2" />
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
 	</ItemGroup>
 
@@ -54,12 +37,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="CiccioGestNhb.mdf">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="CiccioGestNhb_log.ldf">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="CiccioGestNhb.mdf">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="CiccioGestNhb_log.ldf">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
-
 		<RootNamespace>CiccioGest.Infrastructure</RootNamespace>
 		<AssemblyName>Infrastructure</AssemblyName>
 		<Product>CiccioGest</Product>
@@ -19,8 +18,7 @@
 
 	<ItemGroup>
 		<None Update="NLog.config">
-			<SubType>Designer</SubType>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 
