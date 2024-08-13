@@ -1,11 +1,11 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,25 +13,25 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class CategoriaPresenter : PresenterBase, IDisposable
+    public sealed class CategoriaPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly ICategoriaView view;
-        private readonly IMagazinoService magazinoService;
+        private readonly ILogger _logger;
+        private readonly ICategoriaView _view;
+        private readonly IMagazzinoService _magazinoService;
 
         public CategoriaPresenter(ILogger<CategoriaPresenter> logger,
                                   ICategoriaView view,
-                                  IMagazinoService magazinoService)
+                                  IMagazzinoService magazinoService)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.magazinoService = magazinoService;
-            this.view.LoadEvent += View_LoadEvent;
-            this.view.CloseEvent += View_CloseEvent;
-            this.view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
-            this.view.CancellaCategoriaEvent += View_CancellaCategoriaEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _magazinoService = magazinoService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
+            _view.CancellaCategoriaEvent += View_CancellaCategoriaEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private async void View_LoadEvent(object? sender, EventArgs e)
@@ -46,26 +46,26 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_CancellaCategoriaEvent(object? sender, int e)
         {
-            await magazinoService.DeleteCategoria(e);
+            await _magazinoService.DeleteCategoria(e);
             await Refresh();
         }
 
         private async void View_SalvaCategoriaEvent(object? s, Categoria e)
         {
-            await magazinoService.SaveCategoria(e);
+            await _magazinoService.SaveCategoria(e);
             await Refresh();
         }
 
         private async Task Refresh()
         {
-            var list = await magazinoService.GetCategorie();
-            view.SetCategorie(list);
-            view.SetCategoria(new Categoria());
+            var list = await _magazinoService.GetCategorie();
+            _view.SetCategorie(list);
+            _view.SetCategoria(new Categoria());
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

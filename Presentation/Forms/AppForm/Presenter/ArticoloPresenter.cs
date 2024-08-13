@@ -1,11 +1,12 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
@@ -14,85 +15,118 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class ArticoloPresenter : PresenterBase, IDisposable
+    public sealed class ArticoloPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly IMagazinoService magazinoService;
-        private readonly WindowService windowService;
-        private readonly DialogService dialogService;
-        private readonly IArticoloView view;
+        private readonly ILogger _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMagazzinoService _magazinoService;
+        private readonly WindowService _windowService;
+        private readonly DialogService _dialogService;
+        private readonly IArticoloView _view;
         private Articolo? articolo;
 
         public ArticoloPresenter(ILogger<ArticoloPresenter> logger,
+                                 IUnitOfWork unitOfWork,
                                  IArticoloView view,
-                                 IMagazinoService magazinoService,
+                                 IMagazzinoService magazinoService,
                                  WindowService windowService,
                                  DialogService dialogService)
             : base(view)
         {
-            this.logger = logger;
-            this.magazinoService = magazinoService;
-            this.windowService = windowService;
-            this.dialogService = dialogService;
-            this.view = view;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _magazinoService = magazinoService;
+            _windowService = windowService;
+            _dialogService = dialogService;
+            _view = view;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public void NuovoArticolo()
+        public async Task NuovoArticolo()
         {
+            await _unitOfWork.BeginAsync();
             articolo = new Articolo();
             MostraArticolo(articolo);
         }
 
         public async Task MostraArticolo(int id)
         {
-            articolo = await magazinoService.GetArticolo(id);
+            await _unitOfWork.BeginAsync();
+            articolo = await _magazinoService.GetArticolo(id);
             MostraArticolo(articolo);
         }
 
+
         private void View_LoadEvent(object? sender, EventArgs e)
         {
-            view.NuovoArticoloEvent += View_NuovoArticoloEvent;
-            view.SalvaArticoloEvent += View_SalvaArticoloEvent;
-            view.EliminaArticoloEvent += View_EliminaArticoloEvent;
-            view.ApriArticoloEvent += View_ApriArticoloEvent;
-            view.AggiungiCategoriaEvent += View_AggiungiCategoriaEvent;
-            view.RimuoviCategoriaEvent += View_RimuoviCategoriaEvent;
-            view.SelezionaFornitore += View_SelezionaFornitore;
+            _view.NuovoArticoloEvent += View_NuovoArticoloEvent;
+            _view.SalvaArticoloEvent += View_SalvaArticoloEvent;
+            _view.EliminaArticoloEvent += View_EliminaArticoloEvent;
+            _view.ApriArticoloEvent += View_ApriArticoloEvent;
+            _view.AggiungiCategoriaEvent += View_AggiungiCategoriaEvent;
+            _view.RimuoviCategoriaEvent += View_RimuoviCategoriaEvent;
+            _view.SelezionaFornitore += View_SelezionaFornitore;
         }
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            view.NuovoArticoloEvent -= View_NuovoArticoloEvent;
-            view.SalvaArticoloEvent -= View_SalvaArticoloEvent;
-            view.EliminaArticoloEvent -= View_EliminaArticoloEvent;
-            view.ApriArticoloEvent -= View_ApriArticoloEvent;
-            view.AggiungiCategoriaEvent -= View_AggiungiCategoriaEvent;
-            view.RimuoviCategoriaEvent -= View_RimuoviCategoriaEvent;
-            view.SelezionaFornitore -= View_SelezionaFornitore;
+            _view.NuovoArticoloEvent -= View_NuovoArticoloEvent;
+            _view.SalvaArticoloEvent -= View_SalvaArticoloEvent;
+            _view.EliminaArticoloEvent -= View_EliminaArticoloEvent;
+            _view.ApriArticoloEvent -= View_ApriArticoloEvent;
+            _view.AggiungiCategoriaEvent -= View_AggiungiCategoriaEvent;
+            _view.RimuoviCategoriaEvent -= View_RimuoviCategoriaEvent;
+            _view.SelezionaFornitore -= View_SelezionaFornitore;
         }
 
-
-        private void View_NuovoArticoloEvent(object? sender, EventArgs e)
-            => NuovoArticolo();
+        private async void View_NuovoArticoloEvent(object? sender, EventArgs e)
+            => await NuovoArticolo();
 
         private async void View_SalvaArticoloEvent(object? sender, EventArgs e)
         {
             if (articolo != null)
-                await magazinoService.SaveArticolo(articolo);
+            {
+                try
+                {
+                    await _magazinoService.SaveArticolo(articolo);
+                    await _unitOfWork.CommitAsync();
+                }
+                catch (Exception)
+                {
+                    await _unitOfWork.RollbackAsync();
+                    throw;
+                }
+                finally
+                {
+                    await _unitOfWork.BeginAsync();
+                }
+            }
         }
 
         private async void View_EliminaArticoloEvent(object? sender, int e)
         {
-            await magazinoService.DeleteArticolo(e);
-            NuovoArticolo();
+            try
+            {
+                await _magazinoService.DeleteArticolo(e);
+                await _unitOfWork.CommitAsync();
+                await NuovoArticolo();
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
+            finally
+            {
+                await _unitOfWork.BeginAsync();
+            }
         }
 
         private async void View_ApriArticoloEvent(object? sender, EventArgs e)
         {
-            var sav = dialogService.OpenDialog<SelezionaArticoloPresenter>(view);
+            var sav = _dialogService.OpenDialog<SelezionaArticoloPresenter>(_view);
             if (sav?.IdArticolo != 0)
             {
                 await MostraArticolo(sav!.IdArticolo);
@@ -101,10 +135,10 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_AggiungiCategoriaEvent(object? sender, EventArgs e)
         {
-            var scp = dialogService.OpenDialog<SelezionaCategoriaPresenter>(view);
+            var scp = _dialogService.OpenDialog<SelezionaCategoriaPresenter>(_view);
             if (scp?.IdCategoria != 0)
             {
-                Categoria categoria = await magazinoService.GetCategoria(scp!.IdCategoria);
+                Categoria categoria = await _magazinoService.GetCategoria(scp!.IdCategoria);
                 articolo?.AddCategoria(categoria);
             }
         }
@@ -114,31 +148,30 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             articolo?.RemoveCategoria(e);
         }
 
-
-        private void MostraArticolo(Articolo articolo)
-        {
-            view.SetArticolo(articolo);
-            view.SetCategorie(articolo.Categorie);
-        }
-
         private async void View_SelezionaFornitore(object? sender, EventArgs e)
         {
             if (articolo != null)
             {
-                var sfp = dialogService.OpenDialog<SelezionaFornitorePresenter>(view);
+                var sfp = _dialogService.OpenDialog<SelezionaFornitorePresenter>(_view);
                 if (sfp?.IdFornitore != 0)
                 {
-                    var fornitore = await magazinoService.GetFornitore(sfp!.IdFornitore);
+                    var fornitore = await _magazinoService.GetFornitore(sfp!.IdFornitore);
                     articolo.Fornitore = fornitore;
                 } 
             }
         }
 
 
+        private void MostraArticolo(Articolo articolo)
+        {
+            _view.SetArticolo(articolo);
+            _view.SetCategorie(articolo.Categorie);
+        }
+
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

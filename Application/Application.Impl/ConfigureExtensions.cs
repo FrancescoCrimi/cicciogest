@@ -1,4 +1,10 @@
-﻿using CiccioGest.Infrastructure;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 //using CiccioGest.Infrastructure.Persistence.LiteDB;
 //using CiccioGest.Infrastructure.Persistence.Memory;
@@ -30,7 +36,7 @@ namespace CiccioGest.Application.Impl
             }
             serviceCollection
                 .AddTransient<IFatturaService, FatturaService>()
-                .AddTransient<IMagazinoService, MagazinoService>()
+                .AddTransient<IMagazzinoService, MagazzinoService>()
                 .AddTransient<IClientiFornitoriService, ClientiFornitoriService>()
                 .AddTransient<ISettingService, SettingService>();
             return serviceCollection;

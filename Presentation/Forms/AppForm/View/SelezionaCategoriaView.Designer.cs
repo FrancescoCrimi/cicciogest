@@ -100,7 +100,7 @@ namespace CiccioGest.Presentation.AppForm.View
             // categorieBindingSource
             // 
             this.categorieBindingSource.AllowNew = false;
-            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Categoria);
+            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Magazzino.Categoria);
             // 
             // tableLayoutPanel2
             // 

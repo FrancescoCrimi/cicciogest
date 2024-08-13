@@ -97,11 +97,11 @@
             // 
             // articoloBindingSource
             // 
-            this.articoloBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Articolo);
+            this.articoloBindingSource.DataSource = typeof(CiccioGest.Domain.Magazzino.Articolo);
             // 
             // categorieBindingSource
             // 
-            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Categoria);
+            this.categorieBindingSource.DataSource = typeof(CiccioGest.Domain.Magazzino.Categoria);
             // 
             // tableLayoutPanel1
             // 

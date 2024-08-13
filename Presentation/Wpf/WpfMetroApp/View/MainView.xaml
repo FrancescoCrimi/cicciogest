@@ -5,12 +5,13 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                  xmlns:view="clr-namespace:CiccioGest.Presentation.WpfMetroApp.View"
-                 xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
+                 xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModel;assembly=CiccioGest.Presentation.Mvvm"
                  d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
                  mc:Ignorable="d"
                  Title="MainWindow"
                  Height="450"
-                 Width="800">
+                 Width="800"
+                 x:Name="mainView">
 
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
@@ -89,30 +90,39 @@
 
                 <mah:HamburgerMenu x:Name="hamburgerMenu"
                                    ItemTemplate="{StaticResource MenuItemTemplate}"
+                                   OptionsItemTemplate="{StaticResource OptionsMenuItemTemplate}"
+                                   OpenPaneLength="150">
+                    <!--
                                    ItemCommand="{Binding MenuItemCommand}"
                                    ItemCommandParameter="{Binding ElementName=hamburgerMenu, Path=SelectedItem.TargetPageType}"
-                                   OptionsItemTemplate="{StaticResource OptionsMenuItemTemplate}"
                                    OptionsItemCommand="{Binding MenuOptionsItemCommand}"
                                    OptionsItemCommandParameter="{Binding ElementName=hamburgerMenu, Path=SelectedOptionsItem.TargetPageType}"
-                                   OpenPaneLength="150">
+                    -->
 
                     <mah:HamburgerMenu.ItemsSource>
                         <mah:HamburgerMenuItemCollection>
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE719;"
-                                                        Label="Fatture"
-                                                        TargetPageType="view:FattureView" />
+                                                        Label="Fatture"                                                         
+                                                        Command="{Binding ApriFattureCommand, Mode=OneWay}" />
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE8A5;"
                                                         Label="Articoli"
-                                                        TargetPageType="view:ArticoliView" />
+                                                        Command="{Binding ApriArticoliCommand, Mode=OneWay}" />
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE8A5;"
                                                         Label="Categorie"
-                                                        TargetPageType="view:CategoriaView" />
+                                                        Command="{Binding ApriCategorieCommand, Mode=OneWay}" />
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE779;"
                                                         Label="Clienti"
-                                                        TargetPageType="view:ClientiView" />
+                                                        Command="{Binding ApriClientiCommand, Mode=OneWay}" />
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE779;"
                                                         Label="Fornitori"
-                                                        TargetPageType="view:FornitoriView" />
+                                                        Command="{Binding ApriFornitoriCommand, Mode=OneWay}" />
+                            <!--
+                                                        TargetPageType="view:FattureView"
+                                                        TargetPageType="view:ArticoliView"
+                                                        TargetPageType="view:CategoriaView"
+                                                        TargetPageType="view:ClientiView"
+                                                        TargetPageType="view:FornitoriView"
+                            -->
                         </mah:HamburgerMenuItemCollection>
                     </mah:HamburgerMenu.ItemsSource>
 
@@ -124,10 +134,12 @@
                     </mah:HamburgerMenu.OptionsItemsSource>
 
                     <mah:HamburgerMenu.Content>
-                        <Frame x:Name="shellFrame"
+                        <!--<Frame x:Name="shellFrame"
                                Grid.Row="1"
                                NavigationUIVisibility="Hidden"
-                               Focusable="False" />
+                               Focusable="False" />-->
+                        <ContentControl Grid.Row="1"
+                                        x:Name="shellFrame" />
                     </mah:HamburgerMenu.Content>
                 </mah:HamburgerMenu>
 

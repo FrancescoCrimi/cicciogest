@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class SelezionaArticoloView : Form, ISelezionaArticoloView
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
         public event EventHandler? LoadEvent;
         public event EventHandler? CloseEvent;
@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.AppForm.View
         public SelezionaArticoloView(ILogger<SelezionaArticoloView> logger)
         {
             InitializeComponent();
-            this.logger = logger;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            _logger = logger;
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public void CaricaArticoli(IList<ArticoloReadOnly> articoli)
+        public void CaricaArticoli(IList<Articolo> articoli)
         {
             articoliBindingSource.DataSource = articoli;
             articoliDataGridView.ClearSelection();
@@ -47,7 +47,7 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             if (articoliDataGridView.SelectedRows.Count > 0)
             {
-                if (articoliBindingSource.Current is ArticoloReadOnly articolo)
+                if (articoliBindingSource.Current is Articolo articolo)
                     ArticoloSelezionatoEvent?.Invoke(this, articolo.Id);
             }
         }

@@ -1,7 +1,12 @@
-﻿//using Castle.Core.Logging;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure.Conf;
 using LiteDB;
 using Microsoft.Extensions.Logging;
@@ -11,15 +16,15 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 {
     internal class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly CiccioGestConf conf;
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
+        private readonly CiccioGestConf _ciccioGestConf;
         //private LiteDatabase db;
 
         public UnitOfWorkFactory(ILogger<UnitOfWorkFactory> logger,
-                                 CiccioGestConf conf)
+                                 CiccioGestConf ciccioGestConf)
         {
-            this.conf = conf;
-            this.logger = logger;
+            _ciccioGestConf = ciccioGestConf;
+            _logger = logger;
             ConfigureLiteDb();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
@@ -44,7 +49,7 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
                 .Id(fat => fat.Id)
                 .DbRef(x => x.Cliente, "Cliente");
             //db = new LiteDatabase(@"CiccioGest.db");
-            LiteDB = new LiteDatabase(@conf.CS);
+            LiteDB = new LiteDatabase(_ciccioGestConf.CS);
         }
 
 
@@ -53,18 +58,23 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 
         public void CreateDataAccess()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " CreateDataAccess");
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " CreateDataAccess");
         }
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
             //db.Dispose();
         }
 
         public void VerifyDataAccess()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " VerifyDataAccess");
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " VerifyDataAccess");
+        }
+
+        public IUnitOfWork Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

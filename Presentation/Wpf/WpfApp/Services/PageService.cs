@@ -1,40 +1,35 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Presentation.WpfApp.View;
-using CiccioGest.Presentation.WpfBackend.ViewModel;
+using CiccioGest.Presentation.Mvvm.ViewModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using CiccioGest.Presentation.WpfBackend.Services;
 
 namespace CiccioGest.Presentation.WpfApp.Services
 {
-    public class PageService
+    public class PageService : IPageService
     {
-        private readonly Dictionary<string, Type> pages = new Dictionary<string, Type>();
+        private readonly Dictionary<string, Type> pages = new();
 
         public PageService()
         {
-            //Configure<MainViewModel, MainPage>();
             Configure<ArticoliViewModel, ArticoliView>();
-            Configure<ListaArticoliViewModel, ListaArticoliView>();
             Configure<ArticoloViewModel, ArticoloView>();
             Configure<CategoriaViewModel, CategoriaView>();
             Configure<ClienteViewModel, ClienteView>();
             Configure<ClientiViewModel, ClientiView>();
-            Configure<ListaClientiViewModel, ListaClientiView>();
             Configure<FatturaViewModel, FatturaView>();
             Configure<FattureViewModel, FattureView>();
-            Configure<ListaFattureViewModel, ListaFattureView>();
             Configure<FornitoreViewModel, FornitoreView>();
             Configure<FornitoriViewModel, FornitoriView>();
-            Configure<ListaFornitoriViewModel, ListaFornitoriView>();
-
         }
 
         public Type GetPageType(string key)
@@ -52,7 +47,7 @@ namespace CiccioGest.Presentation.WpfApp.Services
 
         private void Configure<VM, V>()
             where VM : ObservableObject
-            where V : Page
+            where V : UserControl
         {
             lock (pages)
             {

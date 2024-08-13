@@ -65,7 +65,7 @@
             // 
             // articoliBindingSource
             // 
-            this.articoliBindingSource.DataSource = typeof(CiccioGest.Domain.Magazino.Articolo);
+            this.articoliBindingSource.DataSource = typeof(CiccioGest.Domain.Magazzino.Articolo);
             // 
             // articoliDataGridView
             // 

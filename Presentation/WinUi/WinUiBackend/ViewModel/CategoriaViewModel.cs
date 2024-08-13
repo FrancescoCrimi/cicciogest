@@ -18,11 +18,11 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
     {
         private AsyncRelayCommand loadedCommand;
         private readonly ILogger<ArticoliViewModel> logger;
-        private readonly IMagazinoService magazinoService;
+        private readonly IMagazzinoService magazinoService;
         private readonly INavigationService navigationService;
 
         public CategoriaViewModel(ILogger<ArticoliViewModel> logger,
-                                  IMagazinoService magazinoService,
+                                  IMagazzinoService magazinoService,
                                   INavigationService navigationService)
         {
             this.logger = logger;

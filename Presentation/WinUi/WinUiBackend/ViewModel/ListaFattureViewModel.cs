@@ -5,6 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
@@ -14,9 +15,11 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
     public partial class ListaFattureViewModel : FattureViewModel
     {
         public ListaFattureViewModel(ILogger<FattureViewModel> logger,
+                                     IUnitOfWork unitOfWork,
                                      IFatturaService fatturaService,
                                      INavigationService navigationService)
             : base(logger,
+                   unitOfWork,
                    fatturaService,
                    navigationService)
         {
@@ -25,7 +28,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         protected override void ApriFattura()
         {
             Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
-            navigationService.GoBack();
+            _navigationService.GoBack();
         }
     }
 }

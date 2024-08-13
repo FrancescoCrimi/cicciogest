@@ -126,7 +126,7 @@ namespace CiccioGest.Presentation.AppForm.View
             // fattureBindingSource
             // 
             fattureBindingSource.AllowNew = false;
-            fattureBindingSource.DataSource = typeof(Domain.Documenti.FatturaReadOnly);
+            fattureBindingSource.DataSource = typeof(Domain.Documenti.Fattura);
             // 
             // tableLayoutPanel2
             // 

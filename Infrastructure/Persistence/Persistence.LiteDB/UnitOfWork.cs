@@ -1,4 +1,10 @@
-﻿using LiteDB;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using LiteDB;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -24,6 +30,15 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
 
         internal LiteDatabase LiteDB { get; }
 
+        public void Begin()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task BeginAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         public void Commit()
         {
@@ -55,6 +70,11 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB
             LiteDB.Rollback();
             LiteDB.BeginTrans();
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Rollback");
+        }
+
+        public Task RollbackAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

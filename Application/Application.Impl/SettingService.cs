@@ -1,6 +1,12 @@
-﻿using CiccioGest.Application.FakeImpl;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Application.FakeImpl;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure;
 using System;
 using System.Threading.Tasks;
@@ -9,26 +15,25 @@ namespace CiccioGest.Application.Impl
 {
     internal class SettingService : ISettingService
     {
-        private readonly IUnitOfWorkFactory unitOfWorkFactory;
-        private readonly IFatturaService fatturaService;
-        private readonly IMagazinoService magazinoService;
-        private readonly IClientiFornitoriService clientiFornitoriService;
+        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IFatturaService _fatturaService;
+        private readonly IMagazzinoService _magazzinoService;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
 
-        public SettingService(
-            IUnitOfWorkFactory unitOfWorkFactory,
-            IFatturaService fatturaService,
-            IMagazinoService magazinoService,
-            IClientiFornitoriService clientiFornitoriService)
+        public SettingService(IUnitOfWorkFactory unitOfWorkFactory,
+                              IFatturaService fatturaService,
+                              IMagazzinoService magazzinoService,
+                              IClientiFornitoriService clientiFornitoriService)
         {
-            this.unitOfWorkFactory = unitOfWorkFactory;
-            this.fatturaService = fatturaService;
-            this.magazinoService = magazinoService;
-            this.clientiFornitoriService = clientiFornitoriService;
+            _unitOfWorkFactory = unitOfWorkFactory;
+            _fatturaService = fatturaService;
+            _magazzinoService = magazzinoService;
+            _clientiFornitoriService = clientiFornitoriService;
         }
 
         public void CreateDataAccess()
         {
-            unitOfWorkFactory.CreateDataAccess();
+            _unitOfWorkFactory.CreateDataAccess();
         }
 
         public async Task LoadSampleData()
@@ -47,7 +52,7 @@ namespace CiccioGest.Application.Impl
 
         public void VerifyDataAccess()
         {
-            unitOfWorkFactory.VerifyDataAccess();
+            _unitOfWorkFactory.VerifyDataAccess();
         }
 
 
@@ -56,7 +61,7 @@ namespace CiccioGest.Application.Impl
         {
             foreach (var item in FakeSampleData.Categorie)
             {
-                await magazinoService.SaveCategoria(item);
+                await _magazzinoService.SaveCategoria(item);
             }
         }
 
@@ -64,7 +69,7 @@ namespace CiccioGest.Application.Impl
         {
             foreach (var item in FakeSampleData.Clienti)
             {
-                await clientiFornitoriService.SaveCliente(item);
+                await _clientiFornitoriService.SaveCliente(item);
             }
         }
                                                                                       
@@ -72,7 +77,7 @@ namespace CiccioGest.Application.Impl
         {
             foreach (var item in FakeSampleData.Fornitori)
             {
-                await clientiFornitoriService.SaveFornitore(item);
+                await _clientiFornitoriService.SaveFornitore(item);
             }
         }
 
@@ -82,10 +87,10 @@ namespace CiccioGest.Application.Impl
             for (int p = 1; p <= FakeSampleData.Articoli.Count; p++)
             {
                 Articolo articolo = FakeSampleData.Articoli[p -1];
-                Categoria categoria = await magazinoService.GetCategoria(p);
+                Categoria categoria = await _magazzinoService.GetCategoria(p);
                 articolo.AddCategoria(categoria);
-                articolo.Fornitore = await magazinoService.GetFornitore(p);
-                await magazinoService.SaveArticolo(articolo);
+                articolo.Fornitore = await _magazzinoService.GetFornitore(p);
+                await _magazzinoService.SaveArticolo(articolo);
             }
         }
 
@@ -93,16 +98,16 @@ namespace CiccioGest.Application.Impl
         {
             for (int i = 1; i < 6; i++)
             {
-                var clie = await fatturaService.GetCliente(i);
+                var clie = await _fatturaService.GetCliente(i);
                 Fattura fatt = new Fattura(clie);
                 for (int o = 1; o < (i + 1); o++)
                 {
 
-                    var articolo = await magazinoService.GetArticolo(o);
+                    var articolo = await _magazzinoService.GetArticolo(o);
                     Dettaglio dett = new Dettaglio(articolo, o);
                     fatt.AddDettaglio(dett);
                 }
-                await fatturaService.SaveFattura(fatt);
+                await _fatturaService.SaveFattura(fatt);
             }
         }
 

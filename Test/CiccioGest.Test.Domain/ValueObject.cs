@@ -1,6 +1,6 @@
 ﻿using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using Moq;
 using Xunit;
 

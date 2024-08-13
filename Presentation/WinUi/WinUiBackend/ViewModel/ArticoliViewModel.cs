@@ -5,7 +5,8 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -22,28 +23,31 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
     public partial class ArticoliViewModel : ObservableRecipient, IDisposable
     {
         private readonly ILogger logger;
-        private readonly IMagazinoService magazinoService;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMagazzinoService magazinoService;
         protected readonly INavigationService navigationService;
-        private ArticoloReadOnly articoloSelezionato;
+        private Articolo articoloSelezionato;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaArticoliCommand;
         private RelayCommand apriArticoloCommand;
         private RelayCommand nuovoArticoloCommand;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
-                                 IMagazinoService magazinoService,
+                                 IUnitOfWork unitOfWork,
+                                 IMagazzinoService magazinoService,
                                  INavigationService navigationService)
         {
             this.logger = logger;
+            this.unitOfWork = unitOfWork;
             this.magazinoService = magazinoService;
             this.navigationService = navigationService;
-            Articoli = new ObservableCollection<ArticoloReadOnly>();
+            Articoli = new ObservableCollection<Articolo>();
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public ObservableCollection<ArticoloReadOnly> Articoli { get; private set; }
+        public ObservableCollection<Articolo> Articoli { get; private set; }
 
-        public ArticoloReadOnly ArticoloSelezionato
+        public Articolo ArticoloSelezionato
         {
             get => articoloSelezionato;
             set
@@ -89,7 +93,8 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private async Task AggiornaArticoli()
         {
             Articoli.Clear();
-            foreach (ArticoloReadOnly pr in await magazinoService.GetArticoli())
+            await unitOfWork.BeginAsync();
+            foreach (Articolo pr in await magazinoService.GetArticoli())
             {
                 Articoli.Add(pr);
             }

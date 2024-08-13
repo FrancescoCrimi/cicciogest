@@ -12,7 +12,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public interface IFattureView : IView
     {
-        void CaricaFatture(IList<FatturaReadOnly> listFatture);
+        void CaricaFatture(IList<Fattura> listFatture);
         event EventHandler<int> FatturaSelezionataEvent;
         event EventHandler NuovaFatturaEvent;
     }

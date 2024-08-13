@@ -1,4 +1,10 @@
-﻿using CiccioGest.Domain.Magazino;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.Magazzino;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,26 +14,20 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
     internal class ArticoloRepository : DomainRepository<Articolo>, IArticoloRepository
     {
         public ArticoloRepository(ILogger<ArticoloRepository> logger,
-                                  IUnitOfWork unitOfWork)
+                                  UnitOfWork unitOfWork)
             : base(logger, unitOfWork)
         {
-            logger.LogDebug("Created: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
+        }
+
+        public Task<IList<Articolo>> GetAll()
+        {
+            return _unitOfWork.Session.CreateCriteria<Articolo>().ListAsync<Articolo>();
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
-        }
-
-        public async Task<IList<ArticoloReadOnly>> GetAll()
-        {
-            IList<ArticoloReadOnly> list = new List<ArticoloReadOnly>();
-            IList<Articolo> prodotti = await unitOfWork.ISession.CreateCriteria<Articolo>().ListAsync<Articolo>();
-            foreach (Articolo item in prodotti)
-            {
-                list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.Categorie));
-            }
-            return list;
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿using CiccioGest.Domain.Documenti;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.Documenti;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,22 +16,22 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
         {
         }
 
-        public void Dispose()
-        {
-            //throw new System.NotImplementedException();
-        }
-
-        public Task<IList<FatturaReadOnly>> GetAll()
+        public Task<IList<Fattura>> GetAll()
         {
             return Task.Run(() =>
             {
-                IList<FatturaReadOnly> list = new List<FatturaReadOnly>();
+                IList<Fattura> list = new List<Fattura>();
                 foreach (Fattura item in entities)
                 {
-                    list.Add(new FatturaReadOnly(item.Id, item.Nome, item.Totale));
+                    list.Add(item);
                 }
                 return list;
             });
+        }
+
+        public void Dispose()
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }

@@ -5,6 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
@@ -14,9 +15,11 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
     public partial class ListaArticoliViewModel : ArticoliViewModel
     {
         public ListaArticoliViewModel(ILogger<ArticoliViewModel> logger,
-                                      IMagazinoService magazinoService,
+                                      IUnitOfWork unitOfWork,
+                                      IMagazzinoService magazinoService,
                                       INavigationService navigationService)
             : base(logger,
+                   unitOfWork,
                    magazinoService,
                    navigationService)
         {

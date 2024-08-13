@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -20,14 +20,14 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
     {
         private AsyncRelayCommand loadedCommand;
         private readonly ILogger<ArticoloViewModel> logger;
-        private readonly IMagazinoService magazinoService;
+        private readonly IMagazzinoService magazinoService;
         private RelayCommand nuovoArticoloCommand;
         private RelayCommand salvaArticoloCommand;
         private RelayCommand eliminaArticoloCommand;
         private RelayCommand apriArticoloCommand;
 
         public ArticoloViewModel(ILogger<ArticoloViewModel> logger,
-                                 IMagazinoService magazinoService)
+                                 IMagazzinoService magazinoService)
         {
             this.logger = logger;
             this.magazinoService = magazinoService;

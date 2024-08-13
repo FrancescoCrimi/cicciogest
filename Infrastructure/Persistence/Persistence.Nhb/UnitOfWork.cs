@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using Microsoft.Extensions.Logging;
 using NHibernate;
 using System;
 using System.Threading.Tasks;
@@ -7,95 +13,119 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
     internal class UnitOfWork : IUnitOfWork
     {
-        private readonly ILogger logger;
-        private readonly ISessionFactory sessionFactory;
-        private ISession session;
+        private readonly UnitOfWorkFactory _unitOfWorkFactory;
+        private ISession? _session;
+        private ITransaction? _transaction;
 
-        public UnitOfWork(ILogger<UnitOfWork> logger,
-                          IUnitOfWorkFactory unitOfWorkFactory)
+        public UnitOfWork(UnitOfWorkFactory unitOfWorkFactory)
         {
-            this.logger = logger;
-            this.sessionFactory = ((UnitOfWorkFactory)unitOfWorkFactory).SessionFactory();
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        internal ISession ISession
+        internal ISession Session
         {
             get
             {
-                if (session == null)
-                    StartSession();
-                return session;
+                if (_session == null)
+                    throw new InvalidOperationException("You are not in a unit of work.");
+                return _session;
             }
         }
 
-        private void StartSession()
+        public void Begin()
         {
-            DisposeSession();
-            session = sessionFactory.OpenSession();
-            session.FlushMode = FlushMode.Commit;
-            session.BeginTransaction();
+            Task.Run(async () => await DisposeTransaction());
+            _session = _unitOfWorkFactory.CreateSession();
+            _session.FlushMode = FlushMode.Commit;
+            _transaction = _session.BeginTransaction();
+        }
+        public async Task BeginAsync()
+        {
+            await DisposeTransaction();
+            _session = _unitOfWorkFactory.CreateSession();
+            _session.FlushMode = FlushMode.Commit;
+            _transaction = _session.BeginTransaction();
         }
 
         public void Commit()
         {
-            session.GetCurrentTransaction().Commit();
-            DisposeSession();
-            session.BeginTransaction();
+            try
+            {
+                _transaction?.Commit();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Task.Run(async () => await DisposeTransaction());
+            }
         }
 
         public async Task CommitAsync()
         {
-            await session.GetCurrentTransaction().RollbackAsync();
-            DisposeSession();
-            session.BeginTransaction();
+            if (_transaction != null)
+            {
+                try
+                {
+                    await _transaction.CommitAsync();
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    await DisposeTransaction();
+                }
+            }
         }
 
         public void Rollback()
         {
-            session.GetCurrentTransaction().Rollback();
-            DisposeSession();
-            session.BeginTransaction();
+            Task.Run(async () => await DisposeTransaction());
         }
 
-        private void DisposeSession()
+        public Task RollbackAsync()
+            => DisposeTransaction();
+
+        private async Task DisposeTransaction()
         {
-            if (session != null)
+            if (_session != null)
             {
-                //try
-                //{
-                if (session.GetCurrentTransaction() != null)
+                try
                 {
-                    try
+                    if (_transaction != null)
                     {
-                        if (session.GetCurrentTransaction().IsActive)
+                        try
                         {
-                            session.GetCurrentTransaction().Rollback();
+                            if (_transaction.IsActive)
+                            {
+                                await _transaction.RollbackAsync();
+                            }
+                            _transaction.Dispose();
+                            _transaction = null!;
                         }
-                        //session.Transaction.Dispose();
+                        catch (Exception ex)
+                        {
+                            throw new HibernateException("Unable to rollback transaction for orphaned session", ex);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        throw new HibernateException("Unable to rollback transaction for orphaned session", ex);
-                    }
+                    _session.Close();
+                    _session.Dispose();
+                    _session = null!;
                 }
-                //    session.Close();
-                //    session.Dispose();
-                //    session = null;
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw new HibernateException("Unable to close orphaned session", ex);
-                //}
+                catch (Exception ex)
+                {
+                    throw new HibernateException("Unable to close orphaned session", ex);
+                }
             }
         }
 
         public void Dispose()
         {
-            //    session.Close();
-            //    session.Dispose();
-            //    session = null;
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            Task.Run(async () => await DisposeTransaction());
         }
     }
 }

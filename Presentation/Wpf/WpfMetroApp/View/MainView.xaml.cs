@@ -4,8 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WpfBackend.ViewModel;
-using CiccioGest.Presentation.WpfMetroApp.Services;
+using CiccioGest.Presentation.Mvvm.ViewModel;
+using CiccioGest.Presentation.WpfBackend.Services;
 using MahApps.Metro.Controls;
 
 namespace CiccioGest.Presentation.WpfMetroApp.View

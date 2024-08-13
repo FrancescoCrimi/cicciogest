@@ -1,5 +1,10 @@
-﻿using CiccioGest.Domain.ClientiFornitori;
-using CiccioGest.Infrastructure;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.ClientiFornitori;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -7,112 +12,73 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
 {
-    class ClientiFornitoriService : IClientiFornitoriService
+    internal class ClientiFornitoriService : IClientiFornitoriService
     {
-        private readonly ILogger logger;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IClienteRepository clienteRepository;
-        private readonly IFornitoreRepository fornitoreRepository;
+        private readonly ILogger _logger;
+        private readonly IClienteRepository _clienteRepository;
+        private readonly IFornitoreRepository _fornitoreRepository;
 
         public ClientiFornitoriService(ILogger<ClientiFornitoriService> logger,
-                                       IUnitOfWork unitOfWork,
                                        IClienteRepository clienteRepository,
                                        IFornitoreRepository fornitoreRepository)
         {
-            this.logger = logger;
-            this.unitOfWork = unitOfWork;
-            this.clienteRepository = clienteRepository;
-            this.fornitoreRepository = fornitoreRepository;
-            logger.LogDebug("Created: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
+            _logger = logger;
+            _clienteRepository = clienteRepository;
+            _fornitoreRepository = fornitoreRepository;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public async Task DeleteCliente(int id)
+        public Task DeleteCliente(int id)
         {
-            try
-            {
-                await clienteRepository.Delete(id);
-                unitOfWork.Commit();
-            }
-            catch (Exception)
-            {
-                unitOfWork.Rollback();
-                throw;
-            }
+            return _clienteRepository.Delete(id);
         }
 
-        public async Task DeleteFornitore(int id)
+        public Task DeleteFornitore(int id)
         {
-            try
-            {
-                await fornitoreRepository.Delete(id);
-                unitOfWork.Commit();
-            }
-            catch (Exception)
-            {
-                unitOfWork.Rollback();
-                throw;
-            }
+            return _fornitoreRepository.Delete(id);
         }
 
-        public async Task<Cliente> GetCliente(int id)
+        public Task<Cliente> GetCliente(int id)
         {
-            return await clienteRepository.GetById(id);
+            return _clienteRepository.GetById(id);
         }
 
-        public async Task<IList<Cliente>> GetClienti()
+        public Task<IList<Cliente>> GetClienti()
         {
-            return await clienteRepository.GetAll();
+            return _clienteRepository.GetAll();
         }
 
-        public async Task<Fornitore> GetFornitore(int id)
+        public Task<Fornitore> GetFornitore(int id)
         {
-            return await fornitoreRepository.GetById(id);
+            return _fornitoreRepository.GetById(id);
         }
 
-        public async Task<IList<Fornitore>> GetFornitori()
+        public Task<IList<Fornitore>> GetFornitori()
         {
-            return await fornitoreRepository.GetAll();
+            return _fornitoreRepository.GetAll();
         }
 
         public async Task<Cliente> SaveCliente(Cliente cliente)
         {
-            try
-            {
-                if (cliente.Id == 0)
-                    await clienteRepository.Save(cliente);
-                else
-                    await clienteRepository.Update(cliente);
-                unitOfWork.Commit();
-                return cliente;
-            }
-            catch (Exception)
-            {
-                unitOfWork.Rollback();
-                throw;
-            }
+            if (cliente.Id == 0)
+                await _clienteRepository.Save(cliente);
+            else
+                await _clienteRepository.Update(cliente);
+            return cliente;
         }
 
         public async Task<Fornitore> SaveFornitore(Fornitore fornitore)
         {
-            try
-            {
-                if (fornitore.Id == 0)
-                    await fornitoreRepository.Save(fornitore);
-                else
-                    await fornitoreRepository.Update(fornitore);
-                unitOfWork.Commit();
-                return fornitore;
-            }
-            catch (Exception)
-            {
-                unitOfWork.Rollback();
-                throw;
-            }
+            if (fornitore.Id == 0)
+                await _fornitoreRepository.Save(fornitore);
+            else
+                await _fornitoreRepository.Update(fornitore);
+            return fornitore;
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

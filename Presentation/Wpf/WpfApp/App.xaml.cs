@@ -1,4 +1,10 @@
-﻿using CiccioGest.Infrastructure.Conf;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.WpfApp.Services;
 using CiccioGest.Presentation.WpfApp.View;
 using CiccioGest.Presentation.WpfBackend;
@@ -39,10 +45,9 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddSingleton(gestConf)
                 .ConfigureWpfBackend()
 
-                .AddSingleton<NavigationService>()
-                .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
                 .AddSingleton<PageService>()
-                .AddSingleton<IMessageBoxService, MessageBoxService>()
+                .AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
+
                 .AddTransient<MainView>()
                 .AddTransient<HomeView>()
                 .AddTransient<ArticoliView>()
@@ -54,10 +59,6 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddTransient<FattureView>()
                 .AddTransient<FornitoreView>()
                 .AddTransient<FornitoriView>()
-                .AddTransient<ListaArticoliView>()
-                .AddTransient<ListaClientiView>()
-                .AddTransient<ListaFattureView>()
-                .AddTransient<ListaFornitoriView>()
                 .BuildServiceProvider();
         }
     }

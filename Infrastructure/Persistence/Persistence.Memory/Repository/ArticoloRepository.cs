@@ -1,4 +1,10 @@
-﻿using CiccioGest.Domain.Magazino;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.Magazzino;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,22 +16,22 @@ namespace CiccioGest.Infrastructure.Persistence.Memory.Repository
         {
         }
 
-        public void Dispose()
-        {
-            //throw new System.NotImplementedException();
-        }
-
-        public Task<IList<ArticoloReadOnly>> GetAll()
+        public Task<IList<Articolo>> GetAll()
         {
             return Task.Run(() =>
             {
-                IList<ArticoloReadOnly> list = new List<ArticoloReadOnly>();
+                IList<Articolo> list = new List<Articolo>();
                 foreach (Articolo item in entities)
                 {
-                    list.Add(new ArticoloReadOnly(item.Id, item.Nome, item.Prezzo, item.Categorie));
+                    list.Add(item);
                 }
                 return list;
             });
+        }
+
+        public void Dispose()
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }

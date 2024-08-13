@@ -1,3 +1,9 @@
+// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Common;
 using CiccioSoft.Collections.Generic;
@@ -37,7 +43,7 @@ namespace CiccioGest.Domain.Documenti
             protected set => _cliente = value;
         }
 
-        public virtual string? Nome => _cliente?.NomeCompleto;
+        public virtual string? Nome => Cliente?.NomeCompleto;
 
         public virtual IList<Dettaglio>? Dettagli
         {

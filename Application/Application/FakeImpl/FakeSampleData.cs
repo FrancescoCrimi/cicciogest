@@ -1,6 +1,12 @@
-﻿using CiccioGest.Domain.ClientiFornitori;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -12,9 +18,7 @@ namespace CiccioGest.Application.FakeImpl
         public static readonly IList<Cliente> Clienti = new List<Cliente>();
         public static readonly IList<Fornitore> Fornitori = new List<Fornitore>();
         public static readonly IList<Articolo> Articoli = new List<Articolo>();
-        public static readonly IList<ArticoloReadOnly> ArticoliRO = new List<ArticoloReadOnly>();
         public static readonly IList<Fattura> Fatture = new List<Fattura>();
-        public static readonly IList<FatturaReadOnly> FattureRO = new List<FatturaReadOnly>();
 
         static FakeSampleData()
         {
@@ -85,8 +89,6 @@ namespace CiccioGest.Application.FakeImpl
                 //articolo.AddCategoria(Categorie[p - 1]);
                 articolo.Descrizione = "Articolo " + p.ToString() + " Bla bla bla";
                 Articoli.Add(articolo);
-                ArticoloReadOnly articoloRO = new ArticoloReadOnly(articolo.Id, articolo.Nome, articolo.Prezzo, articolo.Categorie);
-                ArticoliRO.Add(articoloRO);
             }
         }
 
@@ -102,8 +104,6 @@ namespace CiccioGest.Application.FakeImpl
                     fatt.AddDettaglio(dett);
                 }
                 Fatture.Add(fatt);
-                FatturaReadOnly a = new FatturaReadOnly(i, fatt.Nome, fatt.Totale);
-                FattureRO.Add(a);
             }
         }
     }

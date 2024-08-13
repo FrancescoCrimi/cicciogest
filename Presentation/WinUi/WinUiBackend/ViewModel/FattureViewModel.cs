@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -21,36 +22,39 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
     public partial class FattureViewModel : ObservableRecipient, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly IFatturaService fatturaService;
-        protected readonly INavigationService navigationService;
-        private FatturaReadOnly fatturaSelezionata;
+        private readonly ILogger _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IFatturaService _fatturaService;
+        protected readonly INavigationService _navigationService;
+        private Fattura _fatturaSelezionata;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaFattureCommand;
         private RelayCommand apriFatturaCommand;
         private RelayCommand nuovaFatturaCommand;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
+                                IUnitOfWork unitOfWork,
                                 IFatturaService fatturaService,
                                 INavigationService navigationService)
         {
-            this.logger = logger;
-            this.fatturaService = fatturaService;
-            this.navigationService = navigationService;
-            Fatture = new ObservableCollection<FatturaReadOnly>();
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _fatturaService = fatturaService;
+            _navigationService = navigationService;
+            Fatture = new ObservableCollection<Fattura>();
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        public ObservableCollection<FatturaReadOnly> Fatture { get; private set; }
+        public ObservableCollection<Fattura> Fatture { get; private set; }
 
-        public FatturaReadOnly FatturaSelezionata
+        public Fattura FatturaSelezionata
         {
-            get => fatturaSelezionata;
+            get => _fatturaSelezionata;
             set
             {
-                if (value != fatturaSelezionata)
+                if (value != _fatturaSelezionata)
                 {
-                    fatturaSelezionata = value;
+                    _fatturaSelezionata = value;
                     apriFatturaCommand.NotifyCanExecuteChanged();
                 }
             }
@@ -76,7 +80,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             if (FatturaSelezionata != null)
             {
-                navigationService.Navigate(ViewEnum.Fattura);
+                _navigationService.Navigate(ViewEnum.Fattura);
                 Messenger.Send(new FatturaIdMessage(FatturaSelezionata.Id));
             }
         }
@@ -84,7 +88,8 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private async Task AggiornaFatture()
         {
             Fatture.Clear();
-            foreach (FatturaReadOnly fatt in await fatturaService.GetFatture())
+            await _unitOfWork.BeginAsync();
+            foreach (Fattura fatt in await _fatturaService.GetFatture())
             {
                 Fatture.Add(fatt);
             }
@@ -94,7 +99,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Disposed");
         }
     }
 }

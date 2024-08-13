@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -11,11 +11,11 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class SelezionaFornitorePresenter : PresenterBase, IDisposable
+    public sealed class SelezionaFornitorePresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly ISelezionaFornitoreView view;
-        private readonly IClientiFornitoriService clientiFornitoriService;
+        private readonly ILogger _logger;
+        private readonly ISelezionaFornitoreView _view;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
         public int IdFornitore { get; private set; }
 
         public SelezionaFornitorePresenter(ILogger<SelezionaFornitorePresenter> logger,
@@ -23,36 +23,36 @@ namespace CiccioGest.Presentation.AppForm.Presenter
                                            IClientiFornitoriService clientiFornitoriService)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.clientiFornitoriService = clientiFornitoriService;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _clientiFornitoriService = clientiFornitoriService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private async void View_LoadEvent(object? sender, EventArgs e)
         {
-            view.FornitoreSelezionatoEvent += View_FornitoreSelezionatoEvent;
-            view.CaricaFornitori(await clientiFornitoriService.GetFornitori());
+            _view.FornitoreSelezionatoEvent += View_FornitoreSelezionatoEvent;
+            _view.CaricaFornitori(await _clientiFornitoriService.GetFornitori());
         }
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            view.FornitoreSelezionatoEvent -= View_FornitoreSelezionatoEvent;
+            _view.FornitoreSelezionatoEvent -= View_FornitoreSelezionatoEvent;
         }
 
         private void View_FornitoreSelezionatoEvent(object? sender, int e)
         {
             IdFornitore = e;
-            view.Close();
+            _view.Close();
         }
 
         public void Dispose()
         {
-            view.LoadEvent -= View_LoadEvent;
-            view.CloseEvent -= View_CloseEvent;
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _view.LoadEvent -= View_LoadEvent;
+            _view.CloseEvent -= View_CloseEvent;
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

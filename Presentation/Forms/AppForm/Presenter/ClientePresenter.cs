@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -13,12 +13,12 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class ClientePresenter : PresenterBase, IDisposable
+    public sealed class ClientePresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly IClienteView view;
-        private readonly IClientiFornitoriService clientiFornitoriService;
-        private readonly WindowService windowService;
+        private readonly ILogger _logger;
+        private readonly IClienteView _view;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly WindowService _windowService;
 
         public ClientePresenter(ILogger<ClientePresenter> logger,
                                 IClienteView view,
@@ -26,22 +26,22 @@ namespace CiccioGest.Presentation.AppForm.Presenter
                                 WindowService windowService) 
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.clientiFornitoriService = clientiFornitoriService;
-            this.windowService = windowService;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _clientiFornitoriService = clientiFornitoriService;
+            _windowService = windowService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         #region Metodi Pubblici
 
         public void NuovoCliente()
-            => view.MostraCliente(new Cliente());
+            => _view.MostraCliente(new Cliente());
 
         public async void ApriCliente(int idCliente)
-            => view.MostraCliente(await clientiFornitoriService.GetCliente(idCliente));
+            => _view.MostraCliente(await _clientiFornitoriService.GetCliente(idCliente));
 
         #endregion
 
@@ -49,16 +49,16 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_LoadEvent(object? sender, EventArgs e)
         {
-            view.ApriCliente += View_ApriCliente;
-            view.NuovoCliente += View_NuovoCliente;
-            view.SalvaCliente += View_SalvaCliente;
+            _view.ApriCliente += View_ApriCliente;
+            _view.NuovoCliente += View_NuovoCliente;
+            _view.SalvaCliente += View_SalvaCliente;
         }
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            view.ApriCliente -= View_ApriCliente;
-            view.NuovoCliente -= View_NuovoCliente;
-            view.SalvaCliente -= View_SalvaCliente;
+            _view.ApriCliente -= View_ApriCliente;
+            _view.NuovoCliente -= View_NuovoCliente;
+            _view.SalvaCliente -= View_SalvaCliente;
         }
 
 
@@ -81,7 +81,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

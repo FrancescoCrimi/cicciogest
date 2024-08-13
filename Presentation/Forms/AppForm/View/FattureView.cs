@@ -14,7 +14,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class FattureView : Form, IFattureView
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
         public event EventHandler? LoadEvent;
         public event EventHandler? CloseEvent;
         public event EventHandler<int>? FatturaSelezionataEvent;
@@ -23,11 +23,11 @@ namespace CiccioGest.Presentation.AppForm.View
         public FattureView(ILogger<FattureView> logger)
         {
             InitializeComponent();
-            this.logger = logger;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            _logger = logger;
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public void CaricaFatture(IList<FatturaReadOnly> listFatture)
+        public void CaricaFatture(IList<Fattura> listFatture)
         {
             fattureBindingSource.DataSource = listFatture;
             fattureDataGridView.ClearSelection();
@@ -62,7 +62,7 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             if (fattureDataGridView.SelectedRows.Count > 0)
             {
-                if (fattureBindingSource.Current is FatturaReadOnly fattura)
+                if (fattureBindingSource.Current is Fattura fattura)
                     FatturaSelezionataEvent?.Invoke(this, fattura.Id);
             }
         }

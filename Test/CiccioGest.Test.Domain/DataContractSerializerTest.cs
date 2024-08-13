@@ -1,6 +1,6 @@
 using CiccioGest.Application.FakeImpl;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Domain.Magazino;
+using CiccioGest.Domain.Magazzino;
 using FluentAssertions;
 using System.IO;
 using System.Runtime.Serialization;

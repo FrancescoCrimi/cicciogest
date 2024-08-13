@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -14,12 +14,12 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class SettingPresenter : PresenterBase, IDisposable
+    public sealed class SettingPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly ISettingView view;
-        private readonly IServiceProvider serviceProvider;
-        private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly ILogger _logger;
+        private readonly ISettingView _view;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
         public SettingPresenter(ILogger<SettingPresenter> logger,
                                 ISettingView view,
@@ -27,16 +27,16 @@ namespace CiccioGest.Presentation.AppForm.Presenter
                                 IServiceScopeFactory serviceScopeFactory)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.serviceProvider = serviceProvider;
-            this.serviceScopeFactory = serviceScopeFactory;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            view.CreaDatabaseEvent += View_CreaDatabaseEvent;
-            view.VerificaDatabaseEvent += View_VerificaDatabaseEvent;
-            view.PopolaDatabaseEvent += View_PopolaDatabaseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _serviceProvider = serviceProvider;
+            _serviceScopeFactory = serviceScopeFactory;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _view.CreaDatabaseEvent += View_CreaDatabaseEvent;
+            _view.VerificaDatabaseEvent += View_VerificaDatabaseEvent;
+            _view.PopolaDatabaseEvent += View_PopolaDatabaseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private void View_LoadEvent(object? sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             try
             {
-                var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
+                var uowf = _serviceProvider.GetService<IUnitOfWorkFactory>();
                 uowf?.CreateDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
@@ -65,7 +65,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         {
             try
             {
-                var uowf = serviceProvider.GetService<IUnitOfWorkFactory>();
+                var uowf = _serviceProvider.GetService<IUnitOfWorkFactory>();
                 uowf?.VerifyDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
@@ -77,7 +77,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private async void View_PopolaDatabaseEvent(object? sender, EventArgs e)
         {
-            using (var scope = serviceScopeFactory.CreateScope())
+            using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var sett = scope.ServiceProvider.GetRequiredService<ISettingService>();
                 await sett.LoadSampleData();

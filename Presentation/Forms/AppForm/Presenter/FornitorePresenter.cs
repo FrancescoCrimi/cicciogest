@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -13,12 +13,12 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class FornitorePresenter : PresenterBase, IDisposable
+    public sealed class FornitorePresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly IFornitoreView view;
-        private readonly IClientiFornitoriService clientiFornitoriService;
-        private readonly WindowService windowService;
+        private readonly ILogger _logger;
+        private readonly IFornitoreView _view;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly WindowService _windowService;
 
         public FornitorePresenter(ILogger<FornitorePresenter> logger,
                                   IFornitoreView view,
@@ -26,22 +26,22 @@ namespace CiccioGest.Presentation.AppForm.Presenter
                                   WindowService windowService)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.clientiFornitoriService = clientiFornitoriService;
-            this.windowService = windowService;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _clientiFornitoriService = clientiFornitoriService;
+            _windowService = windowService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         #region Metodi Pubblici
 
         public void NuovoFornitore()
-            => view.MostraFornitore(new Fornitore());
+            => _view.MostraFornitore(new Fornitore());
 
         public async void ApriFornitore(int idFornitore)
-            => view.MostraFornitore(await clientiFornitoriService.GetFornitore(idFornitore));
+            => _view.MostraFornitore(await _clientiFornitoriService.GetFornitore(idFornitore));
 
         #endregion
 
@@ -49,16 +49,16 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_LoadEvent(object? sender, EventArgs e)
         {
-            view.ApriFornitore += View_ApriFornitore;
-            view.NuovoFornitore += View_NuovoFornitore;
-            view.SalvaFornitore += View_SalvaFornitore;
+            _view.ApriFornitore += View_ApriFornitore;
+            _view.NuovoFornitore += View_NuovoFornitore;
+            _view.SalvaFornitore += View_SalvaFornitore;
         }
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            view.ApriFornitore -= View_ApriFornitore;
-            view.NuovoFornitore -= View_NuovoFornitore;
-            view.SalvaFornitore -= View_SalvaFornitore;
+            _view.ApriFornitore -= View_ApriFornitore;
+            _view.NuovoFornitore -= View_NuovoFornitore;
+            _view.SalvaFornitore -= View_SalvaFornitore;
         }
 
 
@@ -81,8 +81,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         public void Dispose()
         {
-            view.LoadEvent -= View_LoadEvent;
-            view.CloseEvent -= View_CloseEvent;
+            _view.LoadEvent -= View_LoadEvent;
+            _view.CloseEvent -= View_CloseEvent;
         }
     }
 }

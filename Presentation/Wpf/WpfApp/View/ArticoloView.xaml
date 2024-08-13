@@ -1,17 +1,18 @@
-﻿<Page
-    x:Class="CiccioGest.Presentation.WpfApp.View.ArticoloView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.WpfBackend.ViewModel;assembly=WpfBackend"
-    d:DataContext="{d:DesignInstance Type=viewmodel:ArticoloViewModel}"
-    mc:Ignorable="d"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    Title="Articolo"
-    Background="White">
+﻿<UserControl x:Class="CiccioGest.Presentation.WpfApp.View.ArticoloView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModel;assembly=CiccioGest.Presentation.Mvvm"
+             d:DataContext="{d:DesignInstance Type=viewmodel:ArticoloViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Background="White">
+    <!--
+      Title="Articolo"
+    -->
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -24,54 +25,64 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <DockPanel>
 
-            <TextBlock
-                Text="Articolo"
-                DockPanel.Dock="Left"
-                Margin="{StaticResource SmallLeftTopRightBottomMargin}"
-                Style="{StaticResource PageTitleStyle}"/>
+            <TextBlock Text="Articolo"
+                       DockPanel.Dock="Left"
+                       Margin="{StaticResource SmallLeftTopRightBottomMargin}"
+                       Style="{StaticResource PageTitleStyle}" />
 
-            <ToolBar
-                ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoArticoloCommand, Mode=OneWay}" Margin="8,0,8,0">
+            <ToolBar ToolBarTray.IsLocked="True">
+                <Button Command="{Binding NuovoArticoloCommand, Mode=OneWay}"
+                        Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="&#xE8A5;"
+                             FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Nuovo" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding SalvaArticoloCommand, Mode=OneWay}" Margin="8,0,8,0">
+                <Button Command="{Binding SalvaArticoloCommand, Mode=OneWay}"
+                        Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE74E;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="&#xE74E;"
+                             FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding EliminaArticoloCommand, Mode=OneWay}" Margin="8,0,8,0">
+                <Button Command="{Binding EliminaArticoloCommand, Mode=OneWay}"
+                        Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="&#xE74D;"
+                             FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ApriArticoloCommand}" Margin="8,0,8,0">
+                <Button Command="{Binding ApriArticoloCommand}"
+                        Margin="8,0,8,0">
                     <TextBlock>
-                        <Run Text="&#xED25;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="&#xED25;"
+                             FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
                     </TextBlock>
                 </Button>
-                <Separator/>
-                <Button Command="{Binding AggiungiCategoriaCommand, Mode=OneWay}" Margin="8,0,8,0">
+                <Separator />
+                <Button Command="{Binding AggiungiCategoriaCommand, Mode=OneWay}"
+                        Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE710;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="&#xE710;"
+                             FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiungi Categoria" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviCategoriaCommand, Mode=OneWay}" Margin="8,0,8,0">
+                <Button Command="{Binding RimuoviCategoriaCommand, Mode=OneWay}"
+                        Margin="8,0,8,0">
                     <TextBlock>        
-                        <Run Text="&#xE738;" FontFamily="Segoe MDL2 Assets"/>
+                        <Run Text="&#xE738;"
+                             FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Rimuovi Categoria" />
                     </TextBlock>
                 </Button>
@@ -81,53 +92,102 @@
 
 
 
-        <GroupBox
-            Margin="{StaticResource XSmallLeftRightBottomMargin}"
-            Grid.Row="1">
+        <GroupBox Margin="{StaticResource XSmallLeftRightBottomMargin}"
+                  Grid.Row="1">
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
                 </Grid.ColumnDefinitions>
 
-                <Grid
-                    Grid.Column="0"
-                    DataContext="{Binding Articolo, Mode=OneWay}">
+                <Grid Grid.Column="0"
+                      DataContext="{Binding Articolo, Mode=OneWay}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="Nome:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                    <TextBox x:Name="nomeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Text="{Binding Nome, NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Center" Width="197"/>
+                    <Label Content="Nome:"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Margin="3"
+                           Grid.Row="0"
+                           VerticalAlignment="Center" />
+                    <TextBox x:Name="nomeTextBox"
+                             Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             Height="23"
+                             Margin="3,0,0,0"
+                             Text="{Binding Nome, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                             VerticalAlignment="Center"
+                             Width="197" />
 
-                    <Label Content="Descrizione:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                    <TextBox x:Name="descrizioneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="1" Text="{Binding Descrizione, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="197"/>
+                    <Label Content="Descrizione:"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Margin="3"
+                           Grid.Row="1"
+                           VerticalAlignment="Center" />
+                    <TextBox x:Name="descrizioneTextBox"
+                             Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             Height="23"
+                             Margin="3,0,0,0"
+                             Grid.Row="1"
+                             Text="{Binding Descrizione, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                             VerticalAlignment="Center"
+                             Width="197" />
 
-                    <Label Content="Prezzo:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                    <TextBox x:Name="prezzoTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="2" Text="{Binding Prezzo, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="197"/>
+                    <Label Content="Prezzo:"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Margin="3"
+                           Grid.Row="2"
+                           VerticalAlignment="Center" />
+                    <TextBox x:Name="prezzoTextBox"
+                             Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             Height="23"
+                             Margin="3,0,0,0"
+                             Grid.Row="2"
+                             Text="{Binding Prezzo, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                             VerticalAlignment="Center"
+                             Width="197" />
 
-                    <Label Content="Fornitore:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                    <TextBox x:Name="fornitoreTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="3" Text="" VerticalAlignment="Center" Width="197"/>
+                    <Label Content="Fornitore:"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Margin="3"
+                           Grid.Row="3"
+                           VerticalAlignment="Center" />
+                    <TextBox x:Name="fornitoreTextBox"
+                             Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             Height="23"
+                             Margin="3,0,0,0"
+                             Grid.Row="3"
+                             Text=""
+                             VerticalAlignment="Center"
+                             Width="197" />
                 </Grid>
 
-                <GroupBox Header="Categorie" Grid.Column="1">
-                    <ListView
-                        Grid.Column="1"
-                        SelectionMode="Single"
-                        ItemsSource="{Binding Articolo.Categorie}"
-                        SelectedItem="{Binding CategoriaSelezionata}">
+                <GroupBox Header="Categorie"
+                          Grid.Column="1">
+                    <ListView Grid.Column="1"
+                              SelectionMode="Single"
+                              ItemsSource="{Binding Articolo.Categorie}"
+                              SelectedItem="{Binding CategoriaSelezionata}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding Nome}"/>
+                                    <TextBlock Text="{Binding Nome}" />
                                 </WrapPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -139,4 +199,4 @@
         </GroupBox>
 
     </Grid>
-</Page>
+</UserControl>

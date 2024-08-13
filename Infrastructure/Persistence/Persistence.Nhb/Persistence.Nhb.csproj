@@ -24,10 +24,10 @@
 	<ItemGroup>
 		<PackageReference Include="CiccioSoft.Collections" Version="2.0.0" />
 		<PackageReference Include="CiccioSoft.NhbCollections" Version="2.0.0" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
 		<PackageReference Include="NHibernate" Version="5.3.20" />
 		<PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.4" />
-		<PackageReference Include="Npgsql" Version="8.0.2" />
+		<PackageReference Include="Npgsql" Version="8.0.3" />
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
 	</ItemGroup>
 

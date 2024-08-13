@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -11,12 +11,12 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class MainPresenter : PresenterBase, IDisposable
+    public sealed class MainPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly WindowService windowService;
-        private readonly DialogService dialogService;
-        private readonly IMainView view;        
+        private readonly ILogger _logger;
+        private readonly WindowService _windowService;
+        private readonly DialogService _dialogService;
+        private readonly IMainView _view;        
 
         public MainPresenter(ILogger<MainPresenter> logger,
                              IMainView view,
@@ -24,33 +24,33 @@ namespace CiccioGest.Presentation.AppForm.Presenter
                              DialogService dialogService)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.windowService = windowService; 
-            this.dialogService = dialogService;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _windowService = windowService; 
+            _dialogService = dialogService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         #region eventi iview
 
         private void View_LoadEvent(object? sender, EventArgs e)
         {
-            view.FattureEvent += View_FattureEvent;
-            view.ClientiEvent += View_ClientiEvent;
-            view.FornitoriEvent += View_FornitoriEvent;
-            view.ArticoliEvent += View_ArticoliEvent;
-            view.CategorieEvent += View_CategorieEvent;
+            _view.FattureEvent += View_FattureEvent;
+            _view.ClientiEvent += View_ClientiEvent;
+            _view.FornitoriEvent += View_FornitoriEvent;
+            _view.ArticoliEvent += View_ArticoliEvent;
+            _view.CategorieEvent += View_CategorieEvent;
         }
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            view.FattureEvent -= View_FattureEvent;
-            view.ClientiEvent -= View_ClientiEvent;
-            view.FornitoriEvent -= View_FornitoriEvent;
-            view.ArticoliEvent -= View_ArticoliEvent;
-            view.CategorieEvent -= View_CategorieEvent;
+            _view.FattureEvent -= View_FattureEvent;
+            _view.ClientiEvent -= View_ClientiEvent;
+            _view.FornitoriEvent -= View_FornitoriEvent;
+            _view.ArticoliEvent -= View_ArticoliEvent;
+            _view.CategorieEvent -= View_CategorieEvent;
         }
 
         #endregion
@@ -59,27 +59,27 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_FattureEvent(object? sender, EventArgs e)
         {
-            windowService.OpenWindow<FatturePresenter>();
+            _windowService.OpenWindow<FatturePresenter>();
         }
 
         private void View_ClientiEvent(object? sender, EventArgs e)
         {
-            windowService.OpenWindow<ClientiPresenter>();
+            _windowService.OpenWindow<ClientiPresenter>();
         }
 
         private void View_FornitoriEvent(object? sender, EventArgs e)
         {
-            windowService.OpenWindow<FornitoriPresenter>();
+            _windowService.OpenWindow<FornitoriPresenter>();
         }
 
         private void View_ArticoliEvent(object? sender, EventArgs e)
         {
-            windowService.OpenWindow<ArticoliPresenter>();
+            _windowService.OpenWindow<ArticoliPresenter>();
         }
 
         private void View_CategorieEvent(object? sender, EventArgs e)
         {
-            windowService.OpenWindow<CategoriaPresenter>();
+            _windowService.OpenWindow<CategoriaPresenter>();
         }
 
         #endregion
@@ -87,9 +87,9 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         public void Dispose()
         {
-            view.LoadEvent -= View_LoadEvent;
-            view.CloseEvent -= View_CloseEvent;
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _view.LoadEvent -= View_LoadEvent;
+            _view.CloseEvent -= View_CloseEvent;
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

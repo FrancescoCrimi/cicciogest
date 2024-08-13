@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -11,48 +11,48 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class SelezionaArticoloPresenter : PresenterBase, IDisposable
+    public sealed class SelezionaArticoloPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly ISelezionaArticoloView view;
-        private readonly IMagazinoService magazinoService;
+        private readonly ILogger _logger;
+        private readonly ISelezionaArticoloView _view;
+        private readonly IMagazzinoService _magazinoService;
         public int IdArticolo { get; private set; }
 
         public SelezionaArticoloPresenter(ILogger<SelezionaArticoloPresenter> logger,
                                           ISelezionaArticoloView view,
-                                          IMagazinoService magazinoService)
+                                          IMagazzinoService magazinoService)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.magazinoService = magazinoService;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _magazinoService = magazinoService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private async void View_LoadEvent(object? sender, EventArgs e)
         {
-            view.CaricaArticoli(await magazinoService.GetArticoli());
-            view.ArticoloSelezionatoEvent += View_ArticoloSelezionatoEvent;
+            _view.CaricaArticoli(await _magazinoService.GetArticoli());
+            _view.ArticoloSelezionatoEvent += View_ArticoloSelezionatoEvent;
         }
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            view.ArticoloSelezionatoEvent -= View_ArticoloSelezionatoEvent;
+            _view.ArticoloSelezionatoEvent -= View_ArticoloSelezionatoEvent;
         }
 
         private void View_ArticoloSelezionatoEvent(object? sender, int e)
         {
             IdArticolo = e;
-            view.Close();
+            _view.Close();
         }
 
         public void Dispose()
         {
-            view.LoadEvent -= View_LoadEvent;
-            view.CloseEvent -= View_CloseEvent;
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _view.LoadEvent -= View_LoadEvent;
+            _view.CloseEvent -= View_CloseEvent;
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -11,11 +11,11 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class SelezionaClientePresenter : PresenterBase, IDisposable
+    public sealed class SelezionaClientePresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly ISelezionaClienteView view;
-        private readonly IClientiFornitoriService clientiFornitoriService;
+        private readonly ILogger _logger;
+        private readonly ISelezionaClienteView _view;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
         public int IdCliente { get; private set; }
 
         public SelezionaClientePresenter(ILogger<SelezionaClientePresenter> logger,
@@ -23,34 +23,34 @@ namespace CiccioGest.Presentation.AppForm.Presenter
                                          IClientiFornitoriService clientiFornitoriService)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.clientiFornitoriService = clientiFornitoriService;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _clientiFornitoriService = clientiFornitoriService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private async void View_LoadEvent(object? s, EventArgs e)
         {
-            view.CaricaClienti(await clientiFornitoriService.GetClienti());
-            view.ClienteSelezionatoEvent += View_ClienteSelezionatoEvent;
+            _view.CaricaClienti(await _clientiFornitoriService.GetClienti());
+            _view.ClienteSelezionatoEvent += View_ClienteSelezionatoEvent;
         }
 
         private void View_CloseEvent(object? s, EventArgs e)
         {
-            view.ClienteSelezionatoEvent -= View_ClienteSelezionatoEvent;
+            _view.ClienteSelezionatoEvent -= View_ClienteSelezionatoEvent;
         }
 
         private void View_ClienteSelezionatoEvent(object? sender, int e)
         {
             IdCliente = e;
-            view.Close();
+            _view.Close();
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

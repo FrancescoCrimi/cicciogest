@@ -1,4 +1,10 @@
-﻿using CiccioGest.Domain.Documenti;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.Documenti;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,20 +18,20 @@ namespace CiccioGest.Infrastructure.Persistence.LiteDB.Repository
         {
         }
 
+        public Task<IList<Fattura>> GetAll() => Task.Run(() =>
+        {
+            var lstArt = coll.FindAll();
+            IList<Fattura> lst = new List<Fattura>();
+            foreach (var item in lstArt)
+            {
+                lst.Add(item);
+            }
+            return lst;
+        });
+
         public void Dispose()
         {
             logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
         }
-
-        public Task<IList<FatturaReadOnly>> GetAll() => Task.Run(() =>
-        {
-            var lstArt = coll.FindAll();
-            IList<FatturaReadOnly> lst = new List<FatturaReadOnly>();
-            foreach (var item in lstArt)
-            {
-                lst.Add(new FatturaReadOnly(item.Id, item.Nome, item.Totale));
-            }
-            return lst;
-        });
     }
 }

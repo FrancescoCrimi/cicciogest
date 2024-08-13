@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -11,17 +11,17 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 {
     public abstract class PresenterBase
     {
-        private readonly IView view;
+        private readonly IView _view;
 
         protected PresenterBase(IView view)
         {
-            this.view = view;
+            _view = view;
         }
 
-        public object View => view;
+        public object View => _view;
 
-        public void Show() => view.Show();
+        public void Show() => _view.Show();
 
-        public DialogResult ShowDialog(IWin32Window owner) => view.ShowDialog(owner);
+        public DialogResult ShowDialog(IWin32Window owner) => _view.ShowDialog(owner);
     }
 }

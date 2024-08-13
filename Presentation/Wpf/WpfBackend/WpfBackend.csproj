@@ -1,25 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<Platforms>x86;x64</Platforms>
-		<RootNamespace>CiccioGest.Presentation.WpfBackend</RootNamespace>
-		<AssemblyName>WpfBackend</AssemblyName>
-		<Product>CiccioGest</Product>
-		<Authors>Francesco Crimi</Authors>
-		<Company>CiccioSoft</Company>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <Platforms>x86;x64</Platforms>
+    <RootNamespace>CiccioGest.Presentation.WpfBackend</RootNamespace>
+    <AssemblyName>WpfBackend</AssemblyName>
+    <Product>CiccioGest</Product>
+    <Authors>Francesco Crimi</Authors>
+    <Company>CiccioSoft</Company>
+  </PropertyGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\Application\Application.Impl\Application.Impl.csproj" />
-		<ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
-		<ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
-		<ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\..\Mvvm\Mvvm.csproj" />
+  </ItemGroup>
 
 </Project>

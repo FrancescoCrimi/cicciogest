@@ -1,7 +1,12 @@
-﻿using CiccioGest.Domain.ClientiFornitori;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
-using CiccioGest.Domain.Magazino;
-using CiccioGest.Infrastructure;
+using CiccioGest.Domain.Magazzino;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,85 +16,64 @@ namespace CiccioGest.Application.Impl
 {
     class FatturaService : IFatturaService
     {
-        private readonly ILogger logger;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IFatturaRepository fatturaRepository;
-        private readonly IArticoloRepository articoloRepository;
-        private readonly IClienteRepository clienteRepository;
+        private readonly ILogger _logger;
+        private readonly IFatturaRepository _fatturaRepository;
+        private readonly IArticoloRepository _articoloRepository;
+        private readonly IClienteRepository _clienteRepository;
 
         public FatturaService(ILogger<FatturaService> logger,
-                              IUnitOfWork unitOfWork,
                               IFatturaRepository fatturaRepository,
                               IArticoloRepository articoloRepository,
                               IClienteRepository clienteRepository)
         {
-            this.logger = logger;
-            this.unitOfWork = unitOfWork;
-            this.fatturaRepository = fatturaRepository;
-            this.articoloRepository = articoloRepository;
-            this.clienteRepository = clienteRepository;
-            logger.LogDebug("Created: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
+            _logger = logger;
+            _fatturaRepository = fatturaRepository;
+            _articoloRepository = articoloRepository;
+            _clienteRepository = clienteRepository;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public async Task DeleteFattura(int id)
+        public Task DeleteFattura(int id)
         {
-            try
-            {
-                await fatturaRepository.Delete(id);
-                unitOfWork.Commit();
-            }
-            catch (Exception)
-            {
-                unitOfWork.Rollback();
-                throw;
-            }
+            return _fatturaRepository.Delete(id);
         }
 
-        public async Task<Fattura> GetFattura(int id)
+        public Task<Fattura> GetFattura(int id)
         {
-            return await fatturaRepository.GetById(id);
+            return _fatturaRepository.GetById(id);
         }
 
-        public async Task<IList<FatturaReadOnly>> GetFatture()
+        public Task<IList<Fattura>> GetFatture()
         {
-            return await fatturaRepository.GetAll();
+            return _fatturaRepository.GetAll();
         }
 
         public async Task<Fattura> SaveFattura(Fattura fattura)
         {
-            try
+            if (fattura.Id == 0)
             {
-                if (fattura.Id == 0)
-                {
-                    await fatturaRepository.Save(fattura);
-                }
-                else
-                {
-                    await fatturaRepository.Update(fattura);
-                }
-                unitOfWork.Commit();
-                return fattura;
+                await _fatturaRepository.Save(fattura);
             }
-            catch (Exception)
+            else
             {
-                unitOfWork.Rollback();
-                throw;
+                await _fatturaRepository.Update(fattura);
             }
+            return fattura;
         }
 
-        public async Task<Articolo> GetArticolo(int id)
+        public Task<Articolo> GetArticolo(int id)
         {
-            return await articoloRepository.GetById(id);
+            return _articoloRepository.GetById(id);
         }
 
-        public async Task<Cliente> GetCliente(int id)
+        public Task<Cliente> GetCliente(int id)
         {
-            return await clienteRepository.GetById(id);
+            return _clienteRepository.GetById(id);
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString() + " (uow: " + unitOfWork.GetHashCode().ToString() + ")");
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

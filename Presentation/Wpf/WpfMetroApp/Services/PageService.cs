@@ -1,10 +1,11 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WpfBackend.ViewModel;
+using CiccioGest.Presentation.Mvvm.ViewModel;
+using CiccioGest.Presentation.WpfBackend.Services;
 using CiccioGest.Presentation.WpfMetroApp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
@@ -14,13 +15,12 @@ using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfMetroApp.Services
 {
-    public class PageService
+    public class PageService : IPageService
     {
-        private readonly Dictionary<string, Type> pages = new Dictionary<string, Type>();
+        private readonly Dictionary<string, Type> pages = new();
 
         public PageService()
         {
-            //Configure<MainViewModel, MainPage>();
             Configure<ArticoliViewModel, ArticoliView>();
             Configure<ArticoloViewModel, ArticoloView>();
             Configure<CategoriaViewModel, CategoriaView>();
@@ -30,10 +30,6 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
             Configure<FattureViewModel, FattureView>();
             Configure<FornitoreViewModel, FornitoreView>();
             Configure<FornitoriViewModel, FornitoriView>();
-            Configure<ListaArticoliViewModel, ListaArticoliView>();
-            Configure<ListaClientiViewModel, ListaClientiView>();
-            Configure<ListaFattureViewModel, ListaFattureView>();
-            Configure<ListaFornitoriViewModel, ListaFornitoriView>();
         }
 
         public Type GetPageType(string key)
@@ -51,7 +47,7 @@ namespace CiccioGest.Presentation.WpfMetroApp.Services
 
         private void Configure<VM, V>()
             where VM : ObservableObject
-            where V : Page
+            where V : UserControl
         {
             lock (pages)
             {

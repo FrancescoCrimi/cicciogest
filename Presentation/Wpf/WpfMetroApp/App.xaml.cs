@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -46,10 +46,9 @@ namespace CiccioGest.Presentation.WpfMetroApp
                 .AddSingleton(gestConf)
                 .ConfigureWpfBackend()
 
-                .AddSingleton<NavigationService>()
-                .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
                 .AddSingleton<PageService>()
-                .AddSingleton<IMessageBoxService, MessageBoxService>()
+                .AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
+
                 .AddTransient<MainView>()
                 .AddTransient<ArticoliView>()
                 .AddTransient<ArticoloView>()
@@ -60,10 +59,6 @@ namespace CiccioGest.Presentation.WpfMetroApp
                 .AddTransient<FattureView>()
                 .AddTransient<FornitoreView>()
                 .AddTransient<FornitoriView>()
-                .AddTransient<ListaArticoliView>()
-                .AddTransient<ListaClientiView>()
-                .AddTransient<ListaFattureView>()
-                .AddTransient<ListaFornitoriView>()
                 .BuildServiceProvider();
         }
     }

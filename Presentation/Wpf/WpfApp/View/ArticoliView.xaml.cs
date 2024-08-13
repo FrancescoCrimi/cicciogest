@@ -1,20 +1,27 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WpfBackend.ViewModel;
+using CiccioGest.Presentation.Mvvm.ViewModel;
+using System;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    public partial class ArticoliView : Page
+    public sealed partial class ArticoliView : UserControl, IDisposable
     {
         public ArticoliView(ArticoliViewModel articoliViewModel)
         {
             InitializeComponent();
             DataContext = articoliViewModel;
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable?)DataContext)?.Dispose();
+            DataContext = null;
         }
     }
 }

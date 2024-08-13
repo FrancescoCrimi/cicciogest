@@ -1,9 +1,16 @@
-﻿using CiccioGest.Infrastructure.Conf;
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using CiccioGest.Infrastructure.Conf;
 using Microsoft.Extensions.Logging;
 using MySqlConnector;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using System;
 using System.Data.SQLite;
 using System.IO;
 
@@ -11,36 +18,36 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
     internal class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly CiccioGestConf conf;
-        private readonly ILogger logger;
-        private static ISessionFactory sessionFactory;
+        private readonly ILogger _logger;
+        private readonly CiccioGestConf _conf;
+        private readonly ISessionFactory _sessionFactory;
 
         public UnitOfWorkFactory(ILogger<UnitOfWorkFactory> logger,
                                  CiccioGestConf conf)
         {
-            this.conf = conf;
-            this.logger = logger;
-            if (sessionFactory == null || sessionFactory.IsClosed)
+            _conf = conf;
+            _logger = logger;
+            if (_sessionFactory == null || _sessionFactory.IsClosed)
             {
-                if (sessionFactory != null)
+                if (_sessionFactory != null)
                 {
-                    sessionFactory.Dispose();
-                    sessionFactory = null;
+                    _sessionFactory.Dispose();
+                    _sessionFactory = null!;
                 }
-                sessionFactory = GetNhbConfiguration().BuildSessionFactory();
+                _sessionFactory = GetNhbConfiguration().BuildSessionFactory();
             }
             logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
 
-        #region Metodi Privati
+        #region Private Method
 
         private Configuration GetNhbConfiguration()
         {
             NHibernate.Cfg.Configuration configuration = new NHibernate.Cfg.Configuration();
             configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionProvider, "NHibernate.Connection.DriverConnectionProvider");
 
-            switch (conf.Database)
+            switch (_conf.Database)
             {
                 //case Databases.MySql:
                 //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlDataDriver");
@@ -50,17 +57,17 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 case Databases.MySql:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MySqlConnector.MySqlConnectorDriver, NHibernate.Driver.MySqlConnector");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MySQL57Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, _conf.CS);
                     break;
                 case Databases.PgSql:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.NpgsqlDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.PostgreSQL83Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, _conf.CS);
                     break;
                 case Databases.SQLite:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.SQLite20Driver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.SQLiteDialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, _conf.CS);
                     break;
                 //case Databases.SqlSrv:
                 //    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
@@ -70,7 +77,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 case Databases.MsSql:
                     configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.MicrosoftDataSqlClientDriver");
                     configuration.SetProperty(NHibernate.Cfg.Environment.Dialect, "NHibernate.Dialect.MsSql2012Dialect");
-                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, conf.CS);
+                    configuration.SetProperty(NHibernate.Cfg.Environment.ConnectionString, _conf.CS);
                     break;
             }
 
@@ -85,7 +92,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         private bool InitMySql()
         {
-            MySqlConnection conn = new MySqlConnection(conf.CS);
+            MySqlConnection conn = new MySqlConnection(_conf.CS);
             conn.Open();
             MySqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "drop database CiccioGestNhb";
@@ -100,10 +107,10 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         private bool InitSQLite()
         {
-            string dbFile = conf.CS.Split(new char[] { '=' })[1].Trim();
+            string dbFile = _conf.CS.Split(new char[] { '=' })[1].Trim();
             if (!File.Exists(dbFile))
             {
-                SQLiteConnection conn = new SQLiteConnection(conf.CS);
+                SQLiteConnection conn = new SQLiteConnection(_conf.CS);
                 conn.Open();
                 conn.Close();
                 conn.Dispose();
@@ -114,16 +121,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
         #endregion
 
 
-
-        internal ISessionFactory SessionFactory()
-        {
-            return sessionFactory;
-        }
-
+        #region Public Method
 
         public void CreateDataAccess()
         {
-            switch (conf.Database)
+            switch (_conf.Database)
             {
                 case Databases.MySql:
                     InitMySql();
@@ -146,9 +148,18 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             new SchemaValidator(GetNhbConfiguration()).Validate();
         }
 
+        #endregion
+
+
+        internal ISession CreateSession()
+        {
+            var session = _sessionFactory.OpenSession();
+            return session;
+        }
+
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

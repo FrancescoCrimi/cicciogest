@@ -27,7 +27,7 @@ namespace CiccioGest.Presentation.AppForm.View
             logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        public void CaricaFatture(IList<FatturaReadOnly> fatture)
+        public void CaricaFatture(IList<Fattura> fatture)
         {
             fattureBindingSource.DataSource = fatture;
         }
@@ -42,7 +42,7 @@ namespace CiccioGest.Presentation.AppForm.View
         {
             if (fattureDataGridView.SelectedRows.Count > 0)
             {
-                if (fattureBindingSource.Current is FatturaReadOnly fattura)
+                if (fattureBindingSource.Current is Fattura fattura)
                 {
                     FatturaSelezionataEvent?.Invoke(sender, fattura.Id);
                 }

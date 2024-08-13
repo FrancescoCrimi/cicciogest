@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2024 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -12,12 +12,12 @@ using System;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public class ClientiPresenter : PresenterBase, IDisposable
+    public sealed class ClientiPresenter : PresenterBase, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly IClientiView view;
-        private readonly IClientiFornitoriService clientiFornitoriService;
-        private readonly WindowService windowService;
+        private readonly ILogger _logger;
+        private readonly IClientiView _view;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly WindowService _windowService;
 
         public ClientiPresenter(ILogger<ClientiPresenter> logger,
                                 IClientiView view,
@@ -25,52 +25,52 @@ namespace CiccioGest.Presentation.AppForm.Presenter
                                 WindowService windowService)
             : base(view)
         {
-            this.logger = logger;
-            this.view = view;
-            this.clientiFornitoriService = clientiFornitoriService;
-            this.windowService = windowService;
-            view.LoadEvent += View_LoadEvent;
-            view.CloseEvent += View_CloseEvent;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger;
+            _view = view;
+            _clientiFornitoriService = clientiFornitoriService;
+            _windowService = windowService;
+            _view.LoadEvent += View_LoadEvent;
+            _view.CloseEvent += View_CloseEvent;
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         private async void View_LoadEvent(object? sender, EventArgs e)
         {
-            view.NuovoClienteEvent += View_NuovoClienteEvent;
-            view.ClienteSelezionatoEvent += View_ClienteSelezionatoEvent;
-            view.CreaFatturaEvent += View_CreaFatturaEvent;
-            var clienti = await clientiFornitoriService.GetClienti();
-            view.CaricaClienti(clienti);
+            _view.NuovoClienteEvent += View_NuovoClienteEvent;
+            _view.ClienteSelezionatoEvent += View_ClienteSelezionatoEvent;
+            _view.CreaFatturaEvent += View_CreaFatturaEvent;
+            var clienti = await _clientiFornitoriService.GetClienti();
+            _view.CaricaClienti(clienti);
         }
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            view.NuovoClienteEvent -= View_NuovoClienteEvent;
-            view.ClienteSelezionatoEvent -= View_ClienteSelezionatoEvent;
-            view.CreaFatturaEvent -= View_CreaFatturaEvent;
+            _view.NuovoClienteEvent -= View_NuovoClienteEvent;
+            _view.ClienteSelezionatoEvent -= View_ClienteSelezionatoEvent;
+            _view.CreaFatturaEvent -= View_CreaFatturaEvent;
         }
 
         private void View_NuovoClienteEvent(object? sender, EventArgs e)
         {
-            windowService?.OpenWindow<ClientePresenter>()?.NuovoCliente();
-            view.Close();
+            _windowService?.OpenWindow<ClientePresenter>()?.NuovoCliente();
+            _view.Close();
         }
 
         private void View_ClienteSelezionatoEvent(object? sender, int e)
         {
-            windowService?.OpenWindow<ClientePresenter>()?.ApriCliente(e);
-            view.Close();
+            _windowService?.OpenWindow<ClientePresenter>()?.ApriCliente(e);
+            _view.Close();
         }
 
         private void View_CreaFatturaEvent(object? sender, int e)
         {
-            windowService?.OpenWindow<FatturaPresenter>()?.NuovaFattura(e);
-            view.Close();
+            _windowService?.OpenWindow<FatturaPresenter>()?.NuovaFattura(e);
+            _view.Close();
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }
