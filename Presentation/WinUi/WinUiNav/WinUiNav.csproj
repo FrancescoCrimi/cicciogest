@@ -37,9 +37,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
+		<!--<ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
 		<ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
-		<ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+		<ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />-->
 		<ProjectReference Include="..\WinUiBackend\WinUiBackend.csproj" />
 	</ItemGroup>
 

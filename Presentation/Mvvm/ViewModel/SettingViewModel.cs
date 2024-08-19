@@ -11,6 +11,14 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
     public sealed partial class SettingViewModel : ObservableObject, IViewModel, IDisposable
     {
+        [ObservableProperty]
+        private string _title;
+
+        public SettingViewModel()
+        {
+            Title = "Setting View";
+        }
+
         public void Initialize(object? parameter)
         {
         }

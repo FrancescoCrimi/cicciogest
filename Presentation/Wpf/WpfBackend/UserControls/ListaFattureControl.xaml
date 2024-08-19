@@ -10,7 +10,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodel:FattureViewModel}"
              d:DesignHeight="450"
              d:DesignWidth="800"
-             Background="White">
+             d:Background="White">
 
     <DataGrid ItemsSource="{Binding Fatture}"
               SelectedItem="{Binding FatturaSelezionata, Mode=OneWayToSource}"

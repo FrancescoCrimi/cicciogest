@@ -13,11 +13,15 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
     public sealed partial class DashboardViewModel : ObservableObject, IViewModel, IDisposable
     {
+        [ObservableProperty]
+        private string _title;
+
         private readonly ILogger _logger;
 
         public DashboardViewModel(ILogger<DashboardViewModel> logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger;
+            Title = "Dashboard";
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
