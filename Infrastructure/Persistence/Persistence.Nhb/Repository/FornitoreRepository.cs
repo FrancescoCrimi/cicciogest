@@ -17,18 +17,18 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
                                    UnitOfWork unitOfWork)
             : base(logger, unitOfWork)
         {
-            logger.LogDebug("Created: " + GetHashCode().ToString());
-        }
-
-        public void Dispose()
-        {
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public async Task<IList<Fornitore>> GetAll()
         {
             IList<Fornitore> fornitori = await _unitOfWork.Session.CreateCriteria<Fornitore>().ListAsync<Fornitore>();
             return fornitori;
+        }
+
+        public void Dispose()
+        {
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

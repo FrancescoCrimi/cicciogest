@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class FornitoreViewModel : ObservableRecipient, IDisposable
+    public sealed partial class FornitoreViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger<FornitoreViewModel> _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -42,12 +42,21 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _navigationService = navigationService;
             _messageBoxService = messageBoxService;
             _clientiFornitoriService = clientiFornitoriService;
-            RegistraMessaggi();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
+        }
+
+        public void Initialize(object? parameter)
+        {
+            if (parameter is FornitoriViewReturn fornitoriViewReturn)
+            {
+                _navigationService.GoBack();
+                Task.Run(async () => await ApriFornitore(fornitoriViewReturn.IdFornitore));
+            }
         }
 
         [RelayCommand]
         private void OnLoaded() { }
+
 
         [RelayCommand]
         private async Task OnNuovoFornitore()
@@ -59,6 +68,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             Fornitore = fornitore;
             Indirizzo = fornitore.IndirizzoNew;
         }
+
 
         [RelayCommand]
         private async Task OnSalvaFornitore()
@@ -78,6 +88,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                 }
             }
         }
+
 
         [RelayCommand]
         private async Task OnRimuoviFornitore()
@@ -99,21 +110,29 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private async Task OnApriFornitore()
         {
-            _navigationService.Navigate(nameof(FornitoriViewModel), false);
-            int idFornitore = await Messenger.Send<IdFornitoreRequestMessage>();
-            _navigationService.GoBack(true);
-            await ApriFornitore(idFornitore);
+            await _unitOfWork.BeginAsync();
+
+            FornitoriViewReturnHandler fornitoriViewReturnHandler = FornitoriViewReturnMethod;
+            _navigationService.Navigate(nameof(FornitoriViewModel), fornitoriViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(FornitoriViewModel), null, false);
+            //int idFornitore = await Messenger.Send<IdFornitoreRequestMessage>();
+            //_navigationService.GoBack(true);
+            //await ApriFornitore(idFornitore);
         }
-
-
-        private void RegistraMessaggi()
+        private async Task FornitoriViewReturnMethod(FornitoriViewReturn fornitoriViewReturn)
         {
-            Messenger.Register<IdFornitoreMessage>(this, async (r, m)
-                => await ApriFornitore(m.Value));
+            if (fornitoriViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack(true);
+                await ApriFornitore(fornitoriViewReturn.IdFornitore);
+            }
         }
+
 
         private async Task ApriFornitore(int idFornitore)
         {
@@ -131,7 +150,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

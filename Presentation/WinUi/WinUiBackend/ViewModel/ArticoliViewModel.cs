@@ -22,11 +22,11 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
     public partial class ArticoliViewModel : ObservableRecipient, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IMagazzinoService magazinoService;
-        protected readonly INavigationService navigationService;
-        private Articolo articoloSelezionato;
+        private readonly ILogger _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMagazzinoService _magazinoService;
+        protected readonly INavigationService _navigationService;
+        private Articolo _articoloSelezionato;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaArticoliCommand;
         private RelayCommand apriArticoloCommand;
@@ -37,24 +37,24 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
                                  IMagazzinoService magazinoService,
                                  INavigationService navigationService)
         {
-            this.logger = logger;
-            this.unitOfWork = unitOfWork;
-            this.magazinoService = magazinoService;
-            this.navigationService = navigationService;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _magazinoService = magazinoService;
+            _navigationService = navigationService;
             Articoli = new ObservableCollection<Articolo>();
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public ObservableCollection<Articolo> Articoli { get; private set; }
 
         public Articolo ArticoloSelezionato
         {
-            get => articoloSelezionato;
+            get => _articoloSelezionato;
             set
             {
-                if (articoloSelezionato != value)
+                if (_articoloSelezionato != value)
                 {
-                    articoloSelezionato = value;
+                    _articoloSelezionato = value;
                     apriArticoloCommand.NotifyCanExecuteChanged();
                     nuovoArticoloCommand.NotifyCanExecuteChanged();
                 }
@@ -85,7 +85,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             if (ArticoloSelezionato != null)
             {
-                navigationService.Navigate(ViewEnum.Articolo);
+                _navigationService.Navigate(ViewEnum.Articolo);
                 Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
             }
         }
@@ -93,8 +93,8 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private async Task AggiornaArticoli()
         {
             Articoli.Clear();
-            await unitOfWork.BeginAsync();
-            foreach (Articolo pr in await magazinoService.GetArticoli())
+            await _unitOfWork.BeginAsync();
+            foreach (Articolo pr in await _magazinoService.GetArticoli())
             {
                 Articoli.Add(pr);
             }
@@ -104,7 +104,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

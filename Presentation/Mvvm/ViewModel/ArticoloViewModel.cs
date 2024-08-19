@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class ArticoloViewModel : ObservableRecipient, IDisposable
+    public sealed partial class ArticoloViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -42,15 +42,25 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _magazinoService = magazinoService;
             _navigationService = navigationService;
             _messageBoxService = messageBoxService;
-            RegistraMessaggi();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
+
+        public void Initialize(object? parameter)
+        {
+            if (parameter is ArticoliViewReturn articoliViewReturn)
+            {
+                Task.Run(async () => await ApriArticolo(articoliViewReturn.IdArticolo));
+            }
+        }
+
 
         [RelayCommand]
         private void OnLoaded() { }
 
+
         [RelayCommand]
         private void OnUnloaded() { }
+
 
         [RelayCommand]
         private async Task OnNuovoArticolo()
@@ -60,6 +70,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             Articolo = new Articolo();
             //OnPropertyChanged(nameof(Articolo));
         }
+
 
         [RelayCommand]
         private async Task OnEliminaArticolo()
@@ -81,6 +92,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private async Task SalvaArticolo()
         {
@@ -100,20 +112,48 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private async Task OnApriArticolo()
         {
-            _navigationService.Navigate(nameof(ArticoliViewModel), false);
-            int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
-            //TODO: dopo GoBack cancellare la crconologia forward per disposare la vista precedente
-            _navigationService.GoBack(true);
-            await ApriArticolo(idArticolo);
+            await _unitOfWork.BeginAsync();
+
+            ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
+            _navigationService.Navigate(nameof(ArticoliViewModel), articoliViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(ArticoliViewModel), null, false);
+            //int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
+            ////TODO: dopo GoBack cancellare la crconologia forward per disposare la vista precedente
+            //_navigationService.GoBack(true);
+            //await ApriArticolo(idArticolo);
+        }
+        private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
+        {
+            if (articoliViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack();
+                await ApriArticolo(articoliViewReturn.IdArticolo);
+            }
         }
 
 
         [RelayCommand]
         private void OnAggiungiCategoria()
-            => _navigationService.Navigate(nameof(CategoriaViewModel), false);
+        {
+            CategoriaViewReturnHandler categoriaViewReturnHandler = CategoriaViewReturnMethod;
+            _navigationService.Navigate(nameof(CategoriaViewModel), categoriaViewReturnHandler, false);
+        }
+        private async Task CategoriaViewReturnMethod(CategoriaViewReturn categoriaViewReturn)
+        {
+            if (categoriaViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack();
+                Categoria categoria = await _magazinoService.GetCategoria(categoriaViewReturn.IdCategoria);
+                Articolo?.AddCategoria(categoria);
+                //OnPropertyChanged(nameof(Categorie));
+            }
+        }
+
 
         [RelayCommand]
         private void OnRimuoviCategoria()
@@ -125,22 +165,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
-
-        private void RegistraMessaggi()
-        {
-            Messenger.Register<IdArticoloMessage>(this, async (r, m)
-                => await ApriArticolo(m.Value));
-
-            Messenger.Register<IdCategoriaMessage>(this, async (r, m) =>
-            {
-                if (m.Value != 0)
-                {
-                    Categoria categoria = await _magazinoService.GetCategoria(m.Value);
-                    Articolo?.AddCategoria(categoria);
-                    //OnPropertyChanged(nameof(Categorie));
-                }
-            });
-        }
 
         private async Task ApriArticolo(int idArticolo)
         {
@@ -159,7 +183,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

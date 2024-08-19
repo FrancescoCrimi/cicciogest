@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             if (ArticoloSelezionato != null)
             {
                 Messenger.Send(new ArticoloIdMessage(ArticoloSelezionato.Id));
-                navigationService.GoBack();
+                _navigationService.GoBack();
             }
         }
     }

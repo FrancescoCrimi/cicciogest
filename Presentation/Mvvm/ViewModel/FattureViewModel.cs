@@ -18,14 +18,15 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class FattureViewModel : ObservableRecipient, IDisposable
+    public sealed partial class FattureViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFatturaService _fatturaService;
         private readonly INavigationService _navigationService;
-        private readonly TaskCompletionSource<int> _idFatturaTaskCompletionSource;
+        //private readonly TaskCompletionSource<int> _idFatturaTaskCompletionSource;
         private Fattura? _fatturaSelezionata;
+        private FattureViewReturnHandler? _fattureViewReturnHandler;
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IUnitOfWork unitOfWork,
@@ -38,9 +39,9 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _navigationService = navigationService;
             Fatture = new ObservableCollection<Fattura>();
 
-            _idFatturaTaskCompletionSource = new TaskCompletionSource<int>();
-            Messenger.Register<FattureViewModel, IdFatturaRequestMessage>(this, (recipient, message)
-                => message.Reply(_idFatturaTaskCompletionSource.Task));
+            //_idFatturaTaskCompletionSource = new TaskCompletionSource<int>();
+            //Messenger.Register<FattureViewModel, IdFatturaRequestMessage>(this, (recipient, message)
+            //    => message.Reply(_idFatturaTaskCompletionSource.Task));
 
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
@@ -60,9 +61,18 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+        public void Initialize(object? parameter)
+        {
+            if (parameter is FattureViewReturnHandler fattureViewReturnHandler)
+            {
+                _fattureViewReturnHandler = fattureViewReturnHandler;
+            }
+        }
+
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaFatture();
+
 
         [RelayCommand]
         private async Task OnAggiornaFatture()
@@ -75,23 +85,29 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private void OnNuovaFattura() { }
 
+
         [RelayCommand(CanExecute = nameof(CanApriFattura))]
-        private void OnApriFattura()
+        private Task OnApriFattura()
         {
             if (FatturaSelezionata != null)
             {
-                _idFatturaTaskCompletionSource.SetResult(FatturaSelezionata.Id);
+                //_idFatturaTaskCompletionSource.SetResult(FatturaSelezionata.Id);
+                if (_fattureViewReturnHandler != null)
+                {
+                    return _fattureViewReturnHandler!.Invoke(new FattureViewReturn(WizardResult.Finished, FatturaSelezionata.Id));
+                }
             }
+            return Task.CompletedTask;
         }
         private bool CanApriFattura() => FatturaSelezionata != null;
 
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

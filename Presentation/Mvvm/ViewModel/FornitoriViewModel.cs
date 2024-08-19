@@ -17,13 +17,14 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class FornitoriViewModel : ObservableRecipient, IDisposable
+    public sealed partial class FornitoriViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger<FornitoriViewModel> _logger;
         private readonly IClientiFornitoriService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
-        private readonly TaskCompletionSource<int> _idFornitoreTaskCompletionSource;
+        //private readonly TaskCompletionSource<int> _idFornitoreTaskCompletionSource;
         private Fornitore? _fornitoreSelezionato;
+        private FornitoriViewReturnHandler? _fornitoriViewReturnHandler;
 
         public FornitoriViewModel(ILogger<FornitoriViewModel> logger,
                                   INavigationService navigationService,
@@ -34,9 +35,9 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _clientiFornitoriService = clientiFornitoriService;
             Fornitori = new ObservableCollection<Fornitore>();
 
-            _idFornitoreTaskCompletionSource = new TaskCompletionSource<int>();
-            Messenger.Register<FornitoriViewModel, IdFornitoreRequestMessage>(this, (recipient, message)
-                => message.Reply(_idFornitoreTaskCompletionSource.Task));
+            //_idFornitoreTaskCompletionSource = new TaskCompletionSource<int>();
+            //Messenger.Register<FornitoriViewModel, IdFornitoreRequestMessage>(this, (recipient, message)
+            //    => message.Reply(_idFornitoreTaskCompletionSource.Task));
 
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
@@ -56,9 +57,18 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+        public void Initialize(object? parameter)
+        {
+            if (parameter is FornitoriViewReturnHandler fornitoriViewReturnHandler)
+            {
+                _fornitoriViewReturnHandler = fornitoriViewReturnHandler;
+            }
+        }
+
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaFornitori();
+
 
         [RelayCommand]
         private async Task OnAggiornaFornitori()
@@ -71,23 +81,29 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             OnPropertyChanged(nameof(Fornitori));
         }
 
+
         [RelayCommand]
         private void OnNuovoFornitore() { }
 
+
         [RelayCommand(CanExecute = nameof(CanApriFornitore))]
-        private void OnApriFornitore()
+        private Task OnApriFornitore()
         {
             if (FornitoreSelezionato != null)
             {
-                _idFornitoreTaskCompletionSource.SetResult(FornitoreSelezionato.Id);
+                //_idFornitoreTaskCompletionSource.SetResult(FornitoreSelezionato.Id);
+                if (_fornitoriViewReturnHandler != null)
+                {
+                    return _fornitoriViewReturnHandler!.Invoke(new FornitoriViewReturn(WizardResult.Finished, FornitoreSelezionato.Id));
+                }
             }
+            return Task.CompletedTask;
         }
         private bool CanApriFornitore() => FornitoreSelezionato != null;
 
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

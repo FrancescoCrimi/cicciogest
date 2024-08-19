@@ -5,7 +5,9 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
+using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -17,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class FatturaViewModel : ObservableRecipient, IDisposable
+    public sealed partial class FatturaViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -45,25 +47,48 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _fatturaService = fatturaService;
             _navigationService = navigationService;
             _messageBoxService = messageBoxService;
-            RegistraMessaggi();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
+
+        public void Initialize(object? parameter)
+        {
+            if (parameter is FattureViewReturn fattureDataReturn)
+            {
+                Task.Run(async () => await ApriFattura(fattureDataReturn.IdFattura));
+            }
+        }
+
 
         [RelayCommand]
         private void OnLoaded() { }
 
+
         [RelayCommand]
         private void OnUnloaded() { }
+
 
         [RelayCommand]
         private async Task OnNuovaFattura()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(nameof(ClientiViewModel), false);
-            int idCliente = await Messenger.Send<IdClienteRequestMessage>();
-            _navigationService.GoBack(true);
-            await NuovaFattura(idCliente);
+
+            ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
+            _navigationService.Navigate(nameof(ClientiViewModel), clientiViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(ClientiViewModel), null, false);
+            //int idCliente = await Messenger.Send<IdClienteRequestMessage>();
+            //_navigationService.GoBack(true);
+            //await NuovaFattura(idCliente);
         }
+        private async Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
+        {
+            if (clientiViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack(true);
+                await NuovaFattura(clientiViewReturn.IdCliente);
+            }
+        }
+
 
         [RelayCommand]
         private async Task OnSalvaFattura()
@@ -84,6 +109,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private async Task OnRimuoviFattura()
         {
@@ -103,26 +129,52 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private async Task OnApriFattura()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(nameof(FattureViewModel), false);
-            int idFattura = await Messenger.Send<IdFatturaRequestMessage>();
-            _navigationService.GoBack(true);
-            await ApriFattura(idFattura);
+
+            FattureViewReturnHandler fattureViewReturnHandler = FattureViewReturnMethod;
+            _navigationService.Navigate(nameof(FattureViewModel), fattureViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(FattureViewModel), null, false);
+            //int idFattura = await Messenger.Send<IdFatturaRequestMessage>();
+            //_navigationService.GoBack(true);
+            //await ApriFattura(idFattura);
         }
+        private async Task FattureViewReturnMethod(FattureViewReturn fattureViewReturn)
+        {
+            if (fattureViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack();
+                await ApriFattura(fattureViewReturn.IdFattura);
+            }
+        }
+
 
         [RelayCommand]
-        private async Task OnNuovoDettaglio()
+        private void OnNuovoDettaglio()
         {
-            _navigationService.Navigate(nameof(ArticoliViewModel), false);
-            int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
-            _navigationService.GoBack(true);
-            var articolo = await _fatturaService.GetArticolo(idArticolo);
-            Dettaglio = new Dettaglio(articolo, 1);
+            ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
+            _navigationService.Navigate(nameof(ArticoliViewModel), articoliViewReturnHandler, false);
 
+            //_navigationService.Navigate(nameof(ArticoliViewModel), null, false);
+            //int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
+            //_navigationService.GoBack(true);
+            //var articolo = await _fatturaService.GetArticolo(idArticolo);
+            //Dettaglio = new Dettaglio(articolo, 1);
         }
+        private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
+        {
+            if (articoliViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack(true);
+                var articolo = await _fatturaService.GetArticolo(articoliViewReturn.IdArticolo);
+                Dettaglio = new Dettaglio(articolo, 1);
+            }
+        }
+
 
         [RelayCommand]
         private void OnAggiungiDettaglio()
@@ -135,6 +187,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private void OnRimuoviDettaglio()
         {
@@ -146,6 +199,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private void OnSelezionaDettaglio()
         {
@@ -154,14 +208,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             OnPropertyChanged(nameof(Dettaglio));
         }
 
-        private void RegistraMessaggi()
-        {
-            Messenger.Register<IdFatturaMessage>(this, async (r, m)
-                => await ApriFattura(m.Value));
-
-            Messenger.Register<IdClienteMessage>(this, async (r, m)
-                => await NuovaFattura(m.Value));
-        }
 
         private async Task NuovaFattura(int idCliente)
         {
@@ -189,7 +235,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

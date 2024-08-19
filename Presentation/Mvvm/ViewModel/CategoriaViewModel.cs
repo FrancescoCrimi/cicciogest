@@ -16,16 +16,16 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class CategoriaViewModel : ObservableRecipient, IDisposable
+    public sealed partial class CategoriaViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMagazzinoService _magazinoService;
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
+        private CategoriaViewReturnHandler? _categoriaViewReturnHandler;
 
         [ObservableProperty]
         private Categoria? _categoria;
@@ -51,11 +51,22 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
+        public void Initialize(object? parameter)
+        {
+            if (parameter is CategoriaViewReturnHandler categoriaViewReturnHandler)
+            {
+                _categoriaViewReturnHandler = categoriaViewReturnHandler;
+            }
+        }
+
+
         [RelayCommand]
         private Task OnLoaded() => Aggiorna();
 
+
         [RelayCommand]
         public Task OnNuovo() => Nuova();
+
 
         [RelayCommand]
         public async Task OnSalva()
@@ -77,6 +88,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                 }
             }
         }
+
 
         [RelayCommand]
         private async Task OnRimuovi()
@@ -100,19 +112,21 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         }
 
 
-
         [RelayCommand]
-        private void OnSelezionaCategoria()
+        private Task OnSelezionaCategoria()
         {
             if (CategoriaSelezionata != null && Categoria != CategoriaSelezionata)
             {
-                if (_navigationService.CanGoBack)
+                if (_categoriaViewReturnHandler != null)
                 {
-                    Messenger.Send(new IdCategoriaMessage(CategoriaSelezionata.Id));
-                    _navigationService.GoBack();
+                    return _categoriaViewReturnHandler.Invoke(new CategoriaViewReturn(WizardResult.Finished, CategoriaSelezionata.Id));
                 }
+                //Messenger.Send(new IdCategoriaMessage(CategoriaSelezionata.Id));
+                //_navigationService.GoBack();
             }
+            return Task.CompletedTask;
         }
+
 
         [RelayCommand]
         private void OnModificaCategoria()
@@ -123,6 +137,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                 OnPropertyChanged(nameof(Categoria));
             }
         }
+
 
         [RelayCommand]
         private Task OnAnnullaModificheCategoria() => Nuova();

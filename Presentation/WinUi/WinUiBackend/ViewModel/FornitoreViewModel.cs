@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -20,10 +21,11 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
     public partial class FornitoreViewModel : ObservableRecipient, IDisposable
     {
-        private readonly ILogger<FornitoreViewModel> logger;
-        private readonly INavigationService navigationService;
+        private readonly ILogger<FornitoreViewModel> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly INavigationService _navigationService;
         //private readonly IMessageBoxService messageBoxService;
-        private readonly IClientiFornitoriService clientiFornitoriService;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
         private RelayCommand loadedCommand;
         private RelayCommand nuovoFornitoreCommand;
         private AsyncRelayCommand salvaFornitoreCommand;
@@ -31,16 +33,18 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private AsyncRelayCommand eliminaFornitoreCommand;
 
         public FornitoreViewModel(ILogger<FornitoreViewModel> logger,
+                                  IUnitOfWork unitOfWork,
                                   INavigationService navigationService,
                                   //IMessageBoxService messageBoxService,
                                   IClientiFornitoriService clientiFornitoriService)
         {
-            this.logger = logger;
-            this.navigationService = navigationService;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _navigationService = navigationService;
             //this.messageBoxService = messageBoxService;
-            this.clientiFornitoriService = clientiFornitoriService;
+            _clientiFornitoriService = clientiFornitoriService;
             RegistraMessaggi();
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public Fornitore Fornitore { get; private set; }
@@ -58,11 +62,17 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             try
             {
-                await clientiFornitoriService.SaveFornitore(Fornitore);
+                await _clientiFornitoriService.SaveFornitore(Fornitore);
+                await _unitOfWork.CommitAsync();
             }
             catch (Exception)
             {
-                //messageBoxService.Show("Errore: " + ex.Message);
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
+            finally
+            {
+                await _unitOfWork.BeginAsync();
             }
         });
 
@@ -70,16 +80,22 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             try
             {
-                await clientiFornitoriService.DeleteFornitore(Fornitore.Id);
+                await _clientiFornitoriService.DeleteFornitore(Fornitore.Id);
+                await _unitOfWork.CommitAsync();
             }
             catch (Exception)
             {
-                //messageBoxService.Show("Errore: " + ex.Message);
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
+            finally
+            {
+                await _unitOfWork.BeginAsync();
             }
         });
 
         public ICommand ApriFornitoreCommand => apriFornitoreCommand ??= new RelayCommand(()
-            => navigationService.Navigate(ViewEnum.ListaFornitori));
+            => _navigationService.Navigate(ViewEnum.ListaFornitori));
 
 
 
@@ -89,7 +105,8 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             {
                 if (m.Value != 0)
                 {
-                    Fornitore fornitore = await clientiFornitoriService.GetFornitore(m.Value);
+                    await _unitOfWork.BeginAsync();
+                    Fornitore fornitore = await _clientiFornitoriService.GetFornitore(m.Value);
                     MostraFornitore(fornitore);
                 }
             });
@@ -105,7 +122,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

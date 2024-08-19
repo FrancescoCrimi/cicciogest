@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazzino;
+using CiccioGest.Infrastructure;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -18,21 +19,24 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
     public sealed partial class ArticoloViewModel : ObservableRecipient, IDisposable
     {
+        private readonly ILogger<ArticoloViewModel> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMagazzinoService _magazinoService;
         private AsyncRelayCommand loadedCommand;
-        private readonly ILogger<ArticoloViewModel> logger;
-        private readonly IMagazzinoService magazinoService;
         private RelayCommand nuovoArticoloCommand;
         private RelayCommand salvaArticoloCommand;
         private RelayCommand eliminaArticoloCommand;
         private RelayCommand apriArticoloCommand;
 
         public ArticoloViewModel(ILogger<ArticoloViewModel> logger,
+                                 IUnitOfWork unitOfWork,
                                  IMagazzinoService magazinoService)
         {
-            this.logger = logger;
-            this.magazinoService = magazinoService;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _magazinoService = magazinoService;
             RegistraMessaggi();
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
 
@@ -85,7 +89,10 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             Messenger.Register<ArticoloIdMessage>(this, async (r, m) =>
             {
                 if (m.Value != 0)
-                    MostraArticolo(await magazinoService.GetArticolo(m.Value));
+                {
+                    await _unitOfWork.BeginAsync();
+                    MostraArticolo(await _magazinoService.GetArticolo(m.Value));
+                }
             });
         }
 
@@ -97,7 +104,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

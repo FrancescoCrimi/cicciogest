@@ -27,7 +27,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 
         public void Dispose()
         {
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

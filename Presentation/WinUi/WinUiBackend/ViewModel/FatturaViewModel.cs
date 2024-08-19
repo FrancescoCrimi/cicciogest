@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -20,9 +21,10 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
     public sealed partial class FatturaViewModel : ObservableRecipient, IDisposable
     {
-        private readonly ILogger logger;
-        private readonly INavigationService navigationService;
-        private readonly IFatturaService fatturaService;
+        private readonly ILogger _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly INavigationService _navigationService;
+        private readonly IFatturaService _fatturaService;
         private ICommand nuovaFatturaCommand;
         private ICommand salvaFatturaCommand;
         private ICommand rimuoviFatturaCommand;
@@ -34,14 +36,16 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private AsyncRelayCommand loadedCommand;
 
         public FatturaViewModel(ILogger<FatturaViewModel> logger,
+                                IUnitOfWork unitOfWork,
                                 IFatturaService fatturaService,
                                 INavigationService navigationService)
         {
-            this.logger = logger;
-            this.navigationService = navigationService;
-            this.fatturaService = fatturaService;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _navigationService = navigationService;
+            _fatturaService = fatturaService;
             RegistraMessaggi();
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public Fattura Fattura { get; private set; }
@@ -52,17 +56,24 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public ICommand NuovaFatturaCommand => nuovaFatturaCommand ??= new RelayCommand(() =>
         {
-            navigationService.Navigate(ViewEnum.Clienti);
+            _navigationService.Navigate(ViewEnum.Clienti);
         });
 
         public ICommand SalvaFatturaCommand => salvaFatturaCommand ??= new AsyncRelayCommand(async () =>
         {
             try
             {
-                await fatturaService.SaveFattura(Fattura);
+                await _fatturaService.SaveFattura(Fattura);
+                await _unitOfWork.CommitAsync();
             }
             catch (Exception)
             {
+                _unitOfWork.Rollback();
+                throw;
+            }
+            finally
+            {
+                await _unitOfWork.BeginAsync();
             }
         });
 
@@ -70,18 +81,25 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             try
             {
-                await fatturaService.DeleteFattura(Fattura.Id);
+                await _fatturaService.DeleteFattura(Fattura.Id);
+                await _unitOfWork.CommitAsync();
             }
             catch (Exception)
             {
+                _unitOfWork.Rollback();
+                throw;
+            }
+            finally
+            {
+                await _unitOfWork.BeginAsync();
             }
         });
 
         public ICommand ApriFatturaCommand => apriFatturaCommand ??= new RelayCommand(() =>
-            navigationService.Navigate(ViewEnum.Fatture));
+            _navigationService.Navigate(ViewEnum.Fatture));
 
         public ICommand NuovoDettaglioCommand => nuovoDettaglioCommand ??= new RelayCommand(() =>
-            navigationService.Navigate(ViewEnum.Articoli));
+            _navigationService.Navigate(ViewEnum.Articoli));
 
         public ICommand AggiungiDettaglioCommand => aggiungiDettaglioCommand ??= new RelayCommand(() =>
         {
@@ -114,14 +132,17 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             Messenger.Register<FatturaIdMessage>(this, async (r, m) =>
             {
                 if (m.Value != 0)
-                    Mostra(await fatturaService.GetFattura(m.Value));
+                {
+                    await _unitOfWork.BeginAsync();
+                    Mostra(await _fatturaService.GetFattura(m.Value));
+                }
             });
 
             Messenger.Register<ArticoloIdMessage>(this, async (r, m) =>
             {
                 if (m.Value != 0)
                 {
-                    Dettaglio = new Dettaglio(await fatturaService.GetArticolo(m.Value), 1);
+                    Dettaglio = new Dettaglio(await _fatturaService.GetArticolo(m.Value), 1);
                     OnPropertyChanged(nameof(Dettaglio));
                 }
             });
@@ -142,7 +163,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

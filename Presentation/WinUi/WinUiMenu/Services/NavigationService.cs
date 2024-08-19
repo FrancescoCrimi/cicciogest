@@ -14,7 +14,7 @@ using System;
 
 namespace CiccioGest.Presentation.WinUiMenu.Services
 {
-    public class NavigationService : INavigationService, IDisposable
+    public sealed class NavigationService : INavigationService, IDisposable
     {
         public event NavigatedEventHandler Navigated;
         public event NavigationFailedEventHandler NavigationFailed;
@@ -34,7 +34,7 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
             _logger = logger;
             _serviceScopeFactory = serviceScopeFactory;
             _pageService = pageService;
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public void Initialize(Frame shellFrame)

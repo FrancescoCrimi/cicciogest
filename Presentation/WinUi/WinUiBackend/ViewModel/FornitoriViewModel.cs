@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -21,36 +22,39 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
     public partial class FornitoriViewModel : ObservableRecipient, IDisposable
     {
-        private readonly ILogger<FornitoriViewModel> logger;
-        private readonly IClientiFornitoriService clientiFornitoriService;
-        protected readonly INavigationService navigationService;
-        private Fornitore fornitoreSelezionato;
+        private readonly ILogger<FornitoriViewModel> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
+        protected readonly INavigationService _navigationService;
+        private Fornitore _fornitoreSelezionato;
         private AsyncRelayCommand loadedCommand;
         private RelayCommand nuovoFornitoreCommand;
         private RelayCommand apriFornitoreCommand;
         private AsyncRelayCommand aggiornaFornitoriCommand;
 
         public FornitoriViewModel(ILogger<FornitoriViewModel> logger,
+                                  IUnitOfWork unitOfWork,
                                   INavigationService navigationService,
                                   IClientiFornitoriService clientiFornitoriService)
         {
-            this.logger = logger;
-            this.navigationService = navigationService;
-            this.clientiFornitoriService = clientiFornitoriService;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _navigationService = navigationService;
+            _clientiFornitoriService = clientiFornitoriService;
             Fornitori = new ObservableCollection<Fornitore>();
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public ObservableCollection<Fornitore> Fornitori { get; private set; }
 
         public Fornitore FornitoreSelezionato
         {
-            get => fornitoreSelezionato;
+            get => _fornitoreSelezionato;
             set
             {
-                if (value != fornitoreSelezionato)
+                if (value != _fornitoreSelezionato)
                 {
-                    fornitoreSelezionato = value;
+                    _fornitoreSelezionato = value;
                     apriFornitoreCommand.NotifyCanExecuteChanged();
                 }
             }
@@ -73,7 +77,8 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private async Task AggiornaFornitori()
         {
             Fornitori.Clear();
-            foreach (var item in await clientiFornitoriService.GetFornitori())
+            await _unitOfWork.BeginAsync();
+            foreach (var item in await _clientiFornitoriService.GetFornitori())
             {
                 Fornitori.Add(item);
             }
@@ -84,7 +89,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             if (FornitoreSelezionato != null)
             {
-                navigationService.Navigate(ViewEnum.Fornitore);
+                _navigationService.Navigate(ViewEnum.Fornitore);
                 Messenger.Send(new FornitoreIdMessage(FornitoreSelezionato.Id));
             }
         }
@@ -92,7 +97,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class ClienteViewModel : ObservableRecipient, IDisposable
+    public sealed partial class ClienteViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger<ClienteViewModel> _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -42,12 +42,21 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _navigationService = navigationService;
             _messageBoxService = messageBoxService;
             _clientiFornitoriService = clientiFornitoriService;
-            RegistraMessaggi();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
+        public void Initialize(object? parameter)
+        {
+            if (parameter is ClientiViewReturn clientiViewReturn)
+            {
+                Task.Run(async () => await ApriCliente(clientiViewReturn.IdCliente));
+            }
+        }
+
+
         [RelayCommand]
         private void OnLoaded() { }
+
 
         [RelayCommand]
         private async Task OnNuovoCliente()
@@ -59,6 +68,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             Cliente = cliente;
             Indirizzo = cliente.IndirizzoNew;
         }
+
 
         [RelayCommand]
         private async Task OnSalvaCliente()
@@ -78,6 +88,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                 }
             }
         }
+
 
         [RelayCommand]
         private async Task OnRimuoviCliente()
@@ -99,20 +110,29 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private async Task OnApriCliente()
         {
-            _navigationService.Navigate(nameof(ClientiViewModel), false);
-            int idCliente = await Messenger.Send<IdClienteRequestMessage>();
-            _navigationService.GoBack(true);
-            await ApriCliente(idCliente);
+            await _unitOfWork.BeginAsync();
+
+            ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
+            _navigationService.Navigate(nameof(ClientiViewModel), clientiViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(ClientiViewModel), null, false);
+            //int idCliente = await Messenger.Send<IdClienteRequestMessage>();
+            //_navigationService.GoBack(true);
+            //await ApriCliente(idCliente);
+        }
+        private async Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
+        {
+            if (clientiViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack();
+                await ApriCliente(clientiViewReturn.IdCliente);
+            }
         }
 
-        private void RegistraMessaggi()
-        {
-            Messenger.Register<IdClienteMessage>(this, async (r, m)
-                => await ApriCliente(m.Value));
-        }
 
         private async Task ApriCliente(int idCliente)
         {
@@ -129,7 +149,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

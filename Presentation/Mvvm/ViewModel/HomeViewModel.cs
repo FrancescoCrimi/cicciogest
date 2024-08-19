@@ -10,19 +10,19 @@ using System;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class HomeViewModel : ObservableRecipient, IDisposable
+    public sealed partial class HomeViewModel : ObservableObject, IDisposable
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
         public HomeViewModel(ILogger<HomeViewModel> logger)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

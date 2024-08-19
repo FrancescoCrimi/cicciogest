@@ -36,7 +36,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 }
                 _sessionFactory = GetNhbConfiguration().BuildSessionFactory();
             }
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
 
@@ -159,7 +159,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
 
         public void Dispose()
         {
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

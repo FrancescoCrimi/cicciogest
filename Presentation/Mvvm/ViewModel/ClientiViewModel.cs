@@ -17,13 +17,14 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class ClientiViewModel : ObservableRecipient, IDisposable
+    public sealed partial class ClientiViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IClientiFornitoriService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
-        private readonly TaskCompletionSource<int> _idClienteTaskCompletionSource;
+        //private readonly TaskCompletionSource<int> _idClienteTaskCompletionSource;
         private Cliente? _clienteSelezionato;
+        private ClientiViewReturnHandler? _clientiViewReturnHandler;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IClientiFornitoriService clientiFornitoriService,
@@ -34,9 +35,9 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _navigationService = navigationService;
             Clienti = new ObservableCollection<Cliente>();
 
-            _idClienteTaskCompletionSource = new TaskCompletionSource<int>();
-            Messenger.Register<ClientiViewModel, IdClienteRequestMessage>(this, (recipient, message)
-                => message.Reply(_idClienteTaskCompletionSource.Task));
+            //_idClienteTaskCompletionSource = new TaskCompletionSource<int>();
+            //Messenger.Register<ClientiViewModel, IdClienteRequestMessage>(this, (recipient, message)
+            //    => message.Reply(_idClienteTaskCompletionSource.Task));
 
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
@@ -56,9 +57,18 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+        public void Initialize(object? parameter)
+        {
+            if (parameter is ClientiViewReturnHandler clientiViewReturnHandler)
+            {
+                _clientiViewReturnHandler = clientiViewReturnHandler;
+            }
+        }
+
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaClienti();
+
 
         [RelayCommand]
         private async Task OnAggiornaClienti()
@@ -70,23 +80,29 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+
         [RelayCommand]
         private void OnNuovoClienti() { }
 
+
         [RelayCommand(CanExecute = nameof(CanApriCliente))]
-        private void OnApriCliente()
+        private Task OnApriCliente()
         {
             if (ClienteSelezionato != null)
             {
-                _idClienteTaskCompletionSource.SetResult(ClienteSelezionato.Id);
+                if (_clientiViewReturnHandler != null)
+                {
+                    //_idClienteTaskCompletionSource.SetResult(ClienteSelezionato.Id);
+                    return _clientiViewReturnHandler.Invoke(new ClientiViewReturn(WizardResult.Finished, ClienteSelezionato.Id));
+                }
             }
+            return Task.CompletedTask;
         }
         private bool CanApriCliente() => ClienteSelezionato != null;
 
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

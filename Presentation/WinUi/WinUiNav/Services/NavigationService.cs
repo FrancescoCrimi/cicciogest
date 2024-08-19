@@ -14,7 +14,7 @@ using System;
 
 namespace CiccioGest.Presentation.WinUiNav.Services
 {
-    public class NavigationService : INavigationService, IDisposable
+    public sealed class NavigationService : INavigationService, IDisposable
     {
         public event NavigatedEventHandler Navigated;
         public event NavigationFailedEventHandler NavigationFailed;

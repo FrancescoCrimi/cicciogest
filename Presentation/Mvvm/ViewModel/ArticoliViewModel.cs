@@ -17,13 +17,14 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class ArticoliViewModel : ObservableRecipient, IDisposable
+    public sealed partial class ArticoliViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IMagazzinoService _magazinoService;
         private readonly INavigationService _navigationService;
-        private readonly TaskCompletionSource<int> _idArticoloTaskCompletionSource;
+        //private readonly TaskCompletionSource<int> _idArticoloTaskCompletionSource;
         private Articolo? articoloSelezionato;
+        private ArticoliViewReturnHandler? _articoliViewReturnHandler;
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
                                  IMagazzinoService magazinoService,
@@ -34,9 +35,9 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _navigationService = navigationService;
             Articoli = new ObservableCollection<Articolo>();
 
-            _idArticoloTaskCompletionSource = new TaskCompletionSource<int>();
-            Messenger.Register<ArticoliViewModel, IdArticoloRequestMessage>(this, (recipient, message)
-                => message.Reply(_idArticoloTaskCompletionSource.Task));
+            //_idArticoloTaskCompletionSource = new TaskCompletionSource<int>();
+            //Messenger.Register<ArticoliViewModel, IdArticoloRequestMessage>(this, (recipient, message)
+            //    => message.Reply(_idArticoloTaskCompletionSource.Task));
 
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
@@ -56,23 +57,39 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             }
         }
 
+        public void Initialize(object? parameter)
+        {
+            if (parameter is ArticoliViewReturnHandler articoliViewReturnHandler)
+            {
+                _articoliViewReturnHandler = articoliViewReturnHandler;
+            }
+        }
+
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaArticoli();
+
 
         [RelayCommand]
         private void OnNuovoArticolo()
              => _navigationService.Navigate(nameof(ArticoloViewModel));
 
+
         [RelayCommand(CanExecute = nameof(CanApriArticolo))]
-        private void OnApriArticolo()
+        private Task OnApriArticolo()
         {
             if (ArticoloSelezionato != null)
             {
-                _idArticoloTaskCompletionSource.SetResult(ArticoloSelezionato.Id);
+                //_idArticoloTaskCompletionSource.SetResult(ArticoloSelezionato.Id);
+                if (_articoliViewReturnHandler != null)
+                {
+                    return _articoliViewReturnHandler.Invoke(new ArticoliViewReturn(WizardResult.Finished, ArticoloSelezionato.Id));
+                }
             }
+            return Task.CompletedTask;
         }
         private bool CanApriArticolo() => ArticoloSelezionato != null;
+
 
         [RelayCommand]
         private async Task OnAggiornaArticoli()
@@ -87,7 +104,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         public void Dispose()
         {
-            Messenger.UnregisterAll(this);
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

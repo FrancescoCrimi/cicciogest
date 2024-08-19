@@ -5,6 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
@@ -14,9 +15,11 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
     public partial class ListaFornitoriViewModel : FornitoriViewModel
     {
         public ListaFornitoriViewModel(ILogger<FornitoriViewModel> logger,
+                                       IUnitOfWork unitOfWork,
                                        INavigationService navigationService,
                                        IClientiFornitoriService clientiFornitoriService)
             : base(logger,
+                   unitOfWork,
                    navigationService,
                    clientiFornitoriService)
         {
@@ -27,7 +30,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
             if (FornitoreSelezionato != null)
             {
                 Messenger.Send(new FornitoreIdMessage(FornitoreSelezionato.Id));
-                navigationService.GoBack();
+                _navigationService.GoBack();
             }
         }
     }

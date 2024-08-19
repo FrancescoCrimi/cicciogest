@@ -16,8 +16,10 @@ namespace CiccioGest.Presentation.Mvvm.Services
         void GoBack(bool emptyForwardStack = false);
         void GoForward(bool emptyBackStack = false);
         void Navigate(Type pageType,
+                      object? parameter = null,
                       bool clearNavigation = true);
         void Navigate(string key,
+                      object? parameter = null,
                       bool clearNavigation = true);
     }
 }

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class MainViewModel : ObservableRecipient, IDisposable
+    public sealed partial class MainViewModel : ObservableObject, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -36,45 +36,95 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private async Task OnApriFatture()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(nameof(FattureViewModel), false);
-            int idFattura = await Messenger.Send<IdFatturaRequestMessage>();
-            _navigationService.Navigate(nameof(FatturaViewModel));
-            Messenger.Send(new IdFatturaMessage(idFattura));
+            FattureViewReturnHandler fattureViewReturnHandler = FattureViewReturnMethod;
+            _navigationService.Navigate(nameof(FattureViewModel), fattureViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(FattureViewModel), null, false);
+            //int idFattura = await Messenger.Send<IdFatturaRequestMessage>();
+            //_navigationService.Navigate(nameof(FatturaViewModel));
+            //Messenger.Send(new IdFatturaMessage(idFattura));
         }
+        private Task FattureViewReturnMethod(FattureViewReturn fattureViewReturn)
+        {
+            if (fattureViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.Navigate(nameof(FatturaViewModel), fattureViewReturn);
+            }
+            return Task.CompletedTask;
+        }
+
 
         [RelayCommand]
         private async Task OnApriArticoli()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(nameof(ArticoliViewModel), false);
-            int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
-            _navigationService.Navigate(nameof(ArticoloViewModel));
-            Messenger.Send(new IdArticoloMessage(idArticolo));
+
+            ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
+            _navigationService.Navigate(nameof(ArticoliViewModel), articoliViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(ArticoliViewModel), null, false);
+            //int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
+            //_navigationService.Navigate(nameof(ArticoloViewModel));
+            //Messenger.Send(new IdArticoloMessage(idArticolo));
         }
+        private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
+        {
+            if (articoliViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.Navigate(nameof(ArticoloViewModel), articoliViewReturn);
+            }
+            await Task.CompletedTask;
+        }
+
 
         [RelayCommand]
         private void OnApriCategorie()
             => _navigationService.Navigate(nameof(CategoriaViewModel));
 
+
         [RelayCommand]
         private async Task OnApriClienti()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(nameof(ClientiViewModel), false);
-            int idCliente = await Messenger.Send<IdClienteRequestMessage>();
-            _navigationService.Navigate(nameof(ClienteViewModel));
-            Messenger.Send(new IdClienteMessage(idCliente));
+            ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
+            _navigationService.Navigate(nameof(ClientiViewModel), clientiViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(ClientiViewModel), null, false);
+            //int idCliente = await Messenger.Send<IdClienteRequestMessage>();
+            //_navigationService.Navigate(nameof(ClienteViewModel));
+            //Messenger.Send(new IdClienteMessage(idCliente));
         }
+        private Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
+        {
+            if (clientiViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.Navigate(nameof(ClienteViewModel), clientiViewReturn);
+            }
+            return Task.CompletedTask;
+        }
+
 
         [RelayCommand]
         private async Task OnApriFornitori()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(nameof(FornitoriViewModel), false);
-            int idFornitore = await Messenger.Send<IdFornitoreRequestMessage>();
-            _navigationService.Navigate(nameof(FornitoreViewModel));
-            Messenger.Send(new IdFornitoreMessage(idFornitore));
+            FornitoriViewReturnHandler fornitoriViewReturnHandler = FornitoriViewReturnMethod;
+            _navigationService.Navigate(nameof(FornitoriViewModel), fornitoriViewReturnHandler, false);
+
+            //_navigationService.Navigate(nameof(FornitoriViewModel), null, false);
+            //int idFornitore = await Messenger.Send<IdFornitoreRequestMessage>();
+            //_navigationService.Navigate(nameof(FornitoreViewModel));
+            //Messenger.Send(new IdFornitoreMessage(idFornitore));
         }
+        private Task FornitoriViewReturnMethod(FornitoriViewReturn fornitoriViewReturn)
+        {
+            if (fornitoriViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.Navigate(nameof(FornitoreViewModel), fornitoriViewReturn);
+            }
+            return Task.CompletedTask;
+        }
+
 
         [RelayCommand]
         private void MenuItem(Type type)
@@ -82,6 +132,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             if (type != null)
                 _navigationService.Navigate(type);
         }
+
 
         [RelayCommand(CanExecute = nameof(CanGoBack))]
         private void OnGoBack() => _navigationService.GoBack();
@@ -92,7 +143,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         {
             GoBackCommand?.NotifyCanExecuteChanged();
         }
-
 
 
         public void Dispose()

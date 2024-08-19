@@ -5,6 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Presentation.Mvvm.Services;
+using CiccioGest.Presentation.Mvvm.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -89,6 +90,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
 
 
         public void Navigate(Type pageType,
+                             object? parameter = null,
                              bool clearNavigation = true)
         {
             if (_contentControl == null)
@@ -98,7 +100,13 @@ namespace CiccioGest.Presentation.WpfBackend.Services
 
             if (_contentControl?.Content?.GetType() != pageType)
             {
-                var page = _serviceProvider.GetRequiredService(pageType);
+                var page = (ContentControl)_serviceProvider.GetRequiredService(pageType);
+
+                // inizializza ViewModel
+                if (page.DataContext is IViewModel viewModel)
+                {
+                    viewModel.Initialize(parameter);
+                }
 
                 // valorizzo pagina precedente
                 var oldPage = _contentControl?.Content;
@@ -131,10 +139,11 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         }
 
         public void Navigate(string key,
+                             object? parameter = null,
                              bool clearNavigation = true)
         {
             var pageType = _pageService.GetPageType(key);
-            Navigate(pageType, clearNavigation);
+            Navigate(pageType, parameter, clearNavigation);
         }
 
         /// <summary>

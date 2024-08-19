@@ -17,7 +17,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
                                  UnitOfWork unitOfWork)
             : base(logger, unitOfWork)
         {
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public async Task<IList<Cliente>> GetAll()
@@ -28,7 +28,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb.Repository
 
         public void Dispose()
         {
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WinUiBackend.Contracts;
 using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -21,24 +22,27 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
     public partial class ClientiViewModel : ObservableRecipient, IDisposable
     {
-        private readonly ILogger<ClientiViewModel> logger;
-        private readonly IClientiFornitoriService clientiFornitoriService;
-        private readonly INavigationService navigationService;
-        private Cliente clienteSelezionato;
+        private readonly ILogger<ClientiViewModel> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly INavigationService _navigationService;
+        private Cliente _clienteSelezionato;
         private AsyncRelayCommand loadedCommand;
         private AsyncRelayCommand aggiornaClientiCommand;
         private RelayCommand apriClienteCommand;
         private RelayCommand nuovoClienteCommand;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
+                                IUnitOfWork unitOfWork,
                                 IClientiFornitoriService clientiFornitoriService,
                                 INavigationService navigationService)
         {
-            this.logger = logger;
-            this.clientiFornitoriService = clientiFornitoriService;
-            this.navigationService = navigationService;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _clientiFornitoriService = clientiFornitoriService;
+            _navigationService = navigationService;
             Clienti = new ObservableCollection<Cliente>();
-            logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
 
@@ -47,12 +51,12 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public Cliente ClienteSelezionato
         {
-            get => clienteSelezionato;
+            get => _clienteSelezionato;
             set
             {
-                if (clienteSelezionato != value)
+                if (_clienteSelezionato != value)
                 {
-                    clienteSelezionato = value;
+                    _clienteSelezionato = value;
                     apriClienteCommand.NotifyCanExecuteChanged();
                     nuovoClienteCommand.NotifyCanExecuteChanged();
                 }
@@ -74,7 +78,8 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         private async Task AggiornaClienti()
         {
             Clienti.Clear();
-            foreach (var item in await clientiFornitoriService.GetClienti())
+            await _unitOfWork.BeginAsync();
+            foreach (var item in await _clientiFornitoriService.GetClienti())
             {
                 Clienti.Add(item);
             }
@@ -84,7 +89,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         {
             if (ClienteSelezionato != null)
             {
-                navigationService.Navigate(ViewEnum.Cliente);
+                _navigationService.Navigate(ViewEnum.Cliente);
                 Messenger.Send(new ClienteIdMessage(ClienteSelezionato.Id));
             }
         }
@@ -96,7 +101,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 
         public void Dispose()
         {
-            logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }
