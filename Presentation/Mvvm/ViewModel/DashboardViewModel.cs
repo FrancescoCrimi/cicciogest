@@ -11,11 +11,11 @@ using System;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class HomeViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class DashboardViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
 
-        public HomeViewModel(ILogger<HomeViewModel> logger)
+        public DashboardViewModel(ILogger<DashboardViewModel> logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());

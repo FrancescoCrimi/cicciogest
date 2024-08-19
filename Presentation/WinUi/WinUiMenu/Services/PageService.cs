@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
 {
     public class PageService
     {
-        private readonly Dictionary<ViewEnum, Type> _pages = new Dictionary<ViewEnum, Type>();
+        private readonly Dictionary<ViewEnum, Type> _pages = new();
 
         public PageService()
         {
@@ -38,7 +38,7 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
 
         public Type GetPageType(ViewEnum key)
         {
-            Type pageType;
+            Type? pageType;
             lock (_pages)
             {
                 if (!_pages.TryGetValue(key, out pageType))

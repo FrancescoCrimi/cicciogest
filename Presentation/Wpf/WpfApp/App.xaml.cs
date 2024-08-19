@@ -5,10 +5,10 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WpfApp.Services;
 using CiccioGest.Presentation.WpfApp.View;
 using CiccioGest.Presentation.WpfBackend;
-using CiccioGest.Presentation.WpfBackend.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -49,7 +49,7 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
 
                 .AddTransient<MainView>()
-                .AddTransient<HomeView>()
+                .AddTransient<DashboardView>()
                 .AddTransient<ArticoliView>()
                 .AddTransient<ArticoloView>()
                 .AddTransient<CategoriaView>()

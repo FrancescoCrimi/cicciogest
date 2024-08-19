@@ -9,8 +9,12 @@ using System;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class SettingViewModel : ObservableObject, IDisposable
+    public sealed partial class SettingViewModel : ObservableObject, IViewModel, IDisposable
     {
+        public void Initialize(object? parameter)
+        {
+        }
+
         private void LoadSampleData()
         {
 
@@ -34,7 +38,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }

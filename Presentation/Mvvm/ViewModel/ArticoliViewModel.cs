@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazzino;
+using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -74,7 +75,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         [RelayCommand]
         private void OnNuovoArticolo()
-             => _navigationService.Navigate(nameof(ArticoloViewModel));
+             => _navigationService.Navigate(ViewEnum.Articolo);
 
 
         [RelayCommand(CanExecute = nameof(CanApriArticolo))]

@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -138,9 +139,9 @@ namespace CiccioGest.Presentation.WpfBackend.Services
             }
         }
 
-        public void Navigate(string key,
+        public void Navigate(ViewEnum key,
                              object? parameter = null,
-                             bool clearNavigation = true)
+                             bool clearNavigation = false)
         {
             var pageType = _pageService.GetPageType(key);
             Navigate(pageType, parameter, clearNavigation);
@@ -177,6 +178,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
             }
             _forwardStack.Clear();
         }
+
 
         public void Dispose()
         {

@@ -7,6 +7,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -116,15 +117,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private async Task OnApriArticolo()
         {
             await _unitOfWork.BeginAsync();
-
             ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
-            _navigationService.Navigate(nameof(ArticoliViewModel), articoliViewReturnHandler, false);
-
-            //_navigationService.Navigate(nameof(ArticoliViewModel), null, false);
-            //int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
-            ////TODO: dopo GoBack cancellare la crconologia forward per disposare la vista precedente
-            //_navigationService.GoBack(true);
-            //await ApriArticolo(idArticolo);
+            _navigationService.Navigate(ViewEnum.Articoli, articoliViewReturnHandler, false);
         }
         private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
         {
@@ -140,7 +134,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private void OnAggiungiCategoria()
         {
             CategoriaViewReturnHandler categoriaViewReturnHandler = CategoriaViewReturnMethod;
-            _navigationService.Navigate(nameof(CategoriaViewModel), categoriaViewReturnHandler, false);
+            _navigationService.Navigate(ViewEnum.Categoria, categoriaViewReturnHandler, false);
         }
         private async Task CategoriaViewReturnMethod(CategoriaViewReturn categoriaViewReturn)
         {

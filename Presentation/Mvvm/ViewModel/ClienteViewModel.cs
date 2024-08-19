@@ -7,6 +7,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -118,14 +119,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private async Task OnApriCliente()
         {
             await _unitOfWork.BeginAsync();
-
             ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
-            _navigationService.Navigate(nameof(ClientiViewModel), clientiViewReturnHandler, false);
-
-            //_navigationService.Navigate(nameof(ClientiViewModel), null, false);
-            //int idCliente = await Messenger.Send<IdClienteRequestMessage>();
-            //_navigationService.GoBack(true);
-            //await ApriCliente(idCliente);
+            _navigationService.Navigate(ViewEnum.Clienti, clientiViewReturnHandler, false);
         }
         private async Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
         {

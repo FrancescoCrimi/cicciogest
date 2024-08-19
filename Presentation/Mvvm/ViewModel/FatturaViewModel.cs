@@ -7,6 +7,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -68,14 +69,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private async Task OnNuovaFattura()
         {
             await _unitOfWork.BeginAsync();
-
             ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
-            _navigationService.Navigate(nameof(ClientiViewModel), clientiViewReturnHandler, false);
-
-            //_navigationService.Navigate(nameof(ClientiViewModel), null, false);
-            //int idCliente = await Messenger.Send<IdClienteRequestMessage>();
-            //_navigationService.GoBack(true);
-            //await NuovaFattura(idCliente);
+            _navigationService.Navigate(ViewEnum.Clienti, clientiViewReturnHandler, false);
         }
         private async Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
         {
@@ -131,14 +126,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private async Task OnApriFattura()
         {
             await _unitOfWork.BeginAsync();
-
             FattureViewReturnHandler fattureViewReturnHandler = FattureViewReturnMethod;
-            _navigationService.Navigate(nameof(FattureViewModel), fattureViewReturnHandler, false);
-
-            //_navigationService.Navigate(nameof(FattureViewModel), null, false);
-            //int idFattura = await Messenger.Send<IdFatturaRequestMessage>();
-            //_navigationService.GoBack(true);
-            //await ApriFattura(idFattura);
+            _navigationService.Navigate(ViewEnum.Fatture, fattureViewReturnHandler, false);
         }
         private async Task FattureViewReturnMethod(FattureViewReturn fattureViewReturn)
         {
@@ -154,13 +143,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private void OnNuovoDettaglio()
         {
             ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
-            _navigationService.Navigate(nameof(ArticoliViewModel), articoliViewReturnHandler, false);
-
-            //_navigationService.Navigate(nameof(ArticoliViewModel), null, false);
-            //int idArticolo = await Messenger.Send<IdArticoloRequestMessage>();
-            //_navigationService.GoBack(true);
-            //var articolo = await _fatturaService.GetArticolo(idArticolo);
-            //Dettaglio = new Dettaglio(articolo, 1);
+            _navigationService.Navigate(ViewEnum.Articoli, articoliViewReturnHandler, false);
         }
         private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
         {

@@ -7,6 +7,7 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Infrastructure;
+using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -119,14 +120,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private async Task OnApriFornitore()
         {
             await _unitOfWork.BeginAsync();
-
             FornitoriViewReturnHandler fornitoriViewReturnHandler = FornitoriViewReturnMethod;
-            _navigationService.Navigate(nameof(FornitoriViewModel), fornitoriViewReturnHandler, false);
-
-            //_navigationService.Navigate(nameof(FornitoriViewModel), null, false);
-            //int idFornitore = await Messenger.Send<IdFornitoreRequestMessage>();
-            //_navigationService.GoBack(true);
-            //await ApriFornitore(idFornitore);
+            _navigationService.Navigate(ViewEnum.Fornitori, fornitoriViewReturnHandler, false);
         }
         private async Task FornitoriViewReturnMethod(FornitoriViewReturn fornitoriViewReturn)
         {

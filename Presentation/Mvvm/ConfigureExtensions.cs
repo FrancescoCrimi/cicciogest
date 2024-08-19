@@ -21,17 +21,17 @@ namespace CiccioGest.Presentation.Mvvm
         {
             serviceCollection
                 .ConfigureApplication()
-                .AddTransient<MainViewModel>()
-                .AddTransient<HomeViewModel>()
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoliViewModel>()
                 .AddTransient<CategoriaViewModel>()
                 .AddTransient<ClienteViewModel>()
                 .AddTransient<ClientiViewModel>()
+                .AddTransient<DashboardViewModel>()
                 .AddTransient<FatturaViewModel>()
                 .AddTransient<FattureViewModel>()
                 .AddTransient<FornitoreViewModel>()
-                .AddTransient<FornitoriViewModel>();
+                .AddTransient<FornitoriViewModel>()
+                .AddTransient<MainViewModel>();
             return serviceCollection;
         }
     }

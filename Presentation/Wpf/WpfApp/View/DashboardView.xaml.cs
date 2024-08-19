@@ -10,12 +10,12 @@ using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.View
 {
-    public sealed partial class HomeView : UserControl, IDisposable
+    public sealed partial class DashboardView : UserControl, IDisposable
     {
-        public HomeView(HomeViewModel homeViewModel)
+        public DashboardView(DashboardViewModel dashboardViewModel)
         {
             InitializeComponent();
-            DataContext = homeViewModel;
+            DataContext = dashboardViewModel;
         }
 
         public void Dispose()

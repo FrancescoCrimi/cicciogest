@@ -5,8 +5,8 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WpfBackend;
-using CiccioGest.Presentation.WpfBackend.Services;
 using CiccioGest.Presentation.WpfMetroApp.Services;
 using CiccioGest.Presentation.WpfMetroApp.View;
 using Microsoft.Extensions.Configuration;

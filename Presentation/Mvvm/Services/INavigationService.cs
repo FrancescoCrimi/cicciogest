@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.Mvvm.Contracts;
 using System;
 
 namespace CiccioGest.Presentation.Mvvm.Services
@@ -18,8 +19,11 @@ namespace CiccioGest.Presentation.Mvvm.Services
         void Navigate(Type pageType,
                       object? parameter = null,
                       bool clearNavigation = true);
-        void Navigate(string key,
+        //void Navigate(string key,
+        //              object? parameter = null,
+        //              bool clearNavigation = true);
+        void Navigate(ViewEnum key,
                       object? parameter = null,
-                      bool clearNavigation = true);
+                      bool clearNavigation = false);
     }
 }
