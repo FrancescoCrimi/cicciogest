@@ -32,6 +32,15 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
+
+        [RelayCommand]
+        private void OnLoaded() { }
+
+
+        [RelayCommand]
+        private void OnUnloaded() { }
+
+
         [RelayCommand]
         private async Task OnApriFatture()
         {

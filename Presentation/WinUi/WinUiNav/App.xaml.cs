@@ -33,7 +33,7 @@ namespace CiccioGest.Presentation.WinUiNav
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            App.MainWindow.Content = Ioc.Default.GetService<ShellView>();
+            App.MainWindow.Content = Ioc.Default.GetService<MainView>();
             App.MainWindow.Activate();
             Ioc.Default.GetService<INavigationService>().Navigate(typeof(DashboardView), args.Arguments);
         }
@@ -65,7 +65,7 @@ namespace CiccioGest.Presentation.WinUiNav
                 .AddSingleton<INavigationService>(s => s.GetService<NavigationService>())
 
                 // View
-                .AddTransient<ShellView>()
+                .AddTransient<MainView>()
 
                 .BuildServiceProvider();
         }

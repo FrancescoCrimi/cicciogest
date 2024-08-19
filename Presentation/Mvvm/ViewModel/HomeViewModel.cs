@@ -5,12 +5,13 @@
 // https://opensource.org/licenses/MIT.
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModel
 {
-    public sealed partial class HomeViewModel : ObservableObject, IDisposable
+    public sealed partial class HomeViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
 
@@ -19,6 +20,19 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
+
+        public void Initialize(object? parameter)
+        {
+        }
+
+
+        [RelayCommand]
+        private void OnLoaded() { }
+
+
+        [RelayCommand]
+        private void OnUnloaded() { }
+
 
         public void Dispose()
         {

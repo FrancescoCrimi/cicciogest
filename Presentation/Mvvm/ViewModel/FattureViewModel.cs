@@ -10,7 +10,6 @@ using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -24,7 +23,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFatturaService _fatturaService;
         private readonly INavigationService _navigationService;
-        //private readonly TaskCompletionSource<int> _idFatturaTaskCompletionSource;
         private Fattura? _fatturaSelezionata;
         private FattureViewReturnHandler? _fattureViewReturnHandler;
 
@@ -38,11 +36,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _fatturaService = fatturaService;
             _navigationService = navigationService;
             Fatture = new ObservableCollection<Fattura>();
-
-            //_idFatturaTaskCompletionSource = new TaskCompletionSource<int>();
-            //Messenger.Register<FattureViewModel, IdFatturaRequestMessage>(this, (recipient, message)
-            //    => message.Reply(_idFatturaTaskCompletionSource.Task));
-
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
@@ -72,6 +65,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaFatture();
+
+
+        [RelayCommand]
+        private void OnUnloaded() { }
 
 
         [RelayCommand]

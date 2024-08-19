@@ -13,12 +13,15 @@ namespace CiccioGest.Presentation.WinUiBackend.Contracts.Services
     {
         event NavigatedEventHandler Navigated;
         event NavigationFailedEventHandler NavigationFailed;
-
         bool CanGoBack { get; }
         bool CanGoForward { get; }
         void GoBack();
         void GoForward();
-        bool Navigate(Type pageType, object parameter = null, bool clearNavigation = false);
-        bool Navigate(ViewEnum key, object parameter = null, bool clearNavigation = false);
+        bool Navigate(Type pageType,
+                      object parameter = null,
+                      bool clearNavigation = false);
+        bool Navigate(ViewEnum key,
+                      object parameter = null,
+                      bool clearNavigation = false);
     }
 }

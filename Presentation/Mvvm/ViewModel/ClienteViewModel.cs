@@ -10,7 +10,6 @@ using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -56,6 +55,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         [RelayCommand]
         private void OnLoaded() { }
+
+
+        [RelayCommand]
+        private void OnUnloaded() { }
 
 
         [RelayCommand]

@@ -10,10 +10,10 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiNav.View
 {
-    public sealed partial class ShellView : Page
+    public sealed partial class MainView : Page
     {
-        public ShellView(NavigationService navigationService,
-                         ShellViewModel mainViewModel)
+        public MainView(NavigationService navigationService,
+                         MainViewModel mainViewModel)
         {
             InitializeComponent();
             navigationService.Initialize(shellFrame);

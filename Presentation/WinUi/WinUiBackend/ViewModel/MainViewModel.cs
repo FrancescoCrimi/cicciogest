@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.WinUiBackend.ViewModel
 {
-    public sealed partial class ShellViewModel : ObservableObject, IDisposable
+    public sealed partial class MainViewModel : ObservableObject, IDisposable
     {
         private readonly ILogger _logger;
         private readonly INavigationService _navigationService;
@@ -22,7 +22,7 @@ namespace CiccioGest.Presentation.WinUiBackend.ViewModel
         [ObservableProperty]
         private bool isBackEnabled;
 
-        public ShellViewModel(ILogger<ShellViewModel> logger,
+        public MainViewModel(ILogger<MainViewModel> logger,
                               INavigationService navigationService)
         {
             _logger = logger;

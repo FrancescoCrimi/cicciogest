@@ -9,7 +9,6 @@ using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -22,7 +21,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private readonly ILogger<FornitoriViewModel> _logger;
         private readonly IClientiFornitoriService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
-        //private readonly TaskCompletionSource<int> _idFornitoreTaskCompletionSource;
         private Fornitore? _fornitoreSelezionato;
         private FornitoriViewReturnHandler? _fornitoriViewReturnHandler;
 
@@ -34,11 +32,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _navigationService = navigationService;
             _clientiFornitoriService = clientiFornitoriService;
             Fornitori = new ObservableCollection<Fornitore>();
-
-            //_idFornitoreTaskCompletionSource = new TaskCompletionSource<int>();
-            //Messenger.Register<FornitoriViewModel, IdFornitoreRequestMessage>(this, (recipient, message)
-            //    => message.Reply(_idFornitoreTaskCompletionSource.Task));
-
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
@@ -68,6 +61,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaFornitori();
+
+
+        [RelayCommand]
+        private void OnUnloaded() { }
 
 
         [RelayCommand]

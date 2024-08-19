@@ -16,7 +16,7 @@ namespace CiccioGest.Presentation.WinUiBackend
         {
             return serviceCollection
                 .ConfigureApplication()
-                .AddTransient<ShellViewModel>()
+                .AddTransient<MainViewModel>()
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoliViewModel>()
                 .AddTransient<CategoriaViewModel>()

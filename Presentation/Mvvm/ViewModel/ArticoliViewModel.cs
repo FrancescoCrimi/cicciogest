@@ -9,7 +9,6 @@ using CiccioGest.Domain.Magazzino;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -22,7 +21,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private readonly ILogger _logger;
         private readonly IMagazzinoService _magazinoService;
         private readonly INavigationService _navigationService;
-        //private readonly TaskCompletionSource<int> _idArticoloTaskCompletionSource;
         private Articolo? articoloSelezionato;
         private ArticoliViewReturnHandler? _articoliViewReturnHandler;
 
@@ -68,6 +66,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaArticoli();
+
+
+        [RelayCommand]
+        private void OnUnloaded() { }
 
 
         [RelayCommand]

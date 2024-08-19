@@ -9,7 +9,6 @@ using CiccioGest.Domain.ClientiFornitori;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
@@ -22,7 +21,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private readonly ILogger _logger;
         private readonly IClientiFornitoriService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
-        //private readonly TaskCompletionSource<int> _idClienteTaskCompletionSource;
         private Cliente? _clienteSelezionato;
         private ClientiViewReturnHandler? _clientiViewReturnHandler;
 
@@ -34,11 +32,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _clientiFornitoriService = clientiFornitoriService;
             _navigationService = navigationService;
             Clienti = new ObservableCollection<Cliente>();
-
-            //_idClienteTaskCompletionSource = new TaskCompletionSource<int>();
-            //Messenger.Register<ClientiViewModel, IdClienteRequestMessage>(this, (recipient, message)
-            //    => message.Reply(_idClienteTaskCompletionSource.Task));
-
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
@@ -68,6 +61,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
         [RelayCommand]
         private Task OnLoaded() => OnAggiornaClienti();
+
+
+        [RelayCommand]
+        private void OnUnloaded() { }
 
 
         [RelayCommand]
