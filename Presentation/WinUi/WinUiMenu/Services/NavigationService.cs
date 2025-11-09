@@ -1,40 +1,34 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WinUiBackend.Contracts;
-using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
-using Microsoft.Extensions.DependencyInjection;
+using CiccioGest.Presentation.Mvvm.Contracts;
+using CiccioGest.Presentation.Mvvm.Services;
+using CiccioGest.Presentation.Mvvm.ViewModel;
+using CiccioGest.Presentation.WinUiMenu.Helpers;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 
 namespace CiccioGest.Presentation.WinUiMenu.Services
 {
     public sealed class NavigationService : INavigationService, IDisposable
     {
-        public event NavigatedEventHandler Navigated;
-        public event NavigationFailedEventHandler NavigationFailed;
+        public event EventHandler? Navigated;
 
         private readonly ILogger _logger;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly PageService _pageService;
-        private Frame _frame;
-        private IServiceScope _scope;
-        private IServiceScope _oldScope;
-        private static object _lastParamUsed;
+        private Frame? _frame;
+        private static object? _lastParamUsed;
 
         public NavigationService(ILogger<NavigationService> logger,
-                                 IServiceScopeFactory serviceScopeFactory,
                                  PageService pageService)
         {
             _logger = logger;
-            _serviceScopeFactory = serviceScopeFactory;
             _pageService = pageService;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void Initialize(Frame shellFrame)
@@ -43,7 +37,6 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
             {
                 _frame = shellFrame;
                 _frame.Navigated += OnNavigated;
-                _frame.NavigationFailed += OnNavigationFailed;
             }
         }
 
@@ -53,12 +46,12 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
 
         public bool CanGoForward => _frame.CanGoForward;
 
-        public void GoBack() => _frame.GoBack();
+        public void GoBack(bool emptyForwardStack = false) => _frame.GoBack();
 
-        public void GoForward() => _frame.GoForward();
+        public void GoForward(bool emptyForwardStack = false) => _frame.GoForward();
 
-        public bool Navigate(Type pageType,
-                             object parameter = null,
+        public void Navigate(Type pageType,
+                             object? parameter = null,
                              bool clearNavigation = false)
         {
             if (pageType == null || !pageType.IsSubclassOf(typeof(Page)))
@@ -71,41 +64,29 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
             {
                 if (clearNavigation)
                 {
-                    _oldScope = _scope;
-                    _scope = _serviceScopeFactory.CreateScope();
+                    //_oldScope = _scope;
+                    //_scope = _serviceScopeFactory.CreateScope();
                 }
                 _frame.Tag = clearNavigation;
-                if (_scope == null)
-                {
-                    _scope = _serviceScopeFactory.CreateScope();
-                }
 
                 var navigationResult = _frame.Navigate(pageType, parameter);
                 if (navigationResult)
                 {
                     _lastParamUsed = parameter;
                 }
-
-                return navigationResult;
-            }
-            else
-            {
-                return false;
             }
         }
 
-        public bool Navigate(ViewEnum key,
-                             object parameter = null,
+        public void Navigate(ViewEnum key,
+                             object? parameter = null,
                              bool clearNavigation = false)
         {
             var pageType = _pageService.GetPageType(key);
-            return Navigate(pageType, parameter, clearNavigation);
+             Navigate(pageType, parameter, clearNavigation);
         }
 
         private void OnNavigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
         {
-            Navigated?.Invoke(this, e);
-
             if (sender is Frame frame)
             {
                 bool clearNavigation = (bool)frame.Tag;
@@ -113,24 +94,23 @@ namespace CiccioGest.Presentation.WinUiMenu.Services
                 {
                     frame.BackStack.Clear();
                 }
-                if (_oldScope != null)
-                {
-                    _oldScope.Dispose();
-                    _oldScope = null;
-                }
-            }
-        }
 
-        private void OnNavigationFailed(object sender, Microsoft.UI.Xaml.Navigation.NavigationFailedEventArgs e)
-        {
-            NavigationFailed?.Invoke(this, e);
+                if (frame.GetDataContext() is IViewModel viewModel)
+                {
+                    viewModel.Initialize(e.Parameter);
+                }
+
+                Navigated?.Invoke(this, new EventArgs());
+            }
         }
 
         public void Dispose()
         {
-            _frame.Navigated -= OnNavigated;
-            _frame.NavigationFailed -= OnNavigationFailed;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (_frame != null)
+            {
+                _frame.Navigated -= OnNavigated;
+            }
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

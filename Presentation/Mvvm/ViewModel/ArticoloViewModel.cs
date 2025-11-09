@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -49,7 +49,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         {
             if (parameter is ArticoliViewReturn articoliViewReturn)
             {
-                Task.Run(async () => await ApriArticolo(articoliViewReturn.IdArticolo));
+                //Task.Run(async () => await ApriArticolo(articoliViewReturn.IdArticolo));
+                ApriArticolo(articoliViewReturn.IdArticolo).ConfigureAwait(false);
             }
         }
 

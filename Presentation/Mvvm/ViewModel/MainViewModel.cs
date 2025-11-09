@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -47,11 +47,17 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
 
         [RelayCommand]
-        private async Task OnApriFatture()
+        private void OnApriDashboard()
+        {
+
+        }
+
+
+        [RelayCommand]
+        private async Task OnApriFattura()
         {
             await _unitOfWork.BeginAsync();
-            FattureViewReturnHandler fattureViewReturnHandler = FattureViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Fatture, fattureViewReturnHandler, false);
+            _navigationService.Navigate(ViewEnum.Fatture, (FattureViewReturnHandler)FattureViewReturnMethod, false);
         }
         private Task FattureViewReturnMethod(FattureViewReturn fattureViewReturn)
         {
@@ -60,6 +66,18 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                 _navigationService.Navigate(ViewEnum.Fattura, fattureViewReturn);
             }
             return Task.CompletedTask;
+        }
+
+
+        [RelayCommand]
+        private async Task OnNuovaFattura()
+        {
+            await _unitOfWork.BeginAsync();
+            _navigationService.Navigate(ViewEnum.Fatture, (FattureViewReturnHandler)NuovaFatturaViewReturnMethod, false);
+        }
+        private async Task NuovaFatturaViewReturnMethod(FattureViewReturn fattureViewReturn)
+        {
+            await Task.CompletedTask;
         }
 
 

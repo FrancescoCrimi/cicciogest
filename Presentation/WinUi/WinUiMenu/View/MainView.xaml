@@ -7,17 +7,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:tollkit="using:CommunityToolkit.WinUI.UI.Controls"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
-      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiBackend.ViewModel"
-      xmlns:contracts="using:CiccioGest.Presentation.WinUiBackend.Contracts"
+      xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModel"
+      xmlns:contracts="using:CiccioGest.Presentation.Mvvm.Contracts"
       d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <i:Interaction.Behaviors>
-        <ic:EventTriggerBehavior EventName="Loaded">
-            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
-        </ic:EventTriggerBehavior>
+        <i:EventTriggerBehavior EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </i:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
     <Grid>
@@ -28,28 +27,27 @@
 
         <MenuBar>
 
-            <MenuBarItem Title="Documenti">
-                <MenuFlyoutItem Text="Fatture"
-                                Command="{Binding NavigateToCommand, Mode=OneWay}"
-                                CommandParameter="{x:Bind contracts:ViewEnum.Fatture}"/>
+            <MenuBarItem Title="Fatture">
+                <MenuFlyoutItem Text="Apri Fattura"
+                                Command="{Binding ApriFatturaCommand, Mode=OneWay}"/>
+                <MenuFlyoutItem Text="Nuova Fattura"
+                                Command="{Binding NuovaFatturaCommand, Mode=OneWay}" />
             </MenuBarItem>
 
             <MenuBarItem Title="Magazino">
                 <MenuFlyoutItem Text="Articoli"
-                                Command="{Binding NavigateToCommand, Mode=OneWay}"
-                                CommandParameter="{x:Bind contracts:ViewEnum.Articoli}" />
+                                Command="{Binding ApriArticoliCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Categorie"
-                                Command="{Binding NavigateToCommand, Mode=OneWay}"
-                                CommandParameter="{x:Bind contracts:ViewEnum.Categoria}" />
+                                Command="{Binding ApriCategorieCommand, Mode=OneWay}" />
             </MenuBarItem>
+
             <MenuBarItem Title="Anagrafica">
                 <MenuFlyoutItem Text="Clienti"
-                                Command="{Binding NavigateToCommand, Mode=OneWay}"
-                                CommandParameter="{x:Bind contracts:ViewEnum.Clienti}" />
+                                Command="{Binding ApriClientiCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Fornitori"
-                                Command="{Binding NavigateToCommand, Mode=OneWay}"
-                                CommandParameter="{x:Bind contracts:ViewEnum.Fornitori}" />
+                                Command="{Binding ApriFornitoriCommand, Mode=OneWay}" />
             </MenuBarItem>
+            
             <MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About" />
             </MenuBarItem>
@@ -61,4 +59,5 @@
         </Grid>
 
     </Grid>
+
 </Page>

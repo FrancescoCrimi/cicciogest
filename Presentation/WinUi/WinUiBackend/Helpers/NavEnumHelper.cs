@@ -1,20 +1,20 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WinUiBackend.Contracts;
+using CiccioGest.Presentation.Mvvm.Contracts;
 using Microsoft.UI.Xaml;
 
 namespace CiccioGest.Presentation.WinUiBackend.Helpers;
 
 /// <summary>
-/// Attached Property for attach Enum object
+/// Attached Property for attach "ViewEnum" value on UIElement
 /// </summary>
 public class NavEnumHelper
 {
-    // Helper class allows to attach an enum value on UIElement
+    // Helper class allows to attach an "ViewEnum" value on UIElement
     //
     // Usage in xaml:
     // <winui:NavigationViewItem helpers:NavEnumHelper.NavigateTo="Fatture" />

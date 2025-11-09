@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -37,7 +37,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_LoadEvent(object? sender, EventArgs e)
         {
-            _view.FattureEvent += View_FattureEvent;
+            _view.ApriFatturaEvent += View_FattureEvent;
             _view.ClientiEvent += View_ClientiEvent;
             _view.FornitoriEvent += View_FornitoriEvent;
             _view.ArticoliEvent += View_ArticoliEvent;
@@ -46,7 +46,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         private void View_CloseEvent(object? sender, EventArgs e)
         {
-            _view.FattureEvent -= View_FattureEvent;
+            _view.ApriFatturaEvent -= View_FattureEvent;
             _view.ClientiEvent -= View_ClientiEvent;
             _view.FornitoriEvent -= View_FornitoriEvent;
             _view.ArticoliEvent -= View_ArticoliEvent;

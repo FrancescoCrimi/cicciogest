@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -49,8 +49,9 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         {
             if (parameter is FornitoriViewReturn fornitoriViewReturn)
             {
-                _navigationService.GoBack();
-                Task.Run(async () => await ApriFornitore(fornitoriViewReturn.IdFornitore));
+                //_navigationService.GoBack();
+                //Task.Run(async () => await ApriFornitore(fornitoriViewReturn.IdFornitore));
+                ApriFornitore(fornitoriViewReturn.IdFornitore).ConfigureAwait(false);
             }
         }
 

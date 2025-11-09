@@ -7,16 +7,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:tollkit="using:CommunityToolkit.WinUI.UI.Controls"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
-      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiBackend.ViewModel"
+      xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModel"
       d:DataContext="{d:DesignInstance Type=viewmodel:FatturaViewModel}"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <i:Interaction.Behaviors>
-        <ic:EventTriggerBehavior EventName="Loaded">
-            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
-        </ic:EventTriggerBehavior>
+        <i:EventTriggerBehavior EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </i:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
     <Grid Margin="{StaticResource SmallLeftRightMargin}">

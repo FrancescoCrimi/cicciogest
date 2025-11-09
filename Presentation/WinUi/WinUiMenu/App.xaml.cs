@@ -1,13 +1,13 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.Mvvm.Contracts;
+using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WinUiBackend;
-using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
-using CiccioGest.Presentation.WinUiBackend.View;
 using CiccioGest.Presentation.WinUiMenu.Services;
 using CiccioGest.Presentation.WinUiMenu.View;
 using CommunityToolkit.Mvvm.DependencyInjection;
@@ -36,7 +36,7 @@ namespace CiccioGest.Presentation.WinUiMenu
         {
             App.MainWindow.Content = Ioc.Default.GetService<MainView>();
             App.MainWindow.Activate();
-            Ioc.Default.GetService<INavigationService>().Navigate(typeof(DashboardView), args.Arguments);
+            Ioc.Default.GetService<INavigationService>().Navigate(ViewEnum.Dashboard, args.Arguments);
         }
 
         private static IServiceProvider ConfigureServices()

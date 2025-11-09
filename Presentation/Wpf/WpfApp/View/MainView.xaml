@@ -28,9 +28,11 @@
         </Grid.RowDefinitions>
 
         <Menu>
-            <MenuItem Header="Documenti">
-                <MenuItem Header="Fatture"
-                          Command="{Binding ApriFattureCommand, Mode=OneWay}" />
+            <MenuItem Header="Fatture">
+                <MenuItem Header="Apri Fattura"
+                          Command="{Binding ApriFatturaCommand, Mode=OneWay}" />
+                <MenuItem Header="Nuova Fattura"
+                          Command="{Binding NuovaFatturaCommand, Mode=OneWay}" />
             </MenuItem>
             <MenuItem Header="Magazino">
                 <MenuItem Header="Articoli"

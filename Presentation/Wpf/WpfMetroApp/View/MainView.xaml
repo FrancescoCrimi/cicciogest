@@ -103,7 +103,7 @@
                         <mah:HamburgerMenuItemCollection>
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE719;"
                                                         Label="Fatture"                                                         
-                                                        Command="{Binding ApriFattureCommand, Mode=OneWay}" />
+                                                        Command="{Binding ApriFatturaCommand, Mode=OneWay}" />
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE8A5;"
                                                         Label="Articoli"
                                                         Command="{Binding ApriArticoliCommand, Mode=OneWay}" />

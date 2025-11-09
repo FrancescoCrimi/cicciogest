@@ -6,17 +6,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
-      xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
       xmlns:uc="using:CiccioGest.Presentation.WinUiBackend.UserControls"
-      xmlns:viewmodel="using:CiccioGest.Presentation.WinUiBackend.ViewModel"
+      xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModel"
       d:DataContext="{d:DesignInstance Type=viewmodel:ArticoliViewModel}"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <i:Interaction.Behaviors>
-        <ic:EventTriggerBehavior EventName="Loaded">
-            <ic:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
-        </ic:EventTriggerBehavior>
+        <i:EventTriggerBehavior EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </i:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
     <Grid Margin="{StaticResource SmallLeftRightMargin}">

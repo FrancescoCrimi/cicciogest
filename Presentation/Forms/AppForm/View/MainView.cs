@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -12,10 +12,11 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class MainView : Form, IMainView
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
         public event EventHandler? LoadEvent;
         public event EventHandler? CloseEvent;
-        public event EventHandler? FattureEvent;
+        public event EventHandler? ApriFatturaEvent;
+        public event EventHandler? NuovaFatturaEvent;
         public event EventHandler? ClientiEvent;
         public event EventHandler? FornitoriEvent;
         public event EventHandler? ArticoliEvent;
@@ -25,8 +26,8 @@ namespace CiccioGest.Presentation.AppForm.View
         public MainView(ILogger<MainView> logger)
         {
             InitializeComponent();
-            this.logger = logger;
-            this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            _logger = logger;
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         private void MainView_Load(object sender, EventArgs e)
@@ -39,9 +40,14 @@ namespace CiccioGest.Presentation.AppForm.View
             CloseEvent?.Invoke(sender, e);
         }
 
-        private void FattureToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ApriFattura_Click(object sender, EventArgs e)
         {
-            FattureEvent?.Invoke(sender, e);
+            ApriFatturaEvent?.Invoke(sender, e);
+        }
+
+        private void NuovaFattura_Click(object sender, EventArgs e)
+        {
+            NuovaFatturaEvent?.Invoke(sender, e);
         }
 
         private void ClientiToolStripMenuItem_Click(object sender, EventArgs e)

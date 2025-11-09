@@ -1,17 +1,12 @@
-﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Application.Impl;
+using CiccioGest.Application;
 using CiccioGest.Presentation.Mvvm.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm
 {

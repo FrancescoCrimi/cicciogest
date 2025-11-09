@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -13,7 +13,7 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class FatturaView : Form, IFatturaView
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
         public event EventHandler? LoadEvent;
         public event EventHandler? CloseEvent;
@@ -27,8 +27,8 @@ namespace CiccioGest.Presentation.AppForm.View
         public FatturaView(ILogger<FatturaView> logger)
         {
             InitializeComponent();
-            this.logger = logger;
-            this.logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            _logger = logger;
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         #region Metodi Pubblici
@@ -85,5 +85,10 @@ namespace CiccioGest.Presentation.AppForm.View
         }
 
         #endregion
+
+        private void EliminaToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

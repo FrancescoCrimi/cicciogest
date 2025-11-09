@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2024 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -22,7 +22,9 @@ namespace CiccioGest.Presentation.WpfApp
     public partial class App : System.Windows.Application
     {
         private void OnStartup(object sender, System.Windows.StartupEventArgs e)
-            => ConfigureServices().GetRequiredService<MainView>().Show();
+        {
+            ConfigureServices().GetRequiredService<MainView>().Show();
+        }
 
         private static IServiceProvider ConfigureServices()
         {

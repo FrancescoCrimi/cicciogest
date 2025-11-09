@@ -1,23 +1,23 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WinUiBackend.Contracts;
-using CiccioGest.Presentation.WinUiBackend.Contracts.Services;
+using CiccioGest.Presentation.Mvvm.Contracts;
+using CiccioGest.Presentation.Mvvm.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 
 namespace CiccioGest.Presentation.WinUiNav.Services
 {
     public sealed class NavigationService : INavigationService, IDisposable
     {
-        public event NavigatedEventHandler Navigated;
-        public event NavigationFailedEventHandler NavigationFailed;
+        //public event NavigatedEventHandler Navigated;
+        //public event NavigationFailedEventHandler NavigationFailed;
+        public event EventHandler Navigated;
 
         private readonly ILogger _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
@@ -43,7 +43,7 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             {
                 _frame = shellFrame;
                 _frame.Navigated += OnNavigated;
-                _frame.NavigationFailed += OnNavigationFailed;
+                //_frame.NavigationFailed += OnNavigationFailed;
             }
         }
 
@@ -53,11 +53,11 @@ namespace CiccioGest.Presentation.WinUiNav.Services
 
         public bool CanGoForward => _frame.CanGoForward;
 
-        public void GoBack() => _frame.GoBack();
+        public void GoBack(bool emptyForwardStack = false) => _frame.GoBack();
 
-        public void GoForward() => _frame.GoForward();
+        public void GoForward(bool emptyBackStack = false) => _frame.GoForward();
 
-        public bool Navigate(Type pageType,
+        public void Navigate(Type pageType,
                              object parameter = null,
                              bool clearNavigation = false)
         {
@@ -86,25 +86,25 @@ namespace CiccioGest.Presentation.WinUiNav.Services
                     _lastParamUsed = parameter;
                 }
 
-                return navigationResult;
+                //return navigationResult;
             }
-            else
-            {
-                return false;
-            }
+            //else
+            //{
+            //    return false;
+            //}
         }
 
-        public bool Navigate(ViewEnum key,
-                             object parameter = null,
+        public void Navigate(ViewEnum key,
+                             object? parameter = null,
                              bool clearNavigation = false)
         {
             var pageType = _pageService.GetPageType(key);
-            return Navigate(pageType, parameter, clearNavigation);
+             Navigate(pageType, parameter, clearNavigation);
         }
 
         private void OnNavigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
         {
-            Navigated?.Invoke(this, e);
+            Navigated?.Invoke(this, new EventArgs());
 
             if (sender is Frame frame)
             {
@@ -121,15 +121,15 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             }
         }
 
-        private void OnNavigationFailed(object sender, Microsoft.UI.Xaml.Navigation.NavigationFailedEventArgs e)
-        {
-            NavigationFailed?.Invoke(this, e);
-        }
+        //private void OnNavigationFailed(object sender, Microsoft.UI.Xaml.Navigation.NavigationFailedEventArgs e)
+        //{
+        //    NavigationFailed?.Invoke(this, e);
+        //}
 
         public void Dispose()
         {
             _frame.Navigated -= OnNavigated;
-            _frame.NavigationFailed -= OnNavigationFailed;
+            //_frame.NavigationFailed -= OnNavigationFailed;
             _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

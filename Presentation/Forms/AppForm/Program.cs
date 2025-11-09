@@ -1,10 +1,10 @@
-// Copyright (c) 2016 - 2024 Francesco Crimi
+// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Application.Impl;
+using CiccioGest.Application;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.AppForm.Presenter;
 using CiccioGest.Presentation.AppForm.Services;

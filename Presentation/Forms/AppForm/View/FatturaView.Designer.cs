@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.Windows.Forms.Label nomeProdottoLabel;
             System.Windows.Forms.Label prezzoProdottoLabel;
             System.Windows.Forms.Label quantitàLabel;
@@ -36,88 +36,89 @@
             System.Windows.Forms.Label nomeLabel1;
             System.Windows.Forms.Label totaleLabel2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FatturaView));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dettagliDataGridView = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prezzoProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dettagliBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fatturaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.totaleTextBox2 = new System.Windows.Forms.TextBox();
-            this.nomeTextBox = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.totaleTextBox1 = new System.Windows.Forms.TextBox();
-            this.dettaglioBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.quantitàTextBox = new System.Windows.Forms.TextBox();
-            this.prezzoProdottoTextBox = new System.Windows.Forms.TextBox();
-            this.nomeProdottoTextBox = new System.Windows.Forms.TextBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.nuovaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.apriToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.nuovoDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.aggiungiDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.rimuoviDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            dettagliDataGridView = new System.Windows.Forms.DataGridView();
+            Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            nomeProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            prezzoProdottoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dettagliBindingSource = new System.Windows.Forms.BindingSource(components);
+            fatturaBindingSource = new System.Windows.Forms.BindingSource(components);
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            totaleTextBox2 = new System.Windows.Forms.TextBox();
+            nomeTextBox = new System.Windows.Forms.TextBox();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            totaleTextBox1 = new System.Windows.Forms.TextBox();
+            dettaglioBindingSource = new System.Windows.Forms.BindingSource(components);
+            quantitàTextBox = new System.Windows.Forms.TextBox();
+            prezzoProdottoTextBox = new System.Windows.Forms.TextBox();
+            nomeProdottoTextBox = new System.Windows.Forms.TextBox();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            nuovaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            apriToolStripButton = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            nuovoDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            aggiungiDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            rimuoviDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
+            aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            eliminaToolStripButton = new System.Windows.Forms.ToolStripButton();
             nomeProdottoLabel = new System.Windows.Forms.Label();
             prezzoProdottoLabel = new System.Windows.Forms.Label();
             quantitàLabel = new System.Windows.Forms.Label();
             totaleLabel1 = new System.Windows.Forms.Label();
             nomeLabel1 = new System.Windows.Forms.Label();
             totaleLabel2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dettagliBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fatturaBindingSource)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dettaglioBindingSource)).BeginInit();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dettagliDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dettagliBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fatturaBindingSource).BeginInit();
+            tableLayoutPanel2.SuspendLayout();
+            groupBox1.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            groupBox2.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dettaglioBindingSource).BeginInit();
+            toolStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // nomeProdottoLabel
             // 
             nomeProdottoLabel.AutoSize = true;
             nomeProdottoLabel.Location = new System.Drawing.Point(3, 0);
             nomeProdottoLabel.Name = "nomeProdottoLabel";
-            nomeProdottoLabel.Size = new System.Drawing.Size(71, 20);
+            nomeProdottoLabel.Size = new System.Drawing.Size(57, 15);
             nomeProdottoLabel.TabIndex = 0;
             nomeProdottoLabel.Text = "Prodotto:";
             // 
             // prezzoProdottoLabel
             // 
             prezzoProdottoLabel.AutoSize = true;
-            prezzoProdottoLabel.Location = new System.Drawing.Point(186, 0);
+            prezzoProdottoLabel.Location = new System.Drawing.Point(160, 0);
             prezzoProdottoLabel.Name = "prezzoProdottoLabel";
-            prezzoProdottoLabel.Size = new System.Drawing.Size(56, 20);
+            prezzoProdottoLabel.Size = new System.Drawing.Size(44, 15);
             prezzoProdottoLabel.TabIndex = 2;
             prezzoProdottoLabel.Text = "Prezzo:";
             // 
             // quantitàLabel
             // 
             quantitàLabel.AutoSize = true;
-            quantitàLabel.Location = new System.Drawing.Point(3, 35);
+            quantitàLabel.Location = new System.Drawing.Point(3, 29);
             quantitàLabel.Name = "quantitàLabel";
-            quantitàLabel.Size = new System.Drawing.Size(69, 20);
+            quantitàLabel.Size = new System.Drawing.Size(56, 15);
             quantitàLabel.TabIndex = 4;
             quantitàLabel.Text = "Quantità:";
             // 
             // totaleLabel1
             // 
             totaleLabel1.AutoSize = true;
-            totaleLabel1.Location = new System.Drawing.Point(186, 35);
+            totaleLabel1.Location = new System.Drawing.Point(160, 29);
             totaleLabel1.Name = "totaleLabel1";
-            totaleLabel1.Size = new System.Drawing.Size(53, 20);
+            totaleLabel1.Size = new System.Drawing.Size(42, 15);
             totaleLabel1.TabIndex = 6;
             totaleLabel1.Text = "Totale:";
             // 
@@ -126,397 +127,380 @@
             nomeLabel1.AutoSize = true;
             nomeLabel1.Location = new System.Drawing.Point(3, 0);
             nomeLabel1.Name = "nomeLabel1";
-            nomeLabel1.Size = new System.Drawing.Size(53, 20);
+            nomeLabel1.Size = new System.Drawing.Size(43, 15);
             nomeLabel1.TabIndex = 0;
             nomeLabel1.Text = "Nome:";
             // 
             // totaleLabel2
             // 
             totaleLabel2.AutoSize = true;
-            totaleLabel2.Location = new System.Drawing.Point(3, 35);
+            totaleLabel2.Location = new System.Drawing.Point(3, 29);
             totaleLabel2.Name = "totaleLabel2";
-            totaleLabel2.Size = new System.Drawing.Size(53, 20);
+            totaleLabel2.Size = new System.Drawing.Size(42, 15);
             totaleLabel2.TabIndex = 2;
             totaleLabel2.Text = "Totale:";
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.dettagliDataGridView, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(702, 541);
-            this.tableLayoutPanel1.TabIndex = 1;
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel1.Controls.Add(dettagliDataGridView, 0, 2);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
+            tableLayoutPanel1.Controls.Add(toolStrip1, 0, 0);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(614, 406);
+            tableLayoutPanel1.TabIndex = 1;
             // 
             // dettagliDataGridView
             // 
-            this.dettagliDataGridView.AllowUserToAddRows = false;
-            this.dettagliDataGridView.AllowUserToDeleteRows = false;
-            this.dettagliDataGridView.AllowUserToResizeRows = false;
-            this.dettagliDataGridView.AutoGenerateColumns = false;
-            this.dettagliDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dettagliDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.nomeProdottoDataGridViewTextBoxColumn,
-            this.Quantita,
-            this.prezzoProdottoDataGridViewTextBoxColumn,
-            this.totaleDataGridViewTextBoxColumn});
-            this.dettagliDataGridView.DataSource = this.dettagliBindingSource;
-            this.dettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dettagliDataGridView.Location = new System.Drawing.Point(3, 144);
-            this.dettagliDataGridView.MultiSelect = false;
-            this.dettagliDataGridView.Name = "dettagliDataGridView";
-            this.dettagliDataGridView.ReadOnly = true;
-            this.dettagliDataGridView.RowHeadersVisible = false;
-            this.dettagliDataGridView.RowHeadersWidth = 51;
-            this.dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dettagliDataGridView.Size = new System.Drawing.Size(696, 394);
-            this.dettagliDataGridView.TabIndex = 6;
-            this.dettagliDataGridView.TabStop = false;
-            this.dettagliDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DettagliDataGridViewCellClick);
+            dettagliDataGridView.AllowUserToAddRows = false;
+            dettagliDataGridView.AllowUserToDeleteRows = false;
+            dettagliDataGridView.AllowUserToResizeRows = false;
+            dettagliDataGridView.AutoGenerateColumns = false;
+            dettagliDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dettagliDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, nomeProdottoDataGridViewTextBoxColumn, Quantita, prezzoProdottoDataGridViewTextBoxColumn, totaleDataGridViewTextBoxColumn });
+            dettagliDataGridView.DataSource = dettagliBindingSource;
+            dettagliDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            dettagliDataGridView.Location = new System.Drawing.Point(3, 121);
+            dettagliDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dettagliDataGridView.MultiSelect = false;
+            dettagliDataGridView.Name = "dettagliDataGridView";
+            dettagliDataGridView.ReadOnly = true;
+            dettagliDataGridView.RowHeadersVisible = false;
+            dettagliDataGridView.RowHeadersWidth = 51;
+            dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            dettagliDataGridView.Size = new System.Drawing.Size(609, 283);
+            dettagliDataGridView.TabIndex = 6;
+            dettagliDataGridView.TabStop = false;
+            dettagliDataGridView.CellClick += DettagliDataGridViewCellClick;
             // 
             // Id
             // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.MinimumWidth = 6;
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 51;
+            Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Id";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Width = 42;
             // 
             // nomeProdottoDataGridViewTextBoxColumn
             // 
-            this.nomeProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nomeProdottoDataGridViewTextBoxColumn.DataPropertyName = "NomeProdotto";
-            this.nomeProdottoDataGridViewTextBoxColumn.HeaderText = "Prodotto";
-            this.nomeProdottoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nomeProdottoDataGridViewTextBoxColumn.Name = "nomeProdottoDataGridViewTextBoxColumn";
-            this.nomeProdottoDataGridViewTextBoxColumn.ReadOnly = true;
+            nomeProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            nomeProdottoDataGridViewTextBoxColumn.DataPropertyName = "NomeProdotto";
+            nomeProdottoDataGridViewTextBoxColumn.HeaderText = "Prodotto";
+            nomeProdottoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            nomeProdottoDataGridViewTextBoxColumn.Name = "nomeProdottoDataGridViewTextBoxColumn";
+            nomeProdottoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // Quantita
             // 
-            this.Quantita.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Quantita.DataPropertyName = "Quantita";
-            this.Quantita.HeaderText = "Quantita";
-            this.Quantita.MinimumWidth = 6;
-            this.Quantita.Name = "Quantita";
-            this.Quantita.ReadOnly = true;
-            this.Quantita.Width = 95;
+            Quantita.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Quantita.DataPropertyName = "Quantita";
+            Quantita.HeaderText = "Quantita";
+            Quantita.MinimumWidth = 6;
+            Quantita.Name = "Quantita";
+            Quantita.ReadOnly = true;
+            Quantita.Width = 78;
             // 
             // prezzoProdottoDataGridViewTextBoxColumn
             // 
-            this.prezzoProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.prezzoProdottoDataGridViewTextBoxColumn.DataPropertyName = "PrezzoProdotto";
-            this.prezzoProdottoDataGridViewTextBoxColumn.HeaderText = "Prezzo";
-            this.prezzoProdottoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.prezzoProdottoDataGridViewTextBoxColumn.Name = "prezzoProdottoDataGridViewTextBoxColumn";
-            this.prezzoProdottoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.prezzoProdottoDataGridViewTextBoxColumn.Width = 82;
+            prezzoProdottoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            prezzoProdottoDataGridViewTextBoxColumn.DataPropertyName = "PrezzoProdotto";
+            prezzoProdottoDataGridViewTextBoxColumn.HeaderText = "Prezzo";
+            prezzoProdottoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            prezzoProdottoDataGridViewTextBoxColumn.Name = "prezzoProdottoDataGridViewTextBoxColumn";
+            prezzoProdottoDataGridViewTextBoxColumn.ReadOnly = true;
+            prezzoProdottoDataGridViewTextBoxColumn.Width = 66;
             // 
             // totaleDataGridViewTextBoxColumn
             // 
-            this.totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
-            this.totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
-            this.totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
-            this.totaleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totaleDataGridViewTextBoxColumn.Width = 79;
+            totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
+            totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
+            totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
+            totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
+            totaleDataGridViewTextBoxColumn.ReadOnly = true;
+            totaleDataGridViewTextBoxColumn.Width = 64;
             // 
             // dettagliBindingSource
             // 
-            this.dettagliBindingSource.AllowNew = false;
-            this.dettagliBindingSource.DataMember = "Dettagli";
-            this.dettagliBindingSource.DataSource = this.fatturaBindingSource;
+            dettagliBindingSource.AllowNew = false;
+            dettagliBindingSource.DataMember = "Dettagli";
+            dettagliBindingSource.DataSource = fatturaBindingSource;
             // 
             // fatturaBindingSource
             // 
-            this.fatturaBindingSource.DataSource = typeof(CiccioGest.Domain.Documenti.Fattura);
+            fatturaBindingSource.DataSource = typeof(Domain.Documenti.Fattura);
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.groupBox2, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 31);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(696, 106);
-            this.tableLayoutPanel2.TabIndex = 7;
+            tableLayoutPanel2.AutoSize = true;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            tableLayoutPanel2.Controls.Add(groupBox1, 0, 0);
+            tableLayoutPanel2.Controls.Add(groupBox2, 1, 0);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(3, 30);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel2.Size = new System.Drawing.Size(609, 86);
+            tableLayoutPanel2.TabIndex = 7;
             // 
             // groupBox1
             // 
-            this.groupBox1.AutoSize = true;
-            this.groupBox1.Controls.Add(this.tableLayoutPanel4);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 4);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(226, 98);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Fattura";
+            groupBox1.AutoSize = true;
+            groupBox1.Controls.Add(tableLayoutPanel4);
+            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox1.Location = new System.Drawing.Point(3, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(196, 80);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Fattura";
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.AutoSize = true;
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.Controls.Add(totaleLabel2, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.totaleTextBox2, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(nomeLabel1, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.nomeTextBox, 1, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 24);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(220, 70);
-            this.tableLayoutPanel4.TabIndex = 1;
+            tableLayoutPanel4.AutoSize = true;
+            tableLayoutPanel4.ColumnCount = 2;
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel4.Controls.Add(totaleLabel2, 0, 1);
+            tableLayoutPanel4.Controls.Add(totaleTextBox2, 1, 1);
+            tableLayoutPanel4.Controls.Add(nomeLabel1, 0, 0);
+            tableLayoutPanel4.Controls.Add(nomeTextBox, 1, 0);
+            tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel4.Location = new System.Drawing.Point(3, 19);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 2;
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel4.Size = new System.Drawing.Size(190, 58);
+            tableLayoutPanel4.TabIndex = 1;
             // 
             // totaleTextBox2
             // 
-            this.totaleTextBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fatturaBindingSource, "Totale", true));
-            this.totaleTextBox2.Location = new System.Drawing.Point(62, 39);
-            this.totaleTextBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.totaleTextBox2.Name = "totaleTextBox2";
-            this.totaleTextBox2.ReadOnly = true;
-            this.totaleTextBox2.Size = new System.Drawing.Size(129, 27);
-            this.totaleTextBox2.TabIndex = 3;
+            totaleTextBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", fatturaBindingSource, "Totale", true));
+            totaleTextBox2.Location = new System.Drawing.Point(52, 32);
+            totaleTextBox2.Name = "totaleTextBox2";
+            totaleTextBox2.ReadOnly = true;
+            totaleTextBox2.Size = new System.Drawing.Size(113, 23);
+            totaleTextBox2.TabIndex = 3;
             // 
             // nomeTextBox
             // 
-            this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fatturaBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nomeTextBox.Location = new System.Drawing.Point(62, 4);
-            this.nomeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.nomeTextBox.Name = "nomeTextBox";
-            this.nomeTextBox.Size = new System.Drawing.Size(129, 27);
-            this.nomeTextBox.TabIndex = 1;
+            nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", fatturaBindingSource, "Nome", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            nomeTextBox.Location = new System.Drawing.Point(52, 3);
+            nomeTextBox.Name = "nomeTextBox";
+            nomeTextBox.Size = new System.Drawing.Size(113, 23);
+            nomeTextBox.TabIndex = 1;
             // 
             // groupBox2
             // 
-            this.groupBox2.AutoSize = true;
-            this.groupBox2.Controls.Add(this.tableLayoutPanel3);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(235, 4);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(458, 98);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Dettaglio";
+            groupBox2.AutoSize = true;
+            groupBox2.Controls.Add(tableLayoutPanel3);
+            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox2.Location = new System.Drawing.Point(205, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(401, 80);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Dettaglio";
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.AutoSize = true;
-            this.tableLayoutPanel3.ColumnCount = 4;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.Controls.Add(totaleLabel1, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.totaleTextBox1, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(quantitàLabel, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.quantitàTextBox, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(prezzoProdottoLabel, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.prezzoProdottoTextBox, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(nomeProdottoLabel, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.nomeProdottoTextBox, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 24);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(452, 70);
-            this.tableLayoutPanel3.TabIndex = 0;
+            tableLayoutPanel3.AutoSize = true;
+            tableLayoutPanel3.ColumnCount = 4;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel3.Controls.Add(totaleLabel1, 2, 1);
+            tableLayoutPanel3.Controls.Add(totaleTextBox1, 3, 1);
+            tableLayoutPanel3.Controls.Add(quantitàLabel, 0, 1);
+            tableLayoutPanel3.Controls.Add(quantitàTextBox, 1, 1);
+            tableLayoutPanel3.Controls.Add(prezzoProdottoLabel, 2, 0);
+            tableLayoutPanel3.Controls.Add(prezzoProdottoTextBox, 3, 0);
+            tableLayoutPanel3.Controls.Add(nomeProdottoLabel, 0, 0);
+            tableLayoutPanel3.Controls.Add(nomeProdottoTextBox, 1, 0);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(3, 19);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel3.Size = new System.Drawing.Size(395, 58);
+            tableLayoutPanel3.TabIndex = 0;
             // 
             // totaleTextBox1
             // 
-            this.totaleTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "Totale", true));
-            this.totaleTextBox1.Location = new System.Drawing.Point(248, 39);
-            this.totaleTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.totaleTextBox1.Name = "totaleTextBox1";
-            this.totaleTextBox1.ReadOnly = true;
-            this.totaleTextBox1.Size = new System.Drawing.Size(60, 27);
-            this.totaleTextBox1.TabIndex = 7;
+            totaleTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", dettaglioBindingSource, "Totale", true));
+            totaleTextBox1.Location = new System.Drawing.Point(210, 32);
+            totaleTextBox1.Name = "totaleTextBox1";
+            totaleTextBox1.ReadOnly = true;
+            totaleTextBox1.Size = new System.Drawing.Size(53, 23);
+            totaleTextBox1.TabIndex = 7;
             // 
             // dettaglioBindingSource
             // 
-            this.dettaglioBindingSource.DataSource = typeof(CiccioGest.Domain.Documenti.Dettaglio);
+            dettaglioBindingSource.DataSource = typeof(Domain.Documenti.Dettaglio);
             // 
             // quantitàTextBox
             // 
-            this.quantitàTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "Quantita", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.quantitàTextBox.Location = new System.Drawing.Point(80, 39);
-            this.quantitàTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.quantitàTextBox.Name = "quantitàTextBox";
-            this.quantitàTextBox.Size = new System.Drawing.Size(100, 27);
-            this.quantitàTextBox.TabIndex = 5;
+            quantitàTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", dettaglioBindingSource, "Quantita", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            quantitàTextBox.Location = new System.Drawing.Point(66, 32);
+            quantitàTextBox.Name = "quantitàTextBox";
+            quantitàTextBox.Size = new System.Drawing.Size(88, 23);
+            quantitàTextBox.TabIndex = 5;
             // 
             // prezzoProdottoTextBox
             // 
-            this.prezzoProdottoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "PrezzoProdotto", true));
-            this.prezzoProdottoTextBox.Location = new System.Drawing.Point(248, 4);
-            this.prezzoProdottoTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.prezzoProdottoTextBox.Name = "prezzoProdottoTextBox";
-            this.prezzoProdottoTextBox.ReadOnly = true;
-            this.prezzoProdottoTextBox.Size = new System.Drawing.Size(60, 27);
-            this.prezzoProdottoTextBox.TabIndex = 3;
+            prezzoProdottoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", dettaglioBindingSource, "PrezzoProdotto", true));
+            prezzoProdottoTextBox.Location = new System.Drawing.Point(210, 3);
+            prezzoProdottoTextBox.Name = "prezzoProdottoTextBox";
+            prezzoProdottoTextBox.ReadOnly = true;
+            prezzoProdottoTextBox.Size = new System.Drawing.Size(53, 23);
+            prezzoProdottoTextBox.TabIndex = 3;
             // 
             // nomeProdottoTextBox
             // 
-            this.nomeProdottoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dettaglioBindingSource, "NomeProdotto", true));
-            this.nomeProdottoTextBox.Location = new System.Drawing.Point(80, 4);
-            this.nomeProdottoTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.nomeProdottoTextBox.Name = "nomeProdottoTextBox";
-            this.nomeProdottoTextBox.ReadOnly = true;
-            this.nomeProdottoTextBox.Size = new System.Drawing.Size(100, 27);
-            this.nomeProdottoTextBox.TabIndex = 1;
+            nomeProdottoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", dettaglioBindingSource, "NomeProdotto", true));
+            nomeProdottoTextBox.Location = new System.Drawing.Point(66, 3);
+            nomeProdottoTextBox.Name = "nomeProdottoTextBox";
+            nomeProdottoTextBox.ReadOnly = true;
+            nomeProdottoTextBox.Size = new System.Drawing.Size(88, 23);
+            nomeProdottoTextBox.TabIndex = 1;
             // 
             // toolStrip1
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuovaToolStripButton,
-            this.salvaToolStripButton,
-            this.apriToolStripButton,
-            this.toolStripSeparator,
-            this.nuovoDettaglioToolStripButton,
-            this.aggiungiDettaglioToolStripButton,
-            this.rimuoviDettaglioToolStripButton,
-            this.aboutToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(702, 27);
-            this.toolStrip1.TabIndex = 8;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { salvaToolStripButton, nuovaToolStripButton, apriToolStripButton, eliminaToolStripButton, toolStripSeparator, nuovoDettaglioToolStripButton, aggiungiDettaglioToolStripButton, rimuoviDettaglioToolStripButton, aboutToolStripButton });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new System.Drawing.Size(615, 27);
+            toolStrip1.TabIndex = 8;
+            toolStrip1.Text = "toolStrip1";
             // 
             // nuovaToolStripButton
             // 
-            this.nuovaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovaToolStripButton.Image")));
-            this.nuovaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovaToolStripButton.Name = "nuovaToolStripButton";
-            this.nuovaToolStripButton.Size = new System.Drawing.Size(76, 24);
-            this.nuovaToolStripButton.Text = "Nuova";
-            this.nuovaToolStripButton.Click += new System.EventHandler(this.NuovaToolStripButton_Click);
+            nuovaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("nuovaToolStripButton.Image");
+            nuovaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            nuovaToolStripButton.Name = "nuovaToolStripButton";
+            nuovaToolStripButton.Size = new System.Drawing.Size(66, 24);
+            nuovaToolStripButton.Text = "Nuova";
+            nuovaToolStripButton.Click += NuovaToolStripButton_Click;
             // 
             // salvaToolStripButton
             // 
-            this.salvaToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("salvaToolStripButton.Image")));
-            this.salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.salvaToolStripButton.Name = "salvaToolStripButton";
-            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
-            this.salvaToolStripButton.Text = "Salva";
-            this.salvaToolStripButton.Click += new System.EventHandler(this.SalvaToolStripButton_Click);
+            salvaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("salvaToolStripButton.Image");
+            salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            salvaToolStripButton.Name = "salvaToolStripButton";
+            salvaToolStripButton.Size = new System.Drawing.Size(58, 24);
+            salvaToolStripButton.Text = "Salva";
+            salvaToolStripButton.Click += SalvaToolStripButton_Click;
             // 
             // apriToolStripButton
             // 
-            this.apriToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.CaricaDefault;
-            this.apriToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.apriToolStripButton.Name = "apriToolStripButton";
-            this.apriToolStripButton.Size = new System.Drawing.Size(61, 24);
-            this.apriToolStripButton.Text = "Apri";
-            this.apriToolStripButton.ToolTipText = "Apri Fattura\r\n";
-            this.apriToolStripButton.Click += new System.EventHandler(this.ApriToolStripButton_Click);
+            apriToolStripButton.Image = Properties.Resources.CaricaDefault;
+            apriToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            apriToolStripButton.Name = "apriToolStripButton";
+            apriToolStripButton.Size = new System.Drawing.Size(53, 24);
+            apriToolStripButton.Text = "Apri";
+            apriToolStripButton.ToolTipText = "Apri Fattura\r\n";
+            apriToolStripButton.Click += ApriToolStripButton_Click;
             // 
             // toolStripSeparator
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 27);
+            toolStripSeparator.Name = "toolStripSeparator";
+            toolStripSeparator.Size = new System.Drawing.Size(6, 27);
             // 
             // nuovoDettaglioToolStripButton
             // 
-            this.nuovoDettaglioToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("nuovoDettaglioToolStripButton.Image")));
-            this.nuovoDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovoDettaglioToolStripButton.Name = "nuovoDettaglioToolStripButton";
-            this.nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(77, 24);
-            this.nuovoDettaglioToolStripButton.Text = "Nuovo";
-            this.nuovoDettaglioToolStripButton.Click += new System.EventHandler(this.NuovoDettaglioToolStripButton_Click);
+            nuovoDettaglioToolStripButton.Image = (System.Drawing.Image)resources.GetObject("nuovoDettaglioToolStripButton.Image");
+            nuovoDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            nuovoDettaglioToolStripButton.Name = "nuovoDettaglioToolStripButton";
+            nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(67, 24);
+            nuovoDettaglioToolStripButton.Text = "Nuovo";
+            nuovoDettaglioToolStripButton.Click += NuovoDettaglioToolStripButton_Click;
             // 
             // aggiungiDettaglioToolStripButton
             // 
-            this.aggiungiDettaglioToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.AddNew;
-            this.aggiungiDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aggiungiDettaglioToolStripButton.Name = "aggiungiDettaglioToolStripButton";
-            this.aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(94, 24);
-            this.aggiungiDettaglioToolStripButton.Text = "Aggiungi";
-            this.aggiungiDettaglioToolStripButton.Click += new System.EventHandler(this.AggiungiDettaglioToolStripButton_Click);
+            aggiungiDettaglioToolStripButton.Image = Properties.Resources.AddNew;
+            aggiungiDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            aggiungiDettaglioToolStripButton.Name = "aggiungiDettaglioToolStripButton";
+            aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(80, 24);
+            aggiungiDettaglioToolStripButton.Text = "Aggiungi";
+            aggiungiDettaglioToolStripButton.Click += AggiungiDettaglioToolStripButton_Click;
             // 
             // rimuoviDettaglioToolStripButton
             // 
-            this.rimuoviDettaglioToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Delete;
-            this.rimuoviDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.rimuoviDettaglioToolStripButton.Name = "rimuoviDettaglioToolStripButton";
-            this.rimuoviDettaglioToolStripButton.Size = new System.Drawing.Size(87, 24);
-            this.rimuoviDettaglioToolStripButton.Text = "Rimuovi";
-            this.rimuoviDettaglioToolStripButton.Click += new System.EventHandler(this.RimuoviDettaglioToolStripButton_Click);
+            rimuoviDettaglioToolStripButton.Image = Properties.Resources.Delete;
+            rimuoviDettaglioToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            rimuoviDettaglioToolStripButton.Name = "rimuoviDettaglioToolStripButton";
+            rimuoviDettaglioToolStripButton.Size = new System.Drawing.Size(75, 24);
+            rimuoviDettaglioToolStripButton.Text = "Rimuovi";
+            rimuoviDettaglioToolStripButton.Click += RimuoviDettaglioToolStripButton_Click;
             // 
             // aboutToolStripButton
             // 
-            this.aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.aboutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripButton.Image")));
-            this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aboutToolStripButton.Name = "aboutToolStripButton";
-            this.aboutToolStripButton.Size = new System.Drawing.Size(29, 24);
-            this.aboutToolStripButton.Text = "&?";
-            this.aboutToolStripButton.Click += new System.EventHandler(this.AboutToolStripButton_Click);
+            aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            aboutToolStripButton.Image = (System.Drawing.Image)resources.GetObject("aboutToolStripButton.Image");
+            aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            aboutToolStripButton.Name = "aboutToolStripButton";
+            aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            aboutToolStripButton.Text = "&?";
+            aboutToolStripButton.Click += AboutToolStripButton_Click;
+            // 
+            // eliminaToolStripButton
+            // 
+            eliminaToolStripButton.Image = Properties.Resources.Delete;
+            eliminaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            eliminaToolStripButton.Name = "eliminaToolStripButton";
+            eliminaToolStripButton.Size = new System.Drawing.Size(70, 24);
+            eliminaToolStripButton.Text = "Elimina";
+            eliminaToolStripButton.ToolTipText = "Elimina";
+            eliminaToolStripButton.Click += EliminaToolStripButton_Click;
             // 
             // FatturaView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 541);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "FatturaView";
-            this.Text = "Fattura";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FatturaView_FormClosing);
-            this.Load += new System.EventHandler(this.FatturaView_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dettagliDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dettagliBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fatturaBindingSource)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dettaglioBindingSource)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(614, 406);
+            Controls.Add(tableLayoutPanel1);
+            Name = "FatturaView";
+            Text = "Fattura";
+            FormClosing += FatturaView_FormClosing;
+            Load += FatturaView_Load;
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dettagliDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dettagliBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fatturaBindingSource).EndInit();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dettaglioBindingSource).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -551,5 +535,6 @@
         private System.Windows.Forms.ToolStripButton aggiungiDettaglioToolStripButton;
         private System.Windows.Forms.ToolStripButton rimuoviDettaglioToolStripButton;
         private System.Windows.Forms.ToolStripButton aboutToolStripButton;
+        private System.Windows.Forms.ToolStripButton eliminaToolStripButton;
     }
 }

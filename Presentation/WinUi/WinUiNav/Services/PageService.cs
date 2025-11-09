@@ -1,10 +1,10 @@
-﻿// Copyright (c) 2023 Francesco Crimi
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WinUiBackend.Contracts;
+using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.WinUiBackend.View;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -29,10 +29,10 @@ namespace CiccioGest.Presentation.WinUiNav.Services
             Configure<FattureView>(ViewEnum.Fatture);
             Configure<FornitoreView>(ViewEnum.Fornitore);
             Configure<FornitoriView>(ViewEnum.Fornitori);
-            Configure<ListaArticoliView>(ViewEnum.ListaArticoli);
-            Configure<ListaClientiView>(ViewEnum.ListaClienti);
-            Configure<ListaFattureView>(ViewEnum.ListaFatture);
-            Configure<ListaFornitoriView>(ViewEnum.ListaFornitori);
+            //Configure<ListaArticoliView>(ViewEnum.ListaArticoli);
+            //Configure<ListaClientiView>(ViewEnum.ListaClienti);
+            //Configure<ListaFattureView>(ViewEnum.ListaFatture);
+            //Configure<ListaFornitoriView>(ViewEnum.ListaFornitori);
             Configure<SettingsView>(ViewEnum.Settings);
         }
 

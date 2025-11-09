@@ -39,14 +39,6 @@
                        Style="{StaticResource PageTitleStyle}" />
 
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovaFatturaCommand}"
-                        Margin="8,0,8,0">
-                    <TextBlock>        
-                        <Run Text="&#xE8A5;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Nuova" />
-                    </TextBlock>
-                </Button>
                 <Button Command="{Binding SalvaFatturaCommand}"
                         Margin="8,0,8,0">
                     <TextBlock>        
@@ -55,12 +47,12 @@
                     <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviFatturaCommand}"
+                <Button Command="{Binding NuovaFatturaCommand}"
                         Margin="8,0,8,0">
                     <TextBlock>        
-                    <Run Text="&#xE74D;"
-                         FontFamily="Segoe MDL2 Assets" />
-                    <Run Text="Elimina" />
+                        <Run Text="&#xE8A5;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Nuova" />
                     </TextBlock>
                 </Button>
                 <Button Command="{Binding ApriFatturaCommand}"
@@ -69,6 +61,14 @@
                     <Run Text="&#xED25;"
                          FontFamily="Segoe MDL2 Assets" />
                     <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding RimuoviFatturaCommand}"
+                        Margin="8,0,8,0">
+                    <TextBlock>        
+                    <Run Text="&#xE74D;"
+                         FontFamily="Segoe MDL2 Assets" />
+                    <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
                 <Separator />

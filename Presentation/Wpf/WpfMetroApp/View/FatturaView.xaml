@@ -36,12 +36,12 @@
                        Margin="5,5,5,5" />
 
             <ToolBar ToolBarTray.IsLocked="True">
+                <Button Content="Salva"
+                        Command="{Binding SalvaFatturaCommand}" />
                 <Button Content="Nuova"
                         Command="{Binding NuovaFatturaCommand}" />
                 <Button Content="Apri"
                         Command="{Binding ApriFatturaCommand}" />
-                <Button Content="Salva"
-                        Command="{Binding SalvaFatturaCommand}" />
                 <Button Content="Elimina"
                         Command="{Binding RimuoviFatturaCommand}" />
                 <Separator />
