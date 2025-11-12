@@ -29,392 +29,394 @@ namespace CiccioGest.Presentation.AppForm.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.codiceFiscaleLabel = new System.Windows.Forms.Label();
-            this.cognomeLabel = new System.Windows.Forms.Label();
-            this.emailLabel = new System.Windows.Forms.Label();
-            this.nomeLabel = new System.Windows.Forms.Label();
-            this.partitaIvaLabel = new System.Windows.Forms.Label();
-            this.societaLabel = new System.Windows.Forms.Label();
-            this.mobileLabel = new System.Windows.Forms.Label();
-            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.codiceFiscaleTextBox = new System.Windows.Forms.TextBox();
-            this.cognomeTextBox = new System.Windows.Forms.TextBox();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.nomeTextBox = new System.Windows.Forms.TextBox();
-            this.partitaIvaTextBox = new System.Windows.Forms.TextBox();
-            this.societaTextBox = new System.Windows.Forms.TextBox();
-            this.mobileTextBox = new System.Windows.Forms.TextBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.nuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.apriToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.stampaToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.telefonoTextBox = new System.Windows.Forms.TextBox();
-            this.telefonoLabel = new System.Windows.Forms.Label();
-            this.indirizzoUserControl1 = new CiccioGest.Presentation.AppForm.View.IndirizzoUserControl();
-            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).BeginInit();
-            this.toolStrip1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClienteView));
+            codiceFiscaleLabel = new System.Windows.Forms.Label();
+            cognomeLabel = new System.Windows.Forms.Label();
+            emailLabel = new System.Windows.Forms.Label();
+            nomeLabel = new System.Windows.Forms.Label();
+            partitaIvaLabel = new System.Windows.Forms.Label();
+            societaLabel = new System.Windows.Forms.Label();
+            mobileLabel = new System.Windows.Forms.Label();
+            clienteBindingSource = new System.Windows.Forms.BindingSource(components);
+            codiceFiscaleTextBox = new System.Windows.Forms.TextBox();
+            cognomeTextBox = new System.Windows.Forms.TextBox();
+            emailTextBox = new System.Windows.Forms.TextBox();
+            nomeTextBox = new System.Windows.Forms.TextBox();
+            partitaIvaTextBox = new System.Windows.Forms.TextBox();
+            societaTextBox = new System.Windows.Forms.TextBox();
+            mobileTextBox = new System.Windows.Forms.TextBox();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            nuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
+            salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            apriToolStripButton = new System.Windows.Forms.ToolStripButton();
+            aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            eliminaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            panel2 = new System.Windows.Forms.Panel();
+            panel3 = new System.Windows.Forms.Panel();
+            telefonoTextBox = new System.Windows.Forms.TextBox();
+            telefonoLabel = new System.Windows.Forms.Label();
+            indirizzoUserControl1 = new IndirizzoUserControl();
+            ((System.ComponentModel.ISupportInitialize)clienteBindingSource).BeginInit();
+            toolStrip1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
+            SuspendLayout();
             // 
             // codiceFiscaleLabel
             // 
-            this.codiceFiscaleLabel.AutoSize = true;
-            this.codiceFiscaleLabel.Location = new System.Drawing.Point(4, 120);
-            this.codiceFiscaleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.codiceFiscaleLabel.Name = "codiceFiscaleLabel";
-            this.codiceFiscaleLabel.Size = new System.Drawing.Size(106, 20);
-            this.codiceFiscaleLabel.TabIndex = 0;
-            this.codiceFiscaleLabel.Text = "Codice Fiscale:";
+            codiceFiscaleLabel.AutoSize = true;
+            codiceFiscaleLabel.Location = new System.Drawing.Point(4, 90);
+            codiceFiscaleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            codiceFiscaleLabel.Name = "codiceFiscaleLabel";
+            codiceFiscaleLabel.Size = new System.Drawing.Size(85, 15);
+            codiceFiscaleLabel.TabIndex = 0;
+            codiceFiscaleLabel.Text = "Codice Fiscale:";
             // 
             // cognomeLabel
             // 
-            this.cognomeLabel.AutoSize = true;
-            this.cognomeLabel.Location = new System.Drawing.Point(4, 9);
-            this.cognomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.cognomeLabel.Name = "cognomeLabel";
-            this.cognomeLabel.Size = new System.Drawing.Size(77, 20);
-            this.cognomeLabel.TabIndex = 2;
-            this.cognomeLabel.Text = "Cognome:";
+            cognomeLabel.AutoSize = true;
+            cognomeLabel.Location = new System.Drawing.Point(4, 7);
+            cognomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            cognomeLabel.Name = "cognomeLabel";
+            cognomeLabel.Size = new System.Drawing.Size(63, 15);
+            cognomeLabel.TabIndex = 2;
+            cognomeLabel.Text = "Cognome:";
             // 
             // emailLabel
             // 
-            this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(4, 46);
-            this.emailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(49, 20);
-            this.emailLabel.TabIndex = 4;
-            this.emailLabel.Text = "Email:";
+            emailLabel.AutoSize = true;
+            emailLabel.Location = new System.Drawing.Point(4, 34);
+            emailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            emailLabel.Name = "emailLabel";
+            emailLabel.Size = new System.Drawing.Size(39, 15);
+            emailLabel.TabIndex = 4;
+            emailLabel.Text = "Email:";
             // 
             // nomeLabel
             // 
-            this.nomeLabel.AutoSize = true;
-            this.nomeLabel.Location = new System.Drawing.Point(4, 9);
-            this.nomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.nomeLabel.Name = "nomeLabel";
-            this.nomeLabel.Size = new System.Drawing.Size(53, 20);
-            this.nomeLabel.TabIndex = 10;
-            this.nomeLabel.Text = "Nome:";
+            nomeLabel.AutoSize = true;
+            nomeLabel.Location = new System.Drawing.Point(4, 7);
+            nomeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            nomeLabel.Name = "nomeLabel";
+            nomeLabel.Size = new System.Drawing.Size(43, 15);
+            nomeLabel.TabIndex = 10;
+            nomeLabel.Text = "Nome:";
             // 
             // partitaIvaLabel
             // 
-            this.partitaIvaLabel.AutoSize = true;
-            this.partitaIvaLabel.Location = new System.Drawing.Point(4, 120);
-            this.partitaIvaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.partitaIvaLabel.Name = "partitaIvaLabel";
-            this.partitaIvaLabel.Size = new System.Drawing.Size(77, 20);
-            this.partitaIvaLabel.TabIndex = 14;
-            this.partitaIvaLabel.Text = "Partita Iva:";
+            partitaIvaLabel.AutoSize = true;
+            partitaIvaLabel.Location = new System.Drawing.Point(4, 90);
+            partitaIvaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            partitaIvaLabel.Name = "partitaIvaLabel";
+            partitaIvaLabel.Size = new System.Drawing.Size(62, 15);
+            partitaIvaLabel.TabIndex = 14;
+            partitaIvaLabel.Text = "Partita Iva:";
             // 
             // societaLabel
             // 
-            this.societaLabel.AutoSize = true;
-            this.societaLabel.Location = new System.Drawing.Point(4, 46);
-            this.societaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.societaLabel.Name = "societaLabel";
-            this.societaLabel.Size = new System.Drawing.Size(61, 20);
-            this.societaLabel.TabIndex = 16;
-            this.societaLabel.Text = "Societa:";
+            societaLabel.AutoSize = true;
+            societaLabel.Location = new System.Drawing.Point(4, 34);
+            societaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            societaLabel.Name = "societaLabel";
+            societaLabel.Size = new System.Drawing.Size(48, 15);
+            societaLabel.TabIndex = 16;
+            societaLabel.Text = "Societa:";
             // 
             // mobileLabel
             // 
-            this.mobileLabel.AutoSize = true;
-            this.mobileLabel.Location = new System.Drawing.Point(4, 83);
-            this.mobileLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.mobileLabel.Name = "mobileLabel";
-            this.mobileLabel.Size = new System.Drawing.Size(59, 20);
-            this.mobileLabel.TabIndex = 18;
-            this.mobileLabel.Text = "Mobile:";
+            mobileLabel.AutoSize = true;
+            mobileLabel.Location = new System.Drawing.Point(4, 62);
+            mobileLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            mobileLabel.Name = "mobileLabel";
+            mobileLabel.Size = new System.Drawing.Size(47, 15);
+            mobileLabel.TabIndex = 18;
+            mobileLabel.Text = "Mobile:";
             // 
             // clienteBindingSource
             // 
-            this.clienteBindingSource.DataSource = typeof(CiccioGest.Domain.ClientiFornitori.Cliente);
+            clienteBindingSource.DataSource = typeof(Domain.ClientiFornitori.Cliente);
             // 
             // codiceFiscaleTextBox
             // 
-            this.codiceFiscaleTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "CodiceFiscale", true));
-            this.codiceFiscaleTextBox.Location = new System.Drawing.Point(120, 117);
-            this.codiceFiscaleTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.codiceFiscaleTextBox.Name = "codiceFiscaleTextBox";
-            this.codiceFiscaleTextBox.Size = new System.Drawing.Size(200, 27);
-            this.codiceFiscaleTextBox.TabIndex = 1;
+            codiceFiscaleTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "CodiceFiscale", true));
+            codiceFiscaleTextBox.Location = new System.Drawing.Point(105, 88);
+            codiceFiscaleTextBox.Margin = new System.Windows.Forms.Padding(4);
+            codiceFiscaleTextBox.Name = "codiceFiscaleTextBox";
+            codiceFiscaleTextBox.Size = new System.Drawing.Size(176, 23);
+            codiceFiscaleTextBox.TabIndex = 1;
             // 
             // cognomeTextBox
             // 
-            this.cognomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "Cognome", true));
-            this.cognomeTextBox.Location = new System.Drawing.Point(120, 6);
-            this.cognomeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cognomeTextBox.Name = "cognomeTextBox";
-            this.cognomeTextBox.Size = new System.Drawing.Size(200, 27);
-            this.cognomeTextBox.TabIndex = 3;
+            cognomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "Cognome", true));
+            cognomeTextBox.Location = new System.Drawing.Point(105, 4);
+            cognomeTextBox.Margin = new System.Windows.Forms.Padding(4);
+            cognomeTextBox.Name = "cognomeTextBox";
+            cognomeTextBox.Size = new System.Drawing.Size(176, 23);
+            cognomeTextBox.TabIndex = 3;
             // 
             // emailTextBox
             // 
-            this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "Email", true));
-            this.emailTextBox.Location = new System.Drawing.Point(120, 43);
-            this.emailTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(200, 27);
-            this.emailTextBox.TabIndex = 5;
+            emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "Email", true));
+            emailTextBox.Location = new System.Drawing.Point(105, 32);
+            emailTextBox.Margin = new System.Windows.Forms.Padding(4);
+            emailTextBox.Name = "emailTextBox";
+            emailTextBox.Size = new System.Drawing.Size(176, 23);
+            emailTextBox.TabIndex = 5;
             // 
             // nomeTextBox
             // 
-            this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "Nome", true));
-            this.nomeTextBox.Location = new System.Drawing.Point(120, 6);
-            this.nomeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.nomeTextBox.Name = "nomeTextBox";
-            this.nomeTextBox.Size = new System.Drawing.Size(200, 27);
-            this.nomeTextBox.TabIndex = 11;
+            nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "Nome", true));
+            nomeTextBox.Location = new System.Drawing.Point(105, 4);
+            nomeTextBox.Margin = new System.Windows.Forms.Padding(4);
+            nomeTextBox.Name = "nomeTextBox";
+            nomeTextBox.Size = new System.Drawing.Size(176, 23);
+            nomeTextBox.TabIndex = 11;
             // 
             // partitaIvaTextBox
             // 
-            this.partitaIvaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "PartitaIva", true));
-            this.partitaIvaTextBox.Location = new System.Drawing.Point(120, 117);
-            this.partitaIvaTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.partitaIvaTextBox.Name = "partitaIvaTextBox";
-            this.partitaIvaTextBox.Size = new System.Drawing.Size(200, 27);
-            this.partitaIvaTextBox.TabIndex = 15;
+            partitaIvaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "PartitaIva", true));
+            partitaIvaTextBox.Location = new System.Drawing.Point(105, 88);
+            partitaIvaTextBox.Margin = new System.Windows.Forms.Padding(4);
+            partitaIvaTextBox.Name = "partitaIvaTextBox";
+            partitaIvaTextBox.Size = new System.Drawing.Size(176, 23);
+            partitaIvaTextBox.TabIndex = 15;
             // 
             // societaTextBox
             // 
-            this.societaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "Societa", true));
-            this.societaTextBox.Location = new System.Drawing.Point(120, 43);
-            this.societaTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.societaTextBox.Name = "societaTextBox";
-            this.societaTextBox.Size = new System.Drawing.Size(200, 27);
-            this.societaTextBox.TabIndex = 17;
+            societaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "Societa", true));
+            societaTextBox.Location = new System.Drawing.Point(105, 32);
+            societaTextBox.Margin = new System.Windows.Forms.Padding(4);
+            societaTextBox.Name = "societaTextBox";
+            societaTextBox.Size = new System.Drawing.Size(176, 23);
+            societaTextBox.TabIndex = 17;
             // 
             // mobileTextBox
             // 
-            this.mobileTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "Mobile", true));
-            this.mobileTextBox.Location = new System.Drawing.Point(120, 80);
-            this.mobileTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.mobileTextBox.Name = "mobileTextBox";
-            this.mobileTextBox.Size = new System.Drawing.Size(200, 27);
-            this.mobileTextBox.TabIndex = 19;
+            mobileTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "Mobile", true));
+            mobileTextBox.Location = new System.Drawing.Point(105, 60);
+            mobileTextBox.Margin = new System.Windows.Forms.Padding(4);
+            mobileTextBox.Name = "mobileTextBox";
+            mobileTextBox.Size = new System.Drawing.Size(176, 23);
+            mobileTextBox.TabIndex = 19;
             // 
             // toolStrip1
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuovoToolStripButton,
-            this.apriToolStripButton,
-            this.salvaToolStripButton,
-            this.stampaToolStripButton,
-            this.aboutToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(782, 27);
-            this.toolStrip1.TabIndex = 20;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { nuovoToolStripButton, salvaToolStripButton, apriToolStripButton, aboutToolStripButton, eliminaToolStripButton });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new System.Drawing.Size(624, 27);
+            toolStrip1.TabIndex = 20;
+            toolStrip1.Text = "toolStrip1";
             // 
             // nuovoToolStripButton
             // 
-            this.nuovoToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Nuovo;
-            this.nuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuovoToolStripButton.Name = "nuovoToolStripButton";
-            this.nuovoToolStripButton.Size = new System.Drawing.Size(77, 24);
-            this.nuovoToolStripButton.Text = "&Nuovo";
-            this.nuovoToolStripButton.Click += new System.EventHandler(this.NuovoToolStripButton_Click);
-            // 
-            // apriToolStripButton
-            // 
-            this.apriToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.CaricaDefault;
-            this.apriToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.apriToolStripButton.Name = "apriToolStripButton";
-            this.apriToolStripButton.Size = new System.Drawing.Size(61, 24);
-            this.apriToolStripButton.Text = "&Apri";
-            this.apriToolStripButton.Click += new System.EventHandler(this.ApriToolStripButton_Click);
+            nuovoToolStripButton.Image = Properties.Resources.Nuovo;
+            nuovoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            nuovoToolStripButton.Name = "nuovoToolStripButton";
+            nuovoToolStripButton.Size = new System.Drawing.Size(67, 24);
+            nuovoToolStripButton.Text = "&Nuovo";
+            nuovoToolStripButton.Click += NuovoToolStripButton_Click;
             // 
             // salvaToolStripButton
             // 
-            this.salvaToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.Salva;
-            this.salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.salvaToolStripButton.Name = "salvaToolStripButton";
-            this.salvaToolStripButton.Size = new System.Drawing.Size(68, 24);
-            this.salvaToolStripButton.Text = "&Salva";
-            this.salvaToolStripButton.Click += new System.EventHandler(this.SalvaToolStripButton_Click);
+            salvaToolStripButton.Image = Properties.Resources.Salva;
+            salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            salvaToolStripButton.Name = "salvaToolStripButton";
+            salvaToolStripButton.Size = new System.Drawing.Size(58, 24);
+            salvaToolStripButton.Text = "&Salva";
+            salvaToolStripButton.Click += SalvaToolStripButton_Click;
             // 
-            // stampaToolStripButton
+            // apriToolStripButton
             // 
-            this.stampaToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.stampa;
-            this.stampaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.stampaToolStripButton.Name = "stampaToolStripButton";
-            this.stampaToolStripButton.Size = new System.Drawing.Size(84, 24);
-            this.stampaToolStripButton.Text = "&Stampa";
+            apriToolStripButton.Image = Properties.Resources.CaricaDefault;
+            apriToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            apriToolStripButton.Name = "apriToolStripButton";
+            apriToolStripButton.Size = new System.Drawing.Size(53, 24);
+            apriToolStripButton.Text = "&Apri";
+            apriToolStripButton.Click += ApriToolStripButton_Click;
             // 
             // aboutToolStripButton
             // 
-            this.aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.aboutToolStripButton.Image = global::CiccioGest.Presentation.AppForm.Properties.Resources.About;
-            this.aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aboutToolStripButton.Name = "aboutToolStripButton";
-            this.aboutToolStripButton.Size = new System.Drawing.Size(29, 24);
-            this.aboutToolStripButton.Text = "&?";
-            this.aboutToolStripButton.Click += new System.EventHandler(this.ToolStripButton_Click);
+            aboutToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            aboutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            aboutToolStripButton.Image = Properties.Resources.About;
+            aboutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            aboutToolStripButton.Name = "aboutToolStripButton";
+            aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            aboutToolStripButton.Text = "&?";
+            aboutToolStripButton.Click += About_Click;
+            // 
+            // eliminaToolStripButton
+            // 
+            eliminaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("eliminaToolStripButton.Image");
+            eliminaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            eliminaToolStripButton.Name = "eliminaToolStripButton";
+            eliminaToolStripButton.Size = new System.Drawing.Size(70, 24);
+            eliminaToolStripButton.Text = "Elimina";
+            eliminaToolStripButton.Click += Elimina_Click;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 358);
-            this.tableLayoutPanel1.TabIndex = 21;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(toolStrip1, 0, 0);
+            tableLayoutPanel1.Controls.Add(groupBox1, 0, 1);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.Size = new System.Drawing.Size(624, 281);
+            tableLayoutPanel1.TabIndex = 21;
             // 
             // groupBox1
             // 
-            this.groupBox1.AutoSize = true;
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 30);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 325);
-            this.groupBox1.TabIndex = 20;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Cliente";
+            groupBox1.AutoSize = true;
+            groupBox1.Controls.Add(tableLayoutPanel2);
+            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox1.Location = new System.Drawing.Point(3, 29);
+            groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            groupBox1.Size = new System.Drawing.Size(618, 251);
+            groupBox1.TabIndex = 20;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Cliente";
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.indirizzoUserControl1, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 23);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(770, 299);
-            this.tableLayoutPanel2.TabIndex = 0;
+            tableLayoutPanel2.AutoSize = true;
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(tableLayoutPanel3, 0, 0);
+            tableLayoutPanel2.Controls.Add(indirizzoUserControl1, 0, 1);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(3, 18);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel2.Size = new System.Drawing.Size(612, 231);
+            tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.AutoSize = true;
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.panel2, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.panel3, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(764, 155);
-            this.tableLayoutPanel3.TabIndex = 0;
+            tableLayoutPanel3.AutoSize = true;
+            tableLayoutPanel3.ColumnCount = 2;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.Controls.Add(panel2, 0, 0);
+            tableLayoutPanel3.Controls.Add(panel3, 1, 0);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(3, 2);
+            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(606, 119);
+            tableLayoutPanel3.TabIndex = 0;
             // 
             // panel2
             // 
-            this.panel2.AutoSize = true;
-            this.panel2.Controls.Add(this.nomeLabel);
-            this.panel2.Controls.Add(this.nomeTextBox);
-            this.panel2.Controls.Add(this.mobileTextBox);
-            this.panel2.Controls.Add(this.partitaIvaTextBox);
-            this.panel2.Controls.Add(this.partitaIvaLabel);
-            this.panel2.Controls.Add(this.societaTextBox);
-            this.panel2.Controls.Add(this.mobileLabel);
-            this.panel2.Controls.Add(this.societaLabel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(376, 149);
-            this.panel2.TabIndex = 0;
+            panel2.AutoSize = true;
+            panel2.Controls.Add(nomeLabel);
+            panel2.Controls.Add(nomeTextBox);
+            panel2.Controls.Add(mobileTextBox);
+            panel2.Controls.Add(partitaIvaTextBox);
+            panel2.Controls.Add(partitaIvaLabel);
+            panel2.Controls.Add(societaTextBox);
+            panel2.Controls.Add(mobileLabel);
+            panel2.Controls.Add(societaLabel);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(3, 2);
+            panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(297, 115);
+            panel2.TabIndex = 0;
             // 
             // panel3
             // 
-            this.panel3.AutoSize = true;
-            this.panel3.Controls.Add(this.telefonoTextBox);
-            this.panel3.Controls.Add(this.telefonoLabel);
-            this.panel3.Controls.Add(this.cognomeLabel);
-            this.panel3.Controls.Add(this.codiceFiscaleLabel);
-            this.panel3.Controls.Add(this.cognomeTextBox);
-            this.panel3.Controls.Add(this.codiceFiscaleTextBox);
-            this.panel3.Controls.Add(this.emailTextBox);
-            this.panel3.Controls.Add(this.emailLabel);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(385, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(376, 149);
-            this.panel3.TabIndex = 1;
+            panel3.AutoSize = true;
+            panel3.Controls.Add(telefonoTextBox);
+            panel3.Controls.Add(telefonoLabel);
+            panel3.Controls.Add(cognomeLabel);
+            panel3.Controls.Add(codiceFiscaleLabel);
+            panel3.Controls.Add(cognomeTextBox);
+            panel3.Controls.Add(codiceFiscaleTextBox);
+            panel3.Controls.Add(emailTextBox);
+            panel3.Controls.Add(emailLabel);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(306, 2);
+            panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(297, 115);
+            panel3.TabIndex = 1;
             // 
             // telefonoTextBox
             // 
-            this.telefonoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clienteBindingSource, "Telefono", true));
-            this.telefonoTextBox.Location = new System.Drawing.Point(120, 80);
-            this.telefonoTextBox.Name = "telefonoTextBox";
-            this.telefonoTextBox.Size = new System.Drawing.Size(200, 27);
-            this.telefonoTextBox.TabIndex = 7;
+            telefonoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "Telefono", true));
+            telefonoTextBox.Location = new System.Drawing.Point(105, 60);
+            telefonoTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            telefonoTextBox.Name = "telefonoTextBox";
+            telefonoTextBox.Size = new System.Drawing.Size(176, 23);
+            telefonoTextBox.TabIndex = 7;
             // 
             // telefonoLabel
             // 
-            this.telefonoLabel.AutoSize = true;
-            this.telefonoLabel.Location = new System.Drawing.Point(4, 83);
-            this.telefonoLabel.Name = "telefonoLabel";
-            this.telefonoLabel.Size = new System.Drawing.Size(70, 20);
-            this.telefonoLabel.TabIndex = 6;
-            this.telefonoLabel.Text = "Telefono:";
+            telefonoLabel.AutoSize = true;
+            telefonoLabel.Location = new System.Drawing.Point(4, 62);
+            telefonoLabel.Name = "telefonoLabel";
+            telefonoLabel.Size = new System.Drawing.Size(56, 15);
+            telefonoLabel.TabIndex = 6;
+            telefonoLabel.Text = "Telefono:";
             // 
             // indirizzoUserControl1
             // 
-            this.indirizzoUserControl1.AutoSize = true;
-            this.indirizzoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indirizzoUserControl1.Location = new System.Drawing.Point(3, 164);
-            this.indirizzoUserControl1.Name = "indirizzoUserControl1";
-            this.indirizzoUserControl1.Size = new System.Drawing.Size(764, 132);
-            this.indirizzoUserControl1.TabIndex = 1;
+            indirizzoUserControl1.Location = new System.Drawing.Point(3, 125);
+            indirizzoUserControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            indirizzoUserControl1.Name = "indirizzoUserControl1";
+            indirizzoUserControl1.Size = new System.Drawing.Size(606, 104);
+            indirizzoUserControl1.TabIndex = 1;
             // 
             // ClienteView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 358);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "ClienteView";
-            this.Text = "Cliente";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClienteView_FormClosing);
-            this.Load += new System.EventHandler(this.ClienteView_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(624, 281);
+            Controls.Add(tableLayoutPanel1);
+            Font = new System.Drawing.Font("Segoe UI", 9F);
+            Margin = new System.Windows.Forms.Padding(4);
+            Name = "ClienteView";
+            Text = "Cliente";
+            ((System.ComponentModel.ISupportInitialize)clienteBindingSource).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ResumeLayout(false);
 
         }
 
@@ -432,7 +434,6 @@ namespace CiccioGest.Presentation.AppForm.View
         private System.Windows.Forms.ToolStripButton nuovoToolStripButton;
         private System.Windows.Forms.ToolStripButton apriToolStripButton;
         private System.Windows.Forms.ToolStripButton salvaToolStripButton;
-        private System.Windows.Forms.ToolStripButton stampaToolStripButton;
         private System.Windows.Forms.ToolStripButton aboutToolStripButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label codiceFiscaleLabel;
@@ -449,6 +450,7 @@ namespace CiccioGest.Presentation.AppForm.View
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox telefonoTextBox;
         private System.Windows.Forms.Label telefonoLabel;
+        private System.Windows.Forms.ToolStripButton eliminaToolStripButton;
         private IndirizzoUserControl indirizzoUserControl1;
     }
 }

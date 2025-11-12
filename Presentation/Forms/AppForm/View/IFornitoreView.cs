@@ -11,9 +11,10 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public interface IFornitoreView : IView
     {
-        event EventHandler NuovoFornitore;
-        event EventHandler SalvaFornitore;
-        event EventHandler ApriFornitore;
+        event EventHandler NuovoRequested;
+        event EventHandler SalvaRequested;
+        event EventHandler ApriRequested;
+        event EventHandler? EliminaRequested;
         void MostraFornitore(Fornitore fornitore);
     }
 }

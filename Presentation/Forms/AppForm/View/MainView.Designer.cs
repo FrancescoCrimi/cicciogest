@@ -31,6 +31,7 @@
             menuStrip = new System.Windows.Forms.MenuStrip();
             documentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ApriFatturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            NuovaFatturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             magazinoMainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             articoliToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             categorieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +42,6 @@
             opzioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             informazionisuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            NuovaFatturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             // 
             // documentiToolStripMenuItem
             // 
-            documentiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ApriFatturaToolStripMenuItem, NuovaFatturaToolStripMenuItem });
+            documentiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { NuovaFatturaToolStripMenuItem, ApriFatturaToolStripMenuItem });
             documentiToolStripMenuItem.Name = "documentiToolStripMenuItem";
             documentiToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             documentiToolStripMenuItem.Text = "Fatture";
@@ -70,6 +70,13 @@
             ApriFatturaToolStripMenuItem.Text = "Apri Fattura";
             ApriFatturaToolStripMenuItem.Click += ApriFattura_Click;
             // 
+            // NuovaFatturaToolStripMenuItem
+            // 
+            NuovaFatturaToolStripMenuItem.Name = "NuovaFatturaToolStripMenuItem";
+            NuovaFatturaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            NuovaFatturaToolStripMenuItem.Text = "Nuova Fattura";
+            NuovaFatturaToolStripMenuItem.Click += NuovaFattura_Click;
+            // 
             // magazinoMainToolStripMenuItem
             // 
             magazinoMainToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { articoliToolStripMenuItem, categorieToolStripMenuItem });
@@ -80,16 +87,16 @@
             // articoliToolStripMenuItem
             // 
             articoliToolStripMenuItem.Name = "articoliToolStripMenuItem";
-            articoliToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            articoliToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             articoliToolStripMenuItem.Text = "Articoli";
-            articoliToolStripMenuItem.Click += ArticoliToolStripMenuItem_Click;
+            articoliToolStripMenuItem.Click += Articoli_Click;
             // 
             // categorieToolStripMenuItem
             // 
             categorieToolStripMenuItem.Name = "categorieToolStripMenuItem";
-            categorieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            categorieToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             categorieToolStripMenuItem.Text = "Categorie";
-            categorieToolStripMenuItem.Click += CategorieToolStripMenuItem_Click;
+            categorieToolStripMenuItem.Click += Categorie_Click;
             // 
             // anagraficaToolStripMenuItem
             // 
@@ -101,16 +108,16 @@
             // clientiToolStripMenuItem
             // 
             clientiToolStripMenuItem.Name = "clientiToolStripMenuItem";
-            clientiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            clientiToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             clientiToolStripMenuItem.Text = "Clienti";
-            clientiToolStripMenuItem.Click += ClientiToolStripMenuItem_Click;
+            clientiToolStripMenuItem.Click += Clienti_Click;
             // 
             // fornitoriToolStripMenuItem
             // 
             fornitoriToolStripMenuItem.Name = "fornitoriToolStripMenuItem";
-            fornitoriToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            fornitoriToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             fornitoriToolStripMenuItem.Text = "Fornitori";
-            fornitoriToolStripMenuItem.Click += FornitoriToolStripMenuItem_Click;
+            fornitoriToolStripMenuItem.Click += Fornitori_Click;
             // 
             // ToolStripMenuItem
             // 
@@ -122,28 +129,21 @@
             // opzioniToolStripMenuItem
             // 
             opzioniToolStripMenuItem.Name = "opzioniToolStripMenuItem";
-            opzioniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            opzioniToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             opzioniToolStripMenuItem.Text = "Opzioni";
-            opzioniToolStripMenuItem.Click += OpzioniToolStripMenuItem_Click;
+            opzioniToolStripMenuItem.Click += Opzioni_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator5.Size = new System.Drawing.Size(162, 6);
             // 
             // informazionisuToolStripMenuItem
             // 
             informazionisuToolStripMenuItem.Name = "informazionisuToolStripMenuItem";
-            informazionisuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            informazionisuToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             informazionisuToolStripMenuItem.Text = "Informazioni su...";
-            informazionisuToolStripMenuItem.Click += InformazionisuToolStripMenuItem_Click;
-            // 
-            // NuovaFatturaToolStripMenuItem
-            // 
-            NuovaFatturaToolStripMenuItem.Name = "NuovaFatturaToolStripMenuItem";
-            NuovaFatturaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            NuovaFatturaToolStripMenuItem.Text = "Nuova Fattura";
-            NuovaFatturaToolStripMenuItem.Click += NuovaFattura_Click;
+            informazionisuToolStripMenuItem.Click += Informazionisu_Click;
             // 
             // MainView
             // 
@@ -153,8 +153,6 @@
             Controls.Add(menuStrip);
             Name = "MainView";
             Text = "CiccioGest";
-            FormClosing += MainView_FormClosing;
-            Load += MainView_Load;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
             ResumeLayout(false);

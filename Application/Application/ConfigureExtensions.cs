@@ -38,7 +38,7 @@ namespace CiccioGest.Application
             serviceCollection
                 .AddTransient<IFatturaService, FatturaService>()
                 .AddTransient<IMagazzinoService, MagazzinoService>()
-                .AddTransient<IClientiFornitoriService, ClientiFornitoriService>()
+                .AddTransient<IAnagraficaService, AnagraficaService>()
                 .AddTransient<ISettingService, SettingService>();
             return serviceCollection;
         }

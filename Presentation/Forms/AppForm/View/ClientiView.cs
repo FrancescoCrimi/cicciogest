@@ -14,18 +14,14 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ClientiView : Form, IClientiView
     {
-        private readonly ILogger logger;
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler? NuovoClienteEvent;
-        public event EventHandler<int>? ClienteSelezionatoEvent;
-        public event EventHandler<int>? CreaFatturaEvent;
+        private readonly ILogger _logger;
+        public event EventHandler<int>? ClienteSelezionatoRequested;
 
         public ClientiView(ILogger<ClientiView> logger)
         {
             InitializeComponent();
-            this.logger = logger;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            _logger = logger;
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void CaricaClienti(IList<Cliente> clienti)
@@ -35,34 +31,15 @@ namespace CiccioGest.Presentation.AppForm.View
         }
 
 
-        #region Gestione Eventi
+        #region Event Handlers
 
-        private void ListaClientiView_Load(object sender, EventArgs e)
-            => LoadEvent?.Invoke(sender, e);
-
-        private void ListaClientiView_FormClosing(object sender, FormClosingEventArgs e)
-            => CloseEvent?.Invoke(sender, e);
-
-
-        private void NuovoClienteToolStripButton_Click(object sender, EventArgs e)
-            => NuovoClienteEvent?.Invoke(this, new EventArgs());
-
-        private void ApriClienteToolStripButton_Click(object sender, EventArgs e)
+        private void ApriCliente_Click(object sender, EventArgs e)
             => ApriCliente();
 
-        private void NuovaFatturaToolStripButton_Click(object sender, EventArgs e)
-        {
-            if (clientiDataGridView.SelectedRows.Count > 0)
-            {
-                if (clientiBindingSource.Current is Cliente cliente)
-                    CreaFatturaEvent?.Invoke(this, cliente.Id);
-            }
-        }
-
-        private void ClientiDataGridView_CellDoubleClick(object s, DataGridViewCellEventArgs e)
+        private void Clienti_CellDoubleClick(object s, DataGridViewCellEventArgs e)
             => ApriCliente();
 
-        private void AboutToolStripButton_Click(object sender, EventArgs e)
+        private void About_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();
 
         #endregion
@@ -73,7 +50,7 @@ namespace CiccioGest.Presentation.AppForm.View
             if (clientiDataGridView.SelectedRows.Count > 0)
             {
                 if (clientiBindingSource.Current is Cliente cliente)
-                    ClienteSelezionatoEvent?.Invoke(this, cliente.Id);
+                    ClienteSelezionatoRequested?.Invoke(this, cliente.Id);
             }
         }
     }

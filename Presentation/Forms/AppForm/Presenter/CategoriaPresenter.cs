@@ -10,38 +10,40 @@ using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
     public sealed class CategoriaPresenter : PresenterBase, IDisposable
     {
         private readonly ILogger _logger;
-        private readonly ICategoriaView _view;
         private readonly IMagazzinoService _magazinoService;
+        private ICategoriaView _view;
 
         public CategoriaPresenter(ILogger<CategoriaPresenter> logger,
-                                  ICategoriaView view,
-                                  IMagazzinoService magazinoService)
+                                  IMagazzinoService magazinoService,
+                                  ICategoriaView view)
             : base(view)
         {
             _logger = logger;
-            _view = view;
             _magazinoService = magazinoService;
-            _view.LoadEvent += View_LoadEvent;
-            _view.CloseEvent += View_CloseEvent;
-            _view.SalvaCategoriaEvent += View_SalvaCategoriaEvent;
-            _view.CancellaCategoriaEvent += View_CancellaCategoriaEvent;
+            _view = view;
+            _view.Load += OnLoad;
+            _view.FormClosing += OnFormClosing;
+            _view.SalvaCategoriaRequested += View_SalvaCategoriaEvent;
+            _view.CancellaCategoriaRequested += View_CancellaCategoriaEvent;
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        private async void View_LoadEvent(object? sender, EventArgs e)
+        #region Event Handlers
+
+        private async void OnLoad(object? sender, EventArgs e)
         {
             await Refresh();
         }
 
-        private void View_CloseEvent(object? sender, EventArgs e)
+        private void OnFormClosing(object? sender, FormClosingEventArgs e)
         {
-            //throw new NotImplementedException();
         }
 
         private async void View_CancellaCategoriaEvent(object? sender, int e)
@@ -56,6 +58,8 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             await Refresh();
         }
 
+        #endregion
+
         private async Task Refresh()
         {
             var list = await _magazinoService.GetCategorie();
@@ -63,8 +67,12 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             _view.SetCategoria(new Categoria());
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+            _view.Load -= OnLoad;
+            _view.FormClosing -= OnFormClosing;
+            _view = null!;
             _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

@@ -13,7 +13,6 @@ namespace CiccioGest.Presentation.AppForm.View
     public interface IArticoliView : IView
     {
         void CaricaArticoli(IList<Articolo> articoli);
-        event EventHandler<int> ArticoloSelezionatoEvent;
-        event EventHandler NuovoArticoloEvent;
+        event EventHandler<int> ArticoloSelezionatoRequested;
     }
 }

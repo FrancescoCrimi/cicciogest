@@ -5,7 +5,6 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,49 +12,46 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public sealed class FornitoriPresenter : PresenterBase, IResultProvider<int>
+    public sealed class CategoriePresenter : PresenterBase, IResultProvider<int>
     {
         private readonly ILogger _logger;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IAnagraficaService _anagraficaService;
-        private IFornitoriView _view;
-        private int _idFornitore;
+        private readonly IMagazzinoService _magazinoService;
+        private ICategorieView _view;
+        private int _idCategoria;
 
-        public FornitoriPresenter(ILogger<FornitoriPresenter> logger,
-                                  IUnitOfWork unitOfWork,
-                                  IAnagraficaService anagraficaService,
-                                  IFornitoriView view)
+        public CategoriePresenter(ILogger<CategoriePresenter> logger,
+                                  IMagazzinoService magazinoService,
+                                  ICategorieView view)
             : base(view)
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
-            _anagraficaService = anagraficaService;
+            _magazinoService = magazinoService;
             _view = view;
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
-            _view.FornitoreSelezionatoRequested += OnFornitoreSelezionatoRequested;
+            _view.CategoriaSelezionataRequested += OnCategoriaSelezionataRequested;
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
         public int GetResult()
         {
-            return _idFornitore;
+            return _idCategoria;
         }
 
         #region Event Handlers
 
         private async void OnLoad(object? sender, EventArgs e)
         {
-            _view.CaricaFornitori(await _anagraficaService.GetFornitori());
+            _view.CaricaCategorie(await _magazinoService.GetCategorie());
         }
 
         private void OnFormClosing(object? sender, FormClosingEventArgs e)
         {
         }
 
-        private void OnFornitoreSelezionatoRequested(object? sender, int e)
+        private void OnCategoriaSelezionataRequested(object? sender, int e)
         {
-            _idFornitore = e;
+            _idCategoria = e;
             _view.DialogResult = DialogResult.OK;
         }
 
@@ -66,7 +62,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             base.Dispose();
             _view.Load -= OnLoad;
             _view.FormClosing -= OnFormClosing;
-            _view.FornitoreSelezionatoRequested -= OnFornitoreSelezionatoRequested;
+            _view.CategoriaSelezionataRequested -= OnCategoriaSelezionataRequested;
             _view = null!;
             _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }

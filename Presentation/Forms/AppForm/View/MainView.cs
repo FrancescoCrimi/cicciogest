@@ -13,15 +13,13 @@ namespace CiccioGest.Presentation.AppForm.View
     public partial class MainView : Form, IMainView
     {
         private readonly ILogger _logger;
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler? ApriFatturaEvent;
-        public event EventHandler? NuovaFatturaEvent;
-        public event EventHandler? ClientiEvent;
-        public event EventHandler? FornitoriEvent;
-        public event EventHandler? ArticoliEvent;
-        public event EventHandler? CategorieEvent;
-        public event EventHandler? OpzioniEvent;
+        public event EventHandler? NuovaFatturaRequested;
+        public event EventHandler? ApriFatturaRequested;
+        public event EventHandler? ClientiRequested;
+        public event EventHandler? FornitoriRequested;
+        public event EventHandler? ArticoliRequested;
+        public event EventHandler? CategorieRequested;
+        public event EventHandler? OpzioniRequested;
 
         public MainView(ILogger<MainView> logger)
         {
@@ -30,54 +28,48 @@ namespace CiccioGest.Presentation.AppForm.View
             _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
-        private void MainView_Load(object sender, EventArgs e)
-        {
-            LoadEvent?.Invoke(sender, e);
-        }
+        #region Event Handlers
 
-        private void MainView_FormClosing(object sender, FormClosingEventArgs e)
+        private void NuovaFattura_Click(object sender, EventArgs e)
         {
-            CloseEvent?.Invoke(sender, e);
+            NuovaFatturaRequested?.Invoke(sender, e);
         }
 
         private void ApriFattura_Click(object sender, EventArgs e)
         {
-            ApriFatturaEvent?.Invoke(sender, e);
+            ApriFatturaRequested?.Invoke(sender, e);
         }
 
-        private void NuovaFattura_Click(object sender, EventArgs e)
+        private void Clienti_Click(object sender, EventArgs e)
         {
-            NuovaFatturaEvent?.Invoke(sender, e);
+            ClientiRequested?.Invoke(sender, e);
         }
 
-        private void ClientiToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Fornitori_Click(object sender, EventArgs e)
         {
-            ClientiEvent?.Invoke(sender, e);
+            FornitoriRequested?.Invoke(sender, e);
         }
 
-        private void FornitoriToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Articoli_Click(object sender, EventArgs e)
         {
-            FornitoriEvent?.Invoke(sender, e);
+            ArticoliRequested?.Invoke(sender, e);
         }
 
-        private void ArticoliToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Categorie_Click(object sender, EventArgs e)
         {
-            ArticoliEvent?.Invoke(sender, e);
+            CategorieRequested?.Invoke(sender, e);
         }
 
-        private void CategorieToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Opzioni_Click(object sender, EventArgs e)
         {
-            CategorieEvent?.Invoke(sender, e);
+            OpzioniRequested?.Invoke(sender, e);
         }
 
-        private void OpzioniToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpzioniEvent?.Invoke(sender, e);
-        }
-
-        private void InformazionisuToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Informazionisu_Click(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
         }
+
+        #endregion
     }
 }

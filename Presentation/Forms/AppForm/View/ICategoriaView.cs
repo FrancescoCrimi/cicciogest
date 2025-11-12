@@ -12,8 +12,8 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public interface ICategoriaView : IView
     {
-        event EventHandler<int> CancellaCategoriaEvent;
-        event EventHandler<Categoria> SalvaCategoriaEvent;
+        event EventHandler<int> CancellaCategoriaRequested;
+        event EventHandler<Categoria> SalvaCategoriaRequested;
 
         void SetCategoria(Categoria categoria);
         void SetCategorie(IList<Categoria> list);

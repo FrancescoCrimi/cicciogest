@@ -17,7 +17,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm
 {
@@ -29,13 +28,13 @@ namespace CiccioGest.Presentation.AppForm
             ApplicationConfiguration.Initialize();
             if (args.Contains("config"))
             {
-                var win = ConfigureServices().GetRequiredService<SettingPresenter>();
-                System.Windows.Forms.Application.Run((Form)win.View);
+                var presenter = ConfigureServices().GetRequiredService<SettingPresenter>();
+                presenter.Run();
             }
             else
             {
                 var win = ConfigureServices().GetRequiredService<MainPresenter>();
-                System.Windows.Forms.Application.Run((Form)win.View);
+                win.Run();
             }
         }
 
@@ -61,7 +60,6 @@ namespace CiccioGest.Presentation.AppForm
                 .ConfigureApplication()
 
                 .AddTransient<WindowService>()
-                .AddTransient<DialogService>()
 
                 .AddTransient<MainPresenter>()
                 .AddTransient<SettingPresenter>()
@@ -69,18 +67,13 @@ namespace CiccioGest.Presentation.AppForm
                 .AddTransient<ArticoloPresenter>()
                 .AddTransient<ArticoliPresenter>()
                 .AddTransient<CategoriaPresenter>()
+                .AddTransient<CategoriePresenter>()
                 .AddTransient<ClientePresenter>()
                 .AddTransient<ClientiPresenter>()
                 .AddTransient<FatturaPresenter>()
                 .AddTransient<FatturePresenter>()
                 .AddTransient<FornitorePresenter>()
                 .AddTransient<FornitoriPresenter>()
-
-                .AddTransient<SelezionaArticoloPresenter>()
-                .AddTransient<SelezionaCategoriaPresenter>()
-                .AddTransient<SelezionaClientePresenter>()
-                .AddTransient<SelezionaFatturaPresenter>()
-                .AddTransient<SelezionaFornitorePresenter>()
 
                 .AddSingleton<MainView>()
                 .AddSingleton<IMainView>(sp => sp.GetRequiredService<MainView>())
@@ -89,18 +82,13 @@ namespace CiccioGest.Presentation.AppForm
                 .AddTransient<IArticoloView, ArticoloView>()
                 .AddTransient<IArticoliView, ArticoliView>()
                 .AddTransient<ICategoriaView, CategoriaView>()
+                .AddTransient<ICategorieView, CategorieView>()
                 .AddTransient<IClienteView, ClienteView>()
                 .AddTransient<IClientiView, ClientiView>()
                 .AddTransient<IFatturaView, FatturaView>()
                 .AddTransient<IFattureView, FattureView>()
                 .AddTransient<IFornitoreView, FornitoreView>()
                 .AddTransient<IFornitoriView, FornitoriView>()
-
-                .AddTransient<ISelezionaArticoloView, SelezionaArticoloView>()
-                .AddTransient<ISelezionaCategoriaView, SelezionaCategoriaView>()
-                .AddTransient<ISelezionaClienteView, SelezionaClienteView>()
-                .AddTransient<ISelezionaFatturaView, SelezionaFatturaView>()
-                .AddTransient<ISelezionaFornitoreView, SelezionaFornitoreView>()
 
                 .AddTransient<SettingView>()
                 .BuildServiceProvider();

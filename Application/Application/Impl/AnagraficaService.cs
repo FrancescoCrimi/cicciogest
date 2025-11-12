@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application.Impl
 {
-    internal class ClientiFornitoriService : IClientiFornitoriService
+    internal class AnagraficaService : IAnagraficaService
     {
         private readonly ILogger _logger;
         private readonly IClienteRepository _clienteRepository;
         private readonly IFornitoreRepository _fornitoreRepository;
 
-        public ClientiFornitoriService(ILogger<ClientiFornitoriService> logger,
+        public AnagraficaService(ILogger<AnagraficaService> logger,
                                        IClienteRepository clienteRepository,
                                        IFornitoreRepository fornitoreRepository)
         {

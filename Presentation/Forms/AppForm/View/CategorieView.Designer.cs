@@ -1,7 +1,9 @@
 ﻿
+using System;
+
 namespace CiccioGest.Presentation.AppForm.View
 {
-    partial class SelezionaFatturaView
+    partial class CategorieView
     {
         /// <summary>
         /// Required designer variable.
@@ -32,16 +34,15 @@ namespace CiccioGest.Presentation.AppForm.View
             components = new System.ComponentModel.Container();
             nomeCompletoLabel = new System.Windows.Forms.Label();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            fattureDataGridView = new System.Windows.Forms.DataGridView();
-            idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            categorieDataGridView = new System.Windows.Forms.DataGridView();
             nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            totaleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            fattureBindingSource = new System.Windows.Forms.BindingSource(components);
+            idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            categorieBindingSource = new System.Windows.Forms.BindingSource(components);
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             nomeCompletoTextBox = new System.Windows.Forms.TextBox();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)fattureDataGridView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)fattureBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)categorieDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)categorieBindingSource).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -51,7 +52,7 @@ namespace CiccioGest.Presentation.AppForm.View
             nomeCompletoLabel.AutoSize = true;
             nomeCompletoLabel.Location = new System.Drawing.Point(3, 7);
             nomeCompletoLabel.Name = "nomeCompletoLabel";
-            nomeCompletoLabel.Size = new System.Drawing.Size(49, 20);
+            nomeCompletoLabel.Size = new System.Drawing.Size(40, 15);
             nomeCompletoLabel.TabIndex = 0;
             nomeCompletoLabel.Text = "Cerca:";
             // 
@@ -59,51 +60,38 @@ namespace CiccioGest.Presentation.AppForm.View
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(fattureDataGridView, 0, 2);
+            tableLayoutPanel1.Controls.Add(categorieDataGridView, 0, 2);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(622, 541);
+            tableLayoutPanel1.Size = new System.Drawing.Size(596, 422);
             tableLayoutPanel1.TabIndex = 3;
             // 
-            // fattureDataGridView
+            // categorieDataGridView
             // 
-            fattureDataGridView.AllowUserToAddRows = false;
-            fattureDataGridView.AllowUserToDeleteRows = false;
-            fattureDataGridView.AllowUserToResizeRows = false;
-            fattureDataGridView.AutoGenerateColumns = false;
-            fattureDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            fattureDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            fattureDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, totaleDataGridViewTextBoxColumn });
-            fattureDataGridView.DataSource = fattureBindingSource;
-            fattureDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            fattureDataGridView.Location = new System.Drawing.Point(3, 46);
-            fattureDataGridView.MultiSelect = false;
-            fattureDataGridView.Name = "fattureDataGridView";
-            fattureDataGridView.ReadOnly = true;
-            fattureDataGridView.RowHeadersVisible = false;
-            fattureDataGridView.RowHeadersWidth = 51;
-            fattureDataGridView.RowTemplate.Height = 24;
-            fattureDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            fattureDataGridView.Size = new System.Drawing.Size(616, 492);
-            fattureDataGridView.TabIndex = 0;
-            fattureDataGridView.CellDoubleClick += FattureDataGridView_CellDoubleClick;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.ReadOnly = true;
-            idDataGridViewTextBoxColumn.Width = 51;
+            categorieDataGridView.AllowUserToAddRows = false;
+            categorieDataGridView.AllowUserToDeleteRows = false;
+            categorieDataGridView.AutoGenerateColumns = false;
+            categorieDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            categorieDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { nomeDataGridViewTextBoxColumn, idDataGridViewTextBoxColumn });
+            categorieDataGridView.DataSource = categorieBindingSource;
+            categorieDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            categorieDataGridView.Location = new System.Drawing.Point(3, 38);
+            categorieDataGridView.MultiSelect = false;
+            categorieDataGridView.Name = "categorieDataGridView";
+            categorieDataGridView.ReadOnly = true;
+            categorieDataGridView.RowHeadersVisible = false;
+            categorieDataGridView.RowHeadersWidth = 51;
+            categorieDataGridView.RowTemplate.Height = 24;
+            categorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            categorieDataGridView.Size = new System.Drawing.Size(590, 381);
+            categorieDataGridView.TabIndex = 0;
+            categorieDataGridView.CellDoubleClick += CategorieDataGridView_CellDoubleClick;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -112,21 +100,21 @@ namespace CiccioGest.Presentation.AppForm.View
             nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
             nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
             nomeDataGridViewTextBoxColumn.ReadOnly = true;
+            nomeDataGridViewTextBoxColumn.Width = 125;
             // 
-            // totaleDataGridViewTextBoxColumn
+            // idDataGridViewTextBoxColumn
             // 
-            totaleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            totaleDataGridViewTextBoxColumn.DataPropertyName = "Totale";
-            totaleDataGridViewTextBoxColumn.HeaderText = "Totale";
-            totaleDataGridViewTextBoxColumn.MinimumWidth = 6;
-            totaleDataGridViewTextBoxColumn.Name = "totaleDataGridViewTextBoxColumn";
-            totaleDataGridViewTextBoxColumn.ReadOnly = true;
-            totaleDataGridViewTextBoxColumn.Width = 79;
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 125;
             // 
-            // fattureBindingSource
+            // categorieBindingSource
             // 
-            fattureBindingSource.AllowNew = false;
-            fattureBindingSource.DataSource = typeof(Domain.Documenti.Fattura);
+            categorieBindingSource.AllowNew = false;
+            categorieBindingSource.DataSource = typeof(Domain.Magazzino.Categoria);
             // 
             // tableLayoutPanel2
             // 
@@ -137,54 +125,51 @@ namespace CiccioGest.Presentation.AppForm.View
             tableLayoutPanel2.Controls.Add(nomeCompletoLabel, 0, 0);
             tableLayoutPanel2.Controls.Add(nomeCompletoTextBox, 1, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel2.Location = new System.Drawing.Point(3, 4);
-            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(616, 35);
+            tableLayoutPanel2.Size = new System.Drawing.Size(590, 29);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // nomeCompletoTextBox
             // 
             nomeCompletoTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            nomeCompletoTextBox.Location = new System.Drawing.Point(58, 4);
-            nomeCompletoTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            nomeCompletoTextBox.Location = new System.Drawing.Point(49, 3);
             nomeCompletoTextBox.Name = "nomeCompletoTextBox";
-            nomeCompletoTextBox.Size = new System.Drawing.Size(555, 27);
+            nomeCompletoTextBox.Size = new System.Drawing.Size(538, 23);
             nomeCompletoTextBox.TabIndex = 1;
             // 
-            // SelezionaFatturaView
+            // SelezionaCategoriaView
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(622, 541);
+            ClientSize = new System.Drawing.Size(596, 422);
             Controls.Add(tableLayoutPanel1);
-            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Name = "SelezionaFatturaView";
-            Text = "Seleziona Fattura";
-            FormClosing += SelezionaFatturaView_FormClosing;
-            Load += SelezionaFatturaView_Load;
+            Name = "SelezionaCategoriaView";
+            Text = "Seleziona Categoria";
+            FormClosing += SelezionaCategoriaView_FormClosing;
+            Load += SelezionaCategoriaView_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)fattureDataGridView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)fattureBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)categorieDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)categorieBindingSource).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView fattureDataGridView;
+        private System.Windows.Forms.DataGridView categorieDataGridView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox nomeCompletoTextBox;
-        private System.Windows.Forms.BindingSource fattureBindingSource;
+        private System.Windows.Forms.BindingSource categorieBindingSource;
 
         #endregion
 
         private System.Windows.Forms.Label nomeCompletoLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totaleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
     }
 }

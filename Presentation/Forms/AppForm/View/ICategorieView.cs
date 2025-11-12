@@ -10,9 +10,9 @@ using System.Collections.Generic;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public interface ISelezionaArticoloView : IView
+    public interface ICategorieView : IView
     {
-        void CaricaArticoli(IList<Articolo> articoli);
-        event EventHandler<int> ArticoloSelezionatoEvent;
+        void CaricaCategorie(IList<Categoria> categorie);
+        event EventHandler<int> CategoriaSelezionataRequested;
     }
 }

@@ -21,9 +21,9 @@ namespace CiccioGest.Presentation.AppForm.View
 
         public event EventHandler? LoadEvent;
         public event EventHandler? CloseEvent;
-        public event EventHandler? VerificaDatabaseEvent;
-        public event EventHandler? CreaDatabaseEvent;
-        public event EventHandler? PopolaDatabaseEvent;
+        public event EventHandler? VerificaDatabaseRequested;
+        public event EventHandler? CreaDatabaseRequested;
+        public event EventHandler? PopolaDatabaseRequested;
 
         public SettingView(ILogger<SettingView> logger,
                            IServiceProvider serviceProvider,
@@ -47,13 +47,13 @@ namespace CiccioGest.Presentation.AppForm.View
             => CloseEvent?.Invoke(sender, e);
 
         private void VerificaDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-            => VerificaDatabaseEvent?.Invoke(sender, e);
+            => VerificaDatabaseRequested?.Invoke(sender, e);
 
         private void CreaDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-            => CreaDatabaseEvent?.Invoke(sender, e);
+            => CreaDatabaseRequested?.Invoke(sender, e);
 
         private void PopolaDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-            => PopolaDatabaseEvent?.Invoke(sender, e);
+            => PopolaDatabaseRequested?.Invoke(sender, e);
 
 
 

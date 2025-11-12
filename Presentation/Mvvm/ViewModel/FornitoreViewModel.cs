@@ -23,7 +23,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
         private readonly IUnitOfWork _unitOfWork;
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
-        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly IAnagraficaService _clientiFornitoriService;
 
         [ObservableProperty]
         private Fornitore? _fornitore;
@@ -35,7 +35,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                                   IUnitOfWork unitOfWork,
                                   INavigationService navigationService,
                                   IMessageBoxService messageBoxService,
-                                  IClientiFornitoriService clientiFornitoriService)
+                                  IAnagraficaService clientiFornitoriService)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

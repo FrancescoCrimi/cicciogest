@@ -19,13 +19,13 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
     public sealed partial class ClientiViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger _logger;
-        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly IAnagraficaService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
         private Cliente? _clienteSelezionato;
         private ClientiViewReturnHandler? _clientiViewReturnHandler;
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
-                                IClientiFornitoriService clientiFornitoriService,
+                                IAnagraficaService clientiFornitoriService,
                                 INavigationService navigationService)
         {
             _logger = logger;

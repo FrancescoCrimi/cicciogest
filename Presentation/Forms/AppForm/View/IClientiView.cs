@@ -13,8 +13,6 @@ namespace CiccioGest.Presentation.AppForm.View
     public interface IClientiView : IView
     {
         void CaricaClienti(IList<Cliente> clienti);
-        event EventHandler<int> ClienteSelezionatoEvent;
-        event EventHandler NuovoClienteEvent;
-        event EventHandler<int> CreaFatturaEvent;
+        event EventHandler<int> ClienteSelezionatoRequested;
     }
 }

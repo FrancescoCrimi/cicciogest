@@ -11,9 +11,14 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public interface IView : IWin32Window
     {
-        event EventHandler LoadEvent;
-        event EventHandler CloseEvent;
+        event EventHandler? Load;
+        event FormClosingEventHandler? FormClosing;
+
+        DialogResult DialogResult { get; set; }
+
         void Show();
+        void Show(IWin32Window owner);
+        DialogResult ShowDialog();
         DialogResult ShowDialog(IWin32Window owner);
         void Close();
     }

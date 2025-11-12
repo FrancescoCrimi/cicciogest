@@ -14,17 +14,14 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class FornitoriView : Form, IFornitoriView
     {
-        private readonly ILogger logger;
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler? NuovoFornitoreEvent;
-        public event EventHandler<int>? FornitoreSelezionatoEvent;
+        private readonly ILogger _logger;
+        public event EventHandler<int>? FornitoreSelezionatoRequested;
 
         public FornitoriView(ILogger<FornitoriView> logger)
         {
             InitializeComponent();
-            this.logger = logger;
-            logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            _logger = logger;
+            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
         }
 
         public void CaricaFornitori(IList<Fornitore> fornitori)
@@ -33,18 +30,7 @@ namespace CiccioGest.Presentation.AppForm.View
             fornitoriDataGridView.ClearSelection();
         }
 
-
-        #region gestione eventi
-
-        private void ListaFornitoriView_Load(object sender, EventArgs e)
-            => LoadEvent?.Invoke(sender, e);
-
-        private void ListaFornitoriView_FormClosing(object sender, FormClosingEventArgs e)
-            => CloseEvent?.Invoke(sender, e);
-
-
-        private void NuovoToolStripButton_Click(object sender, EventArgs e)
-            => NuovoFornitoreEvent?.Invoke(sender, e);
+        #region Event Handlers
 
         private void ApriToolStripButton_Click(object sender, EventArgs e)
             => ApriFornitore();
@@ -57,13 +43,12 @@ namespace CiccioGest.Presentation.AppForm.View
 
         #endregion
 
-
         private void ApriFornitore()
         {
             if (fornitoriDataGridView.SelectedRows.Count > 0)
             {
                 if (fornitoriBindingSource.Current is Fornitore fornitore)
-                    FornitoreSelezionatoEvent?.Invoke(this, fornitore.Id);
+                    FornitoreSelezionatoRequested?.Invoke(this, fornitore.Id);
             }
         }
     }

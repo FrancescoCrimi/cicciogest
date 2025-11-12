@@ -17,8 +17,8 @@ namespace CiccioGest.Presentation.AppForm.View
         private readonly ILogger _logger;
 
         public event EventHandler? LoadEvent;
-        public event EventHandler<Categoria>? SalvaCategoriaEvent;
-        public event EventHandler<int>? CancellaCategoriaEvent;
+        public event EventHandler<Categoria>? SalvaCategoriaRequested;
+        public event EventHandler<int>? CancellaCategoriaRequested;
         public event EventHandler? CloseEvent;
 
         public CategoriaView(ILogger<CategoriaView> logger)
@@ -38,6 +38,8 @@ namespace CiccioGest.Presentation.AppForm.View
             categorieDataGridView.ClearSelection();
         }
 
+        #region Event Handlers
+
         private void CategoriaView_Load(object s, EventArgs e)
         {
             LoadEvent?.Invoke(s, e);
@@ -56,7 +58,7 @@ namespace CiccioGest.Presentation.AppForm.View
             {
                 try
                 {
-                    SalvaCategoriaEvent?.Invoke(s, tp);
+                    SalvaCategoriaRequested?.Invoke(s, tp);
                 }
                 catch (Exception ex)
                 {
@@ -72,7 +74,7 @@ namespace CiccioGest.Presentation.AppForm.View
             {
                 try
                 {
-                    CancellaCategoriaEvent?.Invoke(s, tp.Id);
+                    CancellaCategoriaRequested?.Invoke(s, tp.Id);
                 }
                 catch (Exception ex)
                 {
@@ -94,5 +96,7 @@ namespace CiccioGest.Presentation.AppForm.View
 
         private void CategoriaView_FormClosing(object sender, FormClosingEventArgs e)
             => CloseEvent?.Invoke(sender, e);
+
+        #endregion
     }
 }

@@ -14,36 +14,43 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public sealed class SettingPresenter : PresenterBase, IDisposable
+    public sealed class SettingPresenter : PresenterBase
     {
         private readonly ILogger _logger;
-        private readonly ISettingView _view;
         private readonly IServiceProvider _serviceProvider;
         private readonly IServiceScopeFactory _serviceScopeFactory;
+        private ISettingView _view;
 
         public SettingPresenter(ILogger<SettingPresenter> logger,
-                                ISettingView view,
                                 IServiceProvider serviceProvider,
-                                IServiceScopeFactory serviceScopeFactory)
+                                IServiceScopeFactory serviceScopeFactory,
+                                ISettingView view)
             : base(view)
         {
             _logger = logger;
             _view = view;
             _serviceProvider = serviceProvider;
             _serviceScopeFactory = serviceScopeFactory;
-            _view.LoadEvent += View_LoadEvent;
-            _view.CloseEvent += View_CloseEvent;
-            _view.CreaDatabaseEvent += View_CreaDatabaseEvent;
-            _view.VerificaDatabaseEvent += View_VerificaDatabaseEvent;
-            _view.PopolaDatabaseEvent += View_PopolaDatabaseEvent;
+            _view.Load += OnLoad;
+            _view.FormClosing += OnFormClosing;
+            _view.CreaDatabaseRequested += View_CreaDatabaseEvent;
+            _view.VerificaDatabaseRequested += View_VerificaDatabaseEvent;
+            _view.PopolaDatabaseRequested += View_PopolaDatabaseEvent;
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        private void View_LoadEvent(object? sender, EventArgs e)
+        public void Run()
+        {
+            System.Windows.Forms.Application.Run((Form)_view);
+        }
+
+        #region Event Handlers
+
+        private void OnLoad(object? sender, EventArgs e)
         {
         }
 
-        private void View_CloseEvent(object? sender, EventArgs e)
+        private void OnFormClosing(object? sender, FormClosingEventArgs e)
         {
         }
 
@@ -85,8 +92,19 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-        public void Dispose()
+        #endregion
+
+        public override void Dispose()
         {
+            base.Dispose();
+            _view.Load -= OnLoad;
+            _view.FormClosing -= OnFormClosing;
+            _view.CreaDatabaseRequested -= View_CreaDatabaseEvent;
+            _view.VerificaDatabaseRequested -= View_VerificaDatabaseEvent;
+            _view.PopolaDatabaseRequested -= View_PopolaDatabaseEvent;
+            _view = null!;
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+
         }
     }
 }

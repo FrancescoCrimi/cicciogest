@@ -11,9 +11,10 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public interface IClienteView : IView
     {
-        event EventHandler NuovoCliente;
-        event EventHandler SalvaCliente;
-        event EventHandler ApriCliente;
+        event EventHandler NuovoRequested;
+        event EventHandler SalvaRequested;
+        event EventHandler ApriRequested;
+        event EventHandler? EliminaRequested;
         void MostraCliente(Cliente cliente);
     }
 }

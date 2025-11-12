@@ -15,11 +15,7 @@ namespace CiccioGest.Presentation.AppForm.View
     public partial class ArticoliView : Form, IArticoliView
     {
         private readonly ILogger _logger;
-
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler<int>? ArticoloSelezionatoEvent;
-        public event EventHandler? NuovoArticoloEvent;
+        public event EventHandler<int>? ArticoloSelezionatoRequested;
 
         public ArticoliView(ILogger<ArticoliView> logger)
         {
@@ -34,26 +30,15 @@ namespace CiccioGest.Presentation.AppForm.View
             articoliDataGridView.ClearSelection();
         }
 
+        #region Event Handlers
 
-        #region Gestione Eventi
-
-        private void ListaArticoliView_Load(object sender, EventArgs e)
-            => LoadEvent?.Invoke(sender, e);
-
-        private void ListaArticoliView_FormClosing(object sender, FormClosingEventArgs e)
-            => CloseEvent?.Invoke(sender, e);
-
-
-        private void NuovoToolStripButton_Click(object sender, EventArgs e)
-            => NuovoArticoloEvent?.Invoke(sender, e);
-
-        private void ApriToolStripButton_Click(object sender, EventArgs e)
+        private void Apri_Click(object sender, EventArgs e)
             => ApriArticolo();
 
-        private void ArticoliDataGridView_DoubleClick(object sender, EventArgs e)
+        private void Articoli_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
             => ApriArticolo();
 
-        private void AboutToolStripButton_Click(object sender, EventArgs e)
+        private void About_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();
 
         #endregion
@@ -64,8 +49,9 @@ namespace CiccioGest.Presentation.AppForm.View
             if (articoliDataGridView.SelectedRows.Count > 0)
             {
                 if (articoliBindingSource.Current is Articolo articolo)
-                    ArticoloSelezionatoEvent?.Invoke(this, articolo.Id);
+                    ArticoloSelezionatoRequested?.Invoke(this, articolo.Id);
             }
         }
+
     }
 }

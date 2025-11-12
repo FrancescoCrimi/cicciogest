@@ -10,32 +10,41 @@ using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public sealed class FornitorePresenter : PresenterBase, IDisposable
+    public sealed class FornitorePresenter : PresenterBase, IInitializable
     {
         private readonly ILogger _logger;
-        private readonly IFornitoreView _view;
-        private readonly IClientiFornitoriService _clientiFornitoriService;
         private readonly WindowService _windowService;
+        private readonly IAnagraficaService _clientiFornitoriService;
+        private IFornitoreView _view;
 
         public FornitorePresenter(ILogger<FornitorePresenter> logger,
-                                  IFornitoreView view,
-                                  IClientiFornitoriService clientiFornitoriService,
-                                  WindowService windowService)
+                                  WindowService windowService,
+                                  IAnagraficaService clientiFornitoriService,
+                                  IFornitoreView view)
             : base(view)
         {
             _logger = logger;
             _view = view;
             _clientiFornitoriService = clientiFornitoriService;
             _windowService = windowService;
-            _view.LoadEvent += View_LoadEvent;
-            _view.CloseEvent += View_CloseEvent;
+            _view.Load += OnLoad;
+            _view.FormClosing += OnFormClosing;
+            _view.ApriRequested += View_ApriFornitore;
+            _view.NuovoRequested += View_NuovoFornitore;
+            _view.SalvaRequested += View_SalvaFornitore;
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        #region Metodi Pubblici
+
+        public Task InitializeAsync(object? parameter)
+        {
+            throw new NotImplementedException();
+        }
 
         public void NuovoFornitore()
             => _view.MostraFornitore(new Fornitore());
@@ -43,22 +52,15 @@ namespace CiccioGest.Presentation.AppForm.Presenter
         public async void ApriFornitore(int idFornitore)
             => _view.MostraFornitore(await _clientiFornitoriService.GetFornitore(idFornitore));
 
-        #endregion
 
-        #region Gestione eventi
+        #region Event Handlers
 
-        private void View_LoadEvent(object? sender, EventArgs e)
+        private void OnLoad(object? sender, EventArgs e)
         {
-            _view.ApriFornitore += View_ApriFornitore;
-            _view.NuovoFornitore += View_NuovoFornitore;
-            _view.SalvaFornitore += View_SalvaFornitore;
         }
 
-        private void View_CloseEvent(object? sender, EventArgs e)
+        private void OnFormClosing(object? sender, FormClosingEventArgs e)
         {
-            _view.ApriFornitore -= View_ApriFornitore;
-            _view.NuovoFornitore -= View_NuovoFornitore;
-            _view.SalvaFornitore -= View_SalvaFornitore;
         }
 
 
@@ -79,10 +81,16 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #endregion
 
-        public void Dispose()
+        public override void Dispose()
         {
-            _view.LoadEvent -= View_LoadEvent;
-            _view.CloseEvent -= View_CloseEvent;
+            base.Dispose();
+            _view.Load -= OnLoad;
+            _view.FormClosing -= OnFormClosing;
+            _view.ApriRequested -= View_ApriFornitore;
+            _view.NuovoRequested -= View_NuovoFornitore;
+            _view.SalvaRequested -= View_SalvaFornitore;
+            _view = null!;
+            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }
 }

@@ -15,10 +15,7 @@ namespace CiccioGest.Presentation.AppForm.View
     public partial class FattureView : Form, IFattureView
     {
         private readonly ILogger _logger;
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler<int>? FatturaSelezionataEvent;
-        public event EventHandler? NuovaFatturaEvent;
+        public event EventHandler<int>? FatturaSelezionataRequested;
 
         public FattureView(ILogger<FattureView> logger)
         {
@@ -34,25 +31,15 @@ namespace CiccioGest.Presentation.AppForm.View
         }
 
 
-        #region Gestione Eventi
+        #region Event Handlers
 
-        private void ListaFattureView_Load(object sender, EventArgs e)
-            => LoadEvent?.Invoke(sender, e);
-
-        private void ListaFattureView_FormClosing(object sender, FormClosingEventArgs e)
-            => CloseEvent?.Invoke(sender, e);
-
-
-        private void NuovaFatturaToolStripButton_Click(object sender, EventArgs e)
-            => NuovaFatturaEvent?.Invoke(sender, e);
-
-        private void ApriFatturaToolStripButton_Click(object sender, EventArgs e)
+        private void ApriFattura_Click(object sender, EventArgs e)
             => ApriFattura();
 
-        private void FattureDataGridViewCellDoubleClick(object s, DataGridViewCellEventArgs e)
+        private void Fatture_CellDoubleClick(object s, DataGridViewCellEventArgs e)
             => ApriFattura();
 
-        private void AboutToolStripButton_Click(object sender, EventArgs e)
+        private void About_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();
 
         #endregion
@@ -63,7 +50,9 @@ namespace CiccioGest.Presentation.AppForm.View
             if (fattureDataGridView.SelectedRows.Count > 0)
             {
                 if (fattureBindingSource.Current is Fattura fattura)
-                    FatturaSelezionataEvent?.Invoke(this, fattura.Id);
+                {
+                    FatturaSelezionataRequested?.Invoke(this, fattura.Id);
+                }
             }
         }
     }

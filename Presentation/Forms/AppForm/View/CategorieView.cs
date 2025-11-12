@@ -12,15 +12,15 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.View
 {
-    public partial class SelezionaCategoriaView : Form, ISelezionaCategoriaView
+    public partial class CategorieView : Form, ICategorieView
     {
         private readonly ILogger logger;
 
-        public event EventHandler<int>? CategoriaSelezionataEvent;
+        public event EventHandler<int>? CategoriaSelezionataRequested;
         public event EventHandler? LoadEvent;
         public event EventHandler? CloseEvent;
 
-        public SelezionaCategoriaView(ILogger<SelezionaCategoriaView> logger)
+        public CategorieView(ILogger<CategorieView> logger)
         {
             InitializeComponent();
             this.logger = logger;
@@ -45,7 +45,7 @@ namespace CiccioGest.Presentation.AppForm.View
             {
                 if (categorieBindingSource.Current is Categoria categoria)
                 {
-                    CategoriaSelezionataEvent?.Invoke(sender, categoria.Id);
+                    CategoriaSelezionataRequested?.Invoke(sender, categoria.Id);
                 }
             }
         }

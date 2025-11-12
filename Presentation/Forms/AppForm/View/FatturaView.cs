@@ -15,14 +15,13 @@ namespace CiccioGest.Presentation.AppForm.View
     {
         private readonly ILogger _logger;
 
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler? NuovaFatturaEvent;
-        public event EventHandler? SalvaFatturaEvent;
-        public event EventHandler? ApriFatturaEvent;
-        public event EventHandler? NuovoDettaglioEvent;
-        public event EventHandler<Dettaglio>? AggiungiDettaglioEvent;
-        public event EventHandler<Dettaglio>? RimuoviDettaglioEvent;
+        public event EventHandler? NuovaRequested;
+        public event EventHandler? SalvaRequested;
+        public event EventHandler? ApriRequested;
+        public event EventHandler? EliminaRequested;
+        public event EventHandler? NuovoDettaglioRequested;
+        public event EventHandler<Dettaglio>? AggiungiDettaglioRequested;
+        public event EventHandler<Dettaglio>? RimuoviDettaglioRequested;
 
         public FatturaView(ILogger<FatturaView> logger)
         {
@@ -42,40 +41,36 @@ namespace CiccioGest.Presentation.AppForm.View
         #endregion
 
 
-        #region Gestione eventi
+        #region Event Handlers
 
-        private void FatturaView_Load(object sender, EventArgs e)
-            => LoadEvent?.Invoke(sender, e);
+        private void Nuova_Click(object sender, EventArgs e)
+            => NuovaRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void FatturaView_FormClosing(object sender, FormClosingEventArgs e)
-            => CloseEvent?.Invoke(sender, e);
+        private void Salva_Click(object sender, EventArgs e)
+            => SalvaRequested?.Invoke(sender, EventArgs.Empty);
 
+        private void Apri_Click(object sender, EventArgs e)
+            => ApriRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void NuovaToolStripButton_Click(object sender, EventArgs e)
-            => NuovaFatturaEvent?.Invoke(sender, e);
+        private void Elimina_Click(object sender, EventArgs e)
+            => EliminaRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void SalvaToolStripButton_Click(object sender, EventArgs e)
-            => SalvaFatturaEvent?.Invoke(sender, e);
+        private void NuovoDettaglio_Click(object sender, EventArgs e)
+            => NuovoDettaglioRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void ApriToolStripButton_Click(object sender, EventArgs e)
-            => ApriFatturaEvent?.Invoke(sender, e);
-
-        private void NuovoDettaglioToolStripButton_Click(object sender, EventArgs e)
-            => NuovoDettaglioEvent?.Invoke(sender, e);
-
-        private void AggiungiDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void AggiungiDettaglio_Click(object sender, EventArgs e)
         {
             if (dettaglioBindingSource.Current is Dettaglio dettaglio)
-                AggiungiDettaglioEvent?.Invoke(sender, dettaglio);
+                AggiungiDettaglioRequested?.Invoke(sender, dettaglio);
         }
 
-        private void RimuoviDettaglioToolStripButton_Click(object sender, EventArgs e)
+        private void RimuoviDettaglio_Click(object sender, EventArgs e)
         {
             if (dettaglioBindingSource.Current is Dettaglio dettaglio)
-                RimuoviDettaglioEvent?.Invoke(sender, dettaglio);
+                RimuoviDettaglioRequested?.Invoke(sender, dettaglio);
         }
 
-        private void AboutToolStripButton_Click(object sender, EventArgs e)
+        private void About_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();
 
         private void DettagliDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
@@ -85,10 +80,5 @@ namespace CiccioGest.Presentation.AppForm.View
         }
 
         #endregion
-
-        private void EliminaToolStripButton_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

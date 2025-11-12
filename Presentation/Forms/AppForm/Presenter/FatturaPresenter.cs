@@ -11,96 +11,74 @@ using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public sealed class FatturaPresenter : PresenterBase, IDisposable
+    public sealed class FatturaPresenter : PresenterBase, IInitializable
     {
         private readonly ILogger _logger;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly WindowService _windowService;
-        private readonly DialogService _dialogService;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IFatturaService _fatturaService;
-        private readonly IFatturaView _view;
+        private IFatturaView _view;
         private Fattura? _fattura;
 
         public FatturaPresenter(ILogger<FatturaPresenter> logger,
-                                IUnitOfWork unitOfWork,
-                                IFatturaView view,
-                                IFatturaService fatturaService,
                                 WindowService windowService,
-                                DialogService dialogService)
+                                IUnitOfWork unitOfWork,
+                                IFatturaService fatturaService,
+                                IFatturaView view)
             : base(view)
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
-            _view = view;
-            _fatturaService = fatturaService;
             _windowService = windowService;
-            _dialogService = dialogService;
-            _view.LoadEvent += View_LoadEvent;
-            _view.CloseEvent += View_CloseEvent;
+            _unitOfWork = unitOfWork;
+            _fatturaService = fatturaService;
+            _view = view;
+
+            _view.Load += OnLoad;
+            _view.FormClosing += OnFormClosing;
+            _view.NuovaRequested += OnNuovaRequested;
+            _view.SalvaRequested += OnSalvaRequested;
+            _view.ApriRequested += OnApriRequested;
+            _view.NuovoDettaglioRequested += OnNuovoDettaglioRequested;
+            _view.AggiungiDettaglioRequested += OnAggiungiDettaglioRequested;
+            _view.RimuoviDettaglioRequested += OnRimuoviDettaglioRequested;
+
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        #region public method
-
-        public async void NuovaFattura(int idCliente = 0)
+        public async Task InitializeAsync(object? parameter)
         {
+            if (parameter != null)
+            {
+                if (parameter is IdFatturaParameter idFatturaParam)
+                {
+                    await MostraFattura(idFatturaParam.IdFattura);
+                }
+                if (parameter is IdClienteParameter idClienteParam)
+                {
+                    await NuovaFattura(idClienteParam.IdCliente);
+                }
+            }
+        }
+
+        #region Event Handlers
+
+        private void OnLoad(object? sender, EventArgs e) { }
+
+        private void OnFormClosing(object? sender, FormClosingEventArgs e) { }
+
+        private async void OnNuovaRequested(object? sender, EventArgs e)
+        {
+            var idCliente = await _windowService.ShowDialog<ClientiPresenter, int>(_view);
             if (idCliente != 0)
-            {
-                await _unitOfWork.BeginAsync();
-                var cliente = await _fatturaService.GetCliente(idCliente);
-                _fattura = new Fattura(cliente);
-                _view.SetFattura(_fattura);
-                _view.SetDettaglio(new Dettaglio());
-            }
+                await NuovaFattura(idCliente);
         }
 
-        public async void MostraFattura(int idFattura)
-        {
-            if (idFattura != 0)
-            {
-                await _unitOfWork.BeginAsync();
-                _fattura = await _fatturaService.GetFattura(idFattura);
-                _view.SetFattura(_fattura);
-                _view.SetDettaglio(new Dettaglio());
-            }
-        }
-
-        #endregion
-
-
-        #region Gestione eventi
-
-        private void View_LoadEvent(object? sender, EventArgs e)
-        {
-            _view.NuovaFatturaEvent += View_NuovaFatturaEvent;
-            _view.SalvaFatturaEvent += View_SalvaFatturaEvent;
-            _view.ApriFatturaEvent += View_ApriFatturaEvent;
-            _view.NuovoDettaglioEvent += View_NuovoDettaglioEvent;
-            _view.AggiungiDettaglioEvent += View_AggiungiDettaglioEvent;
-            _view.RimuoviDettaglioEvent += View_RimuoviDettaglioEvent;
-        }
-
-        private void View_CloseEvent(object? sender, EventArgs e)
-        {
-            _view.NuovaFatturaEvent -= View_NuovaFatturaEvent;
-            _view.SalvaFatturaEvent -= View_SalvaFatturaEvent;
-            _view.ApriFatturaEvent -= View_ApriFatturaEvent;
-            _view.NuovoDettaglioEvent -= View_NuovoDettaglioEvent;
-            _view.AggiungiDettaglioEvent -= View_AggiungiDettaglioEvent;
-            _view.RimuoviDettaglioEvent -= View_RimuoviDettaglioEvent;
-        }
-
-        private void View_NuovaFatturaEvent(object? sender, EventArgs e)
-        {
-            var scp = _dialogService.OpenDialog<SelezionaClientePresenter>(_view);
-            if (scp?.IdCliente != 0)
-                NuovaFattura(scp!.IdCliente);
-        }
-
-        private async void View_SalvaFatturaEvent(object? sender, EventArgs e)
+        private async void OnSalvaRequested(object? sender, EventArgs e)
         {
             if (_fattura != null)
             {
@@ -117,25 +95,24 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             }
         }
 
-
-        private void View_ApriFatturaEvent(object? sender, EventArgs e)
+        private async void OnApriRequested(object? sender, EventArgs e)
         {
-            var sfp = _dialogService.OpenDialog<SelezionaFatturaPresenter>(_view);
-            if (sfp?.IdFattura != 0)
-                MostraFattura(sfp!.IdFattura);
+            var idFattura = await _windowService.ShowDialog<FatturePresenter, int>(_view);
+            if (idFattura != 0)
+                await MostraFattura(idFattura);
         }
 
-        private async void View_NuovoDettaglioEvent(object? sender, EventArgs e)
+        private async void OnNuovoDettaglioRequested(object? sender, EventArgs e)
         {
-            var spv = _dialogService.OpenDialog<SelezionaArticoloPresenter>(_view);
-            if (spv?.IdArticolo != 0)
+            var idArticolo = await _windowService.ShowDialog<ArticoliPresenter, int>(_view);
+            if (idArticolo != 0)
             {
-                var articolo = await _fatturaService.GetArticolo(spv!.IdArticolo);
+                var articolo = await _fatturaService.GetArticolo(idArticolo);
                 _view.SetDettaglio(new Dettaglio { Articolo = articolo, Quantita = 1 });
             }
         }
 
-        private void View_AggiungiDettaglioEvent(object? sender, Dettaglio dettaglio)
+        private void OnAggiungiDettaglioRequested(object? sender, Dettaglio dettaglio)
         {
             if (dettaglio.Id == 0)
             {
@@ -144,7 +121,7 @@ namespace CiccioGest.Presentation.AppForm.Presenter
             _view.SetDettaglio(new Dettaglio(null, 0));
         }
 
-        private void View_RimuoviDettaglioEvent(object? sender, Dettaglio dettaglio)
+        private void OnRimuoviDettaglioRequested(object? sender, Dettaglio dettaglio)
         {
             _fattura?.RemoveDettaglio(dettaglio);
             _view.SetDettaglio(new Dettaglio(null, 0));
@@ -152,9 +129,41 @@ namespace CiccioGest.Presentation.AppForm.Presenter
 
         #endregion
 
-
-        public void Dispose()
+        private async Task NuovaFattura(int idCliente = 0)
         {
+            if (idCliente != 0)
+            {
+                await _unitOfWork.BeginAsync();
+                var cliente = await _fatturaService.GetCliente(idCliente);
+                _fattura = new Fattura(cliente);
+                _view.SetFattura(_fattura);
+                _view.SetDettaglio(new Dettaglio());
+            }
+        }
+
+        private async Task MostraFattura(int idFattura)
+        {
+            if (idFattura != 0)
+            {
+                await _unitOfWork.BeginAsync();
+                _fattura = await _fatturaService.GetFattura(idFattura);
+                _view.SetFattura(_fattura);
+                _view.SetDettaglio(new Dettaglio());
+            }
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            _view.Load -= OnLoad;
+            _view.FormClosing -= OnFormClosing;
+            _view.NuovaRequested -= OnNuovaRequested;
+            _view.SalvaRequested -= OnSalvaRequested;
+            _view.ApriRequested -= OnApriRequested;
+            _view.NuovoDettaglioRequested -= OnNuovoDettaglioRequested;
+            _view.AggiungiDettaglioRequested -= OnAggiungiDettaglioRequested;
+            _view.RimuoviDettaglioRequested -= OnRimuoviDettaglioRequested;
+            _view = null!;
             _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

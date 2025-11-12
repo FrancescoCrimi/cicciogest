@@ -7,91 +7,72 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public sealed class FatturePresenter : PresenterBase, IDisposable
+    public sealed class FatturePresenter : PresenterBase, IResultProvider<int>
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IFattureView _view;
         private readonly IFatturaService _fatturaService;
-        private readonly WindowService _windowService;
-        private readonly DialogService _dialogService;
+        private IFattureView _view;
+        private int _idFattura;
 
         public FatturePresenter(ILogger<FatturePresenter> logger,
                                 IUnitOfWork unitOfWork,
-                                IFattureView view,
                                 IFatturaService fatturaService,
-                                WindowService windowService,
-                                DialogService dialogService)
+                                IFattureView view)
             : base(view)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _view = view;
             _fatturaService = fatturaService;
-            _windowService = windowService;
-            _dialogService = dialogService;
-            _view.LoadEvent += View_LoadEvent;
-            _view.CloseEvent += View_CloseEvent;
+            _view = view;
+
+            _view.Load += OnLoad;
+            _view.FormClosing += OnFormClosing;
+            _view.FatturaSelezionataRequested += OnFatturaSelezionataEvent;
+
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        #region eventi iview
-
-        private async void View_LoadEvent(object? sender, EventArgs e)
+        public int GetResult()
         {
-            _view.FatturaSelezionataEvent += View_SelectFatturaEvent;
-            _view.NuovaFatturaEvent += View_NuovaFatturaEvent;
+            return _idFattura;
+        }
+
+        #region Event Handlers
+
+        private async void OnLoad(object? sender, EventArgs e)
+        {
             await _unitOfWork.BeginAsync();
             IList<Fattura> fatture = await _fatturaService.GetFatture();
             _view.CaricaFatture(fatture);
         }
 
-        private void View_CloseEvent(object? sender, EventArgs e)
+        private void OnFormClosing(object? sender, FormClosingEventArgs e) { }
+
+        private void OnFatturaSelezionataEvent(object? sender, int e)
         {
-            if (sender is IFattureView listaFattureView)
-            {
-                listaFattureView.FatturaSelezionataEvent -= View_SelectFatturaEvent;
-                listaFattureView.NuovaFatturaEvent -= View_NuovaFatturaEvent;
-            }
+            _idFattura = e;
+            _view.DialogResult = DialogResult.OK;
         }
 
         #endregion
 
 
-        #region eventi IFattureView
-
-        private void View_SelectFatturaEvent(object? sender, int e)
+        public override void Dispose()
         {
-            _windowService?.OpenWindow<FatturaPresenter>()?.MostraFattura(e);
-            _view.Close();
-        }
-
-        private void View_NuovaFatturaEvent(object? sender, EventArgs e)
-        {
-            var lcd = _dialogService.OpenDialog<SelezionaClientePresenter>(_view);
-            if (lcd?.IdCliente != 0)
-            {
-                var fp = _windowService.OpenWindow<FatturaPresenter>();
-                fp?.NuovaFattura(lcd!.IdCliente);
-                _view.Close();
-            }
-        }
-
-        #endregion
-
-
-        public void Dispose()
-        {
-            _view.LoadEvent -= View_LoadEvent;
-            _view.CloseEvent -= View_CloseEvent;
+            base.Dispose();
+            _view.Load -= OnLoad;
+            _view.FormClosing -= OnFormClosing;
+            _view.FatturaSelezionataRequested -= OnFatturaSelezionataEvent;
+            _view = null!;
             _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

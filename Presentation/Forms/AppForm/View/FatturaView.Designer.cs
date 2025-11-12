@@ -58,15 +58,15 @@
             prezzoProdottoTextBox = new System.Windows.Forms.TextBox();
             nomeProdottoTextBox = new System.Windows.Forms.TextBox();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
-            nuovaToolStripButton = new System.Windows.Forms.ToolStripButton();
             salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
+            nuovaToolStripButton = new System.Windows.Forms.ToolStripButton();
             apriToolStripButton = new System.Windows.Forms.ToolStripButton();
+            eliminaToolStripButton = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             nuovoDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
             aggiungiDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
             rimuoviDettaglioToolStripButton = new System.Windows.Forms.ToolStripButton();
             aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            eliminaToolStripButton = new System.Windows.Forms.ToolStripButton();
             nomeProdottoLabel = new System.Windows.Forms.Label();
             prezzoProdottoLabel = new System.Windows.Forms.Label();
             quantitàLabel = new System.Windows.Forms.Label();
@@ -155,7 +155,7 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(614, 406);
+            tableLayoutPanel1.Size = new System.Drawing.Size(624, 406);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // dettagliDataGridView
@@ -176,7 +176,7 @@
             dettagliDataGridView.RowHeadersVisible = false;
             dettagliDataGridView.RowHeadersWidth = 51;
             dettagliDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dettagliDataGridView.Size = new System.Drawing.Size(609, 283);
+            dettagliDataGridView.Size = new System.Drawing.Size(618, 283);
             dettagliDataGridView.TabIndex = 6;
             dettagliDataGridView.TabStop = false;
             dettagliDataGridView.CellClick += DettagliDataGridViewCellClick;
@@ -253,7 +253,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel2.Size = new System.Drawing.Size(609, 86);
+            tableLayoutPanel2.Size = new System.Drawing.Size(618, 86);
             tableLayoutPanel2.TabIndex = 7;
             // 
             // groupBox1
@@ -263,7 +263,7 @@
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox1.Location = new System.Drawing.Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(196, 80);
+            groupBox1.Size = new System.Drawing.Size(199, 80);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Fattura";
@@ -284,7 +284,7 @@
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel4.Size = new System.Drawing.Size(190, 58);
+            tableLayoutPanel4.Size = new System.Drawing.Size(193, 58);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // totaleTextBox2
@@ -309,9 +309,9 @@
             groupBox2.AutoSize = true;
             groupBox2.Controls.Add(tableLayoutPanel3);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox2.Location = new System.Drawing.Point(205, 3);
+            groupBox2.Location = new System.Drawing.Point(208, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(401, 80);
+            groupBox2.Size = new System.Drawing.Size(407, 80);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Dettaglio";
@@ -338,7 +338,7 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel3.Size = new System.Drawing.Size(395, 58);
+            tableLayoutPanel3.Size = new System.Drawing.Size(401, 58);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // totaleTextBox1
@@ -383,21 +383,12 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { salvaToolStripButton, nuovaToolStripButton, apriToolStripButton, eliminaToolStripButton, toolStripSeparator, nuovoDettaglioToolStripButton, aggiungiDettaglioToolStripButton, rimuoviDettaglioToolStripButton, aboutToolStripButton });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { nuovaToolStripButton, salvaToolStripButton, apriToolStripButton, eliminaToolStripButton, toolStripSeparator, nuovoDettaglioToolStripButton, aggiungiDettaglioToolStripButton, rimuoviDettaglioToolStripButton, aboutToolStripButton });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(615, 27);
+            toolStrip1.Size = new System.Drawing.Size(624, 27);
             toolStrip1.TabIndex = 8;
             toolStrip1.Text = "toolStrip1";
-            // 
-            // nuovaToolStripButton
-            // 
-            nuovaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("nuovaToolStripButton.Image");
-            nuovaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            nuovaToolStripButton.Name = "nuovaToolStripButton";
-            nuovaToolStripButton.Size = new System.Drawing.Size(66, 24);
-            nuovaToolStripButton.Text = "Nuova";
-            nuovaToolStripButton.Click += NuovaToolStripButton_Click;
             // 
             // salvaToolStripButton
             // 
@@ -406,7 +397,16 @@
             salvaToolStripButton.Name = "salvaToolStripButton";
             salvaToolStripButton.Size = new System.Drawing.Size(58, 24);
             salvaToolStripButton.Text = "Salva";
-            salvaToolStripButton.Click += SalvaToolStripButton_Click;
+            salvaToolStripButton.Click += Salva_Click;
+            // 
+            // nuovaToolStripButton
+            // 
+            nuovaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("nuovaToolStripButton.Image");
+            nuovaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            nuovaToolStripButton.Name = "nuovaToolStripButton";
+            nuovaToolStripButton.Size = new System.Drawing.Size(66, 24);
+            nuovaToolStripButton.Text = "Nuova";
+            nuovaToolStripButton.Click += Nuova_Click;
             // 
             // apriToolStripButton
             // 
@@ -416,7 +416,17 @@
             apriToolStripButton.Size = new System.Drawing.Size(53, 24);
             apriToolStripButton.Text = "Apri";
             apriToolStripButton.ToolTipText = "Apri Fattura\r\n";
-            apriToolStripButton.Click += ApriToolStripButton_Click;
+            apriToolStripButton.Click += Apri_Click;
+            // 
+            // eliminaToolStripButton
+            // 
+            eliminaToolStripButton.Image = Properties.Resources.Delete;
+            eliminaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            eliminaToolStripButton.Name = "eliminaToolStripButton";
+            eliminaToolStripButton.Size = new System.Drawing.Size(70, 24);
+            eliminaToolStripButton.Text = "Elimina";
+            eliminaToolStripButton.ToolTipText = "Elimina";
+            eliminaToolStripButton.Click += Elimina_Click;
             // 
             // toolStripSeparator
             // 
@@ -430,7 +440,7 @@
             nuovoDettaglioToolStripButton.Name = "nuovoDettaglioToolStripButton";
             nuovoDettaglioToolStripButton.Size = new System.Drawing.Size(67, 24);
             nuovoDettaglioToolStripButton.Text = "Nuovo";
-            nuovoDettaglioToolStripButton.Click += NuovoDettaglioToolStripButton_Click;
+            nuovoDettaglioToolStripButton.Click += NuovoDettaglio_Click;
             // 
             // aggiungiDettaglioToolStripButton
             // 
@@ -439,7 +449,7 @@
             aggiungiDettaglioToolStripButton.Name = "aggiungiDettaglioToolStripButton";
             aggiungiDettaglioToolStripButton.Size = new System.Drawing.Size(80, 24);
             aggiungiDettaglioToolStripButton.Text = "Aggiungi";
-            aggiungiDettaglioToolStripButton.Click += AggiungiDettaglioToolStripButton_Click;
+            aggiungiDettaglioToolStripButton.Click += AggiungiDettaglio_Click;
             // 
             // rimuoviDettaglioToolStripButton
             // 
@@ -448,7 +458,7 @@
             rimuoviDettaglioToolStripButton.Name = "rimuoviDettaglioToolStripButton";
             rimuoviDettaglioToolStripButton.Size = new System.Drawing.Size(75, 24);
             rimuoviDettaglioToolStripButton.Text = "Rimuovi";
-            rimuoviDettaglioToolStripButton.Click += RimuoviDettaglioToolStripButton_Click;
+            rimuoviDettaglioToolStripButton.Click += RimuoviDettaglio_Click;
             // 
             // aboutToolStripButton
             // 
@@ -459,28 +469,16 @@
             aboutToolStripButton.Name = "aboutToolStripButton";
             aboutToolStripButton.Size = new System.Drawing.Size(24, 24);
             aboutToolStripButton.Text = "&?";
-            aboutToolStripButton.Click += AboutToolStripButton_Click;
-            // 
-            // eliminaToolStripButton
-            // 
-            eliminaToolStripButton.Image = Properties.Resources.Delete;
-            eliminaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            eliminaToolStripButton.Name = "eliminaToolStripButton";
-            eliminaToolStripButton.Size = new System.Drawing.Size(70, 24);
-            eliminaToolStripButton.Text = "Elimina";
-            eliminaToolStripButton.ToolTipText = "Elimina";
-            eliminaToolStripButton.Click += EliminaToolStripButton_Click;
+            aboutToolStripButton.Click += About_Click;
             // 
             // FatturaView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(614, 406);
+            ClientSize = new System.Drawing.Size(624, 406);
             Controls.Add(tableLayoutPanel1);
             Name = "FatturaView";
             Text = "Fattura";
-            FormClosing += FatturaView_FormClosing;
-            Load += FatturaView_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dettagliDataGridView).EndInit();

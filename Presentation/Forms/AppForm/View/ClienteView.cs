@@ -12,11 +12,10 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class ClienteView : Form, IClienteView
     {
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler? NuovoCliente;
-        public event EventHandler? SalvaCliente;
-        public event EventHandler? ApriCliente;
+        public event EventHandler? NuovoRequested;
+        public event EventHandler? SalvaRequested;
+        public event EventHandler? ApriRequested;
+        public event EventHandler? EliminaRequested;
 
         public ClienteView()
         {
@@ -26,27 +25,26 @@ namespace CiccioGest.Presentation.AppForm.View
         public void MostraCliente(Cliente cliente)
         {
             clienteBindingSource.DataSource = cliente;
-            indirizzoUserControl1.indirizzoBindingSource.DataSource = cliente.IndirizzoNew;
+            //indirizzoUserControl1.indirizzoBindingSource.DataSource = cliente.IndirizzoNew;
         }
 
-        #region GestioneEventi
-
-        private void ClienteView_Load(object sender, EventArgs e)
-            => LoadEvent?.Invoke(sender, e);
-
-        private void ClienteView_FormClosing(object sender, FormClosingEventArgs e)
-            => CloseEvent?.Invoke(sender, e);
-
-        private void NuovoToolStripButton_Click(object sender, EventArgs e)
-            => NuovoCliente?.Invoke(sender, e);
-
-        private void ApriToolStripButton_Click(object sender, EventArgs e)
-            => ApriCliente?.Invoke(sender, e);
+        #region Event Handlers
 
         private void SalvaToolStripButton_Click(object sender, EventArgs e)
-            => SalvaCliente?.Invoke(sender, e);
+            => SalvaRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void ToolStripButton_Click(object sender, EventArgs e)
+        private void NuovoToolStripButton_Click(object sender, EventArgs e)
+            => NuovoRequested?.Invoke(sender, EventArgs.Empty);
+
+        private void ApriToolStripButton_Click(object sender, EventArgs e)
+            => ApriRequested?.Invoke(sender, EventArgs.Empty);
+
+        private void Elimina_Click(object sender, EventArgs e)
+        {
+            EliminaRequested?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void About_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();
 
         #endregion

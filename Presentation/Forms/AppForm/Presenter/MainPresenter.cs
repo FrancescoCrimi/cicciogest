@@ -8,6 +8,7 @@ using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
@@ -15,80 +16,89 @@ namespace CiccioGest.Presentation.AppForm.Presenter
     {
         private readonly ILogger _logger;
         private readonly WindowService _windowService;
-        private readonly DialogService _dialogService;
-        private readonly IMainView _view;        
+        private IMainView _view;
 
         public MainPresenter(ILogger<MainPresenter> logger,
-                             IMainView view,
                              WindowService windowService,
-                             DialogService dialogService)
+                             IMainView view)
             : base(view)
         {
             _logger = logger;
             _view = view;
-            _windowService = windowService; 
-            _dialogService = dialogService;
-            _view.LoadEvent += View_LoadEvent;
-            _view.CloseEvent += View_CloseEvent;
+            _windowService = windowService;
+            _view.Load += OnLoad;
+            _view.FormClosing += OnFormClosing;
+            _view.NuovaFatturaRequested += OnNuovaFatturaRequested;
+            _view.ApriFatturaRequested += OnApriFatturaRequested;
+            _view.ClientiRequested += OnClientiRequested;
+            _view.FornitoriRequested += OnFornitoriRequested;
+            _view.ArticoliRequested += OnArticoliRequested;
+            _view.CategorieRequested += OnCategorieRequested;
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        #region eventi iview
-
-        private void View_LoadEvent(object? sender, EventArgs e)
+        public void Run()
         {
-            _view.ApriFatturaEvent += View_FattureEvent;
-            _view.ClientiEvent += View_ClientiEvent;
-            _view.FornitoriEvent += View_FornitoriEvent;
-            _view.ArticoliEvent += View_ArticoliEvent;
-            _view.CategorieEvent += View_CategorieEvent;
+            System.Windows.Forms.Application.Run((Form)_view);
         }
 
-        private void View_CloseEvent(object? sender, EventArgs e)
+        #region Event Handlers
+
+        private void OnLoad(object? sender, EventArgs e) { }
+
+        private void OnFormClosing(object? sender, FormClosingEventArgs e) { }
+
+        private async void OnNuovaFatturaRequested(object? sender, EventArgs e)
         {
-            _view.ApriFatturaEvent -= View_FattureEvent;
-            _view.ClientiEvent -= View_ClientiEvent;
-            _view.FornitoriEvent -= View_FornitoriEvent;
-            _view.ArticoliEvent -= View_ArticoliEvent;
-            _view.CategorieEvent -= View_CategorieEvent;
+            var idCliente = await _windowService.ShowDialog<ClientiPresenter, int>(_view);
+            if (idCliente != 0)
+            {
+               await _windowService.Show<FatturaPresenter>(new IdClienteParameter(idCliente));
+            }
+        }
+
+        private async void OnApriFatturaRequested(object? sender, EventArgs e)
+        {
+            var idFattura = await _windowService.ShowDialog<FatturePresenter, int>(_view);
+            if (idFattura != 0)
+            {
+               await _windowService.Show<FatturaPresenter>(new IdFatturaParameter(idFattura));
+            }
+        }
+
+        private async void OnClientiRequested(object? sender, EventArgs e)
+        {
+           await _windowService.Show<ClientePresenter>();
+        }
+
+        private async void OnFornitoriRequested(object? sender, EventArgs e)
+        {
+          await  _windowService.Show<FornitorePresenter>();
+        }
+
+        private async void OnArticoliRequested(object? sender, EventArgs e)
+        {
+          await  _windowService.Show<ArticoloPresenter>();
+        }
+
+        private async void OnCategorieRequested(object? sender, EventArgs e)
+        {
+          await  _windowService.Show<CategoriaPresenter>();
         }
 
         #endregion
 
-        #region eventi MainView
-
-        private void View_FattureEvent(object? sender, EventArgs e)
+        public override void Dispose()
         {
-            _windowService.OpenWindow<FatturePresenter>();
-        }
-
-        private void View_ClientiEvent(object? sender, EventArgs e)
-        {
-            _windowService.OpenWindow<ClientiPresenter>();
-        }
-
-        private void View_FornitoriEvent(object? sender, EventArgs e)
-        {
-            _windowService.OpenWindow<FornitoriPresenter>();
-        }
-
-        private void View_ArticoliEvent(object? sender, EventArgs e)
-        {
-            _windowService.OpenWindow<ArticoliPresenter>();
-        }
-
-        private void View_CategorieEvent(object? sender, EventArgs e)
-        {
-            _windowService.OpenWindow<CategoriaPresenter>();
-        }
-
-        #endregion
-
-
-        public void Dispose()
-        {
-            _view.LoadEvent -= View_LoadEvent;
-            _view.CloseEvent -= View_CloseEvent;
+            base.Dispose();
+            _view.Load -= OnLoad;
+            _view.FormClosing -= OnFormClosing;
+            _view.ApriFatturaRequested -= OnApriFatturaRequested;
+            _view.ClientiRequested -= OnClientiRequested;
+            _view.FornitoriRequested -= OnFornitoriRequested;
+            _view.ArticoliRequested -= OnArticoliRequested;
+            _view.CategorieRequested -= OnCategorieRequested;
+            _view = null!;
             _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

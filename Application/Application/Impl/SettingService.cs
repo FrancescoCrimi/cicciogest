@@ -18,12 +18,12 @@ namespace CiccioGest.Application.Impl
         private readonly IUnitOfWorkFactory _unitOfWorkFactory;
         private readonly IFatturaService _fatturaService;
         private readonly IMagazzinoService _magazzinoService;
-        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly IAnagraficaService _clientiFornitoriService;
 
         public SettingService(IUnitOfWorkFactory unitOfWorkFactory,
                               IFatturaService fatturaService,
                               IMagazzinoService magazzinoService,
-                              IClientiFornitoriService clientiFornitoriService)
+                              IAnagraficaService clientiFornitoriService)
         {
             _unitOfWorkFactory = unitOfWorkFactory;
             _fatturaService = fatturaService;

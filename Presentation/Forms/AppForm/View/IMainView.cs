@@ -10,12 +10,12 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public interface IMainView : IView
     {
-        event EventHandler ApriFatturaEvent;
-        event EventHandler NuovaFatturaEvent;
-        event EventHandler ClientiEvent;
-        event EventHandler FornitoriEvent;
-        event EventHandler ArticoliEvent;
-        event EventHandler CategorieEvent;
-        event EventHandler OpzioniEvent;
+        event EventHandler ApriFatturaRequested;
+        event EventHandler NuovaFatturaRequested;
+        event EventHandler ClientiRequested;
+        event EventHandler FornitoriRequested;
+        event EventHandler ArticoliRequested;
+        event EventHandler CategorieRequested;
+        event EventHandler OpzioniRequested;
     }
 }

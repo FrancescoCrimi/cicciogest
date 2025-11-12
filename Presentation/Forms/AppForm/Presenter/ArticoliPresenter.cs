@@ -10,69 +10,68 @@ using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenter
 {
-    public sealed class ArticoliPresenter : PresenterBase, IDisposable
+    public sealed class ArticoliPresenter : PresenterBase, IResultProvider<int>
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IArticoliView _view;
         private readonly IMagazzinoService _magazinoService;
-        private readonly WindowService _windowService;
+        private IArticoliView _view;
+        private int _idArticolo;
 
         public int IdProdotto { get; private set; }
 
         public ArticoliPresenter(ILogger<ArticoliPresenter> logger,
                                  IUnitOfWork unitOfWork,
-                                 IArticoliView view,
                                  IMagazzinoService magazinoService,
-                                 WindowService windowService)
+                                 IArticoliView view)
             : base(view)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _view = view;
             _magazinoService = magazinoService;
-            _windowService = windowService;
-            _view.LoadEvent += View_LoadEvent;
-            _view.CloseEvent += View_CloseEvent;
+            _view = view;
+            _view.Load += OnLoad;
+            _view.FormClosing += OnFormClosing;
+            _view.ArticoloSelezionatoRequested += OnArticoloSelezionatoRequested;
             _logger.LogDebug("Created: " + GetHashCode().ToString());
         }
 
-        private async void View_LoadEvent(object? sender, EventArgs e)
+        public int GetResult()
+        {
+            return _idArticolo;
+        }
+
+        #region Event Handlers
+
+        private async void OnLoad(object? sender, EventArgs e)
         {
             await _unitOfWork.BeginAsync();
             _view.CaricaArticoli(await _magazinoService.GetArticoli());
-            _view.NuovoArticoloEvent += View_NuovoArticoloEvent;
-            _view.ArticoloSelezionatoEvent += View_ArticoloSelezionatoEvent;
         }
 
-        private void View_CloseEvent(object? sender, EventArgs e)
+        private void OnFormClosing(object? sender, FormClosingEventArgs e)
         {
-            _view.NuovoArticoloEvent -= View_NuovoArticoloEvent;
-            _view.ArticoloSelezionatoEvent -= View_ArticoloSelezionatoEvent;
         }
 
-        private void View_NuovoArticoloEvent(object? sender, EventArgs e)
-        {
-            _windowService.OpenWindow<ArticoloPresenter>();
-            _view.Close();
-        }
-
-        private async void View_ArticoloSelezionatoEvent(object? sender, int e)
+        private void OnArticoloSelezionatoRequested(object? sender, int e)
         {
             IdProdotto = e;
-            var ap = _windowService.OpenWindow<ArticoloPresenter>();
-            if (ap != null)
-                await ap.MostraArticolo(e);
-            _view.Close();
+            _view.DialogResult = DialogResult.OK;
         }
 
-        public void Dispose()
+        #endregion
+
+        public override void Dispose()
         {
-            _view.LoadEvent -= View_LoadEvent;
-            _view.CloseEvent -= View_CloseEvent;
+            base.Dispose();
+            _view.Load -= OnLoad;
+            _view.FormClosing -= OnFormClosing;
+            _view.ArticoloSelezionatoRequested -= OnArticoloSelezionatoRequested;
+            _view = null!;
             _logger.LogDebug("Disposed: " + GetHashCode().ToString());
         }
     }

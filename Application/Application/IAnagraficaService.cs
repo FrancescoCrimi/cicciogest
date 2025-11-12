@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    public interface IClientiFornitoriService
+    public interface IAnagraficaService
     {
         Task<IList<Cliente>> GetClienti();
         Task<Cliente> GetCliente(int id);

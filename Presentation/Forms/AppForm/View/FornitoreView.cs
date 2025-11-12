@@ -12,11 +12,10 @@ namespace CiccioGest.Presentation.AppForm.View
 {
     public partial class FornitoreView : Form, IFornitoreView
     {
-        public event EventHandler? LoadEvent;
-        public event EventHandler? CloseEvent;
-        public event EventHandler? NuovoFornitore;
-        public event EventHandler? SalvaFornitore;
-        public event EventHandler? ApriFornitore;
+        public event EventHandler? NuovoRequested;
+        public event EventHandler? SalvaRequested;
+        public event EventHandler? ApriRequested;
+        public event EventHandler? EliminaRequested;
 
         public FornitoreView()
         {
@@ -26,28 +25,24 @@ namespace CiccioGest.Presentation.AppForm.View
         public void MostraFornitore(Fornitore fornitore)
         {
             fornitoreBindingSource.DataSource = fornitore;
-            indirizzoUserControl1.indirizzoBindingSource.DataSource = fornitore.IndirizzoNew;
+            //indirizzoUserControl1.indirizzoBindingSource.DataSource = fornitore.IndirizzoNew;
         }
 
+        #region Event Handlers
 
-        #region Gestione eventi
+        private void Nuovo_Click(object sender, EventArgs e)
+            => NuovoRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void FornitoreView_Load(object sender, EventArgs e)
-            => LoadEvent?.Invoke(sender, e);
+        private void Salva_Click(object sender, EventArgs e)
+            => SalvaRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void FornitoreView_FormClosing(object sender, FormClosingEventArgs e)
-            => CloseEvent?.Invoke(sender, e);
+        private void Apri_Click(object sender, EventArgs e)
+            => ApriRequested?.Invoke(sender, EventArgs.Empty);
 
-        private void NuovoToolStripButton_Click(object sender, EventArgs e)
-            => NuovoFornitore?.Invoke(sender, e);
-
-        private void ApriToolStripButton_Click(object sender, EventArgs e)
-            => ApriFornitore?.Invoke(sender, e);
-
-        private void SalvaToolStripButton_Click(object sender, EventArgs e)
-            => SalvaFornitore?.Invoke(sender, e);
-
-        private void StampaToolStripButton_Click(object sender, EventArgs e) { }
+        private void Elimina_Click(object sender, EventArgs e)
+        {
+            EliminaRequested?.Invoke(sender, EventArgs.Empty);
+        }
 
         private void AboutToolStripButton_Click(object sender, EventArgs e)
             => new AboutBox().ShowDialog();

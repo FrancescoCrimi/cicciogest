@@ -19,14 +19,14 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
     public sealed partial class FornitoriViewModel : ObservableObject, IViewModel, IDisposable
     {
         private readonly ILogger<FornitoriViewModel> _logger;
-        private readonly IClientiFornitoriService _clientiFornitoriService;
+        private readonly IAnagraficaService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
         private Fornitore? _fornitoreSelezionato;
         private FornitoriViewReturnHandler? _fornitoriViewReturnHandler;
 
         public FornitoriViewModel(ILogger<FornitoriViewModel> logger,
                                   INavigationService navigationService,
-                                  IClientiFornitoriService clientiFornitoriService)
+                                  IAnagraficaService clientiFornitoriService)
         {
             _logger = logger;
             _navigationService = navigationService;
