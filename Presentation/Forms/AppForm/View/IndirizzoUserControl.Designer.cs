@@ -122,7 +122,7 @@ namespace CiccioGest.Presentation.AppForm.View
             // indirizzoBindingSource
             // 
             this.indirizzoBindingSource.AllowNew = false;
-            this.indirizzoBindingSource.DataSource = typeof(CiccioGest.Domain.ClientiFornitori.Indirizzo);
+            this.indirizzoBindingSource.DataSource = typeof(CiccioGest.Domain.Anagrafica.Indirizzo);
             // 
             // capLabel
             // 

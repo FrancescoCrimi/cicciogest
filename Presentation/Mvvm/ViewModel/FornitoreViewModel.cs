@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Domain.Anagrafica;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
@@ -97,7 +97,24 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
 
         [RelayCommand]
-        private async Task OnRimuoviFornitore()
+        private async Task OnApriFornitore()
+        {
+            await _unitOfWork.BeginAsync();
+            FornitoriViewReturnHandler fornitoriViewReturnHandler = FornitoriViewReturnMethod;
+            _navigationService.Navigate(ViewEnum.Fornitori, fornitoriViewReturnHandler, false);
+        }
+        private async Task FornitoriViewReturnMethod(FornitoriViewReturn fornitoriViewReturn)
+        {
+            if (fornitoriViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack(true);
+                await ApriFornitore(fornitoriViewReturn.IdFornitore);
+            }
+        }
+
+
+        [RelayCommand]
+        private async Task OnEliminaFornitore()
         {
             if (Fornitore != null)
             {
@@ -113,23 +130,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                     _messageBoxService.Show("Errore: " + ex.Message);
                     throw;
                 }
-            }
-        }
-
-
-        [RelayCommand]
-        private async Task OnApriFornitore()
-        {
-            await _unitOfWork.BeginAsync();
-            FornitoriViewReturnHandler fornitoriViewReturnHandler = FornitoriViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Fornitori, fornitoriViewReturnHandler, false);
-        }
-        private async Task FornitoriViewReturnMethod(FornitoriViewReturn fornitoriViewReturn)
-        {
-            if (fornitoriViewReturn.Result == WizardResult.Finished)
-            {
-                _navigationService.GoBack(true);
-                await ApriFornitore(fornitoriViewReturn.IdFornitore);
             }
         }
 

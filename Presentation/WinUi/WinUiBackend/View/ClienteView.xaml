@@ -36,12 +36,12 @@
                 <AppBarButton Icon="Save"
                               Label="Salva"
                               Command="{Binding SalvaClienteCommand}" />
-                <AppBarButton Icon="Delete"
-                              Label="Elimina"
-                              Command="{Binding EliminaClienteCommand}" />
                 <AppBarButton Icon="OpenFile"
                               Label="Apri"
                               Command="{Binding ApriClienteCommand}" />
+                <AppBarButton Icon="Delete"
+                              Label="Elimina"
+                              Command="{Binding EliminaClienteCommand}" />
             </CommandBar>
 
         </RelativePanel>

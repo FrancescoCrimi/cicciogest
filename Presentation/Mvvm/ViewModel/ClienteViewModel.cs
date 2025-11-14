@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Domain.Anagrafica;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
@@ -96,7 +96,24 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
 
 
         [RelayCommand]
-        private async Task OnRimuoviCliente()
+        private async Task OnApriCliente()
+        {
+            await _unitOfWork.BeginAsync();
+            ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
+            _navigationService.Navigate(ViewEnum.Clienti, clientiViewReturnHandler, false);
+        }
+        private async Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
+        {
+            if (clientiViewReturn.Result == WizardResult.Finished)
+            {
+                _navigationService.GoBack();
+                await ApriCliente(clientiViewReturn.IdCliente);
+            }
+        }
+
+
+        [RelayCommand]
+        private async Task OnEliminaCliente()
         {
             if (Cliente != null)
             {
@@ -112,23 +129,6 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
                     _messageBoxService.Show("Errore: " + ex.Message);
                     throw;
                 }
-            }
-        }
-
-
-        [RelayCommand]
-        private async Task OnApriCliente()
-        {
-            await _unitOfWork.BeginAsync();
-            ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Clienti, clientiViewReturnHandler, false);
-        }
-        private async Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
-        {
-            if (clientiViewReturn.Result == WizardResult.Finished)
-            {
-                _navigationService.GoBack();
-                await ApriCliente(clientiViewReturn.IdCliente);
             }
         }
 

@@ -4,10 +4,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Domain.Common;
 using System;
 
-namespace CiccioGest.Domain.ClientiFornitori
+namespace CiccioGest.Domain.Anagrafica
 {
     public class Fornitore : Persona, IEquatable<Fornitore>
     {

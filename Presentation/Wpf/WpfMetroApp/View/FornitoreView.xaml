@@ -51,18 +51,18 @@
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviFornitoreCommand}">
-                    <TextBlock>
-                        <Run Text="&#xE74D;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Elimina" />
-                    </TextBlock>
-                </Button>
                 <Button Command="{Binding ApriFornitoreCommand}">
                     <TextBlock>
                         <Run Text="&#xED25;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding EliminaFornitoreCommand}">
+                    <TextBlock>
+                        <Run Text="&#xE74D;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
             </ToolBar>

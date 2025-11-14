@@ -54,20 +54,20 @@
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding EliminaArticoloCommand, Mode=OneWay}"
-                        Margin="8,0,8,0">
-                    <TextBlock>        
-                        <Run Text="&#xE74D;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Elimina" />
-                    </TextBlock>
-                </Button>
                 <Button Command="{Binding ApriArticoloCommand}"
                         Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xED25;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding EliminaArticoloCommand, Mode=OneWay}"
+                        Margin="8,0,8,0">
+                    <TextBlock>        
+                        <Run Text="&#xE74D;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
                 <Separator />

@@ -10,10 +10,8 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
-    <!--
-      Title="Articolo"
-    -->
 
+    <!-- Title="Articolo" -->
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -49,18 +47,18 @@
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding EliminaArticoloCommand}">
-                    <TextBlock>        
-                        <Run Text="&#xE74D;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Elimina" />
-                    </TextBlock>
-                </Button>
                 <Button Command="{Binding ApriArticoloCommand}">
                     <TextBlock>
                         <Run Text="&#xED25;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding EliminaArticoloCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE74D;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
                 <Separator />

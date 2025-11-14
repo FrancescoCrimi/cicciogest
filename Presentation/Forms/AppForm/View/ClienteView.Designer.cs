@@ -143,7 +143,7 @@ namespace CiccioGest.Presentation.AppForm.View
             // 
             // clienteBindingSource
             // 
-            clienteBindingSource.DataSource = typeof(Domain.ClientiFornitori.Cliente);
+            clienteBindingSource.DataSource = typeof(Domain.Anagrafica.Cliente);
             // 
             // codiceFiscaleTextBox
             // 

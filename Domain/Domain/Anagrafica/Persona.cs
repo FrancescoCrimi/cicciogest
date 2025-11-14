@@ -7,7 +7,7 @@
 using CiccioGest.Domain.Common;
 using System;
 
-namespace CiccioGest.Domain.ClientiFornitori
+namespace CiccioGest.Domain.Anagrafica
 {
     public abstract class Persona : DomainEntity
     {

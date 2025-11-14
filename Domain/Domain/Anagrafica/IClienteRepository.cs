@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Domain.ClientiFornitori
+namespace CiccioGest.Domain.Anagrafica
 {
     public interface IClienteRepository : IDomainRepository<Cliente>, IDisposable
     {

@@ -40,10 +40,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
 
         public void Initialize(ContentControl contentControl)
         {
-            if (contentControl is null)
-            {
-                throw new ArgumentNullException(nameof(contentControl));
-            }
+            ArgumentNullException.ThrowIfNull(contentControl);
 
             if (_contentControl == null)
             {

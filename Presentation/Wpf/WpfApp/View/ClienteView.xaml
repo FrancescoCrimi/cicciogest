@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.View"
-             mc:Ignorable="d"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModel;assembly=CiccioGest.Presentation.Mvvm"
              xmlns:usercontrols="clr-namespace:CiccioGest.Presentation.WpfBackend.UserControls;assembly=WpfBackend"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodel:ClienteViewModel}}"
-             d:DesignHeight="450"
              d:DesignWidth="800"
-             d:Background="White">
+             d:DesignHeight="450"
+             d:Background="White"
+             mc:Ignorable="d">
     <!--
       Title="Cliente"
     -->
@@ -55,20 +55,20 @@
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviClienteCommand}"
-                        Margin="8,0,8,0">
-                    <TextBlock>
-                        <Run Text="&#xE74D;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Elimina" />
-                    </TextBlock>
-                </Button>
                 <Button Command="{Binding ApriClienteCommand}"
                         Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xED25;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding EliminaClienteCommand}"
+                        Margin="8,0,8,0">
+                    <TextBlock>
+                        <Run Text="&#xE74D;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
             </ToolBar>

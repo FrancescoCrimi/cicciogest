@@ -41,12 +41,12 @@
                 <AppBarButton Icon="Document"
                               Label="Nuova"
                               Command="{Binding NuovaFatturaCommand}" />
-                <AppBarButton Icon="OpenFile"
-                              Label="Apri"
-                              Command="{Binding ApriFatturaCommand}" />
                 <AppBarButton Icon="Save"
                               Label="Salva"
                               Command="{Binding SalvaFatturaCommand}" />
+                <AppBarButton Icon="OpenFile"
+                              Label="Apri"
+                              Command="{Binding ApriFatturaCommand}" />
                 <AppBarButton Icon="Delete"
                               Label="Elimina"
                               Command="{Binding RimuoviFatturaCommand}" />

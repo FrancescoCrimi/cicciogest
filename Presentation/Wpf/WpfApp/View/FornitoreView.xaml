@@ -55,20 +55,20 @@
                         <Run Text="Salva" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding RimuoviFornitoreCommand}"
-                        Margin="8,0,8,0">
-                    <TextBlock>
-                        <Run Text="&#xE74D;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Elimina" />
-                    </TextBlock>
-                </Button>
                 <Button Command="{Binding ApriFornitoreCommand}"
                         Margin="8,0,8,0">
                     <TextBlock>
                         <Run Text="&#xED25;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Apri" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding EliminaFornitoreCommand}"
+                        Margin="8,0,8,0">
+                    <TextBlock>
+                        <Run Text="&#xE74D;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Elimina" />
                     </TextBlock>
                 </Button>
             </ToolBar>

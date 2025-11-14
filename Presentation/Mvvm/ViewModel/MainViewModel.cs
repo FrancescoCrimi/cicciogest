@@ -30,7 +30,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModel
             _unitOfWork = unitOfWork;
             _navigationService = navigationService;
             _navigationService.Navigated += OnNavigated;
-            logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void Initialize(object? parameter)

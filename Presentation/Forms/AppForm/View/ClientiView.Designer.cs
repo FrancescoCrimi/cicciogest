@@ -142,7 +142,7 @@
             // clientiBindingSource
             // 
             clientiBindingSource.AllowNew = false;
-            clientiBindingSource.DataSource = typeof(Domain.ClientiFornitori.Cliente);
+            clientiBindingSource.DataSource = typeof(Domain.Anagrafica.Cliente);
             // 
             // toolStrip1
             // 

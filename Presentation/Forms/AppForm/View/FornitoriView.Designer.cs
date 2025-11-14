@@ -218,7 +218,7 @@
             // fornitoriBindingSource
             // 
             fornitoriBindingSource.AllowNew = false;
-            fornitoriBindingSource.DataSource = typeof(Domain.ClientiFornitori.Fornitore);
+            fornitoriBindingSource.DataSource = typeof(Domain.Anagrafica.Fornitore);
             // 
             // tableLayoutPanel2
             // 

@@ -7,10 +7,9 @@
 using CiccioGest.Domain.Common;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Domain.ClientiFornitori
+namespace CiccioGest.Domain.Anagrafica
 {
     public interface IFornitoreRepository : IDomainRepository<Fornitore>, IDisposable
     {

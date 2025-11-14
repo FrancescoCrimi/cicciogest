@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Domain.Anagrafica;
 using System;
 
 namespace CiccioGest.Presentation.AppForm.View

@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Domain.Anagrafica;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.View;
 using Microsoft.Extensions.Logging;

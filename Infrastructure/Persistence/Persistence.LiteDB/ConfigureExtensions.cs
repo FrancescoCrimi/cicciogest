@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Domain.ClientiFornitori;
+using CiccioGest.Domain.Anagrafica;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure.Persistence.LiteDB.Repository;

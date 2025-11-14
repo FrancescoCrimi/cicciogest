@@ -243,7 +243,7 @@ namespace CiccioGest.Presentation.AppForm.View
             // 
             // fornitoreBindingSource
             // 
-            fornitoreBindingSource.DataSource = typeof(Domain.ClientiFornitori.Fornitore);
+            fornitoreBindingSource.DataSource = typeof(Domain.Anagrafica.Fornitore);
             // 
             // emailTextBox
             // 

@@ -10,10 +10,8 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
-    <!--
-      Title="Categorie"
-    -->
 
+    <!-- Title="Categorie" -->
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -57,18 +55,18 @@
                         <Run Text="Nuova" />
                     </TextBlock>
                 </Button>
-                <Button Command="{Binding ModificaCategoriaCommand}">
-                    <TextBlock>
-                        <Run Text="&#xE70F;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Modifica" />
-                    </TextBlock>
-                </Button>
                 <Button Command="{Binding SalvaCommand}">
                     <TextBlock>
                         <Run Text="&#xE74E;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Salva" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding ModificaCategoriaCommand}">
+                    <TextBlock>
+                        <Run Text="&#xE70F;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Modifica" />
                     </TextBlock>
                 </Button>
                 <Button Command="{Binding RimuoviCommand, Mode=OneWay}">

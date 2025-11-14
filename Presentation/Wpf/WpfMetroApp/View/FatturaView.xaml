@@ -10,10 +10,8 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
-    <!--
-      Title="Fattura"
-    -->
-
+    
+    <!-- Title="Fattura" -->
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -36,10 +34,10 @@
                        Margin="5,5,5,5" />
 
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Content="Salva"
-                        Command="{Binding SalvaFatturaCommand}" />
                 <Button Content="Nuova"
                         Command="{Binding NuovaFatturaCommand}" />
+                <Button Content="Salva"
+                        Command="{Binding SalvaFatturaCommand}" />
                 <Button Content="Apri"
                         Command="{Binding ApriFatturaCommand}" />
                 <Button Content="Elimina"
