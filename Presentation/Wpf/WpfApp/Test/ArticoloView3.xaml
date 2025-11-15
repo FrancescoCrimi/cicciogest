@@ -1,4 +1,4 @@
-﻿<Window x:Class="CiccioGest.Presentation.WpfApp.Test.ClienteView3"
+﻿<Window x:Class="CiccioGest.Presentation.WpfApp.Test.ArticoloView3"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.Test"
         xmlns:converters="clr-namespace:CiccioGest.Presentation.WpfApp.Converters"
         mc:Ignorable="d"
-        Title="Cliente"
+        Title="Articolo"
         Width="800"
         Height="450"
         ResizeMode="CanResize"
@@ -15,10 +15,6 @@
         Background="#FFF7F7F7">
 
     <Window.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <converters:IndirizzoToStringConverter x:Key="IndirizzoToStringConverter" />
-
-        <!-- Colori e spaziatura -->
         <Color x:Key="AccentColor">#2B6FA6</Color>
         <SolidColorBrush x:Key="AccentBrush"
                          Color="{StaticResource AccentColor}" />
@@ -31,7 +27,6 @@
             <Setter Property="Foreground"
                     Value="{StaticResource AccentBrush}" />
         </Style>
-
         <Style x:Key="LabelStyle"
                TargetType="TextBlock">
             <Setter Property="FontSize"
@@ -41,7 +36,6 @@
             <Setter Property="Margin"
                     Value="0,0,6,0" />
         </Style>
-
         <Style x:Key="TextBoxStyle"
                TargetType="TextBox">
             <Setter Property="Padding"
@@ -55,8 +49,6 @@
             <Setter Property="Background"
                     Value="White" />
         </Style>
-
-        <!-- Simple validation template -->
         <ControlTemplate x:Key="ValidationTemplate">
             <DockPanel LastChildFill="True">
                 <Border BorderBrush="Red"
@@ -66,8 +58,6 @@
                 </Border>
             </DockPanel>
         </ControlTemplate>
-
-        <!-- Button style -->
         <Style x:Key="CommandButton"
                TargetType="Button">
             <Setter Property="Padding"
@@ -83,11 +73,10 @@
             <Setter Property="FontWeight"
                     Value="SemiBold" />
             <Setter Property="MinWidth"
-                    Value="80" />
+                    Value="90" />
             <Setter Property="Cursor"
                     Value="Hand" />
         </Style>
-
         <Style x:Key="SecondaryButton"
                TargetType="Button"
                BasedOn="{StaticResource CommandButton}">
@@ -100,6 +89,9 @@
             <Setter Property="BorderThickness"
                     Value="1" />
         </Style>
+
+        <!-- Converters già forniti in precedenza -->
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
 
     <Grid Margin="12">
@@ -153,7 +145,6 @@
                 </Button>
             </StackPanel>
 
-            <!-- Status / Id -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         DockPanel.Dock="Right">
@@ -162,11 +153,11 @@
                            Margin="0,0,8,0">ID:</TextBlock>
                 <TextBlock VerticalAlignment="Center"
                            FontWeight="SemiBold"
-                           Text="{Binding Cliente.Id}" />
+                           Text="{Binding Articolo.Id}" />
             </StackPanel>
         </DockPanel>
 
-        <!-- Content area -->
+        <!-- Content -->
         <Border Grid.Row="1"
                 Background="White"
                 CornerRadius="6"
@@ -179,23 +170,21 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Dati Cliente -->
+                <!-- Dati Articolo -->
                 <StackPanel Grid.Column="0"
                             Margin="0,0,12,0">
                     <TextBlock Style="{StaticResource HeaderText}"
-                               Text="Dati Cliente"
+                               Text="Dati Articolo"
                                Margin="0,0,0,12" />
 
-                    <Grid Margin="0,0,0,6">
+                    <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="130" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
@@ -206,146 +195,127 @@
                         <TextBox Grid.Row="0"
                                  Grid.Column="1"
                                  Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Cliente.Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                                 Text="{Binding Articolo.Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" />
 
                         <TextBlock Grid.Row="1"
                                    Grid.Column="0"
                                    Style="{StaticResource LabelStyle}"
-                                   Text="Cognome:"
+                                   Text="Prezzo:"
                                    Margin="0,8,0,0" />
                         <TextBox Grid.Row="1"
                                  Grid.Column="1"
                                  Style="{StaticResource TextBoxStyle}"
-                                 Margin="0,8,0,0"
-                                 Text="{Binding Cliente.Cognome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Articolo.Prezzo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}"
+                                 Margin="0,8,0,0" />
 
                         <TextBlock Grid.Row="2"
                                    Grid.Column="0"
                                    Style="{StaticResource LabelStyle}"
-                                   Text="Data Nascita:"
+                                   Text="Fornitore (ID):"
                                    Margin="0,8,0,0" />
-                        <DatePicker Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="0,8,0,0"
-                                    SelectedDate="{Binding Cliente.DataNascita, Mode=TwoWay}" />
+                        <Grid Grid.Row="2"
+                              Grid.Column="1"
+                              Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Style="{StaticResource TextBoxStyle}"                                     
+                                     Text="{Binding Articolo.NomeFornitore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Column="1"
+                                     Style="{StaticResource TextBoxStyle}"
+                                     Margin="8,0,0,0"
+                                     Text="{Binding Articolo.IdFornitore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalAlignment="Stretch" />
+                        </Grid>
 
-                        <TextBlock Grid.Row="3"
-                                   Grid.Column="0"
-                                   Style="{StaticResource LabelStyle}"
-                                   Text="Telefono:"
-                                   Margin="0,8,0,0" />
-                        <TextBox Grid.Row="3"
-                                 Grid.Column="1"
-                                 Margin="0,8,0,0"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Cliente.Telefono, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock Grid.Row="4"
-                                   Grid.Column="0"
-                                   Style="{StaticResource LabelStyle}"
-                                   Text="Email:"
-                                   Margin="0,8,0,0" />
-                        <TextBox Grid.Row="4"
-                                 Grid.Column="1"
-                                 Margin="0,8,0,0"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Cliente.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <!-- eventuali campi extra -->
                     </Grid>
                 </StackPanel>
 
-                <!-- Dati Indirizzo -->
+                <!-- Gestione Categorie -->
                 <StackPanel Grid.Column="1">
                     <TextBlock Style="{StaticResource HeaderText}"
-                               Text="Indirizzo"
+                               Text="Categorie"
                                Margin="0,0,0,12" />
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="0"
-                                   Style="{StaticResource LabelStyle}"
-                                   Text="Via:" />
-                        <TextBox Grid.Row="0"
-                                 Grid.Column="1"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Indirizzo.Via, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="0"
-                                   Style="{StaticResource LabelStyle}"
-                                   Text="Civico:"
-                                   Margin="0,8,0,0" />
-                        <TextBox Grid.Row="1"
-                                 Grid.Column="1"
-                                 Margin="0,8,0,0"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Indirizzo.Civico, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="0"
-                                   Style="{StaticResource LabelStyle}"
-                                   Text="CAP:"
-                                   Margin="0,8,0,0" />
-                        <TextBox Grid.Row="2"
-                                 Grid.Column="1"
-                                 Margin="0,8,0,0"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Indirizzo.CAP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock Grid.Row="3"
-                                   Grid.Column="0"
-                                   Style="{StaticResource LabelStyle}"
-                                   Text="Città:"
-                                   Margin="0,8,0,0" />
-                        <TextBox Grid.Row="3"
-                                 Grid.Column="1"
-                                 Margin="0,8,0,0"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Indirizzo.Citta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock Grid.Row="4"
-                                   Grid.Column="0"
-                                   Style="{StaticResource LabelStyle}"
-                                   Text="Stato:"
-                                   Margin="0,8,0,0" />
-                        <TextBox Grid.Row="4"
-                                 Grid.Column="1"
-                                 Margin="0,8,0,0"
-                                 Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Indirizzo.Stato, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
-                    <!-- Preview compatto dell'indirizzo -->
-                    <Border Margin="0,16,0,0"
-                            Background="#FFF8F8F8"
-                            Padding="8"
-                            CornerRadius="4"
-                            BorderBrush="#FFEFEFEF"
-                            BorderThickness="1">
-                        <StackPanel>
-                            <TextBlock FontWeight="SemiBold"
-                                       Foreground="#444"
-                                       Text="Anteprima Indirizzo" />
-                            <TextBlock Foreground="#666"
-                                       Text="{Binding Indirizzo, Converter={StaticResource IndirizzoToStringConverter}}" />
+                        <!-- Aggiungi / Rimuovi -->
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left">
+                            <Button Style="{StaticResource CommandButton}"
+                                    Command="{Binding AggiungiCategoriaCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                                               Text=""
+                                               Margin="0,0,6,0" />
+                                    <TextBlock Text="Aggiungi" />
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding RimuoviCategoriaCommand}"
+                                    IsEnabled="{Binding SelectedCategoria, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                                               Text=""
+                                               Margin="0,0,6,0" />
+                                    <TextBlock Text="Rimuovi" />
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
-                    </Border>
+
+                        <!-- Lista categorie -->
+                        <ListBox Grid.Row="1"
+                                 Margin="0,8,0,8"
+                                 ItemsSource="{Binding Articolo.Categorie}"
+                                 SelectedItem="{Binding SelectedCategoria, Mode=TwoWay}"
+                                 DisplayMemberPath="Nome">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding"
+                                            Value="6" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+
+                        <!-- Editor categoria selezionata -->
+                        <Border Grid.Row="2"
+                                Background="#FFF8F8F8"
+                                Padding="8"
+                                CornerRadius="4"
+                                BorderBrush="#FFEFEFEF"
+                                BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock FontWeight="SemiBold"
+                                           Foreground="#444"
+                                           Text="Dettagli Categoria" />
+                                <Grid Margin="0,6,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                               Style="{StaticResource LabelStyle}"
+                                               Text="Nome:" />
+                                    <TextBox Grid.Column="1"
+                                             Style="{StaticResource TextBoxStyle}"
+                                             Text="{Binding SelectedCategoria.Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <!-- Footer: messaggi / busy -->
+        <!-- Footer -->
         <Grid Grid.Row="2"
               Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
@@ -358,14 +328,12 @@
                        Text="{Binding StatusMessage}" />
             <StackPanel Orientation="Horizontal"
                         Grid.Column="1">
-                <Button Style="{StaticResource SecondaryButton}"
-                        Command="{Binding NuovoCommand}"
-                        Visibility="Collapsed">Test</Button>
+                <!-- Placeholder per eventuali pulsanti secondari -->
             </StackPanel>
         </Grid>
 
-        <!-- Optional busy overlay -->
-        <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}">
+        <!-- Busy overlay -->
+        <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}">
             <Rectangle Fill="#80000000" />
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
@@ -378,6 +346,5 @@
                            HorizontalAlignment="Center" />
             </StackPanel>
         </Grid>
-
     </Grid>
 </Window>

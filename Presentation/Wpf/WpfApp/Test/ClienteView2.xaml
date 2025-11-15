@@ -12,10 +12,7 @@
         Background="#FFF5F7FA"
         FontFamily="Segoe UI"
         FontSize="14">
-    
-    <!--
-        Background="{StaticResource WindowBackgroundBrush}"
-    -->
+    <!-- Background="{StaticResource WindowBackgroundBrush}" -->
 
     <Window.Resources>
 
@@ -58,7 +55,6 @@
                     Value="#333" />
         </Style>
 
-
     </Window.Resources>
 
     <Grid Margin="20">
@@ -73,12 +69,18 @@
             <!-- Barra comandi -->
         </Grid.RowDefinitions>
 
+        <!-- ======================= -->
         <!-- 🔹 Titolo -->
+        <!-- ======================= -->
+
         <TextBlock Text="Gestione Cliente"
                    Style="{StaticResource PageTitleStyle}"
                    Margin="0,0,0,10" />
 
+        <!-- ======================= -->
         <!-- 🔹 Corpo principale -->
+        <!-- ======================= -->
+
         <Border Grid.Row="1"
                 Padding="20"
                 CornerRadius="5"
@@ -194,31 +196,14 @@
             </Grid>
         </Border>
 
+        <!-- ======================= -->
         <!-- 🔹 Barra dei comandi -->
-        <!--<StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    Margin="0,15,0,0"
-                    Spacing="10">
-            <Button Content="Nuovo"
-                    Width="100"
-                    Command="{Binding NuovoCommand}" />
-            <Button Content="Apri"
-                    Width="100"
-                    Command="{Binding ApriCommand}" />
-            <Button Content="Salva"
-                    Width="100"
-                    Command="{Binding SalvaCommand}" />
-            <Button Content="Elimina"
-                    Width="100"
-                    Command="{Binding EliminaCommand}" />
-        </StackPanel>-->
+        <!-- ======================= -->
 
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="0,15,0,0">
-
             <Button Content="Nuovo"
                     Width="100"
                     Command="{Binding NuovoCommand}"
@@ -236,6 +221,6 @@
                     Command="{Binding EliminaCommand}" />
         </StackPanel>
 
-
     </Grid>
+
 </Window>
