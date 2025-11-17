@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CiccioGest.Presentation.WpfBackend.UserControls"
              mc:Ignorable="d"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModel;assembly=CiccioGest.Presentation.Mvvm"
+             xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModels;assembly=CiccioGest.Presentation.Mvvm"
              d:DataContext="{d:DesignInstance Type=viewmodel:FattureViewModel}"
              d:DesignHeight="450"
              d:DesignWidth="800"

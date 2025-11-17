@@ -9,7 +9,7 @@ using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WinUiBackend;
 using CiccioGest.Presentation.WinUiMenu.Services;
-using CiccioGest.Presentation.WinUiMenu.View;
+using CiccioGest.Presentation.WinUiMenu.Views;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

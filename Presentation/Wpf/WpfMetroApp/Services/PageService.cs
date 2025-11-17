@@ -6,7 +6,7 @@
 
 using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
-using CiccioGest.Presentation.WpfMetroApp.View;
+using CiccioGest.Presentation.WpfMetroApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

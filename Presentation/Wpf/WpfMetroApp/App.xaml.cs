@@ -8,7 +8,7 @@ using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WpfBackend;
 using CiccioGest.Presentation.WpfMetroApp.Services;
-using CiccioGest.Presentation.WpfMetroApp.View;
+using CiccioGest.Presentation.WpfMetroApp.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

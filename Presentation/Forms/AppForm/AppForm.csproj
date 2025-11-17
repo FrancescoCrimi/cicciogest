@@ -50,7 +50,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="View\Inteface\" />
+	  <Folder Include="Views\Inteface\" />
 	</ItemGroup>
 
 </Project>

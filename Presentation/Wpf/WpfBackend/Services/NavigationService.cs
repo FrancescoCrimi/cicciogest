@@ -6,7 +6,7 @@
 
 using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
-using CiccioGest.Presentation.Mvvm.ViewModel;
+using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;

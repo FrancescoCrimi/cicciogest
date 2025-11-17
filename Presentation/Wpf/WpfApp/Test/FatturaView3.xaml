@@ -1,0 +1,456 @@
+﻿<Window x:Class="CiccioGest.Presentation.WpfApp.Test.FatturaView3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:CiccioGest.Presentation.WpfApp.Converters"
+        Title="Fattura"
+        Width="800"
+        Height="600"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI"
+        Background="#FFF7F7F7">
+
+    <Window.Resources>
+        <Color x:Key="AccentColor">#2B6FA6</Color>
+        <SolidColorBrush x:Key="AccentBrush"
+                         Color="{StaticResource AccentColor}" />
+        <Style x:Key="HeaderText"
+               TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource AccentBrush}" />
+        </Style>
+        <Style x:Key="LabelStyle"
+               TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="12" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Margin"
+                    Value="0,0,6,0" />
+        </Style>
+        <Style x:Key="TextBoxStyle"
+               TargetType="TextBox">
+            <Setter Property="Padding"
+                    Value="6,4" />
+            <Setter Property="MinHeight"
+                    Value="26" />
+            <Setter Property="BorderBrush"
+                    Value="#FFBFBFBF" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="Background"
+                    Value="White" />
+        </Style>
+        <Style x:Key="CommandButton"
+               TargetType="Button">
+            <Setter Property="Padding"
+                    Value="10,6" />
+            <Setter Property="Margin"
+                    Value="6,0,0,0" />
+            <Setter Property="Background"
+                    Value="{StaticResource AccentBrush}" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="MinWidth"
+                    Value="90" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+        </Style>
+        <Style x:Key="SecondaryButton"
+               TargetType="Button"
+               BasedOn="{StaticResource CommandButton}">
+            <Setter Property="Background"
+                    Value="#FFF0F0F0" />
+            <Setter Property="Foreground"
+                    Value="#333" />
+            <Setter Property="BorderBrush"
+                    Value="#FFD0D0D0" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+        </Style>
+
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+        <DataTemplate x:Key="DettaglioRowTemplate">
+            <Grid Margin="0"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="{Binding Id}"
+                           VerticalAlignment="Center"
+                           Foreground="#666" />
+                <TextBlock Grid.Column="1"
+                           Text="{Binding NomeArticolo}"
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold" />
+                <TextBlock Grid.Column="2"
+                           Text="{Binding Quantità}"
+                           VerticalAlignment="Center"
+                           TextAlignment="Right" />
+                <TextBlock Grid.Column="3"
+                           Text="{Binding Prezzo, StringFormat=N0}"
+                           VerticalAlignment="Center"
+                           TextAlignment="Right" />
+                <TextBlock Grid.Column="4"
+                           Text="{Binding Totale, StringFormat=N0}"
+                           VerticalAlignment="Center"
+                           TextAlignment="Right"
+                           Foreground="#2B6FA6"
+                           FontWeight="SemiBold" />
+            </Grid>
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- toolbar -->
+            <RowDefinition Height="Auto" />
+            <!-- top content (fattura + dettaglio corrente) -->
+            <RowDefinition Height="*" />
+            <!-- lista dettagli (full width) -->
+            <RowDefinition Height="Auto" />
+            <!-- footer -->
+        </Grid.RowDefinitions>
+
+        <!-- TOOLBAR -->
+        <DockPanel Grid.Row="0"
+                   LastChildFill="False"
+                   Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal"
+                        DockPanel.Dock="Left">
+                <Button Style="{StaticResource CommandButton}"
+                        Command="{Binding NuovaFatturaCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text=""
+                                   Margin="0,0,6,0" />
+                        <TextBlock Text="Nuova Fattura" />
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource CommandButton}"
+                        Command="{Binding SalvaFatturaCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text=""
+                                   Margin="0,0,6,0" />
+                        <TextBlock Text="Salva Fattura" />
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SecondaryButton}"
+                        Command="{Binding ApriFatturaCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text=""
+                                   Margin="0,0,6,0" />
+                        <TextBlock Text="Apri Fattura" />
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SecondaryButton}"
+                        Command="{Binding EliminaFatturaCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text=""
+                                   Margin="0,0,6,0" />
+                        <TextBlock Text="Elimina Fattura" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Right">
+                <TextBlock VerticalAlignment="Center"
+                           Foreground="#666"
+                           Margin="0,0,8,0">ID:</TextBlock>
+                <TextBlock VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           Text="{Binding Fattura.Id}" />
+            </StackPanel>
+        </DockPanel>
+
+        <!-- TOP CONTENT: left = dati fattura, right = dettaglio corrente -->
+        <Grid Grid.Row="1"
+              Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- DATI FATTURA (sinistra) -->
+            <Border Grid.Column="0"
+                    Background="White"
+                    CornerRadius="6"
+                    Padding="12"
+                    BorderBrush="#FFE5E5E5"
+                    BorderThickness="1"
+                    Margin="0,0,12,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource HeaderText}"
+                               Text="Dati Fattura"
+                               Margin="0,0,0,12" />
+
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}"
+                               Text="Cliente:" />
+                    <Grid Grid.Row="1"
+                                Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding Fattura.IdCliente, Mode=TwoWay}" />
+                        <TextBox Grid.Column="1"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Margin="8,0,0,0"
+                                 Text="{Binding Fattura.NomeCliente, Mode=TwoWay}"
+                                  />
+                        <!--<Button Style="{StaticResource SecondaryButton}"
+                                Padding="0"
+                                Command="{Binding ApriClientiCommand}"
+                                Margin="8,0,0,0">Seleziona</Button>-->
+                    </Grid>
+
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}"
+                               Text="Totale:" />
+                    <TextBox Grid.Row="2"
+                             Grid.Column="1"
+                             Style="{StaticResource TextBoxStyle}"
+                             Margin="0,8,0,0"
+                             Text="{Binding Fattura.Totale, Mode=OneWay}"
+                             IsReadOnly="True" />
+                </Grid>
+            </Border>
+
+            <!-- DETTAGLIO CORRENTE (destra top) -->
+            <Border Grid.Column="1"
+                    Background="White"
+                    CornerRadius="6"
+                    Padding="12"
+                    BorderBrush="#FFE5E5E5"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.ColumnSpan="6"
+                               Style="{StaticResource HeaderText}"
+                               Text="Dettaglio corrente"
+                               Margin="0,0,0,12" />
+
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}"
+                               Text="Articolo:" />
+                    <Grid Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding DettaglioCorrente.IdArticolo, Mode=TwoWay}" />
+                        <TextBox Grid.Column="1"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Margin="8,0,0,0"
+                                 Text="{Binding DettaglioCorrente.NomeArticolo, Mode=TwoWay}"
+                                  />
+                    </Grid>
+
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Style="{StaticResource LabelStyle}"
+                               Margin="0,8,4,0"
+                               Text="Quantità:" />
+                    <TextBox Grid.Row="2"
+                             Grid.Column="1"
+                             Style="{StaticResource TextBoxStyle}"
+                             Margin="0,8,0,0"
+                            
+                             Text="{Binding DettaglioCorrente.Quantità, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="2"
+                               Style="{StaticResource LabelStyle}"
+                               Margin="4,8,4,0"
+                               Text="Prezzo:" />
+                    <TextBox Grid.Row="2"
+                             Grid.Column="3"
+                             Style="{StaticResource TextBoxStyle}"
+                             Margin="0,8,0,0"
+                             
+                             Text="{Binding DettaglioCorrente.Prezzo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="4"
+                               Style="{StaticResource LabelStyle}"
+                               Margin="4,8,4,0"
+                               Text="Totale:" />
+                    <TextBox Grid.Row="2"
+                             Grid.Column="5"
+                             Style="{StaticResource TextBoxStyle}"
+                             Margin="0,8,0,0"
+                             
+                             Text="{Binding DettaglioCorrente.Totale, Mode=OneWay}"
+                             IsReadOnly="True" />
+
+
+                    <!-- Azioni dettaglio -->
+                    <StackPanel Grid.Row="4"
+                                Grid.ColumnSpan="6"
+                                Orientation="Horizontal"
+                                Margin="0,8,0,0"
+                                HorizontalAlignment="Left">
+                        <Button Style="{StaticResource CommandButton}"
+                                Command="{Binding AggiungiDettaglioCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"
+                                           Text=""
+                                           Margin="0,0,6,0" />
+                                <TextBlock Text="Aggiungi Dettaglio" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource SecondaryButton}"
+                                Command="{Binding AnnullaDettaglioCommand}"
+                                Margin="8,0,0,0">Azzera</Button>
+                        <Button Style="{StaticResource SecondaryButton}"
+                                Command="{Binding SelezionaArticoloCommand}"
+                                Margin="8,0,0,0">Seleziona</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- BOTTOM: Lista dettagli full-width -->
+        <Border Grid.Row="2"
+                Background="White"
+                CornerRadius="6"
+                Padding="12"
+                BorderBrush="#FFE5E5E5"
+                BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Style="{StaticResource HeaderText}"
+                           Text="Dettagli Fattura"
+                           Margin="0,0,0,12" />
+
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding Fattura.Dettagli}"
+                         SelectedItem="{Binding SelectedDettaglio, Mode=TwoWay}"
+                         ItemTemplate="{StaticResource DettaglioRowTemplate}"
+                         HorizontalContentAlignment="Stretch" />
+
+                <StackPanel Grid.Row="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0,8,0,0">
+                    <Button Style="{StaticResource SecondaryButton}"
+                            Command="{Binding EliminaDettaglioCommand}"
+                            IsEnabled="{Binding SelectedDettaglio, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                       Text=""
+                                       Margin="0,0,6,0" />
+                            <TextBlock Text="Elimina Dettaglio" />
+                        </StackPanel>
+                    </Button>
+                    <TextBlock VerticalAlignment="Center"
+                               Foreground="#666"
+                               Margin="12,0,8,0">Totale fattura:</TextBlock>
+                    <TextBlock VerticalAlignment="Center"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource AccentBrush}"
+                               Text="{Binding Fattura.Totale, StringFormat=N0}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- FOOTER -->
+        <Grid Grid.Row="3"
+              Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock VerticalAlignment="Center"
+                       Foreground="#666"
+                       Text="{Binding StatusMessage}" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="1">
+                <!--<Button Style="{StaticResource SecondaryButton}"
+                        Command="{Binding ApriClientiCommand}"
+                        Margin="0,0,6,0">Apri Clienti</Button>-->
+            </StackPanel>
+        </Grid>
+
+        <!-- Busy overlay -->
+        <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Rectangle Fill="#80000000" />
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <ProgressBar Width="200"
+                             Height="16"
+                             IsIndeterminate="True" />
+                <TextBlock Foreground="White"
+                           Margin="0,8,0,0"
+                           Text="Operazione in corso..."
+                           HorizontalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Window>

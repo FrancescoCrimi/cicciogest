@@ -7,7 +7,7 @@
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WpfApp.Services;
-using CiccioGest.Presentation.WpfApp.View;
+using CiccioGest.Presentation.WpfApp.Views;
 using CiccioGest.Presentation.WpfBackend;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

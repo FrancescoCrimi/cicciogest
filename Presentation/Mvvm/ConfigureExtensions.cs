@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Presentation.Mvvm.ViewModel;
+using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CiccioGest.Presentation.Mvvm

@@ -5,7 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Presentation.Mvvm.Contracts;
-using CiccioGest.Presentation.WinUiBackend.View;
+using CiccioGest.Presentation.WinUiBackend.Views;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;

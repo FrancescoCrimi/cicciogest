@@ -6,9 +6,9 @@
 
 using CiccioGest.Application;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.AppForm.Presenter;
+using CiccioGest.Presentation.AppForm.Presenters;
 using CiccioGest.Presentation.AppForm.Services;
-using CiccioGest.Presentation.AppForm.View;
+using CiccioGest.Presentation.AppForm.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
