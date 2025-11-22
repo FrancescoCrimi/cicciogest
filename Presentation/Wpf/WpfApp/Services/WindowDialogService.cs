@@ -1,8 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,12 +25,15 @@ namespace CiccioGest.Presentation.WpfApp.Services
             where TViewModel : class, IDialogResult<TResult>;
     }
 
+    public interface IHaveDialogTitle
+    {
+        string? DialogTitle { get; }
+    }
 
     public class WindowDialogService : IWindowDialogService
     {
         private readonly IServiceProvider _provider;
         private readonly Window? _owner;
-        Window? dialogWindow = null;
 
         public WindowDialogService(IServiceProvider provider)
         {
@@ -44,6 +50,8 @@ namespace CiccioGest.Presentation.WpfApp.Services
 
             var tcs = new TaskCompletionSource<TResult?>(TaskCreationOptions.RunContinuationsAsynchronously);
 
+            Window? dialogWindow = null;
+ 
             // Resolve VM from DI
             var vm = ActivatorUtilities.CreateInstance<TViewModel>(_provider);
             void OnRequestClose(object? s, TResult? result)
@@ -56,7 +64,6 @@ namespace CiccioGest.Presentation.WpfApp.Services
 
             vm.RequestClose += OnRequestClose;
 
-
             // Create window, set DataContext, show dialog (blocks UI thread until closed)
             dialogWindow = new CiccioGest.Presentation.WpfApp.Views.DialogWindow
             {
@@ -64,9 +71,9 @@ namespace CiccioGest.Presentation.WpfApp.Services
                 DataContext = vm
             };
 
-            //// Optionally set window Title from VM if it exposes one
-            //if (vm is IHaveDialogTitle titled && !string.IsNullOrWhiteSpace(titled.DialogTitle))
-            //    dialogWindow.Title = titled.DialogTitle;
+            // Optionally set window Title from VM if it exposes one
+            if (vm is IHaveDialogTitle titled && !string.IsNullOrWhiteSpace(titled.DialogTitle))
+                dialogWindow.Title = titled.DialogTitle;
 
             // Cancellation: if token cancels before user action, unsubscribe and close window
             if (cancellationToken != default)
