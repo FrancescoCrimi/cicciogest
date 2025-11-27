@@ -21,8 +21,14 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private readonly ILogger _logger;
         private readonly IAnagraficaService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
-        private Cliente? _clienteSelezionato;
+        
         private ClientiViewReturnHandler? _clientiViewReturnHandler;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ConfermaCommand))]
+        private Cliente? _clienteSelezionato;
+
+        public ObservableCollection<Cliente> Clienti { get; } = [];
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
                                 IAnagraficaService clientiFornitoriService,
@@ -31,23 +37,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger = logger;
             _clientiFornitoriService = clientiFornitoriService;
             _navigationService = navigationService;
-            Clienti = new ObservableCollection<Cliente>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
-        }
-
-        public ObservableCollection<Cliente> Clienti { get; }
-
-        public Cliente? ClienteSelezionato
-        {
-            private get => _clienteSelezionato;
-            set
-            {
-                if (_clienteSelezionato != value)
-                {
-                    _clienteSelezionato = value;
-                    ApriClienteCommand.NotifyCanExecuteChanged();
-                }
-            }
         }
 
         public void Initialize(object? parameter)
@@ -60,7 +50,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
 
         [RelayCommand]
-        private Task OnLoaded() => OnAggiornaClienti();
+        private Task OnLoaded() => OnAggiorna();
 
 
         [RelayCommand]
@@ -68,7 +58,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
 
         [RelayCommand]
-        private async Task OnAggiornaClienti()
+        private async Task OnAggiorna()
         {
             Clienti.Clear();
             foreach (var item in await _clientiFornitoriService.GetClienti())
@@ -78,24 +68,31 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         }
 
 
-        [RelayCommand]
-        private void OnNuovoClienti() { }
-
-
-        [RelayCommand(CanExecute = nameof(CanApriCliente))]
-        private Task OnApriCliente()
+        [RelayCommand(CanExecute = nameof(CanConferma))]
+        private Task OnConferma()
         {
             if (ClienteSelezionato != null)
             {
                 if (_clientiViewReturnHandler != null)
                 {
                     //_idClienteTaskCompletionSource.SetResult(ClienteSelezionato.Id);
-                    return _clientiViewReturnHandler.Invoke(new ClientiViewReturn(WizardResult.Finished, ClienteSelezionato.Id));
+                    return _clientiViewReturnHandler(new ClientiViewReturn(WizardResult.Finished, ClienteSelezionato.Id));
                 }
             }
             return Task.CompletedTask;
         }
-        private bool CanApriCliente() => ClienteSelezionato != null;
+        private bool CanConferma() => ClienteSelezionato != null;
+
+
+        [RelayCommand]
+        private Task OnAnnulla()
+        {
+            if (_clientiViewReturnHandler != null)
+            {
+                return _clientiViewReturnHandler(new ClientiViewReturn(WizardResult.Canceled, 0));
+            }
+            return Task.CompletedTask;
+        }
 
 
         public void Dispose()

@@ -22,144 +22,145 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMagazzinoService _magazinoService;
-        private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
-        private CategoriaViewReturnHandler? _categoriaViewReturnHandler;
 
         [ObservableProperty]
-        private Categoria? _categoria;
+        [NotifyCanExecuteChangedFor(nameof(SalvaCategoriaCommand))]
+        private Categoria? _categoriaCorrente;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(EliminaCategoriaCommand))]
         private Categoria? _categoriaSelezionata;
 
-        public ObservableCollection<Categoria> Categorie { get; private set; }
+        [ObservableProperty]
+        private bool _isBusy;
+
+        [ObservableProperty]
+        private string? _statusMessage;
+
+        public ObservableCollection<Categoria> Categorie { get; } = [];
 
 
         public CategoriaViewModel(ILogger<CategoriaViewModel> logger,
                                   IUnitOfWork unitOfWork,
                                   IMagazzinoService magazinoService,
-                                  INavigationService navigationService,
                                   IMessageBoxService messageBoxService)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
             _magazinoService = magazinoService;
-            _navigationService = navigationService;
             _messageBoxService = messageBoxService;
-            Categorie = new ObservableCollection<Categoria>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void Initialize(object? parameter)
         {
-            if (parameter is CategoriaViewReturnHandler categoriaViewReturnHandler)
-            {
-                _categoriaViewReturnHandler = categoriaViewReturnHandler;
-            }
+            //if (parameter is CategoriaViewReturnHandler categoriaViewReturnHandler)
+            //{
+            //    _categoriaViewReturnHandler = categoriaViewReturnHandler;
+            //}
         }
 
-
         [RelayCommand]
-        private Task OnLoaded() => Aggiorna();
+        private async Task OnLoaded()
+        {
+            CategoriaCorrente = new Categoria();
+            await AggiornaCategorie();
+        }
+
 
         [RelayCommand]
         private Task OnUnloaded() => Task.CompletedTask;
 
 
         [RelayCommand]
-        public Task OnNuovo() => Nuova();
-
-
-        [RelayCommand]
-        public async Task OnSalva()
+        private void OnNuovaCategoria()
         {
-            if (Categoria != null)
+            CategoriaCorrente = new Categoria();
+            CategoriaSelezionata = null;
+            StatusMessage = "Nuova categoria pronta per l'inserimento.";
+        }
+
+
+        [RelayCommand(CanExecute =nameof(CanSalvaCategoria))]
+        private async Task OnSalvaCategoria()
+        {
+            if (CategoriaCorrente != null)
             {
                 try
                 {
-                    await _magazinoService.SaveCategoria(Categoria);
-                    await _unitOfWork.CommitAsync();
+                    var nomeCategoriaSalvata = CategoriaCorrente.Nome;
                     await _unitOfWork.BeginAsync();
-                    await Aggiorna();
+                    await _magazinoService.SaveCategoria(CategoriaCorrente);
+                    await _unitOfWork.CommitAsync();
+
+                    CategoriaCorrente = new Categoria();
+                    await AggiornaCategorie();
+
+                    StatusMessage = $"Categoria '{nomeCategoriaSalvata}' aggiunta.";
                 }
                 catch (Exception e)
                 {
                     await _unitOfWork.RollbackAsync();
                     _messageBoxService.Show("Errore: " + e.Message);
-                    throw;
                 }
             }
         }
+        private bool CanSalvaCategoria() => CategoriaCorrente != null;
 
 
-        [RelayCommand]
-        private async Task OnRimuovi()
+        [RelayCommand(CanExecute = nameof(CanEliminaCategoria))]
+        private async Task OnEliminaCategoria()
         {
-            if (Categoria != null)
+            if (CategoriaSelezionata != null)
             {
                 try
                 {
-                    await _magazinoService.DeleteCategoria(Categoria.Id);
-                    await _unitOfWork.CommitAsync();
+                    var nomeCategoriaEliminata = CategoriaSelezionata.Nome;
                     await _unitOfWork.BeginAsync();
-                    await Aggiorna();
+                    await _magazinoService.DeleteCategoria(CategoriaSelezionata.Id);
+                    await _unitOfWork.CommitAsync();
+
+                    CategoriaCorrente = new Categoria();
+                    await AggiornaCategorie();
+                    StatusMessage = $"Categoria '{nomeCategoriaEliminata}' eliminata.";
                 }
                 catch (Exception e)
                 {
                     await _unitOfWork.RollbackAsync();
                     _messageBoxService.Show("Errore: " + e.Message);
-                    throw;
                 }
             }
         }
+        private bool CanEliminaCategoria() => CategoriaSelezionata != null;
 
 
         [RelayCommand]
-        private Task OnSelezionaCategoria()
+        private async Task OnSelezionaCategoria()
         {
-            if (CategoriaSelezionata != null && Categoria != CategoriaSelezionata)
+            if (CategoriaSelezionata != null && CategoriaCorrente != CategoriaSelezionata)
             {
-                if (_categoriaViewReturnHandler != null)
-                {
-                    return _categoriaViewReturnHandler.Invoke(new CategoriaViewReturn(WizardResult.Finished, CategoriaSelezionata.Id));
-                }
-                //Messenger.Send(new IdCategoriaMessage(CategoriaSelezionata.Id));
-                //_navigationService.GoBack();
-            }
-            return Task.CompletedTask;
-        }
-
-
-        [RelayCommand]
-        private void OnModificaCategoria()
-        {
-            if (CategoriaSelezionata != null && Categoria != CategoriaSelezionata)
-            {
-                Categoria = CategoriaSelezionata;
-                OnPropertyChanged(nameof(Categoria));
+                //if (_categoriaViewReturnHandler != null)
+                //{
+                //    return _categoriaViewReturnHandler.Invoke(new CategoriaViewReturn(WizardResult.Finished, CategoriaSelezionata.Id));
+                //}
+                await _unitOfWork.BeginAsync();
+                CategoriaCorrente = await _magazinoService.GetCategoria(CategoriaSelezionata.Id);
+                await _unitOfWork.CommitAsync();
+                StatusMessage = $"Modifica categoria '{CategoriaCorrente.Nome}'.";
             }
         }
 
-
-        [RelayCommand]
-        private Task OnAnnullaModificheCategoria() => Nuova();
-
-
-        private async Task Nuova()
+        private async Task AggiornaCategorie()
         {
-            await _unitOfWork.BeginAsync();
-            Categoria = null;
-            Categoria = new Categoria();
-        }
-
-        private async Task Aggiorna()
-        {
-            await Nuova();
             Categorie.Clear();
-            foreach (Categoria ca in await _magazinoService.GetCategorie())
+            CategoriaSelezionata = null;
+            await _unitOfWork.BeginAsync();
+            foreach (Categoria categoria in await _magazinoService.GetCategorie())
             {
-                Categorie.Add(ca);
+                Categorie.Add(categoria);
             }
+            await _unitOfWork.CommitAsync();
         }
 
 

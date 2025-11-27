@@ -49,26 +49,26 @@
             </Grid>
 
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoArticoloCommand}">
-                    <TextBlock>        
-                        <Run Text="&#xE8A5;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Nuovo" />
-                    </TextBlock>
-                </Button>
-                <Button Command="{Binding ApriArticoloCommand}">
-                    <TextBlock>        
-                        <Run Text="&#xED25;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Apri" />
-                    </TextBlock>
-                </Button>
-                <Button Command="{Binding AggiornaArticoliCommand}"
+                <Button Command="{Binding AggiornaCommand}"
                         FontSize="14">
                     <TextBlock>        
                         <Run Text="&#xE72C;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding ConfermaCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE10B;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Conferma" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding AnnullaCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE10A;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Annulla" />
                     </TextBlock>
                 </Button>
             </ToolBar>

@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="CiccioGest.Presentation.WpfApp.Test.ArticoliListView1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.Test"
+             xmlns:converters="clr-namespace:CiccioGest.Presentation.WpfApp.Converters"
+             mc:Ignorable="d"
+             d:Width="800"
+             d:Height="450"
+             Background="#FFF7F7F7">
+    
+    <!--
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+    -->
+                                
+
+        <UserControl.Resources>
+            <!-- Converter per watermark -->
+            <converters:StringNullOrEmptyToVisibilityConverter x:Key="StringNullOrEmptyToVisibilityConverter" />
+
+            <!-- Stile ToolBar senza overflow chevron -->
+            <Style TargetType="{x:Type ToolBar}">
+                <Setter Property="ToolBarTray.IsLocked"
+                        Value="True" />
+                <Setter Property="OverflowMode"
+                        Value="Never" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToolBar}">
+                            <Border Background="#2B6FA6"
+                                    Padding="8">
+                                <ToolBarPanel IsItemsHost="True" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Bottoni flat -->
+            <Style x:Key="FlatToolbarButton"
+                   TargetType="Button">
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Foreground"
+                        Value="White" />
+                <Setter Property="Padding"
+                        Value="10,6" />
+                <Setter Property="Margin"
+                        Value="6,0,0,0" />
+                <Setter Property="FontWeight"
+                        Value="SemiBold" />
+                <Setter Property="Cursor"
+                        Value="Hand" />
+                <Setter Property="MinWidth"
+                        Value="90" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#20FFFFFF" />
+                                </Trigger>
+                                <Trigger Property="IsPressed"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#40FFFFFF" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- TextBox -->
+            <Style x:Key="TextBoxStyle"
+                   TargetType="TextBox">
+                <Setter Property="Padding"
+                        Value="6,4" />
+                <Setter Property="MinHeight"
+                        Value="26" />
+                <Setter Property="BorderBrush"
+                        Value="#FFBFBFBF" />
+                <Setter Property="BorderThickness"
+                        Value="1" />
+                <Setter Property="Background"
+                        Value="White" />
+            </Style>
+
+        </UserControl.Resources>
+
+        <Grid Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- toolbar -->
+                <RowDefinition Height="*" />
+                <!-- lista -->
+                <RowDefinition Height="Auto" />
+                <!-- footer -->
+            </Grid.RowDefinitions>
+
+            <!-- Toolbar -->
+            <ToolBar Grid.Row="0">
+                <TextBlock Text="Articoli"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="0,0,20,0" />
+
+                <Button Style="{StaticResource FlatToolbarButton}"
+                        Command="{Binding LoadAsyncCommand}"
+                        Content="Aggiorna" />
+                <Button Style="{StaticResource FlatToolbarButton}"
+                        Command="{Binding ApriDettaglioAsyncCommand}"
+                        Content="Apri dettaglio" />
+                <Button Style="{StaticResource FlatToolbarButton}"
+                        Command="{Binding ConfermaSelezioneCommand}"
+                        Content="Conferma" />
+                <Button Style="{StaticResource FlatToolbarButton}"
+                        Command="{Binding ChiudiCommand}"
+                        Content="Chiudi" />
+
+                <!-- Spacer -->
+                <!--<Separator Width="20" />-->
+
+                <!-- Ricerca -->
+                <Grid Width="240">
+                    <TextBox Style="{StaticResource TextBoxStyle}"
+                             Text="{Binding Filtro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Cerca per codice o nome"
+                               Foreground="#99FFFFFF"
+                               Margin="8,6,0,0"
+                               IsHitTestVisible="False"
+                               Visibility="{Binding Filtro, Converter={StaticResource StringNullOrEmptyToVisibilityConverter}}" />
+                </Grid>
+            </ToolBar>
+
+            <!-- Lista -->
+            <Border Grid.Row="1"
+                    Background="White"
+                    CornerRadius="6"
+                    Padding="12"
+                    BorderBrush="#FFE5E5E5"
+                    BorderThickness="1">
+                <ListView ItemsSource="{Binding ViewArticoli}"
+                          SelectedItem="{Binding ArticoloSelezionato, Mode=TwoWay}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID"
+                                            DisplayMemberBinding="{Binding Id}"
+                                            Width="70" />
+                            <GridViewColumn Header="Codice"
+                                            DisplayMemberBinding="{Binding Codice}"
+                                            Width="180" />
+                            <GridViewColumn Header="Nome"
+                                            DisplayMemberBinding="{Binding Nome}"
+                                            Width="280" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+
+            <!-- Footer -->
+            <Grid Grid.Row="2"
+                  Margin="0,10,0,0">
+                <TextBlock VerticalAlignment="Center"
+                           Foreground="#666"
+                           Text="{Binding StatusMessage}" />
+            </Grid>
+        </Grid>
+
+    </UserControl>

@@ -23,8 +23,14 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFatturaService _fatturaService;
         private readonly INavigationService _navigationService;
-        private Fattura? _fatturaSelezionata;
         private FattureViewReturnHandler? _fattureViewReturnHandler;
+
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ConfermaCommand))]
+        private Fattura? _fatturaSelezionata;
+
+        public ObservableCollection<Fattura> Fatture { get; } = [];
 
         public FattureViewModel(ILogger<FattureViewModel> logger,
                                 IUnitOfWork unitOfWork,
@@ -35,24 +41,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _unitOfWork = unitOfWork;
             _fatturaService = fatturaService;
             _navigationService = navigationService;
-            Fatture = new ObservableCollection<Fattura>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public ObservableCollection<Fattura> Fatture { get; }
 
-        public Fattura? FatturaSelezionata
-        {
-            private get => _fatturaSelezionata;
-            set
-            {
-                if (value != _fatturaSelezionata)
-                {
-                    _fatturaSelezionata = value;
-                    ApriFatturaCommand?.NotifyCanExecuteChanged();
-                }
-            }
-        }
 
         public void Initialize(object? parameter)
         {
@@ -64,7 +56,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
 
         [RelayCommand]
-        private Task OnLoaded() => OnAggiornaFatture();
+        private Task OnLoaded() => OnAggiorna();
 
 
         [RelayCommand]
@@ -72,7 +64,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
 
         [RelayCommand]
-        private async Task OnAggiornaFatture()
+        private async Task OnAggiorna()
         {
             await _unitOfWork.BeginAsync();
             Fatture.Clear();
@@ -83,12 +75,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         }
 
 
-        [RelayCommand]
-        private void OnNuovaFattura() { }
-
-
-        [RelayCommand(CanExecute = nameof(CanApriFattura))]
-        private Task OnApriFattura()
+        [RelayCommand(CanExecute = nameof(CanConferma))]
+        private Task OnConferma()
         {
             if (FatturaSelezionata != null)
             {
@@ -100,7 +88,16 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             }
             return Task.CompletedTask;
         }
-        private bool CanApriFattura() => FatturaSelezionata != null;
+        private bool CanConferma() => FatturaSelezionata != null;
+
+
+        [RelayCommand]
+        private Task OnAnnulla()
+        {
+            if (_fattureViewReturnHandler != null)
+                return _fattureViewReturnHandler!.Invoke(new FattureViewReturn(WizardResult.Canceled, 0));
+            return Task.CompletedTask;
+        }
 
 
         public void Dispose()

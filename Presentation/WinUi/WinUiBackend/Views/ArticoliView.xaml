@@ -37,15 +37,15 @@
                         Background="Transparent"
                         RelativePanel.LeftOf="OrderSearchBox"
                         RelativePanel.RightOf="PageTitle">
-                <AppBarButton Icon="Document"
-                              Label="Nuovo"
-                              Command="{Binding NuovoArticoloCommand}" />
-                <AppBarButton Icon="Edit"
-                              Label="Apri"
-                              Command="{Binding ApriArticoloCommand}" />
                 <AppBarButton Icon="Refresh"
                               Label="Aggiorna"
-                              Command="{Binding AggiornaArticoliCommand}" />
+                              Command="{Binding AggiornaCommand}" />
+                <AppBarButton Icon="Accept"
+                              Label="Conferma"
+                              Command="{Binding ConfermaCommand}" />
+                <AppBarButton Icon="Cancel"
+                              Label="Annulla"
+                              Command="{Binding AnnullaCommand}" />
             </CommandBar>
 
             <uc:CollapsibleSearchBox x:Name="OrderSearchBox"

@@ -333,7 +333,8 @@
         </Grid>
 
         <!-- Busy overlay -->
-        <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}">
+        <!-- Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" -->
+        <Grid Visibility="Hidden">
             <Rectangle Fill="#80000000" />
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">

@@ -49,32 +49,25 @@
             </Grid>
 
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Command="{Binding NuovoClientiCommand}">
-                    <TextBlock>        
-                        <Run Text="&#xE8A5;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Nuovo" />
-                    </TextBlock>
-                </Button>
-                <Button Command="{Binding ApriClienteCommand}">
-                    <TextBlock>        
-                        <Run Text="&#xED25;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Apri" />
-                    </TextBlock>
-                </Button>
-                <Button>
-                    <TextBlock>        
-                        <Run Text="&#xE8A5;"
-                             FontFamily="Segoe MDL2 Assets" />
-                        <Run Text="Crea Fattura" />
-                    </TextBlock>
-                </Button>
-                <Button Command="{Binding AggiornaClientiCommand}">
+                <Button Command="{Binding AggiornaCommand}">
                     <TextBlock>        
                         <Run Text="&#xE72C;"
                              FontFamily="Segoe MDL2 Assets" />
                         <Run Text="Aggiorna" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding ConfermaCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE10B;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Conferma" />
+                    </TextBlock>
+                </Button>
+                <Button Command="{Binding AnnullaCommand}">
+                    <TextBlock>        
+                        <Run Text="&#xE10A;"
+                             FontFamily="Segoe MDL2 Assets" />
+                        <Run Text="Annulla" />
                     </TextBlock>
                 </Button>
             </ToolBar>

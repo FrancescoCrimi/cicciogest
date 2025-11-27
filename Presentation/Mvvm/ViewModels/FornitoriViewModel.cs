@@ -21,8 +21,13 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private readonly ILogger<FornitoriViewModel> _logger;
         private readonly IAnagraficaService _clientiFornitoriService;
         private readonly INavigationService _navigationService;
-        private Fornitore? _fornitoreSelezionato;
         private FornitoriViewReturnHandler? _fornitoriViewReturnHandler;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ConfermaCommand))]
+        private Fornitore? _fornitoreSelezionato;
+
+        public ObservableCollection<Fornitore> Fornitori { get; } = [];
 
         public FornitoriViewModel(ILogger<FornitoriViewModel> logger,
                                   INavigationService navigationService,
@@ -31,23 +36,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger = logger;
             _navigationService = navigationService;
             _clientiFornitoriService = clientiFornitoriService;
-            Fornitori = new ObservableCollection<Fornitore>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
-        }
-
-        public ObservableCollection<Fornitore> Fornitori { get; }
-
-        public Fornitore? FornitoreSelezionato
-        {
-            private get => _fornitoreSelezionato;
-            set
-            {
-                if (value != _fornitoreSelezionato)
-                {
-                    _fornitoreSelezionato = value;
-                    ApriFornitoreCommand?.NotifyCanExecuteChanged();
-                }
-            }
         }
 
         public void Initialize(object? parameter)
@@ -60,7 +49,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
 
         [RelayCommand]
-        private Task OnLoaded() => OnAggiornaFornitori();
+        private Task OnLoaded() => OnAggiorna();
 
 
         [RelayCommand]
@@ -68,7 +57,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
 
         [RelayCommand]
-        private async Task OnAggiornaFornitori()
+        private async Task OnAggiorna()
         {
             Fornitori.Clear();
             foreach (var item in await _clientiFornitoriService.GetFornitori())
@@ -79,12 +68,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         }
 
 
-        [RelayCommand]
-        private void OnNuovoFornitore() { }
-
-
-        [RelayCommand(CanExecute = nameof(CanApriFornitore))]
-        private Task OnApriFornitore()
+        [RelayCommand(CanExecute = nameof(CanConferma))]
+        private Task OnConferma()
         {
             if (FornitoreSelezionato != null)
             {
@@ -96,7 +81,16 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             }
             return Task.CompletedTask;
         }
-        private bool CanApriFornitore() => FornitoreSelezionato != null;
+        private bool CanConferma() => FornitoreSelezionato != null;
+
+
+        [RelayCommand]
+        private Task OnAnnulla()
+        {
+            if (_fornitoriViewReturnHandler != null)
+                return _fornitoriViewReturnHandler!.Invoke(new FornitoriViewReturn(WizardResult.Canceled, 0));
+            return Task.CompletedTask;
+        }
 
 
         public void Dispose()

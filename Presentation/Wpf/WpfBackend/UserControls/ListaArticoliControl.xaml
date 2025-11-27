@@ -27,7 +27,7 @@
         </DataGrid.Columns>
         <DataGrid.InputBindings>
             <MouseBinding MouseAction="LeftDoubleClick"
-                          Command="{Binding ApriArticoloCommand}" />
+                          Command="{Binding ConfermaCommand}" />
         </DataGrid.InputBindings>
     </DataGrid>
 
