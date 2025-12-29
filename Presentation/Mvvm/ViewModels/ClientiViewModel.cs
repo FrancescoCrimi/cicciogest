@@ -6,23 +6,19 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Anagrafica;
-using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class ClientiViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class ClientiViewModel : DialogViewModelBase<int>
     {
         private readonly ILogger _logger;
-        private readonly IAnagraficaService _clientiFornitoriService;
-        private readonly INavigationService _navigationService;
-        
-        private ClientiViewReturnHandler? _clientiViewReturnHandler;
+        private readonly IAnagraficaService _anagraficaService;
+        private bool _disposedValue;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ConfermaCommand))]
@@ -31,73 +27,50 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         public ObservableCollection<Cliente> Clienti { get; } = [];
 
         public ClientiViewModel(ILogger<ClientiViewModel> logger,
-                                IAnagraficaService clientiFornitoriService,
-                                INavigationService navigationService)
+                                IAnagraficaService anagraficaService)
         {
             _logger = logger;
-            _clientiFornitoriService = clientiFornitoriService;
-            _navigationService = navigationService;
+            _anagraficaService = anagraficaService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
-        {
-            if (parameter is ClientiViewReturnHandler clientiViewReturnHandler)
-            {
-                _clientiViewReturnHandler = clientiViewReturnHandler;
-            }
-        }
-
-
         [RelayCommand]
         private Task OnLoaded() => OnAggiorna();
-
-
-        [RelayCommand]
-        private void OnUnloaded() { }
-
 
         [RelayCommand]
         private async Task OnAggiorna()
         {
             Clienti.Clear();
-            foreach (var item in await _clientiFornitoriService.GetClienti())
-            {
+            foreach (var item in await _anagraficaService.GetClienti())
                 Clienti.Add(item);
-            }
         }
 
-
         [RelayCommand(CanExecute = nameof(CanConferma))]
-        private Task OnConferma()
+        private void OnConferma()
         {
             if (ClienteSelezionato != null)
-            {
-                if (_clientiViewReturnHandler != null)
-                {
-                    //_idClienteTaskCompletionSource.SetResult(ClienteSelezionato.Id);
-                    return _clientiViewReturnHandler(new ClientiViewReturn(WizardResult.Finished, ClienteSelezionato.Id));
-                }
-            }
-            return Task.CompletedTask;
+                CloseDialog(ClienteSelezionato.Id);
         }
         private bool CanConferma() => ClienteSelezionato != null;
 
-
         [RelayCommand]
-        private Task OnAnnulla()
+        private void OnAnnulla() => CloseDialog(0);
+
+        protected override void Dispose(bool disposing)
         {
-            if (_clientiViewReturnHandler != null)
+            if (!_disposedValue)
             {
-                return _clientiViewReturnHandler(new ClientiViewReturn(WizardResult.Canceled, 0));
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _anagraficaService?.Dispose();
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
             }
-            return Task.CompletedTask;
-        }
-
-
-        public void Dispose()
-        {
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

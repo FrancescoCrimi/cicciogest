@@ -20,9 +20,6 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
         </i:EventTrigger>
-        <i:EventTrigger EventName="Unloaded">
-            <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}" />
-        </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid Margin="{StaticResource SmallLeftRightBottomMargin}">

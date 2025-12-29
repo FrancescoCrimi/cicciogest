@@ -30,10 +30,10 @@ namespace CiccioGest.Infrastructure
         public DataAccessException() { }
         public DataAccessException(string message) : base(message) { }
         public DataAccessException(string message, Exception inner) : base(message, inner) { }
-        protected DataAccessException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
-            : base(info, context) { }
+        //protected DataAccessException(
+        //  System.Runtime.Serialization.SerializationInfo info,
+        //  System.Runtime.Serialization.StreamingContext context)
+        //    : base(info, context) { }
     }
 
     public class CiccioGestConfigurationException : Exception

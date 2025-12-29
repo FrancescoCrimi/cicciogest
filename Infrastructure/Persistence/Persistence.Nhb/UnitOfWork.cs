@@ -32,13 +32,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             }
         }
 
-        public void Begin()
-        {
-            Task.Run(async () => await DisposeTransaction());
-            _session = _unitOfWorkFactory.CreateSession();
-            _session.FlushMode = FlushMode.Commit;
-            _transaction = _session.BeginTransaction();
-        }
         public async Task BeginAsync()
         {
             await DisposeTransaction();
@@ -47,21 +40,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
             _transaction = _session.BeginTransaction();
         }
 
-        public void Commit()
-        {
-            try
-            {
-                _transaction?.Commit();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Task.Run(async () => await DisposeTransaction());
-            }
-        }
 
         public async Task CommitAsync()
         {
@@ -71,20 +49,11 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 {
                     await _transaction.CommitAsync();
                 }
-                catch
-                {
-                    throw;
-                }
                 finally
                 {
                     await DisposeTransaction();
                 }
             }
-        }
-
-        public void Rollback()
-        {
-            Task.Run(async () => await DisposeTransaction());
         }
 
         public Task RollbackAsync()

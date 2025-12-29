@@ -11,12 +11,13 @@ using System;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class DashboardViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class DashboardViewModel : ViewModelBase, IViewModel
     {
+        private readonly ILogger _logger;
+        private bool _disposedValue;
+
         [ObservableProperty]
         private string _title;
-
-        private readonly ILogger _logger;
 
         public DashboardViewModel(ILogger<DashboardViewModel> logger)
         {
@@ -38,9 +39,20 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private void OnUnloaded() { }
 
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

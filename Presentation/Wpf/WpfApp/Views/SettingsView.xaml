@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.Views"
              xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModels;assembly=CiccioGest.Presentation.Mvvm"
-             d:DataContext="{d:DesignInstance Type=viewmodel:SettingViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"

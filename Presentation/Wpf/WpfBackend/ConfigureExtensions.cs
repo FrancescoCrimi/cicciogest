@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Mvvm;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WpfBackend.Services;
@@ -14,14 +15,14 @@ namespace CiccioGest.Presentation.WpfBackend
 {
     public static class ConfigureExtensions
     {
-        public static IServiceCollection ConfigureWpfBackend(this IServiceCollection serviceCollection)
+        public static IServiceCollection ConfigureWpfBackend(this IServiceCollection serviceCollection,
+                                                             CiccioGestConf conf)
         {
             serviceCollection
-                .ConfigureMvvm()
+                .ConfigureMvvm(conf)
                 .AddSingleton<NavigationService>()
                 .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
-                .AddSingleton<IMessageBoxService, MessageBoxService>()
-                ;
+                .AddSingleton<IMessageBoxService, MessageBoxService>();
             return serviceCollection;
         }
     }

@@ -6,16 +6,17 @@
 
 using CiccioGest.Domain.Anagrafica;
 using CiccioGest.Domain.Magazzino;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    public interface IMagazzinoService
+    public interface IMagazzinoService : IDisposable
     {
         Task<IList<Articolo>> GetArticoli();
         Task<Articolo> GetArticolo(int id);
-        Task<Articolo> SaveArticolo(Articolo prodotto);
+        Task<Articolo> SaveArticolo(Articolo articolo);
         Task DeleteArticolo(int id);
 
         Task<IList<Categoria>> GetCategorie();

@@ -4,34 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.ViewModels;
-using System;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.Views
 {
-    public sealed partial class CategoriaView : UserControl, IDisposable
+    public sealed partial class CategoriaView : UserControl
     {
-        public CategoriaView(CategoriaViewModel categoriaViewModel)
+        public CategoriaView()
         {
             InitializeComponent();
-            DataContext = categoriaViewModel;
-        }
-
-        private void ListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void ListView_MouseDoubleClick_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
-        }
-
-        public void Dispose()
-        {
-            ((IDisposable?)DataContext)?.Dispose();
-            DataContext = null;
         }
     }
 }

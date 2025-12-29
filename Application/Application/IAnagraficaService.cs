@@ -5,12 +5,13 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Domain.Anagrafica;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    public interface IAnagraficaService
+    public interface IAnagraficaService : IDisposable
     {
         Task<IList<Cliente>> GetClienti();
         Task<Cliente> GetCliente(int id);

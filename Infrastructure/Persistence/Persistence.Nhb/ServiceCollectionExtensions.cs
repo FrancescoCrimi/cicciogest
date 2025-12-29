@@ -7,24 +7,21 @@
 using CiccioGest.Domain.Anagrafica;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazzino;
-using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Infrastructure.Persistence.Nhb.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
-    public static class ConfigureExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigurePersistenceNhb(this IServiceCollection serviceCollection)
         {
-            serviceCollection
-                //.AddSingleton<UnitOfWorkFactory>()
-                //.AddSingleton<IUnitOfWorkFactory>(serviceCollection => serviceCollection.GetService<UnitOfWorkFactory>())
-                //.AddScoped<UnitOfWork>()
-                //.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetService<UnitOfWork>())
-
+            return serviceCollection
                 .AddSingleton<UnitOfWorkFactory>()
                 .AddSingleton<IUnitOfWorkFactory>((sp) => sp.GetService<UnitOfWorkFactory>()!)
+
+                //.AddScoped<UnitOfWork>()
+                //.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetService<UnitOfWork>())
                 .AddSingleton<UnitOfWork>()
                 .AddSingleton<IUnitOfWork>((sp) => sp.GetService<UnitOfWork>()!)
 
@@ -33,7 +30,6 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
                 .AddTransient<IClienteRepository, ClienteRepository>()
                 .AddTransient<IFornitoreRepository, FornitoreRepository>()
                 .AddTransient<ICategoriaRepository, CategoriaRepository>();
-            return serviceCollection;
         }
     }
 }

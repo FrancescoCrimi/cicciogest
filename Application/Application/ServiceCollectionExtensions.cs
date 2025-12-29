@@ -14,11 +14,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CiccioGest.Application
 {
-    public static class ConfigureExtensions
+    public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection ConfigureApplication(this IServiceCollection serviceCollection)
+        public static IServiceCollection ConfigureApplication(this IServiceCollection serviceCollection,
+                                                              CiccioGestConf conf)
         {
-            var conf = serviceCollection.BuildServiceProvider().GetService<CiccioGestConf>();
             switch (conf?.DataAccess)
             {
                 case Storage.NHibernate:

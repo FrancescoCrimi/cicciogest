@@ -4,89 +4,30 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using System.Threading.Tasks;
-
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public interface IViewModel
+    public class FattureViewReturn(int idFattura)
     {
-        void Initialize(object? parameter);
-        //void Terminate();
+        public int IdFattura { get; } = idFattura;
     }
 
-
-    public enum WizardResult
+    public class ClientiViewReturn(int idCliente)
     {
-        Finished,
-        Canceled
+        public int IdCliente { get; } = idCliente;
     }
 
-
-    public class FattureViewReturn
+    public class FornitoriViewReturn(int idFornitore)
     {
-        public FattureViewReturn(WizardResult result, int idFattura)
-        {
-            Result = result;
-            IdFattura = idFattura;
-        }
-        public WizardResult Result { get; }
-        public int IdFattura { get; }
+        public int IdFornitore { get; } = idFornitore;
     }
 
-    public delegate Task FattureViewReturnHandler(FattureViewReturn fattureViewReturn);
-
-
-    public class ClientiViewReturn
+    public class ArticoliViewReturn(int idArticolo)
     {
-        public ClientiViewReturn(WizardResult result, int idCliente)
-        {
-            Result = result;
-            IdCliente = idCliente;
-        }
-        public WizardResult Result { get; }
-        public int IdCliente { get; }
+        public int IdArticolo { get; } = idArticolo;
     }
 
-    public delegate Task ClientiViewReturnHandler(ClientiViewReturn clientiViewReturn);
-
-    public class FornitoriViewReturn
+    public class CategoriaViewReturn(int idArticolo)
     {
-        public FornitoriViewReturn(WizardResult result, int idFornitore)
-        {
-            Result = result;
-            IdFornitore = idFornitore;
-        }
-        public WizardResult Result { get; }
-        public int IdFornitore { get; }
+        public int IdCategoria { get; } = idArticolo;
     }
-
-    public delegate Task FornitoriViewReturnHandler(FornitoriViewReturn fornitoriViewReturn);
-
-
-    public class ArticoliViewReturn
-    {
-        public ArticoliViewReturn(WizardResult result, int idArticolo)
-        {
-            Result = result;
-            IdArticolo = idArticolo;
-        }
-        public WizardResult Result { get; }
-        public int IdArticolo { get; }
-    }
-
-    public delegate Task ArticoliViewReturnHandler(ArticoliViewReturn articoliViewReturn);
-
-
-    public class CategoriaViewReturn
-    {
-        public CategoriaViewReturn(WizardResult result, int idArticolo)
-        {
-            Result = result;
-            IdCategoria = idArticolo;
-        }
-        public WizardResult Result { get; }
-        public int IdCategoria { get; }
-    }
-
-    public delegate Task CategoriaViewReturnHandler(CategoriaViewReturn categoriaViewReturn);
 }

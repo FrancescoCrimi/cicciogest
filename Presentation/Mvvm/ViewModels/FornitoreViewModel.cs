@@ -7,7 +7,6 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Anagrafica;
 using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,13 +16,14 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class FornitoreViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class FornitoreViewModel : ViewModelBase, IViewModel
     {
         private readonly ILogger<FornitoreViewModel> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
-        private readonly IAnagraficaService _clientiFornitoriService;
+        private readonly IAnagraficaService _anagraficaService;
+        private bool _disposedValue;
 
         [ObservableProperty]
         private Fornitore? _fornitore;
@@ -35,13 +35,13 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
                                   IUnitOfWork unitOfWork,
                                   INavigationService navigationService,
                                   IMessageBoxService messageBoxService,
-                                  IAnagraficaService clientiFornitoriService)
+                                  IAnagraficaService anagraficaService)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
             _navigationService = navigationService;
             _messageBoxService = messageBoxService;
-            _clientiFornitoriService = clientiFornitoriService;
+            _anagraficaService = anagraficaService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
@@ -83,7 +83,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             {
                 try
                 {
-                    await _clientiFornitoriService.SaveFornitore(Fornitore);
+                    await _anagraficaService.SaveFornitore(Fornitore);
                     await _unitOfWork.CommitAsync();
                 }
                 catch (Exception ex)
@@ -100,15 +100,11 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriFornitore()
         {
             await _unitOfWork.BeginAsync();
-            FornitoriViewReturnHandler fornitoriViewReturnHandler = FornitoriViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Fornitori, fornitoriViewReturnHandler, false);
-        }
-        private async Task FornitoriViewReturnMethod(FornitoriViewReturn fornitoriViewReturn)
-        {
-            if (fornitoriViewReturn.Result == WizardResult.Finished)
+            var id = await _navigationService.NavigateDialogAsync<FornitoriViewModel>();
+            if (id != 0)
             {
                 _navigationService.GoBack(true);
-                await ApriFornitore(fornitoriViewReturn.IdFornitore);
+                await ApriFornitore(id);
             }
         }
 
@@ -120,7 +116,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             {
                 try
                 {
-                    await _clientiFornitoriService.DeleteFornitore(Fornitore.Id);
+                    await _anagraficaService.DeleteFornitore(Fornitore.Id);
                     await _unitOfWork.CommitAsync();
                     await OnNuovoFornitore();
                 }
@@ -139,7 +135,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             if (idFornitore != 0)
             {
                 await _unitOfWork.BeginAsync();
-                Fornitore fornitore = await _clientiFornitoriService.GetFornitore(idFornitore);
+                Fornitore fornitore = await _anagraficaService.GetFornitore(idFornitore);
                 Fornitore = null;
                 Indirizzo = null;
                 Fornitore = fornitore;
@@ -147,10 +143,21 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             }
         }
 
-
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _anagraficaService?.Dispose();
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

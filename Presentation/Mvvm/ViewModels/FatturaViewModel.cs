@@ -7,7 +7,6 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,13 +16,14 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class FatturaViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class FatturaViewModel : ViewModelBase, IViewModel
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFatturaService _fatturaService;
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
+        private bool _disposedValue;
 
         [ObservableProperty]
         private Fattura? _fattura;
@@ -70,15 +70,11 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnNuovaFattura()
         {
             await _unitOfWork.BeginAsync();
-            ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Clienti, clientiViewReturnHandler, false);
-        }
-        private async Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
-        {
-            if (clientiViewReturn.Result == WizardResult.Finished)
+            var id = await _navigationService.NavigateDialogAsync<ClientiViewModel>();
+            if (id != 0)
             {
                 _navigationService.GoBack(true);
-                await NuovaFattura(clientiViewReturn.IdCliente);
+                await NuovaFattura(id);
             }
         }
 
@@ -127,31 +123,21 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriFattura()
         {
             await _unitOfWork.BeginAsync();
-            FattureViewReturnHandler fattureViewReturnHandler = FattureViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Fatture, fattureViewReturnHandler, false);
-        }
-        private async Task FattureViewReturnMethod(FattureViewReturn fattureViewReturn)
-        {
-            if (fattureViewReturn.Result == WizardResult.Finished)
-            {
-                _navigationService.GoBack();
-                await ApriFattura(fattureViewReturn.IdFattura);
-            }
+            var id = await _navigationService.NavigateDialogAsync<FattureViewModel>();
+            _navigationService.GoBack();
+            if (id != 0)
+                await ApriFattura(id);
         }
 
 
         [RelayCommand]
-        private void OnNuovoDettaglio()
+        private async Task OnNuovoDettaglio()
         {
-            ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Articoli, articoliViewReturnHandler, false);
-        }
-        private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
-        {
-            if (articoliViewReturn.Result == WizardResult.Finished)
+            var id = await _navigationService.NavigateDialogAsync<ArticoliViewModel>();
+            _navigationService.GoBack();
+            if (id != 0)
             {
-                _navigationService.GoBack(true);
-                var articolo = await _fatturaService.GetArticolo(articoliViewReturn.IdArticolo);
+                var articolo = await _fatturaService.GetArticolo(id);
                 Dettaglio = new Dettaglio(articolo, 1);
             }
         }
@@ -210,13 +196,25 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             Fattura = null;
             Dettaglio = null;
             Fattura = fattura;
+            //OnPropertyChanged("Fattura");
             _logger.LogDebug("ApriFattura {Id} HashCode: {HashCode}", fattura.Id, GetHashCode().ToString());
         }
 
-
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _fatturaService?.Dispose();
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

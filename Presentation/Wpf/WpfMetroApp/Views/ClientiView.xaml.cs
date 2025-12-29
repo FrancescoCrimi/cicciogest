@@ -4,24 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.ViewModels;
-using System;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfMetroApp.Views
 {
-    public sealed partial class ClientiView : UserControl, IDisposable
+    public sealed partial class ClientiView : UserControl
     {
-        public ClientiView(ClientiViewModel viewModel)
+        public ClientiView()
         {
             InitializeComponent();
-            DataContext = viewModel;
-        }
-
-        public void Dispose()
-        {
-            ((IDisposable?)DataContext)?.Dispose();
-            DataContext = null;
         }
     }
 }

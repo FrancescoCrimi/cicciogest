@@ -6,22 +6,19 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazzino;
-using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class ArticoliViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class ArticoliViewModel : DialogViewModelBase<int>
     {
         private readonly ILogger _logger;
-        private readonly IMagazzinoService _magazinoService;
-        private readonly INavigationService _navigationService;
-        private ArticoliViewReturnHandler? _articoliViewReturnHandler;
+        private readonly IMagazzinoService _magazzinoService;
+        private bool _disposedValue;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ConfermaCommand))]
@@ -30,75 +27,50 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         public ObservableCollection<Articolo> Articoli { get; } = [];
 
         public ArticoliViewModel(ILogger<ArticoliViewModel> logger,
-                                 IMagazzinoService magazinoService,
-                                 INavigationService navigationService)
+                                 IMagazzinoService magazzinoService)
         {
             _logger = logger;
-            _magazinoService = magazinoService;
-            _navigationService = navigationService;
-
-            //_idArticoloTaskCompletionSource = new TaskCompletionSource<int>();
-            //Messenger.Register<ArticoliViewModel, IdArticoloRequestMessage>(this, (recipient, message)
-            //    => message.Reply(_idArticoloTaskCompletionSource.Task));
-
+            _magazzinoService = magazzinoService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
-        {
-            if (parameter is ArticoliViewReturnHandler articoliViewReturnHandler)
-            {
-                _articoliViewReturnHandler = articoliViewReturnHandler;
-            }
-        }
-
-
         [RelayCommand]
         private Task OnLoaded() => OnAggiorna();
-
-
-        [RelayCommand]
-        private void OnUnloaded() { }
 
         [RelayCommand]
         private async Task OnAggiorna()
         {
             Articoli.Clear();
-            foreach (Articolo pr in await _magazinoService.GetArticoli())
-            {
-                Articoli.Add(pr);
-            }
+            foreach (var articolo in await _magazzinoService.GetArticoli())
+                Articoli.Add(articolo);
         }
 
-
         [RelayCommand(CanExecute = nameof(CanConferma))]
-        private Task OnConferma()
+        private void OnConferma()
         {
             if (ArticoloSelezionato != null)
-            {
-                //_idArticoloTaskCompletionSource.SetResult(ArticoloSelezionato.Id);
-                if (_articoliViewReturnHandler != null)
-                {
-                    return _articoliViewReturnHandler(new ArticoliViewReturn(WizardResult.Finished, ArticoloSelezionato.Id));
-                }
-            }
-            return Task.CompletedTask;
+                CloseDialog(ArticoloSelezionato.Id);
         }
         private bool CanConferma() => ArticoloSelezionato != null;
 
-
         [RelayCommand]
-        private Task OnAnnulla()
-        {
-            if (_articoliViewReturnHandler != null)
-                return _articoliViewReturnHandler(new ArticoliViewReturn(WizardResult.Canceled, 0));
-            return Task.CompletedTask;
-        }
+        private void OnAnnulla() => CloseDialog(0);
 
-
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _magazzinoService?.Dispose();
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

@@ -85,7 +85,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
                 try
                 {
                     await _fatturaService.SaveFattura(_fattura);
-                    _unitOfWork.Commit();
+                    await _unitOfWork.CommitAsync();
                 }
                 catch (Exception)
                 {

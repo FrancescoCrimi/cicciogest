@@ -5,18 +5,18 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Presentation.Mvvm.ViewModels;
-using CiccioGest.Presentation.WinUiMenu.Services;
+using CiccioGest.Presentation.WinUiBackend.Services;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiMenu.Views
 {
-    public sealed partial class MainView : Page
+    public sealed partial class MainView : UserControl
     {
         public MainView(NavigationService navigationService,
                         MainViewModel mainViewModel)
         {
             InitializeComponent();
-            navigationService.Initialize(shellFrame);
+            navigationService.Initialize(contentControl);
             DataContext = mainViewModel;
         }
     }

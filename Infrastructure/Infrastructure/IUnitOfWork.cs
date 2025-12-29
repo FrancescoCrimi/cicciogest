@@ -11,11 +11,8 @@ namespace CiccioGest.Infrastructure
 {
     public interface IUnitOfWork : IDisposable
     {
-        void Begin();
         Task BeginAsync();
-        void Commit();
         Task CommitAsync();
-        void Rollback();
         Task RollbackAsync();
     }
 }

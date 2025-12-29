@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
 		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
 		<RootNamespace>CiccioGest.Presentation.WinUiMenu</RootNamespace>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
@@ -11,6 +11,7 @@
 		<UseWinUI>true</UseWinUI>
 		<EnableMsixTooling>true</EnableMsixTooling>
 		<Nullable>enable</Nullable>
+		<SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -25,11 +26,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
-		<PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="9.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.1" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.0" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="6.1.0" />
 		<PackageReference Include="WinUIEx" Version="2.9.0" />
@@ -41,6 +40,7 @@
 		<ProjectReference Include="..\..\..\Application\Application\Application.csproj" />
 		<ProjectReference Include="..\..\..\Domain\Domain\Domain.csproj" />
 		<ProjectReference Include="..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />-->
+		<ProjectReference Include="..\..\Mvvm\Mvvm.csproj" />
 		<ProjectReference Include="..\WinUiBackend\WinUiBackend.csproj" />
 	</ItemGroup>
 

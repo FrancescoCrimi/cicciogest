@@ -4,23 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.ViewModels;
-using System;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.Views
 {
-    public sealed partial class FornitoriView : UserControl, IDisposable
+    public sealed partial class FornitoriView : UserControl
     {
-        public FornitoriView(FornitoriViewModel fornitoriViewModel)
+        public FornitoriView()
         {
             InitializeComponent();
-            DataContext = fornitoriViewModel;
-        }
-        public void Dispose()
-        {
-            ((IDisposable?)DataContext)?.Dispose();
-            DataContext = null;
         }
     }
 }

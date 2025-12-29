@@ -4,64 +4,22 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.Mvvm.Services;
-using CiccioGest.Presentation.WpfApp.Services;
+using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WpfApp.Views;
-using CiccioGest.Presentation.WpfBackend;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
-using System;
-using System.IO;
-using System.Reflection;
+using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp
 {
     public partial class App : System.Windows.Application
     {
-        private void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        public App()
         {
-            ConfigureServices().GetRequiredService<MainView>().Show();
+            ConfigureServiceProvider.ConfigureWpfApp();
         }
 
-        private static IServiceProvider ConfigureServices()
+        private void OnStartup(object sender, StartupEventArgs e)
         {
-            var gestConf = CiccioGestConfMgr.GetCurrent();
-
-            var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
-            IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(appLocation!)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
-                .Build();
-
-            return new ServiceCollection()
-                .AddLogging(loggingBuilder =>
-                {
-                    loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
-                    loggingBuilder.AddNLog();
-                    loggingBuilder.AddDebug();
-                })
-
-                .AddSingleton(gestConf)
-                .ConfigureWpfBackend()
-
-                .AddSingleton<PageService>()
-                .AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
-
-                .AddTransient<MainView>()
-                .AddTransient<DashboardView>()
-                .AddTransient<ArticoliView>()
-                .AddTransient<ArticoloView>()
-                .AddTransient<CategoriaView>()
-                .AddTransient<ClienteView>()
-                .AddTransient<ClientiView>()
-                .AddTransient<FatturaView>()
-                .AddTransient<FattureView>()
-                .AddTransient<FornitoreView>()
-                .AddTransient<FornitoriView>()
-                .BuildServiceProvider();
+            Ioc.Default.GetRequiredService<MainView>().Show();
         }
     }
 }

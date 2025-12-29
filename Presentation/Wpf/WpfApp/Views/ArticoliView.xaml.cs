@@ -4,24 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.ViewModels;
-using System;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.Views
 {
-    public sealed partial class ArticoliView : UserControl, IDisposable
+    public sealed partial class ArticoliView : UserControl
     {
-        public ArticoliView(ArticoliViewModel articoliViewModel)
+        public ArticoliView()
         {
             InitializeComponent();
-            DataContext = articoliViewModel;
-        }
-
-        public void Dispose()
-        {
-            ((IDisposable?)DataContext)?.Dispose();
-            DataContext = null;
         }
     }
 }

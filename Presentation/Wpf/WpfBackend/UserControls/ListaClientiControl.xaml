@@ -17,6 +17,11 @@
               SelectedItem="{Binding ClienteSelezionato}"
               IsReadOnly="True"
               SelectionMode="Single">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseDoubleClick">
+                <i:InvokeCommandAction Command="{Binding ConfermaCommand, Mode=OneWay}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
 
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Id}"
@@ -33,11 +38,11 @@
                                 Header="Codice Fiscale" />
         </DataGrid.Columns>
 
-        <DataGrid.InputBindings>
+        <!--<DataGrid.InputBindings>
             <MouseBinding MouseAction="LeftDoubleClick"
                           Command="{Binding ApriClienteCommand, Mode=OneWay}">
             </MouseBinding>
-        </DataGrid.InputBindings>
+        </DataGrid.InputBindings>-->
 
     </DataGrid>
 

@@ -5,17 +5,19 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CiccioGest.Presentation.Mvvm
 {
-    public static class ConfigureExtensions
+    public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection ConfigureMvvm(this IServiceCollection serviceCollection)
+        public static IServiceCollection ConfigureMvvm(this IServiceCollection serviceCollection,
+                                                       CiccioGestConf conf)
         {
             serviceCollection
-                .ConfigureApplication()
+                .ConfigureApplication(conf)
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoliViewModel>()
                 .AddTransient<CategoriaViewModel>()

@@ -4,23 +4,24 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.Contracts;
+using CiccioGest.Presentation.Mvvm.ViewModels;
 using System;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.Services
 {
     public interface INavigationService
     {
-        event EventHandler Navigated;
+        event EventHandler? Navigated;
+
         bool CanGoBack { get; }
         bool CanGoForward { get; }
+
         void GoBack(bool emptyForwardStack = false);
         void GoForward(bool emptyBackStack = false);
-        void Navigate(Type pageType,
-                      object? parameter = null,
-                      bool clearNavigation = true);
-        void Navigate(ViewEnum key,
-                      object? parameter = null,
-                      bool clearNavigation = false);
+
+        void Navigate<TVM>(object? parameter = null,
+                           bool clearNavigation = false) where TVM : ViewModelBase;
+        Task<int> NavigateDialogAsync<TVM>() where TVM : DialogViewModelBase<int>;
     }
 }

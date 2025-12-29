@@ -4,23 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.ViewModels;
-using System;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfApp.Views
 {
-    public sealed partial class FattureView : UserControl, IDisposable
+    public sealed partial class FattureView : UserControl
     {
-        public FattureView(FattureViewModel fattureViewModel)
+        public FattureView()
         {
             InitializeComponent();
-            DataContext = fattureViewModel;
-        }
-        public void Dispose()
-        {
-            ((IDisposable?)DataContext)?.Dispose();
-            DataContext = null;
         }
     }
 }

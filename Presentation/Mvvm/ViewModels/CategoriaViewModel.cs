@@ -17,12 +17,13 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class CategoriaViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class CategoriaViewModel : ViewModelBase, IViewModel
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMagazzinoService _magazinoService;
+        private readonly IMagazzinoService _magazzinoService;
         private readonly IMessageBoxService _messageBoxService;
+        private bool _disposedValue;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SalvaCategoriaCommand))]
@@ -48,7 +49,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _magazinoService = magazinoService;
+            _magazzinoService = magazinoService;
             _messageBoxService = messageBoxService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
@@ -91,7 +92,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
                 {
                     var nomeCategoriaSalvata = CategoriaCorrente.Nome;
                     await _unitOfWork.BeginAsync();
-                    await _magazinoService.SaveCategoria(CategoriaCorrente);
+                    await _magazzinoService.SaveCategoria(CategoriaCorrente);
                     await _unitOfWork.CommitAsync();
 
                     CategoriaCorrente = new Categoria();
@@ -118,7 +119,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
                 {
                     var nomeCategoriaEliminata = CategoriaSelezionata.Nome;
                     await _unitOfWork.BeginAsync();
-                    await _magazinoService.DeleteCategoria(CategoriaSelezionata.Id);
+                    await _magazzinoService.DeleteCategoria(CategoriaSelezionata.Id);
                     await _unitOfWork.CommitAsync();
 
                     CategoriaCorrente = new Categoria();
@@ -145,7 +146,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
                 //    return _categoriaViewReturnHandler.Invoke(new CategoriaViewReturn(WizardResult.Finished, CategoriaSelezionata.Id));
                 //}
                 await _unitOfWork.BeginAsync();
-                CategoriaCorrente = await _magazinoService.GetCategoria(CategoriaSelezionata.Id);
+                CategoriaCorrente = await _magazzinoService.GetCategoria(CategoriaSelezionata.Id);
                 await _unitOfWork.CommitAsync();
                 StatusMessage = $"Modifica categoria '{CategoriaCorrente.Nome}'.";
             }
@@ -156,17 +157,28 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             Categorie.Clear();
             CategoriaSelezionata = null;
             await _unitOfWork.BeginAsync();
-            foreach (Categoria categoria in await _magazinoService.GetCategorie())
+            foreach (Categoria categoria in await _magazzinoService.GetCategorie())
             {
                 Categorie.Add(categoria);
             }
             await _unitOfWork.CommitAsync();
         }
 
-
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _magazzinoService?.Dispose();
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

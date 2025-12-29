@@ -92,12 +92,6 @@
                                    ItemTemplate="{StaticResource MenuItemTemplate}"
                                    OptionsItemTemplate="{StaticResource OptionsMenuItemTemplate}"
                                    OpenPaneLength="150">
-                    <!--
-                                   ItemCommand="{Binding MenuItemCommand}"
-                                   ItemCommandParameter="{Binding ElementName=hamburgerMenu, Path=SelectedItem.TargetPageType}"
-                                   OptionsItemCommand="{Binding MenuOptionsItemCommand}"
-                                   OptionsItemCommandParameter="{Binding ElementName=hamburgerMenu, Path=SelectedOptionsItem.TargetPageType}"
-                    -->
 
                     <mah:HamburgerMenu.ItemsSource>
                         <mah:HamburgerMenuItemCollection>
@@ -116,13 +110,6 @@
                             <mah:HamburgerMenuGlyphItem Glyph="&#xE779;"
                                                         Label="Fornitori"
                                                         Command="{Binding ApriFornitoriCommand, Mode=OneWay}" />
-                            <!--
-                                                        TargetPageType="view:FattureView"
-                                                        TargetPageType="view:ArticoliView"
-                                                        TargetPageType="view:CategoriaView"
-                                                        TargetPageType="view:ClientiView"
-                                                        TargetPageType="view:FornitoriView"
-                            -->
                         </mah:HamburgerMenuItemCollection>
                     </mah:HamburgerMenu.ItemsSource>
 
@@ -134,13 +121,10 @@
                     </mah:HamburgerMenu.OptionsItemsSource>
 
                     <mah:HamburgerMenu.Content>
-                        <!--<Frame x:Name="shellFrame"
-                               Grid.Row="1"
-                               NavigationUIVisibility="Hidden"
-                               Focusable="False" />-->
                         <ContentControl Grid.Row="1"
                                         x:Name="shellFrame" />
                     </mah:HamburgerMenu.Content>
+
                 </mah:HamburgerMenu>
 
             </mah:SplitView.Content>

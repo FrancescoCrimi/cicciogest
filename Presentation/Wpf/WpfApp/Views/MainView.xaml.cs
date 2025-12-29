@@ -4,14 +4,13 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.WpfBackend.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
-using System;
+using CiccioGest.Presentation.WpfBackend.Services;
 using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp.Views
 {
-    public sealed partial class MainView : Window, IDisposable
+    public sealed partial class MainView : Window
     {
         public MainView(MainViewModel shellViewModel,
                         NavigationService navigationService)
@@ -19,12 +18,6 @@ namespace CiccioGest.Presentation.WpfApp.Views
             InitializeComponent();
             DataContext = shellViewModel;
             navigationService.Initialize(shellFrame);
-        }
-
-        public void Dispose()
-        {
-            ((IDisposable?)DataContext)?.Dispose();
-            DataContext = null;
         }
     }
 }

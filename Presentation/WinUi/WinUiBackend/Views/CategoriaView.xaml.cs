@@ -4,18 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.ViewModels;
-using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiBackend.Views
 {
-    public sealed partial class CategoriaView : Page
+    public sealed partial class CategoriaView : UserControl
     {
         public CategoriaView()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetService<CategoriaViewModel>();
         }
     }
 }

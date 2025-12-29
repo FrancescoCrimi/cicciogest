@@ -1,17 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Page x:Class="CiccioGest.Presentation.WinUiMenu.Views.MainView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:local="using:CiccioGest.Presentation.WinUiMenu.Views"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:tollkit="using:CommunityToolkit.WinUI.UI.Controls"
-      xmlns:i="using:Microsoft.Xaml.Interactivity"
-      xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
-      xmlns:contracts="using:CiccioGest.Presentation.Mvvm.Contracts"
-      d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
-      mc:Ignorable="d"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+<UserControl x:Class="CiccioGest.Presentation.WinUiMenu.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="using:Microsoft.Xaml.Interactivity"
+             xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+             mc:Ignorable="d"
+             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <i:Interaction.Behaviors>
         <i:EventTriggerBehavior EventName="Loaded">
@@ -29,7 +26,7 @@
 
             <MenuBarItem Title="Fatture">
                 <MenuFlyoutItem Text="Apri Fattura"
-                                Command="{Binding ApriFatturaCommand, Mode=OneWay}"/>
+                                Command="{Binding ApriFatturaCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Nuova Fattura"
                                 Command="{Binding NuovaFatturaCommand, Mode=OneWay}" />
             </MenuBarItem>
@@ -47,7 +44,7 @@
                 <MenuFlyoutItem Text="Fornitori"
                                 Command="{Binding ApriFornitoriCommand, Mode=OneWay}" />
             </MenuBarItem>
-            
+
             <MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About" />
             </MenuBarItem>
@@ -55,9 +52,9 @@
         </MenuBar>
 
         <Grid Grid.Row="1">
-            <Frame x:Name="shellFrame" />
+            <ContentControl x:Name="contentControl" />
         </Grid>
 
     </Grid>
 
-</Page>
+</UserControl>

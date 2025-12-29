@@ -8,6 +8,7 @@ using CiccioGest.Application.FakeImpl;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -15,20 +16,24 @@ namespace CiccioGest.Application.Impl
 {
     internal class SettingService : ISettingService
     {
+        private readonly ILogger<SettingService> _logger;
         private readonly IUnitOfWorkFactory _unitOfWorkFactory;
         private readonly IFatturaService _fatturaService;
         private readonly IMagazzinoService _magazzinoService;
         private readonly IAnagraficaService _clientiFornitoriService;
 
-        public SettingService(IUnitOfWorkFactory unitOfWorkFactory,
+        public SettingService(ILogger<SettingService> logger,
+                              IUnitOfWorkFactory unitOfWorkFactory,
                               IFatturaService fatturaService,
                               IMagazzinoService magazzinoService,
                               IAnagraficaService clientiFornitoriService)
         {
+            _logger = logger;
             _unitOfWorkFactory = unitOfWorkFactory;
             _fatturaService = fatturaService;
             _magazzinoService = magazzinoService;
             _clientiFornitoriService = clientiFornitoriService;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void CreateDataAccess()
@@ -72,7 +77,7 @@ namespace CiccioGest.Application.Impl
                 await _clientiFornitoriService.SaveCliente(item);
             }
         }
-                                                                                      
+
         private async Task CreaFornitori()
         {
             foreach (var item in FakeSampleData.Fornitori)
@@ -86,7 +91,7 @@ namespace CiccioGest.Application.Impl
 
             for (int p = 1; p <= FakeSampleData.Articoli.Count; p++)
             {
-                Articolo articolo = FakeSampleData.Articoli[p -1];
+                Articolo articolo = FakeSampleData.Articoli[p - 1];
                 Categoria categoria = await _magazzinoService.GetCategoria(p);
                 articolo.AddCategoria(categoria);
                 articolo.Fornitore = await _magazzinoService.GetFornitore(p);
@@ -111,5 +116,13 @@ namespace CiccioGest.Application.Impl
             }
         }
 
+        public void Dispose()
+        {
+            _unitOfWorkFactory.Dispose();
+            _fatturaService.Dispose();
+            _magazzinoService.Dispose();
+            _clientiFornitoriService.Dispose();
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+        }
     }
 }

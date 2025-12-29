@@ -2,7 +2,9 @@
 <Application x:Class="CiccioGest.Presentation.WinUiMenu.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:CiccioGest.Presentation.WinUiMenu">
+             xmlns:local="using:CiccioGest.Presentation.WinUiMenu"
+             xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
+             xmlns:view="using:CiccioGest.Presentation.WinUiBackend.Views">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -13,6 +15,55 @@
                 <ResourceDictionary Source="/Styles/TextBlock.xaml" />
                 <ResourceDictionary Source="/Styles/NavStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Templates -->
+            <DataTemplate x:Key="ArticoliTemplate">
+                <view:ArticoliView />
+            </DataTemplate>
+            <DataTemplate x:Key="ArticoloTemplate">
+                <view:ArticoloView />
+            </DataTemplate>
+            <DataTemplate x:Key="CategoriaTemplate">
+                <view:CategoriaView />
+            </DataTemplate>
+            <DataTemplate x:Key="ClienteView">
+                <view:ClienteView />
+            </DataTemplate>
+            <DataTemplate x:Key="ClientiTemplate">
+                <view:ClientiView />
+            </DataTemplate>
+            <DataTemplate x:Key="DashboardTemplate">
+                <view:DashboardView />
+            </DataTemplate>
+            <DataTemplate x:Key="FatturaTemplate">
+                <view:FatturaView />
+            </DataTemplate>
+            <DataTemplate x:Key="FattureTemplate">
+                <view:FattureView />
+            </DataTemplate>
+            <DataTemplate x:Key="FornitoreTemplate">
+                <view:FornitoreView />
+            </DataTemplate>
+            <DataTemplate x:Key="FornitoriTemplate">
+                <view:FornitoriView />
+            </DataTemplate>
+            <DataTemplate x:Key="SettingsTemplate">
+                <view:SettingsView />
+            </DataTemplate>
+
+            <!-- Selector -->
+            <local:ViewModelTemplateSelector x:Key="VmSelector"
+                                             ArticoliTemplate="{StaticResource ArticoliTemplate}"
+                                             ArticoloTemplate="{StaticResource ClientiTemplate}"
+                                             CategoriaTemplate="{StaticResource ClientiTemplate}"
+                                             ClienteTemplate="{StaticResource ClientiTemplate}"
+                                             ClientiTemplate="{StaticResource ClientiTemplate}"
+                                             DashboardTemplate="{StaticResource ClientiTemplate}"
+                                             FatturaTemplate="{StaticResource ClientiTemplate}"
+                                             FattureTemplate="{StaticResource ClientiTemplate}"
+                                             FornitoreTemplate="{StaticResource ClientiTemplate}"
+                                             FornitoriTemplate="{StaticResource ClientiTemplate}"
+                                             SettingsTemplate="{StaticResource ClientiTemplate}" />
         </ResourceDictionary>
     </Application.Resources>
 

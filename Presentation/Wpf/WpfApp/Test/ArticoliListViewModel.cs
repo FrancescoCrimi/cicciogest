@@ -23,14 +23,17 @@ namespace CiccioGest.Presentation.WpfApp.Test
     //    private readonly TaskCompletionSource<int?>? _tcsResult; // solo in selection mode
 
     //    // Stato
-    //    [ObservableProperty] private bool _isBusy;
-    //    [ObservableProperty] private string? _statusMessage;
+    //    [ObservableProperty]
+    //    private bool _isBusy;
+    //    [ObservableProperty]
+    //    private string? _statusMessage;
 
     //    [ObservableProperty]
     //    [NotifyCanExecuteChangedFor(nameof(ConfermaSelezioneCommand))]
     //    private Articolo? _articoloSelezionato;
 
-    //    [ObservableProperty] private string? _filtro;
+    //    [ObservableProperty]
+    //    private string? _filtro;
 
     //    // Dati
     //    public ObservableCollection<Articolo> Articoli { get; } = new();
@@ -139,11 +142,11 @@ namespace CiccioGest.Presentation.WpfApp.Test
     //    }
     //}
 
-    // DTO di esempio
-    //public sealed class ArticoloDto
-    //{
-    //    public int Id { get; set; }
-    //    public string? Codice { get; set; }
-    //    public string? Nome { get; set; }
-    //}
+     //DTO di esempio
+    public sealed class ArticoloDto
+    {
+        public int Id { get; set; }
+        public string? Codice { get; set; }
+        public string? Nome { get; set; }
+    }
 }

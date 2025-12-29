@@ -9,12 +9,14 @@ using System;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class SettingViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class SettingsViewModel : ViewModelBase
     {
+        private bool _disposedValue;
+
         [ObservableProperty]
         private string _title;
 
-        public SettingViewModel()
+        public SettingsViewModel()
         {
             Title = "Setting View";
         }
@@ -43,9 +45,19 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
         }
 
-
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

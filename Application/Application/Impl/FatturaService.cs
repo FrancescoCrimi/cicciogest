@@ -73,7 +73,10 @@ namespace CiccioGest.Application.Impl
 
         public void Dispose()
         {
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            _fatturaRepository.Dispose();
+            _articoloRepository.Dispose();
+            _clienteRepository.Dispose();
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

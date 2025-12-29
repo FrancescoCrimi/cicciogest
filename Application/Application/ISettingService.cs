@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Application
 {
-    public interface ISettingService
+    public interface ISettingService : IDisposable
     {
         void SaveConf();
         void CreateDataAccess();

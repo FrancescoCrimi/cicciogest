@@ -7,7 +7,6 @@
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,13 +16,14 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class ArticoloViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class ArticoloViewModel : ViewModelBase, IViewModel
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMagazzinoService _magazinoService;
+        private readonly IMagazzinoService _magazzinoService;
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
+        private bool _disposedValue;
 
         [ObservableProperty]
         private Articolo? _articolo;
@@ -33,13 +33,13 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
         public ArticoloViewModel(ILogger<ArticoloViewModel> logger,
                                  IUnitOfWork unitOfWork,
-                                 IMagazzinoService magazinoService,
+                                 IMagazzinoService magazzinoService,
                                  INavigationService navigationService,
                                  IMessageBoxService messageBoxService)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _magazinoService = magazinoService;
+            _magazzinoService = magazzinoService;
             _navigationService = navigationService;
             _messageBoxService = messageBoxService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
@@ -80,8 +80,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             {
                 try
                 {
-                    await _magazinoService.DeleteArticolo(Articolo.Id);
-                    _unitOfWork.Commit();
+                    await _magazzinoService.DeleteArticolo(Articolo.Id);
+                    await _unitOfWork.CommitAsync();
                     await OnNuovoArticolo();
                 }
                 catch (Exception e)
@@ -101,7 +101,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             {
                 try
                 {
-                    await _magazinoService.SaveArticolo(Articolo);
+                    await _magazzinoService.SaveArticolo(Articolo);
                     await _unitOfWork.CommitAsync();
                 }
                 catch (Exception e)
@@ -118,31 +118,23 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriArticolo()
         {
             await _unitOfWork.BeginAsync();
-            ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Articoli, articoliViewReturnHandler, false);
-        }
-        private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
-        {
-            if (articoliViewReturn.Result == WizardResult.Finished)
+            var id = await _navigationService.NavigateDialogAsync<ArticoliViewModel>();
+            if (id != 0)
             {
                 _navigationService.GoBack();
-                await ApriArticolo(articoliViewReturn.IdArticolo);
+                await ApriArticolo(id);
             }
         }
 
 
         [RelayCommand]
-        private void OnAggiungiCategoria()
+        private async Task OnAggiungiCategoria()
         {
-            CategoriaViewReturnHandler categoriaViewReturnHandler = CategoriaViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Categoria, categoriaViewReturnHandler, false);
-        }
-        private async Task CategoriaViewReturnMethod(CategoriaViewReturn categoriaViewReturn)
-        {
-            if (categoriaViewReturn.Result == WizardResult.Finished)
+            var id = await _navigationService.NavigateDialogAsync<CategorieViewModel>();
+            _navigationService.GoBack();
+            if (id != 0)
             {
-                _navigationService.GoBack();
-                Categoria categoria = await _magazinoService.GetCategoria(categoriaViewReturn.IdCategoria);
+                Categoria categoria = await _magazzinoService.GetCategoria(id);
                 Articolo?.AddCategoria(categoria);
                 //OnPropertyChanged(nameof(Categorie));
             }
@@ -166,7 +158,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             {
                 await _unitOfWork.BeginAsync();
                 Articolo = null;
-                Articolo = await _magazinoService.GetArticolo(idArticolo);
+                Articolo = await _magazzinoService.GetArticolo(idArticolo);
             }
             else
             {
@@ -175,9 +167,21 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         }
 
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _magazzinoService?.Dispose();
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

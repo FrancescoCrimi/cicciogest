@@ -4,13 +4,13 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace CiccioGest.Presentation.WpfBackend.Services
@@ -22,8 +22,8 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
         private readonly IPageService _pageService;
-        private readonly Stack<UserControl> _forwardStack;
-        private readonly Stack<UserControl> _backStack;
+        private readonly Stack<ViewModelBase> _forwardStack;
+        private readonly Stack<ViewModelBase> _backStack;
         private ContentControl? _contentControl;
 
         public NavigationService(ILogger<NavigationService> logger,
@@ -33,8 +33,8 @@ namespace CiccioGest.Presentation.WpfBackend.Services
             _logger = logger;
             _serviceProvider = serviceProvider;
             _pageService = pageService;
-            _forwardStack = new Stack<UserControl>();
-            _backStack = new Stack<UserControl>();
+            _forwardStack = new Stack<ViewModelBase>();
+            _backStack = new Stack<ViewModelBase>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
@@ -60,8 +60,16 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         {
             if (_backStack.Count != 0)
             {
-                _forwardStack.Push((UserControl)_contentControl!.Content);
-                _contentControl.Content = _backStack.Peek();
+
+                var forwardvm = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
+                _forwardStack.Push(forwardvm);
+
+                var backvm = _backStack.Peek();
+                var viewType = _pageService.GetPageType(backvm.GetType());
+                var view = (UserControl)Activator.CreateInstance(viewType)!;
+                view.DataContext = backvm;
+                _contentControl!.Content = view;
+
                 _backStack.Pop();
                 if (emptyForwardStack)
                 {
@@ -75,8 +83,15 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         {
             if (_forwardStack.Count != 0)
             {
-                _backStack.Push((UserControl)_contentControl!.Content);
-                _contentControl.Content = _forwardStack.Peek();
+                var backvm = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
+                _backStack.Push(backvm);
+
+                var forwardvm = _forwardStack.Peek();
+                var viewType = _pageService.GetPageType(forwardvm.GetType());
+                var view = (UserControl)Activator.CreateInstance(viewType)!;
+                view.DataContext = forwardvm;
+                _contentControl.Content = view;
+
                 _forwardStack.Pop();
                 if (emptyBackStack)
                 {
@@ -87,44 +102,84 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         }
 
 
-        public void Navigate(Type pageType,
-                             object? parameter = null,
-                             bool clearNavigation = true)
+        //public void Navigate(Type pageType,
+        //                     object? parameter = null,
+        //                     bool clearNavigation = true)
+        //{
+        //    if (_contentControl == null)
+        //        throw new Exception("NavigationService must be Initialize before use it");
+
+        //    if (_contentControl?.Content?.GetType() != pageType)
+        //    {
+        //        var view = (ContentControl)_serviceProvider.GetRequiredService(pageType);
+
+        //        // inizializza ViewModel
+        //        if (view.DataContext is IViewModel viewModel)
+        //            viewModel.Initialize(parameter);
+
+        //        // valorizzo pagina precedente
+        //        var oldView = _contentControl?.Content;
+
+        //        // visualizza nuova pagina
+        //        _contentControl!.Content = view;
+
+        //        if (!clearNavigation)
+        //        {
+        //            // copia pagina precedente nel backstack
+        //            if (oldView != null)
+        //            {
+        //                _backStack.Push((UserControl)oldView);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (oldView != null)
+        //            {
+        //                if (oldView is IDisposable disposable)
+        //                {
+        //                    disposable.Dispose();
+        //                }
+        //            }
+        //            TerminateBackStack();
+        //        }
+        //        TerminateForwardStack();
+        //        Navigated?.Invoke(this, new EventArgs());
+        //    }
+        //}
+
+        public void Navigate<TVM>(object? parameter = null,
+                                  bool clearNavigation = false) where TVM : ViewModelBase
         {
             if (_contentControl == null)
-            {
                 throw new Exception("NavigationService must be Initialize before use it");
-            }
-
+            var pageType = _pageService.GetPageType(typeof(TVM));
             if (_contentControl?.Content?.GetType() != pageType)
             {
-                var page = (ContentControl)_serviceProvider.GetRequiredService(pageType);
+                var viewModel = _serviceProvider.GetRequiredService<TVM>();
 
                 // inizializza ViewModel
-                if (page.DataContext is IViewModel viewModel)
-                {
-                    viewModel.Initialize(parameter);
-                }
+                if (viewModel is IViewModel iViewModel)
+                    iViewModel.Initialize(parameter);
 
-                // valorizzo pagina precedente
-                var oldPage = _contentControl?.Content;
+                // valorizzo ViewModel precedente
+                var oldViewModel = (_contentControl.Content as UserControl)?.DataContext as ViewModelBase;
 
                 // visualizza nuova pagina
-                _contentControl!.Content = page;
+                var view = (ContentControl)Activator.CreateInstance(pageType)!;
+                view.DataContext = viewModel;
+                _contentControl!.Content = view;
 
                 if (!clearNavigation)
                 {
                     // copia pagina precedente nel backstack
-                    if (oldPage != null)
-                    {
-                        _backStack.Push((UserControl)oldPage);
-                    }
+                    if (oldViewModel != null)
+                        _backStack.Push(oldViewModel);
                 }
                 else
                 {
-                    if (oldPage != null)
+                    if (oldViewModel != null)
                     {
-                        if (oldPage is IDisposable disposable)
+                        if (oldViewModel is IDisposable disposable)
                         {
                             disposable.Dispose();
                         }
@@ -136,12 +191,47 @@ namespace CiccioGest.Presentation.WpfBackend.Services
             }
         }
 
-        public void Navigate(ViewEnum key,
-                             object? parameter = null,
-                             bool clearNavigation = false)
+        //public void Navigate(ViewEnum key,
+        //                     object? parameter = null,
+        //                     bool clearNavigation = false)
+        //{
+        //    var pageType = _pageService.GetPageType(key);
+        //    Navigate(pageType, parameter, clearNavigation);
+        //}
+
+        public Task<int> NavigateDialogAsync<TVM>() where TVM : DialogViewModelBase<int>
         {
-            var pageType = _pageService.GetPageType(key);
-            Navigate(pageType, parameter, clearNavigation);
+            if (_contentControl == null)
+                throw new Exception("NavigationService must be Initialize before use it");
+
+            var tcs = new TaskCompletionSource<int>();
+            var viewModel = _serviceProvider.GetRequiredService<TVM>();
+
+            void OnCloseDialog(object? sender, int e)
+            {
+                viewModel.CloseDialogEvent -= OnCloseDialog;
+                tcs.SetResult(e);
+            }
+            viewModel.CloseDialogEvent += OnCloseDialog;
+
+            // valorizzo ViewModel precedente
+            var oldViewModel = (_contentControl.Content as UserControl)?.DataContext as ViewModelBase;
+
+            var viewType = _pageService.GetPageType(typeof(TVM));
+            var view = (UserControl)Activator.CreateInstance(viewType)!;
+            view.DataContext = viewModel;
+
+            // visualizza nuova pagina
+            _contentControl!.Content = view;
+
+            // copia pagina precedente nel backstack
+            if (oldViewModel != null)
+            {
+                _backStack.Push(oldViewModel);
+            }
+            TerminateForwardStack();
+            Navigated?.Invoke(this, new EventArgs());
+            return tcs.Task;
         }
 
         /// <summary>

@@ -5,22 +5,20 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.Mvvm.Contracts;
 using CiccioGest.Presentation.Mvvm.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class MainViewModel : ObservableObject, IViewModel, IDisposable
+    public sealed partial class MainViewModel : ViewModelBase
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly INavigationService _navigationService;
+        private bool _disposedValue;
 
         public MainViewModel(ILogger<MainViewModel> logger,
                              IUnitOfWork unitOfWork,
@@ -33,117 +31,63 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
-        {
-        }
-
-
         [RelayCommand]
         private void OnLoaded() { }
-
 
         [RelayCommand]
         private void OnUnloaded() { }
 
-
         [RelayCommand]
-        private void OnApriDashboard()
-        {
-
-        }
-
+        private void OnApriDashboard() { }
 
         [RelayCommand]
         private async Task OnApriFattura()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(ViewEnum.Fatture, (FattureViewReturnHandler)FattureViewReturnMethod, false);
+            var id = await _navigationService.NavigateDialogAsync<FattureViewModel>();
+            if (id != 0)
+                _navigationService.Navigate<FatturaViewModel>(new FattureViewReturn(id));
         }
-        private Task FattureViewReturnMethod(FattureViewReturn fattureViewReturn)
-        {
-            if (fattureViewReturn.Result == WizardResult.Finished)
-            {
-                _navigationService.Navigate(ViewEnum.Fattura, fattureViewReturn);
-            }
-            return Task.CompletedTask;
-        }
-
 
         [RelayCommand]
         private async Task OnNuovaFattura()
         {
             await _unitOfWork.BeginAsync();
-            _navigationService.Navigate(ViewEnum.Fatture, (FattureViewReturnHandler)NuovaFatturaViewReturnMethod, false);
+            var id = await _navigationService.NavigateDialogAsync<ClientiViewModel>();
+            if (id != 0)
+                _navigationService.Navigate<FatturaViewModel>(new ClientiViewReturn(id));
         }
-        private async Task NuovaFatturaViewReturnMethod(FattureViewReturn fattureViewReturn)
-        {
-            await Task.CompletedTask;
-        }
-
 
         [RelayCommand]
         private async Task OnApriArticoli()
         {
             await _unitOfWork.BeginAsync();
-            ArticoliViewReturnHandler articoliViewReturnHandler = ArticoliViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Articoli, articoliViewReturnHandler, false);
+            var id = await _navigationService.NavigateDialogAsync<ArticoliViewModel>();
+            if (id != 0)
+                _navigationService.Navigate<ArticoloViewModel>(new ArticoliViewReturn(id));
         }
-        private async Task ArticoliViewReturnMethod(ArticoliViewReturn articoliViewReturn)
-        {
-            if (articoliViewReturn.Result == WizardResult.Finished)
-            {
-                _navigationService.Navigate(ViewEnum.Articolo, articoliViewReturn);
-            }
-            await Task.CompletedTask;
-        }
-
 
         [RelayCommand]
         private void OnApriCategorie()
-            => _navigationService.Navigate(ViewEnum.Categoria);
-
+            => _navigationService.Navigate<CategoriaViewModel>();
 
         [RelayCommand]
         private async Task OnApriClienti()
         {
             await _unitOfWork.BeginAsync();
-            ClientiViewReturnHandler clientiViewReturnHandler = ClientiViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Clienti, clientiViewReturnHandler, false);
+            var id = await _navigationService.NavigateDialogAsync<ClientiViewModel>();
+            if (id != 0)
+                _navigationService.Navigate<ClienteViewModel>(new ClientiViewReturn(id));
         }
-        private Task ClientiViewReturnMethod(ClientiViewReturn clientiViewReturn)
-        {
-            if (clientiViewReturn.Result == WizardResult.Finished)
-            {
-                _navigationService.Navigate(ViewEnum.Cliente, clientiViewReturn);
-            }
-            return Task.CompletedTask;
-        }
-
 
         [RelayCommand]
         private async Task OnApriFornitori()
         {
             await _unitOfWork.BeginAsync();
-            FornitoriViewReturnHandler fornitoriViewReturnHandler = FornitoriViewReturnMethod;
-            _navigationService.Navigate(ViewEnum.Fornitori, fornitoriViewReturnHandler, false);
+            var id = await _navigationService.NavigateDialogAsync<FornitoriViewModel>();
+            if (id != 0)
+                _navigationService.Navigate<FornitoreViewModel>(new FornitoriViewReturn(id));
         }
-        private Task FornitoriViewReturnMethod(FornitoriViewReturn fornitoriViewReturn)
-        {
-            if (fornitoriViewReturn.Result == WizardResult.Finished)
-            {
-                _navigationService.Navigate(ViewEnum.Fornitore, fornitoriViewReturn);
-            }
-            return Task.CompletedTask;
-        }
-
-
-        [RelayCommand]
-        private void MenuItem(Type type)
-        {
-            if (type != null)
-                _navigationService.Navigate(type);
-        }
-
 
         [RelayCommand(CanExecute = nameof(CanGoBack))]
         private void OnGoBack() => _navigationService.GoBack();
@@ -155,11 +99,21 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             GoBackCommand?.NotifyCanExecuteChanged();
         }
 
-
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _navigationService.Navigated -= OnNavigated;
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _navigationService.Navigated -= OnNavigated;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

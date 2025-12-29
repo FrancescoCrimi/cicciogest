@@ -271,10 +271,16 @@
                       SelectionMode="Single"
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
-                <DataGrid.InputBindings>
+                <!--<DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftClick"
                                   Command="{Binding SelezionaDettaglioCommand}" />
-                </DataGrid.InputBindings>
+                </DataGrid.InputBindings>-->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding SelezionaDettaglioCommand, Mode=OneWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NomeProdotto}"
                                         Header="Prodotto"

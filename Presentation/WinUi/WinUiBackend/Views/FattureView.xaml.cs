@@ -4,18 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.ViewModels;
-using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 
 namespace CiccioGest.Presentation.WinUiBackend.Views
 {
-    public sealed partial class FattureView : Page
+    public sealed partial class FattureView : UserControl
     {
         public FattureView()
         {
             InitializeComponent();
-            DataContext = Ioc.Default.GetService<FattureViewModel>();
         }
     }
 }
