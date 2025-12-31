@@ -22,7 +22,7 @@ namespace CiccioGest.Presentation.WpfApp.Test
 
     //    private readonly TaskCompletionSource<int?>? _tcsResult; // solo in selection mode
 
-    //    // Stato
+    //    // Nazione
     //    [ObservableProperty]
     //    private bool _isBusy;
     //    [ObservableProperty]

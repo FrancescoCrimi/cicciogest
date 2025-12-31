@@ -12,19 +12,19 @@ namespace CiccioGest.Domain.Anagrafica
     public abstract class Persona : DomainEntity
     {
         private string? nome;
-        private string? cognome;
+        //private string? cognome;
         private string? societa;
         private string? email;
         private string? telefono;
         private string? mobile;
-        private string? indirizzo;
+        //private string? indirizzo;
         private string? partitaIva;
         private string? codiceFiscale;
-        private Indirizzo? indirizzoNew;
+        private Indirizzo? indirizzo;
 
         protected Persona()
         {
-            IndirizzoNew = new Indirizzo();
+            Indirizzo = new Indirizzo();
         }
 
         public virtual string? Nome
@@ -36,24 +36,24 @@ namespace CiccioGest.Domain.Anagrafica
                 {
                     nome = value;
                     NotifyPropertyChanged(nameof(Nome));
-                    NotifyPropertyChanged(nameof(NomeCompleto));
+                    //NotifyPropertyChanged(nameof(NomeCompleto));
                 }
             }
         }
 
-        public virtual string? Cognome
-        {
-            get => cognome;
-            set
-            {
-                if (value != cognome)
-                {
-                    cognome = value;
-                    NotifyPropertyChanged(nameof(Cognome));
-                    NotifyPropertyChanged(nameof(NomeCompleto));
-                }
-            }
-        }
+        //public virtual string? Cognome
+        //{
+        //    get => cognome;
+        //    set
+        //    {
+        //        if (value != cognome)
+        //        {
+        //            cognome = value;
+        //            NotifyPropertyChanged(nameof(Cognome));
+        //            NotifyPropertyChanged(nameof(NomeCompleto));
+        //        }
+        //    }
+        //}
 
         public virtual string? Societa
         {
@@ -67,8 +67,6 @@ namespace CiccioGest.Domain.Anagrafica
                 }
             }
         }
-
-        public virtual string? NomeCompleto => Nome + " " + Cognome;
 
         public virtual string? Email
         {
@@ -109,18 +107,18 @@ namespace CiccioGest.Domain.Anagrafica
             }
         }
 
-        public virtual string? Indirizzo
-        {
-            get => indirizzo;
-            set
-            {
-                if (value != indirizzo)
-                {
-                    indirizzo = value;
-                    NotifyPropertyChanged(nameof(Indirizzo));
-                }
-            }
-        }
+        //public virtual string? Indirizzo
+        //{
+        //    get => indirizzo;
+        //    set
+        //    {
+        //        if (value != indirizzo)
+        //        {
+        //            indirizzo = value;
+        //            NotifyPropertyChanged(nameof(Indirizzo));
+        //        }
+        //    }
+        //}
 
         public virtual string? PartitaIva
         {
@@ -148,12 +146,14 @@ namespace CiccioGest.Domain.Anagrafica
             }
         }
 
-        public virtual Indirizzo? IndirizzoNew
+        public virtual string? IndirizzoCompleto => $"{Indirizzo.Via} {Indirizzo.Civico}, {Indirizzo.CAP} {Indirizzo.Comune} {Indirizzo.Provincia}, {Indirizzo.Nazione}";
+
+        public virtual Indirizzo? Indirizzo
         {
-            get => indirizzoNew;
+            get => indirizzo;
             set
             {
-                indirizzoNew = value;
+                indirizzo = value;
             }
         }
     }

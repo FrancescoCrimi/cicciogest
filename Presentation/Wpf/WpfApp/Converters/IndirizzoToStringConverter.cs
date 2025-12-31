@@ -69,7 +69,7 @@ namespace CiccioGest.Presentation.WpfApp.Converters
 
                 if (result == null) return Binding.DoNothing;
 
-                // Tentativo naive: splitta la stringa e assegna per ordine (Via, Civico, CAP, Citta, Stato)
+                // Tentativo naive: splitta la stringa e assegna per ordine (Via, Civico, CAP, Comune, Nazione)
                 var tokens = s.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 try
                 {

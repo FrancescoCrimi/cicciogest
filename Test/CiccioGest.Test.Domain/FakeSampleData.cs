@@ -10,7 +10,7 @@ using CiccioGest.Domain.Magazzino;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace CiccioGest.Application.FakeImpl
+namespace CiccioGest.Test.Domain
 {
     public static class FakeSampleData
     {
@@ -44,17 +44,17 @@ namespace CiccioGest.Application.FakeImpl
             {
                 var cli = new Cliente
                 {
-                    Cognome = "Cognome " + i.ToString(),
+                    //Cognome = "Cognome " + i.ToString(),
                     Nome = "Nome " + i.ToString(),
                     Email = "cliente" + i.ToString() + "@pippo.com",
                     Telefono = "091123456" + i.ToString(),
                     Mobile = "338123456" + i.ToString(),
-                    Indirizzo = "Casa sua n° " + i + 1,
+                    //Indirizzo = "Casa sua n° " + i + 1,
                 };
-                cli.IndirizzoNew.Via = "via Casa sua";
-                cli.IndirizzoNew.Civico = (i + 1).ToString();
-                cli.IndirizzoNew.Citta = "Palermo";
-                cli.IndirizzoNew.CAP = "90100";
+                cli.Indirizzo.Via = "via Casa sua";
+                cli.Indirizzo.Civico = (i + 1).ToString();
+                cli.Indirizzo.Comune = "Palermo";
+                cli.Indirizzo.CAP = "90100";
                 Clienti.Add(cli);
             }
         }
@@ -65,17 +65,17 @@ namespace CiccioGest.Application.FakeImpl
             {
                 var forn = new Fornitore
                 {
-                    Cognome = "Cognome " + i.ToString(),
+                    //Cognome = "Cognome " + i.ToString(),
                     Nome = "Nome " + i.ToString(),
                     Email = "cliente" + i.ToString() + "@pippo.com",
                     Telefono = "123456789" + i.ToString(),
                     Mobile = "123456789" + i.ToString(),
-                    Indirizzo = "Casa sua n° " + i + 1
+                    //Indirizzo = "Casa sua n° " + i + 1
                 };
-                forn.IndirizzoNew.Via = "via Casa sua";
-                forn.IndirizzoNew.Civico = (i + 1).ToString();
-                forn.IndirizzoNew.Citta = "Palermo";
-                forn.IndirizzoNew.CAP = "90100";
+                forn.Indirizzo.Via = "via Casa sua";
+                forn.Indirizzo.Civico = (i + 1).ToString();
+                forn.Indirizzo.Comune = "Palermo";
+                forn.Indirizzo.CAP = "90100";
                 Fornitori.Add(forn);
             }
         }
@@ -84,8 +84,8 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int p = 1; p < 11; p++)
             {
-                
-                Articolo articolo = new Articolo("Articolo " + p.ToString(), 10 + p);
+
+                Articolo articolo = new("Articolo " + p.ToString(), 10 + p);
                 //articolo.AddCategoria(Categorie[p - 1]);
                 articolo.Descrizione = "Articolo " + p.ToString() + " Bla bla bla";
                 Articoli.Add(articolo);
@@ -96,10 +96,10 @@ namespace CiccioGest.Application.FakeImpl
         {
             for (int i = 1; i < 6; i++)
             {
-                Fattura fatt = new Fattura(i, Clienti[i -1]);
+                Fattura fatt = new(i, Clienti[i - 1]);
                 for (int o = 1; o < (i + 1); o++)
                 {
-                    Dettaglio dett = new Dettaglio(Articoli[o - 1], o);
+                    Dettaglio dett = new(Articoli[o - 1], o);
                     //Dettaglio dett = new Dettaglio(0, Articoli[o - 1], o);
                     fatt.AddDettaglio(dett);
                 }

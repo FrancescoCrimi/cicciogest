@@ -30,18 +30,6 @@
     </Project>
   </Folder>
   <Folder Name="/Infrastructure/Persistence/">
-    <Project Path="Infrastructure/Persistence/Persistence.LiteDB/Persistence.LiteDB.csproj">
-      <Platform Solution="*|Any CPU" Project="x64" />
-      <Platform Solution="*|ARM64" Project="x64" />
-      <Platform Solution="*|x64" Project="x64" />
-      <Platform Solution="*|x86" Project="x86" />
-    </Project>
-    <Project Path="Infrastructure/Persistence/Persistence.Memory/Persistence.Memory.csproj">
-      <Platform Solution="*|Any CPU" Project="x64" />
-      <Platform Solution="*|ARM64" Project="x64" />
-      <Platform Solution="*|x64" Project="x64" />
-      <Platform Solution="*|x86" Project="x86" />
-    </Project>
     <Project Path="Infrastructure/Persistence/Persistence.Nhb/Persistence.Nhb.csproj">
       <Platform Solution="*|Any CPU" Project="x64" />
       <Platform Solution="*|ARM64" Project="x64" />

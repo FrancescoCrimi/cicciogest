@@ -12,6 +12,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Mapping\Comune.hbm.xml" />
+	  <None Remove="Mapping\Nazione.hbm.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Mapping\Comune.hbm.xml" />
 		<EmbeddedResource Include="Mapping\Fornitore.hbm.xml" />
 		<EmbeddedResource Include="Mapping\Cliente.hbm.xml" />
 		<EmbeddedResource Include="Mapping\Categoria.hbm.xml" />
@@ -19,6 +25,7 @@
 		<EmbeddedResource Include="Mapping\Fattura.hbm.xml" />
 		<EmbeddedResource Include="Mapping\Articolo.hbm.xml" />
 		<EmbeddedResource Include="Mapping\Indirizzo.hbm.xml" />
+		<EmbeddedResource Include="Mapping\Nazione.hbm.xml" />
 	</ItemGroup>
 
 	<ItemGroup>

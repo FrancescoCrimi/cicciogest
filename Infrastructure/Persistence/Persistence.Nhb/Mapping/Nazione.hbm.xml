@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping assembly="Domain"
+									 namespace="CiccioGest.Domain.Anagrafica"
+									 xmlns="urn:nhibernate-mapping-2.2">
+
+	<class name="Nazione" table="Nazioni">
+		<id name="Id" generator="identity" unsaved-value="0" />
+		<property name="Nome" not-null="true" index="IX_Nazioni_Nome" />
+		<property name="Sigla" not-null="true" index="IX_Nazioni_Sigla" />
+	</class>
+
+</hibernate-mapping>

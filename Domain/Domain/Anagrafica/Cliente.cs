@@ -10,7 +10,6 @@ namespace CiccioGest.Domain.Anagrafica
 {
     public class Cliente : Persona, IEquatable<Cliente?>
     {
-
         public Cliente() { }
 
         public override bool Equals(object? obj)
@@ -29,6 +28,6 @@ namespace CiccioGest.Domain.Anagrafica
             return HashCode.Combine(Id);
         }
 
-        public override string ToString() => $"{Nome} {Cognome}";
+        public override string ToString() => $"{Nome}";
     }
 }

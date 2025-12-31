@@ -6,6 +6,7 @@
 
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.WpfApp.Views;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp
@@ -19,6 +20,8 @@ namespace CiccioGest.Presentation.WpfApp
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            var persistenceInitializer = Ioc.Default.GetRequiredService<IPersistenceInitializer>();
+            Task.Run(async () => await persistenceInitializer.InitializeAsync(true));
             Ioc.Default.GetRequiredService<MainView>().Show();
         }
     }

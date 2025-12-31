@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.AppForm.Views
         public void MostraFornitore(Fornitore fornitore)
         {
             fornitoreBindingSource.DataSource = fornitore;
-            //indirizzoUserControl1.indirizzoBindingSource.DataSource = fornitore.IndirizzoNew;
+            //indirizzoUserControl1.indirizzoBindingSource.DataSource = fornitore.Indirizzo;
         }
 
         #region Event Handlers

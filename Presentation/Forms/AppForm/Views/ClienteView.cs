@@ -25,7 +25,7 @@ namespace CiccioGest.Presentation.AppForm.Views
         public void MostraCliente(Cliente cliente)
         {
             clienteBindingSource.DataSource = cliente;
-            //indirizzoUserControl1.indirizzoBindingSource.DataSource = cliente.IndirizzoNew;
+            //indirizzoUserControl1.indirizzoBindingSource.DataSource = cliente.Indirizzo;
         }
 
         #region Event Handlers

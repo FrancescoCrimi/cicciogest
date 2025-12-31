@@ -4,9 +4,6 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Application.FakeImpl;
-using CiccioGest.Domain.Documenti;
-using CiccioGest.Domain.Magazzino;
 using CiccioGest.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,37 +14,33 @@ namespace CiccioGest.Application.Impl
     internal class SettingService : ISettingService
     {
         private readonly ILogger<SettingService> _logger;
-        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IPersistenceInitializer _persistenceInitializer;
         private readonly IFatturaService _fatturaService;
         private readonly IMagazzinoService _magazzinoService;
-        private readonly IAnagraficaService _clientiFornitoriService;
+        private readonly IAnagraficaService _anagraficaService;
 
         public SettingService(ILogger<SettingService> logger,
-                              IUnitOfWorkFactory unitOfWorkFactory,
+                              IPersistenceInitializer persistenceInitializer,
                               IFatturaService fatturaService,
                               IMagazzinoService magazzinoService,
-                              IAnagraficaService clientiFornitoriService)
+                              IAnagraficaService anagraficaService)
         {
             _logger = logger;
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _persistenceInitializer = persistenceInitializer;
             _fatturaService = fatturaService;
             _magazzinoService = magazzinoService;
-            _clientiFornitoriService = clientiFornitoriService;
+            _anagraficaService = anagraficaService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void CreateDataAccess()
+        public async Task CreateDataAccess()
         {
-            _unitOfWorkFactory.CreateDataAccess();
+            await _persistenceInitializer.InitializeAsync();
         }
 
         public async Task LoadSampleData()
         {
-            await CreaCategorie();
-            await CreaClienti();
-            await CreaFornitori();
-            await CreaArticoli();
-            await CreaFatture();
+            await _persistenceInitializer.InitializeAsync(includeTestData: true);
         }
 
         public void SaveConf()
@@ -55,73 +48,17 @@ namespace CiccioGest.Application.Impl
             throw new NotImplementedException();
         }
 
-        public void VerifyDataAccess()
+        public Task VerifyDataAccess()
         {
-            _unitOfWorkFactory.VerifyDataAccess();
+            return _persistenceInitializer.VerifyDataAccess();
         }
 
-
-
-        private async Task CreaCategorie()
-        {
-            foreach (var item in FakeSampleData.Categorie)
-            {
-                await _magazzinoService.SaveCategoria(item);
-            }
-        }
-
-        private async Task CreaClienti()
-        {
-            foreach (var item in FakeSampleData.Clienti)
-            {
-                await _clientiFornitoriService.SaveCliente(item);
-            }
-        }
-
-        private async Task CreaFornitori()
-        {
-            foreach (var item in FakeSampleData.Fornitori)
-            {
-                await _clientiFornitoriService.SaveFornitore(item);
-            }
-        }
-
-        private async Task CreaArticoli()
-        {
-
-            for (int p = 1; p <= FakeSampleData.Articoli.Count; p++)
-            {
-                Articolo articolo = FakeSampleData.Articoli[p - 1];
-                Categoria categoria = await _magazzinoService.GetCategoria(p);
-                articolo.AddCategoria(categoria);
-                articolo.Fornitore = await _magazzinoService.GetFornitore(p);
-                await _magazzinoService.SaveArticolo(articolo);
-            }
-        }
-
-        private async Task CreaFatture()
-        {
-            for (int i = 1; i < 6; i++)
-            {
-                var clie = await _fatturaService.GetCliente(i);
-                Fattura fatt = new Fattura(clie);
-                for (int o = 1; o < (i + 1); o++)
-                {
-
-                    var articolo = await _magazzinoService.GetArticolo(o);
-                    Dettaglio dett = new Dettaglio(articolo, o);
-                    fatt.AddDettaglio(dett);
-                }
-                await _fatturaService.SaveFattura(fatt);
-            }
-        }
 
         public void Dispose()
         {
-            _unitOfWorkFactory.Dispose();
             _fatturaService.Dispose();
             _magazzinoService.Dispose();
-            _clientiFornitoriService.Dispose();
+            _anagraficaService.Dispose();
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }

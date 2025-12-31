@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping
-  assembly="Domain"
-  namespace="CiccioGest.Domain.Anagrafica"
-  xmlns="urn:nhibernate-mapping-2.2">
+<hibernate-mapping assembly="Domain"  
+									 namespace="CiccioGest.Domain.Anagrafica"
+									 xmlns="urn:nhibernate-mapping-2.2">
 
 	<class name="Cliente" table="Clienti">
 		<id name="Id" generator="native" unsaved-value="0"/>
 		<property name="Nome" not-null="true"/>
-		<property name="Cognome" not-null="true"/>
+		<!--<property name="Cognome" not-null="true"/>-->
 		<property name="Email" not-null="true"/>
 		<property name="Telefono" not-null="true"/>
-		<property name="Mobile" not-null="true"/>
-		<property name="Indirizzo" not-null="true"/>
+		<property name="Mobile" />
+		<!--<property name="Indirizzo" />-->
 		<property name="PartitaIva"/>
 		<property name="CodiceFiscale"/>
 
-		<many-to-one name="IndirizzoNew" class="Indirizzo" cascade="all">
+		<many-to-one name="Indirizzo" class="Indirizzo" cascade="all">
 			<column name="IdIndirizzo" not-null="true" />
 		</many-to-one>
 	</class>

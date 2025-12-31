@@ -43,7 +43,7 @@ namespace CiccioGest.Domain.Documenti
             protected set => _cliente = value;
         }
 
-        public virtual string? Nome => Cliente?.NomeCompleto;
+        public virtual string? Nome => Cliente?.Nome;
 
         public virtual IList<Dettaglio>? Dettagli
         {

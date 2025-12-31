@@ -48,16 +48,6 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
 
                 .AddTransient<MainView>()
-                //.AddTransient<DashboardView>()
-                //.AddTransient<ArticoliView>()
-                //.AddTransient<ArticoloView>()
-                //.AddTransient<CategoriaView>()
-                //.AddTransient<ClienteView>()
-                //.AddTransient<ClientiView>()
-                //.AddTransient<FatturaView>()
-                //.AddTransient<FattureView>()
-                //.AddTransient<FornitoreView>()
-                //.AddTransient<FornitoriView>()
 
                 .BuildServiceProvider());
         }

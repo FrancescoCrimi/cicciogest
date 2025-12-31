@@ -43,7 +43,7 @@ namespace CiccioGest.Test.Domain
         //[Fact]
         //public void IndirizzoTest()
         //{
-        //    var moqCitta1 = new Mock<Citta>();
+        //    var moqCitta1 = new Mock<Comune>();
         //    moqCitta1.Setup(c => c.Id).Returns(1);
         //    Indirizzo ind1 = new Indirizzo("via1", "123", moqCitta1.Object);
         //    Indirizzo ind11 = new Indirizzo("via1", "123", moqCitta1.Object);
@@ -55,7 +55,7 @@ namespace CiccioGest.Test.Domain
         //    Indirizzo ind3 = new Indirizzo("via1", "124", moqCitta1.Object);
         //    Assert.NotEqual(ind1, ind3);
 
-        //    var moqCitta2 = new Mock<Citta>();
+        //    var moqCitta2 = new Mock<Comune>();
         //    moqCitta2.Setup(c => c.Id).Returns(2);
         //    Indirizzo ind4 = new Indirizzo("via1", "123", moqCitta2.Object);
         //    Assert.NotEqual(ind1, ind4);

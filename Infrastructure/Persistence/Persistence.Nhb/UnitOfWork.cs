@@ -4,23 +4,17 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
 using System;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Infrastructure.Persistence.Nhb
 {
-    internal class UnitOfWork : IUnitOfWork
+    internal class UnitOfWork(IServiceProvider serviceProvider) : IUnitOfWork
     {
-        private readonly UnitOfWorkFactory _unitOfWorkFactory;
         private ISession? _session;
         private ITransaction? _transaction;
-
-        public UnitOfWork(UnitOfWorkFactory unitOfWorkFactory)
-        {
-            _unitOfWorkFactory = unitOfWorkFactory;
-        }
 
         internal ISession Session
         {
@@ -35,7 +29,7 @@ namespace CiccioGest.Infrastructure.Persistence.Nhb
         public async Task BeginAsync()
         {
             await DisposeTransaction();
-            _session = _unitOfWorkFactory.CreateSession();
+            _session = serviceProvider.GetRequiredService<ISession>();
             _session.FlushMode = FlushMode.Commit;
             _transaction = _session.BeginTransaction();
         }

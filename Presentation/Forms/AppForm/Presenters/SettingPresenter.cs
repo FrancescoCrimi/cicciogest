@@ -5,9 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.AppForm.Views;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;
@@ -17,26 +15,24 @@ namespace CiccioGest.Presentation.AppForm.Presenters
     public sealed class SettingPresenter : PresenterBase
     {
         private readonly ILogger _logger;
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
+        private readonly ISettingService _settingService;
         private ISettingView _view;
 
         public SettingPresenter(ILogger<SettingPresenter> logger,
-                                IServiceProvider serviceProvider,
-                                IServiceScopeFactory serviceScopeFactory,
+                                ISettingService settingService,
                                 ISettingView view)
             : base(view)
         {
             _logger = logger;
             _view = view;
-            _serviceProvider = serviceProvider;
-            _serviceScopeFactory = serviceScopeFactory;
+            _settingService = settingService;
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.CreaDatabaseRequested += View_CreaDatabaseEvent;
             _view.VerificaDatabaseRequested += View_VerificaDatabaseEvent;
             _view.PopolaDatabaseRequested += View_PopolaDatabaseEvent;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
+
         }
 
         public void Run()
@@ -54,12 +50,11 @@ namespace CiccioGest.Presentation.AppForm.Presenters
         {
         }
 
-        private void View_CreaDatabaseEvent(object? sender, EventArgs e)
+        private async void View_CreaDatabaseEvent(object? sender, EventArgs e)
         {
             try
             {
-                var uowf = _serviceProvider.GetService<IUnitOfWorkFactory>();
-                uowf?.CreateDataAccess();
+                await _settingService.CreateDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)
@@ -68,12 +63,11 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             }
         }
 
-        private void View_VerificaDatabaseEvent(object? sender, EventArgs e)
+        private async void View_VerificaDatabaseEvent(object? sender, EventArgs e)
         {
             try
             {
-                var uowf = _serviceProvider.GetService<IUnitOfWorkFactory>();
-                uowf?.VerifyDataAccess();
+                await _settingService.VerifyDataAccess();
                 MessageBox.Show("Eseguito con successo");
             }
             catch (Exception ex)
@@ -84,12 +78,8 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private async void View_PopolaDatabaseEvent(object? sender, EventArgs e)
         {
-            using (var scope = _serviceScopeFactory.CreateScope())
-            {
-                var sett = scope.ServiceProvider.GetRequiredService<ISettingService>();
-                await sett.LoadSampleData();
-                MessageBox.Show("Eseguito con successo");
-            }
+            await _settingService.LoadSampleData();
+            MessageBox.Show("Eseguito con successo");
         }
 
         #endregion
@@ -103,8 +93,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _view.VerificaDatabaseRequested -= View_VerificaDatabaseEvent;
             _view.PopolaDatabaseRequested -= View_PopolaDatabaseEvent;
             _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
-
+            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
         }
     }
 }

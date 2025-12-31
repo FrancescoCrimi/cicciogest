@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Magazzino;
+using CiccioGest.Infrastructure;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
     public sealed partial class CategorieViewModel : DialogViewModelBase<int>
     {
         private readonly ILogger _logger;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMagazzinoService _magazzinoService;
         private bool _disposedValue;
 
@@ -27,9 +29,11 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         public ObservableCollection<Categoria> Categorie { get; } = [];
 
         public CategorieViewModel(ILogger<CategorieViewModel> logger,
+                                  IUnitOfWork unitOfWork,
                                   IMagazzinoService magazzinoService)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
             _magazzinoService = magazzinoService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
@@ -40,6 +44,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         [RelayCommand]
         private async Task OnAggiorna()
         {
+            await _unitOfWork.BeginAsync();
             Categorie.Clear();
             foreach (var categoria in await _magazzinoService.GetCategorie())
                 Categorie.Add(categoria);

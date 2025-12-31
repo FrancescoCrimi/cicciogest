@@ -12,7 +12,6 @@ namespace CiccioGest.Domain.Anagrafica
     {
         public Fornitore() { }
 
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as Fornitore);

@@ -4,13 +4,11 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Application.FakeImpl;
 using CiccioGest.Domain.Documenti;
 using CiccioGest.Domain.Magazzino;
 using FluentAssertions;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 using Xunit;
 
 namespace CiccioGest.Test.Domain

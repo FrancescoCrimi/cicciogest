@@ -14,7 +14,7 @@ namespace CiccioGest.Presentation.WpfApp.Test
 {
         public class CategoriaViewModel : INotifyPropertyChanged
         {
-            // Stato UI
+            // Nazione UI
             private bool _isBusy;
             private string? _statusMessage;
             private Categoria? _categoriaCorrente;

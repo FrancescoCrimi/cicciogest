@@ -13,7 +13,7 @@ using System;
 
 namespace CiccioGest.Presentation.WpfBackend
 {
-    public static class ConfigureExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureWpfBackend(this IServiceCollection serviceCollection,
                                                              CiccioGestConf conf)

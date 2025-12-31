@@ -7,8 +7,6 @@
 using CiccioGest.Application.Impl;
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
-//using CiccioGest.Infrastructure.Persistence.LiteDB;
-//using CiccioGest.Infrastructure.Persistence.Memory;
 using CiccioGest.Infrastructure.Persistence.Nhb;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +20,7 @@ namespace CiccioGest.Application
             switch (conf?.DataAccess)
             {
                 case Storage.NHibernate:
-                    serviceCollection.ConfigurePersistenceNhb();
+                    serviceCollection.ConfigurePersistenceNhb(conf);
                     break;
                 //case Storage.EF:
                 //    break;

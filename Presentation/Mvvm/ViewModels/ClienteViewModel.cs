@@ -71,7 +71,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             Cliente = null;
             Indirizzo = null;
             Cliente = cliente;
-            Indirizzo = cliente.IndirizzoNew;
+            Indirizzo = cliente.Indirizzo;
         }
 
 
@@ -136,7 +136,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
                 Cliente = null;
                 Indirizzo = null;
                 Cliente = cliente;
-                Indirizzo = cliente.IndirizzoNew;
+                Indirizzo = cliente.Indirizzo;
             }
         }
 

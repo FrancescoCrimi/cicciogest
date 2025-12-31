@@ -4,18 +4,16 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace CiccioGest.Application
+namespace CiccioGest.Infrastructure
 {
-    public interface ISettingService : IDisposable
+    public interface IPersistenceInitializer
     {
-        void SaveConf();
-        Task CreateDataAccess();
+        // Esegue la creazione dello schema e il seeding in ordine gerarchico
+        Task InitializeAsync(bool includeTestData = false, CancellationToken ct = default);
+
         Task VerifyDataAccess();
-        Task LoadSampleData();
     }
 }

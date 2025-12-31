@@ -8,7 +8,7 @@
 		<id name="Id" generator="native" unsaved-value="0"/>
 		<property name="Nome" not-null="true"/>
 		<property name="Prezzo" not-null="true"/>
-		<property name="Descrizione" not-null="true"/>
+		<property name="Descrizione" />
 
 		<many-to-one name="Fornitore" column="IdFornitore" foreign-key="FkArticoliFornitoreId" not-null="true"/>
 		

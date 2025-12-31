@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Domain.Anagrafica;
+using CiccioGest.Infrastructure;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
     public sealed partial class FornitoriViewModel : DialogViewModelBase<int>
     {
         private readonly ILogger<FornitoriViewModel> _logger;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IAnagraficaService _anagraficaService;
         private bool _disposedValue;
 
@@ -27,9 +29,11 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         public ObservableCollection<Fornitore> Fornitori { get; } = [];
 
         public FornitoriViewModel(ILogger<FornitoriViewModel> logger,
+                                  IUnitOfWork unitOfWork,
                                   IAnagraficaService anagraficaService)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
             _anagraficaService = anagraficaService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
@@ -40,6 +44,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         [RelayCommand]
         private async Task OnAggiorna()
         {
+            await _unitOfWork.BeginAsync();
             Fornitori.Clear();
             foreach (var fornitore in await _anagraficaService.GetFornitori())
                 Fornitori.Add(fornitore);

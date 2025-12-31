@@ -72,7 +72,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             Fornitore = null;
             Indirizzo = null;
             Fornitore = fornitore;
-            Indirizzo = fornitore.IndirizzoNew;
+            Indirizzo = fornitore.Indirizzo;
         }
 
 
@@ -139,7 +139,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
                 Fornitore = null;
                 Indirizzo = null;
                 Fornitore = fornitore;
-                Indirizzo = fornitore.IndirizzoNew;
+                Indirizzo = fornitore.Indirizzo;
             }
         }
 
