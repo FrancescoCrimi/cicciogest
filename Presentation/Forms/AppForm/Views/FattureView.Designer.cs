@@ -102,7 +102,7 @@
             // 
             // fattureBindingSource
             // 
-            fattureBindingSource.DataSource = typeof(Domain.Documenti.Fattura);
+            fattureBindingSource.DataSource = typeof(Domain.Fatturazione.Fattura);
             // 
             // tableLayoutPanel1
             // 

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -14,25 +14,28 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
-    public sealed class CategoriaPresenter : PresenterBase, IDisposable
+    public sealed class CategoriaPresenter : PresenterBase
     {
         private readonly ILogger _logger;
-        private readonly IMagazzinoService _magazinoService;
+        private readonly IMagazzinoService _magazzinoService;
         private ICategoriaView _view;
+        private bool _disposedValue;
 
         public CategoriaPresenter(ILogger<CategoriaPresenter> logger,
-                                  IMagazzinoService magazinoService,
+                                  IMagazzinoService magazzinoService,
                                   ICategoriaView view)
             : base(view)
         {
             _logger = logger;
-            _magazinoService = magazinoService;
+            _magazzinoService = magazzinoService;
             _view = view;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.SalvaCategoriaRequested += View_SalvaCategoriaEvent;
             _view.CancellaCategoriaRequested += View_CancellaCategoriaEvent;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         #region Event Handlers
@@ -48,13 +51,13 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private async void View_CancellaCategoriaEvent(object? sender, int e)
         {
-            await _magazinoService.DeleteCategoria(e);
+            await _magazzinoService.DeleteCategoria(e);
             await Refresh();
         }
 
         private async void View_SalvaCategoriaEvent(object? s, Categoria e)
         {
-            await _magazinoService.SaveCategoria(e);
+            await _magazzinoService.SaveCategoria(e);
             await Refresh();
         }
 
@@ -62,18 +65,28 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private async Task Refresh()
         {
-            var list = await _magazinoService.GetCategorie();
+            var list = await _magazzinoService.GetCategorie();
             _view.SetCategorie(list);
             _view.SetCategoria(new Categoria());
         }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

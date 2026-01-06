@@ -256,7 +256,6 @@ namespace CiccioGest.Presentation.AppForm.Views
             // 
             // cognomeTextBox
             // 
-            cognomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", fornitoreBindingSource, "Cognome", true));
             cognomeTextBox.Location = new System.Drawing.Point(105, 4);
             cognomeTextBox.Margin = new System.Windows.Forms.Padding(4);
             cognomeTextBox.Name = "cognomeTextBox";

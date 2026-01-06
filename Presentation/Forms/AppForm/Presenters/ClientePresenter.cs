@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -10,7 +10,6 @@ using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.Views;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
@@ -21,6 +20,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
         private readonly WindowService _windowService;
         private readonly IAnagraficaService _anagraficaService;
         private IClienteView _view;
+        private bool _disposedValue;
 
         public ClientePresenter(ILogger<ClientePresenter> logger,
                                 WindowService windowService,
@@ -32,13 +32,15 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _windowService = windowService;
             _anagraficaService = anagraficaService;
             _view = view;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.NuovoRequested += OnNuovoRequested;
             _view.SalvaRequested += OnSalvaRequested;
             _view.ApriRequested += OnApriRequested;
             _view.EliminaRequested += OnEliminaRequested;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void NuovoCliente()
@@ -70,7 +72,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private async void OnApriRequested(object? sender, EventArgs e)
         {
-            var idCliente = await _windowService.ShowDialog<ClientiPresenter, int>(_view);
+            var idCliente = await _windowService.ShowDialogAsync<ClientiPresenter>(_view);
             if (idCliente != 0)
             {
                 ApriCliente(idCliente);
@@ -84,17 +86,27 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.ApriRequested -= OnApriRequested;
-            _view.NuovoRequested -= OnNuovoRequested;
-            _view.SalvaRequested -= OnSalvaRequested;
-            _view.EliminaRequested -= OnEliminaRequested;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.ApriRequested -= OnApriRequested;
+                    _view.NuovoRequested -= OnNuovoRequested;
+                    _view.SalvaRequested -= OnSalvaRequested;
+                    _view.EliminaRequested -= OnEliminaRequested;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

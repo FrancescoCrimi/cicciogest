@@ -35,12 +35,11 @@
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             toolStrip = new System.Windows.Forms.ToolStrip();
-            salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
             nuovoToolStripButton = new System.Windows.Forms.ToolStripButton();
+            salvaToolStripButton = new System.Windows.Forms.ToolStripButton();
             apriToolStripButton = new System.Windows.Forms.ToolStripButton();
             eliminaToolStripButton = new System.Windows.Forms.ToolStripButton();
             categorieDataGridView = new System.Windows.Forms.DataGridView();
-            nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             aggiungiCategoriaToolStripButton = new System.Windows.Forms.ToolStripButton();
             rimuovCategoriaToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -84,6 +83,8 @@
             toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)articoloBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)categorieBindingSource).BeginInit();
             tableLayoutPanel1.SuspendLayout();
@@ -150,15 +151,6 @@
             toolStrip.TabIndex = 15;
             toolStrip.Text = "toolStrip1";
             // 
-            // salvaToolStripButton
-            // 
-            salvaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("salvaToolStripButton.Image");
-            salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            salvaToolStripButton.Name = "salvaToolStripButton";
-            salvaToolStripButton.Size = new System.Drawing.Size(58, 24);
-            salvaToolStripButton.Text = "Salva";
-            salvaToolStripButton.Click += Salva_Click;
-            // 
             // nuovoToolStripButton
             // 
             nuovoToolStripButton.Image = (System.Drawing.Image)resources.GetObject("nuovoToolStripButton.Image");
@@ -167,6 +159,15 @@
             nuovoToolStripButton.Size = new System.Drawing.Size(67, 24);
             nuovoToolStripButton.Text = "Nuovo";
             nuovoToolStripButton.Click += NuovoToolStripButton_Click;
+            // 
+            // salvaToolStripButton
+            // 
+            salvaToolStripButton.Image = (System.Drawing.Image)resources.GetObject("salvaToolStripButton.Image");
+            salvaToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            salvaToolStripButton.Name = "salvaToolStripButton";
+            salvaToolStripButton.Size = new System.Drawing.Size(58, 24);
+            salvaToolStripButton.Text = "Salva";
+            salvaToolStripButton.Click += Salva_Click;
             // 
             // apriToolStripButton
             // 
@@ -194,7 +195,7 @@
             categorieDataGridView.AutoGenerateColumns = false;
             categorieDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             categorieDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            categorieDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { nomeDataGridViewTextBoxColumn });
+            categorieDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { nomeDataGridViewTextBoxColumn, idDataGridViewTextBoxColumn });
             categorieDataGridView.DataSource = categorieBindingSource;
             categorieDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             categorieDataGridView.Location = new System.Drawing.Point(358, 31);
@@ -207,14 +208,6 @@
             categorieDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             categorieDataGridView.Size = new System.Drawing.Size(254, 218);
             categorieDataGridView.TabIndex = 14;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            nomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // toolStrip1
             // 
@@ -556,6 +549,20 @@
             aboutToolStripButton.Text = "&?";
             aboutToolStripButton.Click += About_Click;
             // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            nomeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // ArticoloView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -631,7 +638,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton apriToolStripButton;
         private System.Windows.Forms.ToolStripButton aboutToolStripButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox fornitoreTextBox;
         private System.Windows.Forms.Label nomeLabel;
@@ -641,5 +647,7 @@
         private System.Windows.Forms.Label prezzoLabel;
         private System.Windows.Forms.Label descrizioneLabel;
         private System.Windows.Forms.TextBox prezzoTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
     }
 }

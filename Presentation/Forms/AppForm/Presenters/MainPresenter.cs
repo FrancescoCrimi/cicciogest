@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -12,11 +12,12 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
-    public sealed class MainPresenter : PresenterBase, IDisposable
+    public sealed class MainPresenter : PresenterBase
     {
         private readonly ILogger _logger;
         private readonly WindowService _windowService;
         private IMainView _view;
+        private bool _disposedValue;
 
         public MainPresenter(ILogger<MainPresenter> logger,
                              WindowService windowService,
@@ -26,6 +27,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _logger = logger;
             _view = view;
             _windowService = windowService;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.NuovaFatturaRequested += OnNuovaFatturaRequested;
@@ -34,7 +36,8 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _view.FornitoriRequested += OnFornitoriRequested;
             _view.ArticoliRequested += OnArticoliRequested;
             _view.CategorieRequested += OnCategorieRequested;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void Run()
@@ -50,56 +53,66 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private async void OnNuovaFatturaRequested(object? sender, EventArgs e)
         {
-            var idCliente = await _windowService.ShowDialog<ClientiPresenter, int>(_view);
+            var idCliente = await _windowService.ShowDialogAsync<ClientiPresenter>(_view);
             if (idCliente != 0)
             {
-               await _windowService.Show<FatturaPresenter>(new IdClienteParameter(idCliente));
+                await _windowService.Show<FatturaPresenter>(new IdClienteParameter(idCliente));
             }
         }
 
         private async void OnApriFatturaRequested(object? sender, EventArgs e)
         {
-            var idFattura = await _windowService.ShowDialog<FatturePresenter, int>(_view);
+            var idFattura = await _windowService.ShowDialogAsync<FatturePresenter>(_view);
             if (idFattura != 0)
             {
-               await _windowService.Show<FatturaPresenter>(new IdFatturaParameter(idFattura));
+                await _windowService.Show<FatturaPresenter>(new IdFatturaParameter(idFattura));
             }
         }
 
         private async void OnClientiRequested(object? sender, EventArgs e)
         {
-           await _windowService.Show<ClientePresenter>();
+            await _windowService.Show<ClientePresenter>();
         }
 
         private async void OnFornitoriRequested(object? sender, EventArgs e)
         {
-          await  _windowService.Show<FornitorePresenter>();
+            await _windowService.Show<FornitorePresenter>();
         }
 
         private async void OnArticoliRequested(object? sender, EventArgs e)
         {
-          await  _windowService.Show<ArticoloPresenter>();
+            await _windowService.Show<ArticoloPresenter>();
         }
 
         private async void OnCategorieRequested(object? sender, EventArgs e)
         {
-          await  _windowService.Show<CategoriaPresenter>();
+            await _windowService.Show<CategoriaPresenter>();
         }
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.ApriFatturaRequested -= OnApriFatturaRequested;
-            _view.ClientiRequested -= OnClientiRequested;
-            _view.FornitoriRequested -= OnFornitoriRequested;
-            _view.ArticoliRequested -= OnArticoliRequested;
-            _view.CategorieRequested -= OnCategorieRequested;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.ApriFatturaRequested -= OnApriFatturaRequested;
+                    _view.ClientiRequested -= OnClientiRequested;
+                    _view.FornitoriRequested -= OnFornitoriRequested;
+                    _view.ArticoliRequested -= OnArticoliRequested;
+                    _view.CategorieRequested -= OnCategorieRequested;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

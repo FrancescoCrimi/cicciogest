@@ -1,4 +1,4 @@
-// Copyright (c) 2016 - 2025 Francesco Crimi
+// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -10,7 +10,7 @@ using CiccioSoft.Collections.Generic;
 using System;
 using System.Collections.Generic;
 
-namespace CiccioGest.Domain.Documenti
+namespace CiccioGest.Domain.Fatturazione
 {
     public class Fattura : DomainEntity, IEquatable<Fattura>
     {

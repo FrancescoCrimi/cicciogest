@@ -1,11 +1,11 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.Documenti;
+using CiccioGest.Domain.Fatturazione;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.AppForm.Services;
 using CiccioGest.Presentation.AppForm.Views;
@@ -24,6 +24,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
         private readonly IFatturaService _fatturaService;
         private IFatturaView _view;
         private Fattura? _fattura;
+        private bool _disposedValue;
 
         public FatturaPresenter(ILogger<FatturaPresenter> logger,
                                 WindowService windowService,
@@ -47,7 +48,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _view.AggiungiDettaglioRequested += OnAggiungiDettaglioRequested;
             _view.RimuoviDettaglioRequested += OnRimuoviDettaglioRequested;
 
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public async Task InitializeAsync(object? parameter)
@@ -73,7 +74,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private async void OnNuovaRequested(object? sender, EventArgs e)
         {
-            var idCliente = await _windowService.ShowDialog<ClientiPresenter, int>(_view);
+            var idCliente = await _windowService.ShowDialogAsync<ClientiPresenter>(_view);
             if (idCliente != 0)
                 await NuovaFattura(idCliente);
         }
@@ -97,14 +98,14 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private async void OnApriRequested(object? sender, EventArgs e)
         {
-            var idFattura = await _windowService.ShowDialog<FatturePresenter, int>(_view);
+            var idFattura = await _windowService.ShowDialogAsync<FatturePresenter>(_view);
             if (idFattura != 0)
                 await MostraFattura(idFattura);
         }
 
         private async void OnNuovoDettaglioRequested(object? sender, EventArgs e)
         {
-            var idArticolo = await _windowService.ShowDialog<ArticoliPresenter, int>(_view);
+            var idArticolo = await _windowService.ShowDialogAsync<ArticoliPresenter>(_view);
             if (idArticolo != 0)
             {
                 var articolo = await _fatturaService.GetArticolo(idArticolo);
@@ -152,19 +153,29 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             }
         }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.NuovaRequested -= OnNuovaRequested;
-            _view.SalvaRequested -= OnSalvaRequested;
-            _view.ApriRequested -= OnApriRequested;
-            _view.NuovoDettaglioRequested -= OnNuovoDettaglioRequested;
-            _view.AggiungiDettaglioRequested -= OnAggiungiDettaglioRequested;
-            _view.RimuoviDettaglioRequested -= OnRimuoviDettaglioRequested;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.NuovaRequested -= OnNuovaRequested;
+                    _view.SalvaRequested -= OnSalvaRequested;
+                    _view.ApriRequested -= OnApriRequested;
+                    _view.NuovoDettaglioRequested -= OnNuovoDettaglioRequested;
+                    _view.AggiungiDettaglioRequested -= OnAggiungiDettaglioRequested;
+                    _view.RimuoviDettaglioRequested -= OnRimuoviDettaglioRequested;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

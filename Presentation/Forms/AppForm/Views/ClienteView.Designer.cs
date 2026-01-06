@@ -156,7 +156,6 @@ namespace CiccioGest.Presentation.AppForm.Views
             // 
             // cognomeTextBox
             // 
-            cognomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clienteBindingSource, "Cognome", true));
             cognomeTextBox.Location = new System.Drawing.Point(105, 4);
             cognomeTextBox.Margin = new System.Windows.Forms.Padding(4);
             cognomeTextBox.Name = "cognomeTextBox";
@@ -385,6 +384,7 @@ namespace CiccioGest.Presentation.AppForm.Views
             // 
             // indirizzoUserControl1
             // 
+            indirizzoUserControl1.DataBindings.Add(new System.Windows.Forms.Binding("DataContext", clienteBindingSource, "Indirizzo", true));
             indirizzoUserControl1.Location = new System.Drawing.Point(3, 125);
             indirizzoUserControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             indirizzoUserControl1.Name = "indirizzoUserControl1";

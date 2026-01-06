@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Views
 {
-    public interface IView : IWin32Window
+    public interface IView : IWin32Window, IDisposable
     {
         event EventHandler? Load;
         event FormClosingEventHandler? FormClosing;

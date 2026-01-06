@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -11,9 +11,23 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
+    // Presenter che può ricevere un parametro
+    public interface IInitializable
+    {
+        Task InitializeAsync(object? parameter);
+    }
+
+
+    public interface IDialogResultProvider<TResult>
+    {
+        event EventHandler<TResult>? ValueSelected;
+    }
+
+
     public abstract class PresenterBase : IDisposable
     {
         private IView _view;
+        private bool disposedValue;
 
         protected PresenterBase(IView view) => _view = view;
 
@@ -21,21 +35,53 @@ namespace CiccioGest.Presentation.AppForm.Presenters
         public void Show(IWin32Window owner) => _view.Show(owner);
         public DialogResult ShowDialog() => _view.ShowDialog();
         public DialogResult ShowDialog(IWin32Window owner) => _view.ShowDialog(owner);
+        public void Close() => _view.Close();
 
-        public virtual void Dispose() => _view = null!;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: eliminare lo stato gestito (oggetti gestiti)
+                    _view.Dispose();
+                }
+
+                // TODO: liberare risorse non gestite (oggetti non gestiti) ed eseguire l'override del finalizzatore
+                // TODO: impostare campi di grandi dimensioni su Null
+                _view = null!;
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: eseguire l'override del finalizzatore solo se 'Dispose(bool disposing)' contiene codice per liberare risorse non gestite
+        // ~PresenterBase()
+        // {
+        //     // Non modificare questo codice. Inserire il codice di pulizia nel metodo 'Dispose(bool disposing)'
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Non modificare questo codice. Inserire il codice di pulizia nel metodo 'Dispose(bool disposing)'
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 
-    // Presenter che può ricevere un parametro
-    public interface IInitializable
+    public abstract class DialogPresenterBase : PresenterBase, IDialogResultProvider<int>
     {
-        //void Initialize(object? parameter);
-        //Task InitializeAsync(object? parameter) => Task.Run(() => Initialize(parameter));
-        Task InitializeAsync(object? parameter);
-    }
+        protected DialogPresenterBase(IView view) : base(view)
+        {
+        }
 
-    // Presenter che fornisce un risultato tipizzato
-    public interface IResultProvider<out TResult>
-    {
-        TResult GetResult();
+        public event EventHandler<int>? ValueSelected;
+
+
+        protected void NotifySelection(int value)
+        {
+            ValueSelected?.Invoke(this, value);
+            //_view.DialogResult = DialogResult.OK;
+        }
     }
 }

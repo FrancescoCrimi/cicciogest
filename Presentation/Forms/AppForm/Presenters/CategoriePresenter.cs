@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -12,59 +12,64 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
-    public sealed class CategoriePresenter : PresenterBase, IResultProvider<int>
+    public sealed class CategoriePresenter : DialogPresenterBase
     {
         private readonly ILogger _logger;
-        private readonly IMagazzinoService _magazinoService;
+        private readonly IMagazzinoService _magazzinoService;
         private ICategorieView _view;
-        private int _idCategoria;
+        private bool _disposedValue;
 
         public CategoriePresenter(ILogger<CategoriePresenter> logger,
-                                  IMagazzinoService magazinoService,
+                                  IMagazzinoService magazzinoService,
                                   ICategorieView view)
             : base(view)
         {
             _logger = logger;
-            _magazinoService = magazinoService;
+            _magazzinoService = magazzinoService;
             _view = view;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.CategoriaSelezionataRequested += OnCategoriaSelezionataRequested;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
-        }
 
-        public int GetResult()
-        {
-            return _idCategoria;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         #region Event Handlers
 
         private async void OnLoad(object? sender, EventArgs e)
         {
-            _view.CaricaCategorie(await _magazinoService.GetCategorie());
+            var categorie = await _magazzinoService.GetCategorie();
+            _view.CaricaCategorie(categorie);
         }
 
-        private void OnFormClosing(object? sender, FormClosingEventArgs e)
-        {
-        }
+        private void OnFormClosing(object? sender, FormClosingEventArgs e) { }
 
         private void OnCategoriaSelezionataRequested(object? sender, int e)
         {
-            _idCategoria = e;
-            _view.DialogResult = DialogResult.OK;
+            NotifySelection(e);
         }
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.CategoriaSelezionataRequested -= OnCategoriaSelezionataRequested;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.CategoriaSelezionataRequested -= OnCategoriaSelezionataRequested;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

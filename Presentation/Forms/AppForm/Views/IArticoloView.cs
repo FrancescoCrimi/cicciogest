@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -12,13 +12,15 @@ namespace CiccioGest.Presentation.AppForm.Views
 {
     public interface IArticoloView : IView
     {
-        event EventHandler NuovoArticoloRequested;
-        event EventHandler SalvaArticoloRequested;
-        event EventHandler<int> EliminaArticoloRequested;
-        event EventHandler ApriArticoloRequested;
-        event EventHandler AggiungiCategoriaRequested;
-        event EventHandler<Categoria> RimuoviCategoriaRequested;
-        event EventHandler SelezionaFornitoreRequested;
+        event EventHandler? NuovoArticoloRequested;
+        event EventHandler? SalvaArticoloRequested;
+        event EventHandler? ApriArticoloRequested;
+        event EventHandler<int>? EliminaArticoloRequested;
+        
+        event EventHandler? AggiungiCategoriaRequested;
+        event EventHandler<Categoria>? RimuoviCategoriaRequested;
+        event EventHandler? SelezionaFornitoreRequested;
+        
         void SetArticolo(Articolo articolo);
         void SetCategorie(ICollection<Categoria> list);
     }

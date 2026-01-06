@@ -33,7 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientiView));
             clientiDataGridView = new System.Windows.Forms.DataGridView();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            NomeCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             societaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             indirizzoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             CodiceFiscale = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +69,7 @@
             clientiDataGridView.AllowUserToDeleteRows = false;
             clientiDataGridView.AutoGenerateColumns = false;
             clientiDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            clientiDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, NomeCompleto, societaDataGridViewTextBoxColumn, indirizzoDataGridViewTextBoxColumn, CodiceFiscale, PartitaIva });
+            clientiDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, Nome, societaDataGridViewTextBoxColumn, indirizzoDataGridViewTextBoxColumn, CodiceFiscale, PartitaIva });
             clientiDataGridView.DataSource = clientiBindingSource;
             clientiDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             clientiDataGridView.Location = new System.Drawing.Point(3, 65);
@@ -94,14 +94,14 @@
             Id.ReadOnly = true;
             Id.Width = 42;
             // 
-            // NomeCompleto
+            // Nome
             // 
-            NomeCompleto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            NomeCompleto.DataPropertyName = "NomeCompleto";
-            NomeCompleto.HeaderText = "Nome";
-            NomeCompleto.MinimumWidth = 6;
-            NomeCompleto.Name = "NomeCompleto";
-            NomeCompleto.ReadOnly = true;
+            Nome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            Nome.DataPropertyName = "Nome";
+            Nome.HeaderText = "Nome";
+            Nome.MinimumWidth = 6;
+            Nome.Name = "Nome";
+            Nome.ReadOnly = true;
             // 
             // societaDataGridViewTextBoxColumn
             // 
@@ -114,7 +114,7 @@
             // 
             // indirizzoDataGridViewTextBoxColumn
             // 
-            indirizzoDataGridViewTextBoxColumn.DataPropertyName = "Indirizzo";
+            indirizzoDataGridViewTextBoxColumn.DataPropertyName = "IndirizzoCompleto";
             indirizzoDataGridViewTextBoxColumn.HeaderText = "Indirizzo";
             indirizzoDataGridViewTextBoxColumn.MinimumWidth = 6;
             indirizzoDataGridViewTextBoxColumn.Name = "indirizzoDataGridViewTextBoxColumn";
@@ -209,7 +209,7 @@
             // 
             // nomeCompletoTextBox
             // 
-            nomeCompletoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clientiBindingSource, "NomeCompleto", true));
+            nomeCompletoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", clientiBindingSource, "Nome", true));
             nomeCompletoTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             nomeCompletoTextBox.Location = new System.Drawing.Point(49, 3);
             nomeCompletoTextBox.Name = "nomeCompletoTextBox";
@@ -246,8 +246,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox nomeCompletoTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomeCompleto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn societaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn indirizzoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodiceFiscale;

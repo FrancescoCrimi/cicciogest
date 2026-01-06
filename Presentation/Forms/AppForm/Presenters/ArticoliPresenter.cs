@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -14,35 +14,30 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
-    public sealed class ArticoliPresenter : PresenterBase, IResultProvider<int>
+    public sealed class ArticoliPresenter : DialogPresenterBase
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMagazzinoService _magazinoService;
+        private readonly IMagazzinoService _magazzinoService;
         private IArticoliView _view;
-        private int _idArticolo;
-
-        public int IdProdotto { get; private set; }
+        private bool _disposedValue;
 
         public ArticoliPresenter(ILogger<ArticoliPresenter> logger,
                                  IUnitOfWork unitOfWork,
-                                 IMagazzinoService magazinoService,
+                                 IMagazzinoService magazzinoService,
                                  IArticoliView view)
             : base(view)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _magazinoService = magazinoService;
+            _magazzinoService = magazzinoService;
             _view = view;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.ArticoloSelezionatoRequested += OnArticoloSelezionatoRequested;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
-        }
 
-        public int GetResult()
-        {
-            return _idArticolo;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         #region Event Handlers
@@ -50,29 +45,36 @@ namespace CiccioGest.Presentation.AppForm.Presenters
         private async void OnLoad(object? sender, EventArgs e)
         {
             await _unitOfWork.BeginAsync();
-            _view.CaricaArticoli(await _magazinoService.GetArticoli());
+            _view.CaricaArticoli(await _magazzinoService.GetArticoli());
         }
 
-        private void OnFormClosing(object? sender, FormClosingEventArgs e)
-        {
-        }
+        private void OnFormClosing(object? sender, FormClosingEventArgs e) { }
 
         private void OnArticoloSelezionatoRequested(object? sender, int e)
         {
-            IdProdotto = e;
-            _view.DialogResult = DialogResult.OK;
+            NotifySelection(e);
         }
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.ArticoloSelezionatoRequested -= OnArticoloSelezionatoRequested;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.ArticoloSelezionatoRequested -= OnArticoloSelezionatoRequested;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

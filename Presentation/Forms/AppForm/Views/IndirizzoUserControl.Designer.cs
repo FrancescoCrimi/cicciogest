@@ -166,7 +166,7 @@ namespace CiccioGest.Presentation.AppForm.Views
             // 
             // statoTextBox
             // 
-            this.statoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.indirizzoBindingSource, "Stato", true));
+            this.statoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.indirizzoBindingSource, "Nazione", true));
             this.statoTextBox.Location = new System.Drawing.Point(120, 69);
             this.statoTextBox.Name = "statoTextBox";
             this.statoTextBox.Size = new System.Drawing.Size(200, 27);
@@ -183,7 +183,7 @@ namespace CiccioGest.Presentation.AppForm.Views
             // 
             // cittaTextBox
             // 
-            this.cittaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.indirizzoBindingSource, "Citta", true));
+            this.cittaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.indirizzoBindingSource, "Comune", true));
             this.cittaTextBox.Location = new System.Drawing.Point(120, 36);
             this.cittaTextBox.Name = "cittaTextBox";
             this.cittaTextBox.Size = new System.Drawing.Size(200, 27);

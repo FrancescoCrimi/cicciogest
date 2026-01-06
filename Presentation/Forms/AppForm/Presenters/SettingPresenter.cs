@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -17,6 +17,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
         private readonly ILogger _logger;
         private readonly ISettingService _settingService;
         private ISettingView _view;
+        private bool _disposedValue;
 
         public SettingPresenter(ILogger<SettingPresenter> logger,
                                 ISettingService settingService,
@@ -26,11 +27,13 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _logger = logger;
             _view = view;
             _settingService = settingService;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.CreaDatabaseRequested += View_CreaDatabaseEvent;
             _view.VerificaDatabaseRequested += View_VerificaDatabaseEvent;
             _view.PopolaDatabaseRequested += View_PopolaDatabaseEvent;
+
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
 
         }
@@ -84,16 +87,26 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.CreaDatabaseRequested -= View_CreaDatabaseEvent;
-            _view.VerificaDatabaseRequested -= View_VerificaDatabaseEvent;
-            _view.PopolaDatabaseRequested -= View_PopolaDatabaseEvent;
-            _view = null!;
-            _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.CreaDatabaseRequested -= View_CreaDatabaseEvent;
+                    _view.VerificaDatabaseRequested -= View_VerificaDatabaseEvent;
+                    _view.PopolaDatabaseRequested -= View_PopolaDatabaseEvent;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -8,6 +8,7 @@ using CiccioGest.Presentation.AppForm.Presenters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,16 +24,10 @@ namespace CiccioGest.Presentation.AppForm.Services
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public Task Show<TPresenter>(object? parameter = null)
-            where TPresenter : PresenterBase
-        {
-            return Show<TPresenter>(owner: null!, parameter);
-        }
-
-        public async Task Show<TPresenter>(IWin32Window owner, object? parameter = null)
+        public async Task Show<TPresenter>(object? parameter = null)
             where TPresenter : PresenterBase
         {
             var presenter = _serviceProvider.GetRequiredService<TPresenter>();
@@ -40,47 +35,42 @@ namespace CiccioGest.Presentation.AppForm.Services
             if (presenter is IInitializable init && parameter != null)
                 await init.InitializeAsync(parameter);
 
-            if (owner == null)
-                presenter.Show();
-            else
-                presenter.Show(owner);
+            presenter.Show();
         }
 
-
-        public async Task<TResult?> ShowDialog<TPresenter, TResult>(object? parameter = null)
-            where TPresenter : PresenterBase, IResultProvider<TResult>
+        public Task<int> ShowDialogAsync<TPresenter>(IWin32Window owner)
+            where TPresenter : PresenterBase, IDialogResultProvider<int>
         {
-            return await ShowDialog<TPresenter, TResult>(owner: null!, parameter);
-        }
+            // Otteniamo il riferimento alla form principale (owner)
+            Form? mainForm = owner as Form ?? System.Windows.Forms.Application.OpenForms.Cast<Form>().FirstOrDefault();
 
-        public async Task<TResult?> ShowDialog<TPresenter, TResult>(IWin32Window owner, object? parameter = null)
-            where TPresenter : PresenterBase, IResultProvider<TResult>
-        {
             var presenter = _serviceProvider.GetRequiredService<TPresenter>();
 
-            if (presenter is IInitializable init && parameter != null)
-                await init.InitializeAsync(parameter);
+            var tcs = new TaskCompletionSource<int>();
 
-            var dialogResult = owner == null ? presenter.ShowDialog() : presenter.ShowDialog(owner);
-            return dialogResult == DialogResult.OK ? presenter.GetResult() : default;
+            void OnValueSelected(object? s, int result)
+            {
+                presenter.ValueSelected -= OnValueSelected;
+                presenter.Close();
+
+                // Riabilita la form principale e riportala in primo piano
+                if (mainForm != null)
+                {
+                    mainForm.Enabled = true;
+                    mainForm.Activate();
+                }
+                tcs.TrySetResult(result);
+            }
+            presenter.ValueSelected += OnValueSelected;
+
+            // --- SIMULAZIONE MODALE ---
+            // Disabilita la form principale per impedire interazioni (comportamento modale)
+            if (mainForm != null) mainForm.Enabled = false;
+
+            // Mostra la form in modalità non bloccante
+            presenter.Show(owner);
+
+            return tcs.Task;
         }
-
-
-
-        //public TPresenter? OpenWindow<TPresenter>() where TPresenter : PresenterBase
-        //{
-        //    var scope = _serviceScopeFactory.CreateScope();
-        //    var window = scope.ServiceProvider.GetService<TPresenter>();
-
-        //    void WindowDisposed(object sender, EventArgs e)
-        //    {
-        //        window.Disposed -= WindowDisposed;
-        //        scope.Dispose();
-        //    }
-        //    window.Disposed += WindowDisposed;
-
-        //    window?.Show();
-        //    return window;
-        //}
     }
 }

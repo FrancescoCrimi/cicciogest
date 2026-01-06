@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -12,8 +12,8 @@ namespace CiccioGest.Presentation.AppForm.Views
 {
     public interface ICategoriaView : IView
     {
-        event EventHandler<int> CancellaCategoriaRequested;
-        event EventHandler<Categoria> SalvaCategoriaRequested;
+        event EventHandler<int>? CancellaCategoriaRequested;
+        event EventHandler<Categoria>? SalvaCategoriaRequested;
 
         void SetCategoria(Categoria categoria);
         void SetCategorie(IList<Categoria> list);

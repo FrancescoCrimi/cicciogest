@@ -1,11 +1,11 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application;
-using CiccioGest.Domain.Documenti;
+using CiccioGest.Domain.Fatturazione;
 using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.AppForm.Views;
 using Microsoft.Extensions.Logging;
@@ -15,13 +15,13 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
-    public sealed class FatturePresenter : PresenterBase, IResultProvider<int>
+    public sealed class FatturePresenter : DialogPresenterBase
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFatturaService _fatturaService;
         private IFattureView _view;
-        private int _idFattura;
+        private bool _disposedValue;
 
         public FatturePresenter(ILogger<FatturePresenter> logger,
                                 IUnitOfWork unitOfWork,
@@ -38,12 +38,7 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _view.FormClosing += OnFormClosing;
             _view.FatturaSelezionataRequested += OnFatturaSelezionataEvent;
 
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
-        }
-
-        public int GetResult()
-        {
-            return _idFattura;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         #region Event Handlers
@@ -59,21 +54,29 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private void OnFatturaSelezionataEvent(object? sender, int e)
         {
-            _idFattura = e;
-            _view.DialogResult = DialogResult.OK;
+            NotifySelection(e);
         }
 
         #endregion
 
-
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.FatturaSelezionataRequested -= OnFatturaSelezionataEvent;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.FatturaSelezionataRequested -= OnFatturaSelezionataEvent;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

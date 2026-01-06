@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -21,7 +21,7 @@ namespace CiccioGest.Presentation.AppForm.Views
         {
             InitializeComponent();
             _logger = logger;
-            _logger.LogDebug("HashCode: " + GetHashCode().ToString() + " Created");
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         public void CaricaArticoli(IList<Articolo> articoli)

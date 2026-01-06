@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -19,25 +19,28 @@ namespace CiccioGest.Presentation.AppForm.Presenters
     {
         private readonly ILogger _logger;
         private readonly WindowService _windowService;
-        private readonly IAnagraficaService _clientiFornitoriService;
+        private readonly IAnagraficaService _anagraficaService;
         private IFornitoreView _view;
+        private bool _disposedValue;
 
         public FornitorePresenter(ILogger<FornitorePresenter> logger,
                                   WindowService windowService,
-                                  IAnagraficaService clientiFornitoriService,
+                                  IAnagraficaService anagraficaService,
                                   IFornitoreView view)
             : base(view)
         {
             _logger = logger;
             _view = view;
-            _clientiFornitoriService = clientiFornitoriService;
+            _anagraficaService = anagraficaService;
             _windowService = windowService;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.ApriRequested += View_ApriFornitore;
             _view.NuovoRequested += View_NuovoFornitore;
             _view.SalvaRequested += View_SalvaFornitore;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
+
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
 
@@ -46,11 +49,11 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             throw new NotImplementedException();
         }
 
-        public void NuovoFornitore()
+        private void NuovoFornitore()
             => _view.MostraFornitore(new Fornitore());
 
-        public async void ApriFornitore(int idFornitore)
-            => _view.MostraFornitore(await _clientiFornitoriService.GetFornitore(idFornitore));
+        private async void ApriFornitore(int idFornitore)
+            => _view.MostraFornitore(await _anagraficaService.GetFornitore(idFornitore));
 
 
         #region Event Handlers
@@ -71,26 +74,38 @@ namespace CiccioGest.Presentation.AppForm.Presenters
 
         private void View_NuovoFornitore(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            NuovoFornitore();
         }
 
-        private void View_ApriFornitore(object? sender, EventArgs e)
+        private async void View_ApriFornitore(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var id = await _windowService.ShowDialogAsync<FornitoriPresenter>(_view);
+            if (id != 0)
+                ApriFornitore(id);
         }
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.ApriRequested -= View_ApriFornitore;
-            _view.NuovoRequested -= View_NuovoFornitore;
-            _view.SalvaRequested -= View_SalvaFornitore;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.ApriRequested -= View_ApriFornitore;
+                    _view.NuovoRequested -= View_NuovoFornitore;
+                    _view.SalvaRequested -= View_SalvaFornitore;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

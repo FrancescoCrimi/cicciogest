@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
-    public sealed class FornitoriPresenter : PresenterBase, IResultProvider<int>
+    public sealed class FornitoriPresenter : DialogPresenterBase
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAnagraficaService _anagraficaService;
         private IFornitoriView _view;
-        private int _idFornitore;
+        private bool _disposedValue;
 
         public FornitoriPresenter(ILogger<FornitoriPresenter> logger,
                                   IUnitOfWork unitOfWork,
@@ -31,44 +31,49 @@ namespace CiccioGest.Presentation.AppForm.Presenters
             _unitOfWork = unitOfWork;
             _anagraficaService = anagraficaService;
             _view = view;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.FornitoreSelezionatoRequested += OnFornitoreSelezionatoRequested;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
-        }
 
-        public int GetResult()
-        {
-            return _idFornitore;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         #region Event Handlers
 
         private async void OnLoad(object? sender, EventArgs e)
         {
-            _view.CaricaFornitori(await _anagraficaService.GetFornitori());
+            var fornitori = await _anagraficaService.GetFornitori();
+            _view.CaricaFornitori(fornitori);
         }
 
-        private void OnFormClosing(object? sender, FormClosingEventArgs e)
-        {
-        }
+        private void OnFormClosing(object? sender, FormClosingEventArgs e) { }
 
         private void OnFornitoreSelezionatoRequested(object? sender, int e)
         {
-            _idFornitore = e;
-            _view.DialogResult = DialogResult.OK;
+            NotifySelection(e);
         }
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.FornitoreSelezionatoRequested -= OnFornitoreSelezionatoRequested;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.FornitoreSelezionatoRequested -= OnFornitoreSelezionatoRequested;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

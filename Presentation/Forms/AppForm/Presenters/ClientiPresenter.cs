@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 - 2025 Francesco Crimi
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
@@ -13,33 +13,30 @@ using System.Windows.Forms;
 
 namespace CiccioGest.Presentation.AppForm.Presenters
 {
-    public sealed class ClientiPresenter : PresenterBase, IResultProvider<int>
+    public sealed class ClientiPresenter : DialogPresenterBase
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAnagraficaService _clientiFornitoriService;
+        private readonly IAnagraficaService _anagraficaService;
         private IClientiView _view;
-        private int _idCliente;
+        private bool _disposedValue;
 
         public ClientiPresenter(ILogger<ClientiPresenter> logger,
                                 IUnitOfWork unitOfWork,
-                                IAnagraficaService clientiFornitoriService,
+                                IAnagraficaService anagraficaService,
                                 IClientiView view)
             : base(view)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _clientiFornitoriService = clientiFornitoriService;
+            _anagraficaService = anagraficaService;
             _view = view;
+
             _view.Load += OnLoad;
             _view.FormClosing += OnFormClosing;
             _view.ClienteSelezionatoRequested += OnClienteSelezionatoRequested;
-            _logger.LogDebug("Created: " + GetHashCode().ToString());
-        }
 
-        public int GetResult()
-        {
-            return _idCliente;
+            _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
         #region Event Handlers
@@ -47,30 +44,37 @@ namespace CiccioGest.Presentation.AppForm.Presenters
         private async void OnLoad(object? sender, EventArgs e)
         {
             await _unitOfWork.BeginAsync();
-            var clienti = await _clientiFornitoriService.GetClienti();
+            var clienti = await _anagraficaService.GetClienti();
             _view.CaricaClienti(clienti);
         }
 
-        private void OnFormClosing(object? sender, FormClosingEventArgs e)
-        {
-        }
+        private void OnFormClosing(object? sender, FormClosingEventArgs e) { }
 
         private void OnClienteSelezionatoRequested(object? sender, int e)
         {
-            _idCliente = e;
-            _view.DialogResult = DialogResult.OK;
+            NotifySelection(e);
         }
 
         #endregion
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            _view.Load -= OnLoad;
-            _view.FormClosing -= OnFormClosing;
-            _view.ClienteSelezionatoRequested -= OnClienteSelezionatoRequested;
-            _view = null!;
-            _logger.LogDebug("Disposed: " + GetHashCode().ToString());
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // Libera le risorse specifiche della classe figlia
+                    _view.Load -= OnLoad;
+                    _view.FormClosing -= OnFormClosing;
+                    _view.ClienteSelezionatoRequested -= OnClienteSelezionatoRequested;
+                    _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());
+                }
+
+                // Chiama sempre la base alla fine
+                _view = null!;
+                base.Dispose(disposing);
+                _disposedValue = true;
+            }
         }
     }
 }

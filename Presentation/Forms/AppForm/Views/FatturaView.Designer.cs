@@ -238,7 +238,7 @@
             // 
             // fatturaBindingSource
             // 
-            fatturaBindingSource.DataSource = typeof(Domain.Documenti.Fattura);
+            fatturaBindingSource.DataSource = typeof(Domain.Fatturazione.Fattura);
             // 
             // tableLayoutPanel2
             // 
@@ -352,7 +352,7 @@
             // 
             // dettaglioBindingSource
             // 
-            dettaglioBindingSource.DataSource = typeof(Domain.Documenti.Dettaglio);
+            dettaglioBindingSource.DataSource = typeof(Domain.Fatturazione.Dettaglio);
             // 
             // quantitàTextBox
             // 
