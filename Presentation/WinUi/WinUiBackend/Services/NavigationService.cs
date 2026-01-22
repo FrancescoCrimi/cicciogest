@@ -144,7 +144,7 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
             }
         }
 
-        public Task<int> NavigateDialogAsync<TVM>() where TVM : DialogViewModelBase<int>
+        public Task<int> NavigateForResultAsync<TVM>() where TVM : DialogViewModelBase<int>
         {
             if (_contentControl == null)
                 throw new Exception("NavigationService must be Initialize before use it");

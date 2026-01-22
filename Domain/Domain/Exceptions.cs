@@ -23,10 +23,4 @@ namespace CiccioGest.Domain
         // Possiamo aggiungere un codice di errore specifico per il frontend
         public virtual string? ErrorCode { get; }
     }
-
-    public class CapNonValidoException(string cap, string comune)
-        : DomainException($"Il CAP '{cap}' non risulta associato al comune di {comune}.")
-    {
-        public override string ErrorCode => "INVALID_CAP";
-    }
 }

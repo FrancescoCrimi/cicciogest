@@ -5,8 +5,6 @@
              xmlns:local="using:CiccioGest.Presentation.WinUiNav.Views"
              xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:helpers="using:CiccioGest.Presentation.WinUiBackend.Helpers"
-             xmlns:converters="using:CiccioGest.Presentation.WinUiBackend.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"

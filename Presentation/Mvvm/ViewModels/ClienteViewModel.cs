@@ -99,7 +99,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriCliente()
         {
             await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<ClientiViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
             _navigationService.GoBack();
             if (id != 0)
                 await ApriCliente(id);

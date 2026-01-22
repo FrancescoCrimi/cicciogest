@@ -118,7 +118,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriArticolo()
         {
             await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<ArticoliViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<ArticoliViewModel>();
             if (id != 0)
             {
                 _navigationService.GoBack();
@@ -130,7 +130,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         [RelayCommand]
         private async Task OnAggiungiCategoria()
         {
-            var id = await _navigationService.NavigateDialogAsync<CategorieViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<CategorieViewModel>();
             _navigationService.GoBack();
             if (id != 0)
             {

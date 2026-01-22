@@ -70,7 +70,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnNuovaFattura()
         {
             await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<ClientiViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
             if (id != 0)
             {
                 _navigationService.GoBack(true);
@@ -123,7 +123,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriFattura()
         {
             await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<FattureViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<FattureViewModel>();
             _navigationService.GoBack();
             if (id != 0)
                 await ApriFattura(id);
@@ -133,7 +133,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         [RelayCommand]
         private async Task OnNuovoDettaglio()
         {
-            var id = await _navigationService.NavigateDialogAsync<ArticoliViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<ArticoliViewModel>();
             _navigationService.GoBack();
             if (id != 0)
             {

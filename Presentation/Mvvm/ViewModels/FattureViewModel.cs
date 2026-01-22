@@ -39,7 +39,16 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         }
 
         [RelayCommand]
-        private Task OnLoaded() => OnAggiorna();
+        private Task OnLoaded()
+        {
+            return OnAggiorna();
+        }
+
+        [RelayCommand]
+        private Task OnUnloaded()
+        {
+            return Task.CompletedTask;
+        }
 
         [RelayCommand]
         private async Task OnAggiorna()

@@ -26,6 +26,10 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         private readonly Stack<ViewModelBase> _backStack;
         private ContentControl? _contentControl;
 
+        private TaskCompletionSource<int>? _currentDialogTcs;
+        private DialogViewModelBase<int>? _currentDialogVm;
+
+
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceProvider serviceProvider,
                                  IPageService pageService)
@@ -199,39 +203,65 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         //    Navigate(pageType, parameter, clearNavigation);
         //}
 
-        public Task<int> NavigateDialogAsync<TVM>() where TVM : DialogViewModelBase<int>
+
+        private readonly object _dialogLock = new();
+
+        public Task<int> NavigateForResultAsync<TVM>() where TVM : DialogViewModelBase<int>
         {
             if (_contentControl == null)
                 throw new Exception("NavigationService must be Initialize before use it");
 
-            var tcs = new TaskCompletionSource<int>();
-            var viewModel = _serviceProvider.GetRequiredService<TVM>();
-
-            void OnCloseDialog(object? sender, int e)
+            lock (_dialogLock)
             {
-                viewModel.CloseDialogEvent -= OnCloseDialog;
-                tcs.SetResult(e);
+                TaskCompletionSource<int>? tcs = null;
+                TVM? viewModel = null;
+
+                // Se c'è un dialogo aperto → chiudilo forzatamente
+                if (_currentDialogTcs != null && !_currentDialogTcs.Task.IsCompleted)
+                {
+                    _currentDialogVm!.CloseDialogEvent -= OnCloseDialog;
+                    _currentDialogTcs.TrySetResult(0); // 0 = annullato
+                }
+
+                tcs = new TaskCompletionSource<int>();
+                viewModel = _serviceProvider.GetRequiredService<TVM>();
+
+                void OnCloseDialog(object? sender, int e)
+                {
+                    lock (_dialogLock)
+                    {
+                        if (viewModel != null)
+                            viewModel.CloseDialogEvent -= OnCloseDialog;
+                        tcs?.SetResult(e);
+                        _currentDialogTcs = null;
+                        _currentDialogVm = null;
+                    }
+                }
+
+                viewModel.CloseDialogEvent += OnCloseDialog;
+                _currentDialogTcs = tcs;
+                _currentDialogVm = viewModel;
+
+
+                // valorizzo ViewModel precedente
+                var oldViewModel = (_contentControl.Content as UserControl)?.DataContext as ViewModelBase;
+
+                var viewType = _pageService.GetPageType(typeof(TVM));
+                var view = (UserControl)Activator.CreateInstance(viewType)!;
+                view.DataContext = viewModel;
+
+                // visualizza nuova pagina
+                _contentControl!.Content = view;
+
+                // copia pagina precedente nel backstack
+                if (oldViewModel != null)
+                {
+                    _backStack.Push(oldViewModel);
+                }
+                TerminateForwardStack();
+                Navigated?.Invoke(this, new EventArgs());
+                return tcs.Task;
             }
-            viewModel.CloseDialogEvent += OnCloseDialog;
-
-            // valorizzo ViewModel precedente
-            var oldViewModel = (_contentControl.Content as UserControl)?.DataContext as ViewModelBase;
-
-            var viewType = _pageService.GetPageType(typeof(TVM));
-            var view = (UserControl)Activator.CreateInstance(viewType)!;
-            view.DataContext = viewModel;
-
-            // visualizza nuova pagina
-            _contentControl!.Content = view;
-
-            // copia pagina precedente nel backstack
-            if (oldViewModel != null)
-            {
-                _backStack.Push(oldViewModel);
-            }
-            TerminateForwardStack();
-            Navigated?.Invoke(this, new EventArgs());
-            return tcs.Task;
         }
 
         /// <summary>

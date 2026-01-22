@@ -100,7 +100,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriFornitore()
         {
             await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<FornitoriViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<FornitoriViewModel>();
             if (id != 0)
             {
                 _navigationService.GoBack(true);

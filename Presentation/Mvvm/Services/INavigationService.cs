@@ -22,6 +22,6 @@ namespace CiccioGest.Presentation.Mvvm.Services
 
         void Navigate<TVM>(object? parameter = null,
                            bool clearNavigation = false) where TVM : ViewModelBase;
-        Task<int> NavigateDialogAsync<TVM>() where TVM : DialogViewModelBase<int>;
+        Task<int> NavigateForResultAsync<TVM>() where TVM : DialogViewModelBase<int>;
     }
 }

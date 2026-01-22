@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace CiccioGest.Presentation.AppForm
 {
-    public  class Program
+    public class Program
     {
         public Program(string[] args)
         {

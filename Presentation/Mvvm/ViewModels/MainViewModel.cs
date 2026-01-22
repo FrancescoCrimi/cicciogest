@@ -44,7 +44,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriFattura()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<FattureViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<FattureViewModel>();
             if (id != 0)
                 _navigationService.Navigate<FatturaViewModel>(new FattureViewReturn(id));
         }
@@ -53,7 +53,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnNuovaFattura()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<ClientiViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
             if (id != 0)
                 _navigationService.Navigate<FatturaViewModel>(new ClientiViewReturn(id));
         }
@@ -62,7 +62,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriArticoli()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<ArticoliViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<ArticoliViewModel>();
             if (id != 0)
                 _navigationService.Navigate<ArticoloViewModel>(new ArticoliViewReturn(id));
         }
@@ -75,7 +75,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriClienti()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<ClientiViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
             if (id != 0)
                 _navigationService.Navigate<ClienteViewModel>(new ClientiViewReturn(id));
         }
@@ -84,7 +84,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private async Task OnApriFornitori()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateDialogAsync<FornitoriViewModel>();
+            var id = await _navigationService.NavigateForResultAsync<FornitoriViewModel>();
             if (id != 0)
                 _navigationService.Navigate<FornitoreViewModel>(new FornitoriViewReturn(id));
         }
