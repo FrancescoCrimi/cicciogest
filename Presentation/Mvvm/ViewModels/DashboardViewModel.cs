@@ -8,13 +8,15 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class DashboardViewModel : ViewModelBase, IViewModel
+    public sealed partial class DashboardViewModel : ViewModelBase, INavigationAwareAsync
     {
-        private readonly ILogger _logger;
         private bool _disposedValue;
+        private readonly ILogger _logger;
 
         [ObservableProperty]
         private string _title;
@@ -26,8 +28,19 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
+        public Task OnNavigatedToAsync(object? parameter, CancellationToken cancellationToken = default)
         {
+            return Task.CompletedTask;
+        }
+
+        public Task OnNavigatedFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> OnNavigatingFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(true);
         }
 
 

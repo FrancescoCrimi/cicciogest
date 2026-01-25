@@ -12,11 +12,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class ArticoloViewModel : ViewModelBase, IViewModel
+    public sealed partial class ArticoloViewModel : ViewModelBase, INavigationAwareAsync
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -45,13 +46,22 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
+        public async Task OnNavigatedToAsync(object? parameter, CancellationToken cancellationToken = default)
         {
             if (parameter is ArticoliViewReturn articoliViewReturn)
             {
-                //Task.Run(async () => await ApriArticolo(articoliViewReturn.IdArticolo));
-                ApriArticolo(articoliViewReturn.IdArticolo).ConfigureAwait(false);
+                await ApriArticolo(articoliViewReturn.IdArticolo);
             }
+        }
+
+        public Task OnNavigatedFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> OnNavigatingFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(true);
         }
 
 
@@ -119,10 +129,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         {
             await _unitOfWork.BeginAsync();
             var id = await _navigationService.NavigateForResultAsync<ArticoliViewModel>();
-            if (id != 0)
+            if (id.Type == DialogResultType.Ok)
             {
                 _navigationService.GoBack();
-                await ApriArticolo(id);
+                await ApriArticolo(id.Value);
             }
         }
 
@@ -132,9 +142,9 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         {
             var id = await _navigationService.NavigateForResultAsync<CategorieViewModel>();
             _navigationService.GoBack();
-            if (id != 0)
+            if (id.Type == DialogResultType.Ok)
             {
-                Categoria categoria = await _magazzinoService.GetCategoria(id);
+                Categoria categoria = await _magazzinoService.GetCategoria(id.Value);
                 Articolo?.AddCategoria(categoria);
                 //OnPropertyChanged(nameof(Categorie));
             }

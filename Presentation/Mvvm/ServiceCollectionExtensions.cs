@@ -28,7 +28,8 @@ namespace CiccioGest.Presentation.Mvvm
                 .AddTransient<FattureViewModel>()
                 .AddTransient<FornitoreViewModel>()
                 .AddTransient<FornitoriViewModel>()
-                .AddTransient<MainViewModel>();
+                .AddTransient<MainViewModel>()
+                .AddTransient<SettingsViewModel>();
             return serviceCollection;
         }
     }

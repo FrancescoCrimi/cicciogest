@@ -24,6 +24,9 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
         private readonly Stack<ViewModelBase> _backStack;
         private ContentControl? _contentControl;
 
+        private TaskCompletionSource<DialogResult<int>>? _currentDialogTcs;
+        private ResultViewModelBase<int>? _currentDialogVm;
+
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceProvider serviceProvider,
                                  IPageService pageService)
@@ -57,6 +60,16 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
         }
 
         public void GoBack(bool emptyForwardStack = false)
+        {
+            if (_currentDialogVm != null)
+            {
+                CancelActiveResultPage();
+                return;
+            }
+            GoBackInternal(emptyForwardStack);
+        }
+
+        private void GoBackInternal(bool emptyForwardStack = false)
         {
             if (_backStack.Count != 0)
             {
@@ -101,82 +114,115 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
             }
         }
 
-        public void Navigate<TVM>(object? parameter = null, bool clearNavigation = false) where TVM : ViewModelBase
+
+        // -------------------------------
+        // NAVIGAZIONE NORMALE 
+        // -------------------------------
+        public async Task Navigate<TVM>(object? parameter = null,
+                                        bool clearNavigation = false) where TVM : ViewModelBase
         {
             if (_contentControl == null)
                 throw new Exception("NavigationService must be Initialize before use it");
+
             var pageType = _pageService.GetPageType(typeof(TVM));
             if (_contentControl?.Content?.GetType() != pageType)
             {
+                CancelActiveResultPage();
                 var viewModel = _serviceProvider.GetRequiredService<TVM>();
 
-                // inizializza ViewModel
-                if (viewModel is IViewModel iViewModel)
-                    iViewModel.Initialize(parameter);
-
-                // valorizzo ViewModel precedente
-                var oldViewModel = (_contentControl.Content as UserControl)?.DataContext as ViewModelBase;
-
-                // visualizza nuova pagina
-                var view = (UserControl)Activator.CreateInstance(pageType)!;
-                view.DataContext = viewModel;
-                _contentControl!.Content = view;
-
-                if (!clearNavigation)
-                {
-                    // copia pagina precedente nel backstack
-                    if (oldViewModel != null)
-                        _backStack.Push(oldViewModel);
-                }
-                else
-                {
-                    if (oldViewModel != null)
-                    {
-                        if (oldViewModel is IDisposable disposable)
-                        {
-                            disposable.Dispose();
-                        }
-                    }
-                    TerminateBackStack();
-                }
-                TerminateForwardStack();
-                Navigated?.Invoke(this, new EventArgs());
+                await NavigateTo(viewModel, parameter, clearNavigation);
             }
         }
 
-        public Task<int> NavigateForResultAsync<TVM>() where TVM : DialogViewModelBase<int>
+        // -------------------------------
+        // NAVIGAZIONE CON RISULTATO
+        // -------------------------------
+        public Task<DialogResult<int>> NavigateForResultAsync<TVM>() where TVM : ResultViewModelBase<int>
         {
             if (_contentControl == null)
                 throw new Exception("NavigationService must be Initialize before use it");
 
-            var tcs = new TaskCompletionSource<int>();
+            CancelActiveResultPage();
+
+            var tcs = new TaskCompletionSource<DialogResult<int>>();
             var viewModel = _serviceProvider.GetRequiredService<TVM>();
 
-            void OnCloseDialog(object? sender, int e)
+            viewModel.CloseRequested = result =>
             {
-                viewModel.CloseDialogEvent -= OnCloseDialog;
-                tcs.SetResult(e);
-            }
-            viewModel.CloseDialogEvent += OnCloseDialog;
+                if (!tcs.Task.IsCompleted)
+                    tcs.SetResult(result);
+                if (result.Type == DialogResultType.Cancel)
+                {
+                    GoBackInternal();
+                }
+                _currentDialogTcs = null;
+                _currentDialogVm = null;
+            };
 
+            _currentDialogTcs = tcs;
+            _currentDialogVm = viewModel;
+
+            _ = NavigateTo(viewModel);
+
+            return tcs.Task;
+        }
+
+        private async Task NavigateTo<TVM>(TVM viewModel,
+                                           object? parameter = null,
+                                           bool clearNavigation = false)
+        {
             // valorizzo ViewModel precedente
-            var oldViewModel = (_contentControl.Content as UserControl)?.DataContext as ViewModelBase;
+            var oldViewModel = (_contentControl?.Content as UserControl)?.DataContext as ViewModelBase;
 
-            var viewType = _pageService.GetPageType(typeof(TVM));
-            var view = (UserControl)Activator.CreateInstance(viewType)!;
+            // 1. Notifica la pagina corrente che stiamo per lasciarla
+            if (oldViewModel is INavigationAwareAsync oldAware)
+            {
+                var canLeave = await oldAware.OnNavigatingFromAsync();
+                if (!canLeave)
+                    return;
+
+                await oldAware.OnNavigatedFromAsync();
+            }
+
+            // 2. Mostra la nuova pagina
+            var pageType = _pageService.GetPageType(typeof(TVM));
+            var view = (UserControl)Activator.CreateInstance(pageType)!;
             view.DataContext = viewModel;
-
-            // visualizza nuova pagina
             _contentControl!.Content = view;
 
-            // copia pagina precedente nel backstack
-            if (oldViewModel != null)
+            // 3. Notifica la nuova pagina che è stata navigata
+            if (viewModel is INavigationAwareAsync newAware)
+                await newAware.OnNavigatedToAsync(parameter);
+
+            // 4. Gestione stack
+            if (!clearNavigation)
             {
-                _backStack.Push(oldViewModel);
+                // copia oldViewModel precedente nel BackStack
+                // se oldViewModel è ResultViewModelBase
+                if (oldViewModel != null && oldViewModel is not ResultViewModelBase<int>)
+                    _backStack.Push(oldViewModel);
+            }
+            else
+            {
+                if (oldViewModel is IDisposable disposable)
+                    disposable.Dispose();
+                TerminateBackStack();
             }
             TerminateForwardStack();
             Navigated?.Invoke(this, new EventArgs());
-            return tcs.Task;
+        }
+
+        private void CancelActiveResultPage()
+        {
+            if (_currentDialogVm == null || _currentDialogTcs == null)
+                return;
+
+            // chiude la pagina con risultato "Cancel"
+            if (!_currentDialogTcs.Task.IsCompleted)
+                _currentDialogTcs.SetResult(new DialogResult<int>(DialogResultType.Cancel, default));
+
+            _currentDialogVm = null;
+            _currentDialogTcs = null;
         }
 
         /// <summary>

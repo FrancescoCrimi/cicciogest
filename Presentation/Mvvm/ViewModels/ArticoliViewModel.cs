@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class ArticoliViewModel : DialogViewModelBase<int>
+    public sealed partial class ArticoliViewModel : ResultViewModelBase<int>
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -54,12 +54,17 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private void OnConferma()
         {
             if (ArticoloSelezionato != null)
-                CloseDialog(ArticoloSelezionato.Id);
+            {
+                Close(ArticoloSelezionato.Id);
+            }
         }
         private bool CanConferma() => ArticoloSelezionato != null;
 
         [RelayCommand]
-        private void OnAnnulla() => CloseDialog(0);
+        private void OnAnnulla()
+        {
+            Cancel();
+        }
 
         protected override void Dispose(bool disposing)
         {

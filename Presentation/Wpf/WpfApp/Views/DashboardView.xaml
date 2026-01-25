@@ -4,15 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CiccioGest.Presentation.WpfApp.Views"
-             mc:Ignorable="d"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:viewmodel="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModels;assembly=CiccioGest.Presentation.Mvvm"
+             mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewmodel:DashboardViewModel}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              d:Background="White">
     <!--
-      Title="Home"
+      Title="Dashboard"
     -->
 
     <i:Interaction.Triggers>
@@ -31,12 +31,11 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0">
-            <TextBlock Text="Home"
+            <TextBlock Text="Dashboard"
                        DockPanel.Dock="Left"
                        Margin="{StaticResource SmallLeftMargin}"
                        Style="{StaticResource PageTitleStyle}" />
         </DockPanel>
-
     </Grid>
 
 </UserControl>

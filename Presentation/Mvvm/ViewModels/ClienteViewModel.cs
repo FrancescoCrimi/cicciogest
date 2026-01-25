@@ -12,11 +12,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class ClienteViewModel : ViewModelBase, IViewModel
+    public sealed partial class ClienteViewModel : ViewModelBase, INavigationAwareAsync
     {
         private readonly ILogger<ClienteViewModel> _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -45,13 +46,22 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
+        public async Task OnNavigatedToAsync(object? parameter, CancellationToken cancellationToken = default)
         {
             if (parameter is ClientiViewReturn clientiViewReturn)
             {
-                //Task.Run(async () => await ApriCliente(clientiViewReturn.IdCliente));
-                ApriCliente(clientiViewReturn.IdCliente).ConfigureAwait(false);
+                await ApriCliente(clientiViewReturn.IdCliente);
             }
+        }
+
+        public Task OnNavigatedFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> OnNavigatingFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(true);
         }
 
 
@@ -101,8 +111,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             await _unitOfWork.BeginAsync();
             var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
             _navigationService.GoBack();
-            if (id != 0)
-                await ApriCliente(id);
+            if (id.Type == DialogResultType.Ok)
+                await ApriCliente(id.Value);
         }
 
 

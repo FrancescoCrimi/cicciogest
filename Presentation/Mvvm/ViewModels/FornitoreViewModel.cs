@@ -12,11 +12,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class FornitoreViewModel : ViewModelBase, IViewModel
+    public sealed partial class FornitoreViewModel : ViewModelBase, INavigationAwareAsync
     {
         private readonly ILogger<FornitoreViewModel> _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -45,14 +46,22 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
+        public async Task OnNavigatedToAsync(object? parameter, CancellationToken cancellationToken = default)
         {
             if (parameter is FornitoriViewReturn fornitoriViewReturn)
             {
-                //_navigationService.GoBack();
-                //Task.Run(async () => await ApriFornitore(fornitoriViewReturn.IdFornitore));
-                ApriFornitore(fornitoriViewReturn.IdFornitore).ConfigureAwait(false);
+               await ApriFornitore(fornitoriViewReturn.IdFornitore);
             }
+        }
+
+        public Task OnNavigatedFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> OnNavigatingFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(true);
         }
 
 
@@ -101,10 +110,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         {
             await _unitOfWork.BeginAsync();
             var id = await _navigationService.NavigateForResultAsync<FornitoriViewModel>();
-            if (id != 0)
+            if (id.Type == DialogResultType.Ok)
             {
                 _navigationService.GoBack(true);
-                await ApriFornitore(id);
+                await ApriFornitore(id.Value);
             }
         }
 

@@ -22,11 +22,11 @@ namespace CiccioGest.Presentation.WinUiNav
             ConfigureServiceProvider.ConfigureWinUiNav();
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
             App.MainWindow.Content = Ioc.Default.GetService<MainView>();
             App.MainWindow.Activate();
-            Ioc.Default.GetService<INavigationService>()?.Navigate<DashboardViewModel>();
+            await Ioc.Default.GetRequiredService<INavigationService>().Navigate<DashboardViewModel>();
         }
     }
 }

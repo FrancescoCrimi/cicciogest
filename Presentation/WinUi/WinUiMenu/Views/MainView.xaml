@@ -6,8 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="using:Microsoft.Xaml.Interactivity"
              xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
-             d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <i:Interaction.Behaviors>
@@ -23,32 +23,33 @@
         </Grid.RowDefinitions>
 
         <MenuBar>
-
+            <MenuBarItem Title="Home">
+                <MenuFlyoutItem Text="Apri Dashboard"
+                                Command="{Binding ApriDashboardCommand, Mode=OneWay}" />
+                <MenuFlyoutItem Text="Impostazioni"
+                                Command="{Binding ApriSettingsCommand, Mode=OneWay}" />
+            </MenuBarItem>
             <MenuBarItem Title="Fatture">
                 <MenuFlyoutItem Text="Apri Fattura"
                                 Command="{Binding ApriFatturaCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Nuova Fattura"
                                 Command="{Binding NuovaFatturaCommand, Mode=OneWay}" />
             </MenuBarItem>
-
             <MenuBarItem Title="Magazino">
                 <MenuFlyoutItem Text="Articoli"
                                 Command="{Binding ApriArticoliCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Categorie"
                                 Command="{Binding ApriCategorieCommand, Mode=OneWay}" />
             </MenuBarItem>
-
             <MenuBarItem Title="Anagrafica">
                 <MenuFlyoutItem Text="Clienti"
                                 Command="{Binding ApriClientiCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Fornitori"
                                 Command="{Binding ApriFornitoriCommand, Mode=OneWay}" />
             </MenuBarItem>
-
             <MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About" />
             </MenuBarItem>
-
         </MenuBar>
 
         <Grid Grid.Row="1">

@@ -21,7 +21,7 @@ namespace CiccioGest.Presentation.WpfApp
         private void OnStartup(object sender, StartupEventArgs e)
         {
             //var persistenceInitializer = Ioc.Default.GetRequiredService<IPersistenceInitializer>();
-            //Task.Run(async () => await persistenceInitializer.InitializeAsync(true));
+            //Task.Run(async () => await persistenceInitializer.OnNavigatedToAsync(true));
             Ioc.Default.GetRequiredService<MainView>().Show();
         }
     }

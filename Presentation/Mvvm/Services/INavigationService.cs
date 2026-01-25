@@ -10,6 +10,14 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.Services
 {
+    public enum DialogResultType
+    {
+        Ok,
+        Cancel
+    }
+
+    public record DialogResult<T>(DialogResultType Type, T? Value);
+
     public interface INavigationService
     {
         event EventHandler? Navigated;
@@ -20,8 +28,8 @@ namespace CiccioGest.Presentation.Mvvm.Services
         void GoBack(bool emptyForwardStack = false);
         void GoForward(bool emptyBackStack = false);
 
-        void Navigate<TVM>(object? parameter = null,
+        Task Navigate<TVM>(object? parameter = null,
                            bool clearNavigation = false) where TVM : ViewModelBase;
-        Task<int> NavigateForResultAsync<TVM>() where TVM : DialogViewModelBase<int>;
+        Task<DialogResult<int>> NavigateForResultAsync<TVM>() where TVM : ResultViewModelBase<int>;
     }
 }

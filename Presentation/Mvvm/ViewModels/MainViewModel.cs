@@ -32,21 +32,29 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         }
 
         [RelayCommand]
-        private void OnLoaded() { }
+        private async Task OnLoaded()
+        {
+            await _navigationService.Navigate<DashboardViewModel>();
+        }
 
         [RelayCommand]
         private void OnUnloaded() { }
 
         [RelayCommand]
-        private void OnApriDashboard() { }
+        private async Task OnApriDashboard()
+            => await _navigationService.Navigate<DashboardViewModel>();
+
+        [RelayCommand]
+        private async Task OnApriSettings()
+            => await _navigationService.Navigate<SettingsViewModel>();
 
         [RelayCommand]
         private async Task OnApriFattura()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateForResultAsync<FattureViewModel>();
-            if (id != 0)
-                _navigationService.Navigate<FatturaViewModel>(new FattureViewReturn(id));
+            var result = await _navigationService.NavigateForResultAsync<FattureViewModel>();
+            if (result.Type == DialogResultType.Ok)
+                await _navigationService.Navigate<FatturaViewModel>(new FattureViewReturn(result.Value));
         }
 
         [RelayCommand]
@@ -54,39 +62,39 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         {
             //await _unitOfWork.BeginAsync();
             var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
-            if (id != 0)
-                _navigationService.Navigate<FatturaViewModel>(new ClientiViewReturn(id));
+            if (id.Type == DialogResultType.Ok)
+                await _navigationService.Navigate<FatturaViewModel>(new ClientiViewReturn(id.Value));
         }
 
         [RelayCommand]
         private async Task OnApriArticoli()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateForResultAsync<ArticoliViewModel>();
-            if (id != 0)
-                _navigationService.Navigate<ArticoloViewModel>(new ArticoliViewReturn(id));
+            var result = await _navigationService.NavigateForResultAsync<ArticoliViewModel>();
+            if (result.Type == DialogResultType.Ok)
+                await _navigationService.Navigate<ArticoloViewModel>(new ArticoliViewReturn(result.Value));
         }
 
         [RelayCommand]
-        private void OnApriCategorie()
-            => _navigationService.Navigate<CategoriaViewModel>();
+        private async Task OnApriCategorie()
+            => await _navigationService.Navigate<CategoriaViewModel>();
 
         [RelayCommand]
         private async Task OnApriClienti()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
-            if (id != 0)
-                _navigationService.Navigate<ClienteViewModel>(new ClientiViewReturn(id));
+            var result = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
+            if (result.Type == DialogResultType.Ok)
+                await _navigationService.Navigate<ClienteViewModel>(new ClientiViewReturn(result.Value));
         }
 
         [RelayCommand]
         private async Task OnApriFornitori()
         {
             //await _unitOfWork.BeginAsync();
-            var id = await _navigationService.NavigateForResultAsync<FornitoriViewModel>();
-            if (id != 0)
-                _navigationService.Navigate<FornitoreViewModel>(new FornitoriViewReturn(id));
+            var result = await _navigationService.NavigateForResultAsync<FornitoriViewModel>();
+            if (result.Type == DialogResultType.Ok)
+                await _navigationService.Navigate<FornitoreViewModel>(new FornitoriViewReturn(result.Value));
         }
 
         [RelayCommand(CanExecute = nameof(CanGoBack))]

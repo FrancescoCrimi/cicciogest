@@ -22,11 +22,11 @@ namespace CiccioGest.Presentation.WinUiMenu
             ConfigureServiceProvider.ConfigureWinUiMenu();
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
             App.MainWindow.Content = Ioc.Default.GetService<MainView>();
             App.MainWindow.Activate();
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<DashboardViewModel>();
+            await Ioc.Default.GetRequiredService<INavigationService>().Navigate<DashboardViewModel>();
         }
     }
 }

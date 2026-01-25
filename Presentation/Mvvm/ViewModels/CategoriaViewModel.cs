@@ -13,11 +13,12 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class CategoriaViewModel : ViewModelBase, IViewModel
+    public sealed partial class CategoriaViewModel : ViewModelBase, INavigationAwareAsync
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -44,22 +45,29 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
 
         public CategoriaViewModel(ILogger<CategoriaViewModel> logger,
                                   IUnitOfWork unitOfWork,
-                                  IMagazzinoService magazinoService,
+                                  IMagazzinoService magazzinoService,
                                   IMessageBoxService messageBoxService)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _magazzinoService = magazinoService;
+            _magazzinoService = magazzinoService;
             _messageBoxService = messageBoxService;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
+        public Task OnNavigatedToAsync(object? parameter, CancellationToken cancellationToken = default)
         {
-            //if (parameter is CategoriaViewReturnHandler categoriaViewReturnHandler)
-            //{
-            //    _categoriaViewReturnHandler = categoriaViewReturnHandler;
-            //}
+            return Task.CompletedTask;
+        }
+
+        public Task OnNavigatedFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> OnNavigatingFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(true);
         }
 
         [RelayCommand]

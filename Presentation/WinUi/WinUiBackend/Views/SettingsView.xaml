@@ -6,8 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
-             d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>

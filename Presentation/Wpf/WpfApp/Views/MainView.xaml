@@ -28,6 +28,12 @@
         </Grid.RowDefinitions>
 
         <Menu>
+            <MenuItem Header="Home">
+                <MenuItem Header="Dashboard"
+                          Command="{Binding ApriDashboardCommand, Mode=OneWay}" />
+                <MenuItem Header="Impostazioni"
+                          Command="{Binding ApriSettingsCommand, Mode=OneWay}" />
+            </MenuItem>
             <MenuItem Header="Fatture">
                 <MenuItem Header="Apri Fattura"
                           Command="{Binding ApriFatturaCommand, Mode=OneWay}" />

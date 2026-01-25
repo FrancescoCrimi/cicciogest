@@ -12,11 +12,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.Mvvm.ViewModels
 {
-    public sealed partial class FatturaViewModel : ViewModelBase, IViewModel
+    public sealed partial class FatturaViewModel : ViewModelBase, INavigationAwareAsync
     {
         private readonly ILogger _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -48,13 +49,22 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        public void Initialize(object? parameter)
+        public async Task OnNavigatedToAsync(object? parameter, CancellationToken cancellationToken = default)
         {
             if (parameter is FattureViewReturn fattureDataReturn)
             {
-                //Task.Run(async () => await ApriFattura(fattureDataReturn.IdFattura));
-                ApriFattura(fattureDataReturn.IdFattura).ConfigureAwait(false);
+               await ApriFattura(fattureDataReturn.IdFattura);
             }
+        }
+
+        public Task OnNavigatedFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> OnNavigatingFromAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(true);
         }
 
 
@@ -71,10 +81,10 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         {
             await _unitOfWork.BeginAsync();
             var id = await _navigationService.NavigateForResultAsync<ClientiViewModel>();
-            if (id != 0)
+            if (id.Type == DialogResultType.Ok)
             {
                 _navigationService.GoBack(true);
-                await NuovaFattura(id);
+                await NuovaFattura(id.Value);
             }
         }
 
@@ -125,8 +135,8 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             await _unitOfWork.BeginAsync();
             var id = await _navigationService.NavigateForResultAsync<FattureViewModel>();
             _navigationService.GoBack();
-            if (id != 0)
-                await ApriFattura(id);
+            if (id.Type == DialogResultType.Ok)
+                await ApriFattura(id.Value);
         }
 
 
@@ -135,9 +145,9 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         {
             var id = await _navigationService.NavigateForResultAsync<ArticoliViewModel>();
             _navigationService.GoBack();
-            if (id != 0)
+            if (id.Type == DialogResultType.Ok)
             {
-                var articolo = await _fatturaService.GetArticolo(id);
+                var articolo = await _fatturaService.GetArticolo(id.Value);
                 Dettaglio = new Dettaglio(articolo, 1);
             }
         }
