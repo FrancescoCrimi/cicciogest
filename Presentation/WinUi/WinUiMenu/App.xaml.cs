@@ -5,8 +5,6 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Infrastructure;
-using CiccioGest.Presentation.Mvvm.Services;
-using CiccioGest.Presentation.Mvvm.ViewModels;
 using CiccioGest.Presentation.WinUiMenu.Views;
 using Microsoft.UI.Xaml;
 
@@ -14,19 +12,15 @@ namespace CiccioGest.Presentation.WinUiMenu
 {
     public partial class App : Microsoft.UI.Xaml.Application
     {
-        public static Window MainWindow { get; set; } = new Window();
-
         public App()
         {
             InitializeComponent();
             ConfigureServiceProvider.ConfigureWinUiMenu();
         }
 
-        protected override async void OnLaunched(LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            App.MainWindow.Content = Ioc.Default.GetService<MainView>();
-            App.MainWindow.Activate();
-            await Ioc.Default.GetRequiredService<INavigationService>().Navigate<DashboardViewModel>();
+            Ioc.Default.GetRequiredService<MainView>().Activate();
         }
     }
 }

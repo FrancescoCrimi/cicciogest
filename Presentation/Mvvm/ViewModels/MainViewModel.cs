@@ -16,16 +16,16 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
     public sealed partial class MainViewModel : ViewModelBase
     {
         private readonly ILogger _logger;
-        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IUnitOfWork _unitOfWork;
         private readonly INavigationService _navigationService;
         private bool _disposedValue;
 
         public MainViewModel(ILogger<MainViewModel> logger,
-                             IUnitOfWork unitOfWork,
+                             //IUnitOfWork unitOfWork,
                              INavigationService navigationService)
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
+            //_unitOfWork = unitOfWork;
             _navigationService = navigationService;
             _navigationService.Navigated += OnNavigated;
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());

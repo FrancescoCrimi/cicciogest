@@ -6,48 +6,63 @@
 
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using CiccioGest.Presentation.WinUiBackend.Services;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using WinUIEx;
 
 namespace CiccioGest.Presentation.WinUiNav.Views
 {
-    public sealed partial class MainView : UserControl
+    public sealed partial class MainView : WindowEx
     {
+        private MainViewModel ViewModel { get; }
+
         public MainView(NavigationService navigationService,
                         MainViewModel mainViewModel)
         {
             InitializeComponent();
             navigationService.Initialize(shellFrame);
-            DataContext = mainViewModel;
+            ViewModel = mainViewModel;
+        }
+
+        private async void WindowEx_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            await ViewModel.LoadedCommand.ExecuteAsync(null);
+        }
+
+        private void WindowEx_Closed(object sender, WindowEventArgs args)
+        {
+            ViewModel.UnloadedCommand.Execute(null);
+        }
+
+        private void NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+
         }
 
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.InvokedItemContainer?.Tag is string tag)
             {
-                // Chiamata al ViewModel (assumendo sia il tuo DataContext)
-                if (DataContext is MainViewModel vm)
+                switch (tag)
                 {
-                    switch (tag)
-                    {
-                        case "Dashboard":
-                            vm.ApriDashboardCommand.Execute(null);
-                            break;
-                        case "Fatture":
-                            vm.ApriFatturaCommand.Execute(null);
-                            break;
-                        case "Articoli":
-                            vm.ApriArticoliCommand.Execute(null);
-                            break;
-                        case "Categorie":
-                            vm.ApriCategorieCommand.Execute(null);
-                            break;
-                        case "Clienti":
-                            vm.ApriClientiCommand.Execute(null);
-                            break;
-                        case "Fornitori":
-                            vm.ApriFornitoriCommand.Execute(null);
-                            break;
-                    }
+                    case "Dashboard":
+                        ViewModel.ApriDashboardCommand.Execute(null);
+                        break;
+                    case "Fatture":
+                        ViewModel.ApriFatturaCommand.Execute(null);
+                        break;
+                    case "Articoli":
+                        ViewModel.ApriArticoliCommand.Execute(null);
+                        break;
+                    case "Categorie":
+                        ViewModel.ApriCategorieCommand.Execute(null);
+                        break;
+                    case "Clienti":
+                        ViewModel.ApriClientiCommand.Execute(null);
+                        break;
+                    case "Fornitori":
+                        ViewModel.ApriFornitoriCommand.Execute(null);
+                        break;
                 }
             }
         }

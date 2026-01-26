@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<UserControl x:Class="CiccioGest.Presentation.WinUiNav.Views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:CiccioGest.Presentation.WinUiNav.Views"
-             xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
-             xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
-             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+<windowex:WindowEx x:Class="CiccioGest.Presentation.WinUiNav.Views.MainView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:local="using:CiccioGest.Presentation.WinUiNav.Views"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:windowex="using:WinUIEx"
+                   mc:Ignorable="d"
+                   Activated="WindowEx_Activated"
+                   Closed="WindowEx_Closed"
+                   Title="MainView">
+
+    <windowex:WindowEx.SystemBackdrop>
+        <MicaBackdrop />
+    </windowex:WindowEx.SystemBackdrop>
 
     <NavigationView IsBackButtonVisible="Visible"
                     OpenPaneLength="200"
-                    ItemInvoked="NavigationView_ItemInvoked">
+                    ItemInvoked="NavigationView_ItemInvoked"
+                    BackRequested="NavigationView_BackRequested">
 
         <NavigationView.MenuItems>
 
@@ -56,66 +61,6 @@
 
         <ContentControl x:Name="shellFrame" />
 
-        <i:Interaction.Behaviors>
-
-            <!--<i:EventTriggerBehavior EventName="Tapped"
-                                    SourceObject="{Binding ElementName=DashboardNavigationViewItem}">
-                <i:InvokeCommandAction Command="{Binding ApriDashboardCommand}" />
-            </i:EventTriggerBehavior>
-
-            <i:EventTriggerBehavior EventName="Tapped"
-                                    SourceObject="{Binding ElementName=ClientiNavigationViewItem}">
-                <i:InvokeCommandAction Command="{Binding ApriClientiCommand}" />
-            </i:EventTriggerBehavior>
-
-            <i:EventTriggerBehavior EventName="Tapped"
-                                    SourceObject="{Binding ElementName=FornitoriNavigationViewItem}">
-                <i:InvokeCommandAction Command="{Binding ApriFornitoriCommand}" />
-            </i:EventTriggerBehavior>
-
-            <i:EventTriggerBehavior EventName="Tapped"
-                                    SourceObject="{Binding ElementName=FattureNavigationViewItem}">
-                <i:InvokeCommandAction Command="{Binding ApriFatturaCommand}" />
-            </i:EventTriggerBehavior>
-
-            <i:EventTriggerBehavior EventName="Tapped"
-                                    SourceObject="{Binding ElementName=ArticoliNavigationViewItem}">
-                <i:InvokeCommandAction Command="{Binding ApriArticoliCommand}" />
-            </i:EventTriggerBehavior>
-
-            <i:EventTriggerBehavior EventName="Tapped"
-                                    SourceObject="{Binding ElementName=CategorieNavigationViewItem}">
-                <i:InvokeCommandAction Command="{Binding ApriCategorieCommand}" />
-            </i:EventTriggerBehavior>-->
-
-            <i:EventTriggerBehavior EventName="BackRequested">
-                <i:InvokeCommandAction Command="{Binding BackRequestedCommand}" />
-            </i:EventTriggerBehavior>
-
-        </i:Interaction.Behaviors>
-
     </NavigationView>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</UserControl>
+</windowex:WindowEx>

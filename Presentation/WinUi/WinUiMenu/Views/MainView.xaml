@@ -1,20 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<UserControl x:Class="CiccioGest.Presentation.WinUiMenu.Views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:i="using:Microsoft.Xaml.Interactivity"
-             xmlns:viewmodel="using:CiccioGest.Presentation.Mvvm.ViewModels"
-             mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
-             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+<?xml version="1.0" encoding="utf-8"?>
+<windowex:WindowEx x:Class="CiccioGest.Presentation.WinUiMenu.Views.MainView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:local="using:CiccioGest.Presentation.WinUiMenu.Views"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:windowex="using:WinUIEx"
+                   mc:Ignorable="d"
+                   Activated="WindowEx_Activated"
+                   Closed="WindowEx_Closed"
+                   Title="MainView">
 
-    <i:Interaction.Behaviors>
-        <i:EventTriggerBehavior EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
-        </i:EventTriggerBehavior>
-    </i:Interaction.Behaviors>
+    <windowex:WindowEx.SystemBackdrop>
+        <MicaBackdrop />
+    </windowex:WindowEx.SystemBackdrop>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,27 +24,27 @@
         <MenuBar>
             <MenuBarItem Title="Home">
                 <MenuFlyoutItem Text="Apri Dashboard"
-                                Command="{Binding ApriDashboardCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.ApriDashboardCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Impostazioni"
-                                Command="{Binding ApriSettingsCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.ApriSettingsCommand, Mode=OneWay}" />
             </MenuBarItem>
             <MenuBarItem Title="Fatture">
                 <MenuFlyoutItem Text="Apri Fattura"
-                                Command="{Binding ApriFatturaCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.ApriFatturaCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Nuova Fattura"
-                                Command="{Binding NuovaFatturaCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.NuovaFatturaCommand, Mode=OneWay}" />
             </MenuBarItem>
             <MenuBarItem Title="Magazino">
                 <MenuFlyoutItem Text="Articoli"
-                                Command="{Binding ApriArticoliCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.ApriArticoliCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Categorie"
-                                Command="{Binding ApriCategorieCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.ApriCategorieCommand, Mode=OneWay}" />
             </MenuBarItem>
             <MenuBarItem Title="Anagrafica">
                 <MenuFlyoutItem Text="Clienti"
-                                Command="{Binding ApriClientiCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.ApriClientiCommand, Mode=OneWay}" />
                 <MenuFlyoutItem Text="Fornitori"
-                                Command="{Binding ApriFornitoriCommand, Mode=OneWay}" />
+                                Command="{x:Bind ViewModel.ApriFornitoriCommand, Mode=OneWay}" />
             </MenuBarItem>
             <MenuBarItem Title="Help">
                 <MenuFlyoutItem Text="About" />
@@ -55,7 +54,6 @@
         <Grid Grid.Row="1">
             <ContentControl x:Name="contentControl" />
         </Grid>
-
     </Grid>
 
-</UserControl>
+</windowex:WindowEx>

@@ -17,8 +17,6 @@ namespace CiccioGest.Presentation.WpfBackend.Services
 {
     public sealed class NavigationService : INavigationService, IDisposable
     {
-        public event EventHandler? Navigated;
-
         private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
         private readonly IPageService _pageService;
@@ -29,8 +27,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         private TaskCompletionSource<DialogResult<int>>? _currentDialogTcs;
         private ResultViewModelBase<int>? _currentDialogVm;
 
-        private readonly object _dialogLock = new();
-
+        public event EventHandler? Navigated;
 
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceProvider serviceProvider,
@@ -116,7 +113,6 @@ namespace CiccioGest.Presentation.WpfBackend.Services
                 Navigated?.Invoke(this, new EventArgs());
             }
         }
-
 
 
         // -------------------------------

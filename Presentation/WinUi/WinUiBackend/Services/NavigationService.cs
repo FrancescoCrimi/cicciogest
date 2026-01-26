@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CiccioGest.Presentation.WinUiBackend.Services
 {
-    public class NavigationService : INavigationService
+    public sealed class NavigationService : INavigationService
     {
         private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
@@ -26,6 +26,8 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
 
         private TaskCompletionSource<DialogResult<int>>? _currentDialogTcs;
         private ResultViewModelBase<int>? _currentDialogVm;
+
+        public event EventHandler? Navigated;
 
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceProvider serviceProvider,
@@ -38,12 +40,6 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
             _backStack = new Stack<ViewModelBase>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
-
-        public bool CanGoBack => _backStack.Count != 0;
-
-        public bool CanGoForward => _forwardStack.Count != 0;
-
-        public event EventHandler? Navigated;
 
         public void Initialize(ContentControl contentControl)
         {
@@ -58,6 +54,10 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
                 throw new Exception("NavigationService already initialized");
             }
         }
+
+        public bool CanGoBack => _backStack.Count != 0;
+
+        public bool CanGoForward => _forwardStack.Count != 0;
 
         public void GoBack(bool emptyForwardStack = false)
         {

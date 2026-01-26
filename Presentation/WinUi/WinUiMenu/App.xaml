@@ -26,7 +26,7 @@
             <DataTemplate x:Key="CategoriaTemplate">
                 <view:CategoriaView />
             </DataTemplate>
-            <DataTemplate x:Key="ClienteView">
+            <DataTemplate x:Key="ClienteTemplate">
                 <view:ClienteView />
             </DataTemplate>
             <DataTemplate x:Key="ClientiTemplate">
@@ -54,16 +54,16 @@
             <!-- Selector -->
             <local:ViewModelTemplateSelector x:Key="VmSelector"
                                              ArticoliTemplate="{StaticResource ArticoliTemplate}"
-                                             ArticoloTemplate="{StaticResource ClientiTemplate}"
-                                             CategoriaTemplate="{StaticResource ClientiTemplate}"
-                                             ClienteTemplate="{StaticResource ClientiTemplate}"
+                                             ArticoloTemplate="{StaticResource ArticoloTemplate}"
+                                             CategoriaTemplate="{StaticResource CategoriaTemplate}"
+                                             ClienteTemplate="{StaticResource ClienteTemplate}"
                                              ClientiTemplate="{StaticResource ClientiTemplate}"
-                                             DashboardTemplate="{StaticResource ClientiTemplate}"
-                                             FatturaTemplate="{StaticResource ClientiTemplate}"
-                                             FattureTemplate="{StaticResource ClientiTemplate}"
-                                             FornitoreTemplate="{StaticResource ClientiTemplate}"
-                                             FornitoriTemplate="{StaticResource ClientiTemplate}"
-                                             SettingsTemplate="{StaticResource ClientiTemplate}" />
+                                             DashboardTemplate="{StaticResource DashboardTemplate}"
+                                             FatturaTemplate="{StaticResource FatturaTemplate}"
+                                             FattureTemplate="{StaticResource FattureTemplate}"
+                                             FornitoreTemplate="{StaticResource FornitoreTemplate}"
+                                             FornitoriTemplate="{StaticResource FornitoriTemplate}"
+                                             SettingsTemplate="{StaticResource SettingsTemplate}" />
         </ResourceDictionary>
     </Application.Resources>
 
