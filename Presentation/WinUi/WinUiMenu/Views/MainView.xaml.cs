@@ -6,31 +6,18 @@
 
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using CiccioGest.Presentation.WinUiBackend.Services;
-using Microsoft.UI.Xaml;
 using WinUIEx;
 
 namespace CiccioGest.Presentation.WinUiMenu.Views
 {
     public sealed partial class MainView : WindowEx
     {
-        public MainViewModel ViewModel { get; }
-
         public MainView(NavigationService navigationService,
-                          MainViewModel mainViewModel)
+                        MainViewModel mainViewModel)
         {
             InitializeComponent();
-            navigationService.Initialize(contentControl);
-            ViewModel = mainViewModel;
-        }
-
-        private async void WindowEx_Activated(object sender, WindowActivatedEventArgs args)
-        {
-            await ViewModel.LoadedCommand.ExecuteAsync(null);
-        }
-
-        private void WindowEx_Closed(object sender, WindowEventArgs args)
-        {
-            ViewModel.UnloadedCommand.Execute(null);
+            Root.DataContext = mainViewModel;
+            _ = navigationService.Navigate<DashboardViewModel>();
         }
     }
 }

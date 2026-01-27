@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:CiccioGest.Presentation.WinUiMenu"
+                    xmlns:views="using:CiccioGest.Presentation.WinUiBackend.Views">
+
+    <!-- Templates -->
+    <DataTemplate x:Key="ArticoliTemplate">
+        <views:ArticoliView />
+    </DataTemplate>
+    <DataTemplate x:Key="ArticoloTemplate">
+        <views:ArticoloView />
+    </DataTemplate>
+    <DataTemplate x:Key="CategoriaTemplate">
+        <views:CategoriaView />
+    </DataTemplate>
+    <DataTemplate x:Key="ClienteTemplate">
+        <views:ClienteView />
+    </DataTemplate>
+    <DataTemplate x:Key="ClientiTemplate">
+        <views:ClientiView />
+    </DataTemplate>
+    <DataTemplate x:Key="DashboardTemplate">
+        <views:DashboardView />
+    </DataTemplate>
+    <DataTemplate x:Key="FatturaTemplate">
+        <views:FatturaView />
+    </DataTemplate>
+    <DataTemplate x:Key="FattureTemplate">
+        <views:FattureView />
+    </DataTemplate>
+    <DataTemplate x:Key="FornitoreTemplate">
+        <views:FornitoreView />
+    </DataTemplate>
+    <DataTemplate x:Key="FornitoriTemplate">
+        <views:FornitoriView />
+    </DataTemplate>
+    <DataTemplate x:Key="SettingsTemplate">
+        <views:SettingsView />
+    </DataTemplate>
+
+    <!-- Selector -->
+    <local:ViewModelTemplateSelector x:Key="VmSelector"
+                                     ArticoliTemplate="{StaticResource ArticoliTemplate}"
+                                     ArticoloTemplate="{StaticResource ArticoloTemplate}"
+                                     CategoriaTemplate="{StaticResource CategoriaTemplate}"
+                                     ClienteTemplate="{StaticResource ClienteTemplate}"
+                                     ClientiTemplate="{StaticResource ClientiTemplate}"
+                                     DashboardTemplate="{StaticResource DashboardTemplate}"
+                                     FatturaTemplate="{StaticResource FatturaTemplate}"
+                                     FattureTemplate="{StaticResource FattureTemplate}"
+                                     FornitoreTemplate="{StaticResource FornitoreTemplate}"
+                                     FornitoriTemplate="{StaticResource FornitoriTemplate}"
+                                     SettingsTemplate="{StaticResource SettingsTemplate}" />
+
+</ResourceDictionary>

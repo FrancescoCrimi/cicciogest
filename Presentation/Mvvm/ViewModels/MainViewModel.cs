@@ -31,14 +31,13 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
         }
 
-        [RelayCommand]
-        private async Task OnLoaded()
+        public object? CurrentViewModel
         {
-            await _navigationService.Navigate<DashboardViewModel>();
+            get
+            {
+                return _navigationService.Current;
+            }
         }
-
-        [RelayCommand]
-        private void OnUnloaded() { }
 
         [RelayCommand]
         private async Task OnApriDashboard()
@@ -105,6 +104,7 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         private void OnNavigated(object? sender, EventArgs e)
         {
             GoBackCommand?.NotifyCanExecuteChanged();
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
 
         protected override void Dispose(bool disposing)

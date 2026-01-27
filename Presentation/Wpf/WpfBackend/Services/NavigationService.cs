@@ -28,6 +28,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         private ResultViewModelBase<int>? _currentDialogVm;
 
         public event EventHandler? Navigated;
+        public ViewModelBase? Current { get; }
 
         public NavigationService(ILogger<NavigationService> logger,
                                  IServiceProvider serviceProvider,

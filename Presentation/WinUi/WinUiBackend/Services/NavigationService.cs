@@ -8,7 +8,6 @@ using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,40 +18,23 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
     {
         private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IPageService _pageService;
         private readonly Stack<ViewModelBase> _forwardStack;
         private readonly Stack<ViewModelBase> _backStack;
-        private ContentControl? _contentControl;
 
         private TaskCompletionSource<DialogResult<int>>? _currentDialogTcs;
         private ResultViewModelBase<int>? _currentDialogVm;
 
         public event EventHandler? Navigated;
+        public ViewModelBase? Current { get; private set; }
 
         public NavigationService(ILogger<NavigationService> logger,
-                                 IServiceProvider serviceProvider,
-                                 IPageService pageService)
+                                 IServiceProvider serviceProvider)
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
-            _pageService = pageService;
             _forwardStack = new Stack<ViewModelBase>();
             _backStack = new Stack<ViewModelBase>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
-        }
-
-        public void Initialize(ContentControl contentControl)
-        {
-            ArgumentNullException.ThrowIfNull(contentControl);
-
-            if (_contentControl == null)
-            {
-                _contentControl = contentControl;
-            }
-            else
-            {
-                throw new Exception("NavigationService already initialized");
-            }
         }
 
         public bool CanGoBack => _backStack.Count != 0;
@@ -74,14 +56,16 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
             if (_backStack.Count != 0)
             {
 
-                var forwardvm = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
-                _forwardStack.Push(forwardvm);
+                //var forwardVM = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
+                var forwardVM = Current!;   // New Impl
+                _forwardStack.Push(forwardVM);
 
-                var backvm = _backStack.Peek();
-                var viewType = _pageService.GetPageType(backvm.GetType());
-                var view = (UserControl)Activator.CreateInstance(viewType)!;
-                view.DataContext = backvm;
-                _contentControl!.Content = view;
+                var backVM = _backStack.Peek();
+                //var viewType = _pageService.GetPageType(backVM.GetType());
+                //var view = (UserControl)Activator.CreateInstance(viewType)!;
+                //view.DataContext = backVM;
+                //_contentControl!.Content = view;
+                Current = backVM;           // New Impl
 
                 _backStack.Pop();
                 if (emptyForwardStack)
@@ -96,14 +80,16 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
         {
             if (_forwardStack.Count != 0)
             {
-                var backvm = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
-                _backStack.Push(backvm);
+                //var backVM = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
+                var backVM = Current!;      // New Impl
+                _backStack.Push(backVM);
 
-                var forwardvm = _forwardStack.Peek();
-                var viewType = _pageService.GetPageType(forwardvm.GetType());
-                var view = (UserControl)Activator.CreateInstance(viewType)!;
-                view.DataContext = forwardvm;
-                _contentControl.Content = view;
+                var forwardVM = _forwardStack.Peek();
+                //var viewType = _pageService.GetPageType(forwardVM.GetType());
+                //var view = (UserControl)Activator.CreateInstance(viewType)!;
+                //view.DataContext = forwardVM;
+                //_contentControl.Content = view;
+                Current = forwardVM;        // New Impl
 
                 _forwardStack.Pop();
                 if (emptyBackStack)
@@ -121,11 +107,12 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
         public async Task Navigate<TVM>(object? parameter = null,
                                         bool clearNavigation = false) where TVM : ViewModelBase
         {
-            if (_contentControl == null)
-                throw new Exception("NavigationService must be Initialize before use it");
+            //if (_contentControl == null)
+            //    throw new Exception("NavigationService must be Initialize before use it");
 
-            var pageType = _pageService.GetPageType(typeof(TVM));
-            if (_contentControl?.Content?.GetType() != pageType)
+            //var pageType = _pageService.GetPageType(typeof(TVM));
+            //if (_contentControl?.Content?.GetType() != pageType)
+            if (Current?.GetType() != typeof(TVM)) // New Impl
             {
                 CancelActiveResultPage();
                 var viewModel = _serviceProvider.GetRequiredService<TVM>();
@@ -139,8 +126,8 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
         // -------------------------------
         public Task<DialogResult<int>> NavigateForResultAsync<TVM>() where TVM : ResultViewModelBase<int>
         {
-            if (_contentControl == null)
-                throw new Exception("NavigationService must be Initialize before use it");
+            //if (_contentControl == null)
+            //    throw new Exception("NavigationService must be Initialize before use it");
 
             CancelActiveResultPage();
 
@@ -169,10 +156,11 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
 
         private async Task NavigateTo<TVM>(TVM viewModel,
                                            object? parameter = null,
-                                           bool clearNavigation = false)
+                                           bool clearNavigation = false) where TVM : ViewModelBase
         {
             // valorizzo ViewModel precedente
-            var oldViewModel = (_contentControl?.Content as UserControl)?.DataContext as ViewModelBase;
+            //var oldViewModel = (_contentControl?.Content as UserControl)?.DataContext as ViewModelBase;
+            var oldViewModel = Current; // New Impl
 
             // 1. Notifica la pagina corrente che stiamo per lasciarla
             if (oldViewModel is INavigationAwareAsync oldAware)
@@ -185,10 +173,11 @@ namespace CiccioGest.Presentation.WinUiBackend.Services
             }
 
             // 2. Mostra la nuova pagina
-            var pageType = _pageService.GetPageType(typeof(TVM));
-            var view = (UserControl)Activator.CreateInstance(pageType)!;
-            view.DataContext = viewModel;
-            _contentControl!.Content = view;
+            //var pageType = _pageService.GetPageType(typeof(TVM));
+            //var view = (UserControl)Activator.CreateInstance(pageType)!;
+            //view.DataContext = viewModel;
+            //_contentControl!.Content = view;
+            Current = viewModel; // New Impl
 
             // 3. Notifica la nuova pagina che è stata navigata
             if (viewModel is INavigationAwareAsync newAware)

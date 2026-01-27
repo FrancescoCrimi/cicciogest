@@ -6,7 +6,6 @@
 
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using CiccioGest.Presentation.WinUiBackend.Services;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using WinUIEx;
 
@@ -20,18 +19,9 @@ namespace CiccioGest.Presentation.WinUiNav.Views
                         MainViewModel mainViewModel)
         {
             InitializeComponent();
-            navigationService.Initialize(shellFrame);
+            Root.DataContext = mainViewModel;
             ViewModel = mainViewModel;
-        }
-
-        private async void WindowEx_Activated(object sender, WindowActivatedEventArgs args)
-        {
-            await ViewModel.LoadedCommand.ExecuteAsync(null);
-        }
-
-        private void WindowEx_Closed(object sender, WindowEventArgs args)
-        {
-            ViewModel.UnloadedCommand.Execute(null);
+            _ = navigationService.Navigate<DashboardViewModel>();
         }
 
         private void NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)

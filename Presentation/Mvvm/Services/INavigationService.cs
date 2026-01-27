@@ -21,6 +21,7 @@ namespace CiccioGest.Presentation.Mvvm.Services
     public interface INavigationService
     {
         event EventHandler? Navigated;
+        ViewModelBase? Current { get; }
 
         bool CanGoBack { get; }
         bool CanGoForward { get; }

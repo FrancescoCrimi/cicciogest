@@ -9,7 +9,6 @@ using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WinUiBackend;
 using CiccioGest.Presentation.WinUiBackend.Services;
-using CiccioGest.Presentation.WinUiNav.Services;
 using CiccioGest.Presentation.WinUiNav.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,8 +46,8 @@ namespace CiccioGest.Presentation.WinUiNav
                 .ConfigureWinUiBackend(gestConf)
 
                 // Services
-                .AddSingleton<PageService>()
-                .AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
+                //.AddSingleton<PageService>()
+                //.AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
                 .AddSingleton<NavigationService>()
                 .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
 

@@ -8,7 +8,7 @@ using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace CiccioGest.Presentation.WinUiMenu
+namespace CiccioGest.Presentation.WinUiNav
 {
     public partial class ViewModelTemplateSelector : DataTemplateSelector
     {

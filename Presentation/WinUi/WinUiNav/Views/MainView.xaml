@@ -7,60 +7,62 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:windowex="using:WinUIEx"
                    mc:Ignorable="d"
-                   Activated="WindowEx_Activated"
-                   Closed="WindowEx_Closed"
                    Title="MainView">
 
     <windowex:WindowEx.SystemBackdrop>
         <MicaBackdrop />
     </windowex:WindowEx.SystemBackdrop>
 
-    <NavigationView IsBackButtonVisible="Visible"
-                    OpenPaneLength="200"
-                    ItemInvoked="NavigationView_ItemInvoked"
-                    BackRequested="NavigationView_BackRequested">
+    <Grid x:Name="Root">
+        <NavigationView IsBackButtonVisible="Visible"
+                        OpenPaneLength="200"
+                        ItemInvoked="NavigationView_ItemInvoked"
+                        BackRequested="NavigationView_BackRequested">
 
-        <NavigationView.MenuItems>
+            <NavigationView.MenuItems>
 
-            <NavigationViewItem Content="Dashboard"
-                                Icon="Home"
-                                Tag="Dashboard" />
+                <NavigationViewItem Content="Dashboard"
+                                    Icon="Home"
+                                    Tag="Dashboard" />
 
-            <NavigationViewItem Content="Fatture"
-                                Icon="PreviewLink"
-                                Tag="Fatture" />
+                <NavigationViewItem Content="Fatture"
+                                    Icon="PreviewLink"
+                                    Tag="Fatture" />
 
-            <NavigationViewItem Content="Magazino">
-                <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
-                              Glyph="&#xE781;" />
-                </NavigationViewItem.Icon>
-                <NavigationViewItem.MenuItems>
-                    <NavigationViewItem Content="Articoli"
-                                        Icon="Document"
-                                        Tag="Articoli" />
-                    <NavigationViewItem Content="Categorie"
-                                        Icon="Document"
-                                        Tag="Categorie" />
-                </NavigationViewItem.MenuItems>
-            </NavigationViewItem>
+                <NavigationViewItem Content="Magazino">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                  Glyph="&#xE781;" />
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Articoli"
+                                            Icon="Document"
+                                            Tag="Articoli" />
+                        <NavigationViewItem Content="Categorie"
+                                            Icon="Document"
+                                            Tag="Categorie" />
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
 
-            <NavigationViewItem Content="Anagrafica"
-                                Icon="People">
-                <NavigationViewItem.MenuItems>
-                    <NavigationViewItem Content="Clienti"
-                                        Icon="ContactInfo"
-                                        Tag="Clienti" />
-                    <NavigationViewItem Content="Fornitori"
-                                        Icon="ContactInfo"
-                                        Tag="Fornitori" />
-                </NavigationViewItem.MenuItems>
-            </NavigationViewItem>
+                <NavigationViewItem Content="Anagrafica"
+                                    Icon="People">
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Clienti"
+                                            Icon="ContactInfo"
+                                            Tag="Clienti" />
+                        <NavigationViewItem Content="Fornitori"
+                                            Icon="ContactInfo"
+                                            Tag="Fornitori" />
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
 
-        </NavigationView.MenuItems>
+            </NavigationView.MenuItems>
 
-        <ContentControl x:Name="shellFrame" />
+            <!--<ContentControl x:Name="shellFrame" />-->
+            <ContentControl Content="{Binding CurrentViewModel, Mode=OneWay}"
+                            ContentTemplateSelector="{StaticResource VmSelector}" />
 
-    </NavigationView>
+        </NavigationView>
+    </Grid>
 
 </windowex:WindowEx>
