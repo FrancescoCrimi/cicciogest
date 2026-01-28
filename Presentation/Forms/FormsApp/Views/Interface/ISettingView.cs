@@ -1,0 +1,17 @@
+﻿// Copyright (c) 2016 - 2026 Francesco Crimi
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+
+using System;
+
+namespace CiccioGest.Presentation.FormsApp.Views
+{
+    public interface ISettingView : IView
+    {
+        event EventHandler? VerificaDatabaseRequested;
+        event EventHandler? CreaDatabaseRequested;
+        event EventHandler? PopolaDatabaseRequested;
+    }
+}

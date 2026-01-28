@@ -50,12 +50,11 @@
     </Project>
   </Folder>
   <Folder Name="/Presentation/Forms/">
-    <Project Path="Presentation/Forms/AppForm/FormsApp.csproj">
+    <Project Path="Presentation/Forms/FormsApp/FormsApp.csproj">
       <Platform Solution="*|Any CPU" Project="x64" />
       <Platform Solution="*|ARM64" Project="x64" />
       <Platform Solution="*|x64" Project="x64" />
       <Platform Solution="*|x86" Project="x86" />
-      <Build Solution="*|ARM64" Project="false" />
     </Project>
   </Folder>
   <Folder Name="/Presentation/WinUi/">
