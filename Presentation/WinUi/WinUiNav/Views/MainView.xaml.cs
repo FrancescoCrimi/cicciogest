@@ -4,8 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
-using CiccioGest.Presentation.WinUiBackend.Services;
 using Microsoft.UI.Xaml.Controls;
 using WinUIEx;
 
@@ -15,7 +15,7 @@ namespace CiccioGest.Presentation.WinUiNav.Views
     {
         private MainViewModel ViewModel { get; }
 
-        public MainView(NavigationService navigationService,
+        public MainView(INavigationService navigationService,
                         MainViewModel mainViewModel)
         {
             InitializeComponent();
@@ -52,6 +52,9 @@ namespace CiccioGest.Presentation.WinUiNav.Views
                         break;
                     case "Fornitori":
                         ViewModel.ApriFornitoriCommand.Execute(null);
+                        break;
+                    case "Settings":
+                        ViewModel.ApriSettingsCommand.Execute(null);
                         break;
                 }
             }

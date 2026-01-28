@@ -6,6 +6,7 @@
 
 using CiccioGest.Application;
 using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +19,7 @@ namespace CiccioGest.Presentation.Mvvm
         {
             serviceCollection
                 .ConfigureApplication(conf)
+                .AddSingleton<INavigationService, NavigationService>()
                 .AddTransient<ArticoloViewModel>()
                 .AddTransient<ArticoliViewModel>()
                 .AddTransient<CategoriaViewModel>()

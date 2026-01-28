@@ -48,8 +48,8 @@ namespace CiccioGest.Presentation.WinUiNav
                 // Services
                 //.AddSingleton<PageService>()
                 //.AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
-                .AddSingleton<NavigationService>()
-                .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
+                //.AddSingleton<NavigationService>()
+                //.AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
 
                 // View
                 .AddTransient<MainView>()

@@ -6,7 +6,6 @@ using CiccioGest.Presentation.AppForm.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
 using System;
 using System.IO;
 using System.Reflection;
@@ -29,7 +28,7 @@ namespace CiccioGest.Presentation.AppForm
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
-                    loggingBuilder.AddNLog();
+                    //loggingBuilder.AddNLog();
                     loggingBuilder.AddDebug();
                 })
 

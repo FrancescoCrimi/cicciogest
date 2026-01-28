@@ -4,15 +4,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
-using CiccioGest.Presentation.WinUiBackend.Services;
 using WinUIEx;
 
 namespace CiccioGest.Presentation.WinUiMenu.Views
 {
     public sealed partial class MainView : WindowEx
     {
-        public MainView(NavigationService navigationService,
+        public MainView(INavigationService navigationService,
                         MainViewModel mainViewModel)
         {
             InitializeComponent();

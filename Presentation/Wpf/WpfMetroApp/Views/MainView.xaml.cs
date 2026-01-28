@@ -4,19 +4,20 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
-using CiccioGest.Presentation.WpfBackend.Services;
 using MahApps.Metro.Controls;
 
 namespace CiccioGest.Presentation.WpfMetroApp.Views
 {
-    public partial class MainView : MetroWindow
+    public sealed partial class MainView : MetroWindow
     {
-        public MainView(MainViewModel viewModel, NavigationService navigationService)
+        public MainView(MainViewModel viewModel,
+                        INavigationService navigationService)
         {
             InitializeComponent();
             DataContext = viewModel;
-            navigationService.Initialize(shellFrame);
+            _ = navigationService.Navigate<DashboardViewModel>();
         }
     }
 }

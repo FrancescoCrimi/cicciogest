@@ -1,15 +1,54 @@
 ﻿<Application x:Class="CiccioGest.Presentation.WpfApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewmodels="clr-namespace:CiccioGest.Presentation.Mvvm.ViewModels;assembly=CiccioGest.Presentation.Mvvm"
+             xmlns:views="clr-namespace:CiccioGest.Presentation.WpfApp.Views"
              Startup="OnStartup">
 
     <Application.Resources>
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/_FontSizes.xaml" />
                 <ResourceDictionary Source="/Styles/_Thickness.xaml" />
                 <ResourceDictionary Source="/Styles/TextBlock.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- ViewModel to View mappings -->
+            <DataTemplate DataType="{x:Type viewmodels:ArticoliViewModel}">
+                <views:ArticoliView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ArticoloViewModel}">
+                <views:ArticoloView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CategoriaViewModel}">
+                <views:CategoriaView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ClienteViewModel}">
+                <views:ClienteView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ClientiViewModel}">
+                <views:ClientiView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
+                <views:DashboardView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:FatturaViewModel}">
+                <views:FatturaView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:FattureViewModel}">
+                <views:FattureView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:FornitoreViewModel}">
+                <views:FornitoreView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:FornitoriViewModel}">
+                <views:FornitoriView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 

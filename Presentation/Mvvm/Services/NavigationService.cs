@@ -4,56 +4,36 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.Mvvm.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
-namespace CiccioGest.Presentation.WpfBackend.Services
+namespace CiccioGest.Presentation.Mvvm.Services
 {
-    public sealed class NavigationService : INavigationService, IDisposable
+    internal sealed class NavigationService : INavigationService, IDisposable
     {
         private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IPageService _pageService;
         private readonly Stack<ViewModelBase> _forwardStack;
         private readonly Stack<ViewModelBase> _backStack;
-        private ContentControl? _contentControl;
 
         private TaskCompletionSource<DialogResult<int>>? _currentDialogTcs;
         private ResultViewModelBase<int>? _currentDialogVm;
 
         public event EventHandler? Navigated;
-        public ViewModelBase? Current { get; }
+        public ViewModelBase? Current { get; private set; }
 
         public NavigationService(ILogger<NavigationService> logger,
-                                 IServiceProvider serviceProvider,
-                                 IPageService pageService)
+                                 IServiceProvider serviceProvider)
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
-            _pageService = pageService;
             _forwardStack = new Stack<ViewModelBase>();
             _backStack = new Stack<ViewModelBase>();
             _logger.LogDebug("Created: {HashCode}", GetHashCode().ToString());
-        }
-
-        public void Initialize(ContentControl contentControl)
-        {
-            ArgumentNullException.ThrowIfNull(contentControl);
-
-            if (_contentControl == null)
-            {
-                _contentControl = contentControl;
-            }
-            else
-            {
-                throw new Exception("NavigationService already initialized");
-            }
         }
 
         public bool CanGoBack => _backStack.Count != 0;
@@ -74,21 +54,16 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         {
             if (_backStack.Count != 0)
             {
+                var forwardVM = Current;
+                if (forwardVM != null)
+                    _forwardStack.Push(forwardVM);
 
-                var forwardvm = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
-                _forwardStack.Push(forwardvm);
+                var backVM = _backStack.Pop();
+                Current = backVM;
 
-                var backvm = _backStack.Peek();
-                var viewType = _pageService.GetPageType(backvm.GetType());
-                var view = (UserControl)Activator.CreateInstance(viewType)!;
-                view.DataContext = backvm;
-                _contentControl!.Content = view;
-
-                _backStack.Pop();
                 if (emptyForwardStack)
-                {
                     TerminateForwardStack();
-                }
+
                 Navigated?.Invoke(this, new EventArgs());
             }
         }
@@ -97,20 +72,16 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         {
             if (_forwardStack.Count != 0)
             {
-                var backvm = (ViewModelBase)((UserControl)_contentControl!.Content).DataContext;
-                _backStack.Push(backvm);
+                var backVM = Current;
+                if (backVM != null)
+                    _backStack.Push(backVM);
 
-                var forwardvm = _forwardStack.Peek();
-                var viewType = _pageService.GetPageType(forwardvm.GetType());
-                var view = (UserControl)Activator.CreateInstance(viewType)!;
-                view.DataContext = forwardvm;
-                _contentControl.Content = view;
+                var forwardVM = _forwardStack.Pop();
+                Current = forwardVM;
 
-                _forwardStack.Pop();
                 if (emptyBackStack)
-                {
                     TerminateBackStack();
-                }
+
                 Navigated?.Invoke(this, new EventArgs());
             }
         }
@@ -122,11 +93,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         public async Task Navigate<TVM>(object? parameter = null,
                                         bool clearNavigation = false) where TVM : ViewModelBase
         {
-            if (_contentControl == null)
-                throw new Exception("NavigationService must be Initialize before use it");
-
-            var pageType = _pageService.GetPageType(typeof(TVM));
-            if (_contentControl?.Content?.GetType() != pageType)
+            if (Current?.GetType() != typeof(TVM))
             {
                 CancelActiveResultPage();
                 var viewModel = _serviceProvider.GetRequiredService<TVM>();
@@ -140,9 +107,6 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         // -------------------------------
         public Task<DialogResult<int>> NavigateForResultAsync<TVM>() where TVM : ResultViewModelBase<int>
         {
-            if (_contentControl == null)
-                throw new Exception("NavigationService must be Initialize before use it");
-
             CancelActiveResultPage();
 
             var tcs = new TaskCompletionSource<DialogResult<int>>();
@@ -170,10 +134,10 @@ namespace CiccioGest.Presentation.WpfBackend.Services
 
         private async Task NavigateTo<TVM>(TVM viewModel,
                                            object? parameter = null,
-                                           bool clearNavigation = false)
+                                           bool clearNavigation = false) where TVM : ViewModelBase
         {
             // valorizzo ViewModel precedente
-            var oldViewModel = (_contentControl?.Content as UserControl)?.DataContext as ViewModelBase;
+            var oldViewModel = Current;
 
             // 1. Notifica la pagina corrente che stiamo per lasciarla
             if (oldViewModel is INavigationAwareAsync oldAware)
@@ -186,10 +150,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
             }
 
             // 2. Mostra la nuova pagina
-            var pageType = _pageService.GetPageType(typeof(TVM));
-            var view = (ContentControl)Activator.CreateInstance(pageType)!;
-            view.DataContext = viewModel;
-            _contentControl!.Content = view;
+            Current = viewModel;
 
             // 3. Notifica la nuova pagina che è stata navigata
             if (viewModel is INavigationAwareAsync newAware)
@@ -227,7 +188,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         }
 
         /// <summary>
-        /// termina tutte le pagine contenute nel backstack
+        /// termina tutte le pagine contenute nel backStack
         /// e azzera lo stack
         /// </summary>
         private void TerminateBackStack()
@@ -243,7 +204,7 @@ namespace CiccioGest.Presentation.WpfBackend.Services
         }
 
         /// <summary>
-        /// termina tutte le pagine contenute nel forwardstack
+        /// termina tutte le pagine contenute nel forwardStack
         /// e azzera lo stack
         /// </summary>
         private void TerminateForwardStack()
@@ -261,14 +222,10 @@ namespace CiccioGest.Presentation.WpfBackend.Services
 
         public void Dispose()
         {
-            if (_contentControl?.Content != null)
-            {
-                if (_contentControl.Content is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
-            }
-            _contentControl = null;
+            if (Current != null && Current is IDisposable disposable)
+                disposable.Dispose();
+
+            Current = null;
             TerminateBackStack();
             TerminateForwardStack();
             _logger.LogDebug("Disposed: {HashCode}", GetHashCode().ToString());

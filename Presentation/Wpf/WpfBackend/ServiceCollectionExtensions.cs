@@ -20,8 +20,8 @@ namespace CiccioGest.Presentation.WpfBackend
         {
             serviceCollection
                 .ConfigureMvvm(conf)
-                .AddSingleton<NavigationService>()
-                .AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
+                //.AddSingleton<NavigationService>()
+                //.AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
                 .AddSingleton<IMessageBoxService, MessageBoxService>();
             return serviceCollection;
         }

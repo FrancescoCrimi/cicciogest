@@ -4,7 +4,6 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Infrastructure;
 using CiccioGest.Presentation.Mvvm.Services;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;

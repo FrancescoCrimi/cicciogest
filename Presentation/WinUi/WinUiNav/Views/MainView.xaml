@@ -58,7 +58,6 @@
 
             </NavigationView.MenuItems>
 
-            <!--<ContentControl x:Name="shellFrame" />-->
             <ContentControl Content="{Binding CurrentViewModel, Mode=OneWay}"
                             ContentTemplateSelector="{StaticResource VmSelector}" />
 

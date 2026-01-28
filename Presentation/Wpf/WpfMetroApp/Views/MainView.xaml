@@ -122,7 +122,7 @@
 
                     <mah:HamburgerMenu.Content>
                         <ContentControl Grid.Row="1"
-                                        x:Name="shellFrame" />
+                                        Content="{Binding CurrentViewModel, Mode=OneWay}" />
                     </mah:HamburgerMenu.Content>
 
                 </mah:HamburgerMenu>
