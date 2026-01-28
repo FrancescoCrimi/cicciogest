@@ -4,25 +4,35 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Presentation.WpfApp.Views;
-using System.Threading.Tasks;
+using CiccioGest.Presentation.WpfBackend;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Windows;
 
 namespace CiccioGest.Presentation.WpfApp
 {
     public partial class App : System.Windows.Application
     {
-        public App()
+        private async void OnStartup(object sender, StartupEventArgs e)
         {
-            ConfigureServiceProvider.ConfigureWpfApp();
-        }
+            HostApplicationBuilder builder = Host.CreateApplicationBuilder(e.Args);
 
-        private void OnStartup(object sender, StartupEventArgs e)
-        {
+            var gestConf = CiccioGestConfMgr.GetCurrent();
+
+            builder.Services
+                .AddSingleton(gestConf)
+                .ConfigureWpfBackend(gestConf)
+                .AddTransient<MainView>();
+
+            IHost host = builder.Build();
+            await host.StartAsync();
+
             //var persistenceInitializer = Ioc.Default.GetRequiredService<IPersistenceInitializer>();
             //Task.Run(async () => await persistenceInitializer.OnNavigatedToAsync(true));
-            Ioc.Default.GetRequiredService<MainView>().Show();
+
+            host.Services.GetRequiredService<MainView>().Show();
         }
     }
 }

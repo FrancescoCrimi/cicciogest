@@ -4,23 +4,31 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using CiccioGest.Infrastructure;
+using CiccioGest.Infrastructure.Conf;
+using CiccioGest.Presentation.WinUiBackend;
 using CiccioGest.Presentation.WinUiNav.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 
 namespace CiccioGest.Presentation.WinUiNav
 {
     public partial class App : Microsoft.UI.Xaml.Application
     {
-        public App()
+        protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            InitializeComponent();
-            ConfigureServiceProvider.ConfigureWinUiNav();
-        }
+            HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+            var gestConf = CiccioGestConfMgr.GetCurrent();
 
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
-        {
-            Ioc.Default.GetRequiredService<MainView>().Activate();
+            builder.Services
+                .AddSingleton(gestConf)
+                .ConfigureWinUiBackend(gestConf)
+                .AddTransient<MainView>();
+
+            IHost host = builder.Build();
+            await host.StartAsync();
+
+            host.Services.GetRequiredService<MainView>().Activate();
         }
     }
 }
