@@ -4,9 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CiccioGest.Infrastructure.Conf
 {
@@ -14,11 +12,23 @@ namespace CiccioGest.Infrastructure.Conf
     {
         public CiccioGestConfs()
         {
-            Available = new Dictionary<string, CiccioGestConf>();
+            Confs = [];
         }
 
-        public Dictionary<string, CiccioGestConf> Available { get; set; }
+        public Dictionary<string, CiccioGestConf> Confs { get; set; }
+    }
 
-        public string Current { get; set; }
+    public class CiccioGestConf
+    {
+        public Databases Database { get; set; }
+        public string? CS { get; set; }
+    }
+
+    public enum Databases
+    {
+        MySql = 1,  // Mysql Connector
+        SQLite,     // Sqlite
+        MsSql,      // Microsoft.Data.Sqlclient
+        PgSql       // PostgreSql
     }
 }

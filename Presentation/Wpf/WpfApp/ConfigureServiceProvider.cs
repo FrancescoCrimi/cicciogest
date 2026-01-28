@@ -34,15 +34,11 @@ namespace CiccioGest.Presentation.WpfApp
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
-                    //loggingBuilder.AddNLog();
                     loggingBuilder.AddDebug();
                 })
 
                 .AddSingleton(gestConf)
                 .ConfigureWpfBackend(gestConf)
-
-                //.AddSingleton<PageService>()
-                //.AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
 
                 .AddTransient<MainView>()
 

@@ -36,26 +36,13 @@ namespace CiccioGest.Presentation.WpfMetroApp
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
-                    //loggingBuilder.AddNLog();
                     loggingBuilder.AddDebug();
                 })
 
                 .AddSingleton(gestConf)
                 .ConfigureWpfBackend(gestConf)
 
-                //.AddSingleton<PageService>()
-                //.AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
-
                 .AddTransient<MainView>()
-                //.AddTransient<ArticoliView>()
-                //.AddTransient<ArticoloView>()
-                //.AddTransient<CategoriaView>()
-                //.AddTransient<ClienteView>()
-                //.AddTransient<ClientiView>()
-                //.AddTransient<FatturaView>()
-                //.AddTransient<FattureView>()
-                //.AddTransient<FornitoreView>()
-                //.AddTransient<FornitoriView>()
 
                 .BuildServiceProvider());
         }

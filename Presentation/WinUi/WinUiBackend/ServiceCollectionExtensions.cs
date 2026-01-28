@@ -18,26 +18,8 @@ namespace CiccioGest.Presentation.WinUiBackend
                                                                CiccioGestConf conf)
         {
             return serviceCollection
-                //.ConfigureApplication()
                 .ConfigureMvvm(conf)
-                .AddSingleton<IMessageBoxService, MessageBoxService>()
-                //.AddTransient<MainViewModel>()
-                //.AddTransient<ArticoloViewModel>()
-                //.AddTransient<ArticoliViewModel>()
-                //.AddTransient<CategoriaViewModel>()
-                //.AddTransient<ClienteViewModel>()
-                //.AddTransient<ClientiViewModel>()
-                //.AddTransient<FatturaViewModel>()
-                //.AddTransient<FattureViewModel>()
-                //.AddTransient<FornitoreViewModel>()
-                //.AddTransient<FornitoriViewModel>()
-                //.AddTransient<ListaArticoliViewModel>()
-                //.AddTransient<ListaClientiViewModel>()
-                //.AddTransient<ListaFattureViewModel>()
-                //.AddTransient<ListaFornitoriViewModel>()
-                //.AddTransient<DashboardViewModel>()
-                //.AddTransient<SettingsViewModel>()
-                ;
+                .AddSingleton<IMessageBoxService, MessageBoxService>();
         }
     }
 }

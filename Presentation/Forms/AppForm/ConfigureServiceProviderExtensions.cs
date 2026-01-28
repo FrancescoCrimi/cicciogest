@@ -28,7 +28,6 @@ namespace CiccioGest.Presentation.AppForm
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
-                    //loggingBuilder.AddNLog();
                     loggingBuilder.AddDebug();
                 })
 

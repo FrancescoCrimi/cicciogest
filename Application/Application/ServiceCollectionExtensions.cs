@@ -5,7 +5,6 @@
 // https://opensource.org/licenses/MIT.
 
 using CiccioGest.Application.Impl;
-using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
 using CiccioGest.Infrastructure.Persistence.Nhb;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,28 +16,12 @@ namespace CiccioGest.Application
         public static IServiceCollection ConfigureApplication(this IServiceCollection serviceCollection,
                                                               CiccioGestConf conf)
         {
-            switch (conf?.DataAccess)
-            {
-                case Storage.NHibernate:
-                    serviceCollection.ConfigurePersistenceNhb(conf);
-                    break;
-                //case Storage.EF:
-                //    break;
-                //case Storage.LiteDb:
-                //    serviceCollection.ConfigurePersistenceLiteDB();
-                //    break;
-                //case Storage.Memory:
-                //    serviceCollection.ConfigurePersistenceMemory();
-                //    break;
-                default:
-                    break;
-            }
-            serviceCollection
+            return serviceCollection
+                .ConfigurePersistenceNhb(conf)
                 .AddTransient<IFatturaService, FatturaService>()
                 .AddTransient<IMagazzinoService, MagazzinoService>()
                 .AddTransient<IAnagraficaService, AnagraficaService>()
                 .AddTransient<ISettingService, SettingService>();
-            return serviceCollection;
         }
     }
 }

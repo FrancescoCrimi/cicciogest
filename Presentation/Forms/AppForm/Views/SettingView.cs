@@ -34,7 +34,7 @@ namespace CiccioGest.Presentation.AppForm.Views
             this.serviceProvider = serviceProvider;
             this.serviceScopeFactory = serviceScopeFactory;
 
-            dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
+            //dataAccessComboBox.DataSource = Enum.GetValues(typeof(Storage));
             databaseComboBox.DataSource = Enum.GetValues(typeof(Databases));
 
             CaricaConf();
@@ -57,22 +57,12 @@ namespace CiccioGest.Presentation.AppForm.Views
 
 
 
-
-
-
-
-
-
-
-
-
-
         private void CaricaConf()
         {
-            var asdf = CiccioGestConfMgr.GetAll();
-            appConfsBindingSource.DataSource = asdf;
-            var assa = CiccioGestConfMgr.GetCurrent();
-            appConfBindingSource.DataSource = assa;
+            //var asdf = CiccioGestConfMgr.GetAll();
+            //appConfsBindingSource.DataSource = asdf;
+            //var assa = CiccioGestConfMgr.GetCurrent();
+            //appConfBindingSource.DataSource = assa;
         }
 
 
@@ -80,70 +70,70 @@ namespace CiccioGest.Presentation.AppForm.Views
 
         private void AppConfDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (appConfsBindingSource.Current != null)
-            {
-                CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
-                appConfBindingSource.DataSource = cnf;
-            }
+            //if (appConfsBindingSource.Current != null)
+            //{
+            //    CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
+            //    appConfBindingSource.DataSource = cnf;
+            //}
         }
 
 
 
         private void NuovoToolStripButton_Click(object sender, EventArgs e)
         {
-            appConfBindingSource.DataSource = null;
-            appConfBindingSource.DataSource = new CiccioGestConf();
+            //appConfBindingSource.DataSource = null;
+            //appConfBindingSource.DataSource = new CiccioGestConf();
         }
 
         private void SalvaToolStripButton_Click(object sender, EventArgs e)
         {
-            CiccioGestConfMgr.Save();
+            //CiccioGestConfMgr.Save();
             CaricaConf();
         }
 
         private void AggiungiToolStripButton_Click(object sender, EventArgs e)
         {
-            if (appConfBindingSource.DataSource != null)
-            {
-                CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
-                CiccioGestConfMgr.Add(cnf);
-                appConfBindingSource.DataSource = null;
-                appConfBindingSource.DataSource = new CiccioGestConf();
-                appConfsBindingSource.DataSource = null;
-                appConfsBindingSource.DataSource = CiccioGestConfMgr.GetAll();
-            }
+            //if (appConfBindingSource.DataSource != null)
+            //{
+            //    CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
+            //    CiccioGestConfMgr.Add(cnf);
+            //    appConfBindingSource.DataSource = null;
+            //    appConfBindingSource.DataSource = new CiccioGestConf();
+            //    appConfsBindingSource.DataSource = null;
+            //    appConfsBindingSource.DataSource = CiccioGestConfMgr.GetAll();
+            //}
         }
 
         private void RimuoviToolStripButton_Click(object sender, EventArgs e)
         {
-            if (appConfsBindingSource.Current != null)
-            {
-                CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
-                CiccioGestConfMgr.Remove(cnf);
-                appConfsBindingSource.DataSource = null;
-                appConfsBindingSource.DataSource = CiccioGestConfMgr.GetAll();
-            }
+            //if (appConfsBindingSource.Current != null)
+            //{
+            //    CiccioGestConf cnf = (CiccioGestConf)appConfsBindingSource.Current;
+            //    CiccioGestConfMgr.Remove(cnf);
+            //    appConfsBindingSource.DataSource = null;
+            //    appConfsBindingSource.DataSource = CiccioGestConfMgr.GetAll();
+            //}
         }
 
         private void DefaultToolStripButton_Click(object sender, EventArgs e)
         {
-            if (appConfsBindingSource != null)
-            {
-                CiccioGestConf asdf = (CiccioGestConf)appConfsBindingSource.Current;
-                if (CiccioGestConfMgr.GetAll().Contains(asdf))
-                {
-                    CiccioGestConfMgr.SetCurrent(asdf);
-                }
-                else
-                    MessageBox.Show("Prima aggiungi la conf");
-            }
+            //if (appConfsBindingSource != null)
+            //{
+            //    CiccioGestConf asdf = (CiccioGestConf)appConfsBindingSource.Current;
+            //    if (CiccioGestConfMgr.GetAll().Contains(asdf))
+            //    {
+            //        CiccioGestConfMgr.SetCurrent(asdf);
+            //    }
+            //    else
+            //        MessageBox.Show("Prima aggiungi la conf");
+            //}
         }
 
         private void CaricaDefaultToolStripButton1_Click(object sender, EventArgs e)
         {
             try
             {
-                CiccioGestConfMgr.LoadSample();
+                //CiccioGestConfMgr.LoadSample();
                 CaricaConf();
             }
             catch (Exception ex)

@@ -6,9 +6,7 @@
 
 using CiccioGest.Infrastructure;
 using CiccioGest.Infrastructure.Conf;
-using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WinUiBackend;
-using CiccioGest.Presentation.WinUiBackend.Services;
 using CiccioGest.Presentation.WinUiMenu.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,18 +34,11 @@ namespace CiccioGest.Presentation.WinUiMenu
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
-                    //loggingBuilder.AddNLog();
                     loggingBuilder.AddDebug();
                 })
 
                 .AddSingleton(gestConf)
                 .ConfigureWinUiBackend(gestConf)
-
-                // Services
-                //.AddSingleton<PageService>()
-                //.AddSingleton<IPageService>(s => s.GetRequiredService<PageService>())
-                //.AddSingleton<NavigationService>()
-                //.AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
 
                 // View
                 .AddTransient<MainView>()

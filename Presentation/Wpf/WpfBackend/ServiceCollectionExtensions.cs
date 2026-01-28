@@ -9,7 +9,6 @@ using CiccioGest.Presentation.Mvvm;
 using CiccioGest.Presentation.Mvvm.Services;
 using CiccioGest.Presentation.WpfBackend.Services;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace CiccioGest.Presentation.WpfBackend
 {
@@ -20,8 +19,6 @@ namespace CiccioGest.Presentation.WpfBackend
         {
             serviceCollection
                 .ConfigureMvvm(conf)
-                //.AddSingleton<NavigationService>()
-                //.AddSingleton<INavigationService>(s => s.GetRequiredService<NavigationService>())
                 .AddSingleton<IMessageBoxService, MessageBoxService>();
             return serviceCollection;
         }

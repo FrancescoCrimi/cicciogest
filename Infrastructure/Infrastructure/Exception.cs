@@ -8,22 +8,6 @@ using System;
 
 namespace CiccioGest.Infrastructure
 {
-    public enum Storage
-    {
-        NHibernate = 1,
-        EF,
-        LiteDb,
-        Memory,
-    }
-
-    public enum Databases
-    {
-        MySql = 1,  // Mysql Connector
-        SQLite,     // Sqlite
-        MsSql,      // Microsoft.Data.Sqlclient
-        PgSql       // PostgreSql
-    }
-
     [Serializable]
     public class DataAccessException : Exception
     {
