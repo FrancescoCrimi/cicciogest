@@ -49,10 +49,13 @@ namespace CiccioGest.Presentation.Mvvm.ViewModels
         [RelayCommand]
         private async Task OnApriFattura()
         {
-            //await _unitOfWork.BeginAsync();
-            var result = await _navigationService.NavigateForResultAsync<FattureViewModel>();
-            if (result.Type == DialogResultType.Ok)
-                await _navigationService.Navigate<FatturaViewModel>(new FattureViewReturn(result.Value));
+            //_ = Task.Run(async () =>
+            //{
+                //await _unitOfWork.BeginAsync();
+                var result = await _navigationService.NavigateForResultAsync<FattureViewModel>();
+                if (result.Type == DialogResultType.Ok)
+                    await _navigationService.Navigate<FatturaViewModel>(new FattureViewReturn(result.Value));
+            //});
         }
 
         [RelayCommand]
